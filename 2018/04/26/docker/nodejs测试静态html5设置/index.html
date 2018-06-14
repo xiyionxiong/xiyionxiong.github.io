@@ -13,14 +13,14 @@
 <meta property="og:site_name" content="熊猫博客">
 <meta property="og:description" content="docker 打包镜像   应用场景    1、使用webpack 打包后，测试html静态界面。   2、实现前后端分离，单独部署，   3、此环境实现打包后的dist内容是否正确。  准备工作1、docker 安装。。。略过 2 Dockerfile编写因为是使用webpack 对前端页面进行的打包操作 ，我们选择一个nodejs相关的镜像进行编译我们自己的docker镜像 node镜像，官方">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="http://blog.apanda.online/2018/04/26/docker/nodejs测试静态html5设置/assets/image-20180426112736971.png">
-<meta property="og:image" content="http://blog.apanda.online/2018/04/26/docker/nodejs测试静态html5设置/assets/image-20180426113144629.png">
-<meta property="og:image" content="http://blog.apanda.online/2018/04/26/docker/nodejs测试静态html5设置/assets/image-20180426113543491.png">
-<meta property="og:updated_time" content="2018-06-14T02:59:07.298Z">
+<meta property="og:image" content="http://blog.apanda.online/2018/04/26/docker/nodejs测试静态html5设置/resources/image-20180426112736971.png">
+<meta property="og:image" content="http://blog.apanda.online/2018/04/26/docker/nodejs测试静态html5设置/resources/image-20180426113144629.png">
+<meta property="og:image" content="http://blog.apanda.online/2018/04/26/docker/nodejs测试静态html5设置/resources/image-20180426113543491.png">
+<meta property="og:updated_time" content="2018-06-14T03:34:10.030Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nodejs测试静态html5设置">
 <meta name="twitter:description" content="docker 打包镜像   应用场景    1、使用webpack 打包后，测试html静态界面。   2、实现前后端分离，单独部署，   3、此环境实现打包后的dist内容是否正确。  准备工作1、docker 安装。。。略过 2 Dockerfile编写因为是使用webpack 对前端页面进行的打包操作 ，我们选择一个nodejs相关的镜像进行编译我们自己的docker镜像 node镜像，官方">
-<meta name="twitter:image" content="http://blog.apanda.online/2018/04/26/docker/nodejs测试静态html5设置/assets/image-20180426112736971.png">
+<meta name="twitter:image" content="http://blog.apanda.online/2018/04/26/docker/nodejs测试静态html5设置/resources/image-20180426112736971.png">
     
     
         
@@ -178,7 +178,7 @@
 </ul>
 <h2 id="编译镜像"><a href="#编译镜像" class="headerlink" title="编译镜像"></a>编译镜像</h2><ul>
 <li><p>打开终端，进入dist目录，确保Dockerfile文件的存在。</p>
-<p><img src="assets/image-20180426112736971.png" alt="image-20180426112736971"></p>
+<p><img src="resources/image-20180426112736971.png" alt="image-20180426112736971"></p>
 </li>
 </ul>
 <ul>
@@ -194,13 +194,13 @@
 </blockquote>
 <ul>
 <li><p>按入enter键之后出现如下内容 </p>
-<p><img src="assets/image-20180426113144629.png" alt="image-20180426113144629"></p>
+<p><img src="resources/image-20180426113144629.png" alt="image-20180426113144629"></p>
 </li>
 </ul>
 <p>表示编译成功。</p>
 <h2 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h2><p>到此，我们的node镜像就已经编译成功，接下来就要看看， 是否可以使用。</p>
 <p>1、终端 运行 <code>docker images</code> 显示我们的镜像 。</p>
-<p><img src="assets/image-20180426113543491.png" alt="image-20180426113543491"></p>
+<p><img src="resources/image-20180426113543491.png" alt="image-20180426113543491"></p>
 <blockquote>
 <p>  刚刚我们生成的标记就是beta_v1.1 </p>
 </blockquote>
