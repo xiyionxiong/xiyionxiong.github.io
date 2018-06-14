@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="============================================ 作者 : lightsky原文链接  在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。 避免在循环中分配内存内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中">
+    <meta name="description" content="作者 : lightsky原文链接  在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。 避免在循环中分配内存内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中。比如在绘制代码中，因为每一帧的渲染都会执行该方法。 避免在自定义View的onDraw方">
 <meta name="keywords" content="Google Develop for Android 系列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Google Develop for Android 系列二 － Memory 最佳实践">
 <meta property="og:url" content="http://blog.apanda.online/2015/06/09/android/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/index.html">
 <meta property="og:site_name" content="熊猫博客">
-<meta property="og:description" content="============================================ 作者 : lightsky原文链接  在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。 避免在循环中分配内存内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中">
+<meta property="og:description" content="作者 : lightsky原文链接  在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。 避免在循环中分配内存内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中。比如在绘制代码中，因为每一帧的渲染都会执行该方法。 避免在自定义View的onDraw方">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-06-14T03:19:58.115Z">
+<meta property="og:updated_time" content="2018-06-14T06:18:44.986Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Google Develop for Android 系列二 － Memory 最佳实践">
-<meta name="twitter:description" content="============================================ 作者 : lightsky原文链接  在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。 避免在循环中分配内存内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中">
+<meta name="twitter:description" content="作者 : lightsky原文链接  在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。 避免在循环中分配内存内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中。比如在绘制代码中，因为每一帧的渲染都会执行该方法。 避免在自定义View的onDraw方">
     
     
         
@@ -110,15 +110,14 @@
   <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/06/09/android/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/&title=Google Develop for Android 系列二 － Memory 最佳实践"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/06/09/android/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/&title=Google Develop for Android 系列二 － Memory 最佳实践"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/06/09/android/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/&title=Google Develop for Android 系列二 － Memory 最佳实践"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/06/09/android/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/&name=Google Develop for Android 系列二 － Memory 最佳实践&description=&lt;p&gt;============================================&lt;/p&gt;
-&lt;p&gt;作者 : lightsky&lt;br&gt;&lt;a href=&#34;http://www.lightskystreet.com/2015/06/07/google-for-android-2-memory/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/06/09/android/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/&name=Google Develop for Android 系列二 － Memory 最佳实践&description=&lt;p&gt;作者 : lightsky&lt;br&gt;&lt;a href=&#34;http://www.lightskystreet.com/2015/06/07/google-for-android-2-memory/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。&lt;/p&gt;
 &lt;h2 id=&#34;避免在循环中分配内存&#34;&gt;&lt;a href=&#34;#避免在循环中分配内存&#34; class=&#34;headerlink&#34; title=&#34;避免在循环中分配内存&#34;&gt;&lt;/a&gt;避免在循环中分配内存&lt;/h2&gt;&lt;p&gt;内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中。比如在绘制代码中，因为每一帧的渲染都会执行该方法。&lt;/p&gt;
 &lt;p&gt;避免在自定义View的onDraw方法中分配内存，因为动画也许会调用它。使用缓存对象替换临时对象可以避免新的内存开销。典型的例子就是在 onDraw方法中分配了一个新的Paint对象，因为Canvas需要一个Paint对象。对于这种自定义View的实例只分配一个独立的Paint对 象而后在onDraw方法中临时使用更好。&lt;/p&gt;
 &lt;h2 id=&#34;尽可能的避免内存分配&#34;&gt;&lt;a href=&#34;#尽可能的避免内存分配&#34; class=&#34;headerlink&#34; title=&#34;尽可能的避免内存分配&#34;&gt;&lt;/a&gt;尽可能的避免内存分配&lt;/h2&gt;&lt;p&gt;避免常量，临时变量的内存分配。下面有一些可参考的策略，也许并不适用于传统的java编码，但是对于Android开发是推荐的。通常可以使用工 具帮助我们去决定是否某一块代码需要优化。如果代码的某一部分很少执行（比如用户改变一些设置的操作），更简洁和传统的抽象层是不错的选择。但是如果分析 表明某些代码频繁执行并导致了大量的内存搅动，考虑以下策略：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;对象缓存&lt;/strong&gt;&lt;br&gt;重用对象在一些常量内存的再分配中很有用，比如在内部循环中避免内存分配。比如，有些频繁调用的方法中可能需要一个Rect对象存储一些中间值，最好在把 Rect作为类级别的常量，只分配一次内存，甚至是静态的，避免每次方法调用的时候都分配。关于单例的一些警示对于这种方式也是适用的，在Android 上，静态的常见缺陷就是它们对于某一个进程是静态的，但是可能有多个活动在同一进程中。小心应用，这种技术在避免内存的再分配中是通用的"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+&lt;li&gt;&lt;strong&gt;对象缓存&lt;/strong&gt;&lt;br&gt;重用对象在一些常量内存的再分配中很有用，比如在内部循环中避免内存分配。比如，有些频繁调用的方法中可能需要一个Rect对象存储一些中间值，最好在把 Rect作为类级别的常量，只分配一次内存，甚至是静态的，避免每次方法调用的时候都分配。关于单例的一些警示对于这种方式也是适用的，在Android 上，静态的常见缺陷就是它们对于某一个进程是静态的，但是可能有多个活动在同一进程中。小心应用，这种技术在避免内存的再分配中是通用的&lt;/li&gt;&lt;/ul&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -162,8 +161,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>============================================</p>
-<p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-2-memory/" target="_blank" rel="noopener">原文链接</a></p>
+    <p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-2-memory/" target="_blank" rel="noopener">原文链接</a></p>
 <hr>
 <p>在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。</p>
 <h2 id="避免在循环中分配内存"><a href="#避免在循环中分配内存" class="headerlink" title="避免在循环中分配内存"></a>避免在循环中分配内存</h2><p>内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中。比如在绘制代码中，因为每一帧的渲染都会执行该方法。</p>
@@ -269,15 +267,14 @@
   <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/06/09/android/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/&title=Google Develop for Android 系列二 － Memory 最佳实践"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/06/09/android/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/&title=Google Develop for Android 系列二 － Memory 最佳实践"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/06/09/android/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/&title=Google Develop for Android 系列二 － Memory 最佳实践"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/06/09/android/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/&name=Google Develop for Android 系列二 － Memory 最佳实践&description=&lt;p&gt;============================================&lt;/p&gt;
-&lt;p&gt;作者 : lightsky&lt;br&gt;&lt;a href=&#34;http://www.lightskystreet.com/2015/06/07/google-for-android-2-memory/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/06/09/android/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/&name=Google Develop for Android 系列二 － Memory 最佳实践&description=&lt;p&gt;作者 : lightsky&lt;br&gt;&lt;a href=&#34;http://www.lightskystreet.com/2015/06/07/google-for-android-2-memory/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。&lt;/p&gt;
 &lt;h2 id=&#34;避免在循环中分配内存&#34;&gt;&lt;a href=&#34;#避免在循环中分配内存&#34; class=&#34;headerlink&#34; title=&#34;避免在循环中分配内存&#34;&gt;&lt;/a&gt;避免在循环中分配内存&lt;/h2&gt;&lt;p&gt;内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中。比如在绘制代码中，因为每一帧的渲染都会执行该方法。&lt;/p&gt;
 &lt;p&gt;避免在自定义View的onDraw方法中分配内存，因为动画也许会调用它。使用缓存对象替换临时对象可以避免新的内存开销。典型的例子就是在 onDraw方法中分配了一个新的Paint对象，因为Canvas需要一个Paint对象。对于这种自定义View的实例只分配一个独立的Paint对 象而后在onDraw方法中临时使用更好。&lt;/p&gt;
 &lt;h2 id=&#34;尽可能的避免内存分配&#34;&gt;&lt;a href=&#34;#尽可能的避免内存分配&#34; class=&#34;headerlink&#34; title=&#34;尽可能的避免内存分配&#34;&gt;&lt;/a&gt;尽可能的避免内存分配&lt;/h2&gt;&lt;p&gt;避免常量，临时变量的内存分配。下面有一些可参考的策略，也许并不适用于传统的java编码，但是对于Android开发是推荐的。通常可以使用工 具帮助我们去决定是否某一块代码需要优化。如果代码的某一部分很少执行（比如用户改变一些设置的操作），更简洁和传统的抽象层是不错的选择。但是如果分析 表明某些代码频繁执行并导致了大量的内存搅动，考虑以下策略：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;对象缓存&lt;/strong&gt;&lt;br&gt;重用对象在一些常量内存的再分配中很有用，比如在内部循环中避免内存分配。比如，有些频繁调用的方法中可能需要一个Rect对象存储一些中间值，最好在把 Rect作为类级别的常量，只分配一次内存，甚至是静态的，避免每次方法调用的时候都分配。关于单例的一些警示对于这种方式也是适用的，在Android 上，静态的常见缺陷就是它们对于某一个进程是静态的，但是可能有多个活动在同一进程中。小心应用，这种技术在避免内存的再分配中是通用的"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+&lt;li&gt;&lt;strong&gt;对象缓存&lt;/strong&gt;&lt;br&gt;重用对象在一些常量内存的再分配中很有用，比如在内部循环中避免内存分配。比如，有些频繁调用的方法中可能需要一个Rect对象存储一些中间值，最好在把 Rect作为类级别的常量，只分配一次内存，甚至是静态的，避免每次方法调用的时候都分配。关于单例的一些警示对于这种方式也是适用的，在Android 上，静态的常见缺陷就是它们对于某一个进程是静态的，但是可能有多个活动在同一进程中。小心应用，这种技术在避免内存的再分配中是通用的&lt;/li&gt;&lt;/ul&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

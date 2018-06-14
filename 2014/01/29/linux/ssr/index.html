@@ -14,13 +14,13 @@
 <meta property="og:site_name" content="熊猫博客">
 <meta property="og:description" content="本脚本适用环境系统支持：CentOS 6+，Debian 7+，Ubuntu 12+内存要求：≥128M日期　　：2018 年 02 月 07 日 关于本脚本1、一键安装 Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev 版（四选一）服务端；2、各版本的启动脚本及配置文件名不再重合；3、每次运行可安装一种版本；4">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="http://blog.apanda.online/2014/01/29/linux/ssr/assets/ss_client.png">
-<meta property="og:image" content="http://blog.apanda.online/2014/01/29/linux/ssr/assets/ssr_client.png">
-<meta property="og:updated_time" content="2018-06-14T03:12:40.140Z">
+<meta property="og:image" content="http://blog.apanda.online/2014/01/29/linux/ssr/images/ss_client.png">
+<meta property="og:image" content="http://blog.apanda.online/2014/01/29/linux/ssr/images/ssr_client.png">
+<meta property="og:updated_time" content="2018-06-14T06:29:03.417Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shadowsocks 一键安装脚本（四合一）">
 <meta name="twitter:description" content="本脚本适用环境系统支持：CentOS 6+，Debian 7+，Ubuntu 12+内存要求：≥128M日期　　：2018 年 02 月 07 日 关于本脚本1、一键安装 Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev 版（四选一）服务端；2、各版本的启动脚本及配置文件名不再重合；3、每次运行可安装一种版本；4">
-<meta name="twitter:image" content="http://blog.apanda.online/2014/01/29/linux/ssr/assets/ss_client.png">
+<meta name="twitter:image" content="http://blog.apanda.online/2014/01/29/linux/ssr/images/ss_client.png">
     
     
         
@@ -115,7 +115,7 @@
   <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2014/01/29/linux/ssr/&title=Shadowsocks 一键安装脚本（四合一）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2014/01/29/linux/ssr/&name=Shadowsocks 一键安装脚本（四合一）&description=&lt;h2 id=&#34;本脚本适用环境&#34;&gt;&lt;a href=&#34;#本脚本适用环境&#34; class=&#34;headerlink&#34; title=&#34;本脚本适用环境&#34;&gt;&lt;/a&gt;本脚本适用环境&lt;/h2&gt;&lt;p&gt;系统支持：CentOS 6+，Debian 7+，Ubuntu 12+&lt;br&gt;内存要求：≥128M&lt;br&gt;日期　　：2018 年 02 月 07 日&lt;/p&gt;
 &lt;h3 id=&#34;关于本脚本&#34;&gt;&lt;a href=&#34;#关于本脚本&#34; class=&#34;headerlink&#34; title=&#34;关于本脚本&#34;&gt;&lt;/a&gt;关于本脚本&lt;/h3&gt;&lt;p&gt;1、一键安装 Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev 版（四选一）服务端；&lt;br&gt;2、各版本的启动脚本及配置文件名不再重合；&lt;br&gt;3、每次运行可安装一种版本；&lt;br&gt;4、支持以多次运行来安装多个版本，且各个版本可以共存（注意端口号需设成不同）；&lt;br&gt;5、若已安装多个版本，则卸载时也需多次运行（每次卸载一种）；&lt;br&gt;6、Shadowsocks-Python 和 ShadowsocksR 安装后不可同时启动（因为本质上都属 Python 版）。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;友情提示：&lt;/strong&gt;如果你有问题，请先阅读这篇《&lt;a href=&#34;https://teddysun.com/399.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Shadowsocks Troubleshooting&lt;/a&gt;》之后再询问。&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+&lt;p&gt;&lt;strong&gt;友情提示：&lt;/strong&gt;如果你有问题，请先阅读这篇《&lt;a href=&#34;https://teddysun.com/399.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Shadowsocks Troubleshooting&lt;/a&gt;》之后再询问。&lt;br&gt;&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -186,8 +186,8 @@
 <p>2017 年 12 月 29 日：<br>1、升级：libsodium 到 1.0.16。</p>
 <p>2017 年 11 月 25 日：<br>1、如果 Linux 内核版本大于 3.7.0，则配置文件默认支持 TCP fast open；<br>2、新增：libev 版启动时支持 verbose mode，也就是默认写 log 到 /var/log/messages 方便查看。</p>
 <p>2017 年 11 月 12 日：<br>1、新增生成 ss:// 或 ssr:// 链接，以及其二维码图片。<br>※ 脚本会根据当前安装的版本以及输入的各项配置，自动生成 ss:// 或 ssr:// 的链接并在安装成功后显示，直接复制即可被客户端识别。同时生成其二维码图片，并保存在当前目录下，下载后用看图软件打开，也能被客户端识别。</p>
-<p>复制二维码链接后 Shadowsocks 客户端识别示例：<br><img src="assets/ss_client.png" alt="Shadowsocks 客户端示例"></p>
-<p>复制二维码链接后 ShadowsocksR 客户端识别示例：<br><img src="assets/ssr_client.png" alt="ShadowsocksR 客户端示例"></p>
+<p>复制二维码链接后 Shadowsocks 客户端识别示例：<br><img src="/2014/01/29/linux/ssr/images/ss_client.png" alt="Shadowsocks 客户端示例"></p>
+<p>复制二维码链接后 ShadowsocksR 客户端识别示例：<br><img src="/2014/01/29/linux/ssr/images/ssr_client.png" alt="ShadowsocksR 客户端示例"></p>
 <p>二维码（QR Code）参考链接：<br><a href="https://github.com/shadowsocks/shadowsocks/wiki/Generate-QR-Code-for-Android-or-iOS-Clients" target="_blank" rel="noopener">https://github.com/shadowsocks/shadowsocks/wiki/Generate-QR-Code-for-Android-or-iOS-Clients</a><br><a href="https://github.com/shadowsocksr-backup/shadowsocks-rss/wiki/SSR-QRcode-scheme" target="_blank" rel="noopener">https://github.com/shadowsocksr-backup/shadowsocks-rss/wiki/SSR-QRcode-scheme</a></p>
 <p>2017 年 10 月 22 日：<br>1、升级：libsodium 到 1.0.15。</p>
 <p>2017 年 10 月 14 日：<br>1、新增：在安装 Shadowsocks-libev 版时<strong>可选安装</strong> simple-obfs 服务端。<br>※ 脚本通过判断 autoconf 版本是否大于或等于 2.67 来一键安装 simple-obfs 服务端。并且，支持在安装过程中选择 obfs 为 http 或 tls。<br>※ 使用方法参考：<a href="https://teddysun.com/511.html" target="_blank" rel="noopener">https://teddysun.com/511.html</a></p>
@@ -265,7 +265,7 @@
   <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2014/01/29/linux/ssr/&title=Shadowsocks 一键安装脚本（四合一）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2014/01/29/linux/ssr/&name=Shadowsocks 一键安装脚本（四合一）&description=&lt;h2 id=&#34;本脚本适用环境&#34;&gt;&lt;a href=&#34;#本脚本适用环境&#34; class=&#34;headerlink&#34; title=&#34;本脚本适用环境&#34;&gt;&lt;/a&gt;本脚本适用环境&lt;/h2&gt;&lt;p&gt;系统支持：CentOS 6+，Debian 7+，Ubuntu 12+&lt;br&gt;内存要求：≥128M&lt;br&gt;日期　　：2018 年 02 月 07 日&lt;/p&gt;
 &lt;h3 id=&#34;关于本脚本&#34;&gt;&lt;a href=&#34;#关于本脚本&#34; class=&#34;headerlink&#34; title=&#34;关于本脚本&#34;&gt;&lt;/a&gt;关于本脚本&lt;/h3&gt;&lt;p&gt;1、一键安装 Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev 版（四选一）服务端；&lt;br&gt;2、各版本的启动脚本及配置文件名不再重合；&lt;br&gt;3、每次运行可安装一种版本；&lt;br&gt;4、支持以多次运行来安装多个版本，且各个版本可以共存（注意端口号需设成不同）；&lt;br&gt;5、若已安装多个版本，则卸载时也需多次运行（每次卸载一种）；&lt;br&gt;6、Shadowsocks-Python 和 ShadowsocksR 安装后不可同时启动（因为本质上都属 Python 版）。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;友情提示：&lt;/strong&gt;如果你有问题，请先阅读这篇《&lt;a href=&#34;https://teddysun.com/399.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Shadowsocks Troubleshooting&lt;/a&gt;》之后再询问。&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+&lt;p&gt;&lt;strong&gt;友情提示：&lt;/strong&gt;如果你有问题，请先阅读这篇《&lt;a href=&#34;https://teddysun.com/399.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Shadowsocks Troubleshooting&lt;/a&gt;》之后再询问。&lt;br&gt;&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
