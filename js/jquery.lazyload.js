@@ -27,7 +27,7 @@
             var obj = $(this);
             var dom = this;
 
-            var srcSign = options.srcSign || "lazy-src";
+            var srcSign = options.srcSign || "src";
             var errCallBack = options.errCallBack || function(){};
             var container = options.container || $(window);
 
@@ -47,7 +47,7 @@
                 }
                 var w = target.width();
                 var h = target.height();
-                target[0].src = yiliaConfig.rootUrl + "img/img-err.png";
+                target[0].src = yiliaConfig.rootUrl + "images/img-err.png";
 
                 fn();
                 //todo: 上报
@@ -59,7 +59,7 @@
                 var t = target.offset().top;
                 var l = target.offset().left;
                 var tempDom = target.clone().addClass("lazy-loding").insertBefore(target);
-                tempDom[0].src = yiliaConfig.rootUrl + "img/img-loading.png";
+                tempDom[0].src = yiliaConfig.rootUrl + "images/img-loading.png";
                 target.hide();
             }
             /**
