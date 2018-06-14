@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang=中文>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="译文原文 http://blog.csdn.net/lzyzsd/article/details/44094895  英文原文 Grokking RxJava, Part 2: Operator, Operator 在第一篇blog中， 我介绍了RxJava的一些基础知识，同时也介绍了map()操作符。当然如果你并没有意愿去使用RxJava我一点都不诧异，毕竟才接触了这么点。看完 这篇blog，我">
+<meta name="keywords" content="RxJava">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出RxJava(二：操作符)">
+<meta property="og:url" content="http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/index.html">
+<meta property="og:site_name" content="熊猫博客">
+<meta property="og:description" content="译文原文 http://blog.csdn.net/lzyzsd/article/details/44094895  英文原文 Grokking RxJava, Part 2: Operator, Operator 在第一篇blog中， 我介绍了RxJava的一些基础知识，同时也介绍了map()操作符。当然如果你并没有意愿去使用RxJava我一点都不诧异，毕竟才接触了这么点。看完 这篇blog，我">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-06-14T03:19:28.278Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入浅出RxJava(二：操作符)">
+<meta name="twitter:description" content="译文原文 http://blog.csdn.net/lzyzsd/article/details/44094895  英文原文 Grokking RxJava, Part 2: Operator, Operator 在第一篇blog中， 我介绍了RxJava的一些基础知识，同时也介绍了map()操作符。当然如果你并没有意愿去使用RxJava我一点都不诧异，毕竟才接触了这么点。看完 这篇blog，我">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>深入浅出RxJava(二：操作符)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2016/04/04/android/RxJava/深入浅出RxJava三--响应式的好处/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/04/01/随笔/Q2季度目标/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&text=深入浅出RxJava(二：操作符)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&is_video=false&description=深入浅出RxJava(二：操作符)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=深入浅出RxJava(二：操作符)&body=Check out this article: http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&name=深入浅出RxJava(二：操作符)&description=&lt;p&gt;译文原文 &lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/44094895&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://blog.csdn.net/lzyzsd/article/details/44094895&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;英文原文 &lt;a href=&#34;http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Grokking RxJava, Part 2: Operator, Operator&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/41833541&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;第一篇blog&lt;/a&gt;中， 我介绍了RxJava的一些基础知识，同时也介绍了map()操作符。当然如果你并没有意愿去使用RxJava我一点都不诧异，毕竟才接触了这么点。看完 这篇blog，我相信你肯定想立即在你的项目中使用RxJava了，这篇blog将介绍许多RxJava中的操作符，RxJava的强大性就来自于它所定 义的操作符。&lt;/p&gt;
+&lt;p&gt;首先先看一个例子：&lt;/p&gt;
+&lt;p&gt;假设我有这样一个方法：&lt;br&gt;这个方法根据输入的字符串返回一个网站的url列表（啊哈，搜索引擎）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Observable&amp;lt;List&amp;lt;String&amp;gt;&amp;gt; query(String text);&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;现在我希望构建一个健壮系统，它可以查询字符串并且显示结果。根据上一篇blog的内容，我们可能会写出下面的代码：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;query(`&lt;/code&gt;“Hello, world!”&lt;code&gt;&lt;/code&gt;)&lt;code&gt;&lt;/code&gt;.subscribe(urls -&amp;gt; {&lt;code&gt;&lt;/code&gt;for&lt;code&gt;&lt;/code&gt;(String url : urls) {&lt;code&gt;&lt;/code&gt;System.out.println(url);&lt;code&gt;&lt;/code&gt;}&lt;code&gt;&lt;/code&gt;});`&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#还可以更好"><span class="toc-number">1.</span> <span class="toc-text">还可以更好</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#丰富的操作符"><span class="toc-number">2.</span> <span class="toc-text">丰富的操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#感觉如何？"><span class="toc-number">3.</span> <span class="toc-text">感觉如何？</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        深入浅出RxJava(二：操作符)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">熊猫博客</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-04-02T15:12:17.000Z" itemprop="datePublished">2016-04-02</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/RxJava/">RxJava</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>译文原文 <a href="http://blog.csdn.net/lzyzsd/article/details/44094895" target="_blank" rel="noopener">http://blog.csdn.net/lzyzsd/article/details/44094895</a> </p>
+<p>英文原文 <a href="http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/" target="_blank" rel="noopener">Grokking RxJava, Part 2: Operator, Operator</a></p>
+<p>在<a href="http://blog.csdn.net/lzyzsd/article/details/41833541" target="_blank" rel="noopener">第一篇blog</a>中， 我介绍了RxJava的一些基础知识，同时也介绍了map()操作符。当然如果你并没有意愿去使用RxJava我一点都不诧异，毕竟才接触了这么点。看完 这篇blog，我相信你肯定想立即在你的项目中使用RxJava了，这篇blog将介绍许多RxJava中的操作符，RxJava的强大性就来自于它所定 义的操作符。</p>
+<p>首先先看一个例子：</p>
+<p>假设我有这样一个方法：<br>这个方法根据输入的字符串返回一个网站的url列表（啊哈，搜索引擎）</p>
+<p><code>Observable&lt;List&lt;String&gt;&gt; query(String text);</code></p>
+<p>现在我希望构建一个健壮系统，它可以查询字符串并且显示结果。根据上一篇blog的内容，我们可能会写出下面的代码：</p>
+<p><code>query(`</code>“Hello, world!”<code></code>)<code></code>.subscribe(urls -&gt; {<code></code>for<code></code>(String url : urls) {<code></code>System.out.println(url);<code></code>}<code></code>});`<br><a id="more"></a><br>这种代码当然是不能容忍的，因为上面的代码使我们丧失了变化数据流的能力。一旦我们想要更改每一个URL，只能在Subscriber中来做。我们竟然没有使用如此酷的map()操作符！！！</p>
+<p>当然，我可以使用map操作符，map的输入是urls列表，处理的时候还是要for each遍历，一样很蛋疼。</p>
+<p>万幸，还有Observable.from()方法，它接收一个集合作为输入，然后每次输出一个元素给subscriber：</p>
+<p><code>Observable.from(`</code>“url1”<code>,</code>“url2”<code>,</code>“url3”<code></code>)`</p>
+<p><code>.subscribe(url -&gt; System.out.println(url));</code></p>
+<p>我们来把这个方法使用到刚才的场景：</p>
+<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>.subscribe(urls -&gt; {</code></p>
+<p><code>Observable.from(urls)</code></p>
+<p><code>.subscribe(url -&gt; System.out.println(url));</code></p>
+<p><code>});</code></p>
+<p>虽然去掉了for each循环，但是代码依然看起来很乱。多个嵌套的subscription不仅看起来很丑，难以修改，更严重的是它会破坏某些我们现在还没有讲到的RxJava的特性。</p>
+<p>救星来了,他就是flatMap()。<br>Observable.flatMap()接收一个Observable的输出作为输入，同时输出另外一个Observable。直接看代码：</p>
+<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>.flatMap(`</code>new<code></code>Func1&lt;List<string>, Observable<string>&gt;() {`</string></string></p>
+<p><code>@Override</code></p>
+<p><code>public Observable&lt;String&gt; call(List&lt;String&gt; urls) {</code></p>
+<p><code>return</code> <code>Observable.from(urls);</code></p>
+<p><code>}</code></p>
+<p><code>})</code></p>
+<p><code>.subscribe(url -&gt; System.out.println(url));</code></p>
+<p>这里我贴出了整个的函数代码，以方便你了解发生了什么，使用lambda可以大大简化代码长度：</p>
+<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>.flatMap(urls -&gt; Observable.from(urls))</code></p>
+<p><code>.subscribe(url -&gt; System.out.println(url));</code></p>
+<p>flatMap()是不是看起来很奇怪？为什么它要返回另外一个Observable呢？理解flatMap的关键点在于，flatMap输出的新的 Observable正是我们在Subscriber想要接收的。现在Subscriber不再收到List\&lt;String>，而是收到一些 列单个的字符串，就像Observable.from()的输出一样。</p>
+<p>这部分也是我当初学RxJava的时候最难理解的部分，一旦我突然领悟了，RxJava的很多疑问也就一并解决了。</p>
+<h2 id="还可以更好"><a href="#还可以更好" class="headerlink" title="还可以更好"></a>还可以更好</h2><p>flatMap()实在不能更赞了，它可以返回任何它想返回的Observable对象。<br>比如下面的方法：</p>
+<p><code>// 返回网站的标题，如果404了就返回null</code></p>
+<p><code>Observable&lt;String&gt; getTitle(String URL);</code></p>
+<p>接着前面的例子，现在我不想打印URL了，而是要打印收到的每个网站的标题。问题来了，我的方法每次只能传入一个URL，并且返回值不是一个String，而是一个输出String的Observabl对象。使用flatMap()可以简单的解决这个问题。</p>
+<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>.flatMap(urls -&gt; Observable.from(urls))</code></p>
+<p><code>.flatMap(`</code>new<code></code>Func1&lt;String, Observable<string>&gt;() {`</string></p>
+<p><code>@Override</code></p>
+<p><code>public Observable&lt;String&gt; call(String url) {</code></p>
+<p><code>return</code> <code>getTitle(url);</code></p>
+<p><code>}</code></p>
+<p><code>})</code></p>
+<p><code>.subscribe(title -&gt; System.out.println(title));</code></p>
+<p>使用lambda:</p>
+<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>.flatMap(urls -&gt; Observable.from(urls))</code></p>
+<p><code>.flatMap(url -&gt; getTitle(url))</code></p>
+<p><code>.subscribe(title -&gt; System.out.println(title));</code></p>
+<p>是不是感觉很不可思议？我竟然能将多个独立的返回Observable对象的方法组合在一起！帅呆了！<br>不止这些，我还将两个API的调用组合到一个链式调用中了。我们可以将任意多个API调用链接起来。大家应该都应该知道同步所有的API调用，然后将所有 API调用的回调结果组合成需要展示的数据是一件多么蛋疼的事情。这里我们成功的避免了callback hell（多层嵌套的回调，导致代码难以阅读维护）。现在所有的逻辑都包装成了这种简单的响应式调用。</p>
+<h2 id="丰富的操作符"><a href="#丰富的操作符" class="headerlink" title="丰富的操作符"></a>丰富的操作符</h2><p>目前为止，我们已经接触了两个操作符，RxJava中还有更多的操作符，那么我们如何使用其他的操作符来改进我们的代码呢？<br>getTitle()返回null如果url不存在。我们不想输出”null”，那么我们可以从返回的title列表中过滤掉null值！</p>
+<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>.flatMap(urls -&gt; Observable.from(urls))</code></p>
+<p><code>.flatMap(url -&gt; getTitle(url))</code></p>
+<p><code>.filter(title -&gt; title != `</code>null<code></code>)`</p>
+<p><code>.subscribe(title -&gt; System.out.println(title));</code></p>
+<p>filter()输出和输入相同的元素，并且会过滤掉那些不满足检查条件的。</p>
+<p>如果我们只想要最多5个结果：</p>
+<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>.flatMap(urls -&gt; Observable.from(urls))</code></p>
+<p><code>.flatMap(url -&gt; getTitle(url))</code></p>
+<p><code>.filter(title -&gt; title != `</code>null<code></code>)`</p>
+<p><code>.take(5)</code></p>
+<p><code>.subscribe(title -&gt; System.out.println(title));</code></p>
+<p>take()输出最多指定数量的结果。</p>
+<p>如果我们想在打印之前，把每个标题保存到磁盘：</p>
+<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>.flatMap(urls -&gt; Observable.from(urls))</code></p>
+<p><code>.flatMap(url -&gt; getTitle(url))</code></p>
+<p><code>.filter(title -&gt; title != `</code>null<code></code>)`</p>
+<p><code>.take(5)</code></p>
+<p><code>.doOnNext(title -&gt; saveTitle(title))</code></p>
+<p><code>.subscribe(title -&gt; System.out.println(title));</code></p>
+<p>doOnNext()允许我们在每次输出一个元素之前做一些额外的事情，比如这里的保存标题。</p>
+<p>看到这里操作数据流是多么简单了么。你可以添加任意多的操作，并且不会搞乱你的代码。</p>
+<p>RxJava包含了大量的操作符。操作符的数量是有点吓人，但是很值得你去挨个看一下，这样你可以知道有哪些操作符可以使用。弄懂这些操作符可能会花一些时间，但是一旦弄懂了，你就完全掌握了RxJava的威力。</p>
+<p>你甚至可以编写自定义的操作符！这篇blog不打算将自定义操作符，如果你想的话，清自行Google吧。</p>
+<h2 id="感觉如何？"><a href="#感觉如何？" class="headerlink" title="感觉如何？"></a>感觉如何？</h2><p>好吧，你是一个怀疑主义者，并且还很难被说服，那为什么你要关心这些操作符呢？</p>
+<p>因为操作符可以让你对数据流做任何操作。</p>
+<p>将一系列的操作符链接起来就可以完成复杂的逻辑。代码被分解成一系列可以组合的片段。这就是响应式函数编程的魅力。用的越多，就会越多的改变你的编程思维。</p>
+<p>另外，RxJava也使我们处理数据的方式变得更简单。在最后一个例子里，我们调用了两个API，对API返回的数据进行了处理，然后保存到磁盘。 但是我们的Subscriber并不知道这些，它只是认为自己在接收一个Observable\&lt;String>对象。良好的封装性也带来了编 码的便利！</p>
+<p>在第三部分中，我将介绍RxJava的另外一些很酷的特性，比如错误处理和并发，这些特性并不会直接用来处理数据。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#还可以更好"><span class="toc-number">1.</span> <span class="toc-text">还可以更好</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#丰富的操作符"><span class="toc-number">2.</span> <span class="toc-text">丰富的操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#感觉如何？"><span class="toc-number">3.</span> <span class="toc-text">感觉如何？</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&text=深入浅出RxJava(二：操作符)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&is_video=false&description=深入浅出RxJava(二：操作符)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=深入浅出RxJava(二：操作符)&body=Check out this article: http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&name=深入浅出RxJava(二：操作符)&description=&lt;p&gt;译文原文 &lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/44094895&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://blog.csdn.net/lzyzsd/article/details/44094895&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;英文原文 &lt;a href=&#34;http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Grokking RxJava, Part 2: Operator, Operator&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/41833541&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;第一篇blog&lt;/a&gt;中， 我介绍了RxJava的一些基础知识，同时也介绍了map()操作符。当然如果你并没有意愿去使用RxJava我一点都不诧异，毕竟才接触了这么点。看完 这篇blog，我相信你肯定想立即在你的项目中使用RxJava了，这篇blog将介绍许多RxJava中的操作符，RxJava的强大性就来自于它所定 义的操作符。&lt;/p&gt;
+&lt;p&gt;首先先看一个例子：&lt;/p&gt;
+&lt;p&gt;假设我有这样一个方法：&lt;br&gt;这个方法根据输入的字符串返回一个网站的url列表（啊哈，搜索引擎）&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Observable&amp;lt;List&amp;lt;String&amp;gt;&amp;gt; query(String text);&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;现在我希望构建一个健壮系统，它可以查询字符串并且显示结果。根据上一篇blog的内容，我们可能会写出下面的代码：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;query(`&lt;/code&gt;“Hello, world!”&lt;code&gt;&lt;/code&gt;)&lt;code&gt;&lt;/code&gt;.subscribe(urls -&amp;gt; {&lt;code&gt;&lt;/code&gt;for&lt;code&gt;&lt;/code&gt;(String url : urls) {&lt;code&gt;&lt;/code&gt;System.out.println(url);&lt;code&gt;&lt;/code&gt;}&lt;code&gt;&lt;/code&gt;});`&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 一只熊猫
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

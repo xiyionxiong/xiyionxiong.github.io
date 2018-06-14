@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang=中文>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="在第1，2，3篇中，我大概介绍了RxJava是怎么使用的。下面我会介绍如何在Android中使用RxJava. RxAndroidRxAndroid是RxJava的一个针对Android平台的扩展。它包含了一些能够简化Android开发的工具。 首先，AndroidSchedulers提供了针对Android的线程系统的调度器。需要在UI线程中运行某些代码？很简单，只需要使用AndroidSche">
+<meta name="keywords" content="RxJava">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出RxJava(四：在Android中使用响应式编程)">
+<meta property="og:url" content="http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/index.html">
+<meta property="og:site_name" content="熊猫博客">
+<meta property="og:description" content="在第1，2，3篇中，我大概介绍了RxJava是怎么使用的。下面我会介绍如何在Android中使用RxJava. RxAndroidRxAndroid是RxJava的一个针对Android平台的扩展。它包含了一些能够简化Android开发的工具。 首先，AndroidSchedulers提供了针对Android的线程系统的调度器。需要在UI线程中运行某些代码？很简单，只需要使用AndroidSche">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-06-14T03:19:39.165Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入浅出RxJava(四：在Android中使用响应式编程)">
+<meta name="twitter:description" content="在第1，2，3篇中，我大概介绍了RxJava是怎么使用的。下面我会介绍如何在Android中使用RxJava. RxAndroidRxAndroid是RxJava的一个针对Android平台的扩展。它包含了一些能够简化Android开发的工具。 首先，AndroidSchedulers提供了针对Android的线程系统的调度器。需要在UI线程中运行某些代码？很简单，只需要使用AndroidSche">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>深入浅出RxJava(四：在Android中使用响应式编程)</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2016/04/05/android/RxJava/在安卓上使用RxJava/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/04/04/android/RxJava/深入浅出RxJava三--响应式的好处/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&text=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&title=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&is_video=false&description=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=深入浅出RxJava(四：在Android中使用响应式编程)&body=Check out this article: http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&title=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&title=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&title=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&title=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&name=深入浅出RxJava(四：在Android中使用响应式编程)&description=&lt;p&gt;在第&lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/41833541&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;1&lt;/a&gt;，&lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/44094895&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;2&lt;/a&gt;，&lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/44891933&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;3&lt;/a&gt;篇中，我大概介绍了RxJava是怎么使用的。下面我会介绍如何在Android中使用RxJava.&lt;/p&gt;
+&lt;h2 id=&#34;RxAndroid&#34;&gt;&lt;a href=&#34;#RxAndroid&#34; class=&#34;headerlink&#34; title=&#34;RxAndroid&#34;&gt;&lt;/a&gt;RxAndroid&lt;/h2&gt;&lt;p&gt;RxAndroid是RxJava的一个针对Android平台的扩展。它包含了一些能够简化Android开发的工具。&lt;/p&gt;
+&lt;p&gt;首先，AndroidSchedulers提供了针对Android的线程系统的调度器。需要在UI线程中运行某些代码？很简单，只需要使用AndroidSchedulers.mainThread():&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;retrofitService.getImage(url)
+.subscribeOn(Schedulers.io())
+.observeOn(AndroidSchedulers.mainThread())
+.subscribe(bitmap -&amp;gt; myImageView.setImageBitmap(bitmap));
+&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RxAndroid"><span class="toc-number">1.</span> <span class="toc-text">RxAndroid</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Retrofit"><span class="toc-number">2.</span> <span class="toc-text">Retrofit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遗留代码，运行极慢的代码"><span class="toc-number">3.</span> <span class="toc-text">遗留代码，运行极慢的代码</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        深入浅出RxJava(四：在Android中使用响应式编程)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">熊猫博客</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-04-05T15:12:17.000Z" itemprop="datePublished">2016-04-05</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/RxJava/">RxJava</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>在第<a href="http://blog.csdn.net/lzyzsd/article/details/41833541" target="_blank" rel="noopener">1</a>，<a href="http://blog.csdn.net/lzyzsd/article/details/44094895" target="_blank" rel="noopener">2</a>，<a href="http://blog.csdn.net/lzyzsd/article/details/44891933" target="_blank" rel="noopener">3</a>篇中，我大概介绍了RxJava是怎么使用的。下面我会介绍如何在Android中使用RxJava.</p>
+<h2 id="RxAndroid"><a href="#RxAndroid" class="headerlink" title="RxAndroid"></a>RxAndroid</h2><p>RxAndroid是RxJava的一个针对Android平台的扩展。它包含了一些能够简化Android开发的工具。</p>
+<p>首先，AndroidSchedulers提供了针对Android的线程系统的调度器。需要在UI线程中运行某些代码？很简单，只需要使用AndroidSchedulers.mainThread():</p>
+<pre><code>retrofitService.getImage(url)
+.subscribeOn(Schedulers.io())
+.observeOn(AndroidSchedulers.mainThread())
+.subscribe(bitmap -&gt; myImageView.setImageBitmap(bitmap));
+</code></pre><a id="more"></a>
+<p>如果你已经创建了自己的Handler，你可以使用HandlerThreadScheduler1将一个调度器链接到你的handler上。</p>
+<p>接着要介绍的就是AndroidObservable，它提供了跟多的功能来配合Android的生命周期。bindActivity()和 bindFragment()方法默认使用AndroidSchedulers.mainThread()来执行观察者代码，这两个方法会在 Activity或者Fragment结束的时候通知被观察者停止发出新的消息。</p>
+<p><code>AndroidObservable.bindActivity(`</code>this<code></code>, retrofitService.getImage(url))`</p>
+<p><code>.subscribeOn(Schedulers.io())</code></p>
+<p><code>.subscribe(bitmap -&gt; myImageView.setImageBitmap(bitmap);</code></p>
+<p>我自己也很喜欢AndroidObservable.fromBroadcast()方法，它允许你创建一个类似BroadcastReceiver的Observable对象。下面的例子展示了如何在网络变化的时候被通知到：</p>
+<p><code>IntentFilter filter = `</code>new<code></code>IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);`</p>
+<p><code>AndroidObservable.fromBroadcast(context, filter)</code></p>
+<p><code>.subscribe(intent -&gt; handleConnectivityChange(intent));</code></p>
+<p>最后要介绍的是ViewObservable,使用它可以给View添加了一些绑定。如果你想在每次点击view的时候都收到一个事件，可以使用 ViewObservable.clicks()，或者你想监听TextView的内容变化，可以使用ViewObservable.text()。</p>
+<p><code>ViewObservable.clicks(mCardNameEditText, `</code>false<code></code>)`</p>
+<p><code>.subscribe(view -&gt; handleClick(view));</code></p>
+<h2 id="Retrofit"><a href="#Retrofit" class="headerlink" title="Retrofit"></a>Retrofit</h2><p>大名鼎鼎的Retrofit库内置了对RxJava的支持。通常调用发可以通过使用一个Callback对象来获取异步的结果：</p>
+<p><code>@GET(`</code>“/user/{id}/photo”<code></code>)`</p>
+<p><code>void getUserPhoto(@Path(`</code>“id”<code></code>) int id, Callback<photo> cb);`</photo></p>
+<p>使用RxJava，你可以直接返回一个Observable对象。</p>
+<p><code>@GET(`</code>“/user/{id}/photo”<code></code>)`</p>
+<p><code>Observable&lt;Photo&gt; getUserPhoto(@Path(`</code>“id”<code></code>) int id);`</p>
+<p>现在你可以随意使用Observable对象了。你不仅可以获取数据，还可以进行变换。<br>Retrofit对Observable的支持使得它可以很简单的将多个REST请求结合起来。比如我们有一个请求是获取照片的，还有一个请求是获取元数据的，我们就可以将这两个请求并发的发出，并且等待两个结果都返回之后再做处理：</p>
+<p><code>Observable.zip(</code></p>
+<p><code>service.getUserPhoto(id),</code></p>
+<p><code>service.getPhotoMetadata(id),</code></p>
+<p><code>(photo, metadata) -&gt; createPhotoWithData(photo, metadata))</code></p>
+<p><code>.subscribe(photoWithData -&gt; showPhoto(photoWithData));</code></p>
+<p>在第二篇里我展示过一个类似的例子（使用flatMap()）。这里我只是想展示以下使用RxJava+Retrofit可以多么简单地组合多个REST请求。</p>
+<h2 id="遗留代码，运行极慢的代码"><a href="#遗留代码，运行极慢的代码" class="headerlink" title="遗留代码，运行极慢的代码"></a>遗留代码，运行极慢的代码</h2><p>Retrofit可以返回Observable对象，但是如果你使用的别的库并不支持这样怎么办？或者说一个内部的内码，你想把他们转换成Observable的？有什么简单的办法没？</p>
+<p>绝大多数时候Observable.just() 和 Observable.from() 能够帮助你从遗留代码中创建 Observable 对象:</p>
+<p><code>private Object oldMethod() { ... }</code></p>
+<p><code>public Observable&lt;Object&gt; newMethod() {</code></p>
+<p><code>return</code> <code>Observable.just(oldMethod());</code></p>
+<p><code>}</code></p>
+<p>上面的例子中如果oldMethod()足够快是没有什么问题的，但是如果很慢呢？调用oldMethod()将会阻塞住他所在的线程。<br>为了解决这个问题，可以参考我一直使用的方法–使用defer()来包装缓慢的代码：</p>
+<p><code>private Object slowBlockingMethod() { ... }</code></p>
+<p><code>public Observable&lt;Object&gt; newMethod() {</code></p>
+<p><code>return</code> <code>Observable.defer(() -&gt; Observable.just(slowBlockingMethod()));</code></p>
+<p><code>}</code></p>
+<p>现在，newMethod()的调用不会阻塞了，除非你订阅返回的observable对象。</p>
+<p>我把最难的不分留在了最后。如何处理Activity的生命周期？主要就是两个问题：<br>1.在configuration改变（比如转屏）之后继续之前的Subscription。</p>
+<p>比如你使用Retrofit发出了一个REST请求，接着想在listview中展示结果。如果在网络请求的时候用户旋转了屏幕怎么办？你当然想继续刚才的请求，但是怎么搞？</p>
+<p>2.Observable持有Context导致的内存泄露</p>
+<p>这个问题是因为创建subscription的时候，以某种方式持有了context的引用，尤其是当你和view交互的时候，这太容易发生！如果Observable没有及时结束，内存占用就会越来越大。<br>不幸的是，没有银弹来解决这两个问题，但是这里有一些指导方案你可以参考。</p>
+<p>第一个问题的解决方案就是使用RxJava内置的缓存机制，这样你就可以对同一个Observable对象执行 unsubscribe/resubscribe，却不用重复运行得到Observable的代码。cache() (或者 replay())会继续执行网络请求（甚至你调用了unsubscribe也不会停止）。这就是说你可以在Activity重新创建的时候从 cache()的返回值中创建一个新的Observable对象。</p>
+<p><code>Observable&lt;Photo&gt; request = service.getUserPhoto(id).cache();</code></p>
+<p><code>Subscription sub = request.subscribe(photo -&gt; handleUserPhoto(photo));</code></p>
+<p><code>// ...When the Activity is being recreated...</code></p>
+<p><code>sub.unsubscribe();</code></p>
+<p><code>// ...Once the Activity is recreated...</code></p>
+<p><code>request.subscribe(photo -&gt; handleUserPhoto(photo));</code></p>
+<p>注意，两次sub是使用的同一个缓存的请求。当然在哪里去存储请求的结果还是要你自己来做，和所有其他的生命周期相关的解决方案一延虎，必须在生命周期外的某个地方存储。（retained fragment或者单例等等）。</p>
+<p>第二个问题的解决方案就是在生命周期的某个时刻取消订阅。一个很常见的模式就是使用CompositeSubscription来持有所有的Subscriptions，然后在onDestroy()或者onDestroyView()里取消所有的订阅。</p>
+<p><code>private CompositeSubscription mCompositeSubscription</code></p>
+<p><code>= `</code>new<code></code>CompositeSubscription();`</p>
+<p><code>private void doSomething() {</code></p>
+<p><code>mCompositeSubscription.add(</code></p>
+<p><code>AndroidObservable.bindActivity(`</code>this<code>, Observable.just(</code>“Hello, World!”<code></code>))`</p>
+<p><code>.subscribe(s -&gt; System.out.println(s)));</code></p>
+<p><code>}</code></p>
+<p><code>@Override</code></p>
+<p><code>protected void onDestroy() {</code></p>
+<p><code>super`</code>.onDestroy();`</p>
+<p><code>mCompositeSubscription.unsubscribe();</code></p>
+<p><code>}</code></p>
+<p>你可以在Activity/Fragment的基类里创建一个CompositeSubscription对象，在子类中使用它。</p>
+<p>注意! 一旦你调用了 CompositeSubscription.unsubscribe()，这个CompositeSubscription对象就不可用了, 如果你还想使用CompositeSubscription，就必须在创建一个新的对象了。</p>
+<p>两个问题的解决方案都需要添加额外的代码，如果谁有更好的方案，欢迎告诉我。</p>
+<p>RxJava还是一个很新的项目，RxAndroid更是。RxAndroid目前还在活跃开发中，也没有多少好的例子。我打赌一年之后我的一些建议就会被看做过时了。</p>
+<pre><code>原文链接 &lt;http://blog.danlew.net/2014/10/08/grokking-rxjava-part-4/&gt; 
+译文链接 &lt;http://blog.csdn.net/lzyzsd/article/details/45033611&gt; 
+</code></pre>
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RxAndroid"><span class="toc-number">1.</span> <span class="toc-text">RxAndroid</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Retrofit"><span class="toc-number">2.</span> <span class="toc-text">Retrofit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遗留代码，运行极慢的代码"><span class="toc-number">3.</span> <span class="toc-text">遗留代码，运行极慢的代码</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&text=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&title=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&is_video=false&description=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=深入浅出RxJava(四：在Android中使用响应式编程)&body=Check out this article: http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&title=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&title=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&title=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&title=深入浅出RxJava(四：在Android中使用响应式编程)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2016/04/05/android/RxJava/深入浅出RxJava四-在Android中使用响应式编程/&name=深入浅出RxJava(四：在Android中使用响应式编程)&description=&lt;p&gt;在第&lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/41833541&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;1&lt;/a&gt;，&lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/44094895&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;2&lt;/a&gt;，&lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/44891933&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;3&lt;/a&gt;篇中，我大概介绍了RxJava是怎么使用的。下面我会介绍如何在Android中使用RxJava.&lt;/p&gt;
+&lt;h2 id=&#34;RxAndroid&#34;&gt;&lt;a href=&#34;#RxAndroid&#34; class=&#34;headerlink&#34; title=&#34;RxAndroid&#34;&gt;&lt;/a&gt;RxAndroid&lt;/h2&gt;&lt;p&gt;RxAndroid是RxJava的一个针对Android平台的扩展。它包含了一些能够简化Android开发的工具。&lt;/p&gt;
+&lt;p&gt;首先，AndroidSchedulers提供了针对Android的线程系统的调度器。需要在UI线程中运行某些代码？很简单，只需要使用AndroidSchedulers.mainThread():&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;retrofitService.getImage(url)
+.subscribeOn(Schedulers.io())
+.observeOn(AndroidSchedulers.mainThread())
+.subscribe(bitmap -&amp;gt; myImageView.setImageBitmap(bitmap));
+&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 一只熊猫
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

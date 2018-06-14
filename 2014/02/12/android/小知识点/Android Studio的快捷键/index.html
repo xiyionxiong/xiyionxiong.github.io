@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang=中文>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="IDE按键                        说明 F1                            帮助 Alt+F1                    查找文件所在目录位置 Alt+1                    快速打开或隐藏工程面板 Ctrl+Alt+S                打开设置对话框 Alt+Home                跳转到">
+<meta name="keywords" content="快捷键">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Studio 的快捷键">
+<meta property="og:url" content="http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/index.html">
+<meta property="og:site_name" content="熊猫博客">
+<meta property="og:description" content="IDE按键                        说明 F1                            帮助 Alt+F1                    查找文件所在目录位置 Alt+1                    快速打开或隐藏工程面板 Ctrl+Alt+S                打开设置对话框 Alt+Home                跳转到">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-06-14T03:18:24.539Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android Studio 的快捷键">
+<meta name="twitter:description" content="IDE按键                        说明 F1                            帮助 Alt+F1                    查找文件所在目录位置 Alt+1                    快速打开或隐藏工程面板 Ctrl+Alt+S                打开设置对话框 Alt+Home                跳转到">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Android Studio 的快捷键</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2014/02/17/android/小知识点/Android开发中一些被冷落但却很有用的类和方法/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2014/02/08/android/小知识点/Android开发规范/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&text=Android Studio 的快捷键"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&title=Android Studio 的快捷键"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&is_video=false&description=Android Studio 的快捷键"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android Studio 的快捷键&body=Check out this article: http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&title=Android Studio 的快捷键"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&title=Android Studio 的快捷键"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&title=Android Studio 的快捷键"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&title=Android Studio 的快捷键"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&name=Android Studio 的快捷键&description=&lt;h4 id=&#34;IDE&#34;&gt;&lt;a href=&#34;#IDE&#34; class=&#34;headerlink&#34; title=&#34;IDE&#34;&gt;&lt;/a&gt;IDE&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;按键                        说明
+F1                            帮助
+Alt+F1                    查找文件所在目录位置
+Alt+1                    快速打开或隐藏工程面板
+Ctrl+Alt+S                打开设置对话框
+Alt+Home                跳转到导航栏
+Esc                        光标返回编辑框
+Shift+Esc                光标返回编辑框,关闭无用的窗口
+Shift+Click                关闭标签页
+F12                        把焦点从编辑器移到最近使用的工具窗口
+Ctrl+Alt+Y                    同步
+Ctrl+Alt+S                打开设置对话框
+Alt+Shift+Inert            开启/关闭列选择模式
+Ctrl+Alt+Shift+S        打开当前项目/模块属性
+Alt+Shift+C                查看文件的变更历史
+Ctrl+Shift+F10            运行
+Ctrl+Shift+F9            debug运行
+Ctrl+Alt+F12                资源管理器打开文件夹
+&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#IDE"><span class="toc-number">1.</span> <span class="toc-text">IDE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编辑"><span class="toc-number">2.</span> <span class="toc-text">编辑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件"><span class="toc-number">3.</span> <span class="toc-text">文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找"><span class="toc-number">4.</span> <span class="toc-text">查找</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重构"><span class="toc-number">5.</span> <span class="toc-text">重构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#调试"><span class="toc-number">6.</span> <span class="toc-text">调试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#VCS"><span class="toc-number">7.</span> <span class="toc-text">VCS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Others"><span class="toc-number">8.</span> <span class="toc-text">Others</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#REF"><span class="toc-number">9.</span> <span class="toc-text">REF</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android Studio 的快捷键
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">熊猫博客</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2014-02-11T17:29:16.000Z" itemprop="datePublished">2014-02-12</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/快捷键/">快捷键</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h4 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h4><pre><code>按键                        说明
+F1                            帮助
+Alt+F1                    查找文件所在目录位置
+Alt+1                    快速打开或隐藏工程面板
+Ctrl+Alt+S                打开设置对话框
+Alt+Home                跳转到导航栏
+Esc                        光标返回编辑框
+Shift+Esc                光标返回编辑框,关闭无用的窗口
+Shift+Click                关闭标签页
+F12                        把焦点从编辑器移到最近使用的工具窗口
+Ctrl+Alt+Y                    同步
+Ctrl+Alt+S                打开设置对话框
+Alt+Shift+Inert            开启/关闭列选择模式
+Ctrl+Alt+Shift+S        打开当前项目/模块属性
+Alt+Shift+C                查看文件的变更历史
+Ctrl+Shift+F10            运行
+Ctrl+Shift+F9            debug运行
+Ctrl+Alt+F12                资源管理器打开文件夹
+</code></pre><a id="more"></a>
+<h4 id="编辑"><a href="#编辑" class="headerlink" title="编辑"></a>编辑</h4><pre><code>按键                                    说明
+Alt+J                                多行编辑
+Alt+MouseDrag                        鼠标选中区域
+Ctrl+C                                复制当前行或选中的内容
+Ctrl+D                                粘贴当前行或选中的内容到下一行
+Ctrl+X                                剪切当前行或选中的内容
+Ctrl+Y                                删除行
+Ctrl+Z                                倒退
+Ctrl+Shift+Z                        向前
+Alt+Enter                            自动修正
+Ctrl+Alt+L                            格式化代码
+Ctrl+Alt+I                            将选中的代码进行自动缩进编排
+Ctrl+Alt+O                            优化导入的类和包
+Ctrl+Alt+D                            对选中内容添加包围代码
+Ctrl+Alt+J                            用动态模板环绕
+Alt+Insert                            得到一些Intention Action，可以生成构造器、Getter、Setter、将 == 改为 equals() 等
+Ctrl+Shift+V                        选最近使用的剪贴板内容并插入
+Ctrl+Alt+Shift+V                    简单粘贴
+Ctrl+Shift+Insert                    选最近使用的剪贴板内容并插入（同Ctrl+Shift+V）
+Ctrl+Enter                            在当前行的上面插入新行，并移动光标到新行（此功能光标在行首时有效）
+Shift+Enter                        在当前行的下面插入新行，并移动光标到新行
+Ctrl+J                            自动代码
+Ctrl+Alt+T                        把选中的代码放在 try{} 、if{} 、 else{} 里
+Shift+Alt+Insert                    竖编辑模式
+Ctrl+ /                                注释 //
+Ctrl+Shift+ /                        注释 /…/
+Ctrl+Shift+J                        合并成一行
+F2/Shift+F2                        跳转到下/上一个错误语句处
+Ctrl+Shift+Back                    跳转到上次编辑的地方
+Ctrl+Alt+Space                    类名自动完成
+Shift+Alt+Up/Down                    内容向上/下移动
+Ctrl+Shift+Up/Down                    语句向上/下移动
+Ctrl+Shift+U                    大小写切换
+Tab                                代码标签输入完成后，按 Tab，生成代码
+Ctrl+Backspace                    按单词删除
+Ctrl+Shift+Enter                    语句完成
+</code></pre><h4 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h4><pre><code>按键                            说明
+Ctrl+F12                    显示当前文件的结构
+Ctrl+H                        显示类继承结构图
+Ctrl+Q                        显示注释文档
+Ctrl+P                        方法参数提示
+Ctrl+U                        打开当前类的父类或者实现的接口
+Alt+Left/Right                切换代码视图
+Ctrl+Alt+Left/Right            返回上次编辑的位置
+Alt+Up/Down                    在方法间快速移动定位
+Ctrl+B                        快速打开光标处的类或方法
+Ctrl+W                        选中代码，连续按会有其他效果
+Ctrl+Shift+W                    取消选择光标所在词
+Ctrl+ - / +                    折叠/展开代码
+Ctrl+Shift+ - / +                折叠/展开全部代码
+Ctrl+Shift+.                    折叠/展开当前花括号中的代码
+Ctrl+ ] / [                    跳转到代码块结束/开始处
+F2 或 Shift+F2                高亮错误或警告快速定位
+Ctrl+Shift+C                    复制路径
+Ctrl+Alt+Shift+C            复制引用，必须选择类名
+Alt+Up/Down                    在方法间快速移动定位
+Shift+F1                要打开编辑器光标字符处使用的类或者方法 Java 文档的浏览器
+Ctrl+G                    定位行
+</code></pre><h4 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h4><pre><code>按键                            说明
+Ctrl+F                    在当前窗口查找文本
+Ctrl+Shift+F            在指定环境下查找文本
+F3                        向下查找关键字出现位置
+Shift+F3                向上一个关键字出现位置
+Ctrl+R                    在当前窗口替换文本
+Ctrl+Shift+R            在指定窗口替换文本
+Ctrl+N                    查找类
+Ctrl+Shift+N            查找文件
+Ctrl+Shift+Alt+N        查找项目中的方法或变量
+Ctrl+B                    查找变量的来源
+Ctrl+Alt+B                快速打开光标处的类或方法
+Ctrl+Shift+B            跳转到类或方法实现处
+Ctrl+E                    最近打开的文件
+Alt+F3                    快速查找，效果和Ctrl+F相同
+F4                        跳转至定义变量的位置
+Alt+F7                    查询当前元素在工程中的引用
+Ctrl+F7                    查询当前元素在当前文件中的引用，然后按 F3 可以选择
+Ctrl+Alt+F7                选中查询当前元素(方法或元素)在工程中的引用
+Ctrl+Alt+H                打开方法调用结构层级的窗口
+Ctrl+Shift+F7            高亮显示匹配的字符，按 Esc 高亮消失
+Ctrl+Shift+Alt+N        查找类中的方法或变量
+Ctrl+F12                查找类中的方法
+Ctrl+Shift+O            弹出显示查找内容
+Ctrl+Alt+Up/Down        快速跳转搜索结果
+Ctrl+Shift+S            高级搜索、搜索结构
+</code></pre><h4 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h4><pre><code>按键                      说明
+F5                    复制
+F6                    移动
+Alt+Delete            安全删除
+Ctrl+U                转到父类
+Ctrl+O                重写父类的方法
+Ctrl+I                实现方法
+Ctrl+Alt+N            内联
+Ctrl+Alt+Shift+T    弹出重构菜单
+Shift+F6            重构-重命名
+Ctrl+Alt+M            提取代码组成方法
+Ctrl+Alt+C            将变量更改为常量
+Ctrl+Alt+V        定义变量引用当前对象或者方法的返回值
+Ctrl+Alt+F        将局部变量更改为类的成员变量
+Ctrl+Alt+P        将变量更改为方法的参数
+</code></pre><h4 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h4><pre><code>按键                        说明
+F8                        跳到下一步
+Shift+F8                  跳出函数、跳到下一个断点
+Alt+Shift+F8              强制跳出函数
+F7                        进入代码
+Shift+F7                  智能进入代码
+Alt+Shift+F7              强制进入代码
+Alt+F9                    运行至光标处
+Ctrl+Alt+F9                强制运行至光标处
+Ctrl+F2                    停止运行
+Alt+F8                    计算变量值
+</code></pre><h4 id="VCS"><a href="#VCS" class="headerlink" title="VCS"></a>VCS</h4><pre><code>按键                    说明
+Alt+ ~ VCS            操作菜单
+Ctrl+K                提交更改
+Ctrl+T                更新项目
+Ctrl+Alt+Shift+D      显示变化
+</code></pre><h4 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h4><pre><code>按键            说明
+(Ctrl+)F11    标记书签
+Shift+F11     显示书签
+</code></pre><h4 id="REF"><a href="#REF" class="headerlink" title="REF"></a>REF</h4><pre><code>Android Studio Jar、so、library项目依赖
+</code></pre><p>Inserted from <a href="http://blog.hwangjr.com/2015/08/12/AndroidStudio-%E5%BF%AB%E6%8D%B7%E9%94%AE/" target="_blank" rel="noopener">http://blog.hwangjr.com/2015/08/12/AndroidStudio-%E5%BF%AB%E6%8D%B7%E9%94%AE/</a></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#IDE"><span class="toc-number">1.</span> <span class="toc-text">IDE</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编辑"><span class="toc-number">2.</span> <span class="toc-text">编辑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#文件"><span class="toc-number">3.</span> <span class="toc-text">文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找"><span class="toc-number">4.</span> <span class="toc-text">查找</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#重构"><span class="toc-number">5.</span> <span class="toc-text">重构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#调试"><span class="toc-number">6.</span> <span class="toc-text">调试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#VCS"><span class="toc-number">7.</span> <span class="toc-text">VCS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Others"><span class="toc-number">8.</span> <span class="toc-text">Others</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#REF"><span class="toc-number">9.</span> <span class="toc-text">REF</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&text=Android Studio 的快捷键"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&title=Android Studio 的快捷键"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&is_video=false&description=Android Studio 的快捷键"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android Studio 的快捷键&body=Check out this article: http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&title=Android Studio 的快捷键"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&title=Android Studio 的快捷键"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&title=Android Studio 的快捷键"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&title=Android Studio 的快捷键"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2014/02/12/android/小知识点/Android Studio的快捷键/&name=Android Studio 的快捷键&description=&lt;h4 id=&#34;IDE&#34;&gt;&lt;a href=&#34;#IDE&#34; class=&#34;headerlink&#34; title=&#34;IDE&#34;&gt;&lt;/a&gt;IDE&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;按键                        说明
+F1                            帮助
+Alt+F1                    查找文件所在目录位置
+Alt+1                    快速打开或隐藏工程面板
+Ctrl+Alt+S                打开设置对话框
+Alt+Home                跳转到导航栏
+Esc                        光标返回编辑框
+Shift+Esc                光标返回编辑框,关闭无用的窗口
+Shift+Click                关闭标签页
+F12                        把焦点从编辑器移到最近使用的工具窗口
+Ctrl+Alt+Y                    同步
+Ctrl+Alt+S                打开设置对话框
+Alt+Shift+Inert            开启/关闭列选择模式
+Ctrl+Alt+Shift+S        打开当前项目/模块属性
+Alt+Shift+C                查看文件的变更历史
+Ctrl+Shift+F10            运行
+Ctrl+Shift+F9            debug运行
+Ctrl+Alt+F12                资源管理器打开文件夹
+&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 一只熊猫
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

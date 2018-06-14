@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang=中文>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="作者 : lightsky原文链接  避免文件路径的硬编码尽量从上context或者Environment中获取  不要硬编码全局的路径”/sdcard”，使用Environment.getExternalStorageDirectory() 或者相关的方法替代 不要硬编码应用路径： “/data/data/myapp/databases”, 使用 Context.getDatabasePath(">
+<meta name="keywords" content="Google Develop for Android 系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google Develop for Android 系列六 － Storage最佳实践">
+<meta property="og:url" content="http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/index.html">
+<meta property="og:site_name" content="熊猫博客">
+<meta property="og:description" content="作者 : lightsky原文链接  避免文件路径的硬编码尽量从上context或者Environment中获取  不要硬编码全局的路径”/sdcard”，使用Environment.getExternalStorageDirectory() 或者相关的方法替代 不要硬编码应用路径： “/data/data/myapp/databases”, 使用 Context.getDatabasePath(">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-06-14T03:20:03.931Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Google Develop for Android 系列六 － Storage最佳实践">
+<meta name="twitter:description" content="作者 : lightsky原文链接  避免文件路径的硬编码尽量从上context或者Environment中获取  不要硬编码全局的路径”/sdcard”，使用Environment.getExternalStorageDirectory() 或者相关的方法替代 不要硬编码应用路径： “/data/data/myapp/databases”, 使用 Context.getDatabasePath(">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Google Develop for Android 系列六 － Storage最佳实践</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2015/06/14/android/Google Develop for Android 系列/Google Develop for Android 系列七 － Framework最佳实践/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2015/06/12/android/Google Develop for Android 系列/Google Develop for Android 系列五 － Language and Libraries/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&text=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&title=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&is_video=false&description=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Google Develop for Android 系列六 － Storage最佳实践&body=Check out this article: http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&title=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&title=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&title=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&title=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&name=Google Develop for Android 系列六 － Storage最佳实践&description=&lt;p&gt;作者 : lightsky&lt;br&gt;&lt;a href=&#34;http://www.lightskystreet.com/2015/06/07/google-for-android-6-storage/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;避免文件路径的硬编码&#34;&gt;&lt;a href=&#34;#避免文件路径的硬编码&#34; class=&#34;headerlink&#34; title=&#34;避免文件路径的硬编码&#34;&gt;&lt;/a&gt;避免文件路径的硬编码&lt;/h2&gt;&lt;p&gt;尽量从上context或者Environment中获取&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不要硬编码全局的路径”/sdcard”，使用Environment.getExternalStorageDirectory() 或者相关的方法替代&lt;/li&gt;
+&lt;li&gt;不要硬编码应用路径： “/data/data/myapp/databases”, 使用 Context.getDatabasePath(), Context.getFilesDir()或者相关的方法替代&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;只持久化相对路径&#34;&gt;&lt;a href=&#34;#只持久化相对路径&#34; class=&#34;headerlink&#34; title=&#34;只持久化相对路径&#34;&gt;&lt;/a&gt;只持久化相对路径&lt;/h2&gt;&lt;p&gt;当你需要持久化某个路径的时候，为了防止路径的变化，你应该使用相对路径。比如你的应用的备份需要恢复到一个新的设备上，数据路径就可能有些不同。&lt;/p&gt;
+&lt;p&gt;比如通过Context.getFilesDir() 方法返回的路径在不同的设备，用户或者配置时发生变化。因此在运行期间只通过相对路径构造绝对路径是最安全的。&lt;/p&gt;
+&lt;p&gt;避免过重的标准化以免出现特定的安全情况。&lt;/p&gt;
+&lt;h2 id=&#34;对临时文件使用缓存存储&#34;&gt;&lt;a href=&#34;#对临时文件使用缓存存储&#34; class=&#34;headerlink&#34; title=&#34;对临时文件使用缓存存储&#34;&gt;&lt;/a&gt;对临时文件使用缓存存储&lt;/h2&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#避免文件路径的硬编码"><span class="toc-number">1.</span> <span class="toc-text">避免文件路径的硬编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只持久化相对路径"><span class="toc-number">2.</span> <span class="toc-text">只持久化相对路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对临时文件使用缓存存储"><span class="toc-number">3.</span> <span class="toc-text">对临时文件使用缓存存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单的需求避免使用SQLite"><span class="toc-number">4.</span> <span class="toc-text">简单的需求避免使用SQLite</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免使用太多的数据库"><span class="toc-number">5.</span> <span class="toc-text">避免使用太多的数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#让用户选择内容的存储位置"><span class="toc-number">6.</span> <span class="toc-text">让用户选择内容的存储位置</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Google Develop for Android 系列六 － Storage最佳实践
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">熊猫博客</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2015-06-13T15:12:17.000Z" itemprop="datePublished">2015-06-13</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Google-Develop-for-Android-系列/">Google Develop for Android 系列</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-6-storage/" target="_blank" rel="noopener">原文链接</a></p>
+<hr>
+<h2 id="避免文件路径的硬编码"><a href="#避免文件路径的硬编码" class="headerlink" title="避免文件路径的硬编码"></a>避免文件路径的硬编码</h2><p>尽量从上context或者Environment中获取</p>
+<ul>
+<li>不要硬编码全局的路径”/sdcard”，使用Environment.getExternalStorageDirectory() 或者相关的方法替代</li>
+<li>不要硬编码应用路径： “/data/data/myapp/databases”, 使用 Context.getDatabasePath(), Context.getFilesDir()或者相关的方法替代</li>
+</ul>
+<h2 id="只持久化相对路径"><a href="#只持久化相对路径" class="headerlink" title="只持久化相对路径"></a>只持久化相对路径</h2><p>当你需要持久化某个路径的时候，为了防止路径的变化，你应该使用相对路径。比如你的应用的备份需要恢复到一个新的设备上，数据路径就可能有些不同。</p>
+<p>比如通过Context.getFilesDir() 方法返回的路径在不同的设备，用户或者配置时发生变化。因此在运行期间只通过相对路径构造绝对路径是最安全的。</p>
+<p>避免过重的标准化以免出现特定的安全情况。</p>
+<h2 id="对临时文件使用缓存存储"><a href="#对临时文件使用缓存存储" class="headerlink" title="对临时文件使用缓存存储"></a>对临时文件使用缓存存储</h2><a id="more"></a>
+<p>通过Context.getCacheDir(). 返回的缓存目录将应用的临时文件从其它的持久化数据中分离出来。下面是更高效的存储的建议：</p>
+<ul>
+<li>缓存目录的文件在内存不足的情况下可能会被系统删除掉，不像在data目录下的文件只有在应用被卸载或者用户明确请求清除应用数据的时候才会被删除。</li>
+<li>cache目录的文件从来不会被备份，不像data目录下的文件可能会自动备份</li>
+</ul>
+<h2 id="简单的需求避免使用SQLite"><a href="#简单的需求避免使用SQLite" class="headerlink" title="简单的需求避免使用SQLite"></a>简单的需求避免使用SQLite</h2><p>SQLite是一个完全的关系型数据引擎，对于不需要维护关系的简单的数据结构或者key/value 键值对来说是过度的使用。事务的完整性在每次I/O操作中很重要，但是如果你不需要它们，就会让你的应用更慢。</p>
+<p>如果你的数据很简单，考虑以下替换：</p>
+<ul>
+<li>简单的key values 使用SharedPreferences存储。首先它们在第一次读取之后会被静态的缓存。这样加速了访问速度，但是如果你使用过于复杂可能导致泄漏和内存 的问题。第二，commit的变化会导致整个SharedPreferences结构的重写，因此小而频繁的更新所做的工作可能会比期望的更多。</li>
+<li>当需要存储一些时序事件的数据时，使用只会在尾部添加的log文件，并定时处理它</li>
+<li>如果你需要的只是NoSQL，并且能够正确的，最小化的使用JNI，你可以使用<a href="https://github.com/google/leveldb" target="_blank" rel="noopener">LevelDB</a></li>
+</ul>
+<h2 id="避免使用太多的数据库"><a href="#避免使用太多的数据库" class="headerlink" title="避免使用太多的数据库"></a>避免使用太多的数据库</h2><p>SQLite数据库在硬盘和内存中都是比较耗资源的。不要为每一个表单独创建一个独立的DB。大多数应用应该只有一个DB。</p>
+<h2 id="让用户选择内容的存储位置"><a href="#让用户选择内容的存储位置" class="headerlink" title="让用户选择内容的存储位置"></a>让用户选择内容的存储位置</h2><p>设备通常有多个存储位置，包括多个SDCard，USB驱动以及云存储。通过<a href="http://www.devtf.cn/?p=639" target="_blank" rel="noopener">Storage Access Framework</a>让用户去选择打开或者存储数据的位置.</p>
+<p>可以启动简单的intents去提示用户打开或者保存一个文件，接收一个content:// UIR准备数据存储。当需要一个传统样式的文件API时，<a href="https://developer.android.com/reference/android/support/v4/provider/DocumentFile.html" target="_blank" rel="noopener">DocumentFile</a>support library类可以更容易的适应现有的代码。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#避免文件路径的硬编码"><span class="toc-number">1.</span> <span class="toc-text">避免文件路径的硬编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#只持久化相对路径"><span class="toc-number">2.</span> <span class="toc-text">只持久化相对路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对临时文件使用缓存存储"><span class="toc-number">3.</span> <span class="toc-text">对临时文件使用缓存存储</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单的需求避免使用SQLite"><span class="toc-number">4.</span> <span class="toc-text">简单的需求避免使用SQLite</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免使用太多的数据库"><span class="toc-number">5.</span> <span class="toc-text">避免使用太多的数据库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#让用户选择内容的存储位置"><span class="toc-number">6.</span> <span class="toc-text">让用户选择内容的存储位置</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&text=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&title=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&is_video=false&description=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Google Develop for Android 系列六 － Storage最佳实践&body=Check out this article: http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&title=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&title=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&title=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&title=Google Develop for Android 系列六 － Storage最佳实践"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/06/13/android/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/&name=Google Develop for Android 系列六 － Storage最佳实践&description=&lt;p&gt;作者 : lightsky&lt;br&gt;&lt;a href=&#34;http://www.lightskystreet.com/2015/06/07/google-for-android-6-storage/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;避免文件路径的硬编码&#34;&gt;&lt;a href=&#34;#避免文件路径的硬编码&#34; class=&#34;headerlink&#34; title=&#34;避免文件路径的硬编码&#34;&gt;&lt;/a&gt;避免文件路径的硬编码&lt;/h2&gt;&lt;p&gt;尽量从上context或者Environment中获取&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不要硬编码全局的路径”/sdcard”，使用Environment.getExternalStorageDirectory() 或者相关的方法替代&lt;/li&gt;
+&lt;li&gt;不要硬编码应用路径： “/data/data/myapp/databases”, 使用 Context.getDatabasePath(), Context.getFilesDir()或者相关的方法替代&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;只持久化相对路径&#34;&gt;&lt;a href=&#34;#只持久化相对路径&#34; class=&#34;headerlink&#34; title=&#34;只持久化相对路径&#34;&gt;&lt;/a&gt;只持久化相对路径&lt;/h2&gt;&lt;p&gt;当你需要持久化某个路径的时候，为了防止路径的变化，你应该使用相对路径。比如你的应用的备份需要恢复到一个新的设备上，数据路径就可能有些不同。&lt;/p&gt;
+&lt;p&gt;比如通过Context.getFilesDir() 方法返回的路径在不同的设备，用户或者配置时发生变化。因此在运行期间只通过相对路径构造绝对路径是最安全的。&lt;/p&gt;
+&lt;p&gt;避免过重的标准化以免出现特定的安全情况。&lt;/p&gt;
+&lt;h2 id=&#34;对临时文件使用缓存存储&#34;&gt;&lt;a href=&#34;#对临时文件使用缓存存储&#34; class=&#34;headerlink&#34; title=&#34;对临时文件使用缓存存储&#34;&gt;&lt;/a&gt;对临时文件使用缓存存储&lt;/h2&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 一只熊猫
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

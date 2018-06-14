@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang=中文>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1、一键加油的数据缓存操作 添加缓存 原因：     开发过程，由于测试服务器的网络带宽，客户端请求数据超级慢，用户的体验非常不好。 工具：     sharedPreference： 流程：     1、将一键加油的数据，在进入到主页的时候，进行请求完成，将JSON,时间，当前请求的位置等数据缓存到本地     2、在进入到一键加油的流程时候，先拿到本地缓存的数据，对时间和位置进行对比，时间超过">
+<meta name="keywords" content="反思">
+<meta property="og:type" content="article">
+<meta property="og:title" content="亮点和不足">
+<meta property="og:url" content="http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/index.html">
+<meta property="og:site_name" content="熊猫博客">
+<meta property="og:description" content="1、一键加油的数据缓存操作 添加缓存 原因：     开发过程，由于测试服务器的网络带宽，客户端请求数据超级慢，用户的体验非常不好。 工具：     sharedPreference： 流程：     1、将一键加油的数据，在进入到主页的时候，进行请求完成，将JSON,时间，当前请求的位置等数据缓存到本地     2、在进入到一键加油的流程时候，先拿到本地缓存的数据，对时间和位置进行对比，时间超过">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-06-14T03:16:37.006Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="亮点和不足">
+<meta name="twitter:description" content="1、一键加油的数据缓存操作 添加缓存 原因：     开发过程，由于测试服务器的网络带宽，客户端请求数据超级慢，用户的体验非常不好。 工具：     sharedPreference： 流程：     1、将一键加油的数据，在进入到主页的时候，进行请求完成，将JSON,时间，当前请求的位置等数据缓存到本地     2、在进入到一键加油的流程时候，先拿到本地缓存的数据，对时间和位置进行对比，时间超过">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>亮点和不足</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2015/12/18/android/Android Skills/RecyclerView 列表控件中简单实现时间线/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2015/10/09/android/Android Skills/ActionBar沉浸式实现/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&text=亮点和不足"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&title=亮点和不足"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&is_video=false&description=亮点和不足"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=亮点和不足&body=Check out this article: http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&title=亮点和不足"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&title=亮点和不足"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&title=亮点和不足"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&title=亮点和不足"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&name=亮点和不足&description=&lt;h3 id=&#34;1、一键加油的数据缓存操作&#34;&gt;&lt;a href=&#34;#1、一键加油的数据缓存操作&#34; class=&#34;headerlink&#34; title=&#34;1、一键加油的数据缓存操作&#34;&gt;&lt;/a&gt;1、一键加油的数据缓存操作&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;添加缓存&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;原因：
+    开发过程，由于测试服务器的网络带宽，客户端请求数据超级慢，用户的体验非常不好。
+工具：
+    sharedPreference：
+流程：
+    1、将一键加油的数据，在进入到主页的时候，进行请求完成，将JSON,时间，当前请求的位置等数据缓存到本地
+    2、在进入到一键加油的流程时候，先拿到本地缓存的数据，对时间和位置进行对比，时间超过5分钟，位置移动超过20m，都会重新向服务器请求数据。
+    3、在首页生命周期走到onStop()方法时候，将缓存数据进行致空（json=&amp;quot;&amp;quot;;）操作。
+    4、3的操作，保证每次打开首页进入到一键加油流程都是最新的数据，同样也保证再次回到首页的时候，在网络情况差，请求不到数据的情况，不会使用上一次缓存的数据
+优点：
+    优化用户体验，节省流量
+缺点：暂未发现
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、一键加油的数据缓存操作"><span class="toc-number">1.</span> <span class="toc-text">1、一键加油的数据缓存操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、热修复功能的是实现"><span class="toc-number">2.</span> <span class="toc-text">2、热修复功能的是实现</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        亮点和不足
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">熊猫博客</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2015-11-20T18:33:45.000Z" itemprop="datePublished">2015-11-21</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/反思/">反思</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="1、一键加油的数据缓存操作"><a href="#1、一键加油的数据缓存操作" class="headerlink" title="1、一键加油的数据缓存操作"></a>1、一键加油的数据缓存操作</h3><ul>
+<li><p>添加缓存</p>
+<pre><code>原因：
+    开发过程，由于测试服务器的网络带宽，客户端请求数据超级慢，用户的体验非常不好。
+工具：
+    sharedPreference：
+流程：
+    1、将一键加油的数据，在进入到主页的时候，进行请求完成，将JSON,时间，当前请求的位置等数据缓存到本地
+    2、在进入到一键加油的流程时候，先拿到本地缓存的数据，对时间和位置进行对比，时间超过5分钟，位置移动超过20m，都会重新向服务器请求数据。
+    3、在首页生命周期走到onStop()方法时候，将缓存数据进行致空（json=&quot;&quot;;）操作。
+    4、3的操作，保证每次打开首页进入到一键加油流程都是最新的数据，同样也保证再次回到首页的时候，在网络情况差，请求不到数据的情况，不会使用上一次缓存的数据
+优点：
+    优化用户体验，节省流量
+缺点：暂未发现
+</code></pre></li>
+</ul>
+<a id="more"></a>
+<h3 id="2、热修复功能的是实现"><a href="#2、热修复功能的是实现" class="headerlink" title="2、热修复功能的是实现"></a>2、热修复功能的是实现</h3><ul>
+<li><p>添加的热修复框架</p>
+<pre><code>来源：
+    使用的是阿里开源的一个Android热补丁框架（AndFix）
+功能：
+    允许APP在不重新发布版本的情况下修复线上的bug。
+原理：
+    apkpatch将两个apk做一次对比，然后找出不同的部分。可以看到生成的apatch了文件，后缀改成zip再解压开，里面有一个dex文件。通过jadx查看一下源码，
+    里面就是被修复的代码所在的类文件,这些更改过的类都加上了一个_CF的后缀，并且变动的方法都被加上了一个叫@MethodReplace的annotation，
+    通过clazz和method指定了需要替换的方法。然后客户端sdk得到补丁文件后就会根据annotation来寻找需要替换的方法。最后由JNI层完成方法的替换。
+优点：
+    1、不需要重启APP即可应用补丁。
+    Do not need to restart the APP can apply the patch
+    2、安全性更好，Nuwa后面的版本应该也会加上安全方面的内容。
+    Better security, Nuwa version should also be followed by the security aspects of the content
+
+支持：
+    Android 2.3 到 6.0。
+格式：
+    .apatch
+安全：
+    必须使用签名工具进行操作生成的apatch文件，才能进行patch操作
+局限：
+    1、不支持YunOS
+    2、无法添加新类和新的字段
+    3、需要使用加固前的apk制作补丁，但是补丁文件很容易被反编译，也就是修改过的类源码容易泄露。
+    4、使用加固平台可能会使热补丁功能失效（看到有人在360加固提了这个问题，自己还未验证）。
+缺点：
+    无法添加类和字段
+使用：
+    打补丁的过程，首先生成一个apk文件，然后更改代码，在修复bug后生成另一个apk。
+    通过官方提供的工具apkpatch
+    生成一个.apatch格式的补丁文件，需要提供原apk，修复后的apk，以及一个签名文件。
+    可以直接使用命令apkpatch查看具体的使用方法。
+</code></pre></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、一键加油的数据缓存操作"><span class="toc-number">1.</span> <span class="toc-text">1、一键加油的数据缓存操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、热修复功能的是实现"><span class="toc-number">2.</span> <span class="toc-text">2、热修复功能的是实现</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&text=亮点和不足"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&title=亮点和不足"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&is_video=false&description=亮点和不足"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=亮点和不足&body=Check out this article: http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&title=亮点和不足"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&title=亮点和不足"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&title=亮点和不足"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&title=亮点和不足"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/11/21/随笔/3.5开发中的亮点和不足/&name=亮点和不足&description=&lt;h3 id=&#34;1、一键加油的数据缓存操作&#34;&gt;&lt;a href=&#34;#1、一键加油的数据缓存操作&#34; class=&#34;headerlink&#34; title=&#34;1、一键加油的数据缓存操作&#34;&gt;&lt;/a&gt;1、一键加油的数据缓存操作&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;添加缓存&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;原因：
+    开发过程，由于测试服务器的网络带宽，客户端请求数据超级慢，用户的体验非常不好。
+工具：
+    sharedPreference：
+流程：
+    1、将一键加油的数据，在进入到主页的时候，进行请求完成，将JSON,时间，当前请求的位置等数据缓存到本地
+    2、在进入到一键加油的流程时候，先拿到本地缓存的数据，对时间和位置进行对比，时间超过5分钟，位置移动超过20m，都会重新向服务器请求数据。
+    3、在首页生命周期走到onStop()方法时候，将缓存数据进行致空（json=&amp;quot;&amp;quot;;）操作。
+    4、3的操作，保证每次打开首页进入到一键加油流程都是最新的数据，同样也保证再次回到首页的时候，在网络情况差，请求不到数据的情况，不会使用上一次缓存的数据
+优点：
+    优化用户体验，节省流量
+缺点：暂未发现
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 一只熊猫
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

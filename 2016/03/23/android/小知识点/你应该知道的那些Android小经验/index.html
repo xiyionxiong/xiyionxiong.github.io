@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang=中文>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="原文出处：http://jayfeng.com/  做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。 查看SQLite日志adb shell setprop log.tag.SQLiteLog V adb shell setprop log.tag.SQLiteStatements V 因为实现里用了Log.isLoggab">
+<meta name="keywords" content="知识库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android小经验">
+<meta property="og:url" content="http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/index.html">
+<meta property="og:site_name" content="熊猫博客">
+<meta property="og:description" content="原文出处：http://jayfeng.com/  做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。 查看SQLite日志adb shell setprop log.tag.SQLiteLog V adb shell setprop log.tag.SQLiteStatements V 因为实现里用了Log.isLoggab">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-06-14T03:18:46.480Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android小经验">
+<meta name="twitter:description" content="原文出处：http://jayfeng.com/  做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。 查看SQLite日志adb shell setprop log.tag.SQLiteLog V adb shell setprop log.tag.SQLiteStatements V 因为实现里用了Log.isLoggab">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Android小经验</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2016/03/25/android/RxJava/RxAndroid/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/03/21/android/小知识点/android代码片段/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&text=Android小经验"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&is_video=false&description=Android小经验"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android小经验&body=Check out this article: http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&name=Android小经验&description=&lt;p&gt;原文出处：&lt;a href=&#34;http://jayfeng.com/2016/03/18/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E9%82%A3%E4%BA%9BAndroid%E5%B0%8F%E7%BB%8F%E9%AA%8C/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://jayfeng.com/&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。&lt;/p&gt;
+&lt;h2 id=&#34;查看SQLite日志&#34;&gt;&lt;a href=&#34;#查看SQLite日志&#34; class=&#34;headerlink&#34; title=&#34;查看SQLite日志&#34;&gt;&lt;/a&gt;查看SQLite日志&lt;/h2&gt;&lt;p&gt;&lt;code&gt;adb shell setprop log.tag.SQLiteLog V&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;adb shell setprop log.tag.SQLiteStatements V&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;因为实现里用了Log.isLoggable(TAG, Log.VERBOSE)做了判断，LessCode的LogLess中也参考了这种机制：&lt;a href=&#34;https://github.com/openproject/LessCode/blob/master/lesscode-core/src/main/java/com/jayfeng/lesscode/core/LogLess.java&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LogLess&lt;/a&gt;。&lt;br&gt;使用这种方法就可以在Release版本也能做到查看应用的打印日志了。&lt;/p&gt;
+&lt;h2 id=&#34;PNG优化&#34;&gt;&lt;a href=&#34;#PNG优化&#34; class=&#34;headerlink&#34; title=&#34;PNG优化&#34;&gt;&lt;/a&gt;PNG优化&lt;/h2&gt;&lt;p&gt;APK打包会自动对PNG进行无损压缩，如果自行无损压缩是无效的。&lt;br&gt;当然进行有损压缩是可以的：&lt;a href=&#34;https://tinypng.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://tinypng.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;Tcpdump抓包&#34;&gt;&lt;a href=&#34;#Tcpdump抓包&#34; class=&#34;headerlink&#34; title=&#34;Tcpdump抓包&#34;&gt;&lt;/a&gt;Tcpdump抓包&lt;/h2&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#查看SQLite日志"><span class="toc-number">1.</span> <span class="toc-text">查看SQLite日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PNG优化"><span class="toc-number">2.</span> <span class="toc-text">PNG优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tcpdump抓包"><span class="toc-number">3.</span> <span class="toc-text">Tcpdump抓包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式-懒汉式-的更好的写法"><span class="toc-number">4.</span> <span class="toc-text">单例模式(懒汉式)的更好的写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多进程Application"><span class="toc-number">5.</span> <span class="toc-text">多进程Application</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式启动Service"><span class="toc-number">6.</span> <span class="toc-text">隐式启动Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fill-parent的寿命"><span class="toc-number">7.</span> <span class="toc-text">fill_parent的寿命</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ListView的局部刷新"><span class="toc-number">8.</span> <span class="toc-text">ListView的局部刷新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统日志中几个重要的TAG"><span class="toc-number">9.</span> <span class="toc-text">系统日志中几个重要的TAG</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一行居中，多行居左的TextView"><span class="toc-number">10.</span> <span class="toc-text">一行居中，多行居左的TextView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setCompoundDrawablesWithIntrinsicBounds"><span class="toc-number">11.</span> <span class="toc-text">setCompoundDrawablesWithIntrinsicBounds()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算程序运行时间"><span class="toc-number">12.</span> <span class="toc-text">计算程序运行时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA引用类型一览表"><span class="toc-number">13.</span> <span class="toc-text">JAVA引用类型一览表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Context使用场景"><span class="toc-number">14.</span> <span class="toc-text">Context使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片缓存大小"><span class="toc-number">15.</span> <span class="toc-text">图片缓存大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统内置的一些工具类"><span class="toc-number">16.</span> <span class="toc-text">系统内置的一些工具类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ClipPadding"><span class="toc-number">17.</span> <span class="toc-text">ClipPadding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强大的dumpsys"><span class="toc-number">18.</span> <span class="toc-text">强大的dumpsys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bugreport命令"><span class="toc-number">19.</span> <span class="toc-text">bugreport命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dpi文件夹的换算比例"><span class="toc-number">20.</span> <span class="toc-text">dpi文件夹的换算比例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新媒体库文件"><span class="toc-number">21.</span> <span class="toc-text">更新媒体库文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Monkey参数"><span class="toc-number">22.</span> <span class="toc-text">Monkey参数</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Android小经验
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">熊猫博客</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-03-23T15:33:02.000Z" itemprop="datePublished">2016-03-23</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/知识库/">知识库</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>原文出处：<a href="http://jayfeng.com/2016/03/18/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E9%82%A3%E4%BA%9BAndroid%E5%B0%8F%E7%BB%8F%E9%AA%8C/" target="_blank" rel="noopener">http://jayfeng.com/</a> </p>
+<p>做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。</p>
+<h2 id="查看SQLite日志"><a href="#查看SQLite日志" class="headerlink" title="查看SQLite日志"></a>查看SQLite日志</h2><p><code>adb shell setprop log.tag.SQLiteLog V</code></p>
+<p><code>adb shell setprop log.tag.SQLiteStatements V</code></p>
+<p>因为实现里用了Log.isLoggable(TAG, Log.VERBOSE)做了判断，LessCode的LogLess中也参考了这种机制：<a href="https://github.com/openproject/LessCode/blob/master/lesscode-core/src/main/java/com/jayfeng/lesscode/core/LogLess.java" target="_blank" rel="noopener">LogLess</a>。<br>使用这种方法就可以在Release版本也能做到查看应用的打印日志了。</p>
+<h2 id="PNG优化"><a href="#PNG优化" class="headerlink" title="PNG优化"></a>PNG优化</h2><p>APK打包会自动对PNG进行无损压缩，如果自行无损压缩是无效的。<br>当然进行有损压缩是可以的：<a href="https://tinypng.com/" target="_blank" rel="noopener">https://tinypng.com/</a></p>
+<h2 id="Tcpdump抓包"><a href="#Tcpdump抓包" class="headerlink" title="Tcpdump抓包"></a>Tcpdump抓包</h2><a id="more"></a>
+<p>有些模拟器比如genymotion自带了tcpdump，如果没有的话，需要下载tcpdump:<br><a href="http://www.strazzere.com/android/tcpdump" target="_blank" rel="noopener">http://www.strazzere.com/android/tcpdump</a><br>把tcpdump push到/data/local下，抓包命令：</p>
+<p><code>adb shell  /data/local/tcpdump -i any -p -s 0 -w /sdcard/capture.pcap</code></p>
+<p>很多开发者服务都需要绑定签名信息，用下面的命令可以查看签名：</p>
+<p><code>keytool -list -v -keystore release.jks</code></p>
+<p>注意，这个是需要密码的，可以查看MD5, SHA1，SHA256等等。</p>
+<h2 id="单例模式-懒汉式-的更好的写法"><a href="#单例模式-懒汉式-的更好的写法" class="headerlink" title="单例模式(懒汉式)的更好的写法"></a>单例模式(懒汉式)的更好的写法</h2><p>特别说到这个问题，是因为网上很多这样的代码：</p>
+<p><code>public class Singleton {</code></p>
+<p><code>private static Singleton instance;</code></p>
+<p><code>private Singleton (){}</code></p>
+<p><code>public static Singleton getInstance() {</code></p>
+<p><code>if</code> <code>(instance == `</code>null<code></code>) {`</p>
+<p><code>instance = `</code>new<code></code>Singleton();`</p>
+<p><code>}</code></p>
+<p><code>return</code> <code>instance;</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p>这种写法线程不安全，改进一下，加一个同步锁：</p>
+<p><code>public class Singleton {</code></p>
+<p><code>private static Singleton instance;</code></p>
+<p><code>private Singleton (){}</code></p>
+<p><code>public static synchronized Singleton getInstance() {</code></p>
+<p><code>if</code> <code>(instance == `</code>null<code></code>) {`</p>
+<p><code>instance = `</code>new<code></code>Singleton();`</p>
+<p><code>}</code></p>
+<p><code>return</code> <code>instance;</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p>网上这样的代码更多，可以很好的工作，但是缺点是效率低。<br>实际上，早在JDK1.5就引入volatile关键字，所以又有了一种更好的双重校验锁写法：</p>
+<p><code>public class Singleton {</code></p>
+<p><code>private volatile static Singleton singleton;</code></p>
+<p><code>private Singleton (){}</code></p>
+<p><code>public static Singleton getSingleton() {</code></p>
+<p><code>if</code> <code>(singleton == `</code>null<code></code>) {`</p>
+<p><code>synchronized (Singleton.class) {</code></p>
+<p><code>if</code> <code>(singleton == `</code>null<code></code>) {`</p>
+<p><code>singleton = `</code>new<code></code>Singleton();`</p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p><code>return</code> <code>singleton;</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p>注意，别忘记volatile关键字哦，否则就是10重，100重也可能还是会出问题。<br>上面是用的最多的，还有一种静态内部类写法更推荐：</p>
+<p><code>publlic class Singleton {</code></p>
+<p><code>private Singleton() {}</code></p>
+<p><code>private static class SingletonLoader {</code></p>
+<p><code>private static final Singleton INSTANCE = `</code>new<code></code>Singleton();`</p>
+<p><code>}</code></p>
+<p><code>public static Singleton getInstance() {</code></p>
+<p><code>return</code> <code>SingletonLoader.INSTANCE;</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<h2 id="多进程Application"><a href="#多进程Application" class="headerlink" title="多进程Application"></a>多进程Application</h2><p>是不是经常发现Application里的方法执行了多次？百思不得其解。<br>因为当有多个进程的时候，Application会执行多次，可以通过pid来判断那些方法只执行一次，避免浪费资源。</p>
+<h2 id="隐式启动Service"><a href="#隐式启动Service" class="headerlink" title="隐式启动Service"></a>隐式启动Service</h2><p>这是Android5.0的一个改动，不支持隐式的Service调用。下面的代码在Android 5.0+上会报错：Service Intent must be explicit：</p>
+<p><code>Intent serviceIntent = `</code>new<code></code>Intent();`</p>
+<p><code>serviceIntent.setAction(`</code>“com.jayfeng.MyService”<code></code>);`</p>
+<p><code>context.startService(serviceIntent);</code></p>
+<p>可改成如下：</p>
+<p><code>// 指定具体Service类，或者有packageName也行</code></p>
+<p><code>Intent serviceIntent = `</code>new<code></code>Intent(context, MyService.class);`</p>
+<p><code>context.startService(serviceIntent);</code></p>
+<h2 id="fill-parent的寿命"><a href="#fill-parent的寿命" class="headerlink" title="fill_parent的寿命"></a>fill_parent的寿命</h2><p>在Android2.2之后，支持使用match_parent。你的布局文件里是不是既有fill_parent和match_parent显得很乱？<br>如果你现在的minSdkVersion是8+的话，就可以忽略fill_parent，统一使用match_parent了，否则请使用fill_parent。</p>
+<h2 id="ListView的局部刷新"><a href="#ListView的局部刷新" class="headerlink" title="ListView的局部刷新"></a>ListView的局部刷新</h2><p>有的列表可能notifyDataSetChanged()代价有点高，最好能局部刷新。<br>局部刷新的重点是，找到要更新的那项的View，然后再根据业务逻辑更新数据即可。</p>
+<p><code>private void updateItem(int index) {</code></p>
+<p><code>int visiblePosition = listView.getFirstVisiblePosition();</code></p>
+<p><code>if</code> <code>(index - visiblePosition &gt;= 0) {</code></p>
+<p><code>//得到要更新的item的view</code></p>
+<p><code>View view = listView.getChildAt(index - visiblePosition);</code></p>
+<p><code>// 更新界面（示例参考）</code></p>
+<p><code>// TextView nameView = ViewLess.$(view, R.id.name);</code></p>
+<p><code>// nameView.setText(&quot;update &quot; + index);</code></p>
+<p><code>// 更新列表数据（示例参考）</code></p>
+<p><code>// list.get(index).setName(&quot;Update &quot; + index);</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p>强调一下，最后那个列表数据别忘记更新， 不然数据源不变，一滚动可能又还原了。</p>
+<h2 id="系统日志中几个重要的TAG"><a href="#系统日志中几个重要的TAG" class="headerlink" title="系统日志中几个重要的TAG"></a>系统日志中几个重要的TAG</h2><p><code>// 查看Activity跳转</code></p>
+<p><code>adb logcat -v time | grep ActivityManager</code></p>
+<p><code>// 查看崩溃信息</code></p>
+<p><code>adb logcat -v time | grep AndroidRuntime</code></p>
+<p><code>// 查看Dalvik信息，比如GC</code></p>
+<p><code>adb logcat -v time | grep `</code>“D\/Dalvik”`</p>
+<p><code>// 查看art信息，比如GC</code></p>
+<p><code>adb logcat -v time | grep `</code>“I\/art”`</p>
+<h2 id="一行居中，多行居左的TextView"><a href="#一行居中，多行居左的TextView" class="headerlink" title="一行居中，多行居左的TextView"></a>一行居中，多行居左的TextView</h2><p>这个一般用于提示信息对话框，如果文字是一行就居中，多行就居左。<br>在TextView外套一层wrap_content的ViewGroup即可简单实现：</p>
+<p><code>&lt;RelativeLayout xmlns:android=`</code>“<a href="http://schemas.android.com/apk/res/android" target="_blank" rel="noopener">http://schemas.android.com/apk/res/android</a>“`</p>
+<p><code>android:layout_width=`</code>“match_parent”`</p>
+<p><code>android:layout_height=`</code>“match_parent”<code></code>&gt;`</p>
+<p><code>&lt;!-- 套一层wrap_content的ViewGroup --&gt;</code></p>
+<p><code>&lt;LinearLayout</code></p>
+<p><code>android:layout_width=`</code>“wrap_content”`</p>
+<p><code>android:layout_height=`</code>“wrap_content”`</p>
+<p><code>android:layout_centerInParent=`</code>“true”<code></code>&gt;`</p>
+<p><code>&lt;TextView</code></p>
+<p><code>android:layout_width=`</code>“wrap_content”`</p>
+<p><code>android:layout_height=`</code>“wrap_content”`</p>
+<p><code>android:text=`</code>“@string/hello_world”<code></code>/&gt;`</p>
+<p><code>&lt;/LinearLayout&gt;</code></p>
+<p><code>&lt;/RelativeLayout&gt;</code></p>
+<h2 id="setCompoundDrawablesWithIntrinsicBounds"><a href="#setCompoundDrawablesWithIntrinsicBounds" class="headerlink" title="setCompoundDrawablesWithIntrinsicBounds()"></a>setCompoundDrawablesWithIntrinsicBounds()</h2><p>网上一大堆setCompoundDrawables()方法无效不显示的问题，然后解决方法是setBounds，需要计算大小…<br>不用这么麻烦，用setCompoundDrawablesWithIntrinsicBounds()这个方法最简单！</p>
+<h2 id="计算程序运行时间"><a href="#计算程序运行时间" class="headerlink" title="计算程序运行时间"></a>计算程序运行时间</h2><p>为了计算一段代码运行时间，一般的做法是，在代码的前面加个startTime，在代码的后面把当前时间减去startTime，这个时间差就是运行时间。<br>这里提供一种写起来更方便的方法，完全无时间逻辑，只是加一个打印log就够了。</p>
+<p><code>// 测试setContentView()的时间</code></p>
+<p><code>Log.d(`</code>“TAG”<code>,</code>“Start”<code></code>);`</p>
+<p><code>setContentView(R.layout.activity_http);</code></p>
+<p><code>Log.d(`</code>“TAG”<code>,</code>“End”<code></code>);`</p>
+<p>没有计算时间的逻辑，这能测出来？<br>把日志过滤出来，运行命令“adb logcat -v time | grep TAG”：</p>
+<p><code>03-18 14:47:25.477 D/TAG     (14600): Start</code></p>
+<p><code>03-18 14:47:25.478 D/TAG     (14600): End</code></p>
+<p>通过-v time参数，可以比较日志左边的时间来算出中间的代码运行的时间。</p>
+<h2 id="JAVA引用类型一览表"><a href="#JAVA引用类型一览表" class="headerlink" title="JAVA引用类型一览表"></a>JAVA引用类型一览表</h2><p>对象引用：强引用 > 软引用 > 弱引用 > 虚引用。</p>
+<p>引用类型回收时机用途生存时间强引用从来不会对象的一般状态JVM停止运行时终止软引用在内存不足时对象缓存内存不足时终止弱引用在垃圾回收时对象缓存GC运行后终止虚引用在垃圾回收时对象跟踪GC运行后终止</p>
+<h2 id="Context使用场景"><a href="#Context使用场景" class="headerlink" title="Context使用场景"></a>Context使用场景</h2><p>为了防止Activity，Service等这样的Context泄漏于一些生命周期更长的对象，可以使用生命周期更长的ApplicationContext，但是不是所有的Context的都能替换为ApplicationContext<br>这是网上流传的一份表格：</p>
+<p>ApplicationActivityServiceContentProviderBroadcastReceiverShow Dialog否是否否否Start Activity否是否否否Layout Inflation否是否否否Start Service是是是是是Bind Service是是是是否Send Broadcast是是是是是Regist BroadcastReceiver是是是是否Load Resource Value是是是是是</p>
+<h2 id="图片缓存大小"><a href="#图片缓存大小" class="headerlink" title="图片缓存大小"></a>图片缓存大小</h2><p>现在很多图片库需要给图片设置一个最大缓存，但是这个值设置多少合适呢？<br>高端机和低端机的配置显然应该不同，可以考虑设置一个动态值。<br>建议设置为应用可用内存的1/8:</p>
+<p><code>int memoryCache = (int) (Runtime.getRuntime().maxMemory() / 8);</code></p>
+<h2 id="系统内置的一些工具类"><a href="#系统内置的一些工具类" class="headerlink" title="系统内置的一些工具类"></a>系统内置的一些工具类</h2><p>在AOSP源码全局搜了一下包含Util关键字的类，整理出这个列表供大家参考：</p>
+<p><code>// 系统</code></p>
+<p><code>./android/database/DatabaseUtils.java</code></p>
+<p><code>./android/transition/TransitionUtils.java</code></p>
+<p><code>./android/view/animation/AnimationUtils.java</code></p>
+<p><code>./android/view/ViewAnimationUtils.java</code></p>
+<p><code>./android/webkit/URLUtil.java</code></p>
+<p><code>./android/bluetooth/le/BluetoothLeUtils.java</code></p>
+<p><code>./android/gesture/GestureUtils.java</code></p>
+<p><code>./android/text/TextUtils.java</code></p>
+<p><code>./android/text/format/DateUtils.java</code></p>
+<p><code>./android/os/FileUtils.java</code></p>
+<p><code>./android/os/CommonTimeUtils.java</code></p>
+<p><code>./android/net/NetworkUtils.java</code></p>
+<p><code>./android/util/MathUtils.java</code></p>
+<p><code>./android/util/TimeUtils.java</code></p>
+<p><code>./android/util/ExceptionUtils.java</code></p>
+<p><code>./android/util/DebugUtils.java</code></p>
+<p><code>./android/drm/DrmUtils.java</code></p>
+<p><code>./android/media/ThumbnailUtils.java</code></p>
+<p><code>./android/media/ImageUtils.java</code></p>
+<p><code>./android/media/Utils.java</code></p>
+<p><code>./android/opengl/GLUtils.java</code></p>
+<p><code>./android/opengl/ETC1Util.java</code></p>
+<p><code>./android/telephony/PhoneNumberUtils.java</code></p>
+<p><code>// 设计和支持库</code></p>
+<p><code>./design/src/android/support/design/widget/ViewGroupUtils.java</code></p>
+<p><code>./design/src/android/support/design/widget/ThemeUtils.java</code></p>
+<p><code>./design/src/android/support/design/widget/ViewUtils.java</code></p>
+<p><code>./design/lollipop/android/support/design/widget/ViewUtilsLollipop.java</code></p>
+<p><code>./design/base/android/support/design/widget/AnimationUtils.java</code></p>
+<p><code>./design/base/android/support/design/widget/MathUtils.java</code></p>
+<p><code>./design/honeycomb/android/support/design/widget/ViewGroupUtilsHoneycomb.java</code></p>
+<p><code>./v7/recyclerview/src/android/support/v7/widget/helper/ItemTouchUIUtil.java</code></p>
+<p><code>./v7/recyclerview/src/android/support/v7/widget/helper/ItemTouchUIUtilImpl.java</code></p>
+<p><code>./v7/recyclerview/src/android/support/v7/util/MessageThreadUtil.java</code></p>
+<p><code>./v7/recyclerview/src/android/support/v7/util/AsyncListUtil.java</code></p>
+<p><code>./v7/recyclerview/src/android/support/v7/util/ThreadUtil.java</code></p>
+<p><code>./v7/recyclerview/tests/src/android/support/v7/widget/AsyncListUtilLayoutTest.java</code></p>
+<p><code>./v7/recyclerview/tests/src/android/support/v7/util/AsyncListUtilTest.java</code></p>
+<p><code>./v7/recyclerview/tests/src/android/support/v7/util/ThreadUtilTest.java</code></p>
+<p><code>./v7/appcompat/src/android/support/v7/graphics/drawable/DrawableUtils.java</code></p>
+<p><code>./v7/appcompat/src/android/support/v7/widget/DrawableUtils.java</code></p>
+<p><code>./v7/appcompat/src/android/support/v7/widget/ThemeUtils.java</code></p>
+<p><code>./v7/appcompat/src/android/support/v7/widget/ViewUtils.java</code></p>
+<p><code>./v4/tests/java/android/support/v4/graphics/ColorUtilsTest.java</code></p>
+<p><code>./v4/jellybean-mr1/android/support/v4/text/TextUtilsCompatJellybeanMr1.java</code></p>
+<p><code>./v4/jellybean/android/support/v4/app/BundleUtil.java</code></p>
+<p><code>./v4/jellybean/android/support/v4/app/NavUtilsJB.java</code></p>
+<p><code>./v4/java/android/support/v4/app/NavUtils.java</code></p>
+<p><code>./v4/java/android/support/v4/database/DatabaseUtilsCompat.java</code></p>
+<p><code>./v4/java/android/support/v4/graphics/ColorUtils.java</code></p>
+<p><code>./v4/java/android/support/v4/text/TextUtilsCompat.java</code></p>
+<p><code>./v4/java/android/support/v4/util/TimeUtils.java</code></p>
+<p><code>./v4/java/android/support/v4/util/DebugUtils.java</code></p>
+<p><code>./v4/java/android/support/v4/content/res/TypedArrayUtils.java</code></p>
+<p>这么多工具类，一定可以找到对你有用的。</p>
+<h2 id="ClipPadding"><a href="#ClipPadding" class="headerlink" title="ClipPadding"></a>ClipPadding</h2><p>这个不多说，ListView的ClipPadding设为false，就能为ListView设置各种padding而不会出现丑陋的滑动“禁区”了。</p>
+<h2 id="强大的dumpsys"><a href="#强大的dumpsys" class="headerlink" title="强大的dumpsys"></a>强大的dumpsys</h2><p>dumpsys可以查看系统服务和状态，非常强大，可通过如下查看所有支持的子命令：</p>
+<p><code>dumpsys | grep `</code>“DUMP OF SERVICE”`</p>
+<p>这里列举几个稍微常用的：</p>
+<p>子命令备注activity显示所有的activities的信息cpuinfo显示CPU信息window显示键盘，窗口和它们的关系meminfo内存信息（meminfo $package_name or $pid 使用包名或者进程id显示内存信息）alarm显示Alarm信息statusbar显示状态栏相关的信息（找出广告通知属于哪个应用）usagestats每个界面启动的时间</p>
+<h2 id="bugreport命令"><a href="#bugreport命令" class="headerlink" title="bugreport命令"></a>bugreport命令</h2><p>很多人都用过adb logcat，但是如果想要更详细的信息，logcat则无能为力。<br>所以大多数手机厂商测试更多的是用adb bugreport来抓log给开发人员分析。</p>
+<p><code>// 除了log，还包括启动后的系统状态,包括进程列表，内存信息，VM信息等等</code></p>
+<p><code>// 而且不像logcat是一直打印的，bugreport命令输出到当前时间就停止结束了。</code></p>
+<p><code>adb bugreport &gt; main.log</code></p>
+<h2 id="dpi文件夹的换算比例"><a href="#dpi文件夹的换算比例" class="headerlink" title="dpi文件夹的换算比例"></a>dpi文件夹的换算比例</h2><p>之前的ldpi基本可以抛弃了，主流的dpi已经从很早之前的mdip转移到了xhdpi了，特别提醒。</p>
+<p>PPIRESOLUTIONDPPXmdpi(160dp)320P11hdpi(240dp)480P11.5xhdpi(320dp)720P12xxhdpi(480dpi)1080P13</p>
+<h2 id="更新媒体库文件"><a href="#更新媒体库文件" class="headerlink" title="更新媒体库文件"></a>更新媒体库文件</h2><p>以前做ROM的时候经常碰到一些第三方软件（某音乐APP）下载了新文件或删除文件之后，但是媒体库并没有更新，因为这个是需要第三方软件主动触发。</p>
+<p><code>// 通知媒体库更新单个文件状态</code></p>
+<p><code>Uri fileUri = Uri.fromFile(file);</code></p>
+<p><code>sendBroadcast(`</code>new<code></code>Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,fileUri));`</p>
+<p>媒体库会在手机启动，SD卡插拔的情况下进行全盘扫描，不是实时的而且代价比较大，所以单个文件的刷新很有必要。</p>
+<h2 id="Monkey参数"><a href="#Monkey参数" class="headerlink" title="Monkey参数"></a>Monkey参数</h2><p>大家都知道，跑monkey的参数设置有一些要注意的地方，比如太快了不行不切实际，太慢了也不行等等，这里给出一个参考：</p>
+<p><code>adb shell monkey -p &lt;packageName&gt; -s 1000 --ignore-crashes --ignore-timeouts --ignore-security-exceptions  --pct-trackball 0 --pct-nav 0 --pct-majornav 0 --pct-anyevent 0  -v --throttle 300 1200000000</code></p>
+<p>一边跑monkey，一边抓log吧。</p>
+<p>无论是大经验还是小经验，有用就是好经验。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#查看SQLite日志"><span class="toc-number">1.</span> <span class="toc-text">查看SQLite日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PNG优化"><span class="toc-number">2.</span> <span class="toc-text">PNG优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tcpdump抓包"><span class="toc-number">3.</span> <span class="toc-text">Tcpdump抓包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式-懒汉式-的更好的写法"><span class="toc-number">4.</span> <span class="toc-text">单例模式(懒汉式)的更好的写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多进程Application"><span class="toc-number">5.</span> <span class="toc-text">多进程Application</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式启动Service"><span class="toc-number">6.</span> <span class="toc-text">隐式启动Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fill-parent的寿命"><span class="toc-number">7.</span> <span class="toc-text">fill_parent的寿命</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ListView的局部刷新"><span class="toc-number">8.</span> <span class="toc-text">ListView的局部刷新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统日志中几个重要的TAG"><span class="toc-number">9.</span> <span class="toc-text">系统日志中几个重要的TAG</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一行居中，多行居左的TextView"><span class="toc-number">10.</span> <span class="toc-text">一行居中，多行居左的TextView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setCompoundDrawablesWithIntrinsicBounds"><span class="toc-number">11.</span> <span class="toc-text">setCompoundDrawablesWithIntrinsicBounds()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算程序运行时间"><span class="toc-number">12.</span> <span class="toc-text">计算程序运行时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA引用类型一览表"><span class="toc-number">13.</span> <span class="toc-text">JAVA引用类型一览表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Context使用场景"><span class="toc-number">14.</span> <span class="toc-text">Context使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片缓存大小"><span class="toc-number">15.</span> <span class="toc-text">图片缓存大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统内置的一些工具类"><span class="toc-number">16.</span> <span class="toc-text">系统内置的一些工具类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ClipPadding"><span class="toc-number">17.</span> <span class="toc-text">ClipPadding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强大的dumpsys"><span class="toc-number">18.</span> <span class="toc-text">强大的dumpsys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bugreport命令"><span class="toc-number">19.</span> <span class="toc-text">bugreport命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dpi文件夹的换算比例"><span class="toc-number">20.</span> <span class="toc-text">dpi文件夹的换算比例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新媒体库文件"><span class="toc-number">21.</span> <span class="toc-text">更新媒体库文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Monkey参数"><span class="toc-number">22.</span> <span class="toc-text">Monkey参数</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&text=Android小经验"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&is_video=false&description=Android小经验"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Android小经验&body=Check out this article: http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&name=Android小经验&description=&lt;p&gt;原文出处：&lt;a href=&#34;http://jayfeng.com/2016/03/18/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E9%82%A3%E4%BA%9BAndroid%E5%B0%8F%E7%BB%8F%E9%AA%8C/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://jayfeng.com/&lt;/a&gt; &lt;/p&gt;
+&lt;p&gt;做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。&lt;/p&gt;
+&lt;h2 id=&#34;查看SQLite日志&#34;&gt;&lt;a href=&#34;#查看SQLite日志&#34; class=&#34;headerlink&#34; title=&#34;查看SQLite日志&#34;&gt;&lt;/a&gt;查看SQLite日志&lt;/h2&gt;&lt;p&gt;&lt;code&gt;adb shell setprop log.tag.SQLiteLog V&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;adb shell setprop log.tag.SQLiteStatements V&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;因为实现里用了Log.isLoggable(TAG, Log.VERBOSE)做了判断，LessCode的LogLess中也参考了这种机制：&lt;a href=&#34;https://github.com/openproject/LessCode/blob/master/lesscode-core/src/main/java/com/jayfeng/lesscode/core/LogLess.java&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LogLess&lt;/a&gt;。&lt;br&gt;使用这种方法就可以在Release版本也能做到查看应用的打印日志了。&lt;/p&gt;
+&lt;h2 id=&#34;PNG优化&#34;&gt;&lt;a href=&#34;#PNG优化&#34; class=&#34;headerlink&#34; title=&#34;PNG优化&#34;&gt;&lt;/a&gt;PNG优化&lt;/h2&gt;&lt;p&gt;APK打包会自动对PNG进行无损压缩，如果自行无损压缩是无效的。&lt;br&gt;当然进行有损压缩是可以的：&lt;a href=&#34;https://tinypng.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://tinypng.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;Tcpdump抓包&#34;&gt;&lt;a href=&#34;#Tcpdump抓包&#34; class=&#34;headerlink&#34; title=&#34;Tcpdump抓包&#34;&gt;&lt;/a&gt;Tcpdump抓包&lt;/h2&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 一只熊猫
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

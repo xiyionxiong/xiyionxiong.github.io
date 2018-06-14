@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang=中文>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="作者 : lightsky原文链接  在Android中，性能和内存的关系很密切，因为系统的整体内存大小会影响所有进程的性能，因为垃圾回收器会对运行期间的性能产生很大的影响。下面的重点是运行期间的性能问题而不是内存。 避免在动画和交互期间繁重的操作正如在第一篇文章中提到过的，在UI Thread做繁重的操作会影响到渲染的处理。同样会导致动画的问题，因为它依赖于每一帧的渲染。这就意味着在动画期间避免">
+<meta name="keywords" content="Google Develop for Android 系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google Develop for Android 系列三 － Performance最佳实践">
+<meta property="og:url" content="http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/index.html">
+<meta property="og:site_name" content="熊猫博客">
+<meta property="og:description" content="作者 : lightsky原文链接  在Android中，性能和内存的关系很密切，因为系统的整体内存大小会影响所有进程的性能，因为垃圾回收器会对运行期间的性能产生很大的影响。下面的重点是运行期间的性能问题而不是内存。 避免在动画和交互期间繁重的操作正如在第一篇文章中提到过的，在UI Thread做繁重的操作会影响到渲染的处理。同样会导致动画的问题，因为它依赖于每一帧的渲染。这就意味着在动画期间避免">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-06-14T03:19:54.931Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Google Develop for Android 系列三 － Performance最佳实践">
+<meta name="twitter:description" content="作者 : lightsky原文链接  在Android中，性能和内存的关系很密切，因为系统的整体内存大小会影响所有进程的性能，因为垃圾回收器会对运行期间的性能产生很大的影响。下面的重点是运行期间的性能问题而不是内存。 避免在动画和交互期间繁重的操作正如在第一篇文章中提到过的，在UI Thread做繁重的操作会影响到渲染的处理。同样会导致动画的问题，因为它依赖于每一帧的渲染。这就意味着在动画期间避免">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Google Develop for Android 系列三 － Performance最佳实践</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2015/06/09/android/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&text=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&title=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&is_video=false&description=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Google Develop for Android 系列三 － Performance最佳实践&body=Check out this article: http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&title=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&title=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&title=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&title=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&name=Google Develop for Android 系列三 － Performance最佳实践&description=&lt;p&gt;作者 : lightsky&lt;br&gt;&lt;a href=&#34;http://www.lightskystreet.com/2015/06/07/google-for-android-3-performance/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;在Android中，性能和内存的关系很密切，因为系统的整体内存大小会影响所有进程的性能，因为垃圾回收器会对运行期间的性能产生很大的影响。下面的重点是运行期间的性能问题而不是内存。&lt;/p&gt;
+&lt;h2 id=&#34;避免在动画和交互期间繁重的操作&#34;&gt;&lt;a href=&#34;#避免在动画和交互期间繁重的操作&#34; class=&#34;headerlink&#34; title=&#34;避免在动画和交互期间繁重的操作&#34;&gt;&lt;/a&gt;避免在动画和交互期间繁重的操作&lt;/h2&gt;&lt;p&gt;正如在第一篇文章中提到过的，在UI Thread做繁重的操作会影响到渲染的处理。同样会导致动画的问题，因为它依赖于每一帧的渲染。这就意味着在动画期间避免在UI进行繁重的操作就更加重要。以下是一些可以避免的常见情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Layout&lt;/strong&gt;&lt;br&gt;Measurement 和 layout是比较繁重的操作，view的层级越复杂，操作就会越繁重。Measurement和layout是在UI Thred发发生的。因此当系统需要运行一个动画的时候紧接着还需进行layout，而它们都是在同一个线程，因此动画的流畅度可能就会受到影响。&lt;br&gt;假设你的动画在13ms内就可以完成所有的渲染，在16帧率之内。然后某一请求导致了layout，花费了5ms的时间。该layout在下一帧绘制前会 发生，那么总的绘制时间就会达到18ms，最终你的动画就明显的跳过一帧。当动画过程中需要进行layout的时候，为了避免这种情况，可以在动画启动前 进行layout或者延迟layout到动画完成。当然，尽量为那些不会触发layout的属性添加动画。比如，View的&lt;code&gt;translationX&lt;/code&gt;和&lt;code&gt;tanshlationY&lt;/code&gt;属性影响到post-layout属性。LayoutParams 属性也会需要请求layout操作，因此对这些属性进行动画的时候在相对复杂的UI上会导致卡顿。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Inflation&lt;/strong&gt;&lt;br&gt;View 填充也只会发生在UI Thread，也是比较繁重的操作（View的层级越大，工作越繁重）。填充工作会在手动填充一个View 或者启动一个activity的时候发生。这些都是在相同的UI线程进行的，当新的activity被填充的时候将会导致动画暂停。为了避免这种情况，可 以在动画完成的时候再启动Activity。或者避免滚动列表时填充不同类型的View导致的卡顿，可以考虑预填充。比如，RecyclerView支持 使用RectcledViewPool来装载不同的View类型。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;加快启动速度&#34;&gt;&lt;a href=&#34;#加快启动速度&#34; class=&#34;headerlink&#34; title=&#34;加快启动速度&#34;&gt;&lt;/a&gt;加快启动速度&lt;/h2&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#避免在动画和交互期间繁重的操作"><span class="toc-number">1.</span> <span class="toc-text">避免在动画和交互期间繁重的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加快启动速度"><span class="toc-number">2.</span> <span class="toc-text">加快启动速度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免复杂的View层级"><span class="toc-number">3.</span> <span class="toc-text">避免复杂的View层级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免在View层级的顶层使用RelativeLayout"><span class="toc-number">4.</span> <span class="toc-text">避免在View层级的顶层使用RelativeLayout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免在UI-Thread-进行繁重的操作"><span class="toc-number">5.</span> <span class="toc-text">避免在UI Thread 进行繁重的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最小化-Wakeups"><span class="toc-number">6.</span> <span class="toc-text">最小化 Wakeups</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为低端手机考虑"><span class="toc-number">7.</span> <span class="toc-text">为低端手机考虑</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Google Develop for Android 系列三 － Performance最佳实践
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">熊猫博客</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2015-06-10T14:12:17.000Z" itemprop="datePublished">2015-06-10</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Google-Develop-for-Android-系列/">Google Develop for Android 系列</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-3-performance/" target="_blank" rel="noopener">原文链接</a></p>
+<hr>
+<p>在Android中，性能和内存的关系很密切，因为系统的整体内存大小会影响所有进程的性能，因为垃圾回收器会对运行期间的性能产生很大的影响。下面的重点是运行期间的性能问题而不是内存。</p>
+<h2 id="避免在动画和交互期间繁重的操作"><a href="#避免在动画和交互期间繁重的操作" class="headerlink" title="避免在动画和交互期间繁重的操作"></a>避免在动画和交互期间繁重的操作</h2><p>正如在第一篇文章中提到过的，在UI Thread做繁重的操作会影响到渲染的处理。同样会导致动画的问题，因为它依赖于每一帧的渲染。这就意味着在动画期间避免在UI进行繁重的操作就更加重要。以下是一些可以避免的常见情况：</p>
+<ul>
+<li><strong>Layout</strong><br>Measurement 和 layout是比较繁重的操作，view的层级越复杂，操作就会越繁重。Measurement和layout是在UI Thred发发生的。因此当系统需要运行一个动画的时候紧接着还需进行layout，而它们都是在同一个线程，因此动画的流畅度可能就会受到影响。<br>假设你的动画在13ms内就可以完成所有的渲染，在16帧率之内。然后某一请求导致了layout，花费了5ms的时间。该layout在下一帧绘制前会 发生，那么总的绘制时间就会达到18ms，最终你的动画就明显的跳过一帧。当动画过程中需要进行layout的时候，为了避免这种情况，可以在动画启动前 进行layout或者延迟layout到动画完成。当然，尽量为那些不会触发layout的属性添加动画。比如，View的<code>translationX</code>和<code>tanshlationY</code>属性影响到post-layout属性。LayoutParams 属性也会需要请求layout操作，因此对这些属性进行动画的时候在相对复杂的UI上会导致卡顿。</li>
+<li><strong>Inflation</strong><br>View 填充也只会发生在UI Thread，也是比较繁重的操作（View的层级越大，工作越繁重）。填充工作会在手动填充一个View 或者启动一个activity的时候发生。这些都是在相同的UI线程进行的，当新的activity被填充的时候将会导致动画暂停。为了避免这种情况，可 以在动画完成的时候再启动Activity。或者避免滚动列表时填充不同类型的View导致的卡顿，可以考虑预填充。比如，RecyclerView支持 使用RectcledViewPool来装载不同的View类型。</li>
+</ul>
+<h2 id="加快启动速度"><a href="#加快启动速度" class="headerlink" title="加快启动速度"></a>加快启动速度</h2><a id="more"></a>
+<p>View的填充比较耗资源。不仅要解析资源数据，还要实例化潜在的View以及它们所需要的数据，包括第一次需要的decode bitmap，layout和draw。UI越复杂，填充操作就会越繁重。</p>
+<p>上述所有都会降低启动速度。当用户启动一个应用时时，希望等得到一个及时的反馈说明应用已经在运行了。Android通过使用了一个 “Starting Window”来弱化这种问题，该window通过应用主题和一些指定背景的图片构成。这样可以很好的让系统进程在后台去进行加载和填充工作。当 activity准备好展示的时候，starting window就会过渡到真实的内容紧接着用户就可以使用应用了。</p>
+<p>然而，这种starting window应该给用户更多的反馈以表明应用正在进行一些处理，当然这种策略不足以满足那种需要2秒甚至跟多时间去启动的应用，用户会被动的坐在那里一直等到完全加载完毕。</p>
+<p>为了启动更快，一些不需要立即展示的UI可以延迟加载。通过使用ViewStub可以搞定。任何时候都尽可能的避免繁重的操作，比如进行大bitmap的decoding，避免由于内存分配和回收产生的内存搅动。可以使用工具监视启动时间去解决瓶颈问题。</p>
+<p>避免在Application对象中初始化代码。Application在每一次进程启动的时候会被创建，会导致更多的工作而占用了实际需要展示给 用户的UI的初始化时间。比如用户正在浏览一张图片，决定share，选中了你的app，那么你的app需要做的就是展示给用户分享的UI，其它都是多余 的。Application的子类更倾向在某些情况下需要做一些耗时的操作，建议你选择使用singletons去持有公共全局的状态，这样就会在它第一 次被访问的时候进行初始化。有一点相关的注意事项，不要在Application对象中进行网络有关的操作。That object may be created when one of the app’s Services or BroadcastReceivers is started; hitting the network will turn code that does a local update at a specific frequency into a regular DDoS.</p>
+<p>还要注意，应用的不同状态对于启动时间有一个很大的区别。如果应用第一次启动，那么就会做大量的工作：启动进程，初始化所有的状态，必要的填充，布 局和绘制。如果应用已经启动了并且在后台存活，重新启动就就很简单。这两种极端的例子会有另外两种情况出现，一：应用在用户退出后还存在，但是任务需要重 新创建（通过调用<code>Activity.onCreaate()</code>），二：进程被系统干掉了，需要重新启动该进程，但是任务可以在 Activity.onCreate()方法中通过保存的bundle恢复状态。你在进行应用启动时间测试的时候，确保优化最糟糕的情况：进程被干掉，需 要重新启动。你可以通过从任务列表中移除你的应用来模拟这种情况。</p>
+<h2 id="避免复杂的View层级"><a href="#避免复杂的View层级" class="headerlink" title="避免复杂的View层级"></a>避免复杂的View层级</h2><p>布局越复杂，操作的时间就会越长：填充，布局和渲染（一些潜在的无用内容的内存开销，自定义View中多余数据的引入）。寻找最节省资源的方式去展 示嵌套的内容。一种方法就是使用自定义View或者自定义布局，在自定义布局中去避免复杂的嵌套，对于一个单独的View来说绘制一些text和 icons，相对于一个嵌套的ViewGroup就更简单。如何在一个交互模块中绑定多个元素呢？如果用户可以通过一个元素就可以完成交互，那么该元素应 该是一个独立的View，而不是和其它元素绑定在一起。</p>
+<h2 id="避免在View层级的顶层使用RelativeLayout"><a href="#避免在View层级的顶层使用RelativeLayout" class="headerlink" title="避免在View层级的顶层使用RelativeLayout"></a>避免在View层级的顶层使用RelativeLayout</h2><p>RelativeLayout使用起来很方便，因为可以任意指定View的相对位置。在很多时候，可能是最好的选择，但是相对布局是消耗资源的一种 方案，因为它需要两次measurement去确保自己处理了所有的布局关系。而且这个问题会伴随着View层级中的ReativeLayout的增多， 而变得跟严重。想象一下，一个顶部是RelativeLayout的布局，本来就进行两次的measurement工作，如果它的第一个child也是 RelativeLayout，那么该chilld RelativeLayout下面的布局也要进行两次measurement，整个布局就要进行4次measurement。</p>
+<p>在不需要RelativeLayout的一些属性的时候，可以选择使用其它的布局类型。比如LinearLayout或者自定义的布局。确实需要对 child进行相对布局的时候，可以考虑更优化的GridLayout，它已经预处理了Child View的关系，可以避免double－measurement的问题。</p>
+<h2 id="避免在UI-Thread-进行繁重的操作"><a href="#避免在UI-Thread-进行繁重的操作" class="headerlink" title="避免在UI Thread 进行繁重的操作"></a>避免在UI Thread 进行繁重的操作</h2><p>在UI Thread中复杂的操作会导致动画和绘制的延迟，最终会导致明显的卡顿。一些已知的应该避免耗时操作的方法：<code>onDraw</code>，<code>onLayout</code>，以及任何与View相关的在UI thread调用的相关方法。还有一些其它的操作，比如webservice的调用，网络操作以及数据库的操作。可以考虑使用Loaders或者其它执行在其它线程的工具去操作，完成后再填充到UI上。一个可以追踪卡顿原因的工具是<code>StrictMode</code>。</p>
+<p>另一个在UI Thread中避免访问文件系统和数据库的原因是：Android设备的存储在处理多个并发的读写操作时支持的不够好。即使你的app处理空闲状态，但是 其它的app可能正在执行繁重的I/O操作（Play Store更新apps）也可能会导致你的应用产生ANR或者一些比较大的延迟。</p>
+<p>总的来说，所有的事情都应该是异步的，UI Thread应该只操作那些核心的UI 操作，比如处理View的属性和绘制。</p>
+<h2 id="最小化-Wakeups"><a href="#最小化-Wakeups" class="headerlink" title="最小化 Wakeups"></a>最小化 Wakeups</h2><p>BroadcastReceivers可以用于从其它应用接收那些期望响应的信息和事件。但是过多的响应以至于超过了本身所需的话，这些事件就会导 致app经常被唤醒，最终导致整个设备的性能和资源的耗费。当你的应用不需要关心这些结果时，考虑关闭BroadcastReceivers，并且慎重选 择那些要响应的Intent。</p>
+<h2 id="为低端手机考虑"><a href="#为低端手机考虑" class="headerlink" title="为低端手机考虑"></a>为低端手机考虑</h2><p>大多数用户的手机比开发者手机的配置要低。因此去为这个市场的用户开发就很重要。在关注性能问题的时候，不要以自己的手机水平作为衡量标准，使用不同档次的手机进行测试，确保你的应用可以满足不同水平的设备。</p>
+<p>低端手机的一些关注点还包括一些RAM的大小，屏幕的大小，比如512M的RAM或者768*480的屏幕分辨率的配置在低端手机中很常见。</p>
+<p>使用Android提供的一些测试工具去追踪重要的性能相关的信息：渲染性能（是否达到60的帧率？），内存分配（内存分配是否导致垃圾回收最终导致动画的卡顿？），启动性能（在第一启动的时候是否做了太多的工作，导致用户等太久？）找到这些问题，解决它们！</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#避免在动画和交互期间繁重的操作"><span class="toc-number">1.</span> <span class="toc-text">避免在动画和交互期间繁重的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加快启动速度"><span class="toc-number">2.</span> <span class="toc-text">加快启动速度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免复杂的View层级"><span class="toc-number">3.</span> <span class="toc-text">避免复杂的View层级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免在View层级的顶层使用RelativeLayout"><span class="toc-number">4.</span> <span class="toc-text">避免在View层级的顶层使用RelativeLayout</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免在UI-Thread-进行繁重的操作"><span class="toc-number">5.</span> <span class="toc-text">避免在UI Thread 进行繁重的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最小化-Wakeups"><span class="toc-number">6.</span> <span class="toc-text">最小化 Wakeups</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#为低端手机考虑"><span class="toc-number">7.</span> <span class="toc-text">为低端手机考虑</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&text=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&title=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&is_video=false&description=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Google Develop for Android 系列三 － Performance最佳实践&body=Check out this article: http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&title=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&title=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&title=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&title=Google Develop for Android 系列三 － Performance最佳实践"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/&name=Google Develop for Android 系列三 － Performance最佳实践&description=&lt;p&gt;作者 : lightsky&lt;br&gt;&lt;a href=&#34;http://www.lightskystreet.com/2015/06/07/google-for-android-3-performance/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;在Android中，性能和内存的关系很密切，因为系统的整体内存大小会影响所有进程的性能，因为垃圾回收器会对运行期间的性能产生很大的影响。下面的重点是运行期间的性能问题而不是内存。&lt;/p&gt;
+&lt;h2 id=&#34;避免在动画和交互期间繁重的操作&#34;&gt;&lt;a href=&#34;#避免在动画和交互期间繁重的操作&#34; class=&#34;headerlink&#34; title=&#34;避免在动画和交互期间繁重的操作&#34;&gt;&lt;/a&gt;避免在动画和交互期间繁重的操作&lt;/h2&gt;&lt;p&gt;正如在第一篇文章中提到过的，在UI Thread做繁重的操作会影响到渲染的处理。同样会导致动画的问题，因为它依赖于每一帧的渲染。这就意味着在动画期间避免在UI进行繁重的操作就更加重要。以下是一些可以避免的常见情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Layout&lt;/strong&gt;&lt;br&gt;Measurement 和 layout是比较繁重的操作，view的层级越复杂，操作就会越繁重。Measurement和layout是在UI Thred发发生的。因此当系统需要运行一个动画的时候紧接着还需进行layout，而它们都是在同一个线程，因此动画的流畅度可能就会受到影响。&lt;br&gt;假设你的动画在13ms内就可以完成所有的渲染，在16帧率之内。然后某一请求导致了layout，花费了5ms的时间。该layout在下一帧绘制前会 发生，那么总的绘制时间就会达到18ms，最终你的动画就明显的跳过一帧。当动画过程中需要进行layout的时候，为了避免这种情况，可以在动画启动前 进行layout或者延迟layout到动画完成。当然，尽量为那些不会触发layout的属性添加动画。比如，View的&lt;code&gt;translationX&lt;/code&gt;和&lt;code&gt;tanshlationY&lt;/code&gt;属性影响到post-layout属性。LayoutParams 属性也会需要请求layout操作，因此对这些属性进行动画的时候在相对复杂的UI上会导致卡顿。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Inflation&lt;/strong&gt;&lt;br&gt;View 填充也只会发生在UI Thread，也是比较繁重的操作（View的层级越大，工作越繁重）。填充工作会在手动填充一个View 或者启动一个activity的时候发生。这些都是在相同的UI线程进行的，当新的activity被填充的时候将会导致动画暂停。为了避免这种情况，可 以在动画完成的时候再启动Activity。或者避免滚动列表时填充不同类型的View导致的卡顿，可以考虑预填充。比如，RecyclerView支持 使用RectcledViewPool来装载不同的View类型。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;加快启动速度&#34;&gt;&lt;a href=&#34;#加快启动速度&#34; class=&#34;headerlink&#34; title=&#34;加快启动速度&#34;&gt;&lt;/a&gt;加快启动速度&lt;/h2&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 一只熊猫
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang=中文>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Adapter的getVIew()以得到旧视图（convertView）： /**  * Get a View that displays the data at the specified position in the data set. You can either  * create a View manually or inflate it from an XML layout file">
+<meta name="keywords" content="ViewHolder的作用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ViewHolder的作用">
+<meta property="og:url" content="http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/index.html">
+<meta property="og:site_name" content="熊猫博客">
+<meta property="og:description" content="Adapter的getVIew()以得到旧视图（convertView）： /**  * Get a View that displays the data at the specified position in the data set. You can either  * create a View manually or inflate it from an XML layout file">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-06-14T03:22:02.807Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ViewHolder的作用">
+<meta name="twitter:description" content="Adapter的getVIew()以得到旧视图（convertView）： /**  * Get a View that displays the data at the specified position in the data set. You can either  * create a View manually or inflate it from an XML layout file">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>ViewHolder的作用</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2014/06/01/android/Android Skills/CountDownTimer（倒数计时器）/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2014/05/17/android/Android Skills/Android Skill 下拉刷新/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&text=ViewHolder的作用"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&title=ViewHolder的作用"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&is_video=false&description=ViewHolder的作用"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ViewHolder的作用&body=Check out this article: http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&title=ViewHolder的作用"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&title=ViewHolder的作用"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&title=ViewHolder的作用"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&title=ViewHolder的作用"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&name=ViewHolder的作用&description=&lt;p&gt;Adapter的getVIew()以得到旧视图（convertView）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/**
+ * Get a View that displays the data at the specified position in the data set. You can either
+ * create a View manually or inflate it from an XML layout file. When the View is inflated, the
+ * parent View (GridView, ListView...) will apply default layout parameters unless you use
+ * {@link android.view.LayoutInflater#inflate(int, android.view.ViewGroup, boolean)}
+ * to specify a root view and to prevent attachment to the root.
+ * 
+ * @param position The position of the item within the adapter&amp;apos;s data set of the item whose view
+ *        we want.
+ * @param convertView The old view to reuse, if possible. Note: You should check that this view
+ *        is non-null and of an appropriate type before using. If it is not possible to convert
+ *        this view to display the correct data, this method can create a new view.
+ *        Heterogeneous lists can specify their number of view types, so that this View is
+ *        always of the right type (see {@link #getViewTypeCount()} and
+ *        {@link #getItemViewType(int)}).
+ * @param parent The parent that this view will eventually be attached to
+ * @return A View corresponding to the data at the specified position.
+ */
+View getView(int position, View convertView, ViewGroup parent);
+&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        ViewHolder的作用
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">熊猫博客</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2014-05-19T14:01:14.000Z" itemprop="datePublished">2014-05-19</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/ViewHolder的作用/">ViewHolder的作用</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Adapter的getVIew()以得到旧视图（convertView）：</p>
+<pre><code>/**
+ * Get a View that displays the data at the specified position in the data set. You can either
+ * create a View manually or inflate it from an XML layout file. When the View is inflated, the
+ * parent View (GridView, ListView...) will apply default layout parameters unless you use
+ * {@link android.view.LayoutInflater#inflate(int, android.view.ViewGroup, boolean)}
+ * to specify a root view and to prevent attachment to the root.
+ * 
+ * @param position The position of the item within the adapter&apos;s data set of the item whose view
+ *        we want.
+ * @param convertView The old view to reuse, if possible. Note: You should check that this view
+ *        is non-null and of an appropriate type before using. If it is not possible to convert
+ *        this view to display the correct data, this method can create a new view.
+ *        Heterogeneous lists can specify their number of view types, so that this View is
+ *        always of the right type (see {@link #getViewTypeCount()} and
+ *        {@link #getItemViewType(int)}).
+ * @param parent The parent that this view will eventually be attached to
+ * @return A View corresponding to the data at the specified position.
+ */
+View getView(int position, View convertView, ViewGroup parent);
+</code></pre><a id="more"></a>
+<p>看过精致Adapter都知道，ListView的一个Item移出屏幕的范围，和一个Item进入屏幕的范围的时候，Adapter的getView(int position, View convertView, ViewGroup parent)里都能得到这个Item的View，也就是上述所说的旧视图（convertView） 。ListView的的Item如果样式都是一样的话，我们可以拿到旧视图的View，然后根据ViewId上的去取得组件并修改其内容，然后return该View。达到复用的效果。所以这里，涉及到了ViewHolder去保存该View上组件的各个ViewId，并且将ViewHolder继续保存到return的convertView的tag中，以供下一次拿到convertView时取得，规避了ViewHolder的不断创建，也实现了ViewHolder的复用。</p>
+<p>其实findViewById()的性能是很低的，引入ViewHolder的目的也是为减少getView()时findViewById()的次数。</p>
+<p>万能ViewHolder的原理</p>
+<p>类似于内部存放了一个字典，用于根据ViewId得到View。</p>
+<pre><code>public class ViewHolder {
+    private final SparseArray&lt;View&gt; views;
+    private View convertView;
+
+    public ViewHolder(View convertView) {
+        this.views = new SparseArray&lt;&gt;();
+        this.convertView = convertView;
+    }
+
+    public &lt;T extends View&gt; T findViewById(int viewId) {
+        View view = views.get(viewId);
+        if (view == null) {
+            view = convertView.findViewById(viewId);
+            views.put(viewId, view);
+        }
+        return (T) view;
+    }
+}
+</code></pre><p>在你的BaseListAdapter中可以这么实现</p>
+<pre><code>public abstract View getView(int position, View convertView, ViewHolder viewHolder);
+
+@Override
+public final View getView(int position, View convertView, ViewGroup parent) {
+    ViewHolder viewHolder;
+    if (convertView == null) {
+        convertView = mInflater.inflate(getItemLayout(), null);
+        viewHolder = new ViewHolder(convertView);
+        convertView.setTag(viewHolder);
+    } else {
+        viewHolder = (ViewHolder) convertView.getTag();
+    }
+    try {
+        return getView(position, convertView, viewHolder);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return convertView;
+
+}
+</code></pre><p>这样的话可以让BaseListAdapter的子类强制继承getView然后与BaseListAdapter的getView对接后续操作。相当于执行了：BaseListAdapter.getView() -&gt; BaseListAdapter子类.getView() 。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&text=ViewHolder的作用"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&title=ViewHolder的作用"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&is_video=false&description=ViewHolder的作用"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ViewHolder的作用&body=Check out this article: http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&title=ViewHolder的作用"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&title=ViewHolder的作用"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&title=ViewHolder的作用"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&title=ViewHolder的作用"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2014/05/19/android/Android Skills/万能的ViewHolder/&name=ViewHolder的作用&description=&lt;p&gt;Adapter的getVIew()以得到旧视图（convertView）：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/**
+ * Get a View that displays the data at the specified position in the data set. You can either
+ * create a View manually or inflate it from an XML layout file. When the View is inflated, the
+ * parent View (GridView, ListView...) will apply default layout parameters unless you use
+ * {@link android.view.LayoutInflater#inflate(int, android.view.ViewGroup, boolean)}
+ * to specify a root view and to prevent attachment to the root.
+ * 
+ * @param position The position of the item within the adapter&amp;apos;s data set of the item whose view
+ *        we want.
+ * @param convertView The old view to reuse, if possible. Note: You should check that this view
+ *        is non-null and of an appropriate type before using. If it is not possible to convert
+ *        this view to display the correct data, this method can create a new view.
+ *        Heterogeneous lists can specify their number of view types, so that this View is
+ *        always of the right type (see {@link #getViewTypeCount()} and
+ *        {@link #getItemViewType(int)}).
+ * @param parent The parent that this view will eventually be attached to
+ * @return A View corresponding to the data at the specified position.
+ */
+View getView(int position, View convertView, ViewGroup parent);
+&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 一只熊猫
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/categories/技术">技术</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/docker">容器Docker</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
