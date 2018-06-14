@@ -1,185 +1,298 @@
-<!DOCTYPE HTML>
-<html lang="中文">
+<!DOCTYPE html>
+<html>
 <head>
-    <!--Setting-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta http-equiv="Cache-Control" content="no-siteapp">
-    <meta http-equiv="Cache-Control" content="no-transform">
-    <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <meta name="apple-mobile-web-app-capable" content="一只熊猫的博客">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="format-detection" content="telephone=no,email=no,adress=no">
-    <meta name="browsermode" content="application">
-    <meta name="screen-orientation" content="portrait">
-    <link rel="dns-prefetch" href="http://blog.apanda.online">
-    <!--SEO-->
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Android性能优化典范（三） | 一只熊猫的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android性能优化典范的课程最近更新到第三季了，这次一共12个短视频课程，包括的内容大致有：更高效的ArrayMap容器，使用Android系统提供的特殊容器来避免自动装箱，避免使用枚举类型，注意onLowMemory与onTrimMemory的回调，避免内存泄漏，高效的位置更新操作，重复layout操作的性能影响，以及使用Batching，Prefetching优化网络请求，压缩传输数据等等">
+<meta name="keywords" content="Android性能优化典范">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android性能优化典范（三）">
+<meta property="og:url" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/index.html">
+<meta property="og:site_name" content="一只熊猫的博客">
+<meta property="og:description" content="Android性能优化典范的课程最近更新到第三季了，这次一共12个短视频课程，包括的内容大致有：更高效的ArrayMap容器，使用Android系统提供的特殊容器来避免自动装箱，避免使用枚举类型，注意onLowMemory与onTrimMemory的回调，避免内存泄漏，高效的位置更新操作，重复layout操作的性能影响，以及使用Batching，Prefetching优化网络请求，压缩传输数据等等">
+<meta property="og:locale" content="中文">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/E7C1236FA835601C32BF7E628221652E.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/F29E41FC2EA45D65769B8AEFDD22A155.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/42DB6E22C92F20118AA30D62CFDC243B.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/B749F90BA08411B98770B1F902992945.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/0BD3BFC1B10AEB182156AFC77AADB2CE.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/451CEF2B65FB18B8A5D71C50974659A8.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/2AE0AE9F3F50AF084A80714D0513339C.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/AD0D923F15F432B92AA5488B501F198A.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/6E526A32AEB20E7BF4AE81D6D6C02126.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/76AB63A7AEE5B0007EC558FA077C25F6.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/4B99F65F156D80B655ACAA76DA558852.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/8C5D561C8A3BF3479E33BFCE9D76DE23.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/594E44A9750EB5C5B619904E779972E9.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/D36B2DD4DE533313EEC18D99FD427FF3.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/65D3CAA3C496D3D19A077CFCDA93F42D.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/2FCA1FD92B72241C1237172C26004E0E.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/DCD52E7E5D8EE95FCA70F12DE46AFFF5.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/C9F5B4B5C46678F2C7FC85FE7430B195.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/15F5750E255B7BC3D343228FC18D25E5.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/4C8D7895BCC82144FEB4579B541CDD3D.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/B5BC4E3B0E354EF3862730C63F910180.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/183E8DD7D4CBF2749C535CD86B1F9867.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/665F39DC952280C524AC498CB633C1C2.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/AD58592B8F7481AEB82B5B471ECFA60E.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/002D35D75FC1DB8DD7D65C22AD93DDB6.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/4F93493443349E1BD5BEE3FE86ECD1A2.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/DF396BCA5677021C6B054AEADD0B6822.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/78B3F987AFF7FB2CE8C45DAC041C2593.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/F4886106FB91107E133B978A7040EF3A.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/DF6D67803BBD48405F55D6277BDA1A0F.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/18B002260D413C5DBD82D151DC6079C3.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/B5FB699E1F38B5363A4C06E14F4CE50A.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/AA2C6A76E1EA2AB18D96FF14318ED99A.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/A999F0D0AD8813B266A61C382EDA7F92.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/8C4D435D920E3570302BFBCF0738EA3D.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/B2452C38BF5DE2EADDC32D48F5A3572B.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/45B3545D808A8B4B2E9B6B8C6BA0DF76.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/3D5636BFE235C3958AF6E9BE49F2E6A4.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/4776F1ED699D53599B216A0B2B4315A8.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/929231FBA36D48FE55ED51C1336090DA.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/A155E9AF651592ACFB5DAEA47D68751F.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/F4409A21F514BF5FD077C7D7EAE78961.jpg">
+<meta property="og:updated_time" content="2016-04-10T09:35:41.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android性能优化典范（三）">
+<meta name="twitter:description" content="Android性能优化典范的课程最近更新到第三季了，这次一共12个短视频课程，包括的内容大致有：更高效的ArrayMap容器，使用Android系统提供的特殊容器来避免自动装箱，避免使用枚举类型，注意onLowMemory与onTrimMemory的回调，避免内存泄漏，高效的位置更新操作，重复layout操作的性能影响，以及使用Batching，Prefetching优化网络请求，压缩传输数据等等">
+<meta name="twitter:image" content="http://blog.apanda.online/2015/09/15/Android性能优化典范/Android性能优化典范（三）/resources/E7C1236FA835601C32BF7E628221652E.jpg">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
 
-<meta name="description" content="大道至简，真理在众！技术在手，代码在心!"/>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="https://d23.usercdn.com/i/03907/herx4n7dz1po.gif" class="js-avatar">
+			
+		</a>
 
+		<hgroup>
+		  <h1 class="header-author"><a href="/">一只熊猫</a></h1>
+		</hgroup>
 
+		
 
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						<li>Links</li>
+						
+						
+						<li>About</li>
+						
+					</ul>
+				</div>
+			</div>
+		
 
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/categories/随笔">随笔</a></li>
+				        
+							<li><a href="/categories/技术">技术</a></li>
+				        
+							<li><a href="/instagram">相册</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+					        
+								<a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+					        
+								<a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+					        
+								<a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Android性能优化典范/" style="font-size: 18px;">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size: 10px;">Annotation</a> <a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a> <a href="/tags/Binder/" style="font-size: 10px;">Binder</a> <a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/EventBus/" style="font-size: 12px;">EventBus</a> <a href="/tags/Google-Develop-for-Android-系列/" style="font-size: 20px;">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size: 10px;">Ibeacon</a> <a href="/tags/ImageView/" style="font-size: 10px;">ImageView</a> <a href="/tags/Kotlin/" style="font-size: 10px;">Kotlin</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MotionEvent/" style="font-size: 10px;">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size: 12px;">OkHttp</a> <a href="/tags/React-Native/" style="font-size: 10px;">React-Native</a> <a href="/tags/RxAndroid/" style="font-size: 10px;">RxAndroid</a> <a href="/tags/RxJava/" style="font-size: 18px;">RxJava</a> <a href="/tags/ServiceManager/" style="font-size: 10px;">ServiceManager</a> <a href="/tags/String相关类性能测试/" style="font-size: 10px;">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size: 10px;">Textview</a> <a href="/tags/TypedArray/" style="font-size: 10px;">TypedArray</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ViewHolder的作用/" style="font-size: 10px;">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/Webview/" style="font-size: 10px;">Webview</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/drawable/" style="font-size: 10px;">drawable</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/写作/" style="font-size: 12px;">写作</a> <a href="/tags/反思/" style="font-size: 10px;">反思</a> <a href="/tags/图像、背景、View更新、布局、内存/" style="font-size: 12px;">图像、背景、View更新、布局、内存</a> <a href="/tags/开发规范/" style="font-size: 14px;">开发规范</a> <a href="/tags/异步线程的实现（Looper、MessageQueue、Handler）/" style="font-size: 10px;">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/总结分类/" style="font-size: 16px;">总结分类</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/时间轴/" style="font-size: 10px;">时间轴</a> <a href="/tags/架构的实例/" style="font-size: 10px;">架构的实例</a> <a href="/tags/沉浸式/" style="font-size: 10px;">沉浸式</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/目标/" style="font-size: 12px;">目标</a> <a href="/tags/知识库/" style="font-size: 14px;">知识库</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/自定义Loader/" style="font-size: 10px;">自定义Loader</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wsgzao.github.io/">HelloDog</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dearzd.com/DBlog/">咚门</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.codingyun.com/">Coding云</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.jobbole.com/">伯乐在线</a>
+			        
+			        </div>
+				</section>
+				
 
-<meta name="robots" content="all" />
-<meta name="google" content="all" />
-<meta name="googlebot" content="all" />
-<meta name="verify" content="all" />
-    <!--Title-->
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
 
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">一只熊猫</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="https://d23.usercdn.com/i/03907/herx4n7dz1po.gif" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">一只熊猫</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/categories/随笔">随笔</a></li>
+		        
+					<li><a href="/categories/技术">技术</a></li>
+		        
+					<li><a href="/instagram">相册</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+			        
+						<a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+			        
+						<a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
 
-<title>Android性能优化典范（三） | 一只熊猫的博客</title>
-
-
-    <link rel="alternate" href="/atom.xml" title="一只熊猫的博客" type="application/atom+xml">
-
-
-    <link rel="icon" href="/favicon.ico">
-
+      <div class="body-wrap"><article id="post-Android性能优化典范/Android性能优化典范（三）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/15/Android性能优化典范/Android性能优化典范（三）/" class="article-date">
+  	<time datetime="2015-09-15T08:28:17.000Z" itemprop="datePublished">2015-09-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
     
-
-
-
-<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
-<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
-<link rel="stylesheet" href="/css/style.css?rev=@@hash">
-
-
-
-
+      <input type="hidden" class="isFancy" />
     
-	<div class="hide">
-		<script type="text/javascript">
-			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
-		</script>
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android性能优化典范（三）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android性能优化典范/">Android性能优化典范</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/技术/">技术</a>
 	</div>
 
 
-
-
-
-
+        <div class="clearfix"></div>
+      </div>
+      
     
-</head>
-
-
-<!--[if lte IE 8]>
-<style>
-    html{ font-size: 1em }
-</style>
-<![endif]-->
-<!--[if lte IE 9]>
-<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
-<![endif]-->
-
-<body>
-    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
-    <div class="main-header-box">
-        <a class="header-avatar" href="/" title='一只熊猫'>
-            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
-        </a>
-        <div class="branding">
-        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
-            
-                 <img src="/img/branding.png" alt="Snippet 博客主题" class="img-responsive center-block">
-            
-    	</div>
-    </div>
-</header>
-    <nav class="main-navigation">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
-                    <span class="sr-only"></span>
-                        <i class="fa fa-bars"></i>
-                    </span>
-                </div>
-                <div class="collapse navbar-collapse" id="main-menu">
-                    <ul class="menu">
-                        
-                            <li role="presentation" class="text-center">
-                                <a href="/"><i class="fa "></i>主页</a>
-                            </li>
-                        
-                            <li role="presentation" class="text-center">
-                                <a href="/archives/"><i class="fa "></i>所有文章</a>
-                            </li>
-                        
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/随笔"><i class="fa "></i>随笔</a>
-                            </li>
-                        
-                            <li role="presentation" class="text-center">
-                                <a href="/categories/技术"><i class="fa "></i>技术</a>
-                            </li>
-                        
-                            <li role="presentation" class="text-center">
-                                <a href="/instagram"><i class="fa "></i>相册</a>
-                            </li>
-                        
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
-    <section class="content-wrap">
-        <div class="container">
-            <div class="row">
-                <main class="col-md-8 main-content m-post">
-                    <p id="process"></p>
-<article class="post">
-    <div class="post-head">
-        <h1 id="Android性能优化典范（三）">
-            
-	            Android性能优化典范（三）
-            
-        </h1>
-        <div class="post-meta">
-    
-    
-    <span class="categories-meta fa-wrap">
-        <i class="fa fa-folder-open-o"></i>
-        <a href="/categories/技术">
-            技术
-        </a>
-    </span>
-    
-    
-    <span class="fa-wrap">
-        <i class="fa fa-tags"></i>
-        <span class="tags-meta">
-            
-                
-                    <a href="/tags/Android性能优化典范" title='Android性能优化典范'>
-                        Android性能优化典范
-                    </a>
-                
-            
-        </span>
-    </span>
-    
-
-    
-        
-        <span class="fa-wrap">
-            <i class="fa fa-clock-o"></i>
-            <span class="date-meta">2015/09/15</span>
-        </span>
-    
-</div>
-
-            
-            
-            <p class="fa fa-exclamation-triangle warning">
-                本文于<strong>1002</strong>天之前发表，文中内容可能已经过时。
-            </p>
-        
-    </div>
-    
-    <div class="post-body post-content">
+    <div class="article-entry" itemprop="articleBody">
+      
         <p><a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范</a>的课程最近更新到第三季了，这次一共12个短视频课程，包括的内容大致有：更高效的ArrayMap容器，使用Android系统提供的特殊容器来避免自动装箱，避免使用枚举类型，注意onLowMemory与onTrimMemory的回调，避免内存泄漏，高效的位置更新操作，重复layout操作的性能影响，以及使用Batching，Prefetching优化网络请求，压缩传输数据等等使用技巧。下面是对这些课程的总结摘要，认知有限，理解偏差的地方请多多交流指正！</p>
 <p><img src="resources/E7C1236FA835601C32BF7E628221652E.jpg" alt=""></p>
 <h2 id="1-Fun-with-ArrayMaps"><a href="#1-Fun-with-ArrayMaps" class="headerlink" title="1) Fun with ArrayMaps"></a><strong>1) Fun with ArrayMaps</strong></h2><a id="more"></a>
@@ -289,106 +402,80 @@
 <p><img src="resources/F4409A21F514BF5FD077C7D7EAE78961.jpg" alt=""></p>
 <p>我们可以参考在WiFi，4G，3G等不同的网络下设计不同大小的预取数据量，也可以是按照图片数量或者操作时间来作为阀值。这需要我们需要根据特定的场景，不同的网络情况设计合适的方案。</p>
 
+      
     </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/16/Android性能优化典范/Android性能优化之电量篇/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Android性能优化之电量篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/15/Android性能优化典范/Android性能优化之运算篇/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android性能优化之运算篇</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
-    <div class="post-footer">
-        <div>
-            
-                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
-            
-        </div>
-        <div>
-            
-        </div>
-    </div>
+  
 </article>
 
-<div class="article-nav prev-next-wrap clearfix">
-    
-        <a href="/2015/09/16/Android性能优化典范/Android性能优化之电量篇/" class="pre-post btn btn-default" title='Android性能优化之电量篇'>
-            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
-            <span class="hidden-xs">Android性能优化之电量篇</span>
-        </a>
-    
-    
-        <a href="/2015/09/15/Android性能优化典范/Android性能优化之运算篇/" class="next-post btn btn-default" title='Android性能优化之运算篇'>
-            <span class="hidden-lg">下一篇</span>
-            <span class="hidden-xs">Android性能优化之运算篇</span><i class="fa fa-angle-right fa-fw"></i>
-        </a>
-    
+
+
+
+
+
+
+
 </div>
-
-
-    <div id="comments">
-        
-	<!--PC和WAP自适应版-->
-<div id="SOHUCS"></div>
-<script type="text/javascript">
-	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
-	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
-</script>	
-
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2018 一只熊猫
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
     </div>
-
-
-
-
-
-                </main>
-                
-                    <aside id="article-toc" role="navigation" class="col-md-4">
-    <div class="widget">
-        <h3 class="title">文章目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#清园"><span class="toc-text">清园</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS7安装iptables防火墙"><span class="toc-text">CentOS7安装iptables防火墙</span></a></li></ol></li></ol>
-    </div>
-</aside>
-
-                
-            </div>
-        </div>
-    </section>
-    <footer class="main-footer">
-    <div class="container">
-        <div class="row">
-        </div>
-    </div>
+  </div>
 </footer>
-
-<!--<a id="toc-btn">
-    <i class="fa fa-bars"></i>
-</a>-->
-
-<a id="back-to-top" class="icon-btn hide">
-	<i class="fa fa-chevron-up"></i>
-</a>
-
-
-
-
-    <div class="copyright">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12"> 
-                <span>Copyright &copy; 2017
-                </span> | 
-                <span>
-                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
-                </span> | 
-                <span>
-                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
-                </span>
-            </div>
-        </div>
     </div>
-</div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: ,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
 
 
 
-	<script src="/js/search.js?rev=@@hash"></script>
 
 
-<script src="/js/app.js?rev=@@hash"></script>
 
-
+  </div>
 </body>
 </html>
