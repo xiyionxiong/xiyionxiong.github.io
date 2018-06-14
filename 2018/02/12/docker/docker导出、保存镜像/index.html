@@ -7,14 +7,13 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="在 docker  之间导出导入镜像很喜欢玩docker，但最新遇到一个问题，公司给的新机器的dns有问题，导致pull不下来镜像。 没办法了，没有镜像什么神马都干不了，又不能花很多时间去搭建私有的镜像库，只有另寻办法了。 废话少说，经过探究，发现 docker 提供把镜像导出export（保存save）为文件的机制，这样就可以把镜像copy到任意地方了。 1. 导出 export - 导入 im">
-<meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker导出、保存镜像">
 <meta property="og:url" content="http://blog.apanda.online/2018/02/12/docker/docker导出、保存镜像/index.html">
 <meta property="og:site_name" content="熊猫博客">
 <meta property="og:description" content="在 docker  之间导出导入镜像很喜欢玩docker，但最新遇到一个问题，公司给的新机器的dns有问题，导致pull不下来镜像。 没办法了，没有镜像什么神马都干不了，又不能花很多时间去搭建私有的镜像库，只有另寻办法了。 废话少说，经过探究，发现 docker 提供把镜像导出export（保存save）为文件的机制，这样就可以把镜像copy到任意地方了。 1. 导出 export - 导入 im">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-06-14T11:14:14.916Z">
+<meta property="og:updated_time" content="2018-06-14T11:38:10.576Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker导出、保存镜像">
 <meta name="twitter:description" content="在 docker  之间导出导入镜像很喜欢玩docker，但最新遇到一个问题，公司给的新机器的dns有问题，导致pull不下来镜像。 没办法了，没有镜像什么神马都干不了，又不能花很多时间去搭建私有的镜像库，只有另寻办法了。 废话少说，经过探究，发现 docker 提供把镜像导出export（保存save）为文件的机制，这样就可以把镜像copy到任意地方了。 1. 导出 export - 导入 im">
@@ -143,11 +142,6 @@
 
 
       
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Docker/">Docker</a>
-    </div>
-
 
     </div>
   </header>
