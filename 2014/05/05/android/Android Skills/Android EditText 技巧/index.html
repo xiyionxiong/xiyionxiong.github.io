@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang=中文>
 <head>
-  <meta charset="utf-8">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>图像、背景、View更新、布局、内存 | 熊猫博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="解决EditView抢焦点事件在最外层布局加上 android:focusable=&amp;quot;true&amp;quot; android:focusableInTouchMode=&amp;quot;true&amp;quot;">
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="解决EditView抢焦点事件在最外层布局加上 android:focusable=&amp;quot;true&amp;quot; android:focusableInTouchMode=&amp;quot;true&amp;quot;">
 <meta name="keywords" content="图像、背景、View更新、布局、内存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图像、背景、View更新、布局、内存">
@@ -18,239 +18,146 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图像、背景、View更新、布局、内存">
 <meta name="twitter:description" content="解决EditView抢焦点事件在最外层布局加上 android:focusable=&amp;quot;true&amp;quot; android:focusableInTouchMode=&amp;quot;true&amp;quot;">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
+          
+        
+    
+    <!-- title -->
+    <title>图像、背景、View更新、布局、内存</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
 </head>
 
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="https://d23.usercdn.com/i/03907/herx4n7dz1po.gif" class="js-avatar">
-			
-		</a>
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/android">Android</a></li>
+         
+          <li><a href="/categories/Java">Java</a></li>
+         
+          <li><a href="/categories/docker">Docker容器</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/golang">Golang</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2014/05/11/android/Android Skills/Android ImageView ScaleType属性/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2014/02/28/linux/redis/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&text=图像、背景、View更新、布局、内存"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&is_video=false&description=图像、背景、View更新、布局、内存"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=图像、背景、View更新、布局、内存&body=Check out this article: http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&name=图像、背景、View更新、布局、内存&description=&lt;h3 id=&#34;解决EditView抢焦点事件&#34;&gt;&lt;a href=&#34;#解决EditView抢焦点事件&#34; class=&#34;headerlink&#34; title=&#34;解决EditView抢焦点事件&#34;&gt;&lt;/a&gt;解决EditView抢焦点事件&lt;/h3&gt;&lt;p&gt;在最外层布局加上&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;android:focusable=&amp;quot;true&amp;quot;
+android:focusableInTouchMode=&amp;quot;true&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">一只熊猫</a></h1>
-		</hgroup>
-
-		
-
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>Menu</li>
-						<li>Tags</li>
-						
-						<li>Links</li>
-						
-						
-						<li>About</li>
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-							<li><a href="/categories/随笔">随笔</a></li>
-				        
-							<li><a href="/categories/技术">技术</a></li>
-				        
-							<li><a href="/instagram">相册</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
-					        
-								<a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
-					        
-								<a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
-					        
-								<a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
-					        
-								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
-					        
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Android性能优化典范/" style="font-size: 16px;">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size: 10px;">Annotation</a> <a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a> <a href="/tags/Binder/" style="font-size: 10px;">Binder</a> <a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/EventBus/" style="font-size: 12px;">EventBus</a> <a href="/tags/Golang/" style="font-size: 10px;">Golang</a> <a href="/tags/Google-Develop-for-Android-系列/" style="font-size: 20px;">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size: 10px;">Ibeacon</a> <a href="/tags/ImageView/" style="font-size: 10px;">ImageView</a> <a href="/tags/Java/" style="font-size: 14px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 10px;">Kotlin</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MotionEvent/" style="font-size: 10px;">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size: 12px;">OkHttp</a> <a href="/tags/React-Native/" style="font-size: 10px;">React-Native</a> <a href="/tags/RxAndroid/" style="font-size: 10px;">RxAndroid</a> <a href="/tags/RxJava/" style="font-size: 16px;">RxJava</a> <a href="/tags/ServiceManager/" style="font-size: 10px;">ServiceManager</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/String相关类性能测试/" style="font-size: 10px;">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size: 10px;">Textview</a> <a href="/tags/TypedArray/" style="font-size: 10px;">TypedArray</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ViewHolder的作用/" style="font-size: 10px;">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/Webview/" style="font-size: 10px;">Webview</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/drawable/" style="font-size: 10px;">drawable</a> <a href="/tags/goland-json/" style="font-size: 10px;">goland json</a> <a href="/tags/golang/" style="font-size: 12px;">golang</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/port/" style="font-size: 10px;">port</a> <a href="/tags/redis/" style="font-size: 12px;">redis</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/写作/" style="font-size: 12px;">写作</a> <a href="/tags/反思/" style="font-size: 10px;">反思</a> <a href="/tags/图像、背景、View更新、布局、内存/" style="font-size: 12px;">图像、背景、View更新、布局、内存</a> <a href="/tags/开发规范/" style="font-size: 14px;">开发规范</a> <a href="/tags/异步线程的实现（Looper、MessageQueue、Handler）/" style="font-size: 10px;">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/总结分类/" style="font-size: 18px;">总结分类</a> <a href="/tags/时间轴/" style="font-size: 10px;">时间轴</a> <a href="/tags/架构的实例/" style="font-size: 10px;">架构的实例</a> <a href="/tags/沉浸式/" style="font-size: 10px;">沉浸式</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/目标/" style="font-size: 12px;">目标</a> <a href="/tags/知识库/" style="font-size: 14px;">知识库</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/自定义Loader/" style="font-size: 10px;">自定义Loader</a>
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wsgzao.github.io/">HelloDog</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dearzd.com/DBlog/">咚门</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.codingyun.com/">Coding云</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.jobbole.com/">伯乐在线</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-				
-				<section class="switch-part switch-part4">
-				
-					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>				
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#解决EditView抢焦点事件"><span class="toc-number">1.</span> <span class="toc-text">解决EditView抢焦点事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将EditText的光标定位到字符的最后面"><span class="toc-number">2.</span> <span class="toc-text">将EditText的光标定位到字符的最后面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加下划线"><span class="toc-number">3.</span> <span class="toc-text">添加下划线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置抗锯齿"><span class="toc-number">4.</span> <span class="toc-text">设置抗锯齿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#焦点事件监听"><span class="toc-number">5.</span> <span class="toc-text">焦点事件监听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手动获取焦点"><span class="toc-number">6.</span> <span class="toc-text">手动获取焦点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹出软键盘"><span class="toc-number">7.</span> <span class="toc-text">弹出软键盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制长度"><span class="toc-number">8.</span> <span class="toc-text">限制长度</span></a></li></ol>
+    </div>
+  </span>
 </div>
 
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">一只熊猫</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-			
-				<img lazy-src="https://d23.usercdn.com/i/03907/herx4n7dz1po.gif" class="js-avatar">
-			
-			</div>
-			<hgroup>
-			  <h1 class="header-author">一只熊猫</h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-					<li><a href="/categories/随笔">随笔</a></li>
-		        
-					<li><a href="/categories/技术">技术</a></li>
-		        
-					<li><a href="/instagram">相册</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
-			        
-						<a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
-			        
-						<a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
-			        
-						<a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
-			        
-						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-
-      <div class="body-wrap"><article id="post-android/Android Skills/Android EditText 技巧" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2014/05/05/android/Android Skills/Android EditText 技巧/" class="article-date">
-  	<time datetime="2014-05-05T14:01:14.000Z" itemprop="datePublished">2014-05-05</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <div class="content index my4">
         
-  
-    <h1 class="article-title" itemprop="name">
-      图像、背景、View更新、布局、内存
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        图像、背景、View更新、布局、内存
     </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">熊猫博客</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2014-05-05T14:01:14.000Z" itemprop="datePublished">2014-05-05</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/图像、背景、View更新、布局、内存/">图像、背景、View更新、布局、内存</a>
+    </div>
+
+
+    </div>
+  </header>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图像、背景、View更新、布局、内存/">图像、背景、View更新、布局、内存</a></li></ul>
-	</div>
-
-        
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/android/">android</a>
-	</div>
-
-
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="解决EditView抢焦点事件"><a href="#解决EditView抢焦点事件" class="headerlink" title="解决EditView抢焦点事件"></a>解决EditView抢焦点事件</h3><p>在最外层布局加上</p>
+  <div class="content" itemprop="articleBody">
+    <h3 id="解决EditView抢焦点事件"><a href="#解决EditView抢焦点事件" class="headerlink" title="解决EditView抢焦点事件"></a>解决EditView抢焦点事件</h3><p>在最外层布局加上</p>
 <pre><code>android:focusable=&quot;true&quot;
 android:focusableInTouchMode=&quot;true&quot;
 </code></pre><a id="more"></a>
@@ -332,80 +239,125 @@ this.editText.requestFocus();
 <pre><code>//即限定最大输入字符数为20
 this.editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
 </code></pre>
-      
-    </div>
-    
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2014/05/11/android/Android Skills/Android ImageView ScaleType属性/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          ImageView ScaleType属性
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2014/02/28/linux/redis/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">centos6安装redis-2.8.19</div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-  
 </article>
 
 
 
-
-
-
-
-
-</div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2018 一只熊猫
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
-    </div>
-  </div>
-</footer>
     </div>
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+      <div id="footer-post-container">
+  <div id="footer-post">
 
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/android">Android</a></li>
+         
+          <li><a href="/categories/Java">Java</a></li>
+         
+          <li><a href="/categories/docker">Docker容器</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/golang">Golang</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </div>
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: ,
-		animate: true,
-		isHome: false,
-		isPost: true,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#解决EditView抢焦点事件"><span class="toc-number">1.</span> <span class="toc-text">解决EditView抢焦点事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将EditText的光标定位到字符的最后面"><span class="toc-number">2.</span> <span class="toc-text">将EditText的光标定位到字符的最后面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加下划线"><span class="toc-number">3.</span> <span class="toc-text">添加下划线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置抗锯齿"><span class="toc-number">4.</span> <span class="toc-text">设置抗锯齿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#焦点事件监听"><span class="toc-number">5.</span> <span class="toc-text">焦点事件监听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手动获取焦点"><span class="toc-number">6.</span> <span class="toc-text">手动获取焦点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹出软键盘"><span class="toc-number">7.</span> <span class="toc-text">弹出软键盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制长度"><span class="toc-number">8.</span> <span class="toc-text">限制长度</span></a></li></ol>
+    </div>
 
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&text=图像、背景、View更新、布局、内存"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&is_video=false&description=图像、背景、View更新、布局、内存"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=图像、背景、View更新、布局、内存&body=Check out this article: http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&name=图像、背景、View更新、布局、内存&description=&lt;h3 id=&#34;解决EditView抢焦点事件&#34;&gt;&lt;a href=&#34;#解决EditView抢焦点事件&#34; class=&#34;headerlink&#34; title=&#34;解决EditView抢焦点事件&#34;&gt;&lt;/a&gt;解决EditView抢焦点事件&lt;/h3&gt;&lt;p&gt;在最外层布局加上&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;android:focusable=&amp;quot;true&amp;quot;
+android:focusableInTouchMode=&amp;quot;true&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
 
+    </div>
 
-
-
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
 
   </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 一只熊猫
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/android">Android</a></li>
+         
+          <li><a href="/categories/Java">Java</a></li>
+         
+          <li><a href="/categories/docker">Docker容器</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/golang">Golang</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
 </body>
 </html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+

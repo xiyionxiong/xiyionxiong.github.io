@@ -19,7 +19,7 @@ var Instagram = (function(){
 				liTmpl += '<li>\
 								<div class="img-box">\
 									<a class="img-bg" rel="example_group" href="'+data[em].bigSrclist[i]+'" title="'+data[em].text[i]+'"></a>\
-									<img lazy-src="'+data[em].srclist[i]+'" alt="">\
+									<img src="'+data[em].srclist[i]+'" style="width:320px" alt="">\
 								</div>\
 							</li>';
 			}
@@ -29,7 +29,7 @@ var Instagram = (function(){
 		}
 
 		$(".instagram").lazyload();
-	//	changeSize();
+		changeSize();
 
 		setTimeout(function(){
 			preLoad(data);
@@ -117,7 +117,7 @@ var Instagram = (function(){
 
 	var bind = function(){
 		$(window).resize(function(){
-		//	changeSize();
+			changeSize();
 		});
 	}
 
@@ -131,6 +131,7 @@ var Instagram = (function(){
 				return;
 			}
             	getList("https://api.instagram.com/v1/users/2723120904/media/recent/?access_token=2723120904.f686a42.cd584bf27854444db0c658e4dcfc7375&count=100");
+            	// getList("https://api.instagram.com/v1/users/2723120904/media/recent/?access_token=2723120904.f686a42.cd584bf27854444db0c658e4dcfc7375&count=100");
 			// getList("https://api.instagram.com/v1/users/" + userId + "/media/recent/?client_id="+insid+"&count=100");
 			bind();
 		}
