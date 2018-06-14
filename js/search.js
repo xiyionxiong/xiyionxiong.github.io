@@ -1,143 +1,154 @@
-(function() {
-    var searchWord = document.getElementById('search-key'),
-        searchLocal = document.getElementById('search-local'),
-        searchForm = document.getElementById('search-form'),
-        searchMask = document.getElementById('result-mask'),
-        searchWrap = document.getElementById('result-wrap'),
-        searchResult = document.getElementById('search-result'),
-        searchTpl = document.getElementById('search-tpl').innerHTML,
-        winWidth, winHeight, searchData;
-    if (window.innerWidth) {
-        winWidth = parseInt(window.innerWidth);
-    } else if ((document.body) && (document.body.clientWidth)) {
-        winWidth = parseInt(document.body.clientWidth);
-    }
-    if (window.innerHeight) {
-        winHeight = parseInt(window.innerHeight);
-    } else if ((document.body) && (document.body.clientHeight)) {
-        winHeight = parseInt(document.body.clientHeight);
-    }
-    searchMask.style.width = winWidth + 'px';
-    searchMask.style.height = winHeight + 'px';
+// A local search script with the help of
+// [hexo-generator-search](https://github.com/PaicHyperionDev/hexo-generator-search)
+// Copyright (C) 2015
+// Joseph Pan <http://github.com/wzpan>
+// Shuhao Mao <http://github.com/maoshuhao>
+// This library is free software; you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as
+// published by the Free Software Foundation; either version 2.1 of the
+// License, or (at your option) any later version.
+//
+// This library is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// Lesser General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with this library; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+// 02110-1301 USA
+//
+// Modified by:
+// Pieter Robberechts <http://github.com/probberechts>
 
-    function tpl(html, data) {
-        return html.replace(/\{\w+\}/g, function(str) {
-            var prop = str.replace(/\{|\}/g, '');
-            return data[prop] || '';
-        });
-    }
+/*exported searchFunc*/
+var searchFunc = function(path, searchId, contentId) {
 
-    function hasClass(obj, cls) {
-        return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
-    }
+  function stripHtml(html) {
+    html = html.replace(/<style([\s\S]*?)<\/style>/gi, '');
+    html = html.replace(/<script([\s\S]*?)<\/script>/gi, '');
+    html = html.replace(/<figure([\s\S]*?)<\/figure>/gi, '');
+    html = html.replace(/<\/div>/ig, '\n');
+    html = html.replace(/<\/li>/ig, '\n');
+    html = html.replace(/<li>/ig, '  *  ');
+    html = html.replace(/<\/ul>/ig, '\n');
+    html = html.replace(/<\/p>/ig, '\n');
+    html = html.replace(/<br\s*[\/]?>/gi, "\n");
+    html = html.replace(/<[^>]+>/ig, '');
+    return html;
+  }
 
-    function addClass(obj, cls) {
-        if (!hasClass(obj, cls)) obj.className += " " + cls;
-    }
+  function getAllCombinations(keywords) {
+    var i, j, result = [];
 
-    function removeClass(obj, cls) {
-        if (hasClass(obj, cls)) {
-            var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
-            obj.className = obj.className.replace(reg, ' ');
+    for (i = 0; i < keywords.length; i++) {
+        for (j = i + 1; j < keywords.length + 1; j++) {
+            result.push(keywords.slice(i, j).join(' '));
         }
     }
+    return result;
+  }
 
-    function matcher(post, regExp) {
-        return regtest(post.title, regExp) || regtest(post.text, regExp);
-    }
-
-    function regtest(raw, regExp) {
-        regExp.lastIndex = 0;
-        return regExp.test(raw);
-    }
-
-    function searchShow(){
-        removeClass(searchWrap, 'hide');
-        removeClass(searchMask, 'hide');
-    }
-
-    function searchHide(){
-        addClass(searchWrap, 'hide');
-        addClass(searchMask, 'hide');
-    }
-
-    function loadData(success) {
-        if (!searchData) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '/content.json', true);
-            xhr.onload = function() {
-                if (this.status >= 200 && this.status < 300) {
-                    var res = JSON.parse(this.response || this.responseText);
-                    searchData = res instanceof Array ? res : res.posts;
-                    success(searchData);
-                } else {
-                    console.error(this.statusText);
-                }
-            };
-            xhr.onerror = function() {
-                console.error(this.statusText);
-            };
-            xhr.send();
-        } else {
-            success(searchData);
-        }
-    }
-
-    function render(data) {
-        var html = '';
-        if (data.length) {
-            html = data.map(function(post) {
-                return tpl(searchTpl, {
-                    title: filter(post.title, 'title'),
-                    path: post.path,
-                    content: filter(post.text, 'content')
-                });
-            }).join('');
-        } else {
-            if(searchWord.value == ''){
-                searchHide();
-            } else {
-                html = '<div class="tips"><p>没有找到相关结果!</p></div>';
-            }
-        }
-        searchResult.innerHTML = html;
-    }
-
-    function filter(art, type) {
-        var keyword = searchWord.value;
-        var index = art.indexOf(keyword);
-        var artRe = art.replace(keyword, '<b>' + keyword + '</b>');
-        if (type == 'title') {
-            return artRe
-        }
-        if (type == 'content' && index > 0) {
-            return artRe.substr(index - 15, 45);
-        }
-    }
-
-    function search(e) {
-        var key = this.value.trim();
-        if (!key) {
-            render('');
-            return;
-        }
-        var regExp = new RegExp(key.replace(/[ ]/g, '|'), 'gmi');
-        loadData(function(data) {
-            var result = data.filter(function(post) {
-                return matcher(post, regExp);
-            });
-            render(result);
-        });
-        e.preventDefault();
-        searchShow();
-        searchWord.onfocus = function() {
-            searchShow();
+  $.ajax({
+    url: path,
+    dataType: "xml",
+    success: function(xmlResponse) {
+      // get the contents from search data
+      var datas = $("entry", xmlResponse).map(function() {
+        return {
+          title: $("title", this).text(),
+          content: $("content", this).text(),
+          url: $("link", this).attr('href')
         };
+      }).get();
+
+      var $input = document.getElementById(searchId);
+      if (!$input) { return; }
+      var $resultContent = document.getElementById(contentId);
+
+      $input.addEventListener("input", function(){
+        var resultList = [];
+        var keywords = getAllCombinations(this.value.trim().toLowerCase().split(' '))
+          .sort(function(a,b) { return b.split(' ').length - a.split(' ').length; });
+        $resultContent.innerHTML = "";
+        if (this.value.trim().length <= 0) {
+          return;
+        }
+        // perform local searching
+        datas.forEach(function(data) {
+          var matches = 0;
+          if (!data.title || data.title.trim() === "") {
+            data.title = "Untitled";
+          }
+          var dataTitle = data.title.trim().toLowerCase();
+          var dataContent = stripHtml(data.content.trim());
+          var dataUrl = data.url;
+          var indexTitle = -1;
+          var indexContent = -1;
+          var firstOccur = -1;
+          // only match artiles with not empty contents
+          if (dataContent !== "") {
+            keywords.forEach(function(keyword, i) {
+              indexTitle = dataTitle.indexOf(keyword);
+              indexContent = dataContent.indexOf(keyword);
+
+              if( indexTitle >= 0 || indexContent >= 0 ){
+                matches += 1;
+                if (indexContent < 0) {
+                  indexContent = 0;
+                }
+                if (firstOccur < 0) {
+                  firstOccur = indexContent;
+                }
+              }
+            });
+          }
+          // show search results
+          if (matches > 0) {
+            var searchResult = {};
+            searchResult.rank = matches;
+            searchResult.str = "<li><a href='"+ dataUrl +"' class='search-result-title'>"+ dataTitle +"</a>";
+            if (firstOccur >= 0) {
+              // cut out 100 characters
+              var start = firstOccur - 20;
+              var end = firstOccur + 80;
+
+              if(start < 0){
+                start = 0;
+              }
+
+              if(start == 0){
+                end = 100;
+              }
+
+              if(end > dataContent.length){
+                end = dataContent.length;
+              }
+
+              var matchContent = dataContent.substr(start, end);
+
+              // highlight all keywords
+              var regS = new RegExp(keywords.join('|'), "gi");
+              matchContent = matchContent.replace(regS, function(keyword) {
+                return "<em class=\"search-keyword\">"+keyword+"</em>";
+              });
+
+              searchResult.str += "<p class=\"search-result\">" + matchContent +"...</p>";
+            }
+            searchResult.str += "</li>";
+            resultList.push(searchResult)
+          }
+        });
+        resultList.sort(function(a, b) {
+            return b.rank - a.rank;
+        })
+        var result ="<ul class=\"search-result-list\">";
+        for (var i = 0; i < resultList.length; i++) {
+          result += resultList[i].str;
+        }
+        result += "</ul>";
+        $resultContent.innerHTML = result;
+      });
     }
-    searchWord.onfocus = function() {
-        searchWord.addEventListener('input', search);
-    };
-    searchMask.onclick = function() {
-        searchHide();
-    };
-})();
+  });
+};

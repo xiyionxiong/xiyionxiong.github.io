@@ -1,110 +1,114 @@
-require([], function (){
+/**
+ * Sets up Justified Gallery.
+ */
+if (!!$.prototype.justifiedGallery) {
+  var options = {
+    rowHeight: 140,
+    margins: 4,
+    lastRow: "justify"
+  };
+  $(".article-gallery").justifiedGallery(options);
+}
 
-	var isMobileInit = false;
-	var loadMobile = function(){
-		require(['/js/mobile.js'], function(mobile){
-			mobile.init();
-			isMobileInit = true;
-		});
-	}
-	var isPCInit = false;
-	var loadPC = function(){
-		require(['/js/pc.js'], function(pc){
-			pc.init();
-			isPCInit = true;
-		});
-	}
 
-	var browser={
-	    versions:function(){
-	    var u = window.navigator.userAgent;
-	    return {
-	        trident: u.indexOf('Trident') > -1, //IE内核
-	        presto: u.indexOf('Presto') > -1, //opera内核
-	        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-	        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-	        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-	        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-	        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-	        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
-	        iPad: u.indexOf('iPad') > -1, //是否为iPad
-	        webApp: u.indexOf('Safari') == -1 ,//是否为web应用程序，没有头部与底部
-	        weixin: u.indexOf('MicroMessenger') == -1 //是否为微信浏览器
-	        };
-	    }()
-	}
+$(document).ready(function() {
 
-	$(window).bind("resize", function(){
-		if(isMobileInit && isPCInit){
-			$(window).unbind("resize");
-			return;
-		}
-		var w = $(window).width();
-		if(w >= 700){
-			loadPC();
-		}else{
-			loadMobile();
-		}
-	});
+  /**
+   * Shows the responsive navigation menu on mobile.
+   */
+  $("#header > #nav > ul > .icon").click(function() {
+    $("#header > #nav > ul").toggleClass("responsive");
+  });
 
-	if(browser.versions.mobile === true || $(window).width() < 700){
-		loadMobile();
-	}else{
-		loadPC();
-	}
 
-	//是否使用fancybox
-	if(yiliaConfig.fancybox === true){
-		require(['/fancybox/jquery.fancybox.js'], function(pc){
-			var isFancy = $(".isFancy");
-			if(isFancy.length != 0){
-				var imgArr = $(".article-inner img");
-				for(var i=0,len=imgArr.length;i<len;i++){
-					var src = imgArr.eq(i).attr("src");
-					var title = imgArr.eq(i).attr("alt");
-					imgArr.eq(i).replaceWith("<a href='"+src+"' title='"+title+"' rel='fancy-group' class='fancy-ctn fancybox'><img src='"+src+"' title='"+title+"'></a>");
-				}
-				$(".article-inner .fancy-ctn").fancybox();
-			}
-		});
-		
-	}
-	//是否开启动画
-	if(yiliaConfig.animate === true){
+  /**
+   * Controls the different versions of  the menu in blog post articles 
+   * for Desktop, tablet and mobile.
+   */
+  if ($(".post").length) {
+    var menu = $("#menu");
+    var nav = $("#menu > #nav");
+    var menuIcon = $("#menu-icon, #menu-icon-tablet");
 
-		require(['/js/jquery.lazyload.js'], function(){
-			//avatar
-			$(".js-avatar").attr("src", $(".js-avatar").attr("lazy-src"));
-			$(".js-avatar")[0].onload = function(){
-				$(".js-avatar").addClass("show");
-			}
-		});
-		
-		if(yiliaConfig.isHome === true){
-			//content
-			function showArticle(){
-				$(".article").each(function(){
-					if( $(this).offset().top <= $(window).scrollTop()+$(window).height() && !($(this).hasClass('show')) ) {
-						$(this).removeClass("hidden").addClass("show");
-						$(this).addClass("is-hiddened");
-					}else{
-						if(!$(this).hasClass("is-hiddened")){
-							$(this).addClass("hidden");
-						}
-					}
-				});
-			}
-			$(window).on('scroll', function(){
-				showArticle();
-			});
-			showArticle();
-		}
-		
-	}
-	
-	//是否新窗口打开链接
-	if(yiliaConfig.open_in_new == true){
-		$(".article a[href]").attr("target", "_blank")
-	}
-	
+    /**
+     * Display the menu on hi-res laptops and desktops.
+     */
+    if ($(document).width() >= 1440) {
+      menu.css("visibility", "visible");
+      menuIcon.addClass("active");
+    }
+
+    /**
+     * Display the menu if the menu icon is clicked.
+     */
+    menuIcon.click(function() {
+      if (menu.css("visibility") === "hidden") {
+        menu.css("visibility", "visible");
+        menuIcon.addClass("active");
+      } else {
+        menu.css("visibility", "hidden");
+        menuIcon.removeClass("active");
+      }
+      return false;
+    });
+
+    /**
+     * Add a scroll listener to the menu to hide/show the navigation links.
+     */
+    if (menu.length) {
+      $(window).on("scroll", function() {
+        var topDistance = menu.offset().top;
+
+        // hide only the navigation links on desktop
+        if (!nav.is(":visible") && topDistance < 50) {
+          nav.show();
+        } else if (nav.is(":visible") && topDistance > 100) {
+          nav.hide();
+        }
+
+        // on tablet, hide the navigation icon as well and show a "scroll to top
+        // icon" instead
+        if ( ! $( "#menu-icon" ).is(":visible") && topDistance < 50 ) {
+          $("#menu-icon-tablet").show();
+          $("#top-icon-tablet").hide();
+        } else if (! $( "#menu-icon" ).is(":visible") && topDistance > 100) {
+          $("#menu-icon-tablet").hide();
+          $("#top-icon-tablet").show();
+        }
+      });
+    }
+
+    /**
+     * Show mobile navigation menu after scrolling upwards,
+     * hide it again after scrolling downwards.
+     */
+    if ($( "#footer-post").length) {
+      var lastScrollTop = 0;
+      $(window).on("scroll", function() {
+        var topDistance = $(window).scrollTop();
+
+        if (topDistance > lastScrollTop){
+          // downscroll -> show menu
+          $("#footer-post").hide();
+        } else {
+          // upscroll -> hide menu
+          $("#footer-post").show();
+        }
+        lastScrollTop = topDistance;
+
+        // close all submenu"s on scroll
+        $("#nav-footer").hide();
+        $("#toc-footer").hide();
+        $("#share-footer").hide();
+
+        // show a "navigation" icon when close to the top of the page, 
+        // otherwise show a "scroll to the top" icon
+        if (topDistance < 50) {
+          $("#actions-footer > #top").hide();
+        } else if (topDistance > 100) {
+          $("#actions-footer > #top").show();
+        }
+      });
+    }
+  }
 });
