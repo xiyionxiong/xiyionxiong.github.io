@@ -6,17 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="目录[TOC] 范型1)基本概念：　　泛型(Generic Type或Generics)是 对Java语言的类型系统的一种扩展，以支持创建可以按类型进行参数化的类。可以把类型参数看做是使用参数化类型时指定的类型的一个占位符，就像方法的形 式参数是运行时传递的占位符一样，泛型的体现主要是在集合框架里面可以看到，JCF里面应该是1.5里面使用泛型最多的地方。Java语言引入泛型是一个 较大的功能增强，">
+    <meta name="description" content="1)基本概念：　　泛型(Generic Type或Generics)是 对Java语言的类型系统的一种扩展，以支持创建可以按类型进行参数化的类。可以把类型参数看做是使用参数化类型时指定的类型的一个占位符，就像方法的形 式参数是运行时传递的占位符一样，泛型的体现主要是在集合框架里面可以看到，JCF里面应该是1.5里面使用泛型最多的地方。Java语言引入泛型是一个 较大的功能增强，不仅语言、类型系统和">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一只熊猫的博客">
+<meta property="og:title" content="Java范型">
 <meta property="og:url" content="http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/index.html">
 <meta property="og:site_name" content="一只熊猫的博客">
-<meta property="og:description" content="目录[TOC] 范型1)基本概念：　　泛型(Generic Type或Generics)是 对Java语言的类型系统的一种扩展，以支持创建可以按类型进行参数化的类。可以把类型参数看做是使用参数化类型时指定的类型的一个占位符，就像方法的形 式参数是运行时传递的占位符一样，泛型的体现主要是在集合框架里面可以看到，JCF里面应该是1.5里面使用泛型最多的地方。Java语言引入泛型是一个 较大的功能增强，">
+<meta property="og:description" content="1)基本概念：　　泛型(Generic Type或Generics)是 对Java语言的类型系统的一种扩展，以支持创建可以按类型进行参数化的类。可以把类型参数看做是使用参数化类型时指定的类型的一个占位符，就像方法的形 式参数是运行时传递的占位符一样，泛型的体现主要是在集合框架里面可以看到，JCF里面应该是1.5里面使用泛型最多的地方。Java语言引入泛型是一个 较大的功能增强，不仅语言、类型系统和">
 <meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-04-23T02:43:16.857Z">
+<meta property="og:updated_time" content="2018-06-14T02:19:01.916Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一只熊猫的博客">
-<meta name="twitter:description" content="目录[TOC] 范型1)基本概念：　　泛型(Generic Type或Generics)是 对Java语言的类型系统的一种扩展，以支持创建可以按类型进行参数化的类。可以把类型参数看做是使用参数化类型时指定的类型的一个占位符，就像方法的形 式参数是运行时传递的占位符一样，泛型的体现主要是在集合框架里面可以看到，JCF里面应该是1.5里面使用泛型最多的地方。Java语言引入泛型是一个 较大的功能增强，">
+<meta name="twitter:title" content="Java范型">
+<meta name="twitter:description" content="1)基本概念：　　泛型(Generic Type或Generics)是 对Java语言的类型系统的一种扩展，以支持创建可以按类型进行参数化的类。可以把类型参数看做是使用参数化类型时指定的类型的一个占位符，就像方法的形 式参数是运行时传递的占位符一样，泛型的体现主要是在集合框架里面可以看到，JCF里面应该是1.5里面使用泛型最多的地方。Java语言引入泛型是一个 较大的功能增强，不仅语言、类型系统和">
     
     
         
@@ -36,7 +37,7 @@
         
     
     <!-- title -->
-    <title>一只熊猫的博客</title>
+    <title>Java范型</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -89,20 +90,20 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&text="><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title="><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&is_video=false&description="><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=&body=Check out this article: http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title="><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title="><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title="><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title="><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&name=&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&text=Java范型"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title=Java范型"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&is_video=false&description=Java范型"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Java范型&body=Check out this article: http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title=Java范型"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title=Java范型"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title=Java范型"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title=Java范型"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&name=Java范型&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目录"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#范型"><span class="toc-number">2.</span> <span class="toc-text">范型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-基本概念："><span class="toc-number">2.1.</span> <span class="toc-text">1)基本概念：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类型安全"><span class="toc-number">2.1.1.</span> <span class="toc-text">类型安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消除强制类型转换"><span class="toc-number">2.1.2.</span> <span class="toc-text">消除强制类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#潜在的性能收获："><span class="toc-number">2.1.3.</span> <span class="toc-text">潜在的性能收获：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-深入理解泛型："><span class="toc-number">2.2.</span> <span class="toc-text">2)深入理解泛型：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数据类型转换："><span class="toc-number">2.2.1.</span> <span class="toc-text">　　[1]数据类型转换：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-基本类型限制"><span class="toc-number">2.2.2.</span> <span class="toc-text">　　[2]基本类型限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-泛型的构造函数："><span class="toc-number">2.2.3.</span> <span class="toc-text">[3]泛型的构造函数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-泛型中通配符的使用："><span class="toc-number">2.2.4.</span> <span class="toc-text">[4]泛型中通配符的使用：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-泛型“类型捕获”"><span class="toc-number">2.3.</span> <span class="toc-text">3)泛型“类型捕获”</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#协变概念【extends-和super】"><span class="toc-number">2.3.1.</span> <span class="toc-text">协变概念【extends 和super】</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-基本概念："><span class="toc-number">1.</span> <span class="toc-text">1)基本概念：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类型安全"><span class="toc-number">1.1.</span> <span class="toc-text">类型安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消除强制类型转换"><span class="toc-number">1.2.</span> <span class="toc-text">消除强制类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#潜在的性能收获："><span class="toc-number">1.3.</span> <span class="toc-text">潜在的性能收获：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-深入理解泛型："><span class="toc-number">2.</span> <span class="toc-text">2)深入理解泛型：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数据类型转换："><span class="toc-number">2.1.</span> <span class="toc-text">　　[1]数据类型转换：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-基本类型限制"><span class="toc-number">2.2.</span> <span class="toc-text">　　[2]基本类型限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-泛型的构造函数："><span class="toc-number">2.3.</span> <span class="toc-text">[3]泛型的构造函数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-泛型中通配符的使用："><span class="toc-number">2.4.</span> <span class="toc-text">[4]泛型中通配符的使用：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-泛型“类型捕获”"><span class="toc-number">3.</span> <span class="toc-text">3)泛型“类型捕获”</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#协变概念【extends-和super】"><span class="toc-number">3.1.</span> <span class="toc-text">协变概念【extends 和super】</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -114,7 +115,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        
+        Java范型
     </h1>
 
 
@@ -130,14 +131,18 @@
 
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/java/">java</a>
+    </div>
+
 
     </div>
   </header>
   
 
   <div class="content" itemprop="articleBody">
-    <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>[TOC]</p>
-<h1 id="范型"><a href="#范型" class="headerlink" title="范型"></a>范型</h1><h2 id="1-基本概念："><a href="#1-基本概念：" class="headerlink" title="1)基本概念："></a>1)基本概念：</h2><p>　　泛型(Generic Type或Generics)是 对Java语言的类型系统的一种扩展，以支持创建可以按类型进行参数化的类。可以把类型参数看做是使用参数化类型时指定的类型的一个占位符，就像方法的形 式参数是运行时传递的占位符一样，泛型的体现主要是在集合框架里面可以看到，JCF里面应该是1.5里面使用泛型最多的地方。Java语言引入泛型是一个 较大的功能增强，不仅语言、类型系统和编译器有了大变化，以支持泛型，而且类库也进行了大翻修，所以许多重要的类，比如集合框架，都已经成为了泛型化的 了，使用泛型的优点为：</p>
+    <h2 id="1-基本概念："><a href="#1-基本概念：" class="headerlink" title="1)基本概念："></a>1)基本概念：</h2><p>　　泛型(Generic Type或Generics)是 对Java语言的类型系统的一种扩展，以支持创建可以按类型进行参数化的类。可以把类型参数看做是使用参数化类型时指定的类型的一个占位符，就像方法的形 式参数是运行时传递的占位符一样，泛型的体现主要是在集合框架里面可以看到，JCF里面应该是1.5里面使用泛型最多的地方。Java语言引入泛型是一个 较大的功能增强，不仅语言、类型系统和编译器有了大变化，以支持泛型，而且类库也进行了大翻修，所以许多重要的类，比如集合框架，都已经成为了泛型化的 了，使用泛型的优点为：</p>
 <h3 id="类型安全"><a href="#类型安全" class="headerlink" title="类型安全"></a>类型安全</h3><p>​      泛型的主要目标是提高Java程序的类型安全。通过知道使用泛型定义的变量的类型限制，编译器可以在一个高得多的程度上验证类型假设。没有泛型，这些假设就 只存在于程序员的脑海中。Java程序中的一种流行技术是定义这样的集合，即它的元素或键是功能类型的，比如“_列表”。通过在变量声明中捕获这一附加的 类型信息，泛型允许编译器实施这些附加的约束，类型错误现在就可以在编译时被捕获了，而不是在运行时才来进行检测操作。 </p>
 <h3 id="消除强制类型转换"><a href="#消除强制类型转换" class="headerlink" title="消除强制类型转换"></a>消除强制类型转换</h3><p>​      泛型的一个附带的好处是，消除源代码中的许多强制类型转换，这使得代码更加可读，而且减少了出错的机会。比较两段代码：<br>      不使用泛型的代码段： </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List li = <span class="keyword">new</span> ArrayList(); </span><br><span class="line">li.add(<span class="keyword">new</span> Integer(<span class="number">3</span>)); </span><br><span class="line">Integer i = (Integer)li.get(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
@@ -261,21 +266,21 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目录"><span class="toc-number">1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#范型"><span class="toc-number">2.</span> <span class="toc-text">范型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-基本概念："><span class="toc-number">2.1.</span> <span class="toc-text">1)基本概念：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类型安全"><span class="toc-number">2.1.1.</span> <span class="toc-text">类型安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消除强制类型转换"><span class="toc-number">2.1.2.</span> <span class="toc-text">消除强制类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#潜在的性能收获："><span class="toc-number">2.1.3.</span> <span class="toc-text">潜在的性能收获：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-深入理解泛型："><span class="toc-number">2.2.</span> <span class="toc-text">2)深入理解泛型：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数据类型转换："><span class="toc-number">2.2.1.</span> <span class="toc-text">　　[1]数据类型转换：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-基本类型限制"><span class="toc-number">2.2.2.</span> <span class="toc-text">　　[2]基本类型限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-泛型的构造函数："><span class="toc-number">2.2.3.</span> <span class="toc-text">[3]泛型的构造函数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-泛型中通配符的使用："><span class="toc-number">2.2.4.</span> <span class="toc-text">[4]泛型中通配符的使用：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-泛型“类型捕获”"><span class="toc-number">2.3.</span> <span class="toc-text">3)泛型“类型捕获”</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#协变概念【extends-和super】"><span class="toc-number">2.3.1.</span> <span class="toc-text">协变概念【extends 和super】</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-基本概念："><span class="toc-number">1.</span> <span class="toc-text">1)基本概念：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类型安全"><span class="toc-number">1.1.</span> <span class="toc-text">类型安全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#消除强制类型转换"><span class="toc-number">1.2.</span> <span class="toc-text">消除强制类型转换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#潜在的性能收获："><span class="toc-number">1.3.</span> <span class="toc-text">潜在的性能收获：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-深入理解泛型："><span class="toc-number">2.</span> <span class="toc-text">2)深入理解泛型：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数据类型转换："><span class="toc-number">2.1.</span> <span class="toc-text">　　[1]数据类型转换：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-基本类型限制"><span class="toc-number">2.2.</span> <span class="toc-text">　　[2]基本类型限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-泛型的构造函数："><span class="toc-number">2.3.</span> <span class="toc-text">[3]泛型的构造函数：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-泛型中通配符的使用："><span class="toc-number">2.4.</span> <span class="toc-text">[4]泛型中通配符的使用：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-泛型“类型捕获”"><span class="toc-number">3.</span> <span class="toc-text">3)泛型“类型捕获”</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#协变概念【extends-和super】"><span class="toc-number">3.1.</span> <span class="toc-text">协变概念【extends 和super】</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&text="><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title="><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&is_video=false&description="><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=&body=Check out this article: http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title="><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title="><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title="><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title="><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&name=&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&text=Java范型"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title=Java范型"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&is_video=false&description=Java范型"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Java范型&body=Check out this article: http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title=Java范型"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title=Java范型"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title=Java范型"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&title=Java范型"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/04/06/每天一道算法题目Java/范型/&name=Java范型&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
