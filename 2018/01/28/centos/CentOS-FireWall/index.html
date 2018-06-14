@@ -6,12 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="清园沉没的Atlantis CentOS7安装iptables防火墙CentOS7默认的防火墙不是iptables,而是firewalle. 安装iptable iptable-service ;) 12345678#先检查是否安装了iptablesservice iptables status#安装iptablesyum install -y iptables#升级iptablesyum upd">
+    <meta name="description" content="CentOS7安装iptables防火墙CentOS7默认的防火墙不是iptables,而是firewalle. 安装iptable iptable-service ;) 12345678#先检查是否安装了iptablesservice iptables status#安装iptablesyum install -y iptables#升级iptablesyum update iptables #">
+<meta name="keywords" content="总结分类">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一只熊猫的博客">
-<meta property="og:url" content="http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/index.html">
+<meta property="og:title" content="CentOS7安装iptables防火墙">
+<meta property="og:url" content="http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/index.html">
 <meta property="og:site_name" content="一只熊猫的博客">
-<meta property="og:description" content="清园沉没的Atlantis CentOS7安装iptables防火墙CentOS7默认的防火墙不是iptables,而是firewalle. 安装iptable iptable-service ;) 12345678#先检查是否安装了iptablesservice iptables status#安装iptablesyum install -y iptables#升级iptablesyum upd">
+<meta property="og:description" content="CentOS7安装iptables防火墙CentOS7默认的防火墙不是iptables,而是firewalle. 安装iptable iptable-service ;) 12345678#先检查是否安装了iptablesservice iptables status#安装iptablesyum install -y iptables#升级iptablesyum update iptables #">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="https://common.cnblogs.com/images/copycode.gif">
 <meta property="og:image" content="https://common.cnblogs.com/images/copycode.gif">
@@ -23,10 +24,10 @@
 <meta property="og:image" content="https://common.cnblogs.com/images/copycode.gif">
 <meta property="og:image" content="https://common.cnblogs.com/images/copycode.gif">
 <meta property="og:image" content="https://common.cnblogs.com/images/copycode.gif">
-<meta property="og:updated_time" content="2018-04-14T12:11:50.659Z">
+<meta property="og:updated_time" content="2018-06-14T02:00:11.530Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一只熊猫的博客">
-<meta name="twitter:description" content="清园沉没的Atlantis CentOS7安装iptables防火墙CentOS7默认的防火墙不是iptables,而是firewalle. 安装iptable iptable-service ;) 12345678#先检查是否安装了iptablesservice iptables status#安装iptablesyum install -y iptables#升级iptablesyum upd">
+<meta name="twitter:title" content="CentOS7安装iptables防火墙">
+<meta name="twitter:description" content="CentOS7安装iptables防火墙CentOS7默认的防火墙不是iptables,而是firewalle. 安装iptable iptable-service ;) 12345678#先检查是否安装了iptablesservice iptables status#安装iptablesyum install -y iptables#升级iptablesyum update iptables #">
 <meta name="twitter:image" content="https://common.cnblogs.com/images/copycode.gif">
     
     
@@ -47,7 +48,7 @@
         
     
     <!-- title -->
-    <title>一只熊猫的博客</title>
+    <title>CentOS7安装iptables防火墙</title>
     <!-- styles -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- persian styles -->
@@ -85,8 +86,10 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/2018/04/04/Go lang 学习笔记/Golang 支持交叉编译/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
-        <li><a class="icon" href="/2018/04/14/centos/centos-attack-record/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
         <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
         <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
@@ -99,21 +102,24 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&text="><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&title="><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&is_video=false&description="><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=&body=Check out this article: http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&title="><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&title="><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&title="><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&title="><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&name=&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&text=CentOS7安装iptables防火墙"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&title=CentOS7安装iptables防火墙"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&is_video=false&description=CentOS7安装iptables防火墙"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CentOS7安装iptables防火墙&body=Check out this article: http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&title=CentOS7安装iptables防火墙"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&title=CentOS7安装iptables防火墙"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&title=CentOS7安装iptables防火墙"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&title=CentOS7安装iptables防火墙"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&name=CentOS7安装iptables防火墙&description=&lt;h2 id=&#34;CentOS7安装iptables防火墙&#34;&gt;&lt;a href=&#34;#CentOS7安装iptables防火墙&#34; class=&#34;headerlink&#34; title=&#34;CentOS7安装iptables防火墙&#34;&gt;&lt;/a&gt;CentOS7安装iptables防火墙&lt;/h2&gt;&lt;p&gt;CentOS7默认的防火墙不是iptables,而是firewalle.&lt;/p&gt;
+&lt;p&gt;安装iptable iptable-service&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;javascript:void(0&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;img src=&#34;https://common.cnblogs.com/images/copycode.gif&#34; alt=&#34;复制代码&#34;&gt;&lt;/a&gt;;)&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;#先检查是否安装了iptables&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;service iptables status&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#安装iptables&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yum install -y iptables&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#升级iptables&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yum update iptables &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#安装iptables-services&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yum install iptables-services&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#清园"><span class="toc-number">1.</span> <span class="toc-text">清园</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS7安装iptables防火墙"><span class="toc-number">1.1.</span> <span class="toc-text">CentOS7安装iptables防火墙</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS7安装iptables防火墙"><span class="toc-number">1.</span> <span class="toc-text">CentOS7安装iptables防火墙</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -125,7 +131,7 @@
   <header>
     
     <h1 class="posttitle" itemprop="name headline">
-        
+        CentOS7安装iptables防火墙
     </h1>
 
 
@@ -136,22 +142,27 @@
       </span>
       
     <div class="postdate">
-        <time datetime="2018-04-14T12:09:32.352Z" itemprop="datePublished">2018-04-14</time>
+        <time datetime="2018-01-27T19:01:02.000Z" itemprop="datePublished">2018-01-28</time>
     </div>
 
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/总结分类/">总结分类</a>
+    </div>
+
 
     </div>
   </header>
   
 
   <div class="content" itemprop="articleBody">
-    <h1 id="清园"><a href="#清园" class="headerlink" title="清园"></a><a href="http://www.cnblogs.com/kreo/" target="_blank" rel="noopener">清园</a></h1><p>沉没的Atlantis</p>
-<h2 id="CentOS7安装iptables防火墙"><a href="#CentOS7安装iptables防火墙" class="headerlink" title="CentOS7安装iptables防火墙"></a><a href="http://www.cnblogs.com/kreo/p/4368811.html" target="_blank" rel="noopener">CentOS7安装iptables防火墙</a></h2><p>CentOS7默认的防火墙不是iptables,而是firewalle.</p>
+    <h2 id="CentOS7安装iptables防火墙"><a href="#CentOS7安装iptables防火墙" class="headerlink" title="CentOS7安装iptables防火墙"></a>CentOS7安装iptables防火墙</h2><p>CentOS7默认的防火墙不是iptables,而是firewalle.</p>
 <p>安装iptable iptable-service</p>
 <p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#先检查是否安装了iptables</span><br><span class="line">service iptables status</span><br><span class="line">#安装iptables</span><br><span class="line">yum install -y iptables</span><br><span class="line">#升级iptables</span><br><span class="line">yum update iptables </span><br><span class="line">#安装iptables-services</span><br><span class="line">yum install iptables-services</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p><a href="javascript:void(0" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a>;)</p>
 <p>禁用/停止自带的firewalld服务</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#停止firewalld服务</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">#禁用firewalld服务</span><br><span class="line">systemctl mask firewalld</span><br></pre></td></tr></table></figure>
@@ -206,21 +217,24 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#清园"><span class="toc-number">1.</span> <span class="toc-text">清园</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS7安装iptables防火墙"><span class="toc-number">1.1.</span> <span class="toc-text">CentOS7安装iptables防火墙</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS7安装iptables防火墙"><span class="toc-number">1.</span> <span class="toc-text">CentOS7安装iptables防火墙</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&text="><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&title="><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&is_video=false&description="><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=&body=Check out this article: http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&title="><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&title="><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&title="><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&title="><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/04/14/centos/CentOS-FireWall/&name=&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&text=CentOS7安装iptables防火墙"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&title=CentOS7安装iptables防火墙"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&is_video=false&description=CentOS7安装iptables防火墙"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CentOS7安装iptables防火墙&body=Check out this article: http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&title=CentOS7安装iptables防火墙"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&title=CentOS7安装iptables防火墙"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&title=CentOS7安装iptables防火墙"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&title=CentOS7安装iptables防火墙"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/01/28/centos/CentOS-FireWall/&name=CentOS7安装iptables防火墙&description=&lt;h2 id=&#34;CentOS7安装iptables防火墙&#34;&gt;&lt;a href=&#34;#CentOS7安装iptables防火墙&#34; class=&#34;headerlink&#34; title=&#34;CentOS7安装iptables防火墙&#34;&gt;&lt;/a&gt;CentOS7安装iptables防火墙&lt;/h2&gt;&lt;p&gt;CentOS7默认的防火墙不是iptables,而是firewalle.&lt;/p&gt;
+&lt;p&gt;安装iptable iptable-service&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;javascript:void(0&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;img src=&#34;https://common.cnblogs.com/images/copycode.gif&#34; alt=&#34;复制代码&#34;&gt;&lt;/a&gt;;)&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;#先检查是否安装了iptables&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;service iptables status&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#安装iptables&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yum install -y iptables&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#升级iptables&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yum update iptables &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#安装iptables-services&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;yum install iptables-services&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
