@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang=中文>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="如何使用Docker安装Redis最近准备写如何实现分布式锁的文章，实现分布式锁可以借助数据库、缓存和Zoopkpeer实现。在实现代码时就需要安装以上软件。于是就想到使用docker来简化我的安装，并可以正好学习一下Docker相关知识，本篇文章就介绍下如何使用Docker安装Mysql/Reids/Zookeeper。 关于docker的安装教程很多，不同的操作系统也不一样，这里不再赘述。如果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="熊猫博客">
+<meta property="og:url" content="http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/index.html">
+<meta property="og:site_name" content="熊猫博客">
+<meta property="og:description" content="如何使用Docker安装Redis最近准备写如何实现分布式锁的文章，实现分布式锁可以借助数据库、缓存和Zoopkpeer实现。在实现代码时就需要安装以上软件。于是就想到使用docker来简化我的安装，并可以正好学习一下Docker相关知识，本篇文章就介绍下如何使用Docker安装Mysql/Reids/Zookeeper。 关于docker的安装教程很多，不同的操作系统也不一样，这里不再赘述。如果">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2018-04-09T10:02:02.757Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="熊猫博客">
+<meta name="twitter:description" content="如何使用Docker安装Redis最近准备写如何实现分布式锁的文章，实现分布式锁可以借助数据库、缓存和Zoopkpeer实现。在实现代码时就需要安装以上软件。于是就想到使用docker来简化我的安装，并可以正好学习一下Docker相关知识，本篇文章就介绍下如何使用Docker安装Mysql/Reids/Zookeeper。 关于docker的安装教程很多，不同的操作系统也不一样，这里不再赘述。如果">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
+          
+        
+    
+    <!-- title -->
+    <title>熊猫博客</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/android">Android</a></li>
+         
+          <li><a href="/categories/Java">Java</a></li>
+         
+          <li><a href="/categories/docker">Docker容器</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/golang">Golang</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/04/25/随笔/专业名词/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/04/06/Java/范型/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&text="><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&title="><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&is_video=false&description="><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=&body=Check out this article: http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&title="><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&title="><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&title="><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&title="><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&name=&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#如何使用Docker安装Redis"><span class="toc-number">1.</span> <span class="toc-text">如何使用Docker安装Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker基础概念"><span class="toc-number">1.0.1.</span> <span class="toc-text">Docker基础概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-Daemon"><span class="toc-number">1.0.2.</span> <span class="toc-text">Docker Daemon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-Images"><span class="toc-number">1.0.3.</span> <span class="toc-text">Docker Images</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-Containers"><span class="toc-number">1.0.4.</span> <span class="toc-text">Docker Containers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-Client"><span class="toc-number">1.0.5.</span> <span class="toc-text">Docker Client</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-Registry"><span class="toc-number">1.0.6.</span> <span class="toc-text">Docker Registry</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis"><span class="toc-number">1.1.</span> <span class="toc-text">Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查找镜像"><span class="toc-number">1.1.1.</span> <span class="toc-text">查找镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拉取镜像"><span class="toc-number">1.1.2.</span> <span class="toc-text">拉取镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列出所有镜像"><span class="toc-number">1.1.3.</span> <span class="toc-text">列出所有镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建并启动容器"><span class="toc-number">1.1.4.</span> <span class="toc-text">创建并启动容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看容器启动情况"><span class="toc-number">1.1.5.</span> <span class="toc-text">查看容器启动情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#连接、查看容器"><span class="toc-number">1.1.6.</span> <span class="toc-text">连接、查看容器</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">熊猫博客</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-04-09T09:59:45.762Z" itemprop="datePublished">2018-04-09</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="如何使用Docker安装Redis"><a href="#如何使用Docker安装Redis" class="headerlink" title="如何使用Docker安装Redis"></a>如何使用Docker安装Redis</h1><p>最近准备写如何实现分布式锁的文章，实现分布式锁可以借助数据库、缓存和Zoopkpeer实现。在实现代码时就需要安装以上软件。于是就想到使用docker来简化我的安装，并可以正好学习一下Docker相关知识，本篇文章就介绍下如何使用Docker安装Mysql/Reids/Zookeeper。</p>
+<p>关于docker的安装教程很多，不同的操作系统也不一样，这里不再赘述。如果仅是个人研究和学习，在mac上安装建议大家使用docker for mac安装，<a href="https://store.docker.com/editions/community/docker-ce-desktop-mac" target="_blank" rel="noopener">https://store.docker.com/editions/community/docker-ce-desktop-mac</a></p>
+<h3 id="Docker基础概念"><a href="#Docker基础概念" class="headerlink" title="Docker基础概念"></a>Docker基础概念</h3><p>在使用Docker之前，我们先了解下几个Docker的核心概念</p>
+<h3 id="Docker-Daemon"><a href="#Docker-Daemon" class="headerlink" title="Docker Daemon"></a>Docker Daemon</h3><p>Docker引擎，就是运行在后台的一个守护进程，在我们启动它之后，我们就可以通过Docker客户端发送相关Docker的命令。</p>
+<h3 id="Docker-Images"><a href="#Docker-Images" class="headerlink" title="Docker Images"></a>Docker Images</h3><p>Docker镜像，这个就类似于我们在安装Windows时的镜像，只不过windows的镜像，在以前我们通常存在光盘上或者U盘里，这里的镜像我们通常会发布到Docker Registry</p>
+<h3 id="Docker-Containers"><a href="#Docker-Containers" class="headerlink" title="Docker Containers"></a>Docker Containers</h3><p>Docker容器，在获取到Docker镜像之后，我们可以运行该镜像，此时便会启动一个Docker容器，该容器中运行镜像中的程序。如果把Docker镜像理解为一个类的话，那么Docker容器就是一个实例</p>
+<h3 id="Docker-Client"><a href="#Docker-Client" class="headerlink" title="Docker Client"></a>Docker Client</h3><p>Docker客户端，我们安装完Docker之后，我们打开终端使用docker 相关命令进行操作，这些命令便是Docker客户端的命令，另外还有一个基于REST API的Docker客户端，REST API一般用于在开发一些基于Docker运维的系统中使用。</p>
+<h3 id="Docker-Registry"><a href="#Docker-Registry" class="headerlink" title="Docker Registry"></a>Docker Registry</h3><p>Docker镜像注册中心，Docker的官网的注册中心为<a href="http://hub.docker.com.xn--fiqpe8q0a674ayuep2wa89usxcfzkk3ghy5a803apz9ada./" target="_blank" rel="noopener">http://hub.docker.com。我们也可以自己搭建自己的注册中心。</a></p>
+<p>以上是Docker的核心概念，下面我们来看如何使用Docker安装Redis、Zookeeper、Mysql,并在过程中，学习使用Docker Client的一些常用命令</p>
+<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><h3 id="查找镜像"><a href="#查找镜像" class="headerlink" title="查找镜像"></a>查找镜像</h3><p>使用以下命令在Docker Hub搜索Redis镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search redis</span><br></pre></td></tr></table></figure>
+<p>执行以上命令，会搜索出所有带redis关键字的镜像（为减少篇幅，仅展示部分结果）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yanyanwangdeMacBook-Pro:~ yanyan.wang$ docker search redis</span><br><span class="line">NAME                      DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">redis                     Redis is an open source key-value store th...   3788      [OK]</span><br><span class="line">bitnami/redis             Bitnami Redis Docker Image                      47                   [OK]</span><br><span class="line">torusware/speedus-redis   Always updated official Redis docker image...   32                   [OK]</span><br></pre></td></tr></table></figure>
+<p>其中Name表示镜像仓库的名称，如果不带/则表示Docker官方仓库，带/则表示其他用户公开的镜像。OFFICIAL表示是否为官方仓库，一般我们推荐使用官方的仓库。</p>
+<h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p>我们使用以下命令拉取，Redis的镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull redis:latest</span><br></pre></td></tr></table></figure>
+<p>其中redis:latest表示我们下载NAME为redis的镜像，latest表示TAG</p>
+<p>在执行完以上命令之后，Docker Client会从Docker镜像注册中心下载Redis的镜像，待下载之后，我们查看本地的镜像</p>
+<h3 id="列出所有镜像"><a href="#列出所有镜像" class="headerlink" title="列出所有镜像"></a>列出所有镜像</h3><p>我们使用以下命令查看，本地的redis镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+<p>执行以上命令，就会显示本地的所有镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">redis               latest              a858478874d1        10 days ago         184 MB</span><br></pre></td></tr></table></figure>
+<p>其中IMAGE ID表示镜像ID,具有唯一性</p>
+<h3 id="创建并启动容器"><a href="#创建并启动容器" class="headerlink" title="创建并启动容器"></a>创建并启动容器</h3><p>使用以下命令，使用Reids镜像，创建并启动Redis容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 6379:6379 -v $PWD/data:/data  -d redis:latest redis-server --appendonly yes</span><br></pre></td></tr></table></figure>
+<p>执行以上命令，我们就使用redis:latest镜像创建并启动了一个Redis容器,其中</p>
+<p>-p 6379:6379：将容器的6379端口映射成主机的6379端口</p>
+<p>-v $PWD/data:/data :将主机中当前目录下的data挂载到容器的/data</p>
+<p>redis-server –appendonly yes : 在容器执行redis-server启动命令，并打开redis持久化配置</p>
+<h3 id="查看容器启动情况"><a href="#查看容器启动情况" class="headerlink" title="查看容器启动情况"></a>查看容器启动情况</h3><p>使用以下命令查看所有容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<p>执行以上命令,输出如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">07f0edc95fb3        redis:latest        &quot;docker-entrypoint...&quot;   2 minutes ago       Up 2 minutes        0.0.0.0:6379-&gt;6379/tcp   quirky_davinci</span><br></pre></td></tr></table></figure>
+<p>其中Status表示运行状态，Up表示运行中，PORTS表示容器需要对外暴露的端口号</p>
+<h3 id="连接、查看容器"><a href="#连接、查看容器" class="headerlink" title="连接、查看容器"></a>连接、查看容器</h3><p>我们使用Redis镜像使用redis-cli客户端，连接到redis容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it redis:latest redis-cli -h 192.168.0.101</span><br></pre></td></tr></table></figure>
+<p>执行以上命令，我们就连接到redis容器，接下来我们就可以使用redis命令进行操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">192.168.0.101:6379&gt; set &quot;testKey&quot; &quot;test&quot;</span><br><span class="line">OK</span><br><span class="line">192.168.0.101:6379&gt; get &quot;testKey&quot;</span><br><span class="line">&quot;test&quot;</span><br><span class="line">192.168.0.101:6379&gt;</span><br></pre></td></tr></table></figure>
+<p>至此，我们已经完成了Reids的安装。</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/android">Android</a></li>
+         
+          <li><a href="/categories/Java">Java</a></li>
+         
+          <li><a href="/categories/docker">Docker容器</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/golang">Golang</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#如何使用Docker安装Redis"><span class="toc-number">1.</span> <span class="toc-text">如何使用Docker安装Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker基础概念"><span class="toc-number">1.0.1.</span> <span class="toc-text">Docker基础概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-Daemon"><span class="toc-number">1.0.2.</span> <span class="toc-text">Docker Daemon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-Images"><span class="toc-number">1.0.3.</span> <span class="toc-text">Docker Images</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-Containers"><span class="toc-number">1.0.4.</span> <span class="toc-text">Docker Containers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-Client"><span class="toc-number">1.0.5.</span> <span class="toc-text">Docker Client</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-Registry"><span class="toc-number">1.0.6.</span> <span class="toc-text">Docker Registry</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis"><span class="toc-number">1.1.</span> <span class="toc-text">Redis</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查找镜像"><span class="toc-number">1.1.1.</span> <span class="toc-text">查找镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拉取镜像"><span class="toc-number">1.1.2.</span> <span class="toc-text">拉取镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列出所有镜像"><span class="toc-number">1.1.3.</span> <span class="toc-text">列出所有镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建并启动容器"><span class="toc-number">1.1.4.</span> <span class="toc-text">创建并启动容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看容器启动情况"><span class="toc-number">1.1.5.</span> <span class="toc-text">查看容器启动情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#连接、查看容器"><span class="toc-number">1.1.6.</span> <span class="toc-text">连接、查看容器</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&text="><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&title="><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&is_video=false&description="><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=&body=Check out this article: http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&title="><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&title="><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&title="><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&title="><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/04/09/docker/Docker-Redis安装和使用/&name=&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 一只熊猫
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">主页</a></li>
+         
+          <li><a href="/archives/">所有文章</a></li>
+         
+          <li><a href="/categories/android">Android</a></li>
+         
+          <li><a href="/categories/Java">Java</a></li>
+         
+          <li><a href="/categories/docker">Docker容器</a></li>
+         
+          <li><a href="/categories/web">前端</a></li>
+         
+          <li><a href="/categories/golang">Golang</a></li>
+         
+          <li><a href="/categories/linux">Linux</a></li>
+         
+          <li><a href="/categories/随笔">随笔</a></li>
+         
+          <li><a href="/instagram">相册</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
