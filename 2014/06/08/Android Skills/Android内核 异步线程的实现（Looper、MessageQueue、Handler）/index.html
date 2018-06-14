@@ -11,7 +11,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="异步线程的实现（Looper、MessageQueue、Handler）">
 <meta property="og:url" content="http://blog.apanda.online/2014/06/08/Android Skills/Android内核 异步线程的实现（Looper、MessageQueue、Handler）/index.html">
-<meta property="og:site_name" content="一只熊猫的博客">
+<meta property="og:site_name" content="熊猫博客">
 <meta property="og:description" content="什么是异步消息处理线程? 对于普通线程来说，执行完run()方法内的代码后线程就结束了。所谓异步消息处理线程而言，线程启动后会进入一个无限循环体之中，每循环一次，就从其内部的消息队列中取出一个消息，并回调该消息相应的消息处理函数，执行完一个消息后再继续回到循环体之中。除非消息队列为空，线程会暂停，直到消息队列中有新的消息了，则继续无限循环。 异步消息处理线程其本质上也是一个线程，只不过这种线程的执">
 <meta property="og:locale" content="中文">
 <meta property="og:updated_time" content="2016-02-22T09:29:36.000Z">
@@ -127,7 +127,7 @@
 
     <div class="meta">
       <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">一只熊猫的博客</span>
+        <span itemprop="name">熊猫博客</span>
       </span>
       
     <div class="postdate">

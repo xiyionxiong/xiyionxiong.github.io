@@ -11,7 +11,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="解析：TypedArray 为什么需要调用recycle()">
 <meta property="og:url" content="http://blog.apanda.online/2014/07/18/Android Skills/TypedArray/index.html">
-<meta property="og:site_name" content="一只熊猫的博客">
+<meta property="og:site_name" content="熊猫博客">
 <meta property="og:description" content="在 Android 自定义 View 的时候，需要使用 TypedArray 来获取 XML layout 中的属性值，使用完之后，需要调用 recyle() 方法将 TypedArray 回收。 那么问题来了，这个TypedArray是个什么东西？为什么需要回收呢？TypedArray并没有占用IO，线程，它仅仅是一个变量而已，为什么需要 recycle？为了解开这个谜，首先去找官网的 Docu">
 <meta property="og:locale" content="中文">
 <meta property="og:image" content="http://i.imgur.com/0YmjniV.png">
@@ -128,7 +128,7 @@
 
     <div class="meta">
       <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">一只熊猫的博客</span>
+        <span itemprop="name">熊猫博客</span>
       </span>
       
     <div class="postdate">
