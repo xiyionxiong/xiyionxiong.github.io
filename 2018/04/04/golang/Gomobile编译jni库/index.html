@@ -14,27 +14,27 @@
 <meta property="og:site_name" content="熊猫博客">
 <meta property="og:description" content="0x01–whatgomobile是golang 开发的移动端工具。 其中一些功能如下 ： 123456789101112131415161718192021222324252627282930╭─apanda atxx的MacBook Pro in ~/MEGAsync/Projects/GoProjects/src/github.com/golang/mobile/cmd/gomobile">
 <meta property="og:locale" content="中文">
-<meta property="og:image" content="http://blog.apanda.online/2018/04/04/golang/Gomobile编译jni库/images/golang.png">
+<meta property="og:image" content="http://blog.apanda.online/images/golang.png">
 <meta property="og:updated_time" content="2018-06-14T06:30:37.080Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gomobile 编译jni库 实用 Android和iOS 两端">
 <meta name="twitter:description" content="0x01–whatgomobile是golang 开发的移动端工具。 其中一些功能如下 ： 123456789101112131415161718192021222324252627282930╭─apanda atxx的MacBook Pro in ~/MEGAsync/Projects/GoProjects/src/github.com/golang/mobile/cmd/gomobile">
-<meta name="twitter:image" content="http://blog.apanda.online/2018/04/04/golang/Gomobile编译jni库/images/golang.png">
+<meta name="twitter:image" content="http://blog.apanda.online/images/golang.png">
     
     
         
           
-              <link rel="shortcut icon" href="/images/favicon.ico">
+              <link rel="shortcut icon" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
           
         
         
           
-            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+            <link rel="icon" type="image/png" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" sizes="192x192">
           
         
         
           
-            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+            <link rel="apple-touch-icon" sizes="180x180" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
           
         
     
@@ -69,15 +69,11 @@
          
           <li><a href="/categories/Java">Java</a></li>
          
+          <li><a href="/categories/docker">Docker容器</a></li>
+         
           <li><a href="/categories/web">前端</a></li>
          
-          <li><a href="/categories/docker">容器Docker</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
           <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
          
           <li><a href="/instagram">相册</a></li>
         
@@ -112,7 +108,7 @@
   <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2018/04/04/golang/Gomobile编译jni库/&title=Gomobile 编译jni库 实用 Android和iOS 两端"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2018/04/04/golang/Gomobile编译jni库/&title=Gomobile 编译jni库 实用 Android和iOS 两端"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2018/04/04/golang/Gomobile编译jni库/&title=Gomobile 编译jni库 实用 Android和iOS 两端"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/04/04/golang/Gomobile编译jni库/&name=Gomobile 编译jni库 实用 Android和iOS 两端&description=&lt;p&gt;&lt;img src=&#34;/2018/04/04/golang/Gomobile编译jni库/images/golang.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/04/04/golang/Gomobile编译jni库/&name=Gomobile 编译jni库 实用 Android和iOS 两端&description=&lt;p&gt;&lt;img src=&#34;/images/golang.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;0x01–what&#34;&gt;&lt;a href=&#34;#0x01–what&#34; class=&#34;headerlink&#34; title=&#34;0x01–what&#34;&gt;&lt;/a&gt;0x01–what&lt;/h2&gt;&lt;p&gt;gomobile是golang 开发的移动端工具。&lt;/p&gt;
 &lt;p&gt;其中一些功能如下 ：&lt;/p&gt;
 &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;╭─apanda atxx的MacBook Pro &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; ~/MEGAsync/Projects/GoProjects/src/github.com/golang/mobile/cmd/gomobile on master✔ using ‹› 18-04-04 - 11:13:46&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;╰─○   tree&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── binary_xml.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── binary_xml_test.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── bind.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── bind_androidapp.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── bind_iosapp.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── bind_test.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── build.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── build_androidapp.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── build_darwin_test.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── build_iosapp.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── build_test.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── cert.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── cert_test.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── clean.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── dex.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── doc.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── env.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── gendex.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── init.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── init_test.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── install.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── main.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── manifest.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── strings_flag.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── version.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── writer.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;└── writer_test.go&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
@@ -159,7 +155,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><img src="/2018/04/04/golang/Gomobile编译jni库/images/golang.png" alt=""></p>
+    <p><img src="/images/golang.png" alt=""></p>
 <h2 id="0x01–what"><a href="#0x01–what" class="headerlink" title="0x01–what"></a>0x01–what</h2><p>gomobile是golang 开发的移动端工具。</p>
 <p>其中一些功能如下 ：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">╭─apanda atxx的MacBook Pro <span class="keyword">in</span> ~/MEGAsync/Projects/GoProjects/src/github.com/golang/mobile/cmd/gomobile on master✔ using ‹› 18-04-04 - 11:13:46</span><br><span class="line">╰─○   tree</span><br><span class="line">.</span><br><span class="line">├── binary_xml.go</span><br><span class="line">├── binary_xml_test.go</span><br><span class="line">├── bind.go</span><br><span class="line">├── bind_androidapp.go</span><br><span class="line">├── bind_iosapp.go</span><br><span class="line">├── bind_test.go</span><br><span class="line">├── build.go</span><br><span class="line">├── build_androidapp.go</span><br><span class="line">├── build_darwin_test.go</span><br><span class="line">├── build_iosapp.go</span><br><span class="line">├── build_test.go</span><br><span class="line">├── cert.go</span><br><span class="line">├── cert_test.go</span><br><span class="line">├── clean.go</span><br><span class="line">├── dex.go</span><br><span class="line">├── doc.go</span><br><span class="line">├── env.go</span><br><span class="line">├── gendex.go</span><br><span class="line">├── init.go</span><br><span class="line">├── init_test.go</span><br><span class="line">├── install.go</span><br><span class="line">├── main.go</span><br><span class="line">├── manifest.go</span><br><span class="line">├── strings_flag.go</span><br><span class="line">├── version.go</span><br><span class="line">├── writer.go</span><br><span class="line">└── writer_test.go</span><br></pre></td></tr></table></figure>
@@ -225,15 +221,11 @@
          
           <li><a href="/categories/Java">Java</a></li>
          
+          <li><a href="/categories/docker">Docker容器</a></li>
+         
           <li><a href="/categories/web">前端</a></li>
          
-          <li><a href="/categories/docker">容器Docker</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
           <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
          
           <li><a href="/instagram">相册</a></li>
         
@@ -255,7 +247,7 @@
   <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2018/04/04/golang/Gomobile编译jni库/&title=Gomobile 编译jni库 实用 Android和iOS 两端"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2018/04/04/golang/Gomobile编译jni库/&title=Gomobile 编译jni库 实用 Android和iOS 两端"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2018/04/04/golang/Gomobile编译jni库/&title=Gomobile 编译jni库 实用 Android和iOS 两端"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/04/04/golang/Gomobile编译jni库/&name=Gomobile 编译jni库 实用 Android和iOS 两端&description=&lt;p&gt;&lt;img src=&#34;/2018/04/04/golang/Gomobile编译jni库/images/golang.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2018/04/04/golang/Gomobile编译jni库/&name=Gomobile 编译jni库 实用 Android和iOS 两端&description=&lt;p&gt;&lt;img src=&#34;/images/golang.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h2 id=&#34;0x01–what&#34;&gt;&lt;a href=&#34;#0x01–what&#34; class=&#34;headerlink&#34; title=&#34;0x01–what&#34;&gt;&lt;/a&gt;0x01–what&lt;/h2&gt;&lt;p&gt;gomobile是golang 开发的移动端工具。&lt;/p&gt;
 &lt;p&gt;其中一些功能如下 ：&lt;/p&gt;
 &lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;30&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;╭─apanda atxx的MacBook Pro &lt;span class=&#34;keyword&#34;&gt;in&lt;/span&gt; ~/MEGAsync/Projects/GoProjects/src/github.com/golang/mobile/cmd/gomobile on master✔ using ‹› 18-04-04 - 11:13:46&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;╰─○   tree&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;.&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── binary_xml.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── binary_xml_test.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── bind.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── bind_androidapp.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── bind_iosapp.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── bind_test.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── build.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── build_androidapp.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── build_darwin_test.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── build_iosapp.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── build_test.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── cert.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── cert_test.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── clean.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── dex.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── doc.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── env.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── gendex.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── init.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── init_test.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── install.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── main.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── manifest.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── strings_flag.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── version.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;├── writer.go&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;└── writer_test.go&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
@@ -290,15 +282,11 @@
          
           <li><a href="/categories/Java">Java</a></li>
          
+          <li><a href="/categories/docker">Docker容器</a></li>
+         
           <li><a href="/categories/web">前端</a></li>
          
-          <li><a href="/categories/docker">容器Docker</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
           <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
          
           <li><a href="/instagram">相册</a></li>
         
