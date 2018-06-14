@@ -1,522 +1,278 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="中文">
 <head>
-  <meta charset="utf-8">
-  
-  <title>一只熊猫的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="{&quot;compress&quot;:true,&quot;commitItems&quot;:[[&quot;dfdedd2c-a126-4db1-9d31-2fb26e689fb0&quot;,1507866505681,&quot;寻找出现一次的字符.md\n===\n\n\n&quot;,[[1507866445960,[&quot;Admin@Android&quot;,[[1,18,&quot;$E = mc^2$&quot;]],[18,18],[28,28]]],[1507874307211,">
-<meta property="og:type" content="article">
-<meta property="og:title" content="一只熊猫的博客">
-<meta property="og:url" content="http://blog.apanda.online/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/index.html">
-<meta property="og:site_name" content="一只熊猫的博客">
-<meta property="og:description" content="{&quot;compress&quot;:true,&quot;commitItems&quot;:[[&quot;dfdedd2c-a126-4db1-9d31-2fb26e689fb0&quot;,1507866505681,&quot;寻找出现一次的字符.md\n===\n\n\n&quot;,[[1507866445960,[&quot;Admin@Android&quot;,[[1,18,&quot;$E = mc^2$&quot;]],[18,18],[28,28]]],[1507874307211,">
-<meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2017-10-16T02:00:30.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一只熊猫的博客">
-<meta name="twitter:description" content="{&quot;compress&quot;:true,&quot;commitItems&quot;:[[&quot;dfdedd2c-a126-4db1-9d31-2fb26e689fb0&quot;,1507866505681,&quot;寻找出现一次的字符.md\n===\n\n\n&quot;,[[1507866445960,[&quot;Admin@Android&quot;,[[1,18,&quot;$E = mc^2$&quot;]],[18,18],[28,28]]],[1507874307211,">
-  
-    <link rel="alternative" href="/atom.xml" title="一只熊猫的博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/img/favicon.jpg">
-  
-  
-      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  
-  
-      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  
-  <!-- 加载特效 -->
-    <script src="/js/pace.js"></script>
-    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
-  <script>
-      var yiliaConfig = {
-          rootUrl: '/',
-          fancybox: true,
-          animate: true,
-          isHome: false,
-          isPost: true,
-          isArchive: false,
-          isTag: false,
-          isCategory: false,
-          open_in_new: false
-      }
-  </script>
+    <!--Setting-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta name="apple-mobile-web-app-capable" content="一只熊猫的博客">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <meta name="browsermode" content="application">
+    <meta name="screen-orientation" content="portrait">
+    <link rel="dns-prefetch" href="http://blog.apanda.online">
+    <!--SEO-->
+
+<meta name="description" content="大道至简，真理在众！技术在手，代码在心!"/>
+
+
+
+
+
+<meta name="robots" content="all" />
+<meta name="google" content="all" />
+<meta name="googlebot" content="all" />
+<meta name="verify" content="all" />
+    <!--Title-->
+
+
+<title>一只熊猫的博客</title>
+
+
+    <link rel="alternate" href="/atom.xml" title="一只熊猫的博客" type="application/atom+xml">
+
+
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+
+
+<link rel="stylesheet" href="/css/bootstrap.min.css?rev=3.3.7">
+<link rel="stylesheet" href="/css/font-awesome.min.css?rev=4.5.0">
+<link rel="stylesheet" href="/css/style.css?rev=@@hash">
+
+
+
+
+    
+	<div class="hide">
+		<script type="text/javascript">
+			var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan class='cnzz_stat_icon_1263868967 hide' %3E%3Cscript%20src%3D%22https%3A%2F%2Fs95.cnzz.com%2Fz_stat.php%3Fweb_id%3D1272564536%22%3E%3C%2Fscript%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263868967%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+	</div>
+
+
+
+
+
+
+    
 </head>
+
+
+<!--[if lte IE 8]>
+<style>
+    html{ font-size: 1em }
+</style>
+<![endif]-->
+<!--[if lte IE 9]>
+<div style="ie">你使用的浏览器版本过低，为了你更好的阅读体验，请更新浏览器的版本或者使用其他现代浏览器，比如Chrome、Firefox、Safari等。</div>
+<![endif]-->
+
 <body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            
-            <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
-            
+    <header class="main-header"  style="background-image:url(http://7xpw2b.com1.z0.glb.clouddn.com/hexo-sinppet/img/banner2.jpg)"  >
+    <div class="main-header-box">
+        <a class="header-avatar" href="/" title='一只熊猫'>
+            <img src="/img/avatar.jpg" alt="logo头像" class="img-responsive center-block">
         </a>
-
-        <hgroup>
-          <h1 class="header-author"><a href="/">一只熊猫</a></h1>
-        </hgroup>
-
-        
-        
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
+        <div class="branding">
+        	<!--<h2 class="text-hide">Snippet主题,从未如此简单有趣</h2>-->
+            
+                 <img src="/img/branding.png" alt="Snippet 博客主题" class="img-responsive center-block">
+            
+    	</div>
+    </div>
+</header>
+    <nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="navbar-header"><span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
+                    <span class="sr-only"></span>
+                        <i class="fa fa-bars"></i>
+                    </span>
                 </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
                         
-                        <li>友情链接</li>
+                            <li role="presentation" class="text-center">
+                                <a href="/"><i class="fa "></i>主页</a>
+                            </li>
                         
+                            <li role="presentation" class="text-center">
+                                <a href="/archives/"><i class="fa "></i>所有文章</a>
+                            </li>
                         
-                        <li>关于我</li>
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/随笔"><i class="fa "></i>随笔</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/categories/技术"><i class="fa "></i>技术</a>
+                            </li>
+                        
+                            <li role="presentation" class="text-center">
+                                <a href="/instagram"><i class="fa "></i>相册</a>
+                            </li>
                         
                     </ul>
                 </div>
             </div>
-        
-
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="/">主页</a></li>
-                        
-                            <li><a href="/archives/">所有文章</a></li>
-                        
-                            <li><a href="/categories/随笔">随笔</a></li>
-                        
-                            <li><a href="/categories/技术">技术</a></li>
-                        
-                            <li><a href="/instagram">相册</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fl weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
-                            
-                                <a class="fl mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
-                            
-                                <a class="fl facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
-                            
-                                <a class="fl twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
-                            
-                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/Android性能优化典范/" style="font-size: 18px;">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size: 10px;">Annotation</a> <a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a> <a href="/tags/Binder/" style="font-size: 10px;">Binder</a> <a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/EventBus/" style="font-size: 12px;">EventBus</a> <a href="/tags/Google-Develop-for-Android-系列/" style="font-size: 20px;">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size: 10px;">Ibeacon</a> <a href="/tags/ImageView/" style="font-size: 10px;">ImageView</a> <a href="/tags/Kotlin/" style="font-size: 10px;">Kotlin</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MotionEvent/" style="font-size: 10px;">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size: 12px;">OkHttp</a> <a href="/tags/React-Native/" style="font-size: 10px;">React-Native</a> <a href="/tags/RxAndroid/" style="font-size: 10px;">RxAndroid</a> <a href="/tags/RxJava/" style="font-size: 18px;">RxJava</a> <a href="/tags/ServiceManager/" style="font-size: 10px;">ServiceManager</a> <a href="/tags/String相关类性能测试/" style="font-size: 10px;">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size: 10px;">Textview</a> <a href="/tags/TypedArray/" style="font-size: 10px;">TypedArray</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ViewHolder的作用/" style="font-size: 10px;">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/Webview/" style="font-size: 10px;">Webview</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/drawable/" style="font-size: 10px;">drawable</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/写作/" style="font-size: 12px;">写作</a> <a href="/tags/反思/" style="font-size: 10px;">反思</a> <a href="/tags/图像、背景、View更新、布局、内存/" style="font-size: 12px;">图像、背景、View更新、布局、内存</a> <a href="/tags/开发规范/" style="font-size: 14px;">开发规范</a> <a href="/tags/异步线程的实现（Looper、MessageQueue、Handler）/" style="font-size: 10px;">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/总结分类/" style="font-size: 16px;">总结分类</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/时间轴/" style="font-size: 10px;">时间轴</a> <a href="/tags/架构的实例/" style="font-size: 10px;">架构的实例</a> <a href="/tags/沉浸式/" style="font-size: 10px;">沉浸式</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/目标/" style="font-size: 12px;">目标</a> <a href="/tags/知识库/" style="font-size: 14px;">知识库</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/自定义Loader/" style="font-size: 10px;">自定义Loader</a>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wsgzao.github.io/">HelloDog</a>
-                    
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dearzd.com/DBlog/">咚门</a>
-                    
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.codingyun.com/">Coding云</a>
-                    
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.jobbole.com/">伯乐在线</a>
-                    
-                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin技术宅</a>
-                    
-                    </div>
-                </section>
-                
-
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
-                </section>
-                
-            </div>
         </div>
-    </header>                
-</div>
     </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">一只熊猫</a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                
-                    <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
-                
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">一只熊猫</a></h1>
-            </hgroup>
+</nav>
+    <section class="content-wrap">
+        <div class="container">
+            <div class="row">
+                <main class="col-md-8 main-content m-post">
+                    <p id="process"></p>
+<article class="post">
+    <div class="post-head">
+        <h1 id="">
             
-            <nav class="header-menu">
-                <ul>
+	            NO Title!
+            
+        </h1>
+        <div class="post-meta">
+    
+    
+    <span class="categories-meta fa-wrap">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="/categories/ ">
+             
+        </a>
+    </span>
+    
+    
+    <span class="fa-wrap">
+        <i class="fa fa-tags"></i>
+        <span class="tags-meta">
+            
                 
-                    <li><a href="/">主页</a></li>
-                
-                    <li><a href="/archives/">所有文章</a></li>
-                
-                    <li><a href="/categories/随笔">随笔</a></li>
-                
-                    <li><a href="/categories/技术">技术</a></li>
-                
-                    <li><a href="/instagram">相册</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                <div class="social">
-                    
-                        <a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
-                    
-                        <a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
-                    
-                        <a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
-                    
-                        <a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
-                    
-                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
-                    
-                </div>
-            </nav>
-        </header>                
+            
+        </span>
+    </span>
+    
+
+    
+        
+        <span class="fa-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span class="date-meta">2017/10/16</span>
+        </span>
+    
+</div>
+
+            
+            
     </div>
-</nav>
-      <div class="body-wrap"><article id="post-每天一道算法题目Java/寻找出现一次的字符.resource/commit" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/" class="article-date">
-      <time datetime="2017-10-16T02:00:30.000Z" itemprop="datePublished">2017-10-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
+    <div class="post-body post-content">
         {"compress":true,"commitItems":[["dfdedd2c-a126-4db1-9d31-2fb26e689fb0",1507866505681,"寻找出现一次的字符.md\n===\n\n\n",[[1507866445960,["Admin@Android",[[1,18,"$E = mc^2$"]],[18,18],[28,28]]],[1507874307211,["Admin@Android",[[-1,18,"$E"],[-1,21,"= mc^2$\n"]],[28,28],[19,19]]],[1507874345231,["Admin@Android",[[1,19,"\n```\n /**\n     * 【剑指offer】数组中只出现一次字符\n     *\n     * @param nums\n     */\n    private static void getSingleN(String nums) {\n        char[] chars = nums.toCharArray();\n\n        HashMap<object, integer=""> map = new HashMap<>();\n        for (char aChar : chars) {\n            if (map.containsKey(aChar)) {\n                Integer integer = map.get(aChar);\n                integer++;\n                map.remove(aChar);\n                map.put(aChar, integer);\n            }else {\n                map.put(aChar, 1);\n            }\n        }\n        System.out.println(map);\n\n\n        for (Map.Entry<object, integer=""> entry : map.entrySet()) {\n            if (entry.getValue()==1) {\n                System.out.println(\"只出现一次的字符有：\"+entry.getKey());\n            }\n        }\n\n    }\n```\n"]],[19,19],[789,789]]]]],["0fd47e88-22ad-4e0a-8864-7a20f5bff184",1508119169170,"寻找出现一次的字符.md\n===\n\n \n```\n /**\n     * 【剑指offer】数组中只出现一次字符\n     *\n     * @param nums\n     */\n    private static void getSingleN(String nums) {\n        char[] chars = nums.toCharArray();\n\n        HashMap<object, integer=""> map = new HashMap<>();\n        for (char aChar : chars) {\n            if (map.containsKey(aChar)) {\n                Integer integer = map.get(aChar);\n                integer++;\n                map.remove(aChar);\n                map.put(aChar, integer);\n            }else {\n                map.put(aChar, 1);\n            }\n        }\n        System.out.println(map);\n\n\n        for (Map.Entry<object, integer=""> entry : map.entrySet()) {\n            if (entry.getValue()==1) {\n                System.out.println(\"只出现一次的字符有：\"+entry.getKey());\n            }\n        }\n\n    }\n```\n",[[1508119130919,["Admin@Android",[[-1,20,"```"]],[23,23],[20,20]]],[1508119134053,["Admin@Android",[[-1,782,"```"]],[785,785],[782,782]]],[1508119139727,["Admin@Android",[[1,21,"\t"],[1,26,"\t"],[1,53,"\t"],[1,60,"\t"],[1,79,"\t"],[1,87,"\t"],[1,137,"\t"],[1,180,"\t"],[1,181,"\t"],[1,237,"\t"],[1,272,"\t"],[1,314,"\t"],[1,364,"\t"],[1,391,"\t"],[1,426,"\t"],[1,467,"\t"],[1,487,"\t"],[1,522,"\t"],[1,536,"\t"],[1,546,"\t"],[1,579,"\t"],[1,580,"\t"],[1,581,"\t"],[1,647,"\t"],[1,686,"\t"],[1,751,"\t"],[1,765,"\t"],[1,775,"\t"],[1,776,"\t"]],[22,782],[23,811]]],[1508119141503,["Admin@Android",[[1,22,"\t"],[1,27,"\t"],[1,56,"\t"],[1,63,"\t"],[1,84,"\t"],[1,92,"\t"],[1,144,"\t"],[1,187,"\t"],[1,190,"\t"],[1,246,"\t"],[1,283,"\t"],[1,325,"\t"],[1,377,"\t"],[1,404,"\t"],[1,440,"\t"],[1,483,"\t"],[1,503,"\t"],[1,540,"\t"],[1,554,"\t"],[1,566,"\t"],[1,600,"\t"],[1,601,"\t"],[1,604,"\t"],[1,670,"\t"],[1,711,"\t"],[1,776,"\t"],[1,792,"\t"],[1,803,"\t"],[1,804,"\t"]],[23,811],[24,840]]],[1508119142983,["Admin@Android",[[-1,22,"\t"],[-1,28,"\t"],[-1,58,"\t"],[-1,66,"\t"],[-1,88,"\t"],[-1,97,"\t"],[-1,150,"\t"],[-1,194,"\t"],[-1,198,"\t"],[-1,255,"\t"],[-1,293,"\t"],[-1,336,"\t"],[-1,389,"\t"],[-1,417,"\t"],[-1,454,"\t"],[-1,498,"\t"],[-1,519,"\t"],[-1,557,"\t"],[-1,572,"\t"],[-1,585,"\t"],[-1,620,"\t"],[-1,622,"\t"],[-1,626,"\t"],[-1,693,"\t"],[-1,735,"\t"],[-1,801,"\t"],[-1,818,"\t"],[-1,830,"\t"],[-1,832,"\t"]],[24,840],[23,811]]],[1508119145796,["Admin@Android",[[-1,23,"/**\n\t     * 【剑指offer】数组中只出现一次字符\n\t     *\n\t     * @param nums\n\t     */\n\t    private static void getSingleN(String nums) {\n\t        char[] chars = nums.toCharArray();\n\t\n\t        HashMap<object, integer=""> map = new HashMap<>();\n\t        for (char aChar : chars) {\n\t            if (map.containsKey(aChar)) {\n\t                Integer integer = map.get(aChar);\n\t                integer++;\n\t                map.remove(aChar);\n\t                map.put(aChar, integer);\n\t            }else {\n\t                map.put(aChar, 1);\n\t            }\n\t        }\n\t        System.out.println(map);\n\t\n\t\n\t        for (Map.Entry<object, integer=""> entry : map.entrySet()) {\n\t            if (entry.getValue()==1) {\n\t                System.out.println(\"只出现一次的字符有：\"+entry.getKey());\n\t            }\n\t        }\n\t\n\t    }\n"],[1,811,"z"]],[23,811],[23,24]]],[1508119148242,["Admin@Android",[[-1,23,"z"]],[23,24],[23,23]]],[1508119148559,["Admin@Android",[[1,23,"z"]],[23,23],[23,24]]],[1508119148993,["Admin@Android",[[1,23,"/**\n\t     * 【剑指offer】数组中只出现一次字符\n\t     *\n\t     * @param nums\n\t     */\n\t    private static void getSingleN(String nums) {\n\t        char[] chars = nums.toCharArray();\n\t\n\t        HashMap<object, integer=""> map = new HashMap<>();\n\t        for (char aChar : chars) {\n\t            if (map.containsKey(aChar)) {\n\t                Integer integer = map.get(aChar);\n\t                integer++;\n\t                map.remove(aChar);\n\t                map.put(aChar, integer);\n\t            }else {\n\t                map.put(aChar, 1);\n\t            }\n\t        }\n\t        System.out.println(map);\n\t\n\t\n\t        for (Map.Entry<object, integer=""> entry : map.entrySet()) {\n\t            if (entry.getValue()==1) {\n\t                System.out.println(\"只出现一次的字符有：\"+entry.getKey());\n\t            }\n\t        }\n\t\n\t    }\n"],[-1,23,"z"]],[23,24],[23,811]]],[1508119149899,["Admin@Android",[[-1,21,"\t"],[-1,27,"\t"],[-1,55,"\t"],[-1,63,"\t"],[-1,83,"\t"],[-1,92,"\t"],[-1,143,"\t"],[-1,187,"\t"],[-1,189,"\t"],[-1,246,"\t"],[-1,282,"\t"],[-1,325,"\t"],[-1,376,"\t"],[-1,404,"\t"],[-1,440,"\t"],[-1,482,"\t"],[-1,503,"\t"],[-1,539,"\t"],[-1,554,"\t"],[-1,565,"\t"],[-1,599,"\t"],[-1,601,"\t"],[-1,603,"\t"],[-1,670,"\t"],[-1,710,"\t"],[-1,776,"\t"],[-1,791,"\t"],[-1,802,"\t"],[-1,804,"\t"]],[23,811],[22,782]]],[1508119150336,["Admin@Android",[[1,782,"```"]],[782,782],[785,785]]],[1508119150660,["Admin@Android",[[1,20,"```"]],[20,20],[23,23]]],[1508119158444,["Admin@Android",[[1,25,"  "]],[25,25],[27,27]]],[1508119170849,["Admin@Android",[[-1,396,"                map.remove(aChar);"]],[396,430],[396,396]]],[1508119171231,["Admin@Android",[[-1,396,"\n"]],[396,396],[395,395]]]]]]}</object,></object,></object,></object,></object,></object,></object,></object,>
-      
-    </div>
-    
-  </div>
-  
-    
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/"></a></p>
-        <p><span>文章作者:</span><a href="/" title="访问 一只熊猫 的个人博客">一只熊猫</a></p>
-        <p><span>发布时间:</span>2017年10月16日 - 10时00分</p>
-     
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/" title="">http://blog.apanda.online/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://blog.apanda.online/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/　　作者: 一只熊猫" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script src="/js/clipboard.min.js"></script>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
-        </p>
     </div>
 
-
-
-<nav id="article-nav">
-  
-    <a href="/2017/10/18/Go lang 学习笔记/二叉树插入排序.resource/commit/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title"></div>
-      <strong class="article-nav-caption">></strong>
-    </a>
-  
-</nav>
-
-
-  
+    <div class="post-footer">
+        <div>
+            
+                转载声明：商业转载请联系作者获得授权,非商业转载请注明出处 © <a href="" target="_blank">Snippet</a>
+            
+        </div>
+        <div>
+            
+        </div>
+    </div>
 </article>
 
-    <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
+<div class="article-nav prev-next-wrap clearfix">
+    
+        <a href="/2017/10/18/Go lang 学习笔记/二叉树插入排序.resource/commit/" class="pre-post btn btn-default" title=''>
+            <i class="fa fa-angle-left fa-fw"></i><span class="hidden-lg">上一篇</span>
+            <span class="hidden-xs"></span>
+        </a>
+    
+    
+        <a href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符/" class="next-post btn btn-default" title=''>
+            <span class="hidden-lg">下一篇</span>
+            <span class="hidden-xs"></span><i class="fa fa-angle-right fa-fw"></i>
+        </a>
     
 </div>
-<style>
-    .left-col .switch-btn {
-        display: none;
-    }
-    .left-col .switch-area {
-        display: none;
-    }
-</style>
-
-<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script>
-    var valueHide = "隐藏目录";
-    var valueShow = "显示目录";
-
-    if ($(".left-col").is(":hidden")) {
-        $("#tocButton").attr("value", valueShow);
-    }
-
-    $("#tocButton").click(function() {
-        if ($("#toc").is(":hidden")) {
-            $("#tocButton").attr("value", valueHide);
-            $("#toc").slideDown(320);
-            $(".switch-btn, .switch-area").fadeOut(300);
-        }
-        else {
-            $("#tocButton").attr("value", valueShow);
-            $("#toc").slideUp(350);
-            $(".switch-btn, .switch-area").fadeIn(500);
-        }
-    })
-
-    if ($(".toc").length < 1) {
-        $("#toc, #tocButton").hide();
-        $(".switch-btn, .switch-area").show();
-    }
-</script>
 
 
-
-
-
-<div class="bdsharebuttonbox">
-	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
-	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
-	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
-	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
-	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
-</div>
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
-
-
-
-    
-
-
-
-    <div class="scroll" id="post-nav-button">
+    <div id="comments">
         
-            <a href="/2017/10/18/Go lang 学习笔记/二叉树插入排序.resource/commit/" title="上一篇: ">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-        
-            <a href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符/" title="下一篇: ">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
+	<!--PC和WAP自适应版-->
+<div id="SOHUCS"></div>
+<script type="text/javascript">
+	(function(){var appid='cyt8KmUC1';var conf='prod_855a68d3b3d91855360a6215672a505a';var width=window.innerWidth||document.documentElement.clientWidth;if(width<960){window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='+appid+'&conf='+conf+'"><\/script>');}else{var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}
+	c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});}})();
+</script>	
+
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/CentOS-FireWall/">centos/CentOS-FireWall</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/centos-attack-record/">centos/centos-attack-record</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/redis/">centos/redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/ssr/">centos/ssr</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/06/每天一道算法题目Java/范型/">每天一道算法题目Java/范型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Gomobile编译jni库/">Go lang 学习笔记/Gomobile编译jni库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Golang 支持交叉编译/">Go lang 学习笔记/Golang 支持交叉编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang.resource/commit/">Go lang 学习笔记/基本排序算法Golang.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang/">Go lang 学习笔记/基本排序算法Golang</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit/">Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现/">Go lang 学习笔记/Golang二分查找算法的简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析/">Go lang 学习笔记/Json解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析.resource/commit/">Go lang 学习笔记/Json解析.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序/">Go lang 学习笔记/二叉树插入排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序.resource/commit/">Go lang 学习笔记/二叉树插入排序.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/">每天一道算法题目Java/寻找出现一次的字符.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符/">每天一道算法题目Java/寻找出现一次的字符</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/Android Skills/使用Android Studio进行NDK开发（一）/">使用AndroidStudio进行NDK开发（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/06/RxJava/RxJava & RxAndroid备忘/">RxJava & RxAndroid备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/在安卓上使用RxJava/">在安卓上使用RxJava</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/深入浅出RxJava四-在Android中使用响应式编程/">深入浅出RxJava(四：在Android中使用响应式编程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/04/RxJava/深入浅出RxJava三--响应式的好处/">深入浅出RxJava(三：响应式的好处)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/02/RxJava/深入浅出RxJava(二：操作符)/">深入浅出RxJava(二：操作符)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/Q2季度目标/">Q2季度目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/VIM快捷键/">VIM快捷键的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/RxJava/深入浅出RxJava（一：基础篇）/">深入浅出RxJava(一：基础篇)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考/">谷歌官方出的一套关于 Android 架构的实例参考</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava/RxAndroid/">从案例学习RxAndroid</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/23/小知识点/你应该知道的那些Android小经验/">Android小经验</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/小知识点/android代码片段/">Android开发代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/02/小知识点/Android开发工作中的细节/">Android开发工作中的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/随笔/日常使用到的梯子/">日常使用到的梯子</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/小知识点/Android开发中的小知识点汇总/">Android小知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/Android Skills/Lambda for Android/">Lambda for Android</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/Android Skills/理解Android的编译命令/">理解Android编译命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/22/Android Skills/Webview上传文件的那些坑/">Webview上传文件的那些坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/21/Android Skills/Android源码编译/">Android源码编译和内核编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/New Lan/Kotlin1.0正式版发布/">Kotlin 1.0 正式版发布啦</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/25/随笔/Ibeacon/">Ibeacon</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Android Skills/Android MotionEvent详解/">Android MotionEvent详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/19/New Lan/React-Native学习指南/">React-Native学习指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/18/Android Skills/RecyclerView 列表控件中简单实现时间线/">RecyclerView 列表控件中简单实现时间线</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/21/3.5开发中的亮点和不足/">亮点和不足</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/09/Android Skills/ActionBar沉浸式实现/">ActionBar沉浸式实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之内存篇/">Android性能优化之内存篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之渲染篇/">Android性能优化之渲染篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之电量篇/">Android性能优化之电量篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化典范（三）/">Android性能优化典范（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化之运算篇/">Android性能优化之运算篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/13/Android性能优化典范/Android性能优化典范（二）/">Android性能优化典范（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/11/Android性能优化典范/Android性能优化典范（一）/">Android性能优化典范（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/22/Android Skills/注解(Annotation)自定义注解入门/">Android注解(Annotation)自定义注解入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/21/Android Skills/Android OkHttp完全解析/">Android OkHttp完全解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/19/Android Skills/Android OkHttp初级入门/">Android OkHttp使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/27/Android Skills/EventBus 3.0的用法详解(二)/">EventBus 3.0的用法详解（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/25/Android Skills/EventBus 3.0的用法详解（一）/">EventBus 3.0的用法详解（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/21/Android Skills/自定义Dialog的大小、位置、颜色/">Android自定义对话框(Dialog)位置,大小</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/16/Google Develop for Android 系列/Developing for Android 最佳实践九：工具/">Google Develop for Android 系列九 － 工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/15/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/">Google Develop for Android 系列八 － 用户界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/14/Google Develop for Android 系列/Google Develop for Android 系列七 － Framework最佳实践/">Google Develop for Android 系列七 － Framework最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/13/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/">Google Develop for Android 系列六 － Storage最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/12/Google Develop for Android 系列/Google Develop for Android 系列五 － Language and Libraries/">Google Develop for Android 系列五 － Language and Libraries</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/11/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/">Google Develop for Android 系列四 － Network最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/10/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/">Google Develop for Android 系列三 － Performance最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/">Google Develop for Android 系列二 － Memory 最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/08/Google Develop for Android 系列/Google Develop for Android 系列一 － 相关上下文介绍/">Google Develop for Android 系列一 － 相关上下文介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/02/小知识点/Android开发常用的adb命令整理/">Android开发常用的adb命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/01/21/小知识点/端口号/">端口号设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/07/Android Skills/Android AsyncTask 技巧/">Android AsyncTask 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/05/Android Skills/图像、背景、View更新、布局、内存/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/08/随笔/健身/">健身</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/09/18/Android Skills/widget用法/">widget用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/08/Android Skills/webview入门/">WebView入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/07/18/Android Skills/TypedArray/">解析：TypedArray 为什么需要调用recycle()</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/15/Android Skills/Android内核 ServiceManager/">Android内核 ServiceManager</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/12/Android Skills/Android内核 Binder/">Android内核 Binder</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/08/Android Skills/Android内核 异步线程的实现（Looper、MessageQueue、Handler）/">异步线程的实现（Looper、MessageQueue、Handler）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/01/Android Skills/CountDownTimer（倒数计时器）/">CountDownTimer（倒数计时器）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/19/Android Skills/万能的ViewHolder/">ViewHolder的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android 自定义Loader/">Android 自定义Loader</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android Skill 下拉刷新/">下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/15/Android Skills/Android TextView 技巧/">Android Textview 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/13/Android Skills/Android String相关类性能测试/">String相关类性能测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/11/Android Skills/Android ImageView ScaleType属性/">ImageView ScaleType属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/05/Android Skills/Android EditText 技巧/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/24/随笔/Lantern(灯笼)使用实例/">Lantern(灯笼)使用实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/19/Android Skills/Context/">Android Context 到底是什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/17/小知识点/Android开发中一些被冷落但却很有用的类和方法/">Android开发中一些被冷落但却很有用的类和方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/12/小知识点/Android Studio的快捷键/">Android Studio 的快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/08/小知识点/Android开发规范/">Android 开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/07/小知识点/开发规范/">Google Java编程风格指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/28/Android Skills/40个Java集合面试问题和答案/">40个Java集合面试问题和答案</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/Android Skills/Android anim drawable color 技巧/">Android anim drawable color技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/小知识点/36个Android开发的代码片段/">36个Android开发常用代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/21/随笔/生命中的空白/">生命中的空白</a></li></ul>
-    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-    <script>
-        $(".post-list").addClass("toc-article");
-        $(".post-list-item a").attr("target","_blank");
-        $("#post-nav-button > a:nth-child(2)").click(function() {
-            $(".fa-bars, .fa-times").toggle();
-            $(".post-list").toggle(300);
-            if ($(".toc").length > 0) {
-                $("#toc, #tocButton").toggle(200, function() {
-                    if ($(".switch-area").is(":visible")) {
-                        $("#toc, .switch-btn, .switch-area").toggle();
-                        $("#tocButton").attr("value", valueHide);
-                        }
-                    })
-            }
-            else {
-                $(".switch-btn, .switch-area").fadeToggle(300);
-            }
-        })
-    </script>
 
 
 
-    <script>
-        
-    </script>
-</div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                &copy; 2018 一只熊猫
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank">Hexo</a> 
+
+
+                </main>
+                
+                    <aside id="article-toc" role="navigation" class="col-md-4">
+    <div class="widget">
+        <h3 class="title">文章目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#清园"><span class="toc-text">清园</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS7安装iptables防火墙"><span class="toc-text">CentOS7安装iptables防火墙</span></a></li></ol></li></ol>
+    </div>
+</aside>
+
+                
             </div>
         </div>
-        
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" >本站到访数: 
-                            <span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>, </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit">本页阅读量: 
-                            <span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
-        
+    </section>
+    <footer class="main-footer">
+    <div class="container">
+        <div class="row">
+        </div>
     </div>
 </footer>
 
+<!--<a id="toc-btn">
+    <i class="fa fa-bars"></i>
+</a>-->
+
+<a id="back-to-top" class="icon-btn hide">
+	<i class="fa fa-chevron-up"></i>
+</a>
+
+
+
+
+    <div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12"> 
+                <span>Copyright &copy; 2017
+                </span> | 
+                <span>
+                    Powered by <a href="//hexo.io" class="copyright-links" target="_blank" rel="nofollow">Hexo</a>
+                </span> | 
+                <span>
+                    Theme by <a href="//github.com/shenliyang/hexo-theme-snippet.git" class="copyright-links" target="_blank" rel="nofollow">Snippet</a>
+                </span>
+            </div>
+        </div>
     </div>
-    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
-<script src="/js/main.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            var backgroundnum = 21;
-            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
-            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
-        })
-    </script>
-
-
-
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-<div class="scroll" id="scroll">
-    <a href="#"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
 </div>
-<script>
-    $(document).ready(function() {
-        if ($("#comments").length < 1) {
-            $("#scroll > a:nth-child(2)").hide();
-        };
-    })
-</script>
 
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
 
-  <script language="javascript">
-    $(function() {
-        $("a[title]").each(function() {
-            var a = $(this);
-            var title = a.attr('title');
-            if (title == undefined || title == "") return;
-            a.data('title', title).removeAttr('title').hover(
 
-            function() {
-                var offset = a.offset();
-                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
-                    top: offset.top - a.outerHeight() - 15,
-                    left: offset.left + a.outerWidth()/2 + 1
-                }).fadeIn(function() {
-                    var pop = $(this);
-                    setTimeout(function() {
-                        pop.remove();
-                    }, pop.text().length * 800);
-                });
-            }, function() {
-                $("#anchortitlecontainer").remove();
-            });
-        });
-    });
-</script>
+	<script src="/js/search.js?rev=@@hash"></script>
 
-  </div>
+
+<script src="/js/app.js?rev=@@hash"></script>
+
+
 </body>
 </html>
