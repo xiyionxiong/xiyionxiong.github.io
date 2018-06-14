@@ -18,7 +18,7 @@ var Instagram = (function(){
 			for(var i=0,len=data[em].srclist.length;i<len;i++){
 				liTmpl += '<li>\
 								<div class="img-box">\
-									<a class="img-bg" rel="example_group" href="'+data[em].bigSrclist[i]+'" title="'+data[em].text[i]+'"></a>\
+									<a class="img-bg" target="_blank" rel="example_group" href="'+data[em].bigSrclist[i]+'" title="'+data[em].text[i]+'"></a>\
 									<img src="'+data[em].srclist[i]+'" alt="">\
 								</div>\
 							</li>';
