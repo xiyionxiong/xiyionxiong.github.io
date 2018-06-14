@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在安卓上使用RxJava | 一只熊猫的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="如果你做过Android（和Java）的开发，很有可能已经听说过RxJava了。RxJava是由Netflix开发的响应式扩展（Reactive Extensions）的Java实现。引用MSDN上对它的定义，Reactive Extensions是这样一个第三方库：它结合了可观察集合和LINQ式查询以达到异步和基于事件的编程效果。Netflix将这个库托管到了Github上，支持Java6以上的">
+<meta name="keywords" content="RxJava">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在安卓上使用RxJava">
+<meta property="og:url" content="http://blog.apanda.online/2016/04/05/RxJava/在安卓上使用RxJava/index.html">
+<meta property="og:site_name" content="一只熊猫的博客">
+<meta property="og:description" content="如果你做过Android（和Java）的开发，很有可能已经听说过RxJava了。RxJava是由Netflix开发的响应式扩展（Reactive Extensions）的Java实现。引用MSDN上对它的定义，Reactive Extensions是这样一个第三方库：它结合了可观察集合和LINQ式查询以达到异步和基于事件的编程效果。Netflix将这个库托管到了Github上，支持Java6以上的">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2016-04-10T09:47:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在安卓上使用RxJava">
+<meta name="twitter:description" content="如果你做过Android（和Java）的开发，很有可能已经听说过RxJava了。RxJava是由Netflix开发的响应式扩展（Reactive Extensions）的Java实现。引用MSDN上对它的定义，Reactive Extensions是这样一个第三方库：它结合了可观察集合和LINQ式查询以达到异步和基于事件的编程效果。Netflix将这个库托管到了Github上，支持Java6以上的">
+  
+    <link rel="alternative" href="/atom.xml" title="一只熊猫的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.jpg">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">一只熊猫</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/随笔">随笔</a></li>
+                        
+                            <li><a href="/categories/技术">技术</a></li>
+                        
+                            <li><a href="/instagram">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                            
+                                <a class="fl mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                            
+                                <a class="fl facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                            
+                                <a class="fl twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android性能优化典范/" style="font-size: 18px;">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size: 10px;">Annotation</a> <a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a> <a href="/tags/Binder/" style="font-size: 10px;">Binder</a> <a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/EventBus/" style="font-size: 12px;">EventBus</a> <a href="/tags/Google-Develop-for-Android-系列/" style="font-size: 20px;">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size: 10px;">Ibeacon</a> <a href="/tags/ImageView/" style="font-size: 10px;">ImageView</a> <a href="/tags/Kotlin/" style="font-size: 10px;">Kotlin</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MotionEvent/" style="font-size: 10px;">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size: 12px;">OkHttp</a> <a href="/tags/React-Native/" style="font-size: 10px;">React-Native</a> <a href="/tags/RxAndroid/" style="font-size: 10px;">RxAndroid</a> <a href="/tags/RxJava/" style="font-size: 18px;">RxJava</a> <a href="/tags/ServiceManager/" style="font-size: 10px;">ServiceManager</a> <a href="/tags/String相关类性能测试/" style="font-size: 10px;">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size: 10px;">Textview</a> <a href="/tags/TypedArray/" style="font-size: 10px;">TypedArray</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ViewHolder的作用/" style="font-size: 10px;">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/Webview/" style="font-size: 10px;">Webview</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/drawable/" style="font-size: 10px;">drawable</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/写作/" style="font-size: 12px;">写作</a> <a href="/tags/反思/" style="font-size: 10px;">反思</a> <a href="/tags/图像、背景、View更新、布局、内存/" style="font-size: 12px;">图像、背景、View更新、布局、内存</a> <a href="/tags/开发规范/" style="font-size: 14px;">开发规范</a> <a href="/tags/异步线程的实现（Looper、MessageQueue、Handler）/" style="font-size: 10px;">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/总结分类/" style="font-size: 16px;">总结分类</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/时间轴/" style="font-size: 10px;">时间轴</a> <a href="/tags/架构的实例/" style="font-size: 10px;">架构的实例</a> <a href="/tags/沉浸式/" style="font-size: 10px;">沉浸式</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/目标/" style="font-size: 12px;">目标</a> <a href="/tags/知识库/" style="font-size: 14px;">知识库</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/自定义Loader/" style="font-size: 10px;">自定义Loader</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wsgzao.github.io/">HelloDog</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dearzd.com/DBlog/">咚门</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.codingyun.com/">Coding云</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.jobbole.com/">伯乐在线</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin技术宅</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">一只熊猫</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">一只熊猫</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/随笔">随笔</a></li>
+                
+                    <li><a href="/categories/技术">技术</a></li>
+                
+                    <li><a href="/instagram">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                    
+                        <a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                    
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                    
+                        <a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-RxJava/在安卓上使用RxJava" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/05/RxJava/在安卓上使用RxJava/" class="article-date">
+      <time datetime="2016-04-05T15:45:17.000Z" itemprop="datePublished">2016-04-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在安卓上使用RxJava
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>如果你做过Android（和Java）的开发，很有可能已经听说过RxJava了。RxJava是由Netflix开发的响应式扩展（Reactive Extensions）的Java实现。引用<a href="http://msdn.microsoft.com/en-us/data/gg577609.aspx" target="_blank" rel="noopener">MSDN上对它的定义</a>，Reactive Extensions是这样一个第三方库：<strong>它结合了可观察集合和LINQ式查询以达到异步和基于事件的编程效果</strong>。Netflix将这个库托管到了Github上，支持Java6以上的版本并且使它可以用于Android App开发。</p>
+<p>本篇是介绍RxJava和Android的系列文章的第一篇，将会介绍如何在Android中使用RxJava observables（基于Square的Retrofit组件）创建REST API客户端。</p>
+<p>我们从添加所需的库文件开始。如果你用Maven的话，只需将下面的dependencies（依赖库）加到pom.xml中即可：</p>
+<pre><code>`&lt;dependency&gt;`
+`&lt;groupId&gt;com.squareup.retrofit&lt;/groupId&gt;`
+`&lt;artifactId&gt;retrofit&lt;/artifactId&gt;`
+`&lt;version&gt;1.2.2&lt;/version&gt;`
+`&lt;/dependency&gt;`
+`&lt;dependency&gt;`
+`&lt;groupId&gt;com.netflix.rxjava&lt;/groupId&gt;`
+`&lt;artifactId&gt;rxjava-android&lt;/artifactId&gt;`
+`&lt;version&gt;0.14.6&lt;/version&gt;`s
+`&lt;/dependency&gt;`
+</code></pre><a id="more"></a>
+<p>在本文中，我们将用气象地图开放平台（OpenWeatherMap） API作为演示示例。 <a href="http://api.openweathermap.org/" target="_blank" rel="noopener">OpenWeatherMap</a>是一个免费的天气数据API，非常易于配置和使用，调用时只需传入位置信息（城市名或者是地理坐标）作为参数即可，具体效果请参见这个<a href="http://api.openweathermap.org/data/2.5/weather?q=Budapest,hu" target="_blank" rel="noopener">示例</a>。它默认传输的是JSON格式的数据（但也可以配置为XML或HTML格式）。精度和温度单位也是可以配置的，更多详情请看<a href="http://api.openweathermap.org/API" target="_blank" rel="noopener">这里</a>。</p>
+<p>通常要实现调用一个API需要如下这几个步骤（每个步骤都有一堆公式化代码）：</p>
+<ol>
+<li>创建所需的模型类（必要时，添加上注解）。</li>
+<li>实现请求—回应管理的网络层代码，并带错误处理。</li>
+<li>用后台线程实现请求调用（一般是用异步任务的形式实现），用一个回调函数（Callback Function）来实现在UI线程上呈现回应信息。</li>
+</ol>
+<p><strong>创建模型类</strong></p>
+<p>第一步我们可以依靠一些类似<a href="http://www.jsonschema2pojo.org/" target="_blank" rel="noopener">jsonschema2pojo</a>的JSON-POJO生成工具（半）自动化完成。OpenWeather API的模型类如下：</p>
+<p><code>public class WeatherData {</code></p>
+<p><code>public Coordinates coord;</code></p>
+<p><code>public Local sys;</code></p>
+<p><code>public List&lt;Weather&gt; weathers;</code></p>
+<p><code>public String base;</code></p>
+<p><code>public Main main;</code></p>
+<p><code>public Wind wind;</code></p>
+<p><code>public Rain rain;</code></p>
+<p><code>public Cloud clouds;</code></p>
+<p><code>public long id;</code></p>
+<p><code>public long dt;</code></p>
+<p><code>public String name;</code></p>
+<p><code>public int cod;</code></p>
+<p><code>public static class Coordinates {</code></p>
+<p><code>public double lat;</code></p>
+<p><code>public double lon;</code></p>
+<p><code>}</code></p>
+<p><code>public static class Local {</code></p>
+<p><code>public String country;</code></p>
+<p><code>public long sunrise;</code></p>
+<p><code>public long sunset;</code></p>
+<p><code>}</code></p>
+<p><code>public static class Weather {</code></p>
+<p><code>public int id;</code></p>
+<p><code>public String main;</code></p>
+<p><code>public String description;</code></p>
+<p><code>public String icon;</code></p>
+<p><code>}</code></p>
+<p><code>public static class Main {</code></p>
+<p><code>public double temp;</code></p>
+<p><code>public double pressure;</code></p>
+<p><code>public double humidity;</code></p>
+<p><code>public double temp_min;</code></p>
+<p><code>public double temp_max;</code></p>
+<p><code>public double sea_level;</code></p>
+<p><code>public double grnd_level;</code></p>
+<p><code>}</code></p>
+<p><code>public static class Wind {</code></p>
+<p><code>public double speed;</code></p>
+<p><code>public double deg;</code></p>
+<p><code>}</code></p>
+<p><code>public static class Rain {</code></p>
+<p><code>public int threehourforecast;</code></p>
+<p><code>}</code></p>
+<p><code>public static class Cloud {</code></p>
+<p><code>public int all;</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p><strong>用Retrofit实现网络调用</strong></p>
+<p>第二步中网络调用的实现通常我们需要写一大堆公式化的代码，但如果用Square公司的<a href="http://square.github.io/retrofit/" target="_blank" rel="noopener">Retrofit组件</a>来实现的话将大大减少代码量。只需要创建一个接口类（用注释来描述整个请求），然后用RestAdapter.Builder来创建客户端就行了。Retrofit也可以用来完成JSON的序列化与反序列化。</p>
+<p><code>private interface ApiManagerService {</code></p>
+<p><code>@GET(`</code>“/weather”<code></code>)`</p>
+<p><code>WeatherData getWeather(@Query(`</code>“q”<code>) String place, @Query(</code>“units”<code></code>) String units);`</p>
+<p><code>}</code></p>
+<p>上面的示例中我们可以看到，方法前的注释是由一个HTTP方法（我们这里用的是GET，当然你也可以按需要用Retrofit实现POST、 PUT、DELETE和HEAD方法）和一个相对路径（基本路径是由RestAdapter.Builder提供的）。@Query注释用于组装请求参 数，我们这有两个参数，一个是place（代表位置），另一个是units计量单位。</p>
+<p>我们来看一个具体的调用示例（实际代码中应该把这个调用放到一个非UI线程里）。这段代码还是比较容易理解的：</p>
+<p><code>//...</code></p>
+<p><code>final RestAdapter restAdapter = `</code>new<code></code>RestAdapter.Builder()`</p>
+<p><code>.setServer(`</code>“<a href="http://api.openweathermap.org/data/2.5" target="_blank" rel="noopener">http://api.openweathermap.org/data/2.5</a>“<code></code>)`</p>
+<p><code>.build();</code></p>
+<p><code>final ApiManagerService apiManager = restAdapter.create(ApiManagerService.class);</code></p>
+<p><code>final WeatherData weatherData = apiManager.getWeather(`</code>“Budapest,hu”<code>,</code>“metric”<code></code>);`</p>
+<p><code>//...</code></p>
+<p>怎么样，很简单吧，你只需要很少的代码就实现了整个调用过程，这就是Retrofit的威力，要了解更多，请点击<a href="http://square.github.io/retrofit/" target="_blank" rel="noopener">这里</a>。</p>
+<p><strong>用RxJava实现响应式编程</strong></p>
+<p>现在我们就进入第三步了：RxJava部分！我们这里示例将用它来实现异步的请求调用。但这并不是RxJava所有的功能，以下对RxJava的介绍引用自Netflix的Github 知识库：</p>
+<blockquote>
+<p>RxJava 是一个在Java虚拟机上实现的响应式扩展库：提供了基于observable序列实现的异步调用及基于事件编程。</p>
+<p>它扩展了观察者模式，支持数据、事件序列并允许你合并序列，无需关心底层的线程处理、同步、线程安全、并发数据结构和非阻塞I/O处理。</p>
+<p>它支持Java5及更高版本，并支持其他一些基于JVM的语言，如Groovy、Clojure和Scala。</p>
+</blockquote>
+<p>我们假设你已经对RxJava有一些了解。如果没有的话，强烈建议先看看<a href="http://www.reactivemanifesto.org/" target="_blank" rel="noopener">这两篇 文章</a>和Netflix在<a href="https://github.com/Netflix/RxJava/wiki" target="_blank" rel="noopener">Github Wiki上</a>的前几页。</p>
+<p>在最后的这个示例中，我们将实现一个API 管理器负责生成observable对象，并完成多并发调用（每个调用都请求同一个地址，但参数不同）。</p>
+<p>首先我们需要将前面创建的接口类，换为这个类：</p>
+<p><code>public class ApiManager {</code></p>
+<p><code>private interface ApiManagerService {</code></p>
+<p><code>@GET(`</code>“/weather”<code></code>)`</p>
+<p><code>WeatherData getWeather(@Query(`</code>“q”<code>) String place, @Query(</code>“units”<code></code>) String units);`</p>
+<p><code>}</code></p>
+<p><code>private static final RestAdapter restAdapter = `</code>new<code></code>RestAdapter.Builder()`</p>
+<p><code>.setServer(`</code>“<a href="http://api.openweathermap.org/data/2.5" target="_blank" rel="noopener">http://api.openweathermap.org/data/2.5</a>“<code></code>)`</p>
+<p><code>.build();</code></p>
+<p><code>private static final ApiManagerService apiManager = restAdapter.create(ApiManagerService.class);</code></p>
+<p><code>public static Observable&lt;WeatherData&gt; getWeatherData(final String city) {</code></p>
+<p><code>return</code> <code>Observable.create(`</code>new<code></code>Observable.OnSubscribeFunc<weatherdata>() {`</weatherdata></p>
+<p><code>@Override</code></p>
+<p><code>public Subscription onSubscribe(Observer&lt;? `</code>super<code></code>WeatherData&gt; observer) {`</p>
+<p><code>try</code> <code>{</code></p>
+<p><code>observer.onNext(apiManager.getWeather(city, `</code>“metric”<code></code>));`</p>
+<p><code>observer.onCompleted();</code></p>
+<p><code>} `</code>catch<code></code>(Exception e) {`</p>
+<p><code>observer.onError(e);</code></p>
+<p><code>}</code></p>
+<p><code>return</code> <code>Subscriptions.empty();</code></p>
+<p><code>}</code></p>
+<p><code>}).subscribeOn(Schedulers.threadPoolForIO());</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p>我们先来看下getWeatherData()这个方法，它调用了Observable.create()方法并向方法传入一个 Observable.OnSubscribeFunc的实现，以此得到一个Observable对象并返回。并且一旦Observable对象被订阅 （subscribed）后就会开始工作。Observable每次处理的结果都会当作参数传给onNext()方法。因为我们这里只是想实现网络请求的 并发调用，所以只需要让每个Observable对象中调用一次请求即可。代码最后调用onComplete()方法。这里的subscribeOn() 方法很重要，它决定了程序将选用哪种线程。这里调用的是Schedulers.threadPoolForIO()，此线程用于优化IO和网络性能相关的 工作。</p>
+<p>最后一步是要实现这个API调用。下面的代码实现了并发网络请求，每个请求都使用不同的调用参数异步调用同一个url：</p>
+<p><code>Observable.from(cities)</code></p>
+<p><code>.mapMany(`</code>new<code></code>Func1&lt;String, Observable<weatherdata>&gt;() {`</weatherdata></p>
+<p><code>@Override</code></p>
+<p><code>public Observable&lt;WeatherData&gt; call(String s) {</code></p>
+<p><code>return</code> <code>ApiManager.getWeatherData(s);</code></p>
+<p><code>}</code></p>
+<p><code>})</code></p>
+<p><code>.subscribeOn(Schedulers.threadPoolForIO())</code></p>
+<p><code>.observeOn(AndroidSchedulers.mainThread())</code></p>
+<p><code>.subscribe(`</code>new<code></code>Action1<weatherdata>() {`</weatherdata></p>
+<p><code>@Override</code></p>
+<p><code>public void call(WeatherData weatherData) {</code></p>
+<p><code>// do your work</code></p>
+<p><code>}</code></p>
+<p><code>});</code></p>
+<p>Observable.from()方法将城市名称数组转化为一个observable对象，将数组里的字符串提供给不同的线程。然后mapMany()方法将会把前者提供的每一个字符串都转化为observable对象（<em>译注：新对象包含的是weatherData对象数据</em>）。这里的转化通过调用ApiManager.getWeatherData()完成。</p>
+<p>这里还是注册在I/O线程池上。在Android系统上，如果需要把结果展示在UI上，就必须把数据发布给UI线程处理。因为我们知道，在 Android上只有最原始的那个创建界面的线程才可以操作界面。这里只需要用observeOn()方法调用 AndroidSchedulers.mainThread()即可。subscribe()方法的调用将触发observable对象，我们可以在这里 处理observable对象发出的结果。</p>
+<p>这个示例展示了RxJava强大的功能。如果没有Rx，我们需要创建N个线程去调用请求，然后通过异步方式把处理结果交给UI线程。使用Rx只需编写很少的代码就完成工作，使用它强大的功能创建、合并、过滤和转化observable对象。</p>
+<p>RxJava可以在开发安卓App时，作为一个强大的处理并发的工具使用。虽然要熟悉它还是需要一些时间，但是磨刀不误砍柴工，一旦掌握了它，将给 你带来很大帮助。响应式扩展库是个很好的想法，我们把它用于安卓程序的开发，已经用了好几个礼拜了（在不久的将来，我们产品的异步任务处理将完全基于它完 成）。越是了解它，你就越会爱上它。</p>
+<p>还想看点其他资料不？看看<a href="http://howrobotswork.wordpress.com/2013/11/18/rxjava-and-android-error-handling/" target="_blank" rel="noopener">这篇文章</a>吧，它讲的是RxJava如何进行错误处理。</p>
+<p>英文原文： <a href="http://andraskindler.com/blog/2013/using-rxjava-in-android/" target="_blank" rel="noopener">Using RxJava with Android</a><br>译文原文： <a href="http://www.importnew.com/8321.html" target="_blank" rel="noopener">http://www.importnew.com/8321.html</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/04/05/RxJava/在安卓上使用RxJava/">在安卓上使用RxJava</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 一只熊猫 的个人博客">一只熊猫</a></p>
+        <p><span>发布时间:</span>2016年04月05日 - 23时45分</p>
+     
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/04/05/RxJava/在安卓上使用RxJava/" title="在安卓上使用RxJava">http://blog.apanda.online/2016/04/05/RxJava/在安卓上使用RxJava/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.apanda.online/2016/04/05/RxJava/在安卓上使用RxJava/　　作者: 一只熊猫" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2016/04/06/RxJava/RxJava & RxAndroid备忘/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          RxJava &amp; RxAndroid备忘
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/05/RxJava/深入浅出RxJava四-在Android中使用响应式编程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">深入浅出RxJava(四：在Android中使用响应式编程)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/04/06/RxJava/RxJava & RxAndroid备忘/" title="上一篇: RxJava &amp; RxAndroid备忘">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/04/05/RxJava/深入浅出RxJava四-在Android中使用响应式编程/" title="下一篇: 深入浅出RxJava(四：在Android中使用响应式编程)">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/CentOS-FireWall/">centos/CentOS-FireWall</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/centos-attack-record/">centos/centos-attack-record</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/redis/">centos/redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/ssr/">centos/ssr</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/06/每天一道算法题目Java/范型/">每天一道算法题目Java/范型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Gomobile编译jni库/">Go lang 学习笔记/Gomobile编译jni库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Golang 支持交叉编译/">Go lang 学习笔记/Golang 支持交叉编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang.resource/commit/">Go lang 学习笔记/基本排序算法Golang.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang/">Go lang 学习笔记/基本排序算法Golang</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit/">Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现/">Go lang 学习笔记/Golang二分查找算法的简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析/">Go lang 学习笔记/Json解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析.resource/commit/">Go lang 学习笔记/Json解析.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序/">Go lang 学习笔记/二叉树插入排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序.resource/commit/">Go lang 学习笔记/二叉树插入排序.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/">每天一道算法题目Java/寻找出现一次的字符.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符/">每天一道算法题目Java/寻找出现一次的字符</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/Android Skills/使用Android Studio进行NDK开发（一）/">使用AndroidStudio进行NDK开发（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/06/RxJava/RxJava & RxAndroid备忘/">RxJava & RxAndroid备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/在安卓上使用RxJava/">在安卓上使用RxJava</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/深入浅出RxJava四-在Android中使用响应式编程/">深入浅出RxJava(四：在Android中使用响应式编程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/04/RxJava/深入浅出RxJava三--响应式的好处/">深入浅出RxJava(三：响应式的好处)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/02/RxJava/深入浅出RxJava(二：操作符)/">深入浅出RxJava(二：操作符)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/Q2季度目标/">Q2季度目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/VIM快捷键/">VIM快捷键的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/RxJava/深入浅出RxJava（一：基础篇）/">深入浅出RxJava(一：基础篇)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考/">谷歌官方出的一套关于 Android 架构的实例参考</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava/RxAndroid/">从案例学习RxAndroid</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/23/小知识点/你应该知道的那些Android小经验/">Android小经验</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/小知识点/android代码片段/">Android开发代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/02/小知识点/Android开发工作中的细节/">Android开发工作中的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/随笔/日常使用到的梯子/">日常使用到的梯子</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/小知识点/Android开发中的小知识点汇总/">Android小知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/Android Skills/Lambda for Android/">Lambda for Android</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/Android Skills/理解Android的编译命令/">理解Android编译命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/22/Android Skills/Webview上传文件的那些坑/">Webview上传文件的那些坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/21/Android Skills/Android源码编译/">Android源码编译和内核编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/New Lan/Kotlin1.0正式版发布/">Kotlin 1.0 正式版发布啦</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/25/随笔/Ibeacon/">Ibeacon</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Android Skills/Android MotionEvent详解/">Android MotionEvent详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/19/New Lan/React-Native学习指南/">React-Native学习指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/18/Android Skills/RecyclerView 列表控件中简单实现时间线/">RecyclerView 列表控件中简单实现时间线</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/21/3.5开发中的亮点和不足/">亮点和不足</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/09/Android Skills/ActionBar沉浸式实现/">ActionBar沉浸式实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之内存篇/">Android性能优化之内存篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之渲染篇/">Android性能优化之渲染篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之电量篇/">Android性能优化之电量篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化典范（三）/">Android性能优化典范（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化之运算篇/">Android性能优化之运算篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/13/Android性能优化典范/Android性能优化典范（二）/">Android性能优化典范（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/11/Android性能优化典范/Android性能优化典范（一）/">Android性能优化典范（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/22/Android Skills/注解(Annotation)自定义注解入门/">Android注解(Annotation)自定义注解入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/21/Android Skills/Android OkHttp完全解析/">Android OkHttp完全解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/19/Android Skills/Android OkHttp初级入门/">Android OkHttp使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/27/Android Skills/EventBus 3.0的用法详解(二)/">EventBus 3.0的用法详解（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/25/Android Skills/EventBus 3.0的用法详解（一）/">EventBus 3.0的用法详解（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/21/Android Skills/自定义Dialog的大小、位置、颜色/">Android自定义对话框(Dialog)位置,大小</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/16/Google Develop for Android 系列/Developing for Android 最佳实践九：工具/">Google Develop for Android 系列九 － 工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/15/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/">Google Develop for Android 系列八 － 用户界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/14/Google Develop for Android 系列/Google Develop for Android 系列七 － Framework最佳实践/">Google Develop for Android 系列七 － Framework最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/13/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/">Google Develop for Android 系列六 － Storage最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/12/Google Develop for Android 系列/Google Develop for Android 系列五 － Language and Libraries/">Google Develop for Android 系列五 － Language and Libraries</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/11/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/">Google Develop for Android 系列四 － Network最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/10/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/">Google Develop for Android 系列三 － Performance最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/">Google Develop for Android 系列二 － Memory 最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/08/Google Develop for Android 系列/Google Develop for Android 系列一 － 相关上下文介绍/">Google Develop for Android 系列一 － 相关上下文介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/02/小知识点/Android开发常用的adb命令整理/">Android开发常用的adb命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/01/21/小知识点/端口号/">端口号设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/07/Android Skills/Android AsyncTask 技巧/">Android AsyncTask 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/05/Android Skills/图像、背景、View更新、布局、内存/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/08/随笔/健身/">健身</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/09/18/Android Skills/widget用法/">widget用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/08/Android Skills/webview入门/">WebView入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/07/18/Android Skills/TypedArray/">解析：TypedArray 为什么需要调用recycle()</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/15/Android Skills/Android内核 ServiceManager/">Android内核 ServiceManager</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/12/Android Skills/Android内核 Binder/">Android内核 Binder</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/08/Android Skills/Android内核 异步线程的实现（Looper、MessageQueue、Handler）/">异步线程的实现（Looper、MessageQueue、Handler）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/01/Android Skills/CountDownTimer（倒数计时器）/">CountDownTimer（倒数计时器）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/19/Android Skills/万能的ViewHolder/">ViewHolder的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android 自定义Loader/">Android 自定义Loader</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android Skill 下拉刷新/">下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/15/Android Skills/Android TextView 技巧/">Android Textview 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/13/Android Skills/Android String相关类性能测试/">String相关类性能测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/11/Android Skills/Android ImageView ScaleType属性/">ImageView ScaleType属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/05/Android Skills/Android EditText 技巧/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/24/随笔/Lantern(灯笼)使用实例/">Lantern(灯笼)使用实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/19/Android Skills/Context/">Android Context 到底是什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/17/小知识点/Android开发中一些被冷落但却很有用的类和方法/">Android开发中一些被冷落但却很有用的类和方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/12/小知识点/Android Studio的快捷键/">Android Studio 的快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/08/小知识点/Android开发规范/">Android 开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/07/小知识点/开发规范/">Google Java编程风格指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/28/Android Skills/40个Java集合面试问题和答案/">40个Java集合面试问题和答案</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/Android Skills/Android anim drawable color 技巧/">Android anim drawable color技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/小知识点/36个Android开发的代码片段/">36个Android开发常用代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/21/随笔/生命中的空白/">生命中的空白</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 一只熊猫
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a> 
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 21;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+  </div>
+</body>
+</html>

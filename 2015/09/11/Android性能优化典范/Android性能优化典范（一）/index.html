@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android性能优化典范（一） | 一只熊猫的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="转载自胡凯的博客 Android性能优化典范   2015年伊始，Google发布了关于Android性能优化典范的专题， 一共16个短视频，每个3-5分钟，帮助开发者创建更快更优秀的Android App。课程专题不仅仅介绍了Android系统中有关性能问题的底层工作原理，同时也介绍了如何通过工具来找出性能问题以及提升性能的建议。主要从三个 方面展开，Android的渲染机制，内存与GC，电量优">
+<meta name="keywords" content="Android性能优化典范">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android性能优化典范（一）">
+<meta property="og:url" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/index.html">
+<meta property="og:site_name" content="一只熊猫的博客">
+<meta property="og:description" content="转载自胡凯的博客 Android性能优化典范   2015年伊始，Google发布了关于Android性能优化典范的专题， 一共16个短视频，每个3-5分钟，帮助开发者创建更快更优秀的Android App。课程专题不仅仅介绍了Android系统中有关性能问题的底层工作原理，同时也介绍了如何通过工具来找出性能问题以及提升性能的建议。主要从三个 方面展开，Android的渲染机制，内存与GC，电量优">
+<meta property="og:locale" content="中文">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/1B60ABFE035FF01195310770A636F912.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/89CEA4325FEA20ECCEB900D7A0E204FB.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/75B783AEC9735D84FE792368727C0828.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/5A80E6BC35A44BABE91FB3609688AC69.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/E6F174D2FC3B853E9DBE2A0F3D67842E.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/AEAF28ED416BCAEFFDA3F0CE28E5CC72.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/F83D1AEC21814EC769ECAB62965856B1.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/C9B27592D8B23AD5C679D2C6C03F6771.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/9CEBA66BF3F8D71D11B3870FD2BD9187.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/3C1EE9EA327445A524B1231ADC2352CA.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/540C50D76DCFA910BD82FEFCEAB60730.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/FDD8FC8B9E147F8DD528B2EAE21BEB1E.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/7D619571660623E3F89B5683D37AE886.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/44D1A6B8B0AC808CE8DA4A5790CC953A.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/6F8D06456E14E60A5276D80A079E2303.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/30990A67914805C666D3B6BB12880EF9.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/9203E2E5284DA8BA1E2FBAE136160406.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/C8D8CB25F67B87D1566359DE9935254A.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/8FA9497E1500172C5E8590B2DCEA78EA.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/C21B81FB0EFD3F119FCF9B7046477A77.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/A5B171CD580383839BF6FB6DF4124193.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/86185230884AC06A3AC2DA870A0F41C5.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/10B3BCB89DD1F72E659FD98D628E4FF2.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/C4AF7C1CDAF0DE8995470BC6769101D9.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/1E544C1E687CD66FAB311CBA88C82887.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/8F64EA48B0870C8E02ACC44153DE937B.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/84C664DAC8E09E45E8EAFB1DAAC0F187.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/EB91E9B305F12D479CFD23A964E53FB1.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/F44F1AE7E0086FCEC9D40EBFA7EADEF5.jpg">
+<meta property="og:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/531056DFF5B509CD8ED8FD4D64D23807.jpg">
+<meta property="og:updated_time" content="2016-04-10T09:34:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android性能优化典范（一）">
+<meta name="twitter:description" content="转载自胡凯的博客 Android性能优化典范   2015年伊始，Google发布了关于Android性能优化典范的专题， 一共16个短视频，每个3-5分钟，帮助开发者创建更快更优秀的Android App。课程专题不仅仅介绍了Android系统中有关性能问题的底层工作原理，同时也介绍了如何通过工具来找出性能问题以及提升性能的建议。主要从三个 方面展开，Android的渲染机制，内存与GC，电量优">
+<meta name="twitter:image" content="http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/resources/1B60ABFE035FF01195310770A636F912.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="一只熊猫的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.jpg">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">一只熊猫</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/随笔">随笔</a></li>
+                        
+                            <li><a href="/categories/技术">技术</a></li>
+                        
+                            <li><a href="/instagram">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                            
+                                <a class="fl mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                            
+                                <a class="fl facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                            
+                                <a class="fl twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android性能优化典范/" style="font-size: 18px;">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size: 10px;">Annotation</a> <a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a> <a href="/tags/Binder/" style="font-size: 10px;">Binder</a> <a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/EventBus/" style="font-size: 12px;">EventBus</a> <a href="/tags/Google-Develop-for-Android-系列/" style="font-size: 20px;">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size: 10px;">Ibeacon</a> <a href="/tags/ImageView/" style="font-size: 10px;">ImageView</a> <a href="/tags/Kotlin/" style="font-size: 10px;">Kotlin</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MotionEvent/" style="font-size: 10px;">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size: 12px;">OkHttp</a> <a href="/tags/React-Native/" style="font-size: 10px;">React-Native</a> <a href="/tags/RxAndroid/" style="font-size: 10px;">RxAndroid</a> <a href="/tags/RxJava/" style="font-size: 18px;">RxJava</a> <a href="/tags/ServiceManager/" style="font-size: 10px;">ServiceManager</a> <a href="/tags/String相关类性能测试/" style="font-size: 10px;">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size: 10px;">Textview</a> <a href="/tags/TypedArray/" style="font-size: 10px;">TypedArray</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ViewHolder的作用/" style="font-size: 10px;">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/Webview/" style="font-size: 10px;">Webview</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/drawable/" style="font-size: 10px;">drawable</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/写作/" style="font-size: 12px;">写作</a> <a href="/tags/反思/" style="font-size: 10px;">反思</a> <a href="/tags/图像、背景、View更新、布局、内存/" style="font-size: 12px;">图像、背景、View更新、布局、内存</a> <a href="/tags/开发规范/" style="font-size: 14px;">开发规范</a> <a href="/tags/异步线程的实现（Looper、MessageQueue、Handler）/" style="font-size: 10px;">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/总结分类/" style="font-size: 16px;">总结分类</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/时间轴/" style="font-size: 10px;">时间轴</a> <a href="/tags/架构的实例/" style="font-size: 10px;">架构的实例</a> <a href="/tags/沉浸式/" style="font-size: 10px;">沉浸式</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/目标/" style="font-size: 12px;">目标</a> <a href="/tags/知识库/" style="font-size: 14px;">知识库</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/自定义Loader/" style="font-size: 10px;">自定义Loader</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wsgzao.github.io/">HelloDog</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dearzd.com/DBlog/">咚门</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.codingyun.com/">Coding云</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.jobbole.com/">伯乐在线</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin技术宅</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">一只熊猫</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">一只熊猫</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/随笔">随笔</a></li>
+                
+                    <li><a href="/categories/技术">技术</a></li>
+                
+                    <li><a href="/instagram">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                    
+                        <a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                    
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                    
+                        <a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Android性能优化典范/Android性能优化典范（一）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/11/Android性能优化典范/Android性能优化典范（一）/" class="article-date">
+      <time datetime="2015-09-11T02:12:17.000Z" itemprop="datePublished">2015-09-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android性能优化典范（一）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android性能优化典范/">Android性能优化典范</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>转载自胡凯的博客 <a href="http://hukai.me/android-performance-patterns/" target="_blank" rel="noopener">Android性能优化典范</a> </p>
+<p><img src="resources/1B60ABFE035FF01195310770A636F912.jpg" alt=""></p>
+<p>2015年伊始，Google发布了关于<a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范的专题</a>， 一共16个短视频，每个3-5分钟，帮助开发者创建更快更优秀的Android App。课程专题不仅仅介绍了Android系统中有关性能问题的底层工作原理，同时也介绍了如何通过工具来找出性能问题以及提升性能的建议。主要从三个 方面展开，Android的渲染机制，内存与GC，电量优化。下面是对这些问题和建议的总结梳理。</p>
+<h2 id="0-Render-Performance"><a href="#0-Render-Performance" class="headerlink" title="0)Render Performance"></a>0)Render Performance</h2><p>大多数用户感知到的卡顿等性能问题的最主要根源都是因为渲染性能。从设计师的角度，他们希望App能够有更多的动画，图片等时尚元素来实现流畅的用 户体验。但是Android系统很有可能无法及时完成那些复杂的界面渲染操作。Android系统每隔16ms发出VSYNC信号，触发对UI进行渲染， 如果每次渲染都成功，这样就能够达到流畅的画面所需要的60fps，为了能够实现60fps，这意味着程序的大多数操作都必须在16ms内完成。<br><a id="more"></a><br><img src="resources/89CEA4325FEA20ECCEB900D7A0E204FB.jpg" alt=""></p>
+<p>如果你的某个操作花费时间是24ms，系统在得到VSYNC信号的时候就无法进行正常渲染，这样就发生了丢帧现象。那么用户在32ms内看到的会是同一帧画面。</p>
+<p><img src="resources/75B783AEC9735D84FE792368727C0828.jpg" alt=""></p>
+<p>用户容易在UI执行动画或者滑动ListView的时候感知到卡顿不流畅，是因为这里的操作相对复杂，容易发生丢帧的现象，从而感觉卡顿。有很多原 因可以导致丢帧，也许是因为你的layout太过复杂，无法在16ms内完成渲染，有可能是因为你的UI上有层叠太多的绘制单元，还有可能是因为动画执行 的次数过多。这些都会导致CPU或者GPU负载过重。</p>
+<p>我们可以通过一些工具来定位问题，比如可以使用HierarchyViewer来查找Activity中的布局是否过于复杂，也可以使用手机设置里 面的开发者选项，打开Show GPU Overdraw等选项进行观察。你还可以使用TraceView来观察CPU的执行情况，更加快捷的找到性能瓶颈。</p>
+<h2 id="1-Understanding-Overdraw"><a href="#1-Understanding-Overdraw" class="headerlink" title="1)Understanding Overdraw"></a>1)Understanding Overdraw</h2><p>Overdraw(过度绘制)描述的是屏幕上的某个像素在同一帧的时间内被绘制了多次。在多层次的UI结构里面，如果不可见的UI也在做绘制的操作，这就会导致某些像素区域被绘制了多次。这就浪费大量的CPU以及GPU资源。</p>
+<p><img src="resources/5A80E6BC35A44BABE91FB3609688AC69.jpg" alt=""></p>
+<p>当设计上追求更华丽的视觉效果的时候，我们就容易陷入采用越来越多的层叠组件来实现这种视觉效果的怪圈。这很容易导致大量的性能问题，为了获得最佳的性能，我们必须尽量减少Overdraw的情况发生。</p>
+<p>幸运的是，我们可以通过手机设置里面的开发者选项，打开Show GPU Overdraw的选项，可以观察UI上的Overdraw情况。</p>
+<p><img src="resources/E6F174D2FC3B853E9DBE2A0F3D67842E.jpg" alt=""></p>
+<p>蓝色，淡绿，淡红，深红代表了4种不同程度的Overdraw情况，我们的目标就是尽量减少红色Overdraw，看到更多的蓝色区域。</p>
+<p>Overdraw有时候是因为你的UI布局存在大量重叠的部分，还有的时候是因为非必须的重叠背景。例如某个Activity有一个背景，然后里面 的Layout又有自己的背景，同时子View又分别有自己的背景。仅仅是通过移除非必须的背景图片，这就能够减少大量的红色Overdraw区域，增加 蓝色区域的占比。这一措施能够显著提升程序性能。</p>
+<h2 id="2-Understanding-VSYNC"><a href="#2-Understanding-VSYNC" class="headerlink" title="2)Understanding VSYNC"></a>2)Understanding VSYNC</h2><p>为了理解App是如何进行渲染的，我们必须了解手机硬件是如何工作，那么就必须理解什么是<em>VSYNC</em>。</p>
+<p>在讲解VSYNC之前，我们需要了解两个相关的概念：</p>
+<ul>
+<li>Refresh Rate：代表了屏幕在一秒内刷新屏幕的次数，这取决于硬件的固定参数，例如60Hz。</li>
+<li>Frame Rate：代表了GPU在一秒内绘制操作的帧数，例如30fps，60fps。</li>
+</ul>
+<p>GPU会获取图形数据进行渲染，然后硬件负责把渲染后的内容呈现到屏幕上，他们两者不停的进行协作。</p>
+<p><img src="resources/AEAF28ED416BCAEFFDA3F0CE28E5CC72.jpg" alt=""></p>
+<p>不幸的是，刷新频率和帧率并不是总能够保持相同的节奏。如果发生帧率与刷新频率不一致的情况，就会容易出现<strong>Tearing</strong>的现象(画面上下两部分显示内容发生断裂，来自不同的两帧数据发生重叠)。</p>
+<p><img src="resources/F83D1AEC21814EC769ECAB62965856B1.jpg" alt=""></p>
+<p><img src="resources/C9B27592D8B23AD5C679D2C6C03F6771.jpg" alt=""></p>
+<p>理解图像渲染里面的双重与三重缓存机制，这个概念比较复杂，请移步查看这里：<a href="http://source.android.com/devices/graphics/index.html" target="_blank" rel="noopener">http://source.android.com/devices/graphics/index.html</a>，还有这里<a href="http://article.yeeyan.org/view/37503/304664" target="_blank" rel="noopener">http://article.yeeyan.org/view/37503/304664</a>。</p>
+<p>通常来说，帧率超过刷新频率只是一种理想的状况，在超过60fps的情况下，GPU所产生的帧数据会因为等待VSYNC的刷新信息而被Hold住，这样能够保持每次刷新都有实际的新的数据可以显示。但是我们遇到更多的情况是帧率小于刷新频率。</p>
+<p><img src="resources/9CEBA66BF3F8D71D11B3870FD2BD9187.jpg" alt=""></p>
+<p>在这种情况下，某些帧显示的画面内容就会与上一帧的画面相同。糟糕的事情是，帧率从超过60fps突然掉到60fps以下，这样就会发生<strong>LAG</strong>，<strong>JANK</strong>，<strong>HITCHING</strong>等卡顿掉帧的不顺滑的情况。这也是用户感受不好的原因所在。</p>
+<h2 id="3-Tool-Profile-GPU-Rendering"><a href="#3-Tool-Profile-GPU-Rendering" class="headerlink" title="3)Tool:Profile GPU Rendering"></a>3)Tool:Profile GPU Rendering</h2><p>性能问题如此的麻烦，幸好我们可以有工具来进行调试。打开手机里面的开发者选项，选择Profile GPU Rendering，选中On screen as bars的选项。</p>
+<p><img src="resources/3C1EE9EA327445A524B1231ADC2352CA.jpg" alt=""></p>
+<p>选择了这样以后，我们可以在手机画面上看到丰富的GPU绘制图形信息，分别关于StatusBar，NavBar，激活的程序Activity区域的GPU Rending信息。</p>
+<p><img src="resources/540C50D76DCFA910BD82FEFCEAB60730.jpg" alt=""></p>
+<p>随着界面的刷新，界面上会滚动显示垂直的柱状图来表示每帧画面所需要渲染的时间，柱状图越高表示花费的渲染时间越长。</p>
+<p><img src="resources/FDD8FC8B9E147F8DD528B2EAE21BEB1E.jpg" alt=""></p>
+<p>中间有一根绿色的横线，代表16ms，我们需要确保每一帧花费的总时间都低于这条横线，这样才能够避免出现卡顿的问题。</p>
+<p><img src="resources/7D619571660623E3F89B5683D37AE886.jpg" alt=""></p>
+<p>每一条柱状线都包含三部分，蓝色代表测量绘制Display List的时间，红色代表OpenGL渲染Display List所需要的时间，黄色代表CPU等待GPU处理的时间。</p>
+<h2 id="4-Why-60fps"><a href="#4-Why-60fps" class="headerlink" title="4)Why 60fps?"></a>4)Why 60fps?</h2><p>我们通常都会提到60fps与16ms，可是知道为何会是以程序是否达到60fps来作为App性能的衡量标准吗？这是因为人眼与大脑之间的协作无法感知超过60fps的画面更新。</p>
+<p>12fps大概类似手动快速翻动书籍的帧率，这明显是可以感知到不够顺滑的。24fps使得人眼感知的是连续线性的运动，这其实是归功于运动模糊的 效果。24fps是电影胶圈通常使用的帧率，因为这个帧率已经足够支撑大部分电影画面需要表达的内容，同时能够最大的减少费用支出。但是低于30fps是 无法顺畅表现绚丽的画面内容的，此时就需要用到60fps来达到想要的效果，当然超过60fps是没有必要的。</p>
+<p>开发app的性能目标就是保持60fps，这意味着每一帧你只有16ms=1000/60的时间来处理所有的任务。</p>
+<h2 id="5-Android-UI-and-the-GPU"><a href="#5-Android-UI-and-the-GPU" class="headerlink" title="5)Android, UI and the GPU"></a>5)Android, UI and the GPU</h2><p>了解Android是如何利用GPU进行画面渲染有助于我们更好的理解性能问题。那么一个最实际的问题是：activity的画面是如何绘制到屏幕上的？那些复杂的XML布局文件又是如何能够被识别并绘制出来的？</p>
+<p><img src="resources/44D1A6B8B0AC808CE8DA4A5790CC953A.jpg" alt=""></p>
+<p><strong>Resterization栅格化</strong>是绘制那些Button，Shape，Path，String，Bitmap等组件最基础的操作。它把那些组件拆分到不同的像素上进行显示。这是一个很费时的操作，GPU的引入就是为了加快栅格化的操作。</p>
+<p>CPU负责把UI组件计算成Polygons，Texture纹理，然后交给GPU进行栅格化渲染。</p>
+<p><img src="resources/6F8D06456E14E60A5276D80A079E2303.jpg" alt=""></p>
+<p>然而每次从CPU转移到GPU是一件很麻烦的事情，所幸的是OpenGL ES可以把那些需要渲染的纹理Hold在GPU Memory里面，在下次需要渲染的时候直接进行操作。所以如果你更新了GPU所hold住的纹理内容，那么之前保存的状态就丢失了。</p>
+<p>在Android里面那些由主题所提供的资源，例如Bitmaps，Drawables都是一起打包到统一的Texture纹理当中，然后再传递到 GPU里面，这意味着每次你需要使用这些资源的时候，都是直接从纹理里面进行获取渲染的。当然随着UI组件的越来越丰富，有了更多演变的形态。例如显示图 片的时候，需要先经过CPU的计算加载到内存中，然后传递给GPU进行渲染。文字的显示更加复杂，需要先经过CPU换算成纹理，然后再交给GPU进行渲 染，回到CPU绘制单个字符的时候，再重新引用经过GPU渲染的内容。动画则是一个更加复杂的操作流程。</p>
+<p>为了能够使得App流畅，我们需要在每一帧16ms以内处理完所有的CPU与GPU计算，绘制，渲染等等操作。</p>
+<h2 id="6-Invalidations-Layouts-and-Performance"><a href="#6-Invalidations-Layouts-and-Performance" class="headerlink" title="6)Invalidations, Layouts, and Performance"></a>6)Invalidations, Layouts, and Performance</h2><p>顺滑精妙的动画是app设计里面最重要的元素之一，这些动画能够显著提升用户体验。下面会讲解Android系统是如何处理UI组件的更新操作的。</p>
+<p>通常来说，Android需要把XML布局文件转换成GPU能够识别并绘制的对象。这个操作是在<strong>DisplayList</strong>的帮助下完成的。DisplayList持有所有将要交给GPU绘制到屏幕上的数据信息。</p>
+<p>在某个View第一次需要被渲染时，DisplayList会因此而被创建，当这个View要显示到屏幕上时，我们会执行GPU的绘制指令来进行渲 染。如果你在后续有执行类似移动这个View的位置等操作而需要再次渲染这个View时，我们就仅仅需要额外操作一次渲染指令就够了。然而如果你修改了 View中的某些可见组件，那么之前的DisplayList就无法继续使用了，我们需要回头重新创建一个DisplayList并且重新执行渲染指令并 更新到屏幕上。</p>
+<p>需要注意的是：任何时候View中的绘制内容发生变化时，都会重新执行创建DisplayList，渲染DisplayList，更新到屏幕上等一 系列操作。这个流程的表现性能取决于你的View的复杂程度，View的状态变化以及渲染管道的执行性能。举个例子，假设某个Button的大小需要增大 到目前的两倍，在增大Button大小之前，需要通过父View重新计算并摆放其他子View的位置。修改View的大小会触发整个 HierarcyView的重新计算大小的操作。如果是修改View的位置则会触发HierarchView重新计算其他View的位置。如果布局很复 杂，这就会很容易导致严重的性能问题。我们需要尽量减少Overdraw。</p>
+<p><img src="resources/30990A67914805C666D3B6BB12880EF9.jpg" alt=""></p>
+<p>我们可以通过前面介绍的Monitor GPU Rendering来查看渲染的表现性能如何，另外也可以通过开发者选项里面的Show GPU view updates来查看视图更新的操作，最后我们还可以通过HierarchyViewer这个工具来查看布局，使得布局尽量扁平化，移除非必需的UI组 件，这些操作能够减少Measure，Layout的计算时间。</p>
+<h2 id="7-Overdraw-Cliprect-QuickReject"><a href="#7-Overdraw-Cliprect-QuickReject" class="headerlink" title="7)Overdraw, Cliprect, QuickReject"></a>7)Overdraw, Cliprect, QuickReject</h2><p>引起性能问题的一个很重要的方面是因为过多复杂的绘制操作。我们可以通过工具来检测并修复标准UI组件的Overdraw问题，但是针对高度自定义的UI组件则显得有些力不从心。</p>
+<p>有一个窍门是我们可以通过执行几个APIs方法来显著提升绘制操作的性能。前面有提到过，非可见的UI组件进行绘制更新会导致Overdraw。例 如Nav Drawer从前置可见的Activity滑出之后，如果还继续绘制那些在Nav Drawer里面不可见的UI组件，这就导致了Overdraw。为了解决这个问题，Android系统会通过避免绘制那些完全不可见的组件来尽量减少 Overdraw。那些Nav Drawer里面不可见的View就不会被执行浪费资源。</p>
+<p><img src="resources/9203E2E5284DA8BA1E2FBAE136160406.jpg" alt=""></p>
+<p>但是不幸的是，对于那些过于复杂的自定义的View(重写了onDraw方法)，Android系统无法检测具体在onDraw里面会执行什么操作，系统无法监控并自动优化，也就无法避免Overdraw了。但是我们可以通过<a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="noopener">canvas.clipRect()</a>来 帮助系统识别那些可见的区域。这个方法可以指定一块矩形区域，只有在这个区域内才会被绘制，其他的区域会被忽视。这个API可以很好的帮助那些有多组重叠 组件的自定义View来控制显示的区域。同时clipRect方法还可以帮助节约CPU与GPU资源，在clipRect区域之外的绘制指令都不会被执 行，那些部分内容在矩形区域内的组件，仍然会得到绘制。</p>
+<p><img src="resources/C8D8CB25F67B87D1566359DE9935254A.jpg" alt=""></p>
+<p>除了clipRect方法之外，我们还可以使用<a href="http://developer.android.com/reference/android/graphics/Canvas.html" target="_blank" rel="noopener">canvas.quickreject()</a>来判断是否没和某个矩形相交，从而跳过那些非矩形区域内的绘制操作。做了那些优化之后，我们可以通过上面介绍的Show GPU Overdraw来查看效果。</p>
+<h2 id="8-Memory-Churn-and-performance"><a href="#8-Memory-Churn-and-performance" class="headerlink" title="8)Memory Churn and performance"></a>8)Memory Churn and performance</h2><p>虽然Android有自动管理内存的机制，但是对内存的不恰当使用仍然容易引起严重的性能问题。在同一帧里面创建过多的对象是件需要特别引起注意的事情。</p>
+<p>Android系统里面有一个<strong>Generational Heap Memory</strong>的模型，系统会根据内存中不同 的内存数据类型分别执行不同的GC操作。例如，最近刚分配的对象会放在Young Generation区域，这个区域的对象通常都是会快速被创建并且很快被销毁回收的，同时这个区域的GC操作速度也是比Old Generation区域的GC操作速度更快的。</p>
+<p><img src="resources/8FA9497E1500172C5E8590B2DCEA78EA.jpg" alt=""></p>
+<p>除了速度差异之外，执行GC操作的时候，任何线程的任何操作都会需要暂停，等待GC操作完成之后，其他操作才能够继续运行。</p>
+<p><img src="resources/C21B81FB0EFD3F119FCF9B7046477A77.jpg" alt=""></p>
+<p>通常来说，单个的GC并不会占用太多时间，但是大量不停的GC操作则会显著占用帧间隔时间(16ms)。如果在帧间隔时间里面做了过多的GC操作，那么自然其他类似计算，渲染等操作的可用时间就变得少了。</p>
+<p>导致GC频繁执行有两个原因：</p>
+<ul>
+<li><strong>Memory Churn内存抖动</strong>，内存抖动是因为大量的对象被创建又在短时间内马上被释放。</li>
+<li>瞬间产生大量的对象会严重占用Young Generation的内存区域，当达到阀值，剩余空间不够的时候，也会触发GC。即使每次分配的对象占用了很少的内存，但是他们叠加在一起会增加 Heap的压力，从而触发更多其他类型的GC。这个操作有可能会影响到帧率，并使得用户感知到性能问题。</li>
+</ul>
+<p><img src="resources/A5B171CD580383839BF6FB6DF4124193.jpg" alt=""></p>
+<p>解决上面的问题有简洁直观方法，如果你在<strong>Memory Monitor</strong>里面查看到短时间发生了多次内存的涨跌，这意味着很有可能发生了内存抖动。</p>
+<p><img src="resources/86185230884AC06A3AC2DA870A0F41C5.jpg" alt=""></p>
+<p>同时我们还可以通过<strong>Allocation Tracker</strong>来查看在短时间内，同一个栈中不断进出的相同对象。这是内存抖动的典型信号之一。</p>
+<p>当你大致定位问题之后，接下去的问题修复也就显得相对直接简单了。例如，你需要避免在for循环里面分配对象占用内存，需要尝试把对象的创建移到循 环体之外，自定义View中的onDraw方法也需要引起注意，每次屏幕发生绘制以及动画执行过程中，onDraw方法都会被调用到，避免在onDraw 方法里面执行复杂的操作，避免创建对象。对于那些无法避免需要创建对象的情况，我们可以考虑对象池模型，通过对象池来解决频繁创建与销毁的问题，但是这里 需要注意结束使用之后，需要手动释放对象池中的对象。</p>
+<h2 id="9-Garbage-Collection-in-Android"><a href="#9-Garbage-Collection-in-Android" class="headerlink" title="9)Garbage Collection in Android"></a>9)Garbage Collection in Android</h2><p>JVM的回收机制给开发人员带来很大的好处，不用时刻处理对象的分配与回收，可以更加专注于更加高级的代码实现。相比起Java，C与C++等语言 具备更高的执行效率，他们需要开发人员自己关注对象的分配与回收，但是在一个庞大的系统当中，还是免不了经常发生部分对象忘记回收的情况，这就是内存泄 漏。</p>
+<p>原始JVM中的GC机制在Android中得到了很大程度上的优化。Android里面是一个三级Generation的内存模型，最近分配的对象 会存放在Young Generation区域，当这个对象在这个区域停留的时间达到一定程度，它会被移动到Old Generation，最后到Permanent Generation区域。</p>
+<p><img src="resources/10B3BCB89DD1F72E659FD98D628E4FF2.jpg" alt=""></p>
+<p>每一个级别的内存区域都有固定的大小，此后不断有新的对象被分配到此区域，当这些对象总的大小快达到这一级别内存区域的阀值时，会触发GC的操作，以便腾出空间来存放其他新的对象。</p>
+<p><img src="resources/C4AF7C1CDAF0DE8995470BC6769101D9.jpg" alt=""></p>
+<p>前面提到过每次GC发生的时候，所有的线程都是暂停状态的。GC所占用的时间和它是哪一个Generation也有关系，Young Generation的每次GC操作时间是最短的，Old Generation其次，Permanent Generation最长。执行时间的长短也和当前Generation中的对象数量有关，遍历查找20000个对象比起遍历50个对象自然是要慢很多 的。</p>
+<p>虽然Google的工程师在尽量缩短每次GC所花费的时间，但是特别注意GC引起的性能问题还是很有必要。如果不小心在最小的for循环单元里面执 行了创建对象的操作，这将很容易引起GC并导致性能问题。通过Memory Monitor我们可以查看到内存的占用情况，每一次瞬间的内存降低都是因为此时发生了GC操作，如果在短时间内发生大量的内存上涨与降低的事件，这说明 很有可能这里有性能问题。我们还可以通过<strong>Heap and Allocation Tracker</strong>工具来查看此时内存中分配的到底有哪些对象。</p>
+<h2 id="10-Performance-Cost-of-Memory-Leaks"><a href="#10-Performance-Cost-of-Memory-Leaks" class="headerlink" title="10)Performance Cost of Memory Leaks"></a>10)Performance Cost of Memory Leaks</h2><p>虽然Java有自动回收的机制，可是这不意味着Java中不存在内存泄漏的问题，而内存泄漏会很容易导致严重的性能问题。</p>
+<p>内存泄漏指的是那些程序不再使用的对象无法被GC识别，这样就导致这个对象一直留在内存当中，占用了宝贵的内存空间。显然，这还使得每级Generation的内存区域可用空间变小，GC就会更容易被触发，从而引起性能问题。</p>
+<p>寻找内存泄漏并修复这个漏洞是件很棘手的事情，你需要对执行的代码很熟悉，清楚的知道在特定环境下是如何运行的，然后仔细排查。例如，你想知道程序 中的某个activity退出的时候，它之前所占用的内存是否有完整的释放干净了？首先你需要在activity处于前台的时候使用Heap Tool获取一份当前状态的内存快照，然后你需要创建一个几乎不这么占用内存的空白activity用来给前一个Activity进行跳转，其次在跳转到 这个空白的activity的时候主动调用System.gc()方法来确保触发一个GC操作。最后，如果前面这个activity的内存都有全部正确释 放，那么在空白activity被启动之后的内存快照中应该不会有前面那个activity中的任何对象了。</p>
+<p><img src="resources/1E544C1E687CD66FAB311CBA88C82887.jpg" alt=""></p>
+<p>如果你发现在空白activity的内存快照中有一些可疑的没有被释放的对象存在，那么接下去就应该使用<strong>Alocation Track Tool</strong>来仔细查找具体的可疑对象。我们可以从空白activity开始监听，启动到观察activity，然后再回到空白activity结束监听。这样操作以后，我们可以仔细观察那些对象，找出内存泄漏的真凶。</p>
+<p><img src="resources/8F64EA48B0870C8E02ACC44153DE937B.jpg" alt=""></p>
+<h2 id="11-Memory-Performance"><a href="#11-Memory-Performance" class="headerlink" title="11)Memory Performance"></a>11)Memory Performance</h2><p>通常来说，Android对GC做了大量的优化操作，虽然执行GC操作的时候会暂停其他任务，可是大多数情况下，GC操作还是相对很安静并且高效的。但是如果我们对内存的使用不恰当，导致GC频繁执行，这样就会引起不小的性能问题。</p>
+<p>为了寻找内存的性能问题，Android Studio提供了工具来帮助开发者。</p>
+<ul>
+<li><strong>Memory Monitor：</strong>查看整个app所占用的内存，以及发生GC的时刻，短时间内发生大量的GC操作是一个危险的信号。</li>
+<li><strong>Allocation Tracker：</strong>使用此工具来追踪内存的分配，前面有提到过。</li>
+<li><strong>Heap Tool：</strong>查看当前内存快照，便于对比分析哪些对象有可能是泄漏了的，请参考前面的Case。</li>
+</ul>
+<h2 id="12-Tool-Memory-Monitor"><a href="#12-Tool-Memory-Monitor" class="headerlink" title="12)Tool - Memory Monitor"></a>12)Tool - Memory Monitor</h2><p>Android Studio中的Memory Monitor可以很好的帮组我们查看程序的内存使用情况。</p>
+<p><img src="resources/84C664DAC8E09E45E8EAFB1DAAC0F187.jpg" alt=""></p>
+<p><img src="resources/EB91E9B305F12D479CFD23A964E53FB1.jpg" alt=""></p>
+<h2 id="13-Battery-Performance"><a href="#13-Battery-Performance" class="headerlink" title="13)Battery Performance"></a>13)Battery Performance</h2><p>电量其实是目前手持设备最宝贵的资源之一，大多数设备都需要不断的充电来维持继续使用。不幸的是，对于开发者来说，电量优化是他们最后才会考虑的的事情。但是可以确定的是，千万不能让你的应用成为消耗电量的大户。</p>
+<p>Purdue University研究了最受欢迎的一些应用的电量消耗，平均只有30%左右的电量是被程序最核心的方法例如绘制图片，摆放布局等等所使用掉的，剩下的 70%左右的电量是被上报数据，检查位置信息，定时检索后台广告信息所使用掉的。如何平衡这两者的电量消耗，就显得非常重要了。</p>
+<p>有下面一些措施能够显著减少电量的消耗：</p>
+<ul>
+<li>我们应该尽量减少唤醒屏幕的次数与持续的时间，使用WakeLock来处理唤醒的问题，能够正确执行唤醒操作并根据设定及时关闭操作进入睡眠状态。</li>
+<li>某些非必须马上执行的操作，例如上传歌曲，图片处理等，可以等到设备处于充电状态或者电量充足的时候才进行。</li>
+<li>触发网络请求的操作，每次都会保持无线信号持续一段时间，我们可以把零散的网络请求打包进行一次操作，避免过多的无线信号引起的电量消耗。关于网络请求引起无线信号的电量消耗，还可以参考这里<a href="http://hukai.me/android-training-course-in-chinese/connectivity/efficient-downloads/efficient-network-access.html" target="_blank" rel="noopener">http://hukai.me/android-training-course-in-chinese/connectivity/efficient-downloads/efficient-network-access.html</a></li>
+</ul>
+<p>我们可以通过手机设置选项找到对应App的电量消耗统计数据。我们还可以通过<strong>Battery Historian Tool</strong>来查看详细的电量消耗。</p>
+<p><img src="resources/F44F1AE7E0086FCEC9D40EBFA7EADEF5.jpg" alt=""></p>
+<p>如果发现我们的App有电量消耗过多的问题，我们可以使用JobScheduler API来对一些任务进行定时处理，例如我们可以把那些任务重的操作等到手机处于充电状态，或者是连接到WiFi的时候来处理。 关于JobScheduler的更多知识可以参考<a href="http://hukai.me/android-training-course-in-chinese/background-jobs/scheduling/index.html" target="_blank" rel="noopener">http://hukai.me/android-training-course-in-chinese/background-jobs/scheduling/index.html</a></p>
+<h2 id="14-Understanding-Battery-Drain-on-Android"><a href="#14-Understanding-Battery-Drain-on-Android" class="headerlink" title="14)Understanding Battery Drain on Android"></a>14)Understanding Battery Drain on Android</h2><p>电量消耗的计算与统计是一件麻烦而且矛盾的事情，记录电量消耗本身也是一个费电量的事情。唯一可行的方案是使用第三方监测电量的设备，这样才能够获取到真实的电量消耗。</p>
+<p>当设备处于待机状态时消耗的电量是极少的，以N5为例，打开飞行模式，可以待机接近1个月。可是点亮屏幕，硬件各个模块就需要开始工作，这会需要消耗很多电量。</p>
+<p>使用WakeLock或者JobScheduler唤醒设备处理定时的任务之后，一定要及时让设备回到初始状态。每次唤醒无线信号进行数据传递，都会消耗很多电量，它比WiFi等操作更加的耗电，详情请关注<a href="http://hukai.me/android-training-course-in-chinese/connectivity/efficient-downloads/efficient-network-access.html" target="_blank" rel="noopener">http://hukai.me/android-training-course-in-chinese/connectivity/efficient-downloads/efficient-network-access.html</a></p>
+<p><img src="resources/531056DFF5B509CD8ED8FD4D64D23807.jpg" alt=""></p>
+<p>修复电量的消耗是另外一个很大的课题，这里就不展开继续了。</p>
+<h2 id="15-Battery-Drain-and-WakeLocks"><a href="#15-Battery-Drain-and-WakeLocks" class="headerlink" title="15)Battery Drain and WakeLocks"></a>15)Battery Drain and WakeLocks</h2><p>高效的保留更多的电量与不断促使用户使用你的App来消耗电量，这是矛盾的选择题。不过我们可以使用一些更好的办法来平衡两者。</p>
+<p>假设你的手机里面装了大量的社交类应用，即使手机处于待机状态，也会经常被这些应用唤醒用来检查同步新的数据信息。Android会不断关闭各种硬 件来延长手机的待机时间，首先屏幕会逐渐变暗直至关闭，然后CPU进入睡眠，这一切操作都是为了节约宝贵的电量资源。但是即使在这种睡眠状态下，大多数应 用还是会尝试进行工作，他们将不断的唤醒手机。一个最简单的唤醒手机的方法是使用PowerManager.WakeLock的API来保持CPU工作并 防止屏幕变暗关闭。这使得手机可以被唤醒，执行工作，然后回到睡眠状态。知道如何获取WakeLock是简单的，可是及时释放WakeLock也是非常重 要的，不恰当的使用WakeLock会导致严重错误。例如网络请求的数据返回时间不确定，导致本来只需要10s的事情一直等待了1个小时，这样会使得电量 白白浪费了。这也是为何使用带超时参数的wakelock.acquice()方法是很关键的。但是仅仅设置超时并不足够解决问题，例如设置多长的超时比 较合适？什么时候进行重试等等？</p>
+<p>解决上面的问题，正确的方式可能是使用非精准定时器。通常情况下，我们会设定一个时间进行某个操作，但是动态修改这个时间也许会更好。例如，如果有 另外一个程序需要比你设定的时间晚5分钟唤醒，最好能够等到那个时候，两个任务捆绑一起同时进行，这就是非精确定时器的核心工作原理。我们可以定制计划的 任务，可是系统如果检测到一个更好的时间，它可以推迟你的任务，以节省电量消耗。</p>
+<p>这正是JobScheduler API所做的事情。它会根据当前的情况与任务，组合出理想的唤醒时间，例如等到正在充电或者连接到WiFi的时候，或者集中任务一起执行。我们可以通过这个API实现很多免费的调度算法。</p>
+<p>从Android 5.0开始发布了Battery History Tool，它可以查看程序被唤醒的频率，又谁唤醒的，持续了多长的时间，这些信息都可以获取到。</p>
+<p>请关注程序的电量消耗，用户可以通过手机的设置选项观察到那些耗电量大户，并可能决定卸载他们。所以尽量减少程序的电量消耗是非常有必要的。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/09/11/Android性能优化典范/Android性能优化典范（一）/">Android性能优化典范（一）</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 一只熊猫 的个人博客">一只熊猫</a></p>
+        <p><span>发布时间:</span>2015年09月11日 - 10时12分</p>
+     
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/09/11/Android性能优化典范/Android性能优化典范（一）/" title="Android性能优化典范（一）">http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.apanda.online/2015/09/11/Android性能优化典范/Android性能优化典范（一）/　　作者: 一只熊猫" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2015/09/13/Android性能优化典范/Android性能优化典范（二）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Android性能优化典范（二）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/22/Android Skills/注解(Annotation)自定义注解入门/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android注解(Annotation)自定义注解入门</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-Render-Performance"><span class="toc-number">1.</span> <span class="toc-text">0)Render Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Understanding-Overdraw"><span class="toc-number">2.</span> <span class="toc-text">1)Understanding Overdraw</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Understanding-VSYNC"><span class="toc-number">3.</span> <span class="toc-text">2)Understanding VSYNC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Tool-Profile-GPU-Rendering"><span class="toc-number">4.</span> <span class="toc-text">3)Tool:Profile GPU Rendering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Why-60fps"><span class="toc-number">5.</span> <span class="toc-text">4)Why 60fps?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Android-UI-and-the-GPU"><span class="toc-number">6.</span> <span class="toc-text">5)Android, UI and the GPU</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Invalidations-Layouts-and-Performance"><span class="toc-number">7.</span> <span class="toc-text">6)Invalidations, Layouts, and Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Overdraw-Cliprect-QuickReject"><span class="toc-number">8.</span> <span class="toc-text">7)Overdraw, Cliprect, QuickReject</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Memory-Churn-and-performance"><span class="toc-number">9.</span> <span class="toc-text">8)Memory Churn and performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-Garbage-Collection-in-Android"><span class="toc-number">10.</span> <span class="toc-text">9)Garbage Collection in Android</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-Performance-Cost-of-Memory-Leaks"><span class="toc-number">11.</span> <span class="toc-text">10)Performance Cost of Memory Leaks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-Memory-Performance"><span class="toc-number">12.</span> <span class="toc-text">11)Memory Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-Tool-Memory-Monitor"><span class="toc-number">13.</span> <span class="toc-text">12)Tool - Memory Monitor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-Battery-Performance"><span class="toc-number">14.</span> <span class="toc-text">13)Battery Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-Understanding-Battery-Drain-on-Android"><span class="toc-number">15.</span> <span class="toc-text">14)Understanding Battery Drain on Android</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-Battery-Drain-and-WakeLocks"><span class="toc-number">16.</span> <span class="toc-text">15)Battery Drain and WakeLocks</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/09/13/Android性能优化典范/Android性能优化典范（二）/" title="上一篇: Android性能优化典范（二）">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2015/07/22/Android Skills/注解(Annotation)自定义注解入门/" title="下一篇: Android注解(Annotation)自定义注解入门">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/CentOS-FireWall/">centos/CentOS-FireWall</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/centos-attack-record/">centos/centos-attack-record</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/redis/">centos/redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/ssr/">centos/ssr</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/06/每天一道算法题目Java/范型/">每天一道算法题目Java/范型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Gomobile编译jni库/">Go lang 学习笔记/Gomobile编译jni库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Golang 支持交叉编译/">Go lang 学习笔记/Golang 支持交叉编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang.resource/commit/">Go lang 学习笔记/基本排序算法Golang.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang/">Go lang 学习笔记/基本排序算法Golang</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit/">Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现/">Go lang 学习笔记/Golang二分查找算法的简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析/">Go lang 学习笔记/Json解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析.resource/commit/">Go lang 学习笔记/Json解析.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序/">Go lang 学习笔记/二叉树插入排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序.resource/commit/">Go lang 学习笔记/二叉树插入排序.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/">每天一道算法题目Java/寻找出现一次的字符.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符/">每天一道算法题目Java/寻找出现一次的字符</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/Android Skills/使用Android Studio进行NDK开发（一）/">使用AndroidStudio进行NDK开发（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/06/RxJava/RxJava & RxAndroid备忘/">RxJava & RxAndroid备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/在安卓上使用RxJava/">在安卓上使用RxJava</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/深入浅出RxJava四-在Android中使用响应式编程/">深入浅出RxJava(四：在Android中使用响应式编程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/04/RxJava/深入浅出RxJava三--响应式的好处/">深入浅出RxJava(三：响应式的好处)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/02/RxJava/深入浅出RxJava(二：操作符)/">深入浅出RxJava(二：操作符)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/Q2季度目标/">Q2季度目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/VIM快捷键/">VIM快捷键的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/RxJava/深入浅出RxJava（一：基础篇）/">深入浅出RxJava(一：基础篇)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考/">谷歌官方出的一套关于 Android 架构的实例参考</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava/RxAndroid/">从案例学习RxAndroid</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/23/小知识点/你应该知道的那些Android小经验/">Android小经验</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/小知识点/android代码片段/">Android开发代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/02/小知识点/Android开发工作中的细节/">Android开发工作中的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/随笔/日常使用到的梯子/">日常使用到的梯子</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/小知识点/Android开发中的小知识点汇总/">Android小知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/Android Skills/Lambda for Android/">Lambda for Android</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/Android Skills/理解Android的编译命令/">理解Android编译命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/22/Android Skills/Webview上传文件的那些坑/">Webview上传文件的那些坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/21/Android Skills/Android源码编译/">Android源码编译和内核编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/New Lan/Kotlin1.0正式版发布/">Kotlin 1.0 正式版发布啦</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/25/随笔/Ibeacon/">Ibeacon</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Android Skills/Android MotionEvent详解/">Android MotionEvent详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/19/New Lan/React-Native学习指南/">React-Native学习指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/18/Android Skills/RecyclerView 列表控件中简单实现时间线/">RecyclerView 列表控件中简单实现时间线</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/21/3.5开发中的亮点和不足/">亮点和不足</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/09/Android Skills/ActionBar沉浸式实现/">ActionBar沉浸式实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之内存篇/">Android性能优化之内存篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之渲染篇/">Android性能优化之渲染篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之电量篇/">Android性能优化之电量篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化典范（三）/">Android性能优化典范（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化之运算篇/">Android性能优化之运算篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/13/Android性能优化典范/Android性能优化典范（二）/">Android性能优化典范（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/11/Android性能优化典范/Android性能优化典范（一）/">Android性能优化典范（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/22/Android Skills/注解(Annotation)自定义注解入门/">Android注解(Annotation)自定义注解入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/21/Android Skills/Android OkHttp完全解析/">Android OkHttp完全解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/19/Android Skills/Android OkHttp初级入门/">Android OkHttp使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/27/Android Skills/EventBus 3.0的用法详解(二)/">EventBus 3.0的用法详解（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/25/Android Skills/EventBus 3.0的用法详解（一）/">EventBus 3.0的用法详解（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/21/Android Skills/自定义Dialog的大小、位置、颜色/">Android自定义对话框(Dialog)位置,大小</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/16/Google Develop for Android 系列/Developing for Android 最佳实践九：工具/">Google Develop for Android 系列九 － 工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/15/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/">Google Develop for Android 系列八 － 用户界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/14/Google Develop for Android 系列/Google Develop for Android 系列七 － Framework最佳实践/">Google Develop for Android 系列七 － Framework最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/13/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/">Google Develop for Android 系列六 － Storage最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/12/Google Develop for Android 系列/Google Develop for Android 系列五 － Language and Libraries/">Google Develop for Android 系列五 － Language and Libraries</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/11/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/">Google Develop for Android 系列四 － Network最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/10/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/">Google Develop for Android 系列三 － Performance最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/">Google Develop for Android 系列二 － Memory 最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/08/Google Develop for Android 系列/Google Develop for Android 系列一 － 相关上下文介绍/">Google Develop for Android 系列一 － 相关上下文介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/02/小知识点/Android开发常用的adb命令整理/">Android开发常用的adb命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/01/21/小知识点/端口号/">端口号设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/07/Android Skills/Android AsyncTask 技巧/">Android AsyncTask 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/05/Android Skills/图像、背景、View更新、布局、内存/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/08/随笔/健身/">健身</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/09/18/Android Skills/widget用法/">widget用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/08/Android Skills/webview入门/">WebView入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/07/18/Android Skills/TypedArray/">解析：TypedArray 为什么需要调用recycle()</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/15/Android Skills/Android内核 ServiceManager/">Android内核 ServiceManager</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/12/Android Skills/Android内核 Binder/">Android内核 Binder</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/08/Android Skills/Android内核 异步线程的实现（Looper、MessageQueue、Handler）/">异步线程的实现（Looper、MessageQueue、Handler）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/01/Android Skills/CountDownTimer（倒数计时器）/">CountDownTimer（倒数计时器）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/19/Android Skills/万能的ViewHolder/">ViewHolder的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android 自定义Loader/">Android 自定义Loader</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android Skill 下拉刷新/">下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/15/Android Skills/Android TextView 技巧/">Android Textview 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/13/Android Skills/Android String相关类性能测试/">String相关类性能测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/11/Android Skills/Android ImageView ScaleType属性/">ImageView ScaleType属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/05/Android Skills/Android EditText 技巧/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/24/随笔/Lantern(灯笼)使用实例/">Lantern(灯笼)使用实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/19/Android Skills/Context/">Android Context 到底是什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/17/小知识点/Android开发中一些被冷落但却很有用的类和方法/">Android开发中一些被冷落但却很有用的类和方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/12/小知识点/Android Studio的快捷键/">Android Studio 的快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/08/小知识点/Android开发规范/">Android 开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/07/小知识点/开发规范/">Google Java编程风格指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/28/Android Skills/40个Java集合面试问题和答案/">40个Java集合面试问题和答案</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/Android Skills/Android anim drawable color 技巧/">Android anim drawable color技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/小知识点/36个Android开发的代码片段/">36个Android开发常用代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/21/随笔/生命中的空白/">生命中的空白</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 一只熊猫
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a> 
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 21;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+  </div>
+</body>
+</html>

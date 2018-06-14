@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>40个Java集合面试问题和答案 | 一只熊猫的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Java集合框架为Java编程语言的基础，也是Java面试中很重要的一个知识点。这里，我列出了一些关于Java集合的重要问题和答案。  1.Java集合框架是什么？说出一些集合框架的优点？每种编程语言中都有集合，最初的Java版本包含几种集合类：Vector、Stack、HashTable和Array。随着集合的广泛使用，Java1.2提出了囊括所有集合接口、实现和算法的集合框架。在保证线程安全">
+<meta name="keywords" content="总结分类">
+<meta property="og:type" content="article">
+<meta property="og:title" content="40个Java集合面试问题和答案">
+<meta property="og:url" content="http://blog.apanda.online/2014/01/28/Android Skills/40个Java集合面试问题和答案/index.html">
+<meta property="og:site_name" content="一只熊猫的博客">
+<meta property="og:description" content="Java集合框架为Java编程语言的基础，也是Java面试中很重要的一个知识点。这里，我列出了一些关于Java集合的重要问题和答案。  1.Java集合框架是什么？说出一些集合框架的优点？每种编程语言中都有集合，最初的Java版本包含几种集合类：Vector、Stack、HashTable和Array。随着集合的广泛使用，Java1.2提出了囊括所有集合接口、实现和算法的集合框架。在保证线程安全">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2016-02-19T08:27:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="40个Java集合面试问题和答案">
+<meta name="twitter:description" content="Java集合框架为Java编程语言的基础，也是Java面试中很重要的一个知识点。这里，我列出了一些关于Java集合的重要问题和答案。  1.Java集合框架是什么？说出一些集合框架的优点？每种编程语言中都有集合，最初的Java版本包含几种集合类：Vector、Stack、HashTable和Array。随着集合的广泛使用，Java1.2提出了囊括所有集合接口、实现和算法的集合框架。在保证线程安全">
+  
+    <link rel="alternative" href="/atom.xml" title="一只熊猫的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.jpg">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">一只熊猫</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/随笔">随笔</a></li>
+                        
+                            <li><a href="/categories/技术">技术</a></li>
+                        
+                            <li><a href="/instagram">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                            
+                                <a class="fl mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                            
+                                <a class="fl facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                            
+                                <a class="fl twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android性能优化典范/" style="font-size: 18px;">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size: 10px;">Annotation</a> <a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a> <a href="/tags/Binder/" style="font-size: 10px;">Binder</a> <a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/EventBus/" style="font-size: 12px;">EventBus</a> <a href="/tags/Google-Develop-for-Android-系列/" style="font-size: 20px;">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size: 10px;">Ibeacon</a> <a href="/tags/ImageView/" style="font-size: 10px;">ImageView</a> <a href="/tags/Kotlin/" style="font-size: 10px;">Kotlin</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MotionEvent/" style="font-size: 10px;">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size: 12px;">OkHttp</a> <a href="/tags/React-Native/" style="font-size: 10px;">React-Native</a> <a href="/tags/RxAndroid/" style="font-size: 10px;">RxAndroid</a> <a href="/tags/RxJava/" style="font-size: 18px;">RxJava</a> <a href="/tags/ServiceManager/" style="font-size: 10px;">ServiceManager</a> <a href="/tags/String相关类性能测试/" style="font-size: 10px;">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size: 10px;">Textview</a> <a href="/tags/TypedArray/" style="font-size: 10px;">TypedArray</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ViewHolder的作用/" style="font-size: 10px;">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/Webview/" style="font-size: 10px;">Webview</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/drawable/" style="font-size: 10px;">drawable</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/写作/" style="font-size: 12px;">写作</a> <a href="/tags/反思/" style="font-size: 10px;">反思</a> <a href="/tags/图像、背景、View更新、布局、内存/" style="font-size: 12px;">图像、背景、View更新、布局、内存</a> <a href="/tags/开发规范/" style="font-size: 14px;">开发规范</a> <a href="/tags/异步线程的实现（Looper、MessageQueue、Handler）/" style="font-size: 10px;">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/总结分类/" style="font-size: 16px;">总结分类</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/时间轴/" style="font-size: 10px;">时间轴</a> <a href="/tags/架构的实例/" style="font-size: 10px;">架构的实例</a> <a href="/tags/沉浸式/" style="font-size: 10px;">沉浸式</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/目标/" style="font-size: 12px;">目标</a> <a href="/tags/知识库/" style="font-size: 14px;">知识库</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/自定义Loader/" style="font-size: 10px;">自定义Loader</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wsgzao.github.io/">HelloDog</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dearzd.com/DBlog/">咚门</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.codingyun.com/">Coding云</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.jobbole.com/">伯乐在线</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin技术宅</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">一只熊猫</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">一只熊猫</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/随笔">随笔</a></li>
+                
+                    <li><a href="/categories/技术">技术</a></li>
+                
+                    <li><a href="/instagram">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                    
+                        <a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                    
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                    
+                        <a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Android Skills/40个Java集合面试问题和答案" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/01/28/Android Skills/40个Java集合面试问题和答案/" class="article-date">
+      <time datetime="2014-01-27T19:01:02.000Z" itemprop="datePublished">2014-01-28</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      40个Java集合面试问题和答案
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结分类/">总结分类</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <blockquote>
+<p>Java集合框架为Java编程语言的基础，也是Java面试中很重要的一个知识点。这里，我列出了一些关于Java集合的重要问题和答案。</p>
+</blockquote>
+<h3 id="1-Java集合框架是什么？说出一些集合框架的优点？"><a href="#1-Java集合框架是什么？说出一些集合框架的优点？" class="headerlink" title="1.Java集合框架是什么？说出一些集合框架的优点？"></a>1.Java集合框架是什么？说出一些集合框架的优点？</h3><pre><code>每种编程语言中都有集合，最初的Java版本包含几种集合类：Vector、Stack、HashTable和Array。随着集合的广泛使用，Java1.2提出了囊括所有集合接口、实现和算法的集合框架。在保证线程安全的情况下使用泛型和并发集合类，Java已经经历了很久。它还包括在Java并发包中，阻塞接口以及它们的实现。集合框架的部分优点如下：
+
+（1）使用核心集合类降低开发成本，而非实现我们自己的集合类。
+（2）随着使用经过严格测试的集合框架类，代码质量会得到提高。
+（3）通过使用JDK附带的集合类，可以降低代码维护成本。
+（4）复用性和可操作性。
+</code></pre><a id="more"></a>
+<h3 id="2-集合框架中的泛型有什么优点？"><a href="#2-集合框架中的泛型有什么优点？" class="headerlink" title="2.集合框架中的泛型有什么优点？"></a>2.集合框架中的泛型有什么优点？</h3><pre><code>Java1.5引入了泛型，所有的集合接口和实现都大量地使用它。泛型允许我们为集合提供一个可以容纳的对象类型，因此，如果你添加其它类型的任何元素，它会在编译时报错。这避免了在运行时出现ClassCastException，因为你将会在编译时得到报错信息。泛型也使得代码整洁，我们不需要使用显式转换和instanceOf操作符。它也给运行时带来好处，因为不会产生类型检查的字节码指令。
+</code></pre><h3 id="3-Java集合框架的基础接口有哪些？"><a href="#3-Java集合框架的基础接口有哪些？" class="headerlink" title="3.Java集合框架的基础接口有哪些？"></a>3.Java集合框架的基础接口有哪些？</h3><pre><code>Collection为集合层级的根接口。一个集合代表一组对象，这些对象即为它的元素。Java平台不提供这个接口任何直接的实现。
+
+Set是一个不能包含重复元素的集合。这个接口对数学集合抽象进行建模，被用来代表集合，就如一副牌。
+
+List是一个有序集合，可以包含重复元素。你可以通过它的索引来访问任何元素。List更像长度动态变换的数组。
+
+Map是一个将key映射到value的对象.一个Map不能包含重复的key：每个key最多只能映射一个value。
+
+一些其它的接口有Queue、Dequeue、SortedSet、SortedMap和ListIterator。
+</code></pre><h3 id="4-为何Collection不从Cloneable和Serializable接口继承？"><a href="#4-为何Collection不从Cloneable和Serializable接口继承？" class="headerlink" title="4.为何Collection不从Cloneable和Serializable接口继承？"></a>4.为何Collection不从Cloneable和Serializable接口继承？</h3><pre><code>Collection接口指定一组对象，对象即为它的元素。如何维护这些元素由Collection的具体实现决定。例如，一些如List的Collection实现允许重复的元素，而其它的如Set就不允许。很多Collection实现有一个公有的clone方法。然而，把它放到集合的所有实现中也是没有意义的。这是因为Collection是一个抽象表现。重要的是实现。
+
+当与具体实现打交道的时候，克隆或序列化的语义和含义才发挥作用。所以，具体实现应该决定如何对它进行克隆或序列化，或它是否可以被克隆或序列化。
+
+在所有的实现中授权克隆和序列化，最终导致更少的灵活性和更多的限制。特定的实现应该决定它是否可以被克隆和序列化。
+</code></pre><h3 id="5-为何Map接口不继承Collection接口？"><a href="#5-为何Map接口不继承Collection接口？" class="headerlink" title="5.为何Map接口不继承Collection接口？"></a>5.为何Map接口不继承Collection接口？</h3><pre><code>尽管Map接口和它的实现也是集合框架的一部分，但Map不是集合，集合也不是Map。因此，Map继承Collection毫无意义，反之亦然。
+
+如果Map继承Collection接口，那么元素去哪儿？Map包含key-value对，它提供抽取key或value列表集合的方法，但是它不适合“一组对象”规范。
+</code></pre><h3 id="6-Iterator是什么？"><a href="#6-Iterator是什么？" class="headerlink" title="6.Iterator是什么？"></a>6.Iterator是什么？</h3><pre><code>Iterator接口提供遍历任何Collection的接口。我们可以从一个Collection中使用迭代器方法来获取迭代器实例。迭代器取代了Java集合框架中的Enumeration。迭代器允许调用者在迭代过程中移除元素。
+</code></pre><h3 id="7-Enumeration和Iterator接口的区别？"><a href="#7-Enumeration和Iterator接口的区别？" class="headerlink" title="7.Enumeration和Iterator接口的区别？"></a>7.Enumeration和Iterator接口的区别？</h3><pre><code>Enumeration的速度是Iterator的两倍，也使用更少的内存。Enumeration是非常基础的，也满足了基础的需要。但是，与Enumeration相比，Iterator更加安全，因为当一个集合正在被遍历的时候，它会阻止其它线程去修改集合。
+
+迭代器取代了Java集合框架中的Enumeration。迭代器允许调用者从集合中移除元素，而Enumeration不能做到。为了使它的功能更加清晰，迭代器方法名已经经过改善。
+</code></pre><h3 id="8-为何没有像Iterator-add-这样的方法，向集合中添加元素？"><a href="#8-为何没有像Iterator-add-这样的方法，向集合中添加元素？" class="headerlink" title="8.为何没有像Iterator.add()这样的方法，向集合中添加元素？"></a>8.为何没有像Iterator.add()这样的方法，向集合中添加元素？</h3><pre><code>语义不明，已知的是，Iterator的协议不能确保迭代的次序。然而要注意，ListIterator没有提供一个add操作，它要确保迭代的顺序。
+</code></pre><h3 id="9-为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？"><a href="#9-为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？" class="headerlink" title="9.为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？"></a>9.为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？</h3><pre><code>它可以在当前Iterator的顶层实现，但是它用得很少，如果将它加到接口中，每个继承都要去实现它，这没有意义。
+</code></pre><h3 id="10-Iterater和ListIterator之间有什么区别？"><a href="#10-Iterater和ListIterator之间有什么区别？" class="headerlink" title="10.Iterater和ListIterator之间有什么区别？"></a>10.Iterater和ListIterator之间有什么区别？</h3><pre><code>（1）我们可以使用Iterator来遍历Set和List集合，而ListIterator只能遍历List。
+（2）Iterator只可以向前遍历，而LIstIterator可以双向遍历。
+（3）ListIterator从Iterator接口继承，然后添加了一些额外的功能，比如添加一个元素、替换一个元素、获取前面或后面元素的索引位置。
+</code></pre><h3 id="11-遍历一个List有哪些不同的方式？"><a href="#11-遍历一个List有哪些不同的方式？" class="headerlink" title="11.遍历一个List有哪些不同的方式？"></a>11.遍历一个List有哪些不同的方式？</h3><pre><code>List&lt;String&gt; strList = new ArrayList&lt;&gt;();
+//使用for-each循环
+for(String obj : strList){
+  System.out.println(obj);
+}
+//using iterator
+Iterator&lt;String&gt; it = strList.iterator();
+while(it.hasNext()){
+  String obj = it.next();
+  System.out.println(obj);
+}
+    使用迭代器更加线程安全，因为它可以确保，在当前遍历的集合元素被更改的时候，它会抛出ConcurrentModificationException。
+</code></pre><h3 id="12-通过迭代器fail-fast属性，你明白了什么？"><a href="#12-通过迭代器fail-fast属性，你明白了什么？" class="headerlink" title="12.通过迭代器fail-fast属性，你明白了什么？"></a>12.通过迭代器fail-fast属性，你明白了什么？</h3><pre><code>每次我们尝试获取下一个元素的时候，Iterator fail-fast属性检查当前集合结构里的任何改动。如果发现任何改动，它抛出ConcurrentModificationException。Collection中所有Iterator的实现都是按fail-fast来设计的（ConcurrentHashMap和CopyOnWriteArrayList这类并发集合类除外）。
+</code></pre><h3 id="13-fail-fast与fail-safe有什么区别？"><a href="#13-fail-fast与fail-safe有什么区别？" class="headerlink" title="13.fail-fast与fail-safe有什么区别？"></a>13.fail-fast与fail-safe有什么区别？</h3><pre><code>Iterator的fail-fast属性与当前的集合共同起作用，因此它不会受到集合中任何改动的影响。Java.util包中的所有集合类都被设计为fail-fast的，而java.util.concurrent中的集合类都为fail-safe的。Fail-fast迭代器抛出ConcurrentModificationException，而fail-safe迭代器从不抛出ConcurrentModificationException。
+</code></pre><h3 id="14-在迭代一个集合的时候，如何避免ConcurrentModificationException？"><a href="#14-在迭代一个集合的时候，如何避免ConcurrentModificationException？" class="headerlink" title="14.在迭代一个集合的时候，如何避免ConcurrentModificationException？"></a>14.在迭代一个集合的时候，如何避免ConcurrentModificationException？</h3><pre><code>在遍历一个集合的时候，我们可以使用并发集合类来避免ConcurrentModificationException，比如使用CopyOnWriteArrayList，而不是ArrayList。
+</code></pre><h3 id="15-为何Iterator接口没有具体的实现？"><a href="#15-为何Iterator接口没有具体的实现？" class="headerlink" title="15.为何Iterator接口没有具体的实现？"></a>15.为何Iterator接口没有具体的实现？</h3><pre><code>Iterator接口定义了遍历集合的方法，但它的实现则是集合实现类的责任。每个能够返回用于遍历的Iterator的集合类都有它自己的Iterator实现内部类。
+
+这就允许集合类去选择迭代器是fail-fast还是fail-safe的。比如，ArrayList迭代器是fail-fast的，而CopyOnWriteArrayList迭代器是fail-safe的。
+</code></pre><h3 id="16-UnsupportedOperationException是什么？"><a href="#16-UnsupportedOperationException是什么？" class="headerlink" title="16.UnsupportedOperationException是什么？"></a>16.UnsupportedOperationException是什么？</h3><pre><code>UnsupportedOperationException是用于表明操作不支持的异常。在JDK类中已被大量运用，在集合框架java.util.Collections.UnmodifiableCollection将会在所有add和remove操作中抛出这个异常。
+</code></pre><h3 id="17-在Java中，HashMap是如何工作的？"><a href="#17-在Java中，HashMap是如何工作的？" class="headerlink" title="17.在Java中，HashMap是如何工作的？"></a>17.在Java中，HashMap是如何工作的？</h3><pre><code>HashMap在Map.Entry静态内部类实现中存储key-value对。HashMap使用哈希算法，在put和get方法中，它使用hashCode()和equals()方法。当我们通过传递key-value对调用put方法的时候，HashMap使用Key hashCode()和哈希算法来找出存储key-value对的索引。Entry存储在LinkedList中，所以如果存在entry，它使用equals()方法来检查传递的key是否已经存在，如果存在，它会覆盖value，如果不存在，它会创建一个新的entry然后保存。当我们通过传递key调用get方法时，它再次使用hashCode()来找到数组中的索引，然后使用equals()方法找出正确的Entry，然后返回它的值。下面的图片解释了详细内容。
+
+其它关于HashMap比较重要的问题是容量、负荷系数和阀值调整。HashMap默认的初始容量是32，负荷系数是0.75。阀值是为负荷系数乘以容量，无论何时我们尝试添加一个entry，如果map的大小比阀值大的时候，HashMap会对map的内容进行重新哈希，且使用更大的容量。容量总是2的幂，所以如果你知道你需要存储大量的key-value对，比如缓存从数据库里面拉取的数据，使用正确的容量和负荷系数对HashMap进行初始化是个不错的做法。
+</code></pre><h3 id="18-hashCode-和equals-方法有何重要性？"><a href="#18-hashCode-和equals-方法有何重要性？" class="headerlink" title="18.hashCode()和equals()方法有何重要性？"></a>18.hashCode()和equals()方法有何重要性？</h3><pre><code>HashMap使用Key对象的hashCode()和equals()方法去决定key-value对的索引。当我们试着从HashMap中获取值的时候，这些方法也会被用到。如果这些方法没有被正确地实现，在这种情况下，两个不同Key也许会产生相同的hashCode()和equals()输出，HashMap将会认为它们是相同的，然后覆盖它们，而非把它们存储到不同的地方。同样的，所有不允许存储重复数据的集合类都使用hashCode()和equals()去查找重复，所以正确实现它们非常重要。equals()和hashCode()的实现应该遵循以下规则：
+
+（1）如果o1.equals(o2)，那么o1.hashCode() == o2.hashCode()总是为true的。
+（2）如果o1.hashCode() == o2.hashCode()，并不意味着o1.equals(o2)会为true。
+</code></pre><h3 id="19-我们能否使用任何类作为Map的key？"><a href="#19-我们能否使用任何类作为Map的key？" class="headerlink" title="19.我们能否使用任何类作为Map的key？"></a>19.我们能否使用任何类作为Map的key？</h3><pre><code>我们可以使用任何类作为Map的key，然而在使用它们之前，需要考虑以下几点：
+
+（1）如果类重写了equals()方法，它也应该重写hashCode()方法。
+（2）类的所有实例需要遵循与equals()和hashCode()相关的规则。请参考之前提到的这些规则。
+（3）如果一个类没有使用equals()，你不应该在hashCode()中使用它。
+（4）用户自定义key类的最佳实践是使之为不可变的，这样，hashCode()值可以被缓存起来，拥有更好的性能。不可变的类也可以确保hashCode()和equals()在未来不会改变，这样就会解决与可变相关的问题了。
+
+比如，我有一个类MyKey，在HashMap中使用它。
+
+
+//传递给MyKey的name参数被用于equals()和hashCode()中
+MyKey key = new MyKey(&apos;Pankaj&apos;); //assume hashCode=1234
+myHashMap.put(key, &apos;Value&apos;);
+// 以下的代码会改变key的hashCode()和equals()值
+key.setName(&apos;Amit&apos;); //assume new hashCode=7890
+//下面会返回null，因为HashMap会尝试查找存储同样索引的key，而key已被改变了，匹配失败，返回null
+myHashMap.get(new MyKey(&apos;Pankaj&apos;));
+
+那就是为何String和Integer被作为HashMap的key大量使用。
+</code></pre><h3 id="20-Map接口提供了哪些不同的集合视图？"><a href="#20-Map接口提供了哪些不同的集合视图？" class="headerlink" title="20.Map接口提供了哪些不同的集合视图？"></a>20.Map接口提供了哪些不同的集合视图？</h3><pre><code>Map接口提供三个集合视图：
+
+（1）Set keyset()：返回map中包含的所有key的一个Set视图。集合是受map支持的，map的变化会在集合中反映出来，反之亦然。当一个迭代器正在遍历一个集合时，若map被修改了（除迭代器自身的移除操作以外），迭代器的结果会变为未定义。集合支持通过Iterator的Remove、Set.remove、removeAll、retainAll和clear操作进行元素移除，从map中移除对应的映射。它不支持add和addAll操作。
+
+（2）Collection values()：返回一个map中包含的所有value的一个Collection视图。这个collection受map支持的，map的变化会在collection中反映出来，反之亦然。当一个迭代器正在遍历一个collection时，若map被修改了（除迭代器自身的移除操作以外），迭代器的结果会变为未定义。集合支持通过Iterator的Remove、Set.remove、removeAll、retainAll和clear操作进行元素移除，从map中移除对应的映射。它不支持add和addAll操作。
+
+（3）Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet()：返回一个map钟包含的所有映射的一个集合视图。这个集合受map支持的，map的变化会在collection中反映出来，反之亦然。当一个迭代器正在遍历一个集合时，若map被修改了（除迭代器自身的移除操作，以及对迭代器返回的entry进行setValue外），迭代器的结果会变为未定义。集合支持通过Iterator的Remove、Set.remove、removeAll、retainAll和clear操作进行元素移除，从map中移除对应的映射。它不支持add和addAll操作。
+</code></pre><h3 id="21-HashMap和HashTable有何不同？"><a href="#21-HashMap和HashTable有何不同？" class="headerlink" title="21.HashMap和HashTable有何不同？"></a>21.HashMap和HashTable有何不同？</h3><pre><code>（1）HashMap允许key和value为null，而HashTable不允许。
+（2）HashTable是同步的，而HashMap不是。所以HashMap适合单线程环境，HashTable适合多线程环境。
+（3）在Java1.4中引入了LinkedHashMap，HashMap的一个子类，假如你想要遍历顺序，你很容易从HashMap转向LinkedHashMap，但是HashTable不是这样的，它的顺序是不可预知的。
+（4）HashMap提供对key的Set进行遍历，因此它是fail-fast的，但HashTable提供对key的Enumeration进行遍历，它不支持fail-fast。
+（5）HashTable被认为是个遗留的类，如果你寻求在迭代的时候修改Map，你应该使用CocurrentHashMap。
+</code></pre><p>22.如何决定选用HashMap还是TreeMap？</p>
+<pre><code>对于在Map中插入、删除和定位元素这类操作，HashMap是最好的选择。然而，假如你需要对一个有序的key集合进行遍历，TreeMap是更好的选择。基于你的collection的大小，也许向HashMap中添加元素会更快，将map换为TreeMap进行有序key的遍历。
+</code></pre><h3 id="23-ArrayList和Vector有何异同点？"><a href="#23-ArrayList和Vector有何异同点？" class="headerlink" title="23.ArrayList和Vector有何异同点？"></a>23.ArrayList和Vector有何异同点？</h3><pre><code>ArrayList和Vector在很多时候都很类似。
+
+（1）两者都是基于索引的，内部由一个数组支持。
+（2）两者维护插入的顺序，我们可以根据插入顺序来获取元素。
+（3）ArrayList和Vector的迭代器实现都是fail-fast的。
+（4）ArrayList和Vector两者允许null值，也可以使用索引值对元素进行随机访问。
+
+   以下是ArrayList和Vector的不同点。
+
+（1）Vector是同步的，而ArrayList不是。然而，如果你寻求在迭代的时候对列表进行改变，你应该使用CopyOnWriteArrayList。
+（2）ArrayList比Vector快，它因为有同步，不会过载。
+（3）ArrayList更加通用，因为我们可以使用Collections工具类轻易地获取同步列表和只读列表。
+</code></pre><h3 id="24-Array和ArrayList有何区别？什么时候更适合用Array？"><a href="#24-Array和ArrayList有何区别？什么时候更适合用Array？" class="headerlink" title="24.Array和ArrayList有何区别？什么时候更适合用Array？"></a>24.Array和ArrayList有何区别？什么时候更适合用Array？</h3><pre><code>Array可以容纳基本类型和对象，而ArrayList只能容纳对象。
+
+Array是指定大小的，而ArrayList大小是固定的。
+
+Array没有提供ArrayList那么多功能，比如addAll、removeAll和iterator等。尽管ArrayList明显是更好的选择，但也有些时候Array比较好用。
+
+（1）如果列表的大小已经指定，大部分情况下是存储和遍历它们。
+（2）对于遍历基本数据类型，尽管Collections使用自动装箱来减轻编码任务，在指定大小的基本类型的列表上工作也会变得很慢。
+（3）如果你要使用多维数组，使用[][]比List&lt;List&lt;&gt;&gt;更容易。
+</code></pre><h3 id="25-ArrayList和LinkedList有何区别？"><a href="#25-ArrayList和LinkedList有何区别？" class="headerlink" title="25.ArrayList和LinkedList有何区别？"></a>25.ArrayList和LinkedList有何区别？</h3><pre><code>ArrayList和LinkedList两者都实现了List接口，但是它们之间有些不同。
+
+（1）ArrayList是由Array所支持的基于一个索引的数据结构，所以它提供对元素的随机访问，复杂度为O(1)，但LinkedList存储一系列的节点数据，每个节点都与前一个和下一个节点相连接。所以，尽管有使用索引获取元素的方法，内部实现是从起始点开始遍历，遍历到索引的节点然后返回元素，时间复杂度为O(n)，比ArrayList要慢。
+
+（2）与ArrayList相比，在LinkedList中插入、添加和删除一个元素会更快，因为在一个元素被插入到中间的时候，不会涉及改变数组的大小，或更新索引。
+
+（3）LinkedList比ArrayList消耗更多的内存，因为LinkedList中的每个节点存储了前后节点的引用。
+</code></pre><h3 id="26-哪些集合类提供对元素的随机访问？"><a href="#26-哪些集合类提供对元素的随机访问？" class="headerlink" title="26.哪些集合类提供对元素的随机访问？"></a>26.哪些集合类提供对元素的随机访问？</h3><pre><code>ArrayList、HashMap、TreeMap和HashTable类提供对元素的随机访问。
+</code></pre><h3 id="27-EnumSet是什么？"><a href="#27-EnumSet是什么？" class="headerlink" title="27.EnumSet是什么？"></a>27.EnumSet是什么？</h3><pre><code>java.util.EnumSet是使用枚举类型的集合实现。当集合创建时，枚举集合中的所有元素必须来自单个指定的枚举类型，可以是显示的或隐示的。EnumSet是不同步的，不允许值为null的元素。它也提供了一些有用的方法，比如copyOf(Collection c)、of(E first,E…rest)和complementOf(EnumSet s)。
+</code></pre><h3 id="28-哪些集合类是线程安全的？"><a href="#28-哪些集合类是线程安全的？" class="headerlink" title="28.哪些集合类是线程安全的？"></a>28.哪些集合类是线程安全的？</h3><pre><code>Vector、HashTable、Properties和Stack是同步类，所以它们是线程安全的，可以在多线程环境下使用。Java1.5并发API包括一些集合类，允许迭代时修改，因为它们都工作在集合的克隆上，所以它们在多线程环境中是安全的。
+</code></pre><h3 id="29-并发集合类是什么？"><a href="#29-并发集合类是什么？" class="headerlink" title="29.并发集合类是什么？"></a>29.并发集合类是什么？</h3><pre><code>Java1.5并发包（java.util.concurrent）包含线程安全集合类，允许在迭代时修改集合。迭代器被设计为fail-fast的，会抛出ConcurrentModificationException。一部分类为：CopyOnWriteArrayList、 ConcurrentHashMap、CopyOnWriteArraySet。
+</code></pre><h3 id="30-BlockingQueue是什么？"><a href="#30-BlockingQueue是什么？" class="headerlink" title="30.BlockingQueue是什么？"></a>30.BlockingQueue是什么？</h3><pre><code>Java.util.concurrent.BlockingQueue是一个队列，在进行检索或移除一个元素的时候，它会等待队列变为非空；当在添加一个元素时，它会等待队列中的可用空间。BlockingQueue接口是Java集合框架的一部分，主要用于实现生产者-消费者模式。我们不需要担心等待生产者有可用的空间，或消费者有可用的对象，因为它都在BlockingQueue的实现类中被处理了。Java提供了集中BlockingQueue的实现，比如ArrayBlockingQueue、LinkedBlockingQueue、PriorityBlockingQueue,、SynchronousQueue等。
+</code></pre><h3 id="31-队列和栈是什么，列出它们的区别？"><a href="#31-队列和栈是什么，列出它们的区别？" class="headerlink" title="31.队列和栈是什么，列出它们的区别？"></a>31.队列和栈是什么，列出它们的区别？</h3><pre><code>栈和队列两者都被用来预存储数据。java.util.Queue是一个接口，它的实现类在Java并发包中。队列允许先进先出（FIFO）检索元素，但并非总是这样。Deque接口允许从两端检索元素。
+
+栈与队列很相似，但它允许对元素进行后进先出（LIFO）进行检索。
+
+Stack是一个扩展自Vector的类，而Queue是一个接口。
+</code></pre><h3 id="32-Collections类是什么？"><a href="#32-Collections类是什么？" class="headerlink" title="32.Collections类是什么？"></a>32.Collections类是什么？</h3><pre><code>Java.util.Collections是一个工具类仅包含静态方法，它们操作或返回集合。它包含操作集合的多态算法，返回一个由指定集合支持的新集合和其它一些内容。这个类包含集合框架算法的方法，比如折半搜索、排序、混编和逆序等。
+</code></pre><h3 id="33-Comparable和Comparator接口是什么？"><a href="#33-Comparable和Comparator接口是什么？" class="headerlink" title="33.Comparable和Comparator接口是什么？"></a>33.Comparable和Comparator接口是什么？</h3><pre><code>如果我们想使用Array或Collection的排序方法时，需要在自定义类里实现Java提供Comparable接口。Comparable接口有compareTo(T OBJ)方法，它被排序方法所使用。我们应该重写这个方法，如果“this”对象比传递的对象参数更小、相等或更大时，它返回一个负整数、0或正整数。但是，在大多数实际情况下，我们想根据不同参数进行排序。比如，作为一个CEO，我想对雇员基于薪资进行排序，一个HR想基于年龄对他们进行排序。这就是我们需要使用Comparator接口的情景，因为Comparable.compareTo(Object o)方法实现只能基于一个字段进行排序，我们不能根据对象排序的需要选择字段。Comparator接口的compare(Object o1, Object o2)方法的实现需要传递两个对象参数，若第一个参数比第二个小，返回负整数；若第一个等于第二个，返回0；若第一个比第二个大，返回正整数。
+</code></pre><h3 id="34-Comparable和Comparator接口有何区别？"><a href="#34-Comparable和Comparator接口有何区别？" class="headerlink" title="34.Comparable和Comparator接口有何区别？"></a>34.Comparable和Comparator接口有何区别？</h3><pre><code>Comparable和Comparator接口被用来对对象集合或者数组进行排序。Comparable接口被用来提供对象的自然排序，我们可以使用它来提供基于单个逻辑的排序。
+
+Comparator接口被用来提供不同的排序算法，我们可以选择需要使用的Comparator来对给定的对象集合进行排序。
+</code></pre><h3 id="35-我们如何对一组对象进行排序？"><a href="#35-我们如何对一组对象进行排序？" class="headerlink" title="35.我们如何对一组对象进行排序？"></a>35.我们如何对一组对象进行排序？</h3><pre><code>如果我们需要对一个对象数组进行排序，我们可以使用Arrays.sort()方法。如果我们需要排序一个对象列表，我们可以使用Collection.sort()方法。两个类都有用于自然排序（使用Comparable）或基于标准的排序（使用Comparator）的重载方法sort()。Collections内部使用数组排序方法，所有它们两者都有相同的性能，只是Collections需要花时间将列表转换为数组。
+</code></pre><h3 id="36-当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？"><a href="#36-当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？" class="headerlink" title="36.当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？"></a>36.当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？</h3><pre><code>在作为参数传递之前，我们可以使用Collections.unmodifiableCollection(Collection c)方法创建一个只读集合，这将确保改变集合的任何操作都会抛出UnsupportedOperationException。
+</code></pre><h3 id="37-我们如何从给定集合那里创建一个synchronized的集合？"><a href="#37-我们如何从给定集合那里创建一个synchronized的集合？" class="headerlink" title="37.我们如何从给定集合那里创建一个synchronized的集合？"></a>37.我们如何从给定集合那里创建一个synchronized的集合？</h3><pre><code>我们可以使用Collections.synchronizedCollection(Collection c)根据指定集合来获取一个synchronized（线程安全的）集合。
+</code></pre><h3 id="38-集合框架里实现的通用算法有哪些？"><a href="#38-集合框架里实现的通用算法有哪些？" class="headerlink" title="38.集合框架里实现的通用算法有哪些？"></a>38.集合框架里实现的通用算法有哪些？</h3><pre><code>Java集合框架提供常用的算法实现，比如排序和搜索。Collections类包含这些方法实现。大部分算法是操作List的，但一部分对所有类型的集合都是可用的。部分算法有排序、搜索、混编、最大最小值。
+</code></pre><h3 id="39-大写的O是什么？举几个例子？"><a href="#39-大写的O是什么？举几个例子？" class="headerlink" title="39.大写的O是什么？举几个例子？"></a>39.大写的O是什么？举几个例子？</h3><pre><code>大写的O描述的是，就数据结构中的一系列元素而言，一个算法的性能。Collection类就是实际的数据结构，我们通常基于时间、内存和性能，使用大写的O来选择集合实现。比如：例子1：ArrayList的get(index i)是一个常量时间操作，它不依赖list中元素的数量。所以它的性能是O(1)。例子2：一个对于数组或列表的线性搜索的性能是O(n)，因为我们需要遍历所有的元素来查找需要的元素。
+</code></pre><h3 id="40-与Java集合框架相关的有哪些最好的实践？"><a href="#40-与Java集合框架相关的有哪些最好的实践？" class="headerlink" title="40.与Java集合框架相关的有哪些最好的实践？"></a>40.与Java集合框架相关的有哪些最好的实践？</h3><pre><code>（1）根据需要选择正确的集合类型。比如，如果指定了大小，我们会选用Array而非ArrayList。如果我们想根据插入顺序遍历一个Map，我们需要使用TreeMap。如果我们不想重复，我们应该使用Set。
+（2）一些集合类允许指定初始容量，所以如果我们能够估计到存储元素的数量，我们可以使用它，就避免了重新哈希或大小调整。
+（3）基于接口编程，而非基于实现编程，它允许我们后来轻易地改变实现。
+（4）总是使用类型安全的泛型，避免在运行时出现ClassCastException。
+（5）使用JDK提供的不可变类作为Map的key，可以避免自己实现hashCode()和equals()。
+（6）尽可能使用Collections工具类，或者获取只读、同步或空的集合，而非编写自己的实现。它将会提供代码重用性，它有着更好的稳定性和可维护性。
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2014/01/28/Android Skills/40个Java集合面试问题和答案/">40个Java集合面试问题和答案</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 一只熊猫 的个人博客">一只熊猫</a></p>
+        <p><span>发布时间:</span>2014年01月28日 - 03时01分</p>
+     
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2014/01/28/Android Skills/40个Java集合面试问题和答案/" title="40个Java集合面试问题和答案">http://blog.apanda.online/2014/01/28/Android Skills/40个Java集合面试问题和答案/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.apanda.online/2014/01/28/Android Skills/40个Java集合面试问题和答案/　　作者: 一只熊猫" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2014/02/07/小知识点/开发规范/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Google Java编程风格指南
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/01/23/Android Skills/Android anim drawable color 技巧/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android anim drawable color技巧</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Java集合框架是什么？说出一些集合框架的优点？"><span class="toc-number">1.</span> <span class="toc-text">1.Java集合框架是什么？说出一些集合框架的优点？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-集合框架中的泛型有什么优点？"><span class="toc-number">2.</span> <span class="toc-text">2.集合框架中的泛型有什么优点？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Java集合框架的基础接口有哪些？"><span class="toc-number">3.</span> <span class="toc-text">3.Java集合框架的基础接口有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-为何Collection不从Cloneable和Serializable接口继承？"><span class="toc-number">4.</span> <span class="toc-text">4.为何Collection不从Cloneable和Serializable接口继承？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-为何Map接口不继承Collection接口？"><span class="toc-number">5.</span> <span class="toc-text">5.为何Map接口不继承Collection接口？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Iterator是什么？"><span class="toc-number">6.</span> <span class="toc-text">6.Iterator是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Enumeration和Iterator接口的区别？"><span class="toc-number">7.</span> <span class="toc-text">7.Enumeration和Iterator接口的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-为何没有像Iterator-add-这样的方法，向集合中添加元素？"><span class="toc-number">8.</span> <span class="toc-text">8.为何没有像Iterator.add()这样的方法，向集合中添加元素？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？"><span class="toc-number">9.</span> <span class="toc-text">9.为何迭代器没有一个方法可以直接获取下一个元素，而不需要移动游标？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-Iterater和ListIterator之间有什么区别？"><span class="toc-number">10.</span> <span class="toc-text">10.Iterater和ListIterator之间有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-遍历一个List有哪些不同的方式？"><span class="toc-number">11.</span> <span class="toc-text">11.遍历一个List有哪些不同的方式？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-通过迭代器fail-fast属性，你明白了什么？"><span class="toc-number">12.</span> <span class="toc-text">12.通过迭代器fail-fast属性，你明白了什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-fail-fast与fail-safe有什么区别？"><span class="toc-number">13.</span> <span class="toc-text">13.fail-fast与fail-safe有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-在迭代一个集合的时候，如何避免ConcurrentModificationException？"><span class="toc-number">14.</span> <span class="toc-text">14.在迭代一个集合的时候，如何避免ConcurrentModificationException？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-为何Iterator接口没有具体的实现？"><span class="toc-number">15.</span> <span class="toc-text">15.为何Iterator接口没有具体的实现？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#16-UnsupportedOperationException是什么？"><span class="toc-number">16.</span> <span class="toc-text">16.UnsupportedOperationException是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#17-在Java中，HashMap是如何工作的？"><span class="toc-number">17.</span> <span class="toc-text">17.在Java中，HashMap是如何工作的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#18-hashCode-和equals-方法有何重要性？"><span class="toc-number">18.</span> <span class="toc-text">18.hashCode()和equals()方法有何重要性？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#19-我们能否使用任何类作为Map的key？"><span class="toc-number">19.</span> <span class="toc-text">19.我们能否使用任何类作为Map的key？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20-Map接口提供了哪些不同的集合视图？"><span class="toc-number">20.</span> <span class="toc-text">20.Map接口提供了哪些不同的集合视图？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-HashMap和HashTable有何不同？"><span class="toc-number">21.</span> <span class="toc-text">21.HashMap和HashTable有何不同？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-ArrayList和Vector有何异同点？"><span class="toc-number">22.</span> <span class="toc-text">23.ArrayList和Vector有何异同点？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#24-Array和ArrayList有何区别？什么时候更适合用Array？"><span class="toc-number">23.</span> <span class="toc-text">24.Array和ArrayList有何区别？什么时候更适合用Array？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#25-ArrayList和LinkedList有何区别？"><span class="toc-number">24.</span> <span class="toc-text">25.ArrayList和LinkedList有何区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#26-哪些集合类提供对元素的随机访问？"><span class="toc-number">25.</span> <span class="toc-text">26.哪些集合类提供对元素的随机访问？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#27-EnumSet是什么？"><span class="toc-number">26.</span> <span class="toc-text">27.EnumSet是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#28-哪些集合类是线程安全的？"><span class="toc-number">27.</span> <span class="toc-text">28.哪些集合类是线程安全的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#29-并发集合类是什么？"><span class="toc-number">28.</span> <span class="toc-text">29.并发集合类是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#30-BlockingQueue是什么？"><span class="toc-number">29.</span> <span class="toc-text">30.BlockingQueue是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#31-队列和栈是什么，列出它们的区别？"><span class="toc-number">30.</span> <span class="toc-text">31.队列和栈是什么，列出它们的区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#32-Collections类是什么？"><span class="toc-number">31.</span> <span class="toc-text">32.Collections类是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#33-Comparable和Comparator接口是什么？"><span class="toc-number">32.</span> <span class="toc-text">33.Comparable和Comparator接口是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#34-Comparable和Comparator接口有何区别？"><span class="toc-number">33.</span> <span class="toc-text">34.Comparable和Comparator接口有何区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#35-我们如何对一组对象进行排序？"><span class="toc-number">34.</span> <span class="toc-text">35.我们如何对一组对象进行排序？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#36-当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？"><span class="toc-number">35.</span> <span class="toc-text">36.当一个集合被作为参数传递给一个函数时，如何才可以确保函数不能修改它？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#37-我们如何从给定集合那里创建一个synchronized的集合？"><span class="toc-number">36.</span> <span class="toc-text">37.我们如何从给定集合那里创建一个synchronized的集合？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#38-集合框架里实现的通用算法有哪些？"><span class="toc-number">37.</span> <span class="toc-text">38.集合框架里实现的通用算法有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#39-大写的O是什么？举几个例子？"><span class="toc-number">38.</span> <span class="toc-text">39.大写的O是什么？举几个例子？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#40-与Java集合框架相关的有哪些最好的实践？"><span class="toc-number">39.</span> <span class="toc-text">40.与Java集合框架相关的有哪些最好的实践？</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2014/02/07/小知识点/开发规范/" title="上一篇: Google Java编程风格指南">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2014/01/23/Android Skills/Android anim drawable color 技巧/" title="下一篇: Android anim drawable color技巧">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/CentOS-FireWall/">centos/CentOS-FireWall</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/centos-attack-record/">centos/centos-attack-record</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/redis/">centos/redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/ssr/">centos/ssr</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/06/每天一道算法题目Java/范型/">每天一道算法题目Java/范型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Gomobile编译jni库/">Go lang 学习笔记/Gomobile编译jni库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Golang 支持交叉编译/">Go lang 学习笔记/Golang 支持交叉编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang.resource/commit/">Go lang 学习笔记/基本排序算法Golang.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang/">Go lang 学习笔记/基本排序算法Golang</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit/">Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现/">Go lang 学习笔记/Golang二分查找算法的简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析/">Go lang 学习笔记/Json解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析.resource/commit/">Go lang 学习笔记/Json解析.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序/">Go lang 学习笔记/二叉树插入排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序.resource/commit/">Go lang 学习笔记/二叉树插入排序.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/">每天一道算法题目Java/寻找出现一次的字符.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符/">每天一道算法题目Java/寻找出现一次的字符</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/Android Skills/使用Android Studio进行NDK开发（一）/">使用AndroidStudio进行NDK开发（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/06/RxJava/RxJava & RxAndroid备忘/">RxJava & RxAndroid备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/在安卓上使用RxJava/">在安卓上使用RxJava</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/深入浅出RxJava四-在Android中使用响应式编程/">深入浅出RxJava(四：在Android中使用响应式编程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/04/RxJava/深入浅出RxJava三--响应式的好处/">深入浅出RxJava(三：响应式的好处)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/02/RxJava/深入浅出RxJava(二：操作符)/">深入浅出RxJava(二：操作符)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/Q2季度目标/">Q2季度目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/VIM快捷键/">VIM快捷键的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/RxJava/深入浅出RxJava（一：基础篇）/">深入浅出RxJava(一：基础篇)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考/">谷歌官方出的一套关于 Android 架构的实例参考</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava/RxAndroid/">从案例学习RxAndroid</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/23/小知识点/你应该知道的那些Android小经验/">Android小经验</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/小知识点/android代码片段/">Android开发代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/02/小知识点/Android开发工作中的细节/">Android开发工作中的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/随笔/日常使用到的梯子/">日常使用到的梯子</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/小知识点/Android开发中的小知识点汇总/">Android小知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/Android Skills/Lambda for Android/">Lambda for Android</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/Android Skills/理解Android的编译命令/">理解Android编译命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/22/Android Skills/Webview上传文件的那些坑/">Webview上传文件的那些坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/21/Android Skills/Android源码编译/">Android源码编译和内核编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/New Lan/Kotlin1.0正式版发布/">Kotlin 1.0 正式版发布啦</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/25/随笔/Ibeacon/">Ibeacon</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Android Skills/Android MotionEvent详解/">Android MotionEvent详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/19/New Lan/React-Native学习指南/">React-Native学习指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/18/Android Skills/RecyclerView 列表控件中简单实现时间线/">RecyclerView 列表控件中简单实现时间线</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/21/3.5开发中的亮点和不足/">亮点和不足</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/09/Android Skills/ActionBar沉浸式实现/">ActionBar沉浸式实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之内存篇/">Android性能优化之内存篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之渲染篇/">Android性能优化之渲染篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之电量篇/">Android性能优化之电量篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化典范（三）/">Android性能优化典范（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化之运算篇/">Android性能优化之运算篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/13/Android性能优化典范/Android性能优化典范（二）/">Android性能优化典范（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/11/Android性能优化典范/Android性能优化典范（一）/">Android性能优化典范（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/22/Android Skills/注解(Annotation)自定义注解入门/">Android注解(Annotation)自定义注解入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/21/Android Skills/Android OkHttp完全解析/">Android OkHttp完全解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/19/Android Skills/Android OkHttp初级入门/">Android OkHttp使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/27/Android Skills/EventBus 3.0的用法详解(二)/">EventBus 3.0的用法详解（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/25/Android Skills/EventBus 3.0的用法详解（一）/">EventBus 3.0的用法详解（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/21/Android Skills/自定义Dialog的大小、位置、颜色/">Android自定义对话框(Dialog)位置,大小</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/16/Google Develop for Android 系列/Developing for Android 最佳实践九：工具/">Google Develop for Android 系列九 － 工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/15/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/">Google Develop for Android 系列八 － 用户界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/14/Google Develop for Android 系列/Google Develop for Android 系列七 － Framework最佳实践/">Google Develop for Android 系列七 － Framework最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/13/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/">Google Develop for Android 系列六 － Storage最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/12/Google Develop for Android 系列/Google Develop for Android 系列五 － Language and Libraries/">Google Develop for Android 系列五 － Language and Libraries</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/11/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/">Google Develop for Android 系列四 － Network最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/10/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/">Google Develop for Android 系列三 － Performance最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/">Google Develop for Android 系列二 － Memory 最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/08/Google Develop for Android 系列/Google Develop for Android 系列一 － 相关上下文介绍/">Google Develop for Android 系列一 － 相关上下文介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/02/小知识点/Android开发常用的adb命令整理/">Android开发常用的adb命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/01/21/小知识点/端口号/">端口号设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/07/Android Skills/Android AsyncTask 技巧/">Android AsyncTask 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/05/Android Skills/图像、背景、View更新、布局、内存/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/08/随笔/健身/">健身</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/09/18/Android Skills/widget用法/">widget用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/08/Android Skills/webview入门/">WebView入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/07/18/Android Skills/TypedArray/">解析：TypedArray 为什么需要调用recycle()</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/15/Android Skills/Android内核 ServiceManager/">Android内核 ServiceManager</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/12/Android Skills/Android内核 Binder/">Android内核 Binder</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/08/Android Skills/Android内核 异步线程的实现（Looper、MessageQueue、Handler）/">异步线程的实现（Looper、MessageQueue、Handler）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/01/Android Skills/CountDownTimer（倒数计时器）/">CountDownTimer（倒数计时器）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/19/Android Skills/万能的ViewHolder/">ViewHolder的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android 自定义Loader/">Android 自定义Loader</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android Skill 下拉刷新/">下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/15/Android Skills/Android TextView 技巧/">Android Textview 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/13/Android Skills/Android String相关类性能测试/">String相关类性能测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/11/Android Skills/Android ImageView ScaleType属性/">ImageView ScaleType属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/05/Android Skills/Android EditText 技巧/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/24/随笔/Lantern(灯笼)使用实例/">Lantern(灯笼)使用实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/19/Android Skills/Context/">Android Context 到底是什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/17/小知识点/Android开发中一些被冷落但却很有用的类和方法/">Android开发中一些被冷落但却很有用的类和方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/12/小知识点/Android Studio的快捷键/">Android Studio 的快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/08/小知识点/Android开发规范/">Android 开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/07/小知识点/开发规范/">Google Java编程风格指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/28/Android Skills/40个Java集合面试问题和答案/">40个Java集合面试问题和答案</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/Android Skills/Android anim drawable color 技巧/">Android anim drawable color技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/小知识点/36个Android开发的代码片段/">36个Android开发常用代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/21/随笔/生命中的空白/">生命中的空白</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 一只熊猫
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a> 
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 21;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+  </div>
+</body>
+</html>

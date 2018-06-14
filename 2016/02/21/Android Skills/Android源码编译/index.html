@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android源码编译和内核编译 | 一只熊猫的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="源码编译1、系统： Ubuntu14.04以上 或者 Mac 下面的介绍都是在ubuntu下进行的  2、JdK安装$ sudo add-apt-repository &amp;quot;deb http://archive.canonical.com/ lucid partner&amp;quot; $ sudo apt-get update $ sudo apt-get install sun-java8-j">
+<meta name="keywords" content="源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android源码编译和内核编译">
+<meta property="og:url" content="http://blog.apanda.online/2016/02/21/Android Skills/Android源码编译/index.html">
+<meta property="og:site_name" content="一只熊猫的博客">
+<meta property="og:description" content="源码编译1、系统： Ubuntu14.04以上 或者 Mac 下面的介绍都是在ubuntu下进行的  2、JdK安装$ sudo add-apt-repository &amp;quot;deb http://archive.canonical.com/ lucid partner&amp;quot; $ sudo apt-get update $ sudo apt-get install sun-java8-j">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2016-02-26T07:27:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android源码编译和内核编译">
+<meta name="twitter:description" content="源码编译1、系统： Ubuntu14.04以上 或者 Mac 下面的介绍都是在ubuntu下进行的  2、JdK安装$ sudo add-apt-repository &amp;quot;deb http://archive.canonical.com/ lucid partner&amp;quot; $ sudo apt-get update $ sudo apt-get install sun-java8-j">
+  
+    <link rel="alternative" href="/atom.xml" title="一只熊猫的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.jpg">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">一只熊猫</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/随笔">随笔</a></li>
+                        
+                            <li><a href="/categories/技术">技术</a></li>
+                        
+                            <li><a href="/instagram">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                            
+                                <a class="fl mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                            
+                                <a class="fl facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                            
+                                <a class="fl twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android性能优化典范/" style="font-size: 18px;">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size: 10px;">Annotation</a> <a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a> <a href="/tags/Binder/" style="font-size: 10px;">Binder</a> <a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/EventBus/" style="font-size: 12px;">EventBus</a> <a href="/tags/Google-Develop-for-Android-系列/" style="font-size: 20px;">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size: 10px;">Ibeacon</a> <a href="/tags/ImageView/" style="font-size: 10px;">ImageView</a> <a href="/tags/Kotlin/" style="font-size: 10px;">Kotlin</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MotionEvent/" style="font-size: 10px;">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size: 12px;">OkHttp</a> <a href="/tags/React-Native/" style="font-size: 10px;">React-Native</a> <a href="/tags/RxAndroid/" style="font-size: 10px;">RxAndroid</a> <a href="/tags/RxJava/" style="font-size: 18px;">RxJava</a> <a href="/tags/ServiceManager/" style="font-size: 10px;">ServiceManager</a> <a href="/tags/String相关类性能测试/" style="font-size: 10px;">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size: 10px;">Textview</a> <a href="/tags/TypedArray/" style="font-size: 10px;">TypedArray</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ViewHolder的作用/" style="font-size: 10px;">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/Webview/" style="font-size: 10px;">Webview</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/drawable/" style="font-size: 10px;">drawable</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/写作/" style="font-size: 12px;">写作</a> <a href="/tags/反思/" style="font-size: 10px;">反思</a> <a href="/tags/图像、背景、View更新、布局、内存/" style="font-size: 12px;">图像、背景、View更新、布局、内存</a> <a href="/tags/开发规范/" style="font-size: 14px;">开发规范</a> <a href="/tags/异步线程的实现（Looper、MessageQueue、Handler）/" style="font-size: 10px;">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/总结分类/" style="font-size: 16px;">总结分类</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/时间轴/" style="font-size: 10px;">时间轴</a> <a href="/tags/架构的实例/" style="font-size: 10px;">架构的实例</a> <a href="/tags/沉浸式/" style="font-size: 10px;">沉浸式</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/目标/" style="font-size: 12px;">目标</a> <a href="/tags/知识库/" style="font-size: 14px;">知识库</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/自定义Loader/" style="font-size: 10px;">自定义Loader</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wsgzao.github.io/">HelloDog</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dearzd.com/DBlog/">咚门</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.codingyun.com/">Coding云</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.jobbole.com/">伯乐在线</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin技术宅</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">一只熊猫</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">一只熊猫</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/随笔">随笔</a></li>
+                
+                    <li><a href="/categories/技术">技术</a></li>
+                
+                    <li><a href="/instagram">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                    
+                        <a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                    
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                    
+                        <a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Android Skills/Android源码编译" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/21/Android Skills/Android源码编译/" class="article-date">
+      <time datetime="2016-02-21T06:33:45.000Z" itemprop="datePublished">2016-02-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android源码编译和内核编译
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源码/">源码</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h2 id="源码编译"><a href="#源码编译" class="headerlink" title="源码编译"></a>源码编译</h2><h4 id="1、系统：-Ubuntu14-04以上-或者-Mac"><a href="#1、系统：-Ubuntu14-04以上-或者-Mac" class="headerlink" title="1、系统： Ubuntu14.04以上 或者 Mac"></a>1、系统： Ubuntu14.04以上 或者 Mac</h4><blockquote>
+<p>下面的介绍都是在ubuntu下进行的</p>
+</blockquote>
+<h4 id="2、JdK安装"><a href="#2、JdK安装" class="headerlink" title="2、JdK安装"></a>2、JdK安装</h4><pre><code>$ sudo add-apt-repository &quot;deb http://archive.canonical.com/ lucid partner&quot;
+$ sudo apt-get update
+$ sudo apt-get install sun-java8-jdk
+</code></pre><a id="more"></a> 
+<h4 id="3、必备软件包安装"><a href="#3、必备软件包安装" class="headerlink" title="3、必备软件包安装"></a>3、必备软件包安装</h4><pre><code>$ sudo apt-get install git-core gnupg flex bison gperf build-essential \
+  zip curl zlib1g-dev libc6-dev lib32ncurses5-dev ia32-libs \
+  x11proto-core-dev libx11-dev lib32readline5-dev lib32z-dev \
+  libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown \
+  libxml2-utils
+</code></pre><h4 id="４-下载repo工具"><a href="#４-下载repo工具" class="headerlink" title="４　下载repo工具"></a>４　下载repo工具</h4><pre><code>$ cd ~
+$ mkdir ~/bin
+$ PATH=~/bin:$PATH
+$ curl https://dl-ssl.google.com/dl/googlesource/git-repo/repo &gt; ~/bin/repo
+$ chmod a+x ~/bin/repo
+</code></pre><h4 id="５-下载源码"><a href="#５-下载源码" class="headerlink" title="５　下载源码"></a>５　下载源码</h4><blockquote>
+<p>注意，下面最后一条命令，-b 后面的 Gingerbread 可以替换成 IceCreamSandwich 或者是 Froyo 中的任何一个。当然，还有其它选择，这个名字，就是 Android 版本的英文名，<a href="http://source.android.com/source/build-numbers.html" target="_blank" rel="noopener">http://source.android.com/source/build-numbers.html</a> 里面有所有的名字</p>
+</blockquote>
+<pre><code>$ mkdir CMROM
+$ cd CMROM
+$ repo init -u git://github.com/CyanogenMod/android.git
+</code></pre><blockquote>
+<p>如果是使用Google官方的源码编译</p>
+</blockquote>
+<pre><code>$ repo init -u https://android.googlesource.com/platform/manifest -b [Gingerbread]
+
+[?]部分是Android的版本名称--详见http://source.android.com/source/build-numbers.html
+</code></pre><ul>
+<li>注意事项</li>
+</ul>
+<blockquote>
+<p>默认情况下，访问Android源码是匿名的，为了防止下载服务器压力过大，下载服务器对每个ip都有下载限制。如果和别人共享一个公网IP(和别人共享路由器时，便是如此),Android源码服务器便会阻止多人同时下载，容易报错。为了解决该问题，需要使用带授权的访问，源码服务器此时对用户进行限制，而不是对ip进行限制。方法如下：<br>先创建密码：<a href="https://android.googlesource.com/new-password" target="_blank" rel="noopener">https://android.googlesource.com/new-password</a><br>该地址也经常无法访问，需多次尝试(可相隔几分钟)，若使用代理，就没法获得有用的密钥<br>再将密码保存在~/.netrc里<br>然后强制使用带授权的访问：<br> $repo init -u <a href="https://android.googlesource.com/a/platform/manifest" target="_blank" rel="noopener">https://android.googlesource.com/a/platform/manifest</a><br>在国内用repo初始化时，会经常遇到101的错误，因为有墙的原因，重试多次，运气好时便可以完成，设置代理的话会更顺利一点</p>
+</blockquote>
+<ul>
+<li><p>源代码的目录结构</p>
+<p>  在讲述Android源码编译的三个步骤之前，将先介绍Android源码目录结构，以便读者理清Android编译系统核心代码在Android源代码的位置。<br>Android源代码顶层目录结构如下所示：</p>
+<p>../CyanogenMod/</p>
+<pre><code>├──abi#应用二进制接口，不同的操作系统，应用二进制接口不同，因此linux上的二进制可执行文件在windows上无法执行
+├──android#存放了一些xml文件，用于描述工程路径及其对应的远程仓库地址，repo工具将使用这些信息同步代码
+├──bionic#bionic C库,Android没有使用标准的glibc库，而是自己重新实现了一套c/C++库，包括libc libdl libm libstdc++ libthread_db
+├──bootable# 包含两个工程，recovery和diskinstaller，刷机或者系统升级都是由recovery完成的，
+├──build#Android编译系统核心代码都存放在该目录，我们也将对该目录下的文件做详细分析
+├──cts#Android兼容性测试套件标准
+├──dalvik#dalvik JAVA虚拟机，Android用的java虚拟机和pc上用的jvm不一样
+├──development#应用程序开发工具 有eclipse开发用的formatter配置
+├──device#设备相关配置文件，存放规则 device/$vendor/$product
+├──docs#网站文档
+├──external#用到的第三方库 象busybox bash openssl等工具都存放在该目录
+├──filelist#使用godir命令生成的索引文件
+├──frameworks#核心框架——java及C++语言，可生成framework.jar
+├──gdk#glass开发Sdk
+├──hardware#部分厂家开源的硬件适配层HAL代码
+├──kernel#内核源码目录 存放规则kernel/$vendor/$product
+├──libcore#一些有用的库 像xml Jason luni
+├──libnativehelper#Support functions for Android’s class libraries
+├──Makefile#在顶层目录编译，利用的默认Makefile，它只是简单包含了build/core/main.mk
+├──ndk#ndk开发工具
+├──packages#Android apk程序所在目录,象settings，gallery等程序
+├──pdk#Platform Development Kit The goal of the PDK release is to help chipset vendors and OEMs to migrate to a new relelase
+├──prebuilt#x86和arm架构下预编译的一些资源
+├──prebuilts#有clang eclipse gcc misc ndk qemu-kernel sdk tools等子目录，交叉编译工具链所在目录
+├──sdk#sdk及模拟器
+├──system#核心代码，包含了最小化可启动的环境，还有底层调试及检查工具，adbd也在system/core目录
+├──tools#有子目录build和motodev，可能跟摩托罗拉有关
+├──vendor#设备制造商专用的配置存放目录，存放规则vendor/$vendor/$product，cm编写的apk也放在该目录
+</code></pre><p>build子目录存放编译系统的核心代码，包含着138个makefile，15个shell脚本，19个python脚本，7个C文件，7个C++文件，16个头文件，因此如果想分析编译系统核心代码，使用的IDE需支持这些编程语言，推荐使用eclipse，安装一些插件就可以很方便地查看这些代码<br>build子文件夹的目录结构如下所示：<br>build/</p>
+<pre><code>├── buildspec.mk.default#buildspec的模版文件，可定义一些变量比如TARGET_BUILD_VARIANT:=user，TARGET_BUILD_TYPE:=release
+├── CleanSpec.mk#增量编译时，会执行该文件里的命令，这些命令一般用于清除中间文件
+├── core#编译系统的核心文件放在该目录，主要是一些makefile
+├── envsetup.sh#编译时需先用source envsetup.sh设置好环境变量，该脚本提供了许多有用的命令，比如cout,croot,cgrep,在详细介绍Android编译步骤时会列出来
+├── libs#是一个C++模块，编译后可生成libhost.a静态库，里面的函数主要用于与编译主机交互
+├── target#包含编译目标相关的makefile，它有两个子文件夹 board和product，产品都在该目录下定义，比如generic,full产品，定义设备产品时，会从这里继承产品
+└── tools#各种工具，多数使用python编写，工具有用于签名的signpak, 用于下载device配置的roomservice.py等，后续将详细介绍
+</code></pre><p>我们在阅读build核心代码时，可能最头疼的就是变量，编译系统里有成百上千的变量，我们常常不知道其含义，容易一头雾水，为此我做了一个编译系统的参考手册供大家查阅， 可以很方便地检索变量，查看变量的意义，并有示例值。链接：<a href="http://android.cloudchou.com/" target="_blank" rel="noopener">http://android.cloudchou.com/</a></p>
+</li>
+</ul>
+<h4 id="６-同步源码"><a href="#６-同步源码" class="headerlink" title="６　同步源码"></a>６　同步源码</h4><blockquote>
+<p>别看只有一条命令，但是，下载的时间，很长的，推荐这条命令，晚上的时候，挂机执行，第二天早上，差不多能下载完。毕竟是 3GB 多的东西呢。</p>
+</blockquote>
+<pre><code>$ repo sync -j 10
+</code></pre><ul>
+<li>注意事项<blockquote>
+<p>在工作目录里使用repo sync同步代码，期间可能会多次卡死，需要ctrl+z，然后杀掉进程，然后再次使用repo sync，因为其支持断点续传，不需要担心会从头开始下载 还可以开启多个进程同时下载，使用repo sync -j4<br>j4代表开启4个线程,建议i5以上的开4,i7开8</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="4-编译源代码"><a href="#4-编译源代码" class="headerlink" title="4.编译源代码"></a>4.编译源代码</h4><ul>
+<li><p>初始化编译环境</p>
+<pre><code>$source build/envsetup.sh
+</code></pre></li>
+</ul>
+<ul>
+<li><p>选择一个目标设备，以cm下编译htc one为例</p>
+<pre><code>$lunch cm_m7ul-eng
+</code></pre></li>
+<li><p>此时会从网站下载m7ul的device配置以及内核源代码<br>所有目标设备的格式为BUILD-BUILDTYPE， BUILD是选择的目标设备，比如cm_m7,而BUILD_TYPE是eng，user或者userdebug</p>
+<pre><code>user: 适合发布产品时使用，访问受限
+userdebug: 和user类型类似，有root权限和调试能力，适合调试
+eng: 开发配置，有额外的调试工具
+</code></pre></li>
+<li><p>编译源代码：</p>
+<pre><code>$mka
+</code></pre></li>
+</ul>
+<h2 id="内核编译"><a href="#内核编译" class="headerlink" title="内核编译"></a>内核编译</h2><h4 id="１-下载内核源码"><a href="#１-下载内核源码" class="headerlink" title="１　下载内核源码"></a>１　下载内核源码</h4><p>　　每一个 Android 手机厂商，都会在自己的网站上公布已经生产的手机的内核源码，大家去小米手机的官方网站下载即可。</p>
+<h4 id="２-解压内核源码包"><a href="#２-解压内核源码包" class="headerlink" title="２　解压内核源码包"></a>２　解压内核源码包</h4><p>　　内核源码，一般是以压缩包的形式提供下载的。大家下载之后，在 Ubuntu 中解压即可，因为命令非常简单，这里不提供。</p>
+<h4 id="３-配置交叉工具链（编译器）路径"><a href="#３-配置交叉工具链（编译器）路径" class="headerlink" title="３　配置交叉工具链（编译器）路径"></a>３　配置交叉工具链（编译器）路径</h4><p>　　学过编程的人都知道，源码要编译成程序，必须要用编译器编译。而且手机的 CPU 不同于 PC 机，所以，得用专用的工具，即“交叉工具链”。<br>　　打开内核源码目录下的 Makefile 文件，找到“CROSS_COMPILE”定义的地方，确保和下面一模一样。</p>
+<pre><code>CROSS_COMPILE := $(shell if [ -f .cross_compile ]; then \
+    cat .cross_compile; \
+    fi)
+</code></pre><p>　　接着，在内核源码目录下面，新建一个叫“.cross_compile”的文件，在文件中，输入以下分隔线中间的一行内容</p>
+<pre><code>/（这前面，是 Android 源码的绝对路径，要求您有一点 Ubuntu 使用经验，否则不能完成）/ANDROID_SRC/prebuilt/linux-x86/toolchain/arm-eabi-4.4.0/bin/arm-eabi-
+</code></pre><p>　　打开已经下载的 Android 源码（前面有提到如何下载）目录，在 ANDROID_SRC/prebuilt/linux-x86/toolchain 下面，你会发现有几个工具链文件夹，名字为别是 arm-eabi-4.2.1（4.3.1，4.4.0，4.4.3），如果，你是用 64位 系统，用哪个都可以。如果是 32位 系统，貌似用 4.4.3 会出错。建议用 4.4.0。<br>　注：ANDROID_SRC 是指您电脑上，Android 源码存储的目录，请根据实际情况，进行替换。</p>
+<h4 id="４-“-config”配置文件"><a href="#４-“-config”配置文件" class="headerlink" title="４　“.config”配置文件"></a>４　“.config”配置文件</h4><p>　　在内核源码的目录下面，一定要有一个名字为“.config”的文件，这个文件，是小米手机的内核配置。如果内核源码的根目录下，没有发现这个文件，或者，发现的文件不是针对小米手机配置的，在 LINUX_SRC/arch/arm/configs 下面，找到针对小米手机的配置文件，复制到内核源码根目录，即可。<br>　注：LINUX_SRC 是指您电脑上，内核源码存储的目录，请根据实际情况，进行替换。</p>
+<h4 id="５-选择内核配置选项"><a href="#５-选择内核配置选项" class="headerlink" title="５　选择内核配置选项"></a>５　选择内核配置选项</h4><pre><code>$ cd LINUX_SRC
+$ make config
+</code></pre><p>这里的config文件,是在内核源码根目录下的 config文件,如果没有直接名称为config文件的,看看是否有前缀,例如:menuconfig<br>　　输入上面的命令后，会出现一个怪怪的列表，通过按“空格键”，进行“选择”或“取消”某些选项。完成后，记得保存。<br>　注：在手机使用中，有的用户总抱怨不能使用“Wifi Tether”，不能“使用笔记本共享出来的宽带上网”，都是因为这一步，内核的选项没有被正确设置。读完这篇文章之后，大家可以自己动手了。</p>
+<h4 id="６-“最后一步”"><a href="#６-“最后一步”" class="headerlink" title="６　“最后一步”"></a>６　“最后一步”</h4><pre><code>$ cd LINUX_SRC
+$ make
+</code></pre><p>　编译完成之后，会在“kernel/goldfish/arch/arm/boot/”目录下生成名为zImage的文件。 </p>
+<h2 id="用到的命令"><a href="#用到的命令" class="headerlink" title="用到的命令"></a>用到的命令</h2><h4 id="下载Android源码简要流程"><a href="#下载Android源码简要流程" class="headerlink" title="下载Android源码简要流程"></a>下载Android源码简要流程</h4><pre><code>a. 获取repo文件: curl http://commondatastorage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo .注意执行该文件需要python2.5以上版本,如果是2.4.3的python版本就无法执行这个文件脚本;
+b. 修改repo权限 : chmod a+x ~/bin/repo , 如果repo没有执行权限, 该脚本也无法执行;
+c. 初始化repo文件 : repo init -u https://android.googlesource.com/platform/manifest -b android-2.3.3_r1 , 这里要下载2.3.3版本的源码;
+d. 开始下载 :repo sync , 执行该命令就可以开始下载Android源码;
+</code></pre><h4 id="下载Android内核源码简要流程"><a href="#下载Android内核源码简要流程" class="headerlink" title="下载Android内核源码简要流程"></a>下载Android内核源码简要流程</h4><pre><code>a. 使用git下载 : git clone https://android.googlesource.com/kernel/goldfish.git ;
+b. 查看分支 : git branch -a ;
+c. 检出版本 : git checkout remotes/origin/android-goldfish-2.6.29 ;
+</code></pre>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/02/21/Android Skills/Android源码编译/">Android源码编译和内核编译</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 一只熊猫 的个人博客">一只熊猫</a></p>
+        <p><span>发布时间:</span>2016年02月21日 - 14时33分</p>
+     
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/02/21/Android Skills/Android源码编译/" title="Android源码编译和内核编译">http://blog.apanda.online/2016/02/21/Android Skills/Android源码编译/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.apanda.online/2016/02/21/Android Skills/Android源码编译/　　作者: 一只熊猫" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2016/02/22/Android Skills/Webview上传文件的那些坑/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Webview上传文件的那些坑
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/18/New Lan/Kotlin1.0正式版发布/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Kotlin 1.0 正式版发布啦</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码编译"><span class="toc-number">1.</span> <span class="toc-text">源码编译</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、系统：-Ubuntu14-04以上-或者-Mac"><span class="toc-number">1.0.1.</span> <span class="toc-text">1、系统： Ubuntu14.04以上 或者 Mac</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、JdK安装"><span class="toc-number">1.0.2.</span> <span class="toc-text">2、JdK安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、必备软件包安装"><span class="toc-number">1.0.3.</span> <span class="toc-text">3、必备软件包安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#４-下载repo工具"><span class="toc-number">1.0.4.</span> <span class="toc-text">４　下载repo工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#５-下载源码"><span class="toc-number">1.0.5.</span> <span class="toc-text">５　下载源码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#６-同步源码"><span class="toc-number">1.0.6.</span> <span class="toc-text">６　同步源码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-编译源代码"><span class="toc-number">1.0.7.</span> <span class="toc-text">4.编译源代码</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#内核编译"><span class="toc-number">2.</span> <span class="toc-text">内核编译</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#１-下载内核源码"><span class="toc-number">2.0.1.</span> <span class="toc-text">１　下载内核源码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#２-解压内核源码包"><span class="toc-number">2.0.2.</span> <span class="toc-text">２　解压内核源码包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#３-配置交叉工具链（编译器）路径"><span class="toc-number">2.0.3.</span> <span class="toc-text">３　配置交叉工具链（编译器）路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#４-“-config”配置文件"><span class="toc-number">2.0.4.</span> <span class="toc-text">４　“.config”配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#５-选择内核配置选项"><span class="toc-number">2.0.5.</span> <span class="toc-text">５　选择内核配置选项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#６-“最后一步”"><span class="toc-number">2.0.6.</span> <span class="toc-text">６　“最后一步”</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#用到的命令"><span class="toc-number">3.</span> <span class="toc-text">用到的命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载Android源码简要流程"><span class="toc-number">3.0.1.</span> <span class="toc-text">下载Android源码简要流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#下载Android内核源码简要流程"><span class="toc-number">3.0.2.</span> <span class="toc-text">下载Android内核源码简要流程</span></a></li></ol></li></ol></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/02/22/Android Skills/Webview上传文件的那些坑/" title="上一篇: Webview上传文件的那些坑">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/02/18/New Lan/Kotlin1.0正式版发布/" title="下一篇: Kotlin 1.0 正式版发布啦">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/CentOS-FireWall/">centos/CentOS-FireWall</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/centos-attack-record/">centos/centos-attack-record</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/redis/">centos/redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/ssr/">centos/ssr</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/06/每天一道算法题目Java/范型/">每天一道算法题目Java/范型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Gomobile编译jni库/">Go lang 学习笔记/Gomobile编译jni库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Golang 支持交叉编译/">Go lang 学习笔记/Golang 支持交叉编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang.resource/commit/">Go lang 学习笔记/基本排序算法Golang.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang/">Go lang 学习笔记/基本排序算法Golang</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit/">Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现/">Go lang 学习笔记/Golang二分查找算法的简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析/">Go lang 学习笔记/Json解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析.resource/commit/">Go lang 学习笔记/Json解析.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序/">Go lang 学习笔记/二叉树插入排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序.resource/commit/">Go lang 学习笔记/二叉树插入排序.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/">每天一道算法题目Java/寻找出现一次的字符.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符/">每天一道算法题目Java/寻找出现一次的字符</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/Android Skills/使用Android Studio进行NDK开发（一）/">使用AndroidStudio进行NDK开发（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/06/RxJava/RxJava & RxAndroid备忘/">RxJava & RxAndroid备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/在安卓上使用RxJava/">在安卓上使用RxJava</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/深入浅出RxJava四-在Android中使用响应式编程/">深入浅出RxJava(四：在Android中使用响应式编程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/04/RxJava/深入浅出RxJava三--响应式的好处/">深入浅出RxJava(三：响应式的好处)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/02/RxJava/深入浅出RxJava(二：操作符)/">深入浅出RxJava(二：操作符)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/Q2季度目标/">Q2季度目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/VIM快捷键/">VIM快捷键的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/RxJava/深入浅出RxJava（一：基础篇）/">深入浅出RxJava(一：基础篇)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考/">谷歌官方出的一套关于 Android 架构的实例参考</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava/RxAndroid/">从案例学习RxAndroid</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/23/小知识点/你应该知道的那些Android小经验/">Android小经验</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/小知识点/android代码片段/">Android开发代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/02/小知识点/Android开发工作中的细节/">Android开发工作中的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/随笔/日常使用到的梯子/">日常使用到的梯子</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/小知识点/Android开发中的小知识点汇总/">Android小知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/Android Skills/Lambda for Android/">Lambda for Android</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/Android Skills/理解Android的编译命令/">理解Android编译命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/22/Android Skills/Webview上传文件的那些坑/">Webview上传文件的那些坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/21/Android Skills/Android源码编译/">Android源码编译和内核编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/New Lan/Kotlin1.0正式版发布/">Kotlin 1.0 正式版发布啦</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/25/随笔/Ibeacon/">Ibeacon</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Android Skills/Android MotionEvent详解/">Android MotionEvent详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/19/New Lan/React-Native学习指南/">React-Native学习指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/18/Android Skills/RecyclerView 列表控件中简单实现时间线/">RecyclerView 列表控件中简单实现时间线</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/21/3.5开发中的亮点和不足/">亮点和不足</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/09/Android Skills/ActionBar沉浸式实现/">ActionBar沉浸式实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之内存篇/">Android性能优化之内存篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之渲染篇/">Android性能优化之渲染篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之电量篇/">Android性能优化之电量篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化典范（三）/">Android性能优化典范（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化之运算篇/">Android性能优化之运算篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/13/Android性能优化典范/Android性能优化典范（二）/">Android性能优化典范（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/11/Android性能优化典范/Android性能优化典范（一）/">Android性能优化典范（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/22/Android Skills/注解(Annotation)自定义注解入门/">Android注解(Annotation)自定义注解入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/21/Android Skills/Android OkHttp完全解析/">Android OkHttp完全解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/19/Android Skills/Android OkHttp初级入门/">Android OkHttp使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/27/Android Skills/EventBus 3.0的用法详解(二)/">EventBus 3.0的用法详解（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/25/Android Skills/EventBus 3.0的用法详解（一）/">EventBus 3.0的用法详解（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/21/Android Skills/自定义Dialog的大小、位置、颜色/">Android自定义对话框(Dialog)位置,大小</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/16/Google Develop for Android 系列/Developing for Android 最佳实践九：工具/">Google Develop for Android 系列九 － 工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/15/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/">Google Develop for Android 系列八 － 用户界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/14/Google Develop for Android 系列/Google Develop for Android 系列七 － Framework最佳实践/">Google Develop for Android 系列七 － Framework最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/13/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/">Google Develop for Android 系列六 － Storage最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/12/Google Develop for Android 系列/Google Develop for Android 系列五 － Language and Libraries/">Google Develop for Android 系列五 － Language and Libraries</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/11/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/">Google Develop for Android 系列四 － Network最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/10/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/">Google Develop for Android 系列三 － Performance最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/">Google Develop for Android 系列二 － Memory 最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/08/Google Develop for Android 系列/Google Develop for Android 系列一 － 相关上下文介绍/">Google Develop for Android 系列一 － 相关上下文介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/02/小知识点/Android开发常用的adb命令整理/">Android开发常用的adb命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/01/21/小知识点/端口号/">端口号设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/07/Android Skills/Android AsyncTask 技巧/">Android AsyncTask 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/05/Android Skills/图像、背景、View更新、布局、内存/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/08/随笔/健身/">健身</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/09/18/Android Skills/widget用法/">widget用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/08/Android Skills/webview入门/">WebView入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/07/18/Android Skills/TypedArray/">解析：TypedArray 为什么需要调用recycle()</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/15/Android Skills/Android内核 ServiceManager/">Android内核 ServiceManager</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/12/Android Skills/Android内核 Binder/">Android内核 Binder</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/08/Android Skills/Android内核 异步线程的实现（Looper、MessageQueue、Handler）/">异步线程的实现（Looper、MessageQueue、Handler）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/01/Android Skills/CountDownTimer（倒数计时器）/">CountDownTimer（倒数计时器）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/19/Android Skills/万能的ViewHolder/">ViewHolder的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android 自定义Loader/">Android 自定义Loader</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android Skill 下拉刷新/">下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/15/Android Skills/Android TextView 技巧/">Android Textview 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/13/Android Skills/Android String相关类性能测试/">String相关类性能测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/11/Android Skills/Android ImageView ScaleType属性/">ImageView ScaleType属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/05/Android Skills/Android EditText 技巧/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/24/随笔/Lantern(灯笼)使用实例/">Lantern(灯笼)使用实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/19/Android Skills/Context/">Android Context 到底是什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/17/小知识点/Android开发中一些被冷落但却很有用的类和方法/">Android开发中一些被冷落但却很有用的类和方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/12/小知识点/Android Studio的快捷键/">Android Studio 的快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/08/小知识点/Android开发规范/">Android 开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/07/小知识点/开发规范/">Google Java编程风格指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/28/Android Skills/40个Java集合面试问题和答案/">40个Java集合面试问题和答案</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/Android Skills/Android anim drawable color 技巧/">Android anim drawable color技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/小知识点/36个Android开发的代码片段/">36个Android开发常用代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/21/随笔/生命中的空白/">生命中的空白</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 一只熊猫
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a> 
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 21;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+  </div>
+</body>
+</html>

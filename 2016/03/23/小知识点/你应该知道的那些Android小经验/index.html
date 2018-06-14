@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android小经验 | 一只熊猫的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="原文出处：http://jayfeng.com/  做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。 查看SQLite日志adb shell setprop log.tag.SQLiteLog V adb shell setprop log.tag.SQLiteStatements V 因为实现里用了Log.isLoggab">
+<meta name="keywords" content="知识库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android小经验">
+<meta property="og:url" content="http://blog.apanda.online/2016/03/23/小知识点/你应该知道的那些Android小经验/index.html">
+<meta property="og:site_name" content="一只熊猫的博客">
+<meta property="og:description" content="原文出处：http://jayfeng.com/  做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。 查看SQLite日志adb shell setprop log.tag.SQLiteLog V adb shell setprop log.tag.SQLiteStatements V 因为实现里用了Log.isLoggab">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2016-04-10T10:08:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android小经验">
+<meta name="twitter:description" content="原文出处：http://jayfeng.com/  做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。 查看SQLite日志adb shell setprop log.tag.SQLiteLog V adb shell setprop log.tag.SQLiteStatements V 因为实现里用了Log.isLoggab">
+  
+    <link rel="alternative" href="/atom.xml" title="一只熊猫的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.jpg">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">一只熊猫</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/随笔">随笔</a></li>
+                        
+                            <li><a href="/categories/技术">技术</a></li>
+                        
+                            <li><a href="/instagram">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                            
+                                <a class="fl mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                            
+                                <a class="fl facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                            
+                                <a class="fl twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android性能优化典范/" style="font-size: 18px;">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size: 10px;">Annotation</a> <a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a> <a href="/tags/Binder/" style="font-size: 10px;">Binder</a> <a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/EventBus/" style="font-size: 12px;">EventBus</a> <a href="/tags/Google-Develop-for-Android-系列/" style="font-size: 20px;">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size: 10px;">Ibeacon</a> <a href="/tags/ImageView/" style="font-size: 10px;">ImageView</a> <a href="/tags/Kotlin/" style="font-size: 10px;">Kotlin</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MotionEvent/" style="font-size: 10px;">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size: 12px;">OkHttp</a> <a href="/tags/React-Native/" style="font-size: 10px;">React-Native</a> <a href="/tags/RxAndroid/" style="font-size: 10px;">RxAndroid</a> <a href="/tags/RxJava/" style="font-size: 18px;">RxJava</a> <a href="/tags/ServiceManager/" style="font-size: 10px;">ServiceManager</a> <a href="/tags/String相关类性能测试/" style="font-size: 10px;">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size: 10px;">Textview</a> <a href="/tags/TypedArray/" style="font-size: 10px;">TypedArray</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ViewHolder的作用/" style="font-size: 10px;">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/Webview/" style="font-size: 10px;">Webview</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/drawable/" style="font-size: 10px;">drawable</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/写作/" style="font-size: 12px;">写作</a> <a href="/tags/反思/" style="font-size: 10px;">反思</a> <a href="/tags/图像、背景、View更新、布局、内存/" style="font-size: 12px;">图像、背景、View更新、布局、内存</a> <a href="/tags/开发规范/" style="font-size: 14px;">开发规范</a> <a href="/tags/异步线程的实现（Looper、MessageQueue、Handler）/" style="font-size: 10px;">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/总结分类/" style="font-size: 16px;">总结分类</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/时间轴/" style="font-size: 10px;">时间轴</a> <a href="/tags/架构的实例/" style="font-size: 10px;">架构的实例</a> <a href="/tags/沉浸式/" style="font-size: 10px;">沉浸式</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/目标/" style="font-size: 12px;">目标</a> <a href="/tags/知识库/" style="font-size: 14px;">知识库</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/自定义Loader/" style="font-size: 10px;">自定义Loader</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wsgzao.github.io/">HelloDog</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dearzd.com/DBlog/">咚门</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.codingyun.com/">Coding云</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.jobbole.com/">伯乐在线</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin技术宅</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">一只熊猫</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">一只熊猫</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/随笔">随笔</a></li>
+                
+                    <li><a href="/categories/技术">技术</a></li>
+                
+                    <li><a href="/instagram">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                    
+                        <a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                    
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                    
+                        <a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-小知识点/你应该知道的那些Android小经验" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/23/小知识点/你应该知道的那些Android小经验/" class="article-date">
+      <time datetime="2016-03-23T15:33:02.000Z" itemprop="datePublished">2016-03-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android小经验
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/知识库/">知识库</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>原文出处：<a href="http://jayfeng.com/2016/03/18/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E9%82%A3%E4%BA%9BAndroid%E5%B0%8F%E7%BB%8F%E9%AA%8C/" target="_blank" rel="noopener">http://jayfeng.com/</a> </p>
+<p>做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。</p>
+<h2 id="查看SQLite日志"><a href="#查看SQLite日志" class="headerlink" title="查看SQLite日志"></a>查看SQLite日志</h2><p><code>adb shell setprop log.tag.SQLiteLog V</code></p>
+<p><code>adb shell setprop log.tag.SQLiteStatements V</code></p>
+<p>因为实现里用了Log.isLoggable(TAG, Log.VERBOSE)做了判断，LessCode的LogLess中也参考了这种机制：<a href="https://github.com/openproject/LessCode/blob/master/lesscode-core/src/main/java/com/jayfeng/lesscode/core/LogLess.java" target="_blank" rel="noopener">LogLess</a>。<br>使用这种方法就可以在Release版本也能做到查看应用的打印日志了。</p>
+<h2 id="PNG优化"><a href="#PNG优化" class="headerlink" title="PNG优化"></a>PNG优化</h2><p>APK打包会自动对PNG进行无损压缩，如果自行无损压缩是无效的。<br>当然进行有损压缩是可以的：<a href="https://tinypng.com/" target="_blank" rel="noopener">https://tinypng.com/</a></p>
+<h2 id="Tcpdump抓包"><a href="#Tcpdump抓包" class="headerlink" title="Tcpdump抓包"></a>Tcpdump抓包</h2><a id="more"></a>
+<p>有些模拟器比如genymotion自带了tcpdump，如果没有的话，需要下载tcpdump:<br><a href="http://www.strazzere.com/android/tcpdump" target="_blank" rel="noopener">http://www.strazzere.com/android/tcpdump</a><br>把tcpdump push到/data/local下，抓包命令：</p>
+<p><code>adb shell  /data/local/tcpdump -i any -p -s 0 -w /sdcard/capture.pcap</code></p>
+<p>很多开发者服务都需要绑定签名信息，用下面的命令可以查看签名：</p>
+<p><code>keytool -list -v -keystore release.jks</code></p>
+<p>注意，这个是需要密码的，可以查看MD5, SHA1，SHA256等等。</p>
+<h2 id="单例模式-懒汉式-的更好的写法"><a href="#单例模式-懒汉式-的更好的写法" class="headerlink" title="单例模式(懒汉式)的更好的写法"></a>单例模式(懒汉式)的更好的写法</h2><p>特别说到这个问题，是因为网上很多这样的代码：</p>
+<p><code>public class Singleton {</code></p>
+<p><code>private static Singleton instance;</code></p>
+<p><code>private Singleton (){}</code></p>
+<p><code>public static Singleton getInstance() {</code></p>
+<p><code>if</code> <code>(instance == `</code>null<code></code>) {`</p>
+<p><code>instance = `</code>new<code></code>Singleton();`</p>
+<p><code>}</code></p>
+<p><code>return</code> <code>instance;</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p>这种写法线程不安全，改进一下，加一个同步锁：</p>
+<p><code>public class Singleton {</code></p>
+<p><code>private static Singleton instance;</code></p>
+<p><code>private Singleton (){}</code></p>
+<p><code>public static synchronized Singleton getInstance() {</code></p>
+<p><code>if</code> <code>(instance == `</code>null<code></code>) {`</p>
+<p><code>instance = `</code>new<code></code>Singleton();`</p>
+<p><code>}</code></p>
+<p><code>return</code> <code>instance;</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p>网上这样的代码更多，可以很好的工作，但是缺点是效率低。<br>实际上，早在JDK1.5就引入volatile关键字，所以又有了一种更好的双重校验锁写法：</p>
+<p><code>public class Singleton {</code></p>
+<p><code>private volatile static Singleton singleton;</code></p>
+<p><code>private Singleton (){}</code></p>
+<p><code>public static Singleton getSingleton() {</code></p>
+<p><code>if</code> <code>(singleton == `</code>null<code></code>) {`</p>
+<p><code>synchronized (Singleton.class) {</code></p>
+<p><code>if</code> <code>(singleton == `</code>null<code></code>) {`</p>
+<p><code>singleton = `</code>new<code></code>Singleton();`</p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p><code>return</code> <code>singleton;</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p>注意，别忘记volatile关键字哦，否则就是10重，100重也可能还是会出问题。<br>上面是用的最多的，还有一种静态内部类写法更推荐：</p>
+<p><code>publlic class Singleton {</code></p>
+<p><code>private Singleton() {}</code></p>
+<p><code>private static class SingletonLoader {</code></p>
+<p><code>private static final Singleton INSTANCE = `</code>new<code></code>Singleton();`</p>
+<p><code>}</code></p>
+<p><code>public static Singleton getInstance() {</code></p>
+<p><code>return</code> <code>SingletonLoader.INSTANCE;</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<h2 id="多进程Application"><a href="#多进程Application" class="headerlink" title="多进程Application"></a>多进程Application</h2><p>是不是经常发现Application里的方法执行了多次？百思不得其解。<br>因为当有多个进程的时候，Application会执行多次，可以通过pid来判断那些方法只执行一次，避免浪费资源。</p>
+<h2 id="隐式启动Service"><a href="#隐式启动Service" class="headerlink" title="隐式启动Service"></a>隐式启动Service</h2><p>这是Android5.0的一个改动，不支持隐式的Service调用。下面的代码在Android 5.0+上会报错：Service Intent must be explicit：</p>
+<p><code>Intent serviceIntent = `</code>new<code></code>Intent();`</p>
+<p><code>serviceIntent.setAction(`</code>“com.jayfeng.MyService”<code></code>);`</p>
+<p><code>context.startService(serviceIntent);</code></p>
+<p>可改成如下：</p>
+<p><code>// 指定具体Service类，或者有packageName也行</code></p>
+<p><code>Intent serviceIntent = `</code>new<code></code>Intent(context, MyService.class);`</p>
+<p><code>context.startService(serviceIntent);</code></p>
+<h2 id="fill-parent的寿命"><a href="#fill-parent的寿命" class="headerlink" title="fill_parent的寿命"></a>fill_parent的寿命</h2><p>在Android2.2之后，支持使用match_parent。你的布局文件里是不是既有fill_parent和match_parent显得很乱？<br>如果你现在的minSdkVersion是8+的话，就可以忽略fill_parent，统一使用match_parent了，否则请使用fill_parent。</p>
+<h2 id="ListView的局部刷新"><a href="#ListView的局部刷新" class="headerlink" title="ListView的局部刷新"></a>ListView的局部刷新</h2><p>有的列表可能notifyDataSetChanged()代价有点高，最好能局部刷新。<br>局部刷新的重点是，找到要更新的那项的View，然后再根据业务逻辑更新数据即可。</p>
+<p><code>private void updateItem(int index) {</code></p>
+<p><code>int visiblePosition = listView.getFirstVisiblePosition();</code></p>
+<p><code>if</code> <code>(index - visiblePosition &gt;= 0) {</code></p>
+<p><code>//得到要更新的item的view</code></p>
+<p><code>View view = listView.getChildAt(index - visiblePosition);</code></p>
+<p><code>// 更新界面（示例参考）</code></p>
+<p><code>// TextView nameView = ViewLess.$(view, R.id.name);</code></p>
+<p><code>// nameView.setText(&quot;update &quot; + index);</code></p>
+<p><code>// 更新列表数据（示例参考）</code></p>
+<p><code>// list.get(index).setName(&quot;Update &quot; + index);</code></p>
+<p><code>}</code></p>
+<p><code>}</code></p>
+<p>强调一下，最后那个列表数据别忘记更新， 不然数据源不变，一滚动可能又还原了。</p>
+<h2 id="系统日志中几个重要的TAG"><a href="#系统日志中几个重要的TAG" class="headerlink" title="系统日志中几个重要的TAG"></a>系统日志中几个重要的TAG</h2><p><code>// 查看Activity跳转</code></p>
+<p><code>adb logcat -v time | grep ActivityManager</code></p>
+<p><code>// 查看崩溃信息</code></p>
+<p><code>adb logcat -v time | grep AndroidRuntime</code></p>
+<p><code>// 查看Dalvik信息，比如GC</code></p>
+<p><code>adb logcat -v time | grep `</code>“D\/Dalvik”`</p>
+<p><code>// 查看art信息，比如GC</code></p>
+<p><code>adb logcat -v time | grep `</code>“I\/art”`</p>
+<h2 id="一行居中，多行居左的TextView"><a href="#一行居中，多行居左的TextView" class="headerlink" title="一行居中，多行居左的TextView"></a>一行居中，多行居左的TextView</h2><p>这个一般用于提示信息对话框，如果文字是一行就居中，多行就居左。<br>在TextView外套一层wrap_content的ViewGroup即可简单实现：</p>
+<p><code>&lt;RelativeLayout xmlns:android=`</code>“<a href="http://schemas.android.com/apk/res/android" target="_blank" rel="noopener">http://schemas.android.com/apk/res/android</a>“`</p>
+<p><code>android:layout_width=`</code>“match_parent”`</p>
+<p><code>android:layout_height=`</code>“match_parent”<code></code>&gt;`</p>
+<p><code>&lt;!-- 套一层wrap_content的ViewGroup --&gt;</code></p>
+<p><code>&lt;LinearLayout</code></p>
+<p><code>android:layout_width=`</code>“wrap_content”`</p>
+<p><code>android:layout_height=`</code>“wrap_content”`</p>
+<p><code>android:layout_centerInParent=`</code>“true”<code></code>&gt;`</p>
+<p><code>&lt;TextView</code></p>
+<p><code>android:layout_width=`</code>“wrap_content”`</p>
+<p><code>android:layout_height=`</code>“wrap_content”`</p>
+<p><code>android:text=`</code>“@string/hello_world”<code></code>/&gt;`</p>
+<p><code>&lt;/LinearLayout&gt;</code></p>
+<p><code>&lt;/RelativeLayout&gt;</code></p>
+<h2 id="setCompoundDrawablesWithIntrinsicBounds"><a href="#setCompoundDrawablesWithIntrinsicBounds" class="headerlink" title="setCompoundDrawablesWithIntrinsicBounds()"></a>setCompoundDrawablesWithIntrinsicBounds()</h2><p>网上一大堆setCompoundDrawables()方法无效不显示的问题，然后解决方法是setBounds，需要计算大小…<br>不用这么麻烦，用setCompoundDrawablesWithIntrinsicBounds()这个方法最简单！</p>
+<h2 id="计算程序运行时间"><a href="#计算程序运行时间" class="headerlink" title="计算程序运行时间"></a>计算程序运行时间</h2><p>为了计算一段代码运行时间，一般的做法是，在代码的前面加个startTime，在代码的后面把当前时间减去startTime，这个时间差就是运行时间。<br>这里提供一种写起来更方便的方法，完全无时间逻辑，只是加一个打印log就够了。</p>
+<p><code>// 测试setContentView()的时间</code></p>
+<p><code>Log.d(`</code>“TAG”<code>,</code>“Start”<code></code>);`</p>
+<p><code>setContentView(R.layout.activity_http);</code></p>
+<p><code>Log.d(`</code>“TAG”<code>,</code>“End”<code></code>);`</p>
+<p>没有计算时间的逻辑，这能测出来？<br>把日志过滤出来，运行命令“adb logcat -v time | grep TAG”：</p>
+<p><code>03-18 14:47:25.477 D/TAG     (14600): Start</code></p>
+<p><code>03-18 14:47:25.478 D/TAG     (14600): End</code></p>
+<p>通过-v time参数，可以比较日志左边的时间来算出中间的代码运行的时间。</p>
+<h2 id="JAVA引用类型一览表"><a href="#JAVA引用类型一览表" class="headerlink" title="JAVA引用类型一览表"></a>JAVA引用类型一览表</h2><p>对象引用：强引用 > 软引用 > 弱引用 > 虚引用。</p>
+<p>引用类型回收时机用途生存时间强引用从来不会对象的一般状态JVM停止运行时终止软引用在内存不足时对象缓存内存不足时终止弱引用在垃圾回收时对象缓存GC运行后终止虚引用在垃圾回收时对象跟踪GC运行后终止</p>
+<h2 id="Context使用场景"><a href="#Context使用场景" class="headerlink" title="Context使用场景"></a>Context使用场景</h2><p>为了防止Activity，Service等这样的Context泄漏于一些生命周期更长的对象，可以使用生命周期更长的ApplicationContext，但是不是所有的Context的都能替换为ApplicationContext<br>这是网上流传的一份表格：</p>
+<p>ApplicationActivityServiceContentProviderBroadcastReceiverShow Dialog否是否否否Start Activity否是否否否Layout Inflation否是否否否Start Service是是是是是Bind Service是是是是否Send Broadcast是是是是是Regist BroadcastReceiver是是是是否Load Resource Value是是是是是</p>
+<h2 id="图片缓存大小"><a href="#图片缓存大小" class="headerlink" title="图片缓存大小"></a>图片缓存大小</h2><p>现在很多图片库需要给图片设置一个最大缓存，但是这个值设置多少合适呢？<br>高端机和低端机的配置显然应该不同，可以考虑设置一个动态值。<br>建议设置为应用可用内存的1/8:</p>
+<p><code>int memoryCache = (int) (Runtime.getRuntime().maxMemory() / 8);</code></p>
+<h2 id="系统内置的一些工具类"><a href="#系统内置的一些工具类" class="headerlink" title="系统内置的一些工具类"></a>系统内置的一些工具类</h2><p>在AOSP源码全局搜了一下包含Util关键字的类，整理出这个列表供大家参考：</p>
+<p><code>// 系统</code></p>
+<p><code>./android/database/DatabaseUtils.java</code></p>
+<p><code>./android/transition/TransitionUtils.java</code></p>
+<p><code>./android/view/animation/AnimationUtils.java</code></p>
+<p><code>./android/view/ViewAnimationUtils.java</code></p>
+<p><code>./android/webkit/URLUtil.java</code></p>
+<p><code>./android/bluetooth/le/BluetoothLeUtils.java</code></p>
+<p><code>./android/gesture/GestureUtils.java</code></p>
+<p><code>./android/text/TextUtils.java</code></p>
+<p><code>./android/text/format/DateUtils.java</code></p>
+<p><code>./android/os/FileUtils.java</code></p>
+<p><code>./android/os/CommonTimeUtils.java</code></p>
+<p><code>./android/net/NetworkUtils.java</code></p>
+<p><code>./android/util/MathUtils.java</code></p>
+<p><code>./android/util/TimeUtils.java</code></p>
+<p><code>./android/util/ExceptionUtils.java</code></p>
+<p><code>./android/util/DebugUtils.java</code></p>
+<p><code>./android/drm/DrmUtils.java</code></p>
+<p><code>./android/media/ThumbnailUtils.java</code></p>
+<p><code>./android/media/ImageUtils.java</code></p>
+<p><code>./android/media/Utils.java</code></p>
+<p><code>./android/opengl/GLUtils.java</code></p>
+<p><code>./android/opengl/ETC1Util.java</code></p>
+<p><code>./android/telephony/PhoneNumberUtils.java</code></p>
+<p><code>// 设计和支持库</code></p>
+<p><code>./design/src/android/support/design/widget/ViewGroupUtils.java</code></p>
+<p><code>./design/src/android/support/design/widget/ThemeUtils.java</code></p>
+<p><code>./design/src/android/support/design/widget/ViewUtils.java</code></p>
+<p><code>./design/lollipop/android/support/design/widget/ViewUtilsLollipop.java</code></p>
+<p><code>./design/base/android/support/design/widget/AnimationUtils.java</code></p>
+<p><code>./design/base/android/support/design/widget/MathUtils.java</code></p>
+<p><code>./design/honeycomb/android/support/design/widget/ViewGroupUtilsHoneycomb.java</code></p>
+<p><code>./v7/recyclerview/src/android/support/v7/widget/helper/ItemTouchUIUtil.java</code></p>
+<p><code>./v7/recyclerview/src/android/support/v7/widget/helper/ItemTouchUIUtilImpl.java</code></p>
+<p><code>./v7/recyclerview/src/android/support/v7/util/MessageThreadUtil.java</code></p>
+<p><code>./v7/recyclerview/src/android/support/v7/util/AsyncListUtil.java</code></p>
+<p><code>./v7/recyclerview/src/android/support/v7/util/ThreadUtil.java</code></p>
+<p><code>./v7/recyclerview/tests/src/android/support/v7/widget/AsyncListUtilLayoutTest.java</code></p>
+<p><code>./v7/recyclerview/tests/src/android/support/v7/util/AsyncListUtilTest.java</code></p>
+<p><code>./v7/recyclerview/tests/src/android/support/v7/util/ThreadUtilTest.java</code></p>
+<p><code>./v7/appcompat/src/android/support/v7/graphics/drawable/DrawableUtils.java</code></p>
+<p><code>./v7/appcompat/src/android/support/v7/widget/DrawableUtils.java</code></p>
+<p><code>./v7/appcompat/src/android/support/v7/widget/ThemeUtils.java</code></p>
+<p><code>./v7/appcompat/src/android/support/v7/widget/ViewUtils.java</code></p>
+<p><code>./v4/tests/java/android/support/v4/graphics/ColorUtilsTest.java</code></p>
+<p><code>./v4/jellybean-mr1/android/support/v4/text/TextUtilsCompatJellybeanMr1.java</code></p>
+<p><code>./v4/jellybean/android/support/v4/app/BundleUtil.java</code></p>
+<p><code>./v4/jellybean/android/support/v4/app/NavUtilsJB.java</code></p>
+<p><code>./v4/java/android/support/v4/app/NavUtils.java</code></p>
+<p><code>./v4/java/android/support/v4/database/DatabaseUtilsCompat.java</code></p>
+<p><code>./v4/java/android/support/v4/graphics/ColorUtils.java</code></p>
+<p><code>./v4/java/android/support/v4/text/TextUtilsCompat.java</code></p>
+<p><code>./v4/java/android/support/v4/util/TimeUtils.java</code></p>
+<p><code>./v4/java/android/support/v4/util/DebugUtils.java</code></p>
+<p><code>./v4/java/android/support/v4/content/res/TypedArrayUtils.java</code></p>
+<p>这么多工具类，一定可以找到对你有用的。</p>
+<h2 id="ClipPadding"><a href="#ClipPadding" class="headerlink" title="ClipPadding"></a>ClipPadding</h2><p>这个不多说，ListView的ClipPadding设为false，就能为ListView设置各种padding而不会出现丑陋的滑动“禁区”了。</p>
+<h2 id="强大的dumpsys"><a href="#强大的dumpsys" class="headerlink" title="强大的dumpsys"></a>强大的dumpsys</h2><p>dumpsys可以查看系统服务和状态，非常强大，可通过如下查看所有支持的子命令：</p>
+<p><code>dumpsys | grep `</code>“DUMP OF SERVICE”`</p>
+<p>这里列举几个稍微常用的：</p>
+<p>子命令备注activity显示所有的activities的信息cpuinfo显示CPU信息window显示键盘，窗口和它们的关系meminfo内存信息（meminfo $package_name or $pid 使用包名或者进程id显示内存信息）alarm显示Alarm信息statusbar显示状态栏相关的信息（找出广告通知属于哪个应用）usagestats每个界面启动的时间</p>
+<h2 id="bugreport命令"><a href="#bugreport命令" class="headerlink" title="bugreport命令"></a>bugreport命令</h2><p>很多人都用过adb logcat，但是如果想要更详细的信息，logcat则无能为力。<br>所以大多数手机厂商测试更多的是用adb bugreport来抓log给开发人员分析。</p>
+<p><code>// 除了log，还包括启动后的系统状态,包括进程列表，内存信息，VM信息等等</code></p>
+<p><code>// 而且不像logcat是一直打印的，bugreport命令输出到当前时间就停止结束了。</code></p>
+<p><code>adb bugreport &gt; main.log</code></p>
+<h2 id="dpi文件夹的换算比例"><a href="#dpi文件夹的换算比例" class="headerlink" title="dpi文件夹的换算比例"></a>dpi文件夹的换算比例</h2><p>之前的ldpi基本可以抛弃了，主流的dpi已经从很早之前的mdip转移到了xhdpi了，特别提醒。</p>
+<p>PPIRESOLUTIONDPPXmdpi(160dp)320P11hdpi(240dp)480P11.5xhdpi(320dp)720P12xxhdpi(480dpi)1080P13</p>
+<h2 id="更新媒体库文件"><a href="#更新媒体库文件" class="headerlink" title="更新媒体库文件"></a>更新媒体库文件</h2><p>以前做ROM的时候经常碰到一些第三方软件（某音乐APP）下载了新文件或删除文件之后，但是媒体库并没有更新，因为这个是需要第三方软件主动触发。</p>
+<p><code>// 通知媒体库更新单个文件状态</code></p>
+<p><code>Uri fileUri = Uri.fromFile(file);</code></p>
+<p><code>sendBroadcast(`</code>new<code></code>Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,fileUri));`</p>
+<p>媒体库会在手机启动，SD卡插拔的情况下进行全盘扫描，不是实时的而且代价比较大，所以单个文件的刷新很有必要。</p>
+<h2 id="Monkey参数"><a href="#Monkey参数" class="headerlink" title="Monkey参数"></a>Monkey参数</h2><p>大家都知道，跑monkey的参数设置有一些要注意的地方，比如太快了不行不切实际，太慢了也不行等等，这里给出一个参考：</p>
+<p><code>adb shell monkey -p &lt;packageName&gt; -s 1000 --ignore-crashes --ignore-timeouts --ignore-security-exceptions  --pct-trackball 0 --pct-nav 0 --pct-majornav 0 --pct-anyevent 0  -v --throttle 300 1200000000</code></p>
+<p>一边跑monkey，一边抓log吧。</p>
+<p>无论是大经验还是小经验，有用就是好经验。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/03/23/小知识点/你应该知道的那些Android小经验/">Android小经验</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 一只熊猫 的个人博客">一只熊猫</a></p>
+        <p><span>发布时间:</span>2016年03月23日 - 23时33分</p>
+     
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/03/23/小知识点/你应该知道的那些Android小经验/" title="Android小经验">http://blog.apanda.online/2016/03/23/小知识点/你应该知道的那些Android小经验/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.apanda.online/2016/03/23/小知识点/你应该知道的那些Android小经验/　　作者: 一只熊猫" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2016/03/25/RxJava/RxAndroid/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          从案例学习RxAndroid
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/21/小知识点/android代码片段/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android开发代码片段</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#查看SQLite日志"><span class="toc-number">1.</span> <span class="toc-text">查看SQLite日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PNG优化"><span class="toc-number">2.</span> <span class="toc-text">PNG优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tcpdump抓包"><span class="toc-number">3.</span> <span class="toc-text">Tcpdump抓包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式-懒汉式-的更好的写法"><span class="toc-number">4.</span> <span class="toc-text">单例模式(懒汉式)的更好的写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多进程Application"><span class="toc-number">5.</span> <span class="toc-text">多进程Application</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式启动Service"><span class="toc-number">6.</span> <span class="toc-text">隐式启动Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fill-parent的寿命"><span class="toc-number">7.</span> <span class="toc-text">fill_parent的寿命</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ListView的局部刷新"><span class="toc-number">8.</span> <span class="toc-text">ListView的局部刷新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统日志中几个重要的TAG"><span class="toc-number">9.</span> <span class="toc-text">系统日志中几个重要的TAG</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一行居中，多行居左的TextView"><span class="toc-number">10.</span> <span class="toc-text">一行居中，多行居左的TextView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setCompoundDrawablesWithIntrinsicBounds"><span class="toc-number">11.</span> <span class="toc-text">setCompoundDrawablesWithIntrinsicBounds()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算程序运行时间"><span class="toc-number">12.</span> <span class="toc-text">计算程序运行时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA引用类型一览表"><span class="toc-number">13.</span> <span class="toc-text">JAVA引用类型一览表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Context使用场景"><span class="toc-number">14.</span> <span class="toc-text">Context使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片缓存大小"><span class="toc-number">15.</span> <span class="toc-text">图片缓存大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统内置的一些工具类"><span class="toc-number">16.</span> <span class="toc-text">系统内置的一些工具类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ClipPadding"><span class="toc-number">17.</span> <span class="toc-text">ClipPadding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强大的dumpsys"><span class="toc-number">18.</span> <span class="toc-text">强大的dumpsys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bugreport命令"><span class="toc-number">19.</span> <span class="toc-text">bugreport命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dpi文件夹的换算比例"><span class="toc-number">20.</span> <span class="toc-text">dpi文件夹的换算比例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新媒体库文件"><span class="toc-number">21.</span> <span class="toc-text">更新媒体库文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Monkey参数"><span class="toc-number">22.</span> <span class="toc-text">Monkey参数</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/03/25/RxJava/RxAndroid/" title="上一篇: 从案例学习RxAndroid">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2016/03/21/小知识点/android代码片段/" title="下一篇: Android开发代码片段">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/CentOS-FireWall/">centos/CentOS-FireWall</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/centos-attack-record/">centos/centos-attack-record</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/redis/">centos/redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/ssr/">centos/ssr</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/06/每天一道算法题目Java/范型/">每天一道算法题目Java/范型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Gomobile编译jni库/">Go lang 学习笔记/Gomobile编译jni库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Golang 支持交叉编译/">Go lang 学习笔记/Golang 支持交叉编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang.resource/commit/">Go lang 学习笔记/基本排序算法Golang.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang/">Go lang 学习笔记/基本排序算法Golang</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit/">Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现/">Go lang 学习笔记/Golang二分查找算法的简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析/">Go lang 学习笔记/Json解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析.resource/commit/">Go lang 学习笔记/Json解析.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序/">Go lang 学习笔记/二叉树插入排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序.resource/commit/">Go lang 学习笔记/二叉树插入排序.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/">每天一道算法题目Java/寻找出现一次的字符.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符/">每天一道算法题目Java/寻找出现一次的字符</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/Android Skills/使用Android Studio进行NDK开发（一）/">使用AndroidStudio进行NDK开发（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/06/RxJava/RxJava & RxAndroid备忘/">RxJava & RxAndroid备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/在安卓上使用RxJava/">在安卓上使用RxJava</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/深入浅出RxJava四-在Android中使用响应式编程/">深入浅出RxJava(四：在Android中使用响应式编程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/04/RxJava/深入浅出RxJava三--响应式的好处/">深入浅出RxJava(三：响应式的好处)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/02/RxJava/深入浅出RxJava(二：操作符)/">深入浅出RxJava(二：操作符)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/Q2季度目标/">Q2季度目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/VIM快捷键/">VIM快捷键的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/RxJava/深入浅出RxJava（一：基础篇）/">深入浅出RxJava(一：基础篇)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考/">谷歌官方出的一套关于 Android 架构的实例参考</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava/RxAndroid/">从案例学习RxAndroid</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/23/小知识点/你应该知道的那些Android小经验/">Android小经验</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/小知识点/android代码片段/">Android开发代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/02/小知识点/Android开发工作中的细节/">Android开发工作中的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/随笔/日常使用到的梯子/">日常使用到的梯子</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/小知识点/Android开发中的小知识点汇总/">Android小知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/Android Skills/Lambda for Android/">Lambda for Android</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/Android Skills/理解Android的编译命令/">理解Android编译命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/22/Android Skills/Webview上传文件的那些坑/">Webview上传文件的那些坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/21/Android Skills/Android源码编译/">Android源码编译和内核编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/New Lan/Kotlin1.0正式版发布/">Kotlin 1.0 正式版发布啦</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/25/随笔/Ibeacon/">Ibeacon</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Android Skills/Android MotionEvent详解/">Android MotionEvent详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/19/New Lan/React-Native学习指南/">React-Native学习指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/18/Android Skills/RecyclerView 列表控件中简单实现时间线/">RecyclerView 列表控件中简单实现时间线</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/21/3.5开发中的亮点和不足/">亮点和不足</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/09/Android Skills/ActionBar沉浸式实现/">ActionBar沉浸式实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之内存篇/">Android性能优化之内存篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之渲染篇/">Android性能优化之渲染篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之电量篇/">Android性能优化之电量篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化典范（三）/">Android性能优化典范（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化之运算篇/">Android性能优化之运算篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/13/Android性能优化典范/Android性能优化典范（二）/">Android性能优化典范（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/11/Android性能优化典范/Android性能优化典范（一）/">Android性能优化典范（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/22/Android Skills/注解(Annotation)自定义注解入门/">Android注解(Annotation)自定义注解入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/21/Android Skills/Android OkHttp完全解析/">Android OkHttp完全解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/19/Android Skills/Android OkHttp初级入门/">Android OkHttp使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/27/Android Skills/EventBus 3.0的用法详解(二)/">EventBus 3.0的用法详解（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/25/Android Skills/EventBus 3.0的用法详解（一）/">EventBus 3.0的用法详解（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/21/Android Skills/自定义Dialog的大小、位置、颜色/">Android自定义对话框(Dialog)位置,大小</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/16/Google Develop for Android 系列/Developing for Android 最佳实践九：工具/">Google Develop for Android 系列九 － 工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/15/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/">Google Develop for Android 系列八 － 用户界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/14/Google Develop for Android 系列/Google Develop for Android 系列七 － Framework最佳实践/">Google Develop for Android 系列七 － Framework最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/13/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/">Google Develop for Android 系列六 － Storage最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/12/Google Develop for Android 系列/Google Develop for Android 系列五 － Language and Libraries/">Google Develop for Android 系列五 － Language and Libraries</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/11/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/">Google Develop for Android 系列四 － Network最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/10/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/">Google Develop for Android 系列三 － Performance最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/">Google Develop for Android 系列二 － Memory 最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/08/Google Develop for Android 系列/Google Develop for Android 系列一 － 相关上下文介绍/">Google Develop for Android 系列一 － 相关上下文介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/02/小知识点/Android开发常用的adb命令整理/">Android开发常用的adb命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/01/21/小知识点/端口号/">端口号设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/07/Android Skills/Android AsyncTask 技巧/">Android AsyncTask 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/05/Android Skills/图像、背景、View更新、布局、内存/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/08/随笔/健身/">健身</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/09/18/Android Skills/widget用法/">widget用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/08/Android Skills/webview入门/">WebView入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/07/18/Android Skills/TypedArray/">解析：TypedArray 为什么需要调用recycle()</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/15/Android Skills/Android内核 ServiceManager/">Android内核 ServiceManager</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/12/Android Skills/Android内核 Binder/">Android内核 Binder</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/08/Android Skills/Android内核 异步线程的实现（Looper、MessageQueue、Handler）/">异步线程的实现（Looper、MessageQueue、Handler）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/01/Android Skills/CountDownTimer（倒数计时器）/">CountDownTimer（倒数计时器）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/19/Android Skills/万能的ViewHolder/">ViewHolder的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android 自定义Loader/">Android 自定义Loader</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android Skill 下拉刷新/">下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/15/Android Skills/Android TextView 技巧/">Android Textview 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/13/Android Skills/Android String相关类性能测试/">String相关类性能测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/11/Android Skills/Android ImageView ScaleType属性/">ImageView ScaleType属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/05/Android Skills/Android EditText 技巧/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/24/随笔/Lantern(灯笼)使用实例/">Lantern(灯笼)使用实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/19/Android Skills/Context/">Android Context 到底是什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/17/小知识点/Android开发中一些被冷落但却很有用的类和方法/">Android开发中一些被冷落但却很有用的类和方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/12/小知识点/Android Studio的快捷键/">Android Studio 的快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/08/小知识点/Android开发规范/">Android 开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/07/小知识点/开发规范/">Google Java编程风格指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/28/Android Skills/40个Java集合面试问题和答案/">40个Java集合面试问题和答案</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/Android Skills/Android anim drawable color 技巧/">Android anim drawable color技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/小知识点/36个Android开发的代码片段/">36个Android开发常用代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/21/随笔/生命中的空白/">生命中的空白</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 一只熊猫
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a> 
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 21;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+  </div>
+</body>
+</html>

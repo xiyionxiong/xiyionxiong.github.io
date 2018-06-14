@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Google Develop for Android 系列二 － Memory 最佳实践 | 一只熊猫的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="============================================ 作者 : lightsky原文链接  在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。 避免在循环中分配内存内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中">
+<meta name="keywords" content="Google Develop for Android 系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google Develop for Android 系列二 － Memory 最佳实践">
+<meta property="og:url" content="http://blog.apanda.online/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/index.html">
+<meta property="og:site_name" content="一只熊猫的博客">
+<meta property="og:description" content="============================================ 作者 : lightsky原文链接  在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。 避免在循环中分配内存内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中">
+<meta property="og:locale" content="中文">
+<meta property="og:updated_time" content="2016-04-10T09:02:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Google Develop for Android 系列二 － Memory 最佳实践">
+<meta name="twitter:description" content="============================================ 作者 : lightsky原文链接  在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。 避免在循环中分配内存内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中">
+  
+    <link rel="alternative" href="/atom.xml" title="一只熊猫的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.jpg">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">一只熊猫</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/随笔">随笔</a></li>
+                        
+                            <li><a href="/categories/技术">技术</a></li>
+                        
+                            <li><a href="/instagram">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                            
+                                <a class="fl mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                            
+                                <a class="fl facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                            
+                                <a class="fl twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android性能优化典范/" style="font-size: 18px;">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size: 10px;">Annotation</a> <a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a> <a href="/tags/Binder/" style="font-size: 10px;">Binder</a> <a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/EventBus/" style="font-size: 12px;">EventBus</a> <a href="/tags/Google-Develop-for-Android-系列/" style="font-size: 20px;">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size: 10px;">Ibeacon</a> <a href="/tags/ImageView/" style="font-size: 10px;">ImageView</a> <a href="/tags/Kotlin/" style="font-size: 10px;">Kotlin</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MotionEvent/" style="font-size: 10px;">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size: 12px;">OkHttp</a> <a href="/tags/React-Native/" style="font-size: 10px;">React-Native</a> <a href="/tags/RxAndroid/" style="font-size: 10px;">RxAndroid</a> <a href="/tags/RxJava/" style="font-size: 18px;">RxJava</a> <a href="/tags/ServiceManager/" style="font-size: 10px;">ServiceManager</a> <a href="/tags/String相关类性能测试/" style="font-size: 10px;">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size: 10px;">Textview</a> <a href="/tags/TypedArray/" style="font-size: 10px;">TypedArray</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ViewHolder的作用/" style="font-size: 10px;">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/Webview/" style="font-size: 10px;">Webview</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/drawable/" style="font-size: 10px;">drawable</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/写作/" style="font-size: 12px;">写作</a> <a href="/tags/反思/" style="font-size: 10px;">反思</a> <a href="/tags/图像、背景、View更新、布局、内存/" style="font-size: 12px;">图像、背景、View更新、布局、内存</a> <a href="/tags/开发规范/" style="font-size: 14px;">开发规范</a> <a href="/tags/异步线程的实现（Looper、MessageQueue、Handler）/" style="font-size: 10px;">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/总结分类/" style="font-size: 16px;">总结分类</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/时间轴/" style="font-size: 10px;">时间轴</a> <a href="/tags/架构的实例/" style="font-size: 10px;">架构的实例</a> <a href="/tags/沉浸式/" style="font-size: 10px;">沉浸式</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/目标/" style="font-size: 12px;">目标</a> <a href="/tags/知识库/" style="font-size: 14px;">知识库</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/自定义Loader/" style="font-size: 10px;">自定义Loader</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wsgzao.github.io/">HelloDog</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dearzd.com/DBlog/">咚门</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.codingyun.com/">Coding云</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.jobbole.com/">伯乐在线</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin技术宅</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">一只熊猫</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">一只熊猫</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/随笔">随笔</a></li>
+                
+                    <li><a href="/categories/技术">技术</a></li>
+                
+                    <li><a href="/instagram">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                    
+                        <a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                    
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                    
+                        <a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/" class="article-date">
+      <time datetime="2015-06-09T13:12:17.000Z" itemprop="datePublished">2015-06-09</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Google Develop for Android 系列二 － Memory 最佳实践
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Google-Develop-for-Android-系列/">Google Develop for Android 系列</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>============================================</p>
+<p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-2-memory/" target="_blank" rel="noopener">原文链接</a></p>
+<hr>
+<p>在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。</p>
+<h2 id="避免在循环中分配内存"><a href="#避免在循环中分配内存" class="headerlink" title="避免在循环中分配内存"></a>避免在循环中分配内存</h2><p>内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中。比如在绘制代码中，因为每一帧的渲染都会执行该方法。</p>
+<p>避免在自定义View的onDraw方法中分配内存，因为动画也许会调用它。使用缓存对象替换临时对象可以避免新的内存开销。典型的例子就是在 onDraw方法中分配了一个新的Paint对象，因为Canvas需要一个Paint对象。对于这种自定义View的实例只分配一个独立的Paint对 象而后在onDraw方法中临时使用更好。</p>
+<h2 id="尽可能的避免内存分配"><a href="#尽可能的避免内存分配" class="headerlink" title="尽可能的避免内存分配"></a>尽可能的避免内存分配</h2><p>避免常量，临时变量的内存分配。下面有一些可参考的策略，也许并不适用于传统的java编码，但是对于Android开发是推荐的。通常可以使用工 具帮助我们去决定是否某一块代码需要优化。如果代码的某一部分很少执行（比如用户改变一些设置的操作），更简洁和传统的抽象层是不错的选择。但是如果分析 表明某些代码频繁执行并导致了大量的内存搅动，考虑以下策略：</p>
+<ul>
+<li><strong>对象缓存</strong><br>重用对象在一些常量内存的再分配中很有用，比如在内部循环中避免内存分配。比如，有些频繁调用的方法中可能需要一个Rect对象存储一些中间值，最好在把 Rect作为类级别的常量，只分配一次内存，甚至是静态的，避免每次方法调用的时候都分配。关于单例的一些警示对于这种方式也是适用的，在Android 上，静态的常见缺陷就是它们对于某一个进程是静态的，但是可能有多个活动在同一进程中。小心应用，这种技术在避免内存的再分配中是通用的<a id="more"></a></li>
+<li><strong>对象池</strong><br>如果代码临时需要同一种类型的多个对象，考虑适用对象池而不是频繁的分配内存。但对象池可能不容易管理。如果对象有状态并且又是被任意线程访问的情况，要 注意一些并发性的问题。在内存压力方面也有问题（可以使用LruCache策略），对象的增加存在着内存泄漏的风险，因此当你使用对象池的时候注意这些问 题，考虑只在特定的情况下使用它。如果这种策略在那些内存配置低低老版本或者设备上非常有用，你应该通过API版本或者isLowRamDevice() 方法来检测对象池的使用限制</li>
+<li><strong>Arrays</strong><br>ArrayList是一种很便利的集合也不会造成太多的分配。它会再分配，并且会复制当前的数组添加到列表后面，但是设置一个合理的初始化容量可以避免频繁的分配内存。如果你的集合不需要动态的变化大小，考虑使用Array</li>
+<li><strong>Andorid集合类</strong><br>除非你需要一个map去存储大量的数据，否则考虑使用ArrayMap或者是SimpleArayMap作为数据结构而不是HashMap。这些类是经过 优化的，相对于HashMap会有更高的内存效率以及更少的GC压力，这样的数据结构在移动设备上能够更好的满足通用的使用情景（另外它们也支持实体的遍 历而不使用Iterator）。当然，考虑设置一个恰当的初始容量去避免自动扩容</li>
+<li><strong>需要修改对象的方法</strong><br>这种情况你不应该不要返回一个新的对象，考虑将该对象作为参数传入进来，去修改该对象：</li>
+</ul>
+<p><code>Rect getRect(int w, int h)</code></p>
+<p><code>void getRect(Rect rect, int w, int h)</code></p>
+<ul>
+<li><strong>当原始类型可以满足时避免使用对象类型</strong> 使用Integer，Float而不是int，float时，会导致内存分配，自动装箱以及更多对象自身内存的分配。比如，如果你的方法中一个 Integer，然后代码调用附带了一个int，由于自动装箱，将会导致一个内存分配。带有传统类型的集合类和泛型可能不可避免的，但是当原始类型可以搞 定的时候应该避免包装类型。Android中提供了一些像SparseIntArray和SparseLongArray的集合类，它们内部使用的就是原 始类型而不是对象类型。</li>
+<li><strong>避免对象数组</strong> 如果你有一组简单的数据对象，可以考虑将每一个字段存储到数组中。比如，假设你绘制的时候需要追踪一些之前的touch X/Y的point数据。你应该使用两个int[]来保存它们，一个用于存储X坐标值，另一个用于存储Y坐标值，而不是使用一个Point[]。这样不仅 仅减少了原始对象的个数（节省了内存），也增加了数据的局部性，可以更好的利用宝贵的内存和CPU的缓存。</li>
+</ul>
+<h2 id="避免Interators"><a href="#避免Interators" class="headerlink" title="避免Interators"></a>避免Interators</h2><p>明确的(<code>List.iterator()</code>)或者不明确的(<code>for(Object o : myObjects)</code>)使用Interator会导致一个Interator对象的内存分配。单独一个内存分配不是什么大事，但是应该尽量避免在内部循环中分配内存。当然，直接的使用角标进行集合遍历可以不用分配任何的内存。</p>
+<p><code>final int count = myList.size();</code></p>
+<p><code>for</code> <code>(int i = 0; i &lt; count; ++i) {</code></p>
+<p><code>Object o = myList.get(i);</code></p>
+<p><code>// …</code></p>
+<p><code>}</code></p>
+<p>值得注意的是，Interator总会导致一个内存的分配，即使是空集合。因此，如果当你非要使用foreach的时候，应该在遍历集合的之前可以进行一次isEmpty的检验。</p>
+<p>枚举通常可以用来代表常量，但是会比原始类型耗费更多，它涉及到代码量的大小和枚举对象内存的分配。</p>
+<p>一个临时的枚举不会造成较大的内存消耗。但是Proguard会，在一些情况下他会进行一些静态的分析所有的代码，将枚举优化为int值。当枚举在 整个应用中被被广泛的使用或者当一个library或某个API中的枚举被其它很多应用使用的时候时就是问题了，甚至会很糟糕。</p>
+<p>使用AndioStudio1.3版本中的<code>@IntDef</code>注解能够保证你的代码在build时期是类型安全的（当lint error开启的时候）。因此使用int变量对于性能和代码量都会更好。</p>
+<h2 id="避免非移动应用的Frameworks和Libraries"><a href="#避免非移动应用的Frameworks和Libraries" class="headerlink" title="避免非移动应用的Frameworks和Libraries"></a>避免非移动应用的Frameworks和Libraries</h2><p>有时会使用一些熟悉的java平台的一些框架，比如注解依赖的Guice。但是它并没有为移动应用进行优化，使用它们将会导致一些问题。</p>
+<p>如果你只是使用了某个Library中的一小部分，你可以试着将那一部分抽取出来。即使Proguard在很多情况下可以跳过那些不用的代码，但是在大的library的依赖图可能会导致优化失败（也会大大增加Proguard的build时间）。</p>
+<p>有一些libraries虽然被引入到Android应用中，但是你不应该随意使用，除非很熟悉它，知道它可能为应用带来的问题。</p>
+<p>还有些问题就是使用那些非移动的框架和库可能会增加内存的开销。你可以通过监视内存的使用和垃圾回收器的行为来检测它们导致的问题程度。</p>
+<h2 id="避免静态的内存泄漏"><a href="#避免静态的内存泄漏" class="headerlink" title="避免静态的内存泄漏"></a>避免静态的内存泄漏</h2><p>对于避免临时的内存分配使用static对象很有用。但是应该注意使用静态变量去缓存对象时，它们实际上不应该一直存在整个进程的生命周期中。特别 的，这些static的变量不应该和Activity的生命周期一致。比如，当屏幕方向改变的时候Activity会destroy并recreate， 但是static变量持有Activity的引用，这样会导致内存泄漏。Activities是非常耗资源的，这种内存泄漏很快会导致你的应用和系统 OOM。</p>
+<h2 id="避免Finalizers"><a href="#避免Finalizers" class="headerlink" title="避免Finalizers"></a>避免Finalizers</h2><p>因为和java语言的席位差别，finalizers需要的不是一个垃圾回收器，而是两个。这就意味着不仅资源会被finalizer会被冻住直到 两个垃圾回收器都触发的时候，而且系统中同时运行两个垃圾回收器也会导致资源消耗和卡顿。有一种特殊情况需要finalization，当你的对象持有一 个本地的指针时。如果没有这样的情况，就可以完全避免finalizers。</p>
+<p>如果你确实需要finalizers，考虑实现AutoCloseable接口并且在你的代码域内通过close方法释放所有的资源。</p>
+<h2 id="避免过度的静态初始化"><a href="#避免过度的静态初始化" class="headerlink" title="避免过度的静态初始化"></a>避免过度的静态初始化</h2><p>在你的应用中一些重要的时间内（比如启动的时候），过多的初始化可能导致性能的问题和较差的用户体验。可以在你需要它的时候再去加载代码。</p>
+<h2 id="通过命令释放缓存"><a href="#通过命令释放缓存" class="headerlink" title="通过命令释放缓存"></a>通过命令释放缓存</h2><p>从API 14，<a href="http://developer.android.com/reference/android/content/ComponentCallbacks2.html" target="_blank" rel="noopener">ComponentCallbacks2</a>提供了onTrimMemory()回调方法允许你的app在较低内存压力的情况下释放内存。更多详情可以参考Google I/O 2012的Video <a href="https://www.youtube.com/watch?v=gbQb1PVjfqM&amp;t=4m" target="_blank" rel="noopener">Doing More with Less</a>，展示了一个如何LruCache处理bitmap的例子。</p>
+<h2 id="使用-isLowRamDevice"><a href="#使用-isLowRamDevice" class="headerlink" title="使用 isLowRamDevice()"></a>使用 isLowRamDevice()</h2><p>KitKat版本中出现的ActivityManager.isLowRamDevice()方法可以帮助你检测应用运行时的内存限制.当你的应用中有一些特性比较好内存的时候u，可以通过这种方式去检测内存是否可以满足你的特性，然后决定是否开启。</p>
+<h2 id="避免请求较大的Heap内存"><a href="#避免请求较大的Heap内存" class="headerlink" title="避免请求较大的Heap内存"></a>避免请求较大的Heap内存</h2><p>应用可以通过在mainfest文件中设置application tag来开启请求较大heap内存的功能，但是你不应该这么做。请求一个大的Heap的行为可能着该应用只考虑到自己的需求，但是对于整个设备度体验来说是一个错误度决定。</p>
+<p>请求大的Heap在很少的情况下可能是必要的，比如media内容的处理。但是应用使用该功能只是为了更好的管理内存和资源而不是导致整个设备的用 户体验变得更差。应用请求较大的heap将会导致设备上其它的进程拥有更少的内存，用户在切换activity的时候就有可能导致其它应用被kill掉然 后重启。</p>
+<h2 id="避免在必要情况外过长的运行service"><a href="#避免在必要情况外过长的运行service" class="headerlink" title="避免在必要情况外过长的运行service"></a>避免在必要情况外过长的运行service</h2><p>每一个进程在系统中都有一个资源的限制。如果你不需要service在后台一致运行，就及时将它关闭。</p>
+<p>Android提供了很多机制来确保组件只在特定的范围内运行：</p>
+<ul>
+<li>使用BroadcastReceiver去接收那些重要但是不频繁的事件，而不是使用一个大多数时间都无用的Service，比如network 状态变化或者alarm。App可以在不需要但时候 关闭BroadcastReceivers，以至于系统只在需要的时候才被唤醒。</li>
+<li>使用IntentService实现一个service，这样的service会在任务栈为空的时候自动关闭</li>
+</ul>
+<h2 id="优化代码大小"><a href="#优化代码大小" class="headerlink" title="优化代码大小"></a>优化代码大小</h2><p>瘦身的应用会运行更快。加载的代码量越少,用户下载你的app的时间就会越少，你的应用也会更快的启动和初始化。下面是一些建议：</p>
+<ul>
+<li>使用Proguard剔除无用的代码。使用Gradle也可以，而且它还会从你依赖的libraries中剔除那些无用的代码</li>
+<li>谨慎依赖 当你只是需要某一种指定的数据类型的时候不要使用那些拥有各种集合较大的library。</li>
+<li>确保你自己理解那些自动化生成代码的消耗</li>
+<li>越简单越好，直接解决问题，而不是创造出大量的结构和抽象去解决问题</li>
+</ul>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/">Google Develop for Android 系列二 － Memory 最佳实践</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 一只熊猫 的个人博客">一只熊猫</a></p>
+        <p><span>发布时间:</span>2015年06月09日 - 21时12分</p>
+     
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/" title="Google Develop for Android 系列二 － Memory 最佳实践">http://blog.apanda.online/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.apanda.online/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/　　作者: 一只熊猫" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2015/06/10/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Google Develop for Android 系列三 － Performance最佳实践
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/06/08/Google Develop for Android 系列/Google Develop for Android 系列一 － 相关上下文介绍/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Google Develop for Android 系列一 － 相关上下文介绍</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#避免在循环中分配内存"><span class="toc-number">1.</span> <span class="toc-text">避免在循环中分配内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#尽可能的避免内存分配"><span class="toc-number">2.</span> <span class="toc-text">尽可能的避免内存分配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免Interators"><span class="toc-number">3.</span> <span class="toc-text">避免Interators</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免非移动应用的Frameworks和Libraries"><span class="toc-number">4.</span> <span class="toc-text">避免非移动应用的Frameworks和Libraries</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免静态的内存泄漏"><span class="toc-number">5.</span> <span class="toc-text">避免静态的内存泄漏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免Finalizers"><span class="toc-number">6.</span> <span class="toc-text">避免Finalizers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免过度的静态初始化"><span class="toc-number">7.</span> <span class="toc-text">避免过度的静态初始化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过命令释放缓存"><span class="toc-number">8.</span> <span class="toc-text">通过命令释放缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用-isLowRamDevice"><span class="toc-number">9.</span> <span class="toc-text">使用 isLowRamDevice()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免请求较大的Heap内存"><span class="toc-number">10.</span> <span class="toc-text">避免请求较大的Heap内存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免在必要情况外过长的运行service"><span class="toc-number">11.</span> <span class="toc-text">避免在必要情况外过长的运行service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化代码大小"><span class="toc-number">12.</span> <span class="toc-text">优化代码大小</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2015/06/10/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/" title="上一篇: Google Develop for Android 系列三 － Performance最佳实践">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2015/06/08/Google Develop for Android 系列/Google Develop for Android 系列一 － 相关上下文介绍/" title="下一篇: Google Develop for Android 系列一 － 相关上下文介绍">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/CentOS-FireWall/">centos/CentOS-FireWall</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/centos-attack-record/">centos/centos-attack-record</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/redis/">centos/redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/ssr/">centos/ssr</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/06/每天一道算法题目Java/范型/">每天一道算法题目Java/范型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Gomobile编译jni库/">Go lang 学习笔记/Gomobile编译jni库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Golang 支持交叉编译/">Go lang 学习笔记/Golang 支持交叉编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang.resource/commit/">Go lang 学习笔记/基本排序算法Golang.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang/">Go lang 学习笔记/基本排序算法Golang</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit/">Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现/">Go lang 学习笔记/Golang二分查找算法的简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析/">Go lang 学习笔记/Json解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析.resource/commit/">Go lang 学习笔记/Json解析.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序/">Go lang 学习笔记/二叉树插入排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序.resource/commit/">Go lang 学习笔记/二叉树插入排序.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/">每天一道算法题目Java/寻找出现一次的字符.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符/">每天一道算法题目Java/寻找出现一次的字符</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/Android Skills/使用Android Studio进行NDK开发（一）/">使用AndroidStudio进行NDK开发（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/06/RxJava/RxJava & RxAndroid备忘/">RxJava & RxAndroid备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/在安卓上使用RxJava/">在安卓上使用RxJava</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/深入浅出RxJava四-在Android中使用响应式编程/">深入浅出RxJava(四：在Android中使用响应式编程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/04/RxJava/深入浅出RxJava三--响应式的好处/">深入浅出RxJava(三：响应式的好处)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/02/RxJava/深入浅出RxJava(二：操作符)/">深入浅出RxJava(二：操作符)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/Q2季度目标/">Q2季度目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/VIM快捷键/">VIM快捷键的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/RxJava/深入浅出RxJava（一：基础篇）/">深入浅出RxJava(一：基础篇)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考/">谷歌官方出的一套关于 Android 架构的实例参考</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava/RxAndroid/">从案例学习RxAndroid</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/23/小知识点/你应该知道的那些Android小经验/">Android小经验</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/小知识点/android代码片段/">Android开发代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/02/小知识点/Android开发工作中的细节/">Android开发工作中的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/随笔/日常使用到的梯子/">日常使用到的梯子</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/小知识点/Android开发中的小知识点汇总/">Android小知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/Android Skills/Lambda for Android/">Lambda for Android</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/Android Skills/理解Android的编译命令/">理解Android编译命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/22/Android Skills/Webview上传文件的那些坑/">Webview上传文件的那些坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/21/Android Skills/Android源码编译/">Android源码编译和内核编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/New Lan/Kotlin1.0正式版发布/">Kotlin 1.0 正式版发布啦</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/25/随笔/Ibeacon/">Ibeacon</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Android Skills/Android MotionEvent详解/">Android MotionEvent详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/19/New Lan/React-Native学习指南/">React-Native学习指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/18/Android Skills/RecyclerView 列表控件中简单实现时间线/">RecyclerView 列表控件中简单实现时间线</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/21/3.5开发中的亮点和不足/">亮点和不足</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/09/Android Skills/ActionBar沉浸式实现/">ActionBar沉浸式实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之内存篇/">Android性能优化之内存篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之渲染篇/">Android性能优化之渲染篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之电量篇/">Android性能优化之电量篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化典范（三）/">Android性能优化典范（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化之运算篇/">Android性能优化之运算篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/13/Android性能优化典范/Android性能优化典范（二）/">Android性能优化典范（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/11/Android性能优化典范/Android性能优化典范（一）/">Android性能优化典范（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/22/Android Skills/注解(Annotation)自定义注解入门/">Android注解(Annotation)自定义注解入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/21/Android Skills/Android OkHttp完全解析/">Android OkHttp完全解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/19/Android Skills/Android OkHttp初级入门/">Android OkHttp使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/27/Android Skills/EventBus 3.0的用法详解(二)/">EventBus 3.0的用法详解（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/25/Android Skills/EventBus 3.0的用法详解（一）/">EventBus 3.0的用法详解（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/21/Android Skills/自定义Dialog的大小、位置、颜色/">Android自定义对话框(Dialog)位置,大小</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/16/Google Develop for Android 系列/Developing for Android 最佳实践九：工具/">Google Develop for Android 系列九 － 工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/15/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/">Google Develop for Android 系列八 － 用户界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/14/Google Develop for Android 系列/Google Develop for Android 系列七 － Framework最佳实践/">Google Develop for Android 系列七 － Framework最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/13/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/">Google Develop for Android 系列六 － Storage最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/12/Google Develop for Android 系列/Google Develop for Android 系列五 － Language and Libraries/">Google Develop for Android 系列五 － Language and Libraries</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/11/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/">Google Develop for Android 系列四 － Network最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/10/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/">Google Develop for Android 系列三 － Performance最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/">Google Develop for Android 系列二 － Memory 最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/08/Google Develop for Android 系列/Google Develop for Android 系列一 － 相关上下文介绍/">Google Develop for Android 系列一 － 相关上下文介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/02/小知识点/Android开发常用的adb命令整理/">Android开发常用的adb命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/01/21/小知识点/端口号/">端口号设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/07/Android Skills/Android AsyncTask 技巧/">Android AsyncTask 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/05/Android Skills/图像、背景、View更新、布局、内存/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/08/随笔/健身/">健身</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/09/18/Android Skills/widget用法/">widget用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/08/Android Skills/webview入门/">WebView入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/07/18/Android Skills/TypedArray/">解析：TypedArray 为什么需要调用recycle()</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/15/Android Skills/Android内核 ServiceManager/">Android内核 ServiceManager</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/12/Android Skills/Android内核 Binder/">Android内核 Binder</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/08/Android Skills/Android内核 异步线程的实现（Looper、MessageQueue、Handler）/">异步线程的实现（Looper、MessageQueue、Handler）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/01/Android Skills/CountDownTimer（倒数计时器）/">CountDownTimer（倒数计时器）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/19/Android Skills/万能的ViewHolder/">ViewHolder的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android 自定义Loader/">Android 自定义Loader</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android Skill 下拉刷新/">下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/15/Android Skills/Android TextView 技巧/">Android Textview 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/13/Android Skills/Android String相关类性能测试/">String相关类性能测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/11/Android Skills/Android ImageView ScaleType属性/">ImageView ScaleType属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/05/Android Skills/Android EditText 技巧/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/24/随笔/Lantern(灯笼)使用实例/">Lantern(灯笼)使用实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/19/Android Skills/Context/">Android Context 到底是什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/17/小知识点/Android开发中一些被冷落但却很有用的类和方法/">Android开发中一些被冷落但却很有用的类和方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/12/小知识点/Android Studio的快捷键/">Android Studio 的快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/08/小知识点/Android开发规范/">Android 开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/07/小知识点/开发规范/">Google Java编程风格指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/28/Android Skills/40个Java集合面试问题和答案/">40个Java集合面试问题和答案</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/Android Skills/Android anim drawable color 技巧/">Android anim drawable color技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/小知识点/36个Android开发的代码片段/">36个Android开发常用代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/21/随笔/生命中的空白/">生命中的空白</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 一只熊猫
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a> 
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 21;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>下拉刷新 | 一只熊猫的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近在研究Android的下拉刷新功能，看了几个别人写的自定义控件： 1.android-pulltorefresh：https://github.com/chrisbanes/Android-PullToRefresh2.android-pulltorefresh-listview：https://github.com/johannilsson/android-pulltorefresh">
+<meta name="keywords" content="下拉刷新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="下拉刷新">
+<meta property="og:url" content="http://blog.apanda.online/2014/05/17/Android Skills/Android Skill 下拉刷新/index.html">
+<meta property="og:site_name" content="一只熊猫的博客">
+<meta property="og:description" content="最近在研究Android的下拉刷新功能，看了几个别人写的自定义控件： 1.android-pulltorefresh：https://github.com/chrisbanes/Android-PullToRefresh2.android-pulltorefresh-listview：https://github.com/johannilsson/android-pulltorefresh">
+<meta property="og:locale" content="中文">
+<meta property="og:image" content="http://img.blog.csdn.net/20141118183653229?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20141118183704773?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20141118183715678?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20141118183726406?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2016-02-22T05:52:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="下拉刷新">
+<meta name="twitter:description" content="最近在研究Android的下拉刷新功能，看了几个别人写的自定义控件： 1.android-pulltorefresh：https://github.com/chrisbanes/Android-PullToRefresh2.android-pulltorefresh-listview：https://github.com/johannilsson/android-pulltorefresh">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20141118183653229?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+  
+    <link rel="alternative" href="/atom.xml" title="一只熊猫的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.jpg">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">一只熊猫</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/随笔">随笔</a></li>
+                        
+                            <li><a href="/categories/技术">技术</a></li>
+                        
+                            <li><a href="/instagram">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                            
+                                <a class="fl mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                            
+                                <a class="fl facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                            
+                                <a class="fl twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android性能优化典范/" style="font-size: 18px;">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size: 10px;">Annotation</a> <a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a> <a href="/tags/Binder/" style="font-size: 10px;">Binder</a> <a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/EventBus/" style="font-size: 12px;">EventBus</a> <a href="/tags/Google-Develop-for-Android-系列/" style="font-size: 20px;">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size: 10px;">Ibeacon</a> <a href="/tags/ImageView/" style="font-size: 10px;">ImageView</a> <a href="/tags/Kotlin/" style="font-size: 10px;">Kotlin</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MotionEvent/" style="font-size: 10px;">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size: 12px;">OkHttp</a> <a href="/tags/React-Native/" style="font-size: 10px;">React-Native</a> <a href="/tags/RxAndroid/" style="font-size: 10px;">RxAndroid</a> <a href="/tags/RxJava/" style="font-size: 18px;">RxJava</a> <a href="/tags/ServiceManager/" style="font-size: 10px;">ServiceManager</a> <a href="/tags/String相关类性能测试/" style="font-size: 10px;">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size: 10px;">Textview</a> <a href="/tags/TypedArray/" style="font-size: 10px;">TypedArray</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ViewHolder的作用/" style="font-size: 10px;">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/Webview/" style="font-size: 10px;">Webview</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/drawable/" style="font-size: 10px;">drawable</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/写作/" style="font-size: 12px;">写作</a> <a href="/tags/反思/" style="font-size: 10px;">反思</a> <a href="/tags/图像、背景、View更新、布局、内存/" style="font-size: 12px;">图像、背景、View更新、布局、内存</a> <a href="/tags/开发规范/" style="font-size: 14px;">开发规范</a> <a href="/tags/异步线程的实现（Looper、MessageQueue、Handler）/" style="font-size: 10px;">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/总结分类/" style="font-size: 16px;">总结分类</a> <a href="/tags/技术/" style="font-size: 10px;">技术</a> <a href="/tags/时间轴/" style="font-size: 10px;">时间轴</a> <a href="/tags/架构的实例/" style="font-size: 10px;">架构的实例</a> <a href="/tags/沉浸式/" style="font-size: 10px;">沉浸式</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/目标/" style="font-size: 12px;">目标</a> <a href="/tags/知识库/" style="font-size: 14px;">知识库</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/自定义Loader/" style="font-size: 10px;">自定义Loader</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wsgzao.github.io/">HelloDog</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dearzd.com/DBlog/">咚门</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.codingyun.com/">Coding云</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.jobbole.com/">伯乐在线</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin技术宅</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">一只熊猫</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">一只熊猫</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/随笔">随笔</a></li>
+                
+                    <li><a href="/categories/技术">技术</a></li>
+                
+                    <li><a href="/instagram">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                    
+                        <a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                    
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                    
+                        <a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-Android Skills/Android Skill 下拉刷新" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/05/17/Android Skills/Android Skill 下拉刷新/" class="article-date">
+      <time datetime="2014-05-17T14:01:14.000Z" itemprop="datePublished">2014-05-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      下拉刷新
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/技术/">技术</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/下拉刷新/">下拉刷新</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>最近在研究Android的下拉刷新功能，看了几个别人写的自定义控件：</p>
+<p>1.android-pulltorefresh：<a href="https://github.com/chrisbanes/Android-PullToRefresh" target="_blank" rel="noopener">https://github.com/chrisbanes/Android-PullToRefresh</a><br>2.android-pulltorefresh-listview：<a href="https://github.com/johannilsson/android-pulltorefresh" target="_blank" rel="noopener">https://github.com/johannilsson/android-pulltorefresh</a></p>
+<a id="more"></a>
+<p>前者是：一个强大的拉动刷新开源项目，支持各种控件下拉刷新，ListView、ViewPager、WevView、<br>ExpandableListView、GridView、ScrollView、Horizontal ScrollView、Fragment上下左右拉动刷新<br>并且它实现的下拉刷新ListView在item不足一屏情况下也不会显示刷新提示，体验更好。</p>
+<p>后者是：下拉刷新ListView</p>
+<p>这里我为什么特意例举这两个自定义控件呢?因为这两种自定义控件就单单从实现ListView的下拉刷<br>新方面而已，原理是不一样的!</p>
+<p>前者的原理：简单而言就是自定义一个View的方式，然后我们就用这个View，不用ListView。但是这个<br>View，不是ListView，你想getCount()、addHeaderView()等都没有实现。</p>
+<p>后者的原理：就是覆写ListView的部分方法（onScroll()、onScrollStateChanged()、onTouchEvent()、<br>setOnScrollListener()、setAdapter()等等）。</p>
+<p>我个人感觉前者足够强大，但是没有达到我想要的效果，所以参照了另外一个大神的博客，然后自己照<br>着写了一遍代码，感触颇深。</p>
+<p>主要思路：就是自定义一个View，这个View就相当一个包装袋一样，包裹商品（LIstView），然后<br>利用事件的覆盖（View覆写ListView对应的事件），间接屏蔽了ListView的事件。所以部分事件只<br>会在包装袋上触发，不会在ListView上触发。</p>
+<p>优点：这样ListView就和事件的耦合度大大降低了。我们通过自定义的View去实现事件覆盖，触发了<br>View上的事件，通过这个View上对对应事件的监听间接修改ListView的Adapter对应的List数据。这<br>样我们在ListView上的操作少之又少，操作的是List&lt;String,Object&gt; ……而已。</p>
+<p>PullToRefreshView：</p>
+<pre><code>package com.zyy.android_csdn.pulltorefresh;
+
+import com.zyy.android_csdn.R;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.preference.PreferenceManager;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.View.OnTouchListener;
+import android.view.ViewConfiguration;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+/**
+ * 下拉刷新控件(View)
+ *
+ * @author CaMnter
+ *
+ */
+public class PullToRefreshView extends LinearLayout implements OnTouchListener {
+
+    /**
+     * 下拉状态
+     */
+    public static final int STATUS_PULL_TO_REFRESH = 0;
+
+    /**
+     * 释放立即刷新状态
+     */
+    public static final int STATUS_RELEASE_TO_REFRESH = 1;
+
+    /**
+     * 正在刷新状态
+     */
+    public static final int STATUS_REFRESHING = 2;
+
+    /**
+     * 刷新完成或未刷新状态
+     */
+    public static final int STATUS_REFRESH_FINISHED = 3;
+
+    /**
+     * 下拉头部回滚的速度
+     */
+    public static final int SCROLL_SPEED = -20;
+
+    /**
+     * 一分钟的毫秒值，用于判断上次的更新时间
+     */
+    public static final long ONE_MINUTE = 60 * 1000;
+
+    /**
+     * 一小时的毫秒值，用于判断上次的更新时间
+     */
+    public static final long ONE_HOUR = 60 * ONE_MINUTE;
+
+    /**
+     * 一天的毫秒值，用于判断上次的更新时间
+     */
+    public static final long ONE_DAY = 24 * ONE_HOUR;
+
+    /**
+     * 一月的毫秒值，用于判断上次的更新时间
+     */
+    public static final long ONE_MONTH = 30 * ONE_DAY;
+
+    /**
+     * 一年的毫秒值，用于判断上次的更新时间
+     */
+    public static final long ONE_YEAR = 12 * ONE_MONTH;
+
+    /**
+     * 上次更新时间的字符串常量，用于作为SharedPreferences的键值
+     */
+    private static final String UPDATED_AT = &quot;updated_at&quot;;
+
+    /**
+     * 下拉刷新的回调接口
+     */
+    private PullToRefreshListener mListener;
+
+    /**
+     * 用于存储上次更新时间
+     */
+    private SharedPreferences preferences;
+
+    /**
+     * 下拉头的View
+     */
+    private View header;
+
+    /**
+     * 需要去下拉刷新的ListView
+     */
+    private ListView listView;
+
+    /**
+     * 刷新时显示的进度条
+     */
+    private ProgressBar progressBar;
+
+    /**
+     * 指示下拉和释放的箭头
+     */
+    private ImageView arrow;
+
+    /**
+     * 指示下拉和释放的文字描述
+     */
+    private TextView description;
+
+    /**
+     * 上次更新时间的文字描述
+     */
+    private TextView updateAt;
+
+    /**
+     * 下拉头的布局参数
+     */
+    private MarginLayoutParams headerLayoutParams;
+
+    /**
+     * 上次更新时间的毫秒值
+     */
+    private long lastUpdateTime;
+
+    /**
+     * 为了防止不同界面的下拉刷新在上次更新时间上互相有冲突，使用id来做区分
+     */
+    private int mId = -1;
+
+    /**
+     * 下拉头的高度
+     */
+    private int hideHeaderHeight;
+
+    /**
+     * 当前处理什么状态，可选值有STATUS_PULL_TO_REFRESH, STATUS_RELEASE_TO_REFRESH,
+     * STATUS_REFRESHING 和 STATUS_REFRESH_FINISHED
+     */
+    private int currentStatus = STATUS_REFRESH_FINISHED;;
+
+    /**
+     * 记录上一次的状态是什么，避免进行重复操作
+     */
+    private int lastStatus = currentStatus;
+
+    /**
+     * 手指按下时的屏幕纵坐标
+     */
+    private float yDown;
+
+    /**
+     * 在被判定为滚动之前用户手指可以移动的最大值
+     */
+    private int touchSlop;
+
+    /**
+     * 是否已加载过一次layout，这里onLayout中的初始化只需加载一次
+     */
+    private boolean loadOnce;
+
+    /**
+     * 当前是否可以下拉，只有ListView滚动到头的时候才允许下拉
+     */
+    private boolean ableToPull;
+
+    /**
+     * head View 包含的一个 LinearLayout
+     */
+    private LinearLayout pull_to_refresh_linearLayout;
+
+    /**
+     * 下拉刷新控件的构造函数，会在运行时动态添加一个下拉头的布局。
+     *
+     * @param context
+     * @param attrs
+     */
+    @SuppressLint(&quot;InflateParams&quot;)
+    public PullToRefreshView(Context context, AttributeSet attrs) {
+
+        super(context, attrs);
+
+        // 实例化SharedPreferences
+        this.preferences = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        // 实例化 下拉头的 布局View
+        this.header = LayoutInflater.from(context).inflate(
+                R.layout.pull_to_refresh, null, true);
+
+        // 实例化 下拉头的 LinearLayout
+        this.pull_to_refresh_linearLayout = (LinearLayout) this.header
+                .findViewById(R.id.pull_to_refresh_linearLayout);
+
+        // 取得 下拉头的 布局 里的 组件
+        this.progressBar = (ProgressBar) this.header
+                .findViewById(R.id.progress_bar);
+
+        this.arrow = (ImageView) this.header.findViewById(R.id.arrow);
+
+        this.description = (TextView) this.header
+                .findViewById(R.id.description);
+
+        this.updateAt = (TextView) this.header.findViewById(R.id.updated_at);
+
+        // 取得移动的最小距离,只有大于这个距离,才可认为是 move
+        this.touchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+
+        // 设置上次更新文字描述s
+        this.refreshUpdatedAtValue();
+
+        // 设置布局为垂直
+        setOrientation(VERTICAL);
+
+        // 下拉头的View 置顶
+        addView(this.header, 0);
+
+    }
+
+    /**
+     * 进行一些关键性的初始化操作
+     *
+     * 比如：将下拉头向上偏移进行隐藏，给ListView注册touch事件。
+     */
+    @Override
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+
+        super.onLayout(changed, l, t, r, b);
+
+        // 如果loadOnce没有设置(没有加载过一次layout)
+        if (changed &amp;&amp; !this.loadOnce) {
+
+            this.hideHeaderHeight = -this.header.getHeight();
+
+            this.headerLayoutParams = (MarginLayoutParams) this.header
+                    .getLayoutParams();
+
+            this.headerLayoutParams.topMargin = this.hideHeaderHeight;
+
+            // getChildAt(1); 是 1 不是 L
+            this.listView = (ListView) getChildAt(1);
+
+            System.out.println(&quot;this.listView = &quot; + this.listView);
+
+            // 设置ListView的触摸事件
+            this.listView.setOnTouchListener(this);
+
+            // 更变 loadOnce 的值
+            this.loadOnce = true;
+
+        }
+
+    }
+
+    public static boolean result = false;
+
+    public static boolean state = false;
+
+    /**
+     * 当ListView被触摸时调用，其中处理了各种下拉刷新的具体逻辑。
+     */
+    @SuppressLint(&quot;ClickableViewAccessibility&quot;)
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+
+        /**
+         * 设定 {@link #ableToPull}
+         */
+        this.setIsAbleToPull(event);
+
+        // 如果允许下拉
+        if (this.ableToPull) {
+
+            switch (event.getAction()) {
+
+            // &quot;按下&quot;
+            case MotionEvent.ACTION_DOWN:
+
+                PullToRefreshView.result = false;
+
+                PullToRefreshView.state = false;
+
+                this.yDown = event.getRawY();
+
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+
+                if (!PullToRefreshView.state) {
+
+                    PullToRefreshView.result = true;
+
+                    float yMove = event.getRawY();
+
+                    int distance = (int) (yMove - this.yDown);
+
+                    /**
+                     * 如果手指是下滑状态，并且下拉头是完全隐藏的
+                     *
+                     * 就屏蔽下拉事件
+                     */
+                    if (distance &lt;= 0
+                            &amp;&amp; this.headerLayoutParams.topMargin &lt;= this.hideHeaderHeight) {
+
+                        PullToRefreshView.result = false;
+
+                        return false;
+
+                    }
+
+                    // 如果滑动的距离 小于 算是滑动的距离
+                    if (distance &lt; touchSlop) {
+
+                        PullToRefreshView.result = false;
+
+                        return false;
+
+                    }
+
+                    // 当前状态 不是 正在刷新
+                    if (this.currentStatus != PullToRefreshView.STATUS_REFRESHING) {
+
+                        if (this.headerLayoutParams.topMargin &gt; 0) {
+
+                            this.currentStatus = PullToRefreshView.STATUS_RELEASE_TO_REFRESH;
+
+                        } else {
+
+                            this.currentStatus = PullToRefreshView.STATUS_PULL_TO_REFRESH;
+
+                        }
+
+                        // 滑动时 如果 head部分 不可见
+                        if (this.pull_to_refresh_linearLayout.getVisibility() == View.INVISIBLE) {
+
+                            // 设置 可见 head部分
+                            this.pull_to_refresh_linearLayout
+                                    .setVisibility(View.VISIBLE);
+
+                        }
+
+                        // 通过偏移下拉头的topMargin值，来实现下拉效果
+                        this.headerLayoutParams.topMargin = (distance / 2)
+                                + this.hideHeaderHeight;
+
+                        this.header.setLayoutParams(this.headerLayoutParams);
+
+                    }
+                }
+                break;
+
+            case MotionEvent.ACTION_UP:
+
+            default:
+
+                // 如果 当前状态 为 释放立即刷新状态
+                if (this.currentStatus == PullToRefreshView.STATUS_RELEASE_TO_REFRESH) {
+
+                    // 松手时如果是释放立即刷新状态，就去调用正在刷新的任务
+                    new RefreshingTask().execute();
+
+                    // 如果 当前状态 为下拉状态
+                } else if (this.currentStatus == PullToRefreshView.STATUS_PULL_TO_REFRESH) {
+
+                    // 松手时如果是下拉状态，就去调用隐藏下拉头的任务
+                    new HideHeaderTask().execute();
+
+                }
+
+                break;
+            }
+
+            /*
+             * 时刻记得更新下拉头中的信息
+             *
+             * 如果 当前状态 为下拉状态 or 释放立即刷新状态
+             */
+            if (this.currentStatus == PullToRefreshView.STATUS_PULL_TO_REFRESH
+                    || this.currentStatus == PullToRefreshView.STATUS_RELEASE_TO_REFRESH) {
+
+                // 更新下拉头中的信息
+                this.updateHeaderView();
+
+                // 要让ListView失去焦点，否则被点击的那一项会一直处于选中状态
+                this.listView.setPressed(false);
+
+                this.listView.setFocusable(false);
+
+                this.listView.setFocusableInTouchMode(false);
+
+                this.lastStatus = this.currentStatus;
+
+                // 当前正处于下拉或释放状态，通过返回true屏蔽掉ListView的滚动事件
+
+                return true;
+
+            }
+
+        }
+
+        return false;
+    }
+
+    /**
+     * 给下拉刷新控件注册一个监听器。
+     *
+     * @param listener
+     *            监听器的实现。
+     * @param id
+     *            为了防止不同界面的下拉刷新在上次更新时间上互相有冲突， 请不同界面在注册下拉刷新监听器时一定要传入不同的id。
+     */
+    public void setOnRefreshListener(PullToRefreshListener listener, int id) {
+
+        this.mListener = listener;
+
+        this.mId = id;
+
+    }
+
+    /**
+     * 当所有的刷新逻辑完成后，记录调用一下
+     *
+     * 否则ListView将一直处于正在刷新状态。
+     */
+    public void finishRefreshing() {
+
+        this.currentStatus = PullToRefreshView.STATUS_REFRESH_FINISHED;
+
+        this.preferences.edit()
+                .putLong(UPDATED_AT + mId, System.currentTimeMillis()).commit();
+
+        // 调用隐藏下拉头的任务
+        new HideHeaderTask().execute();
+    }
+
+    /**
+     * 根据当前ListView的滚动状态来设定 {@link #ableToPull}的值
+     *
+     * 每次都需要在onTouch中第一个执行
+     *
+     * 这样可以判断出当前应该是滚动ListView，还是应该进行下拉。
+     *
+     * @param event
+     */
+    private void setIsAbleToPull(MotionEvent event) {
+
+        View firstChild = this.listView.getChildAt(0);
+
+        if (firstChild != null) {
+
+            int firstVisiblePos = this.listView.getFirstVisiblePosition();
+
+            if (firstVisiblePos == 0 &amp;&amp; firstChild.getTop() == 0) {
+
+                if (!this.ableToPull) {
+
+                    this.yDown = event.getRawY();
+
+                }
+
+                /*
+                 * 如果首个元素的上边缘，距离父布局值为0
+                 *
+                 * 就说明ListView滚动到了最顶部，此时应该允许下拉刷新
+                 */
+                this.ableToPull = true;
+
+            } else {
+
+                if (this.headerLayoutParams.topMargin != this.hideHeaderHeight) {
+
+                    this.headerLayoutParams.topMargin = this.hideHeaderHeight;
+
+                    this.header.setLayoutParams(this.headerLayoutParams);
+
+                }
+
+                this.ableToPull = false;
+
+            }
+
+        } else {
+
+            // 如果ListView中没有元素，也应该允许下拉刷新
+            this.ableToPull = true;
+
+        }
+
+    }
+
+    /**
+     * 更新下拉头中的信息
+     */
+    private void updateHeaderView() {
+
+        // 如果上次的状态 不等于 这次的状态
+        if (this.lastStatus != this.currentStatus) {
+
+            // &quot;下拉刷新状态&quot;
+            if (this.currentStatus == PullToRefreshView.STATUS_PULL_TO_REFRESH) {
+
+                this.description.setText(getResources().getString(
+                        R.string.pull_to_refresh));
+
+                this.arrow.setVisibility(View.VISIBLE);
+
+                this.progressBar.setVisibility(View.GONE);
+
+                // 根据当前的状态来旋转箭头
+                this.rotateArrow();
+
+                // &quot;释放立即刷新状态&quot;
+            } else if (this.currentStatus == PullToRefreshView.STATUS_RELEASE_TO_REFRESH) {
+
+                this.description.setText(getResources().getString(
+                        R.string.release_to_refresh));
+
+                this.arrow.setVisibility(View.VISIBLE);
+
+                this.progressBar.setVisibility(View.GONE);
+
+                // 根据当前的状态来旋转箭头
+                this.rotateArrow();
+
+                // &quot;正在刷新状态&quot;
+            } else if (this.currentStatus == PullToRefreshView.STATUS_REFRESHING) {
+
+                this.description.setText(getResources().getString(
+                        R.string.refreshing));
+
+                this.progressBar.setVisibility(View.VISIBLE);
+
+                this.arrow.clearAnimation();
+
+                this.arrow.setVisibility(View.GONE);
+
+            }
+
+            // 刷新下拉头中上次更新时间的文字描述
+            this.refreshUpdatedAtValue();
+
+        }
+
+    }
+
+    /**
+     * 根据当前的状态来旋转箭头
+     */
+    private void rotateArrow() {
+
+        float pivotX = arrow.getWidth() / 2f;
+
+        float pivotY = arrow.getHeight() / 2f;
+
+        float fromDegrees = 0f;
+
+        float toDegrees = 0f;
+
+        // &quot;下拉刷新状态&quot;
+        if (this.currentStatus == PullToRefreshView.STATUS_PULL_TO_REFRESH) {
+
+            fromDegrees = 180f;
+
+            toDegrees = 360f;
+
+            // &quot;释放立即刷新状态&quot;
+        } else if (this.currentStatus == PullToRefreshView.STATUS_RELEASE_TO_REFRESH) {
+
+            fromDegrees = 0f;
+
+            toDegrees = 180f;
+
+        }
+
+        // 旋转动画
+        RotateAnimation animation = new RotateAnimation(fromDegrees, toDegrees,
+                pivotX, pivotY);
+
+        animation.setDuration(100);
+
+        animation.setFillAfter(true);
+
+        arrow.startAnimation(animation);
+
+    }
+
+    /**
+     * 刷新下拉头中上次更新时间的文字描述
+     */
+    private void refreshUpdatedAtValue() {
+
+        // 从 SharedPreferences 取出 上次更新时间
+        this.lastUpdateTime = this.preferences.getLong(
+                PullToRefreshView.UPDATED_AT + this.mId, -1);
+
+        // 取得 以毫秒为单位的当前时间
+        long currentTime = System.currentTimeMillis();
+
+        // 计算时间差
+        long timePassed = currentTime - this.lastUpdateTime;
+
+        long timeIntoFormat;
+
+        String updateAtValue;
+
+        if (this.lastUpdateTime == -1) {
+
+            updateAtValue = getResources().getString(R.string.not_updated_yet);
+
+        } else if (timePassed &lt; 0) {
+
+            updateAtValue = getResources().getString(R.string.time_error);
+
+        } else if (timePassed &lt; PullToRefreshView.ONE_MINUTE) {
+
+            updateAtValue = getResources().getString(R.string.updated_just_now);
+
+        } else if (timePassed &lt; PullToRefreshView.ONE_HOUR) {
+
+            timeIntoFormat = timePassed / PullToRefreshView.ONE_MINUTE;
+
+            String value = timeIntoFormat + &quot;分钟&quot;;
+
+            updateAtValue = String.format(
+                    getResources().getString(R.string.updated_at), value);
+
+        } else if (timePassed &lt; PullToRefreshView.ONE_DAY) {
+
+            timeIntoFormat = timePassed / PullToRefreshView.ONE_HOUR;
+
+            String value = timeIntoFormat + &quot;小时&quot;;
+
+            updateAtValue = String.format(
+                    getResources().getString(R.string.updated_at), value);
+
+        } else if (timePassed &lt; PullToRefreshView.ONE_MONTH) {
+
+            timeIntoFormat = timePassed / PullToRefreshView.ONE_DAY;
+
+            String value = timeIntoFormat + &quot;天&quot;;
+
+            updateAtValue = String.format(
+                    getResources().getString(R.string.updated_at), value);
+
+        } else if (timePassed &lt; PullToRefreshView.ONE_YEAR) {
+
+            timeIntoFormat = timePassed / PullToRefreshView.ONE_MONTH;
+
+            String value = timeIntoFormat + &quot;个月&quot;;
+
+            updateAtValue = String.format(
+                    getResources().getString(R.string.updated_at), value);
+
+        } else {
+
+            timeIntoFormat = timePassed / PullToRefreshView.ONE_YEAR;
+
+            String value = timeIntoFormat + &quot;年&quot;;
+
+            updateAtValue = String.format(
+                    getResources().getString(R.string.updated_at), value);
+
+        }
+
+        this.updateAt.setText(updateAtValue);
+
+    }
+
+    /**
+     * 正在刷新的任务
+     *
+     * 在此任务中会去回调注册进来的下拉刷新监听器
+     *
+     * @author CaMnter
+     *
+     */
+    class RefreshingTask extends AsyncTask&lt;Void, Integer, Void&gt; {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            int topMargin = PullToRefreshView.this.headerLayoutParams.topMargin;
+
+            while (true) {
+
+                topMargin = topMargin + PullToRefreshView.SCROLL_SPEED;
+
+                if (topMargin &lt;= 0) {
+
+                    topMargin = 0;
+
+                    break;
+
+                }
+
+                // 每个调用此方法将触发onProgressUpdate在UI线程的执行
+                this.publishProgress(topMargin);
+
+                PullToRefreshView.this.sleep(10);
+
+            }
+
+            PullToRefreshView.this.currentStatus = PullToRefreshView.STATUS_REFRESHING;
+
+            this.publishProgress(0);
+
+            PullToRefreshView.this.sleep(3000);
+
+            PullToRefreshView.this.finishRefreshing();
+
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+            /**
+             * 如果 doInBackground 的onRefresh() 中有事件处理 那么 执行不到 doInBackground 里的
+             * return null 就一直处在刷新状态效果 此时，可以把 doInBackground 里的 onRefresh操作换到
+             * onPostExecute里来
+             **/
+            if (PullToRefreshView.this.mListener != null) {
+
+                // 调用刷新方法
+                PullToRefreshView.this.mListener.onRefresh();
+
+            }
+
+            super.onPostExecute(result);
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... topMargin) {
+
+            // 更新下拉头中的信息
+            PullToRefreshView.this.updateHeaderView();
+
+            PullToRefreshView.this.headerLayoutParams.topMargin = topMargin[0];
+
+            PullToRefreshView.this.header
+                    .setLayoutParams(PullToRefreshView.this.headerLayoutParams);
+
+        }
+
+    }
+
+    /**
+     * 隐藏下拉头的任务，当未进行下拉刷新或下拉刷新完成后
+     *
+     * 此任务将会使下拉头重新隐藏
+     *
+     * @author CaMnter
+     *
+     */
+    class HideHeaderTask extends AsyncTask&lt;Void, Integer, Integer&gt; {
+
+        @Override
+        protected Integer doInBackground(Void... params) {
+
+            int topMargin = PullToRefreshView.this.headerLayoutParams.topMargin;
+
+            while (true) {
+
+                topMargin = topMargin + PullToRefreshView.SCROLL_SPEED;
+
+                if (topMargin &lt;= PullToRefreshView.this.hideHeaderHeight) {
+
+                    topMargin = PullToRefreshView.this.hideHeaderHeight;
+
+                    break;
+
+                }
+
+                // 每个调用此方法将触发onProgressUpdate在UI线程的执行
+                this.publishProgress(topMargin);
+
+                PullToRefreshView.this.sleep(10);
+
+            }
+
+            return topMargin;
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... topMargin) {
+
+            PullToRefreshView.this.headerLayoutParams.topMargin = topMargin[0];
+
+            PullToRefreshView.this.header
+                    .setLayoutParams(PullToRefreshView.this.headerLayoutParams);
+
+        }
+
+        /**
+         *
+         * doInBackground后在UI线程上运行
+         *
+         * 指定的结果是doInBackground返回的值。
+         *
+         * 如果任务被取消,这个方法不会被调用。
+         *
+         */
+        @Override
+        protected void onPostExecute(Integer topMargin) {
+
+            PullToRefreshView.this.headerLayoutParams.topMargin = topMargin;
+
+            PullToRefreshView.this.header
+                    .setLayoutParams(PullToRefreshView.this.headerLayoutParams);
+
+            // 设置状态为 刷新结束
+            PullToRefreshView.this.currentStatus = PullToRefreshView.STATUS_REFRESH_FINISHED;
+
+        }
+
+    }
+
+    /**
+     * 使当前线程睡眠指定的毫秒数
+     *
+     * @param time
+     *            指定当前线程睡眠多久，以毫秒为单位
+     */
+    private void sleep(int time) {
+
+        try {
+
+            Thread.sleep(time);
+
+        } catch (InterruptedException e) {
+
+            e.printStackTrace();
+
+        }
+
+    }
+
+    /**
+     * 下拉刷新的监听器，使用下拉刷新的地方应该注册PullToRefreshListener
+     *
+     * 来获取刷新回调
+     *
+     * @author CaMnter
+     */
+    public interface PullToRefreshListener {
+
+        /**
+         * 刷新时会去回调此方法，在方法内编写具体的刷新逻辑。
+         *
+         * 注意此方法是在子线程中调用的，
+         *
+         * 可以不必另开线程来进行耗时操作。
+         */
+        void onRefresh();
+
+    }
+
+}
+</code></pre><p>温馨提示：这里做了if (this.pull_to_refresh_linearLayout.getVisibility() == View.INVISIBLE) 。设置<br> 可见 head的linearLayout部分，原因是因为Fragment的兼容问题。在Acticity里没什么问题；到了Fragment，<br>head部分都会闪一下再消失，我在布局里让LinearLayout部分不可见，然后通过滑动事件动态设置可见，取巧得躲避了这个问题。</p>
+<p>还有一点：就是调用刷新方法这里：PullToRefreshView.this.mListener.onRefresh()；如果<br>doInBackground 的onRefresh() 中有事件处理，那么 执行不到  doInBackground 里的 return null ，<br>就一直处在刷新状态效果。此时，可以把 doInBackground 里的 onRefresh操作换到onPostExecute(Void result)<br>里来 。               </p>
+<p>MOnCreateContextMenuListener：</p>
+<pre><code>package com.zyy.android_csdn;
+
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.View;
+import android.view.View.OnCreateContextMenuListener;
+
+/**
+ * 覆盖ListView长按事件
+ *
+ * @author CaMnter
+ *
+ */
+public class MOnCreateContextMenuListener implements
+        OnCreateContextMenuListener {
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+            ContextMenuInfo menuInfo) {
+
+        if (!PullToRefreshView.result) {
+
+            PullToRefreshView.state = true;
+
+            menu.add(0, 0, 0, &quot;你好&quot;);
+
+            menu.add(0, 0, 0, &quot;再见&quot;);
+
+        }
+
+    }
+
+}
+</code></pre><p>RefreshActivity：</p>
+<pre><code>package com.zyy.android_csdn;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.view.Window;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.zyy.android_csdn.pulltorefresh.MOnCreateContextMenuListener;
+import com.zyy.android_csdn.pulltorefresh.PullToRefreshView;
+import com.zyy.android_csdn.pulltorefresh.PullToRefreshView.PullToRefreshListener;
+import com.zyy.android_csdn.skill.ExquisiteAdapter;
+
+/**
+ * &quot;下拉刷新，你值得拥有&quot;
+ *
+ * @author CaMnter
+ *
+ */
+@SuppressLint(&quot;HandlerLeak&quot;)
+public class RefreshActivity extends Activity {
+
+    PullToRefreshView pullToRefreshView;
+
+    private ListView listView;
+
+    private List&lt;String&gt; data_list;
+
+    private ExquisiteAdapter exquisiteAdapter;
+
+    private Bitmap oneIcon;
+
+    private Bitmap zeroIcon;
+
+    TextView newText;
+
+    ImageView newImage;
+
+    public static final String NEW_TEXT = &quot;        Save you from anything&quot;;
+
+    View v;
+
+    private Handler handler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+
+            RefreshActivity.this.data_list.add(0, RefreshActivity.NEW_TEXT);
+
+            RefreshActivity.this.exquisiteAdapter.notifyDataSetChanged();
+
+        }
+
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.refresh);
+
+        this.data_list = new ArrayList&lt;String&gt;();
+
+        for (int i = 0; i &lt; 25; i++) {
+
+            this.data_list.add(&quot;        &quot; + i + &quot;&quot;);
+
+        }
+
+        pullToRefreshView = (PullToRefreshView) findViewById(R.id.refreshable_view);
+
+        this.listView = (ListView) super.findViewById(R.id.list_view);
+
+        this.oneIcon = BitmapFactory.decodeResource(getResources(),
+                R.drawable.one);
+
+        this.zeroIcon = BitmapFactory.decodeResource(getResources(),
+                R.drawable.zero);
+
+        this.exquisiteAdapter = new ExquisiteAdapter(this, data_list, oneIcon,
+                zeroIcon);
+
+        this.listView.setAdapter(this.exquisiteAdapter);
+
+        pullToRefreshView.setOnRefreshListener(new PullToRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+
+                Message msg = RefreshActivity.this.handler.obtainMessage(1);
+
+                RefreshActivity.this.handler.sendMessage(msg);
+
+
+
+            }
+        }, 0);
+
+        listView.setOnCreateContextMenuListener(new MOnCreateContextMenuListener());
+    }
+}
+</code></pre><p>Activity显示的布局(refresh.xml)：</p>
+<pre><code>&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;
+    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;
+    tools:context=&quot;com.zyy.android_csdn.MainActivity&quot; &gt;
+
+    &lt;com.zyy.android_csdn.PullToRefreshView
+        android:id=&quot;@+id/refreshable_view&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot; &gt;
+
+        &lt;ListView
+            android:id=&quot;@+id/list_view&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot; &gt;
+
+            &lt;!-- android:scrollbars=&quot;none&quot; --&gt;
+
+        &lt;/ListView&gt;
+    &lt;/com.zyy.android_csdn.PullToRefreshView&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>下拉头的View的(pull_to_refresh.xml)布局：</p>
+<pre><code>&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:id=&quot;@+id/pull_to_refresh_head&quot;
+    android:layout_width=&quot;fill_parent&quot;
+    android:layout_height=&quot;60dip&quot; &gt;
+
+    &lt;LinearLayout
+        android:id=&quot;@+id/pull_to_refresh_linearLayout&quot;
+        android:layout_width=&quot;200dip&quot;
+        android:layout_height=&quot;60dip&quot;
+        android:layout_centerInParent=&quot;true&quot;
+        android:orientation=&quot;horizontal&quot;
+        android:visibility=&quot;invisible&quot; &gt;
+
+        &lt;RelativeLayout
+            android:layout_width=&quot;0dip&quot;
+            android:layout_height=&quot;60dip&quot;
+            android:layout_weight=&quot;3&quot; &gt;
+
+            &lt;ImageView
+                android:id=&quot;@+id/arrow&quot;
+                android:layout_width=&quot;wrap_content&quot;
+                android:layout_height=&quot;wrap_content&quot;
+                android:layout_centerInParent=&quot;true&quot;
+                android:src=&quot;@drawable/arrow&quot; /&gt;
+
+            &lt;ProgressBar
+                android:id=&quot;@+id/progress_bar&quot;
+                android:layout_width=&quot;30dip&quot;
+                android:layout_height=&quot;30dip&quot;
+                android:layout_centerInParent=&quot;true&quot;
+                android:visibility=&quot;gone&quot; /&gt;
+        &lt;/RelativeLayout&gt;
+
+        &lt;LinearLayout
+            android:layout_width=&quot;0dip&quot;
+            android:layout_height=&quot;60dip&quot;
+            android:layout_weight=&quot;12&quot;
+            android:orientation=&quot;vertical&quot; &gt;
+
+            &lt;TextView
+                android:id=&quot;@+id/description&quot;
+                android:layout_width=&quot;fill_parent&quot;
+                android:layout_height=&quot;0dip&quot;
+                android:layout_weight=&quot;1&quot;
+                android:gravity=&quot;center_horizontal|bottom&quot;
+                android:text=&quot;@string/pull_to_refresh&quot; /&gt;
+
+            &lt;TextView
+                android:id=&quot;@+id/updated_at&quot;
+                android:layout_width=&quot;fill_parent&quot;
+                android:layout_height=&quot;0dip&quot;
+                android:layout_weight=&quot;1&quot;
+                android:gravity=&quot;center_horizontal|top&quot;
+                android:text=&quot;@string/updated_at&quot; /&gt;
+        &lt;/LinearLayout&gt;
+    &lt;/LinearLayout&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>string.xml：</p>
+<pre><code>&lt;string name=&quot;pull_to_refresh&quot;&gt;下拉可以刷新&lt;/string&gt;
+&lt;string name=&quot;release_to_refresh&quot;&gt;释放立即刷新&lt;/string&gt;
+&lt;string name=&quot;refreshing&quot;&gt;正在刷新…&lt;/string&gt;
+&lt;string name=&quot;not_updated_yet&quot;&gt;暂未更新过&lt;/string&gt;
+&lt;string name=&quot;updated_at&quot;&gt;上次更新于%1$s前&lt;/string&gt;
+&lt;string name=&quot;updated_just_now&quot;&gt;刚刚更新&lt;/string&gt;
+&lt;string name=&quot;time_error&quot;&gt;时间有问题&lt;/string&gt;
+</code></pre><p>效果图：</p>
+<p><img src="http://img.blog.csdn.net/20141118183653229?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br><img src="http://img.blog.csdn.net/20141118183704773?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br><img src="http://img.blog.csdn.net/20141118183715678?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""><br><img src="http://img.blog.csdn.net/20141118183726406?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2014/05/17/Android Skills/Android Skill 下拉刷新/">下拉刷新</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 一只熊猫 的个人博客">一只熊猫</a></p>
+        <p><span>发布时间:</span>2014年05月17日 - 22时01分</p>
+     
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2014/05/17/Android Skills/Android Skill 下拉刷新/" title="下拉刷新">http://blog.apanda.online/2014/05/17/Android Skills/Android Skill 下拉刷新/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://blog.apanda.online/2014/05/17/Android Skills/Android Skill 下拉刷新/　　作者: 一只熊猫" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2014/05/17/Android Skills/Android 自定义Loader/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Android 自定义Loader
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/05/15/Android Skills/Android TextView 技巧/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android Textview 技巧</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2014/05/17/Android Skills/Android 自定义Loader/" title="上一篇: Android 自定义Loader">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2014/05/15/Android Skills/Android TextView 技巧/" title="下一篇: Android Textview 技巧">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/CentOS-FireWall/">centos/CentOS-FireWall</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/14/centos/centos-attack-record/">centos/centos-attack-record</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/redis/">centos/redis</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/12/centos/ssr/">centos/ssr</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/06/每天一道算法题目Java/范型/">每天一道算法题目Java/范型</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Gomobile编译jni库/">Go lang 学习笔记/Gomobile编译jni库</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/04/04/Go lang 学习笔记/Golang 支持交叉编译/">Go lang 学习笔记/Golang 支持交叉编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang.resource/commit/">Go lang 学习笔记/基本排序算法Golang.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/基本排序算法Golang/">Go lang 学习笔记/基本排序算法Golang</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit/">Go lang 学习笔记/Golang二分查找算法的简单实现.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/26/Go lang 学习笔记/Golang二分查找算法的简单实现/">Go lang 学习笔记/Golang二分查找算法的简单实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析/">Go lang 学习笔记/Json解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/25/Go lang 学习笔记/Json解析.resource/commit/">Go lang 学习笔记/Json解析.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序/">Go lang 学习笔记/二叉树插入排序</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/18/Go lang 学习笔记/二叉树插入排序.resource/commit/">Go lang 学习笔记/二叉树插入排序.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符.resource/commit/">每天一道算法题目Java/寻找出现一次的字符.resource/commit</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/10/16/每天一道算法题目Java/寻找出现一次的字符/">每天一道算法题目Java/寻找出现一次的字符</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/09/Android Skills/使用Android Studio进行NDK开发（一）/">使用AndroidStudio进行NDK开发（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/06/RxJava/RxJava & RxAndroid备忘/">RxJava & RxAndroid备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/在安卓上使用RxJava/">在安卓上使用RxJava</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/05/RxJava/深入浅出RxJava四-在Android中使用响应式编程/">深入浅出RxJava(四：在Android中使用响应式编程)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/04/RxJava/深入浅出RxJava三--响应式的好处/">深入浅出RxJava(三：响应式的好处)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/02/RxJava/深入浅出RxJava(二：操作符)/">深入浅出RxJava(二：操作符)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/Q2季度目标/">Q2季度目标</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/04/01/随笔/VIM快捷键/">VIM快捷键的使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/RxJava/深入浅出RxJava（一：基础篇）/">深入浅出RxJava(一：基础篇)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/29/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考/">谷歌官方出的一套关于 Android 架构的实例参考</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/25/RxJava/RxAndroid/">从案例学习RxAndroid</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/23/小知识点/你应该知道的那些Android小经验/">Android小经验</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/21/小知识点/android代码片段/">Android开发代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/02/小知识点/Android开发工作中的细节/">Android开发工作中的细节</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/随笔/日常使用到的梯子/">日常使用到的梯子</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/小知识点/Android开发中的小知识点汇总/">Android小知识库</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/01/Android Skills/Lambda for Android/">Lambda for Android</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/25/Android Skills/理解Android的编译命令/">理解Android编译命令</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/22/Android Skills/Webview上传文件的那些坑/">Webview上传文件的那些坑</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/21/Android Skills/Android源码编译/">Android源码编译和内核编译</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/18/New Lan/Kotlin1.0正式版发布/">Kotlin 1.0 正式版发布啦</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/01/25/随笔/Ibeacon/">Ibeacon</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/21/Android Skills/Android MotionEvent详解/">Android MotionEvent详解</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/19/New Lan/React-Native学习指南/">React-Native学习指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/18/Android Skills/RecyclerView 列表控件中简单实现时间线/">RecyclerView 列表控件中简单实现时间线</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/21/3.5开发中的亮点和不足/">亮点和不足</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/10/09/Android Skills/ActionBar沉浸式实现/">ActionBar沉浸式实现</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之内存篇/">Android性能优化之内存篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之渲染篇/">Android性能优化之渲染篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/16/Android性能优化典范/Android性能优化之电量篇/">Android性能优化之电量篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化典范（三）/">Android性能优化典范（三）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/15/Android性能优化典范/Android性能优化之运算篇/">Android性能优化之运算篇</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/13/Android性能优化典范/Android性能优化典范（二）/">Android性能优化典范（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/09/11/Android性能优化典范/Android性能优化典范（一）/">Android性能优化典范（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/22/Android Skills/注解(Annotation)自定义注解入门/">Android注解(Annotation)自定义注解入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/21/Android Skills/Android OkHttp完全解析/">Android OkHttp完全解析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/07/19/Android Skills/Android OkHttp初级入门/">Android OkHttp使用教程</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/27/Android Skills/EventBus 3.0的用法详解(二)/">EventBus 3.0的用法详解（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/25/Android Skills/EventBus 3.0的用法详解（一）/">EventBus 3.0的用法详解（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/21/Android Skills/自定义Dialog的大小、位置、颜色/">Android自定义对话框(Dialog)位置,大小</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/16/Google Develop for Android 系列/Developing for Android 最佳实践九：工具/">Google Develop for Android 系列九 － 工具</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/15/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/">Google Develop for Android 系列八 － 用户界面</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/14/Google Develop for Android 系列/Google Develop for Android 系列七 － Framework最佳实践/">Google Develop for Android 系列七 － Framework最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/13/Google Develop for Android 系列/Google Develop for Android 系列六 － Storage最佳实践/">Google Develop for Android 系列六 － Storage最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/12/Google Develop for Android 系列/Google Develop for Android 系列五 － Language and Libraries/">Google Develop for Android 系列五 － Language and Libraries</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/11/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/">Google Develop for Android 系列四 － Network最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/10/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/">Google Develop for Android 系列三 － Performance最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/09/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/">Google Develop for Android 系列二 － Memory 最佳实践</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/06/08/Google Develop for Android 系列/Google Develop for Android 系列一 － 相关上下文介绍/">Google Develop for Android 系列一 － 相关上下文介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/03/02/小知识点/Android开发常用的adb命令整理/">Android开发常用的adb命令整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/01/21/小知识点/端口号/">端口号设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/07/Android Skills/Android AsyncTask 技巧/">Android AsyncTask 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/11/05/Android Skills/图像、背景、View更新、布局、内存/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/10/08/随笔/健身/">健身</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/09/18/Android Skills/widget用法/">widget用法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/08/08/Android Skills/webview入门/">WebView入门</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/07/18/Android Skills/TypedArray/">解析：TypedArray 为什么需要调用recycle()</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/15/Android Skills/Android内核 ServiceManager/">Android内核 ServiceManager</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/12/Android Skills/Android内核 Binder/">Android内核 Binder</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/08/Android Skills/Android内核 异步线程的实现（Looper、MessageQueue、Handler）/">异步线程的实现（Looper、MessageQueue、Handler）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/06/01/Android Skills/CountDownTimer（倒数计时器）/">CountDownTimer（倒数计时器）</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/19/Android Skills/万能的ViewHolder/">ViewHolder的作用</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android 自定义Loader/">Android 自定义Loader</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/17/Android Skills/Android Skill 下拉刷新/">下拉刷新</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/15/Android Skills/Android TextView 技巧/">Android Textview 技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/13/Android Skills/Android String相关类性能测试/">String相关类性能测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/11/Android Skills/Android ImageView ScaleType属性/">ImageView ScaleType属性</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/05/05/Android Skills/Android EditText 技巧/">图像、背景、View更新、布局、内存</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/24/随笔/Lantern(灯笼)使用实例/">Lantern(灯笼)使用实例</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/19/Android Skills/Context/">Android Context 到底是什么？</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/17/小知识点/Android开发中一些被冷落但却很有用的类和方法/">Android开发中一些被冷落但却很有用的类和方法</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/12/小知识点/Android Studio的快捷键/">Android Studio 的快捷键</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/08/小知识点/Android开发规范/">Android 开发规范</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/02/07/小知识点/开发规范/">Google Java编程风格指南</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/28/Android Skills/40个Java集合面试问题和答案/">40个Java集合面试问题和答案</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/Android Skills/Android anim drawable color 技巧/">Android anim drawable color技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/23/小知识点/36个Android开发的代码片段/">36个Android开发常用代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/2014/01/21/随笔/生命中的空白/">生命中的空白</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2018 一只熊猫
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a> 
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 21;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+  </div>
+</body>
+</html>
