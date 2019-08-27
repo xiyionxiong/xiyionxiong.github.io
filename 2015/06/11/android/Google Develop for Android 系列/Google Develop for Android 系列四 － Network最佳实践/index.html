@@ -1,171 +1,64 @@
 <!DOCTYPE html>
-<html lang=中文>
+<html>
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="作者 : lightsky原文链接  不要过度同步向云端发送数据和获取数据是非常耗电的行为之一。不是网络传输会将设备搞挂，而是一定量的后台应用向服务发起的这些请求会导致设备不能进入睡眠状态 （或者对于收音机的低电量模式），一定时间后会导致严重的电量的流失。如果你不需要立即获取数据，就不要获取。如果将来需要获取数据，那么可以使用JobScheduler或者GCM Network Manager将它们">
-<meta name="keywords" content="Google Develop for Android 系列">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Google Develop for Android 系列四 － Network最佳实践">
-<meta property="og:url" content="http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/index.html">
-<meta property="og:site_name" content="熊猫博客">
-<meta property="og:description" content="作者 : lightsky原文链接  不要过度同步向云端发送数据和获取数据是非常耗电的行为之一。不是网络传输会将设备搞挂，而是一定量的后台应用向服务发起的这些请求会导致设备不能进入睡眠状态 （或者对于收音机的低电量模式），一定时间后会导致严重的电量的流失。如果你不需要立即获取数据，就不要获取。如果将来需要获取数据，那么可以使用JobScheduler或者GCM Network Manager将它们">
-<meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-06-14T03:20:07.014Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Google Develop for Android 系列四 － Network最佳实践">
-<meta name="twitter:description" content="作者 : lightsky原文链接  不要过度同步向云端发送数据和获取数据是非常耗电的行为之一。不是网络传输会将设备搞挂，而是一定量的后台应用向服务发起的这些请求会导致设备不能进入睡眠状态 （或者对于收音机的低电量模式），一定时间后会导致严重的电量的流失。如果你不需要立即获取数据，就不要获取。如果将来需要获取数据，那么可以使用JobScheduler或者GCM Network Manager将它们">
-    
-    
-        
-          
-              <link rel="shortcut icon" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-    
-    <!-- title -->
-    <title>Google Develop for Android 系列四 － Network最佳实践</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- persian styles -->
-    
-      <link rel="stylesheet" href="/css/rtl.css">
-    
-    <!-- rss -->
-    
-    
-</head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Google Develop for Android 系列四 － Network最佳实践 | 熊猫博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="一只熊猫">
+  <meta name="keywords" content="">
+  <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '1.4.5',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" href="/2015/06/12/android/Google Develop for Android 系列/Google Develop for Android 系列五 － Language and Libraries/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&text=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&title=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&is_video=false&description=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Google Develop for Android 系列四 － Network最佳实践&body=Check out this article: http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&title=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&title=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&title=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&title=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&name=Google Develop for Android 系列四 － Network最佳实践&description=&lt;p&gt;作者 : lightsky&lt;br&gt;&lt;a href=&#34;http://www.lightskystreet.com/2015/06/07/google-for-android-4-network/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;不要过度同步&#34;&gt;&lt;a href=&#34;#不要过度同步&#34; class=&#34;headerlink&#34; title=&#34;不要过度同步&#34;&gt;&lt;/a&gt;不要过度同步&lt;/h2&gt;&lt;p&gt;向云端发送数据和获取数据是非常耗电的行为之一。不是网络传输会将设备搞挂，而是一定量的后台应用向服务发起的这些请求会导致设备不能进入睡眠状态 （或者对于收音机的低电量模式），一定时间后会导致严重的电量的流失。如果你不需要立即获取数据，就不要获取。如果将来需要获取数据，那么可以使用&lt;code&gt;JobScheduler&lt;/code&gt;或者&lt;code&gt;GCM Network Manager&lt;/code&gt;将它们和一些系统的请求一起处理。&lt;br&gt;下面是一些避免过度请求的一些建议：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;使用 GoogleCloudMessaging（GCM）。而不是使用新的持久化连接。&lt;/li&gt;
-&lt;li&gt;使用JobScheduler（API 21以及之后）或者GCM NetrowManager将一些异步请求绑在一起进行批处理，这些API可以保证操作只在设备恰当的闲暇状态下进行&lt;/li&gt;
-&lt;li&gt;Do not poll.Ever.（不太理解啥意思）&lt;/li&gt;
-&lt;li&gt;只同步你需要的数据。数据同步已经被认为是电池和总体系统健康的罪魁祸首之一。因此开发者需要谨慎的选择哪些是真正需要同步的数据，以及多久同步一次,这些都可以让用户有更好的体验。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;避免过度加载服务&#34;&gt;&lt;a href=&#34;#避免过度加载服务&#34; class=&#34;headerlink&#34; title=&#34;避免过度加载服务&#34;&gt;&lt;/a&gt;避免过度加载服务&lt;/h2&gt;&lt;p&gt;当服务请求失败，应该使用备用的技术避免请求一直，重复的请求。Also, never synchronize against wall-clock time to avoid problems with the server being hit by large loads at these absolute times. 不是太明白啥意思， “当然，从不同步以至于一次性进行大量加载的方式去避免这些问题也是不好的？”&lt;/p&gt;
-&lt;h2 id=&#34;不要对网络想当然&#34;&gt;&lt;a href=&#34;#不要对网络想当然&#34; class=&#34;headerlink&#34; title=&#34;不要对网络想当然&#34;&gt;&lt;/a&gt;不要对网络想当然&lt;/h2&gt;&lt;p&gt;进行网络调用前，确保使用&lt;code&gt;NetworkInfo.isConnected()&lt;/code&gt;进行检测。&lt;/p&gt;
-&lt;p&gt;网络请求不确定性很大，比较耗时，因此另一个建议是不要在UI 线程或者其它需要立即同步的行为中进行网络的请求。&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#不要过度同步"><span class="toc-number">1.</span> <span class="toc-text">不要过度同步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免过度加载服务"><span class="toc-number">2.</span> <span class="toc-text">避免过度加载服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不要对网络想当然"><span class="toc-number">3.</span> <span class="toc-text">不要对网络想当然</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#考虑低端网络环境"><span class="toc-number">4.</span> <span class="toc-text">考虑低端网络环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设计向后兼容的API满足客户的使用模式"><span class="toc-number">5.</span> <span class="toc-text">设计向后兼容的API满足客户的使用模式</span></a></li></ol>
-    </div>
-  </span>
-</div>
-
-    
-    <div class="content index my4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        Google Develop for Android 系列四 － Network最佳实践
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">熊猫博客</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2015-06-11T12:12:17.000Z" itemprop="datePublished">2015-06-11</time>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Google-Develop-for-Android-系列/">Google Develop for Android 系列</a>
-    </div>
-
-
-    </div>
-  </header>
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "endless-river",
+	     });
+	}); 
+	</script>
   
-
-  <div class="content" itemprop="articleBody">
-    <p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-4-network/" target="_blank" rel="noopener">原文链接</a></p>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+</head>
+<body>
+<div class="single">
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/page-cover.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
+    <span>2015-06-11</span>
+    <h2>Google Develop for Android 系列四 － Network最佳实践</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/Google-Develop-for-Android-系列/">Google Develop for Android 系列</a></div>
+    </div>
+</div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-4-network/" target="_blank" rel="noopener">原文链接</a></p>
 <hr>
 <h2 id="不要过度同步"><a href="#不要过度同步" class="headerlink" title="不要过度同步"></a>不要过度同步</h2><p>向云端发送数据和获取数据是非常耗电的行为之一。不是网络传输会将设备搞挂，而是一定量的后台应用向服务发起的这些请求会导致设备不能进入睡眠状态 （或者对于收音机的低电量模式），一定时间后会导致严重的电量的流失。如果你不需要立即获取数据，就不要获取。如果将来需要获取数据，那么可以使用<code>JobScheduler</code>或者<code>GCM Network Manager</code>将它们和一些系统的请求一起处理。<br>下面是一些避免过度请求的一些建议：</p>
 <ul>
@@ -183,133 +76,93 @@
 <p>然而，很多API返回的数据结构是非标准化的。这种数据结构可能对于服务端处理更合适，但是对于移动端的数据持久化和从硬盘的读取都不够好。</p>
 <p>客户端从返回的信息中能够直接用于展示的信息越多，就越高效。应用要很仔细的去筛选那些需要缓存的，剔除一些无用的，以及新数据到来时如何刷新视图。如果对待客户端像一个简单的HTML渲染机制一样就会丢掉客户端自身的很多优势。</p>
 
-  </div>
-</article>
-
-
-
+      </div>
     </div>
-    
-      <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </div>
-
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#不要过度同步"><span class="toc-number">1.</span> <span class="toc-text">不要过度同步</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#避免过度加载服务"><span class="toc-number">2.</span> <span class="toc-text">避免过度加载服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不要对网络想当然"><span class="toc-number">3.</span> <span class="toc-text">不要对网络想当然</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#考虑低端网络环境"><span class="toc-number">4.</span> <span class="toc-text">考虑低端网络环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设计向后兼容的API满足客户的使用模式"><span class="toc-number">5.</span> <span class="toc-text">设计向后兼容的API满足客户的使用模式</span></a></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&text=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&title=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&is_video=false&description=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Google Develop for Android 系列四 － Network最佳实践&body=Check out this article: http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&title=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&title=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&title=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&title=Google Develop for Android 系列四 － Network最佳实践"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/&name=Google Develop for Android 系列四 － Network最佳实践&description=&lt;p&gt;作者 : lightsky&lt;br&gt;&lt;a href=&#34;http://www.lightskystreet.com/2015/06/07/google-for-android-4-network/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id=&#34;不要过度同步&#34;&gt;&lt;a href=&#34;#不要过度同步&#34; class=&#34;headerlink&#34; title=&#34;不要过度同步&#34;&gt;&lt;/a&gt;不要过度同步&lt;/h2&gt;&lt;p&gt;向云端发送数据和获取数据是非常耗电的行为之一。不是网络传输会将设备搞挂，而是一定量的后台应用向服务发起的这些请求会导致设备不能进入睡眠状态 （或者对于收音机的低电量模式），一定时间后会导致严重的电量的流失。如果你不需要立即获取数据，就不要获取。如果将来需要获取数据，那么可以使用&lt;code&gt;JobScheduler&lt;/code&gt;或者&lt;code&gt;GCM Network Manager&lt;/code&gt;将它们和一些系统的请求一起处理。&lt;br&gt;下面是一些避免过度请求的一些建议：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;使用 GoogleCloudMessaging（GCM）。而不是使用新的持久化连接。&lt;/li&gt;
-&lt;li&gt;使用JobScheduler（API 21以及之后）或者GCM NetrowManager将一些异步请求绑在一起进行批处理，这些API可以保证操作只在设备恰当的闲暇状态下进行&lt;/li&gt;
-&lt;li&gt;Do not poll.Ever.（不太理解啥意思）&lt;/li&gt;
-&lt;li&gt;只同步你需要的数据。数据同步已经被认为是电池和总体系统健康的罪魁祸首之一。因此开发者需要谨慎的选择哪些是真正需要同步的数据，以及多久同步一次,这些都可以让用户有更好的体验。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;避免过度加载服务&#34;&gt;&lt;a href=&#34;#避免过度加载服务&#34; class=&#34;headerlink&#34; title=&#34;避免过度加载服务&#34;&gt;&lt;/a&gt;避免过度加载服务&lt;/h2&gt;&lt;p&gt;当服务请求失败，应该使用备用的技术避免请求一直，重复的请求。Also, never synchronize against wall-clock time to avoid problems with the server being hit by large loads at these absolute times. 不是太明白啥意思， “当然，从不同步以至于一次性进行大量加载的方式去避免这些问题也是不好的？”&lt;/p&gt;
-&lt;h2 id=&#34;不要对网络想当然&#34;&gt;&lt;a href=&#34;#不要对网络想当然&#34; class=&#34;headerlink&#34; title=&#34;不要对网络想当然&#34;&gt;&lt;/a&gt;不要对网络想当然&lt;/h2&gt;&lt;p&gt;进行网络调用前，确保使用&lt;code&gt;NetworkInfo.isConnected()&lt;/code&gt;进行检测。&lt;/p&gt;
-&lt;p&gt;网络请求不确定性很大，比较耗时，因此另一个建议是不要在UI 线程或者其它需要立即同步的行为中进行网络的请求。&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
   </div>
 </div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_1.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2015/06/12/android/Google Develop for Android 系列/Google Develop for Android 系列五 － Language and Libraries/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>Google Develop for Android 系列五 － Language and Libraries</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_2.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>Google Develop for Android 系列三 － Performance最佳实践</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+</div>
 
-    
-    <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2019 一只熊猫
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </nav>
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">熊猫博客</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
   </div>
 </footer>
+</div>
+
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/person_1.jpg" alt="一只熊猫"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>一只熊猫</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook">留言</a></li>
+        <li><a href="/about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://lx.blleng.cn" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
+
 
 </body>
 </html>
-<!-- styles -->
-<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
-<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
-
-<!-- jquery -->
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/main.js"></script>
-<!-- search -->
-
-<!-- Google Analytics -->
-
-<!-- Baidu Analytics -->
-
-<!-- Disqus Comments -->
-
-

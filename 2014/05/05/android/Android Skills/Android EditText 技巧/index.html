@@ -1,163 +1,64 @@
 <!DOCTYPE html>
-<html lang=中文>
+<html>
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="解决EditView抢焦点事件在最外层布局加上 android:focusable=&amp;quot;true&amp;quot; android:focusableInTouchMode=&amp;quot;true&amp;quot;">
-<meta name="keywords" content="图像、背景、View更新、布局、内存">
-<meta property="og:type" content="article">
-<meta property="og:title" content="图像、背景、View更新、布局、内存">
-<meta property="og:url" content="http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/index.html">
-<meta property="og:site_name" content="熊猫博客">
-<meta property="og:description" content="解决EditView抢焦点事件在最外层布局加上 android:focusable=&amp;quot;true&amp;quot; android:focusableInTouchMode=&amp;quot;true&amp;quot;">
-<meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-06-14T03:20:52.806Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图像、背景、View更新、布局、内存">
-<meta name="twitter:description" content="解决EditView抢焦点事件在最外层布局加上 android:focusable=&amp;quot;true&amp;quot; android:focusableInTouchMode=&amp;quot;true&amp;quot;">
-    
-    
-        
-          
-              <link rel="shortcut icon" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-    
-    <!-- title -->
-    <title>图像、背景、View更新、布局、内存</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- persian styles -->
-    
-      <link rel="stylesheet" href="/css/rtl.css">
-    
-    <!-- rss -->
-    
-    
-</head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>图像、背景、View更新、布局、内存 | 熊猫博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="一只熊猫">
+  <meta name="keywords" content="">
+  <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '1.4.5',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" href="/2014/05/11/android/Android Skills/Android ImageView ScaleType属性/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2014/02/28/linux/redis/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&text=图像、背景、View更新、布局、内存"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&is_video=false&description=图像、背景、View更新、布局、内存"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=图像、背景、View更新、布局、内存&body=Check out this article: http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&name=图像、背景、View更新、布局、内存&description=&lt;h3 id=&#34;解决EditView抢焦点事件&#34;&gt;&lt;a href=&#34;#解决EditView抢焦点事件&#34; class=&#34;headerlink&#34; title=&#34;解决EditView抢焦点事件&#34;&gt;&lt;/a&gt;解决EditView抢焦点事件&lt;/h3&gt;&lt;p&gt;在最外层布局加上&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;android:focusable=&amp;quot;true&amp;quot;
-android:focusableInTouchMode=&amp;quot;true&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#解决EditView抢焦点事件"><span class="toc-number">1.</span> <span class="toc-text">解决EditView抢焦点事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将EditText的光标定位到字符的最后面"><span class="toc-number">2.</span> <span class="toc-text">将EditText的光标定位到字符的最后面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加下划线"><span class="toc-number">3.</span> <span class="toc-text">添加下划线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置抗锯齿"><span class="toc-number">4.</span> <span class="toc-text">设置抗锯齿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#焦点事件监听"><span class="toc-number">5.</span> <span class="toc-text">焦点事件监听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手动获取焦点"><span class="toc-number">6.</span> <span class="toc-text">手动获取焦点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹出软键盘"><span class="toc-number">7.</span> <span class="toc-text">弹出软键盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制长度"><span class="toc-number">8.</span> <span class="toc-text">限制长度</span></a></li></ol>
-    </div>
-  </span>
-</div>
-
-    
-    <div class="content index my4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        图像、背景、View更新、布局、内存
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">熊猫博客</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2014-05-05T14:01:14.000Z" itemprop="datePublished">2014-05-05</time>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/图像、背景、View更新、布局、内存/">图像、背景、View更新、布局、内存</a>
-    </div>
-
-
-    </div>
-  </header>
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "endless-river",
+	     });
+	}); 
+	</script>
   
-
-  <div class="content" itemprop="articleBody">
-    <h3 id="解决EditView抢焦点事件"><a href="#解决EditView抢焦点事件" class="headerlink" title="解决EditView抢焦点事件"></a>解决EditView抢焦点事件</h3><p>在最外层布局加上</p>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+</head>
+<body>
+<div class="single">
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/page-cover.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
+    <span>2014-05-05</span>
+    <h2>图像、背景、View更新、布局、内存</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/图像、背景、View更新、布局、内存/">图像、背景、View更新、布局、内存</a></div>
+    </div>
+</div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <h3 id="解决EditView抢焦点事件"><a href="#解决EditView抢焦点事件" class="headerlink" title="解决EditView抢焦点事件"></a>解决EditView抢焦点事件</h3><p>在最外层布局加上</p>
 <pre><code>android:focusable=&quot;true&quot;
 android:focusableInTouchMode=&quot;true&quot;
 </code></pre><a id="more"></a>
@@ -239,125 +140,93 @@ this.editText.requestFocus();
 <pre><code>//即限定最大输入字符数为20
 this.editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
 </code></pre>
-  </div>
-</article>
-
-
-
+      </div>
     </div>
-    
-      <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </div>
-
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#解决EditView抢焦点事件"><span class="toc-number">1.</span> <span class="toc-text">解决EditView抢焦点事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将EditText的光标定位到字符的最后面"><span class="toc-number">2.</span> <span class="toc-text">将EditText的光标定位到字符的最后面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加下划线"><span class="toc-number">3.</span> <span class="toc-text">添加下划线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置抗锯齿"><span class="toc-number">4.</span> <span class="toc-text">设置抗锯齿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#焦点事件监听"><span class="toc-number">5.</span> <span class="toc-text">焦点事件监听</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#手动获取焦点"><span class="toc-number">6.</span> <span class="toc-text">手动获取焦点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#弹出软键盘"><span class="toc-number">7.</span> <span class="toc-text">弹出软键盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#限制长度"><span class="toc-number">8.</span> <span class="toc-text">限制长度</span></a></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&text=图像、背景、View更新、布局、内存"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&is_video=false&description=图像、背景、View更新、布局、内存"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=图像、背景、View更新、布局、内存&body=Check out this article: http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&title=图像、背景、View更新、布局、内存"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2014/05/05/android/Android Skills/Android EditText 技巧/&name=图像、背景、View更新、布局、内存&description=&lt;h3 id=&#34;解决EditView抢焦点事件&#34;&gt;&lt;a href=&#34;#解决EditView抢焦点事件&#34; class=&#34;headerlink&#34; title=&#34;解决EditView抢焦点事件&#34;&gt;&lt;/a&gt;解决EditView抢焦点事件&lt;/h3&gt;&lt;p&gt;在最外层布局加上&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;android:focusable=&amp;quot;true&amp;quot;
-android:focusableInTouchMode=&amp;quot;true&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
   </div>
 </div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_1.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2014/05/11/android/Android Skills/Android ImageView ScaleType属性/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>ImageView ScaleType属性</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_2.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2014/02/28/linux/redis/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>centos6安装redis-2.8.19</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+</div>
 
-    
-    <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2019 一只熊猫
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </nav>
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">熊猫博客</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
   </div>
 </footer>
+</div>
+
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/person_1.jpg" alt="一只熊猫"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>一只熊猫</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook">留言</a></li>
+        <li><a href="/about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://lx.blleng.cn" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
+
 
 </body>
 </html>
-<!-- styles -->
-<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
-<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
-
-<!-- jquery -->
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/main.js"></script>
-<!-- search -->
-
-<!-- Google Analytics -->
-
-<!-- Baidu Analytics -->
-
-<!-- Disqus Comments -->
-
-

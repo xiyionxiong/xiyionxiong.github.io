@@ -1,205 +1,64 @@
 <!DOCTYPE html>
-<html lang=中文>
+<html>
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Android性能优化典范的课程最近更新到第三季了，这次一共12个短视频课程，包括的内容大致有：更高效的ArrayMap容器，使用Android系统提供的特殊容器来避免自动装箱，避免使用枚举类型，注意onLowMemory与onTrimMemory的回调，避免内存泄漏，高效的位置更新操作，重复layout操作的性能影响，以及使用Batching，Prefetching优化网络请求，压缩传输数据等等">
-<meta name="keywords" content="Android性能优化典范">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Android性能优化典范（三）">
-<meta property="og:url" content="http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/index.html">
-<meta property="og:site_name" content="熊猫博客">
-<meta property="og:description" content="Android性能优化典范的课程最近更新到第三季了，这次一共12个短视频课程，包括的内容大致有：更高效的ArrayMap容器，使用Android系统提供的特殊容器来避免自动装箱，避免使用枚举类型，注意onLowMemory与onTrimMemory的回调，避免内存泄漏，高效的位置更新操作，重复layout操作的性能影响，以及使用Batching，Prefetching优化网络请求，压缩传输数据等等">
-<meta property="og:locale" content="中文">
-<meta property="og:image" content="http://blog.apanda.online/images/E7C1236FA835601C32BF7E628221652E.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/F29E41FC2EA45D65769B8AEFDD22A155.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/42DB6E22C92F20118AA30D62CFDC243B.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/B749F90BA08411B98770B1F902992945.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/0BD3BFC1B10AEB182156AFC77AADB2CE.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/451CEF2B65FB18B8A5D71C50974659A8.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/2AE0AE9F3F50AF084A80714D0513339C.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/AD0D923F15F432B92AA5488B501F198A.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/6E526A32AEB20E7BF4AE81D6D6C02126.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/76AB63A7AEE5B0007EC558FA077C25F6.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/4B99F65F156D80B655ACAA76DA558852.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/8C5D561C8A3BF3479E33BFCE9D76DE23.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/594E44A9750EB5C5B619904E779972E9.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/D36B2DD4DE533313EEC18D99FD427FF3.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/65D3CAA3C496D3D19A077CFCDA93F42D.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/2FCA1FD92B72241C1237172C26004E0E.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/DCD52E7E5D8EE95FCA70F12DE46AFFF5.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/C9F5B4B5C46678F2C7FC85FE7430B195.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/15F5750E255B7BC3D343228FC18D25E5.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/4C8D7895BCC82144FEB4579B541CDD3D.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/B5BC4E3B0E354EF3862730C63F910180.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/183E8DD7D4CBF2749C535CD86B1F9867.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/665F39DC952280C524AC498CB633C1C2.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/AD58592B8F7481AEB82B5B471ECFA60E.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/002D35D75FC1DB8DD7D65C22AD93DDB6.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/4F93493443349E1BD5BEE3FE86ECD1A2.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/DF396BCA5677021C6B054AEADD0B6822.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/78B3F987AFF7FB2CE8C45DAC041C2593.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/F4886106FB91107E133B978A7040EF3A.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/DF6D67803BBD48405F55D6277BDA1A0F.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/18B002260D413C5DBD82D151DC6079C3.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/B5FB699E1F38B5363A4C06E14F4CE50A.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/AA2C6A76E1EA2AB18D96FF14318ED99A.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/A999F0D0AD8813B266A61C382EDA7F92.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/8C4D435D920E3570302BFBCF0738EA3D.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/B2452C38BF5DE2EADDC32D48F5A3572B.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/45B3545D808A8B4B2E9B6B8C6BA0DF76.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/3D5636BFE235C3958AF6E9BE49F2E6A4.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/4776F1ED699D53599B216A0B2B4315A8.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/929231FBA36D48FE55ED51C1336090DA.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/A155E9AF651592ACFB5DAEA47D68751F.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/F4409A21F514BF5FD077C7D7EAE78961.jpg">
-<meta property="og:updated_time" content="2018-06-14T06:34:06.013Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android性能优化典范（三）">
-<meta name="twitter:description" content="Android性能优化典范的课程最近更新到第三季了，这次一共12个短视频课程，包括的内容大致有：更高效的ArrayMap容器，使用Android系统提供的特殊容器来避免自动装箱，避免使用枚举类型，注意onLowMemory与onTrimMemory的回调，避免内存泄漏，高效的位置更新操作，重复layout操作的性能影响，以及使用Batching，Prefetching优化网络请求，压缩传输数据等等">
-<meta name="twitter:image" content="http://blog.apanda.online/images/E7C1236FA835601C32BF7E628221652E.jpg">
-    
-    
-        
-          
-              <link rel="shortcut icon" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-    
-    <!-- title -->
-    <title>Android性能优化典范（三）</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- persian styles -->
-    
-      <link rel="stylesheet" href="/css/rtl.css">
-    
-    <!-- rss -->
-    
-    
-</head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Android性能优化典范（三） | 熊猫博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="一只熊猫">
+  <meta name="keywords" content="">
+  <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '1.4.5',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" href="/2015/09/16/android/Android性能优化典范/Android性能优化之电量篇/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2015/09/15/android/Android性能优化典范/Android性能优化之运算篇/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&text=Android性能优化典范（三）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&title=Android性能优化典范（三）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&is_video=false&description=Android性能优化典范（三）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Android性能优化典范（三）&body=Check out this article: http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&title=Android性能优化典范（三）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&title=Android性能优化典范（三）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&title=Android性能优化典范（三）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&title=Android性能优化典范（三）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&name=Android性能优化典范（三）&description=&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Android性能优化典范&lt;/a&gt;的课程最近更新到第三季了，这次一共12个短视频课程，包括的内容大致有：更高效的ArrayMap容器，使用Android系统提供的特殊容器来避免自动装箱，避免使用枚举类型，注意onLowMemory与onTrimMemory的回调，避免内存泄漏，高效的位置更新操作，重复layout操作的性能影响，以及使用Batching，Prefetching优化网络请求，压缩传输数据等等使用技巧。下面是对这些课程的总结摘要，认知有限，理解偏差的地方请多多交流指正！&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/images/E7C1236FA835601C32BF7E628221652E.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;1-Fun-with-ArrayMaps&#34;&gt;&lt;a href=&#34;#1-Fun-with-ArrayMaps&#34; class=&#34;headerlink&#34; title=&#34;1) Fun with ArrayMaps&#34;&gt;&lt;/a&gt;&lt;strong&gt;1) Fun with ArrayMaps&lt;/strong&gt;&lt;/h2&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Fun-with-ArrayMaps"><span class="toc-number">1.</span> <span class="toc-text">1) Fun with ArrayMaps</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Beware-Autoboxing"><span class="toc-number">2.</span> <span class="toc-text">2) Beware Autoboxing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-SparseArray-Family-Ties"><span class="toc-number">3.</span> <span class="toc-text">3) SparseArray Family Ties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-The-price-of-ENUMs"><span class="toc-number">4.</span> <span class="toc-text">4) The price of ENUMs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Trimming-and-Sharing-Memory"><span class="toc-number">5.</span> <span class="toc-text">5) Trimming and Sharing Memory</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-DO-NOT-LEAK-VIEWS"><span class="toc-number">6.</span> <span class="toc-text">6) DO NOT LEAK VIEWS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-避免使用异步回调"><span class="toc-number">6.1.</span> <span class="toc-text">6.1) 避免使用异步回调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-避免使用Static对象"><span class="toc-number">6.2.</span> <span class="toc-text">6.2) 避免使用Static对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-避免把View添加到没有清除机制的容器里面"><span class="toc-number">6.3.</span> <span class="toc-text">6.3) 避免把View添加到没有清除机制的容器里面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Location-amp-Battery-Drain"><span class="toc-number">7.</span> <span class="toc-text">7) Location &amp; Battery Drain</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Double-Layout-Taxation"><span class="toc-number">8.</span> <span class="toc-text">8) Double Layout Taxation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-Network-Performance-101"><span class="toc-number">9.</span> <span class="toc-text">9) Network Performance 101</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-减少移动网络被激活的时间与次数"><span class="toc-number">9.1.</span> <span class="toc-text">9.1) 减少移动网络被激活的时间与次数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-压缩传输数据"><span class="toc-number">9.2.</span> <span class="toc-text">9.2) 压缩传输数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-Effective-Network-Batching"><span class="toc-number">10.</span> <span class="toc-text">10) Effective Network Batching</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-Optimizing-Network-Request-Frequencies"><span class="toc-number">11.</span> <span class="toc-text">11) Optimizing Network Request Frequencies</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-Effective-Prefetching"><span class="toc-number">12.</span> <span class="toc-text">12) Effective Prefetching</span></a></li></ol>
-    </div>
-  </span>
-</div>
-
-    
-    <div class="content index my4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        Android性能优化典范（三）
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">熊猫博客</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2015-09-15T08:28:17.000Z" itemprop="datePublished">2015-09-15</time>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Android性能优化典范/">Android性能优化典范</a>
-    </div>
-
-
-    </div>
-  </header>
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "endless-river",
+	     });
+	}); 
+	</script>
   
-
-  <div class="content" itemprop="articleBody">
-    <p><a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范</a>的课程最近更新到第三季了，这次一共12个短视频课程，包括的内容大致有：更高效的ArrayMap容器，使用Android系统提供的特殊容器来避免自动装箱，避免使用枚举类型，注意onLowMemory与onTrimMemory的回调，避免内存泄漏，高效的位置更新操作，重复layout操作的性能影响，以及使用Batching，Prefetching优化网络请求，压缩传输数据等等使用技巧。下面是对这些课程的总结摘要，认知有限，理解偏差的地方请多多交流指正！</p>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+</head>
+<body>
+<div class="single">
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/page-cover.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
+    <span>2015-09-15</span>
+    <h2>Android性能优化典范（三）</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/Android性能优化典范/">Android性能优化典范</a></div>
+    </div>
+</div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <p><a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范</a>的课程最近更新到第三季了，这次一共12个短视频课程，包括的内容大致有：更高效的ArrayMap容器，使用Android系统提供的特殊容器来避免自动装箱，避免使用枚举类型，注意onLowMemory与onTrimMemory的回调，避免内存泄漏，高效的位置更新操作，重复layout操作的性能影响，以及使用Batching，Prefetching优化网络请求，压缩传输数据等等使用技巧。下面是对这些课程的总结摘要，认知有限，理解偏差的地方请多多交流指正！</p>
 <p><img src="/images/E7C1236FA835601C32BF7E628221652E.jpg" alt=""></p>
 <h2 id="1-Fun-with-ArrayMaps"><a href="#1-Fun-with-ArrayMaps" class="headerlink" title="1) Fun with ArrayMaps"></a><strong>1) Fun with ArrayMaps</strong></h2><a id="more"></a>
 <p>程序内存的管理是否合理高效对应用的性能有着很大的影响，有的时候对容器的使用不当也会导致内存管理效率低下。Android为移动操作系统特意编写了一些更加高效的容器，例如SparseArray，今天要介绍的是一个新的容器，叫做 <a href="https://android.googlesource.com/platform/frameworks/base.git/+/master/core/java/android/util/ArrayMap.java" target="_blank" rel="noopener">ArrayMap</a>。</p>
@@ -308,124 +167,93 @@
 <p><img src="/images/F4409A21F514BF5FD077C7D7EAE78961.jpg" alt=""></p>
 <p>我们可以参考在WiFi，4G，3G等不同的网络下设计不同大小的预取数据量，也可以是按照图片数量或者操作时间来作为阀值。这需要我们需要根据特定的场景，不同的网络情况设计合适的方案。</p>
 
-  </div>
-</article>
-
-
-
+      </div>
     </div>
-    
-      <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </div>
-
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Fun-with-ArrayMaps"><span class="toc-number">1.</span> <span class="toc-text">1) Fun with ArrayMaps</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Beware-Autoboxing"><span class="toc-number">2.</span> <span class="toc-text">2) Beware Autoboxing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-SparseArray-Family-Ties"><span class="toc-number">3.</span> <span class="toc-text">3) SparseArray Family Ties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-The-price-of-ENUMs"><span class="toc-number">4.</span> <span class="toc-text">4) The price of ENUMs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Trimming-and-Sharing-Memory"><span class="toc-number">5.</span> <span class="toc-text">5) Trimming and Sharing Memory</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-DO-NOT-LEAK-VIEWS"><span class="toc-number">6.</span> <span class="toc-text">6) DO NOT LEAK VIEWS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-避免使用异步回调"><span class="toc-number">6.1.</span> <span class="toc-text">6.1) 避免使用异步回调</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-避免使用Static对象"><span class="toc-number">6.2.</span> <span class="toc-text">6.2) 避免使用Static对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-避免把View添加到没有清除机制的容器里面"><span class="toc-number">6.3.</span> <span class="toc-text">6.3) 避免把View添加到没有清除机制的容器里面</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Location-amp-Battery-Drain"><span class="toc-number">7.</span> <span class="toc-text">7) Location &amp; Battery Drain</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Double-Layout-Taxation"><span class="toc-number">8.</span> <span class="toc-text">8) Double Layout Taxation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-Network-Performance-101"><span class="toc-number">9.</span> <span class="toc-text">9) Network Performance 101</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-减少移动网络被激活的时间与次数"><span class="toc-number">9.1.</span> <span class="toc-text">9.1) 减少移动网络被激活的时间与次数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-压缩传输数据"><span class="toc-number">9.2.</span> <span class="toc-text">9.2) 压缩传输数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-Effective-Network-Batching"><span class="toc-number">10.</span> <span class="toc-text">10) Effective Network Batching</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-Optimizing-Network-Request-Frequencies"><span class="toc-number">11.</span> <span class="toc-text">11) Optimizing Network Request Frequencies</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-Effective-Prefetching"><span class="toc-number">12.</span> <span class="toc-text">12) Effective Prefetching</span></a></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&text=Android性能优化典范（三）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&title=Android性能优化典范（三）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&is_video=false&description=Android性能优化典范（三）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Android性能优化典范（三）&body=Check out this article: http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&title=Android性能优化典范（三）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&title=Android性能优化典范（三）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&title=Android性能优化典范（三）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&title=Android性能优化典范（三）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/&name=Android性能优化典范（三）&description=&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Android性能优化典范&lt;/a&gt;的课程最近更新到第三季了，这次一共12个短视频课程，包括的内容大致有：更高效的ArrayMap容器，使用Android系统提供的特殊容器来避免自动装箱，避免使用枚举类型，注意onLowMemory与onTrimMemory的回调，避免内存泄漏，高效的位置更新操作，重复layout操作的性能影响，以及使用Batching，Prefetching优化网络请求，压缩传输数据等等使用技巧。下面是对这些课程的总结摘要，认知有限，理解偏差的地方请多多交流指正！&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/images/E7C1236FA835601C32BF7E628221652E.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;h2 id=&#34;1-Fun-with-ArrayMaps&#34;&gt;&lt;a href=&#34;#1-Fun-with-ArrayMaps&#34; class=&#34;headerlink&#34; title=&#34;1) Fun with ArrayMaps&#34;&gt;&lt;/a&gt;&lt;strong&gt;1) Fun with ArrayMaps&lt;/strong&gt;&lt;/h2&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
   </div>
 </div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_1.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2015/09/16/android/Android性能优化典范/Android性能优化之电量篇/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>Android性能优化之电量篇</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_2.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2015/09/15/android/Android性能优化典范/Android性能优化之运算篇/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>Android性能优化之运算篇</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+</div>
 
-    
-    <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2019 一只熊猫
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </nav>
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">熊猫博客</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
   </div>
 </footer>
+</div>
+
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/person_1.jpg" alt="一只熊猫"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>一只熊猫</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook">留言</a></li>
+        <li><a href="/about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://lx.blleng.cn" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
+
 
 </body>
 </html>
-<!-- styles -->
-<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
-<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
-
-<!-- jquery -->
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/main.js"></script>
-<!-- search -->
-
-<!-- Google Analytics -->
-
-<!-- Baidu Analytics -->
-
-<!-- Disqus Comments -->
-
-

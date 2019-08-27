@@ -1,166 +1,64 @@
 <!DOCTYPE html>
-<html lang=中文>
+<html>
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="原文出处：http://jayfeng.com/  做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。 查看SQLite日志adb shell setprop log.tag.SQLiteLog V adb shell setprop log.tag.SQLiteStatements V 因为实现里用了Log.isLoggab">
-<meta name="keywords" content="知识库">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Android小经验">
-<meta property="og:url" content="http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/index.html">
-<meta property="og:site_name" content="熊猫博客">
-<meta property="og:description" content="原文出处：http://jayfeng.com/  做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。 查看SQLite日志adb shell setprop log.tag.SQLiteLog V adb shell setprop log.tag.SQLiteStatements V 因为实现里用了Log.isLoggab">
-<meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-06-14T03:18:46.480Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android小经验">
-<meta name="twitter:description" content="原文出处：http://jayfeng.com/  做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。 查看SQLite日志adb shell setprop log.tag.SQLiteLog V adb shell setprop log.tag.SQLiteStatements V 因为实现里用了Log.isLoggab">
-    
-    
-        
-          
-              <link rel="shortcut icon" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-    
-    <!-- title -->
-    <title>Android小经验</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- persian styles -->
-    
-      <link rel="stylesheet" href="/css/rtl.css">
-    
-    <!-- rss -->
-    
-    
-</head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Android小经验 | 熊猫博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="一只熊猫">
+  <meta name="keywords" content="">
+  <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '1.4.5',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" href="/2016/03/25/android/RxJava/RxAndroid/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2016/03/21/android/小知识点/android代码片段/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&text=Android小经验"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&is_video=false&description=Android小经验"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Android小经验&body=Check out this article: http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&name=Android小经验&description=&lt;p&gt;原文出处：&lt;a href=&#34;http://jayfeng.com/2016/03/18/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E9%82%A3%E4%BA%9BAndroid%E5%B0%8F%E7%BB%8F%E9%AA%8C/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://jayfeng.com/&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。&lt;/p&gt;
-&lt;h2 id=&#34;查看SQLite日志&#34;&gt;&lt;a href=&#34;#查看SQLite日志&#34; class=&#34;headerlink&#34; title=&#34;查看SQLite日志&#34;&gt;&lt;/a&gt;查看SQLite日志&lt;/h2&gt;&lt;p&gt;&lt;code&gt;adb shell setprop log.tag.SQLiteLog V&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;adb shell setprop log.tag.SQLiteStatements V&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;因为实现里用了Log.isLoggable(TAG, Log.VERBOSE)做了判断，LessCode的LogLess中也参考了这种机制：&lt;a href=&#34;https://github.com/openproject/LessCode/blob/master/lesscode-core/src/main/java/com/jayfeng/lesscode/core/LogLess.java&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LogLess&lt;/a&gt;。&lt;br&gt;使用这种方法就可以在Release版本也能做到查看应用的打印日志了。&lt;/p&gt;
-&lt;h2 id=&#34;PNG优化&#34;&gt;&lt;a href=&#34;#PNG优化&#34; class=&#34;headerlink&#34; title=&#34;PNG优化&#34;&gt;&lt;/a&gt;PNG优化&lt;/h2&gt;&lt;p&gt;APK打包会自动对PNG进行无损压缩，如果自行无损压缩是无效的。&lt;br&gt;当然进行有损压缩是可以的：&lt;a href=&#34;https://tinypng.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://tinypng.com/&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;Tcpdump抓包&#34;&gt;&lt;a href=&#34;#Tcpdump抓包&#34; class=&#34;headerlink&#34; title=&#34;Tcpdump抓包&#34;&gt;&lt;/a&gt;Tcpdump抓包&lt;/h2&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#查看SQLite日志"><span class="toc-number">1.</span> <span class="toc-text">查看SQLite日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PNG优化"><span class="toc-number">2.</span> <span class="toc-text">PNG优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tcpdump抓包"><span class="toc-number">3.</span> <span class="toc-text">Tcpdump抓包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式-懒汉式-的更好的写法"><span class="toc-number">4.</span> <span class="toc-text">单例模式(懒汉式)的更好的写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多进程Application"><span class="toc-number">5.</span> <span class="toc-text">多进程Application</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式启动Service"><span class="toc-number">6.</span> <span class="toc-text">隐式启动Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fill-parent的寿命"><span class="toc-number">7.</span> <span class="toc-text">fill_parent的寿命</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ListView的局部刷新"><span class="toc-number">8.</span> <span class="toc-text">ListView的局部刷新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统日志中几个重要的TAG"><span class="toc-number">9.</span> <span class="toc-text">系统日志中几个重要的TAG</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一行居中，多行居左的TextView"><span class="toc-number">10.</span> <span class="toc-text">一行居中，多行居左的TextView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setCompoundDrawablesWithIntrinsicBounds"><span class="toc-number">11.</span> <span class="toc-text">setCompoundDrawablesWithIntrinsicBounds()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算程序运行时间"><span class="toc-number">12.</span> <span class="toc-text">计算程序运行时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA引用类型一览表"><span class="toc-number">13.</span> <span class="toc-text">JAVA引用类型一览表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Context使用场景"><span class="toc-number">14.</span> <span class="toc-text">Context使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片缓存大小"><span class="toc-number">15.</span> <span class="toc-text">图片缓存大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统内置的一些工具类"><span class="toc-number">16.</span> <span class="toc-text">系统内置的一些工具类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ClipPadding"><span class="toc-number">17.</span> <span class="toc-text">ClipPadding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强大的dumpsys"><span class="toc-number">18.</span> <span class="toc-text">强大的dumpsys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bugreport命令"><span class="toc-number">19.</span> <span class="toc-text">bugreport命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dpi文件夹的换算比例"><span class="toc-number">20.</span> <span class="toc-text">dpi文件夹的换算比例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新媒体库文件"><span class="toc-number">21.</span> <span class="toc-text">更新媒体库文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Monkey参数"><span class="toc-number">22.</span> <span class="toc-text">Monkey参数</span></a></li></ol>
-    </div>
-  </span>
-</div>
-
-    
-    <div class="content index my4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        Android小经验
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">熊猫博客</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2016-03-23T15:33:02.000Z" itemprop="datePublished">2016-03-23</time>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/知识库/">知识库</a>
-    </div>
-
-
-    </div>
-  </header>
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "endless-river",
+	     });
+	}); 
+	</script>
   
-
-  <div class="content" itemprop="articleBody">
-    <p>原文出处：<a href="http://jayfeng.com/2016/03/18/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E9%82%A3%E4%BA%9BAndroid%E5%B0%8F%E7%BB%8F%E9%AA%8C/" target="_blank" rel="noopener">http://jayfeng.com/</a> </p>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+</head>
+<body>
+<div class="single">
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/page-cover.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
+    <span>2016-03-23</span>
+    <h2>Android小经验</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/知识库/">知识库</a></div>
+    </div>
+</div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <p>原文出处：<a href="http://jayfeng.com/2016/03/18/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E9%82%A3%E4%BA%9BAndroid%E5%B0%8F%E7%BB%8F%E9%AA%8C/" target="_blank" rel="noopener">http://jayfeng.com/</a> </p>
 <p>做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。</p>
 <h2 id="查看SQLite日志"><a href="#查看SQLite日志" class="headerlink" title="查看SQLite日志"></a>查看SQLite日志</h2><p><code>adb shell setprop log.tag.SQLiteLog V</code></p>
 <p><code>adb shell setprop log.tag.SQLiteStatements V</code></p>
@@ -360,128 +258,93 @@
 <p>一边跑monkey，一边抓log吧。</p>
 <p>无论是大经验还是小经验，有用就是好经验。</p>
 
-  </div>
-</article>
-
-
-
+      </div>
     </div>
-    
-      <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </div>
-
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#查看SQLite日志"><span class="toc-number">1.</span> <span class="toc-text">查看SQLite日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PNG优化"><span class="toc-number">2.</span> <span class="toc-text">PNG优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tcpdump抓包"><span class="toc-number">3.</span> <span class="toc-text">Tcpdump抓包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#单例模式-懒汉式-的更好的写法"><span class="toc-number">4.</span> <span class="toc-text">单例模式(懒汉式)的更好的写法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多进程Application"><span class="toc-number">5.</span> <span class="toc-text">多进程Application</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#隐式启动Service"><span class="toc-number">6.</span> <span class="toc-text">隐式启动Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fill-parent的寿命"><span class="toc-number">7.</span> <span class="toc-text">fill_parent的寿命</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ListView的局部刷新"><span class="toc-number">8.</span> <span class="toc-text">ListView的局部刷新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统日志中几个重要的TAG"><span class="toc-number">9.</span> <span class="toc-text">系统日志中几个重要的TAG</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一行居中，多行居左的TextView"><span class="toc-number">10.</span> <span class="toc-text">一行居中，多行居左的TextView</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setCompoundDrawablesWithIntrinsicBounds"><span class="toc-number">11.</span> <span class="toc-text">setCompoundDrawablesWithIntrinsicBounds()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#计算程序运行时间"><span class="toc-number">12.</span> <span class="toc-text">计算程序运行时间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JAVA引用类型一览表"><span class="toc-number">13.</span> <span class="toc-text">JAVA引用类型一览表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Context使用场景"><span class="toc-number">14.</span> <span class="toc-text">Context使用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片缓存大小"><span class="toc-number">15.</span> <span class="toc-text">图片缓存大小</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统内置的一些工具类"><span class="toc-number">16.</span> <span class="toc-text">系统内置的一些工具类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ClipPadding"><span class="toc-number">17.</span> <span class="toc-text">ClipPadding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#强大的dumpsys"><span class="toc-number">18.</span> <span class="toc-text">强大的dumpsys</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bugreport命令"><span class="toc-number">19.</span> <span class="toc-text">bugreport命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dpi文件夹的换算比例"><span class="toc-number">20.</span> <span class="toc-text">dpi文件夹的换算比例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更新媒体库文件"><span class="toc-number">21.</span> <span class="toc-text">更新媒体库文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Monkey参数"><span class="toc-number">22.</span> <span class="toc-text">Monkey参数</span></a></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&text=Android小经验"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&is_video=false&description=Android小经验"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Android小经验&body=Check out this article: http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&title=Android小经验"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2016/03/23/android/小知识点/你应该知道的那些Android小经验/&name=Android小经验&description=&lt;p&gt;原文出处：&lt;a href=&#34;http://jayfeng.com/2016/03/18/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E9%82%A3%E4%BA%9BAndroid%E5%B0%8F%E7%BB%8F%E9%AA%8C/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://jayfeng.com/&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。&lt;/p&gt;
-&lt;h2 id=&#34;查看SQLite日志&#34;&gt;&lt;a href=&#34;#查看SQLite日志&#34; class=&#34;headerlink&#34; title=&#34;查看SQLite日志&#34;&gt;&lt;/a&gt;查看SQLite日志&lt;/h2&gt;&lt;p&gt;&lt;code&gt;adb shell setprop log.tag.SQLiteLog V&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;adb shell setprop log.tag.SQLiteStatements V&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;因为实现里用了Log.isLoggable(TAG, Log.VERBOSE)做了判断，LessCode的LogLess中也参考了这种机制：&lt;a href=&#34;https://github.com/openproject/LessCode/blob/master/lesscode-core/src/main/java/com/jayfeng/lesscode/core/LogLess.java&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;LogLess&lt;/a&gt;。&lt;br&gt;使用这种方法就可以在Release版本也能做到查看应用的打印日志了。&lt;/p&gt;
-&lt;h2 id=&#34;PNG优化&#34;&gt;&lt;a href=&#34;#PNG优化&#34; class=&#34;headerlink&#34; title=&#34;PNG优化&#34;&gt;&lt;/a&gt;PNG优化&lt;/h2&gt;&lt;p&gt;APK打包会自动对PNG进行无损压缩，如果自行无损压缩是无效的。&lt;br&gt;当然进行有损压缩是可以的：&lt;a href=&#34;https://tinypng.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://tinypng.com/&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;Tcpdump抓包&#34;&gt;&lt;a href=&#34;#Tcpdump抓包&#34; class=&#34;headerlink&#34; title=&#34;Tcpdump抓包&#34;&gt;&lt;/a&gt;Tcpdump抓包&lt;/h2&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
   </div>
 </div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_1.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2016/03/25/android/RxJava/RxAndroid/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>从案例学习RxAndroid</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_2.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2016/03/21/android/小知识点/android代码片段/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>Android开发代码片段</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+</div>
 
-    
-    <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2019 一只熊猫
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </nav>
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">熊猫博客</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
   </div>
 </footer>
+</div>
+
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/person_1.jpg" alt="一只熊猫"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>一只熊猫</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook">留言</a></li>
+        <li><a href="/about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://lx.blleng.cn" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
+
 
 </body>
 </html>
-<!-- styles -->
-<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
-<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
-
-<!-- jquery -->
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/main.js"></script>
-<!-- search -->
-
-<!-- Google Analytics -->
-
-<!-- Baidu Analytics -->
-
-<!-- Disqus Comments -->
-
-

@@ -1,167 +1,64 @@
 <!DOCTYPE html>
-<html lang=中文>
+<html>
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="译文原文 http://blog.csdn.net/lzyzsd/article/details/44094895  英文原文 Grokking RxJava, Part 2: Operator, Operator 在第一篇blog中， 我介绍了RxJava的一些基础知识，同时也介绍了map()操作符。当然如果你并没有意愿去使用RxJava我一点都不诧异，毕竟才接触了这么点。看完 这篇blog，我">
-<meta name="keywords" content="RxJava">
-<meta property="og:type" content="article">
-<meta property="og:title" content="深入浅出RxJava(二：操作符)">
-<meta property="og:url" content="http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/index.html">
-<meta property="og:site_name" content="熊猫博客">
-<meta property="og:description" content="译文原文 http://blog.csdn.net/lzyzsd/article/details/44094895  英文原文 Grokking RxJava, Part 2: Operator, Operator 在第一篇blog中， 我介绍了RxJava的一些基础知识，同时也介绍了map()操作符。当然如果你并没有意愿去使用RxJava我一点都不诧异，毕竟才接触了这么点。看完 这篇blog，我">
-<meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-06-14T03:19:28.278Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入浅出RxJava(二：操作符)">
-<meta name="twitter:description" content="译文原文 http://blog.csdn.net/lzyzsd/article/details/44094895  英文原文 Grokking RxJava, Part 2: Operator, Operator 在第一篇blog中， 我介绍了RxJava的一些基础知识，同时也介绍了map()操作符。当然如果你并没有意愿去使用RxJava我一点都不诧异，毕竟才接触了这么点。看完 这篇blog，我">
-    
-    
-        
-          
-              <link rel="shortcut icon" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-    
-    <!-- title -->
-    <title>深入浅出RxJava(二：操作符)</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- persian styles -->
-    
-      <link rel="stylesheet" href="/css/rtl.css">
-    
-    <!-- rss -->
-    
-    
-</head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>深入浅出RxJava(二：操作符) | 熊猫博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="一只熊猫">
+  <meta name="keywords" content="">
+  <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '1.4.5',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" href="/2016/04/04/android/RxJava/深入浅出RxJava三--响应式的好处/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2016/04/01/随笔/VIM快捷键/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&text=深入浅出RxJava(二：操作符)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&is_video=false&description=深入浅出RxJava(二：操作符)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=深入浅出RxJava(二：操作符)&body=Check out this article: http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&name=深入浅出RxJava(二：操作符)&description=&lt;p&gt;译文原文 &lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/44094895&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://blog.csdn.net/lzyzsd/article/details/44094895&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;英文原文 &lt;a href=&#34;http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Grokking RxJava, Part 2: Operator, Operator&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;在&lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/41833541&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;第一篇blog&lt;/a&gt;中， 我介绍了RxJava的一些基础知识，同时也介绍了map()操作符。当然如果你并没有意愿去使用RxJava我一点都不诧异，毕竟才接触了这么点。看完 这篇blog，我相信你肯定想立即在你的项目中使用RxJava了，这篇blog将介绍许多RxJava中的操作符，RxJava的强大性就来自于它所定 义的操作符。&lt;/p&gt;
-&lt;p&gt;首先先看一个例子：&lt;/p&gt;
-&lt;p&gt;假设我有这样一个方法：&lt;br&gt;这个方法根据输入的字符串返回一个网站的url列表（啊哈，搜索引擎）&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Observable&amp;lt;List&amp;lt;String&amp;gt;&amp;gt; query(String text);&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;现在我希望构建一个健壮系统，它可以查询字符串并且显示结果。根据上一篇blog的内容，我们可能会写出下面的代码：&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;query(`&lt;/code&gt;“Hello, world!”&lt;code&gt;&lt;/code&gt;)&lt;code&gt;&lt;/code&gt;.subscribe(urls -&amp;gt; {&lt;code&gt;&lt;/code&gt;for&lt;code&gt;&lt;/code&gt;(String url : urls) {&lt;code&gt;&lt;/code&gt;System.out.println(url);&lt;code&gt;&lt;/code&gt;}&lt;code&gt;&lt;/code&gt;});`&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#还可以更好"><span class="toc-number">1.</span> <span class="toc-text">还可以更好</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#丰富的操作符"><span class="toc-number">2.</span> <span class="toc-text">丰富的操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#感觉如何？"><span class="toc-number">3.</span> <span class="toc-text">感觉如何？</span></a></li></ol>
-    </div>
-  </span>
-</div>
-
-    
-    <div class="content index my4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        深入浅出RxJava(二：操作符)
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">熊猫博客</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2016-04-02T15:12:17.000Z" itemprop="datePublished">2016-04-02</time>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/RxJava/">RxJava</a>
-    </div>
-
-
-    </div>
-  </header>
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "endless-river",
+	     });
+	}); 
+	</script>
   
-
-  <div class="content" itemprop="articleBody">
-    <p>译文原文 <a href="http://blog.csdn.net/lzyzsd/article/details/44094895" target="_blank" rel="noopener">http://blog.csdn.net/lzyzsd/article/details/44094895</a> </p>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+</head>
+<body>
+<div class="single">
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/page-cover.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
+    <span>2016-04-02</span>
+    <h2>深入浅出RxJava(二：操作符)</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/RxJava/">RxJava</a></div>
+    </div>
+</div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <p>译文原文 <a href="http://blog.csdn.net/lzyzsd/article/details/44094895" target="_blank" rel="noopener">http://blog.csdn.net/lzyzsd/article/details/44094895</a> </p>
 <p>英文原文 <a href="http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/" target="_blank" rel="noopener">Grokking RxJava, Part 2: Operator, Operator</a></p>
 <p>在<a href="http://blog.csdn.net/lzyzsd/article/details/41833541" target="_blank" rel="noopener">第一篇blog</a>中， 我介绍了RxJava的一些基础知识，同时也介绍了map()操作符。当然如果你并没有意愿去使用RxJava我一点都不诧异，毕竟才接触了这么点。看完 这篇blog，我相信你肯定想立即在你的项目中使用RxJava了，这篇blog将介绍许多RxJava中的操作符，RxJava的强大性就来自于它所定 义的操作符。</p>
 <p>首先先看一个例子：</p>
@@ -247,129 +144,93 @@
 <p>另外，RxJava也使我们处理数据的方式变得更简单。在最后一个例子里，我们调用了两个API，对API返回的数据进行了处理，然后保存到磁盘。 但是我们的Subscriber并不知道这些，它只是认为自己在接收一个Observable\&lt;String>对象。良好的封装性也带来了编 码的便利！</p>
 <p>在第三部分中，我将介绍RxJava的另外一些很酷的特性，比如错误处理和并发，这些特性并不会直接用来处理数据。</p>
 
-  </div>
-</article>
-
-
-
+      </div>
     </div>
-    
-      <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </div>
-
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#还可以更好"><span class="toc-number">1.</span> <span class="toc-text">还可以更好</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#丰富的操作符"><span class="toc-number">2.</span> <span class="toc-text">丰富的操作符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#感觉如何？"><span class="toc-number">3.</span> <span class="toc-text">感觉如何？</span></a></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&text=深入浅出RxJava(二：操作符)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&is_video=false&description=深入浅出RxJava(二：操作符)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=深入浅出RxJava(二：操作符)&body=Check out this article: http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&title=深入浅出RxJava(二：操作符)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/&name=深入浅出RxJava(二：操作符)&description=&lt;p&gt;译文原文 &lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/44094895&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://blog.csdn.net/lzyzsd/article/details/44094895&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;英文原文 &lt;a href=&#34;http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Grokking RxJava, Part 2: Operator, Operator&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;在&lt;a href=&#34;http://blog.csdn.net/lzyzsd/article/details/41833541&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;第一篇blog&lt;/a&gt;中， 我介绍了RxJava的一些基础知识，同时也介绍了map()操作符。当然如果你并没有意愿去使用RxJava我一点都不诧异，毕竟才接触了这么点。看完 这篇blog，我相信你肯定想立即在你的项目中使用RxJava了，这篇blog将介绍许多RxJava中的操作符，RxJava的强大性就来自于它所定 义的操作符。&lt;/p&gt;
-&lt;p&gt;首先先看一个例子：&lt;/p&gt;
-&lt;p&gt;假设我有这样一个方法：&lt;br&gt;这个方法根据输入的字符串返回一个网站的url列表（啊哈，搜索引擎）&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Observable&amp;lt;List&amp;lt;String&amp;gt;&amp;gt; query(String text);&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;现在我希望构建一个健壮系统，它可以查询字符串并且显示结果。根据上一篇blog的内容，我们可能会写出下面的代码：&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;query(`&lt;/code&gt;“Hello, world!”&lt;code&gt;&lt;/code&gt;)&lt;code&gt;&lt;/code&gt;.subscribe(urls -&amp;gt; {&lt;code&gt;&lt;/code&gt;for&lt;code&gt;&lt;/code&gt;(String url : urls) {&lt;code&gt;&lt;/code&gt;System.out.println(url);&lt;code&gt;&lt;/code&gt;}&lt;code&gt;&lt;/code&gt;});`&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
   </div>
 </div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_1.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2016/04/04/android/RxJava/深入浅出RxJava三--响应式的好处/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>深入浅出RxJava(三：响应式的好处)</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_2.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2016/04/01/随笔/VIM快捷键/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>VIM快捷键的使用</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+</div>
 
-    
-    <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2019 一只熊猫
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </nav>
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">熊猫博客</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
   </div>
 </footer>
+</div>
+
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/person_1.jpg" alt="一只熊猫"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>一只熊猫</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook">留言</a></li>
+        <li><a href="/about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://lx.blleng.cn" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
+
 
 </body>
 </html>
-<!-- styles -->
-<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
-<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
-
-<!-- jquery -->
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/main.js"></script>
-<!-- search -->
-
-<!-- Google Analytics -->
-
-<!-- Baidu Analytics -->
-
-<!-- Disqus Comments -->
-
-

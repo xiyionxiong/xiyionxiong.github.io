@@ -1,194 +1,64 @@
 <!DOCTYPE html>
-<html lang=中文>
+<html>
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="转载自胡凯的博客 Android性能优化典范   2015年伊始，Google发布了关于Android性能优化典范的专题， 一共16个短视频，每个3-5分钟，帮助开发者创建更快更优秀的Android App。课程专题不仅仅介绍了Android系统中有关性能问题的底层工作原理，同时也介绍了如何通过工具来找出性能问题以及提升性能的建议。主要从三个 方面展开，Android的渲染机制，内存与GC，电量优">
-<meta name="keywords" content="Android性能优化典范">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Android性能优化典范（一）">
-<meta property="og:url" content="http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/index.html">
-<meta property="og:site_name" content="熊猫博客">
-<meta property="og:description" content="转载自胡凯的博客 Android性能优化典范   2015年伊始，Google发布了关于Android性能优化典范的专题， 一共16个短视频，每个3-5分钟，帮助开发者创建更快更优秀的Android App。课程专题不仅仅介绍了Android系统中有关性能问题的底层工作原理，同时也介绍了如何通过工具来找出性能问题以及提升性能的建议。主要从三个 方面展开，Android的渲染机制，内存与GC，电量优">
-<meta property="og:locale" content="中文">
-<meta property="og:image" content="http://blog.apanda.online/images/1B60ABFE035FF01195310770A636F912.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/89CEA4325FEA20ECCEB900D7A0E204FB.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/75B783AEC9735D84FE792368727C0828.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/5A80E6BC35A44BABE91FB3609688AC69.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/E6F174D2FC3B853E9DBE2A0F3D67842E.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/AEAF28ED416BCAEFFDA3F0CE28E5CC72.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/F83D1AEC21814EC769ECAB62965856B1.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/C9B27592D8B23AD5C679D2C6C03F6771.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/9CEBA66BF3F8D71D11B3870FD2BD9187.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/3C1EE9EA327445A524B1231ADC2352CA.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/540C50D76DCFA910BD82FEFCEAB60730.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/FDD8FC8B9E147F8DD528B2EAE21BEB1E.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/7D619571660623E3F89B5683D37AE886.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/44D1A6B8B0AC808CE8DA4A5790CC953A.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/6F8D06456E14E60A5276D80A079E2303.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/30990A67914805C666D3B6BB12880EF9.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/9203E2E5284DA8BA1E2FBAE136160406.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/C8D8CB25F67B87D1566359DE9935254A.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/8FA9497E1500172C5E8590B2DCEA78EA.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/C21B81FB0EFD3F119FCF9B7046477A77.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/A5B171CD580383839BF6FB6DF4124193.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/86185230884AC06A3AC2DA870A0F41C5.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/10B3BCB89DD1F72E659FD98D628E4FF2.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/C4AF7C1CDAF0DE8995470BC6769101D9.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/1E544C1E687CD66FAB311CBA88C82887.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/8F64EA48B0870C8E02ACC44153DE937B.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/84C664DAC8E09E45E8EAFB1DAAC0F187.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/EB91E9B305F12D479CFD23A964E53FB1.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/F44F1AE7E0086FCEC9D40EBFA7EADEF5.jpg">
-<meta property="og:image" content="http://blog.apanda.online/images/531056DFF5B509CD8ED8FD4D64D23807.jpg">
-<meta property="og:updated_time" content="2018-06-14T06:34:01.853Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android性能优化典范（一）">
-<meta name="twitter:description" content="转载自胡凯的博客 Android性能优化典范   2015年伊始，Google发布了关于Android性能优化典范的专题， 一共16个短视频，每个3-5分钟，帮助开发者创建更快更优秀的Android App。课程专题不仅仅介绍了Android系统中有关性能问题的底层工作原理，同时也介绍了如何通过工具来找出性能问题以及提升性能的建议。主要从三个 方面展开，Android的渲染机制，内存与GC，电量优">
-<meta name="twitter:image" content="http://blog.apanda.online/images/1B60ABFE035FF01195310770A636F912.jpg">
-    
-    
-        
-          
-              <link rel="shortcut icon" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-    
-    <!-- title -->
-    <title>Android性能优化典范（一）</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- persian styles -->
-    
-      <link rel="stylesheet" href="/css/rtl.css">
-    
-    <!-- rss -->
-    
-    
-</head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Android性能优化典范（一） | 熊猫博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="一只熊猫">
+  <meta name="keywords" content="">
+  <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '1.4.5',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" href="/2015/09/13/android/Android性能优化典范/Android性能优化典范（二）/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2015/07/22/android/Android Skills/注解(Annotation)自定义注解入门/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&text=Android性能优化典范（一）"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&title=Android性能优化典范（一）"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&is_video=false&description=Android性能优化典范（一）"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Android性能优化典范（一）&body=Check out this article: http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&title=Android性能优化典范（一）"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&title=Android性能优化典范（一）"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&title=Android性能优化典范（一）"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&title=Android性能优化典范（一）"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&name=Android性能优化典范（一）&description=&lt;p&gt;转载自胡凯的博客 &lt;a href=&#34;http://hukai.me/android-performance-patterns/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Android性能优化典范&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/images/1B60ABFE035FF01195310770A636F912.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;2015年伊始，Google发布了关于&lt;a href=&#34;https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Android性能优化典范的专题&lt;/a&gt;， 一共16个短视频，每个3-5分钟，帮助开发者创建更快更优秀的Android App。课程专题不仅仅介绍了Android系统中有关性能问题的底层工作原理，同时也介绍了如何通过工具来找出性能问题以及提升性能的建议。主要从三个 方面展开，Android的渲染机制，内存与GC，电量优化。下面是对这些问题和建议的总结梳理。&lt;/p&gt;
-&lt;h2 id=&#34;0-Render-Performance&#34;&gt;&lt;a href=&#34;#0-Render-Performance&#34; class=&#34;headerlink&#34; title=&#34;0)Render Performance&#34;&gt;&lt;/a&gt;0)Render Performance&lt;/h2&gt;&lt;p&gt;大多数用户感知到的卡顿等性能问题的最主要根源都是因为渲染性能。从设计师的角度，他们希望App能够有更多的动画，图片等时尚元素来实现流畅的用 户体验。但是Android系统很有可能无法及时完成那些复杂的界面渲染操作。Android系统每隔16ms发出VSYNC信号，触发对UI进行渲染， 如果每次渲染都成功，这样就能够达到流畅的画面所需要的60fps，为了能够实现60fps，这意味着程序的大多数操作都必须在16ms内完成。&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-Render-Performance"><span class="toc-number">1.</span> <span class="toc-text">0)Render Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Understanding-Overdraw"><span class="toc-number">2.</span> <span class="toc-text">1)Understanding Overdraw</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Understanding-VSYNC"><span class="toc-number">3.</span> <span class="toc-text">2)Understanding VSYNC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Tool-Profile-GPU-Rendering"><span class="toc-number">4.</span> <span class="toc-text">3)Tool:Profile GPU Rendering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Why-60fps"><span class="toc-number">5.</span> <span class="toc-text">4)Why 60fps?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Android-UI-and-the-GPU"><span class="toc-number">6.</span> <span class="toc-text">5)Android, UI and the GPU</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Invalidations-Layouts-and-Performance"><span class="toc-number">7.</span> <span class="toc-text">6)Invalidations, Layouts, and Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Overdraw-Cliprect-QuickReject"><span class="toc-number">8.</span> <span class="toc-text">7)Overdraw, Cliprect, QuickReject</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Memory-Churn-and-performance"><span class="toc-number">9.</span> <span class="toc-text">8)Memory Churn and performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-Garbage-Collection-in-Android"><span class="toc-number">10.</span> <span class="toc-text">9)Garbage Collection in Android</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-Performance-Cost-of-Memory-Leaks"><span class="toc-number">11.</span> <span class="toc-text">10)Performance Cost of Memory Leaks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-Memory-Performance"><span class="toc-number">12.</span> <span class="toc-text">11)Memory Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-Tool-Memory-Monitor"><span class="toc-number">13.</span> <span class="toc-text">12)Tool - Memory Monitor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-Battery-Performance"><span class="toc-number">14.</span> <span class="toc-text">13)Battery Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-Understanding-Battery-Drain-on-Android"><span class="toc-number">15.</span> <span class="toc-text">14)Understanding Battery Drain on Android</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-Battery-Drain-and-WakeLocks"><span class="toc-number">16.</span> <span class="toc-text">15)Battery Drain and WakeLocks</span></a></li></ol>
-    </div>
-  </span>
-</div>
-
-    
-    <div class="content index my4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        Android性能优化典范（一）
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">熊猫博客</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2015-09-11T02:12:17.000Z" itemprop="datePublished">2015-09-11</time>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Android性能优化典范/">Android性能优化典范</a>
-    </div>
-
-
-    </div>
-  </header>
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "endless-river",
+	     });
+	}); 
+	</script>
   
-
-  <div class="content" itemprop="articleBody">
-    <p>转载自胡凯的博客 <a href="http://hukai.me/android-performance-patterns/" target="_blank" rel="noopener">Android性能优化典范</a> </p>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+</head>
+<body>
+<div class="single">
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/page-cover.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
+    <span>2015-09-11</span>
+    <h2>Android性能优化典范（一）</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/Android性能优化典范/">Android性能优化典范</a></div>
+    </div>
+</div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <p>转载自胡凯的博客 <a href="http://hukai.me/android-performance-patterns/" target="_blank" rel="noopener">Android性能优化典范</a> </p>
 <p><img src="/images/1B60ABFE035FF01195310770A636F912.jpg" alt=""></p>
 <p>2015年伊始，Google发布了关于<a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范的专题</a>， 一共16个短视频，每个3-5分钟，帮助开发者创建更快更优秀的Android App。课程专题不仅仅介绍了Android系统中有关性能问题的底层工作原理，同时也介绍了如何通过工具来找出性能问题以及提升性能的建议。主要从三个 方面展开，Android的渲染机制，内存与GC，电量优化。下面是对这些问题和建议的总结梳理。</p>
 <h2 id="0-Render-Performance"><a href="#0-Render-Performance" class="headerlink" title="0)Render Performance"></a>0)Render Performance</h2><p>大多数用户感知到的卡顿等性能问题的最主要根源都是因为渲染性能。从设计师的角度，他们希望App能够有更多的动画，图片等时尚元素来实现流畅的用 户体验。但是Android系统很有可能无法及时完成那些复杂的界面渲染操作。Android系统每隔16ms发出VSYNC信号，触发对UI进行渲染， 如果每次渲染都成功，这样就能够达到流畅的画面所需要的60fps，为了能够实现60fps，这意味着程序的大多数操作都必须在16ms内完成。<br><a id="more"></a><br><img src="/images/89CEA4325FEA20ECCEB900D7A0E204FB.jpg" alt=""></p>
@@ -312,125 +182,93 @@
 <p>从Android 5.0开始发布了Battery History Tool，它可以查看程序被唤醒的频率，又谁唤醒的，持续了多长的时间，这些信息都可以获取到。</p>
 <p>请关注程序的电量消耗，用户可以通过手机的设置选项观察到那些耗电量大户，并可能决定卸载他们。所以尽量减少程序的电量消耗是非常有必要的。</p>
 
-  </div>
-</article>
-
-
-
+      </div>
     </div>
-    
-      <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </div>
-
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0-Render-Performance"><span class="toc-number">1.</span> <span class="toc-text">0)Render Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Understanding-Overdraw"><span class="toc-number">2.</span> <span class="toc-text">1)Understanding Overdraw</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Understanding-VSYNC"><span class="toc-number">3.</span> <span class="toc-text">2)Understanding VSYNC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Tool-Profile-GPU-Rendering"><span class="toc-number">4.</span> <span class="toc-text">3)Tool:Profile GPU Rendering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Why-60fps"><span class="toc-number">5.</span> <span class="toc-text">4)Why 60fps?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Android-UI-and-the-GPU"><span class="toc-number">6.</span> <span class="toc-text">5)Android, UI and the GPU</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Invalidations-Layouts-and-Performance"><span class="toc-number">7.</span> <span class="toc-text">6)Invalidations, Layouts, and Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-Overdraw-Cliprect-QuickReject"><span class="toc-number">8.</span> <span class="toc-text">7)Overdraw, Cliprect, QuickReject</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-Memory-Churn-and-performance"><span class="toc-number">9.</span> <span class="toc-text">8)Memory Churn and performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-Garbage-Collection-in-Android"><span class="toc-number">10.</span> <span class="toc-text">9)Garbage Collection in Android</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-Performance-Cost-of-Memory-Leaks"><span class="toc-number">11.</span> <span class="toc-text">10)Performance Cost of Memory Leaks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-Memory-Performance"><span class="toc-number">12.</span> <span class="toc-text">11)Memory Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-Tool-Memory-Monitor"><span class="toc-number">13.</span> <span class="toc-text">12)Tool - Memory Monitor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-Battery-Performance"><span class="toc-number">14.</span> <span class="toc-text">13)Battery Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-Understanding-Battery-Drain-on-Android"><span class="toc-number">15.</span> <span class="toc-text">14)Understanding Battery Drain on Android</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-Battery-Drain-and-WakeLocks"><span class="toc-number">16.</span> <span class="toc-text">15)Battery Drain and WakeLocks</span></a></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&text=Android性能优化典范（一）"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&title=Android性能优化典范（一）"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&is_video=false&description=Android性能优化典范（一）"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Android性能优化典范（一）&body=Check out this article: http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&title=Android性能优化典范（一）"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&title=Android性能优化典范（一）"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&title=Android性能优化典范（一）"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&title=Android性能优化典范（一）"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/&name=Android性能优化典范（一）&description=&lt;p&gt;转载自胡凯的博客 &lt;a href=&#34;http://hukai.me/android-performance-patterns/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Android性能优化典范&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/images/1B60ABFE035FF01195310770A636F912.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;2015年伊始，Google发布了关于&lt;a href=&#34;https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Android性能优化典范的专题&lt;/a&gt;， 一共16个短视频，每个3-5分钟，帮助开发者创建更快更优秀的Android App。课程专题不仅仅介绍了Android系统中有关性能问题的底层工作原理，同时也介绍了如何通过工具来找出性能问题以及提升性能的建议。主要从三个 方面展开，Android的渲染机制，内存与GC，电量优化。下面是对这些问题和建议的总结梳理。&lt;/p&gt;
-&lt;h2 id=&#34;0-Render-Performance&#34;&gt;&lt;a href=&#34;#0-Render-Performance&#34; class=&#34;headerlink&#34; title=&#34;0)Render Performance&#34;&gt;&lt;/a&gt;0)Render Performance&lt;/h2&gt;&lt;p&gt;大多数用户感知到的卡顿等性能问题的最主要根源都是因为渲染性能。从设计师的角度，他们希望App能够有更多的动画，图片等时尚元素来实现流畅的用 户体验。但是Android系统很有可能无法及时完成那些复杂的界面渲染操作。Android系统每隔16ms发出VSYNC信号，触发对UI进行渲染， 如果每次渲染都成功，这样就能够达到流畅的画面所需要的60fps，为了能够实现60fps，这意味着程序的大多数操作都必须在16ms内完成。&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
   </div>
 </div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_1.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2015/09/13/android/Android性能优化典范/Android性能优化典范（二）/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>Android性能优化典范（二）</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_2.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2015/07/22/android/Android Skills/注解(Annotation)自定义注解入门/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>Android注解(Annotation)自定义注解入门</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+</div>
 
-    
-    <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2019 一只熊猫
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </nav>
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">熊猫博客</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
   </div>
 </footer>
+</div>
+
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/person_1.jpg" alt="一只熊猫"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>一只熊猫</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook">留言</a></li>
+        <li><a href="/about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://lx.blleng.cn" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
+
 
 </body>
 </html>
-<!-- styles -->
-<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
-<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
-
-<!-- jquery -->
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/main.js"></script>
-<!-- search -->
-
-<!-- Google Analytics -->
-
-<!-- Baidu Analytics -->
-
-<!-- Disqus Comments -->
-
-

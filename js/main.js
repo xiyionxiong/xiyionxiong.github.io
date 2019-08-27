@@ -1,114 +1,123 @@
-/**
- * Sets up Justified Gallery.
- */
-if (!!$.prototype.justifiedGallery) {
-  var options = {
-    rowHeight: 140,
-    margins: 4,
-    lastRow: "justify"
-  };
-  $(".article-gallery").justifiedGallery(options);
-}
+;(function () {
+	
+	"use strict";
+
+	var isMobile = {
+		Android: function() {
+			return navigator.userAgent.match(/Android/i);
+		},
+			BlackBerry: function() {
+			return navigator.userAgent.match(/BlackBerry/i);
+		},
+			iOS: function() {
+			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+		},
+			Opera: function() {
+			return navigator.userAgent.match(/Opera Mini/i);
+		},
+			Windows: function() {
+			return navigator.userAgent.match(/IEMobile/i);
+		},
+			any: function() {
+			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+		}
+	};
 
 
-$(document).ready(function() {
-
-  /**
-   * Shows the responsive navigation menu on mobile.
-   */
-  $("#header > #nav > ul > .icon").click(function() {
-    $("#header > #nav > ul").toggleClass("responsive");
-  });
 
 
-  /**
-   * Controls the different versions of  the menu in blog post articles 
-   * for Desktop, tablet and mobile.
-   */
-  if ($(".post").length) {
-    var menu = $("#menu");
-    var nav = $("#menu > #nav");
-    var menuIcon = $("#menu-icon, #menu-icon-tablet");
+	var contentWayPoint = function() {
+		var i = 0;
+		$(".animate-box").waypoint( function( direction ) {
 
-    /**
-     * Display the menu on hi-res laptops and desktops.
-     */
-    if ($(document).width() >= 1440) {
-      menu.css("visibility", "visible");
-      menuIcon.addClass("active");
-    }
+			if( direction === "down" && !$(this.element).hasClass("animated-fast") ) {
+				
+				i++;
 
-    /**
-     * Display the menu if the menu icon is clicked.
-     */
-    menuIcon.click(function() {
-      if (menu.css("visibility") === "hidden") {
-        menu.css("visibility", "visible");
-        menuIcon.addClass("active");
-      } else {
-        menu.css("visibility", "hidden");
-        menuIcon.removeClass("active");
-      }
-      return false;
-    });
+				$(this.element).addClass("item-animate");
+				setTimeout(function(){
 
-    /**
-     * Add a scroll listener to the menu to hide/show the navigation links.
-     */
-    if (menu.length) {
-      $(window).on("scroll", function() {
-        var topDistance = menu.offset().top;
+					$("body .animate-box.item-animate").each(function(k){
+						var el = $(this);
+						setTimeout( function () {
+							var effect = el.data("animate-effect");
+							if ( effect === "fadeIn") {
+								el.addClass("fadeIn animated-fast");
+							} else if ( effect === "fadeInLeft") {
+								el.addClass("fadeInLeft animated-fast");
+							} else if ( effect === "fadeInRight") {
+								el.addClass("fadeInRight animated-fast");
+							} else {
+								el.addClass("fadeInUp animated-fast");
+							}
 
-        // hide only the navigation links on desktop
-        if (!nav.is(":visible") && topDistance < 50) {
-          nav.show();
-        } else if (nav.is(":visible") && topDistance > 100) {
-          nav.hide();
-        }
+							el.removeClass("item-animate");
+						},  k * 50, "easeInOutExpo" );
+					});
+					
+				}, 100);
+				
+			}
 
-        // on tablet, hide the navigation icon as well and show a "scroll to top
-        // icon" instead
-        if ( ! $( "#menu-icon" ).is(":visible") && topDistance < 50 ) {
-          $("#menu-icon-tablet").show();
-          $("#top-icon-tablet").hide();
-        } else if (! $( "#menu-icon" ).is(":visible") && topDistance > 100) {
-          $("#menu-icon-tablet").hide();
-          $("#top-icon-tablet").show();
-        }
-      });
-    }
+		} , { offset: "85%" } );
+	};
 
-    /**
-     * Show mobile navigation menu after scrolling upwards,
-     * hide it again after scrolling downwards.
-     */
-    if ($( "#footer-post").length) {
-      var lastScrollTop = 0;
-      $(window).on("scroll", function() {
-        var topDistance = $(window).scrollTop();
 
-        if (topDistance > lastScrollTop){
-          // downscroll -> show menu
-          $("#footer-post").hide();
-        } else {
-          // upscroll -> hide menu
-          $("#footer-post").show();
-        }
-        lastScrollTop = topDistance;
+	
 
-        // close all submenu"s on scroll
-        $("#nav-footer").hide();
-        $("#toc-footer").hide();
-        $("#share-footer").hide();
+	var goToTop = function() {
 
-        // show a "navigation" icon when close to the top of the page, 
-        // otherwise show a "scroll to the top" icon
-        if (topDistance < 50) {
-          $("#actions-footer > #top").hide();
-        } else if (topDistance > 100) {
-          $("#actions-footer > #top").show();
-        }
-      });
-    }
-  }
-});
+		$(".js-gotop").on("click", function(event){
+			
+			event.preventDefault();
+
+			$("html, body").animate({
+				scrollTop: $("html").offset().top
+			}, 500, "easeInOutExpo");
+			
+			return false;
+		});
+
+		$(window).scroll(function(){
+
+			var $win = $(window);
+			if ($win.scrollTop() > 200) {
+				$(".js-top").addClass("active");
+			} else {
+				$(".js-top").removeClass("active");
+			}
+
+		});
+	
+	};
+
+
+	// Loading page
+	var loaderPage = function() {
+		$(".fh5co-loader").fadeOut("slow");
+	};
+
+	
+	var parallax = function() {
+
+		if ( !isMobile.any() ) {
+			$(window).stellar({
+				horizontalScrolling: false,
+				hideDistantElements: false, 
+				responsive: true
+
+			});
+		}
+	};
+
+
+	$(function(){
+		contentWayPoint();
+		
+		goToTop();
+		loaderPage();
+		parallax();
+	});
+
+
+}());

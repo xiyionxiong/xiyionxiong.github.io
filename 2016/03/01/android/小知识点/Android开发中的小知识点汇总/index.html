@@ -1,163 +1,64 @@
 <!DOCTYPE html>
-<html lang=中文>
+<html>
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="这份是我工作以来，总结的小知识库，有些知识点现在看来太LOW了，把还觉得有用的分享出来！ Genymotion下载虚拟镜像Connection timeoutAdd new device出现的问题： Failed to deploy virtual device.Unable to create virtual device.Connection timeout occurred. 解决方案：12">
-<meta name="keywords" content="知识库">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Android小知识库">
-<meta property="og:url" content="http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/index.html">
-<meta property="og:site_name" content="熊猫博客">
-<meta property="og:description" content="这份是我工作以来，总结的小知识库，有些知识点现在看来太LOW了，把还觉得有用的分享出来！ Genymotion下载虚拟镜像Connection timeoutAdd new device出现的问题： Failed to deploy virtual device.Unable to create virtual device.Connection timeout occurred. 解决方案：12">
-<meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-06-14T03:18:33.182Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android小知识库">
-<meta name="twitter:description" content="这份是我工作以来，总结的小知识库，有些知识点现在看来太LOW了，把还觉得有用的分享出来！ Genymotion下载虚拟镜像Connection timeoutAdd new device出现的问题： Failed to deploy virtual device.Unable to create virtual device.Connection timeout occurred. 解决方案：12">
-    
-    
-        
-          
-              <link rel="shortcut icon" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-    
-    <!-- title -->
-    <title>Android小知识库</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- persian styles -->
-    
-      <link rel="stylesheet" href="/css/rtl.css">
-    
-    <!-- rss -->
-    
-    
-</head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Android小知识库 | 熊猫博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="一只熊猫">
+  <meta name="keywords" content="">
+  <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '1.4.5',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" href="/2016/03/01/随笔/日常使用到的梯子/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2016/03/01/android/Android Skills/Lambda for Android/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&text=Android小知识库"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&title=Android小知识库"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&is_video=false&description=Android小知识库"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Android小知识库&body=Check out this article: http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&title=Android小知识库"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&title=Android小知识库"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&title=Android小知识库"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&title=Android小知识库"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&name=Android小知识库&description=&lt;p&gt;这份是我工作以来，总结的小知识库，有些知识点现在看来太LOW了，把还觉得有用的分享出来！&lt;/p&gt;
-&lt;h3 id=&#34;Genymotion下载虚拟镜像Connection-timeout&#34;&gt;&lt;a href=&#34;#Genymotion下载虚拟镜像Connection-timeout&#34; class=&#34;headerlink&#34; title=&#34;Genymotion下载虚拟镜像Connection timeout&#34;&gt;&lt;/a&gt;Genymotion下载虚拟镜像Connection timeout&lt;/h3&gt;&lt;p&gt;Add new device出现的问题：&lt;/p&gt;
-&lt;p&gt;Failed to deploy virtual device.&lt;br&gt;Unable to create virtual device.Connection timeout occurred.&lt;/p&gt;
-&lt;p&gt;解决方案：&lt;br&gt;&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;当选择Google Nexus 5 - 6.0.0 - API 23 - 1080x1920下载device失败后，到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova下看到genymotion_vbox86p_6.0_160114_090449.ova，大小却是0KB，在C:\Users\用户主目录\AppData\Local\Genymobile\genymotion.log，打开该文件，找到类似&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    “http://files2.genymotion.com/dists/6.0.0/ova/genymotion_vbox86p_6.0_160114_090449.ova”路径，即您想要下载的镜像文件URL；`&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;用迅雷去下载，下载完成后放到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova；&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;重新点击Google Nexus 5 - 6.0.0 - API 23 - 1080x1920去下载，验证安装后即会显示在设备列表中。&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Genymotion下载虚拟镜像Connection-timeout"><span class="toc-number">1.</span> <span class="toc-text">Genymotion下载虚拟镜像Connection timeout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-Studio-如何Debug"><span class="toc-number">2.</span> <span class="toc-text">Android Studio 如何Debug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-Studio设置默认的签名文件"><span class="toc-number">3.</span> <span class="toc-text">Android Studio设置默认的签名文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fragment懒加载"><span class="toc-number">4.</span> <span class="toc-text">Fragment懒加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-studio头注释和方法注释"><span class="toc-number">5.</span> <span class="toc-text">Android studio头注释和方法注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#onFinishInflate"><span class="toc-number">6.</span> <span class="toc-text">onFinishInflate()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fragment设置隐藏或显示某个Fragment"><span class="toc-number">7.</span> <span class="toc-text">Fragment设置隐藏或显示某个Fragment</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MainFragment点击"><span class="toc-number">7.1.</span> <span class="toc-text">MainFragment点击</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MainActivity"><span class="toc-number">7.2.</span> <span class="toc-text">MainActivity</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取arrt的值"><span class="toc-number">8.</span> <span class="toc-text">获取arrt的值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码获取"><span class="toc-number">8.1.</span> <span class="toc-text">代码获取</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拨号盘拨打电话"><span class="toc-number">9.</span> <span class="toc-text">拨号盘拨打电话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Drawable-Bitmap、String-InputStream、Bitmap-byte-互转"><span class="toc-number">10.</span> <span class="toc-text">Drawable /Bitmap、String/InputStream、Bitmap/byte[]互转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ProgressDialog"><span class="toc-number">11.</span> <span class="toc-text">ProgressDialog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#毫秒"><span class="toc-number">12.</span> <span class="toc-text">毫秒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fragment-setUserVisibleHint-boolean-isVisibleToUser"><span class="toc-number">13.</span> <span class="toc-text">Fragment setUserVisibleHint(boolean isVisibleToUser)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fragment-onActivityResult"><span class="toc-number">14.</span> <span class="toc-text">Fragment onActivityResult</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dimen代码取值"><span class="toc-number">15.</span> <span class="toc-text">dimen代码取值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组初始化赋值"><span class="toc-number">16.</span> <span class="toc-text">数组初始化赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fragment-isAdded"><span class="toc-number">17.</span> <span class="toc-text">Fragment.isAdded()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#android之inputType属性"><span class="toc-number">18.</span> <span class="toc-text">android之inputType属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ImageView-ScaleType"><span class="toc-number">19.</span> <span class="toc-text">ImageView.ScaleType</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用系统发送短信界面"><span class="toc-number">20.</span> <span class="toc-text">调用系统发送短信界面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#跳转市场搜索某款软件"><span class="toc-number">21.</span> <span class="toc-text">跳转市场搜索某款软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#检测系统中是否安装某款软件"><span class="toc-number">22.</span> <span class="toc-text">检测系统中是否安装某款软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对话框菜单"><span class="toc-number">23.</span> <span class="toc-text">对话框菜单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义ProgressBar"><span class="toc-number">24.</span> <span class="toc-text">定义ProgressBar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#幻灯片效果"><span class="toc-number">25.</span> <span class="toc-text">幻灯片效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MD5加密"><span class="toc-number">26.</span> <span class="toc-text">MD5加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置自动跳转页面"><span class="toc-number">27.</span> <span class="toc-text">设置自动跳转页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Handler"><span class="toc-number">28.</span> <span class="toc-text">Handler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机取数"><span class="toc-number">29.</span> <span class="toc-text">随机取数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#selector下的属性值"><span class="toc-number">30.</span> <span class="toc-text">selector下的属性值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#带下划线的EditText"><span class="toc-number">31.</span> <span class="toc-text">带下划线的EditText</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭键盘"><span class="toc-number">32.</span> <span class="toc-text">关闭键盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#windowSoftInputMode各值的含义："><span class="toc-number">33.</span> <span class="toc-text">windowSoftInputMode各值的含义：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控件美化Shape"><span class="toc-number">34.</span> <span class="toc-text">控件美化Shape</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取版本名称-VersionName"><span class="toc-number">35.</span> <span class="toc-text">获取版本名称 VersionName</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取Android手机设备的IMSI-IMEI-信息"><span class="toc-number">36.</span> <span class="toc-text">获取Android手机设备的IMSI / IMEI 信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义Log是否显示"><span class="toc-number">37.</span> <span class="toc-text">自定义Log是否显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异步操作AsyncTask"><span class="toc-number">38.</span> <span class="toc-text">异步操作AsyncTask</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#让数据接受网页的格式"><span class="toc-number">39.</span> <span class="toc-text">让数据接受网页的格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码设置背景图setImageResource-setBackgroundResource"><span class="toc-number">40.</span> <span class="toc-text">代码设置背景图setImageResource/setBackgroundResource</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#android中的ellipsize"><span class="toc-number">41.</span> <span class="toc-text">android中的ellipsize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RadioGroup"><span class="toc-number">42.</span> <span class="toc-text">RadioGroup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#占位符-s替换"><span class="toc-number">43.</span> <span class="toc-text">占位符%s替换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TextView中嵌套图片Drawable"><span class="toc-number">44.</span> <span class="toc-text">TextView中嵌套图片Drawable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SpannableString单击文字链接"><span class="toc-number">45.</span> <span class="toc-text">SpannableString单击文字链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#android-drawableTop属性"><span class="toc-number">46.</span> <span class="toc-text">android:drawableTop属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取分辨率"><span class="toc-number">47.</span> <span class="toc-text">获取分辨率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码完成控件"><span class="toc-number">48.</span> <span class="toc-text">代码完成控件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TextWatcher"><span class="toc-number">49.</span> <span class="toc-text">TextWatcher</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#屏幕旋转时不销毁"><span class="toc-number">50.</span> <span class="toc-text">屏幕旋转时不销毁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#List增加数据"><span class="toc-number">51.</span> <span class="toc-text">List增加数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证是否手机号码"><span class="toc-number">52.</span> <span class="toc-text">验证是否手机号码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SharedPreferences"><span class="toc-number">53.</span> <span class="toc-text">SharedPreferences</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intent-传值"><span class="toc-number">54.</span> <span class="toc-text">Intent 传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xml文件中导入另一个xml文件的方法include"><span class="toc-number">55.</span> <span class="toc-text">xml文件中导入另一个xml文件的方法include</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单击返回键两次退出"><span class="toc-number">56.</span> <span class="toc-text">单击返回键两次退出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图片左右循环移动"><span class="toc-number">57.</span> <span class="toc-text">图片左右循环移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控件左右抖动"><span class="toc-number">58.</span> <span class="toc-text">控件左右抖动</span></a></li></ol>
-    </div>
-  </span>
-</div>
-
-    
-    <div class="content index my4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        Android小知识库
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">熊猫博客</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2016-02-29T18:33:45.000Z" itemprop="datePublished">2016-03-01</time>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/知识库/">知识库</a>
-    </div>
-
-
-    </div>
-  </header>
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "endless-river",
+	     });
+	}); 
+	</script>
   
-
-  <div class="content" itemprop="articleBody">
-    <p>这份是我工作以来，总结的小知识库，有些知识点现在看来太LOW了，把还觉得有用的分享出来！</p>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+</head>
+<body>
+<div class="single">
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/page-cover.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
+    <span>2016-03-01</span>
+    <h2>Android小知识库</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/知识库/">知识库</a></div>
+    </div>
+</div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <p>这份是我工作以来，总结的小知识库，有些知识点现在看来太LOW了，把还觉得有用的分享出来！</p>
 <h3 id="Genymotion下载虚拟镜像Connection-timeout"><a href="#Genymotion下载虚拟镜像Connection-timeout" class="headerlink" title="Genymotion下载虚拟镜像Connection timeout"></a>Genymotion下载虚拟镜像Connection timeout</h3><p>Add new device出现的问题：</p>
 <p>Failed to deploy virtual device.<br>Unable to create virtual device.Connection timeout occurred.</p>
 <p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">当选择Google Nexus 5 - 6.0.0 - API 23 - 1080x1920下载device失败后，到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova下看到genymotion_vbox86p_6.0_160114_090449.ova，大小却是0KB，在C:\Users\用户主目录\AppData\Local\Genymobile\genymotion.log，打开该文件，找到类似</span><br><span class="line">    </span><br><span class="line">    “http://files2.genymotion.com/dists/6.0.0/ova/genymotion_vbox86p_6.0_160114_090449.ova”路径，即您想要下载的镜像文件URL；`</span><br><span class="line"></span><br><span class="line">用迅雷去下载，下载完成后放到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova；</span><br><span class="line">重新点击Google Nexus 5 - 6.0.0 - API 23 - 1080x1920去下载，验证安装后即会显示在设备列表中。</span><br></pre></td></tr></table></figure></p>
@@ -1219,125 +1120,93 @@ android:cycles=&quot;7&quot; /&gt;
 </code></pre><p>(2)java代码</p>
 <p>Animation shake = AnimationUtils.loadAnimation(<br>                        MainActivity.this, R.anim.animlayout);<br>                btn.setAnimation(shake);</p>
 
-  </div>
-</article>
-
-
-
+      </div>
     </div>
-    
-      <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </div>
-
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Genymotion下载虚拟镜像Connection-timeout"><span class="toc-number">1.</span> <span class="toc-text">Genymotion下载虚拟镜像Connection timeout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-Studio-如何Debug"><span class="toc-number">2.</span> <span class="toc-text">Android Studio 如何Debug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-Studio设置默认的签名文件"><span class="toc-number">3.</span> <span class="toc-text">Android Studio设置默认的签名文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fragment懒加载"><span class="toc-number">4.</span> <span class="toc-text">Fragment懒加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android-studio头注释和方法注释"><span class="toc-number">5.</span> <span class="toc-text">Android studio头注释和方法注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#onFinishInflate"><span class="toc-number">6.</span> <span class="toc-text">onFinishInflate()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fragment设置隐藏或显示某个Fragment"><span class="toc-number">7.</span> <span class="toc-text">Fragment设置隐藏或显示某个Fragment</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MainFragment点击"><span class="toc-number">7.1.</span> <span class="toc-text">MainFragment点击</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MainActivity"><span class="toc-number">7.2.</span> <span class="toc-text">MainActivity</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取arrt的值"><span class="toc-number">8.</span> <span class="toc-text">获取arrt的值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码获取"><span class="toc-number">8.1.</span> <span class="toc-text">代码获取</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拨号盘拨打电话"><span class="toc-number">9.</span> <span class="toc-text">拨号盘拨打电话</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Drawable-Bitmap、String-InputStream、Bitmap-byte-互转"><span class="toc-number">10.</span> <span class="toc-text">Drawable /Bitmap、String/InputStream、Bitmap/byte[]互转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ProgressDialog"><span class="toc-number">11.</span> <span class="toc-text">ProgressDialog</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#毫秒"><span class="toc-number">12.</span> <span class="toc-text">毫秒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fragment-setUserVisibleHint-boolean-isVisibleToUser"><span class="toc-number">13.</span> <span class="toc-text">Fragment setUserVisibleHint(boolean isVisibleToUser)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fragment-onActivityResult"><span class="toc-number">14.</span> <span class="toc-text">Fragment onActivityResult</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dimen代码取值"><span class="toc-number">15.</span> <span class="toc-text">dimen代码取值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组初始化赋值"><span class="toc-number">16.</span> <span class="toc-text">数组初始化赋值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Fragment-isAdded"><span class="toc-number">17.</span> <span class="toc-text">Fragment.isAdded()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#android之inputType属性"><span class="toc-number">18.</span> <span class="toc-text">android之inputType属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ImageView-ScaleType"><span class="toc-number">19.</span> <span class="toc-text">ImageView.ScaleType</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用系统发送短信界面"><span class="toc-number">20.</span> <span class="toc-text">调用系统发送短信界面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#跳转市场搜索某款软件"><span class="toc-number">21.</span> <span class="toc-text">跳转市场搜索某款软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#检测系统中是否安装某款软件"><span class="toc-number">22.</span> <span class="toc-text">检测系统中是否安装某款软件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对话框菜单"><span class="toc-number">23.</span> <span class="toc-text">对话框菜单</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义ProgressBar"><span class="toc-number">24.</span> <span class="toc-text">定义ProgressBar</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#幻灯片效果"><span class="toc-number">25.</span> <span class="toc-text">幻灯片效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MD5加密"><span class="toc-number">26.</span> <span class="toc-text">MD5加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置自动跳转页面"><span class="toc-number">27.</span> <span class="toc-text">设置自动跳转页面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Handler"><span class="toc-number">28.</span> <span class="toc-text">Handler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机取数"><span class="toc-number">29.</span> <span class="toc-text">随机取数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#selector下的属性值"><span class="toc-number">30.</span> <span class="toc-text">selector下的属性值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#带下划线的EditText"><span class="toc-number">31.</span> <span class="toc-text">带下划线的EditText</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关闭键盘"><span class="toc-number">32.</span> <span class="toc-text">关闭键盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#windowSoftInputMode各值的含义："><span class="toc-number">33.</span> <span class="toc-text">windowSoftInputMode各值的含义：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控件美化Shape"><span class="toc-number">34.</span> <span class="toc-text">控件美化Shape</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取版本名称-VersionName"><span class="toc-number">35.</span> <span class="toc-text">获取版本名称 VersionName</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取Android手机设备的IMSI-IMEI-信息"><span class="toc-number">36.</span> <span class="toc-text">获取Android手机设备的IMSI / IMEI 信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义Log是否显示"><span class="toc-number">37.</span> <span class="toc-text">自定义Log是否显示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#异步操作AsyncTask"><span class="toc-number">38.</span> <span class="toc-text">异步操作AsyncTask</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#让数据接受网页的格式"><span class="toc-number">39.</span> <span class="toc-text">让数据接受网页的格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码设置背景图setImageResource-setBackgroundResource"><span class="toc-number">40.</span> <span class="toc-text">代码设置背景图setImageResource/setBackgroundResource</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#android中的ellipsize"><span class="toc-number">41.</span> <span class="toc-text">android中的ellipsize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RadioGroup"><span class="toc-number">42.</span> <span class="toc-text">RadioGroup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#占位符-s替换"><span class="toc-number">43.</span> <span class="toc-text">占位符%s替换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TextView中嵌套图片Drawable"><span class="toc-number">44.</span> <span class="toc-text">TextView中嵌套图片Drawable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SpannableString单击文字链接"><span class="toc-number">45.</span> <span class="toc-text">SpannableString单击文字链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#android-drawableTop属性"><span class="toc-number">46.</span> <span class="toc-text">android:drawableTop属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取分辨率"><span class="toc-number">47.</span> <span class="toc-text">获取分辨率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码完成控件"><span class="toc-number">48.</span> <span class="toc-text">代码完成控件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TextWatcher"><span class="toc-number">49.</span> <span class="toc-text">TextWatcher</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#屏幕旋转时不销毁"><span class="toc-number">50.</span> <span class="toc-text">屏幕旋转时不销毁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#List增加数据"><span class="toc-number">51.</span> <span class="toc-text">List增加数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证是否手机号码"><span class="toc-number">52.</span> <span class="toc-text">验证是否手机号码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SharedPreferences"><span class="toc-number">53.</span> <span class="toc-text">SharedPreferences</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Intent-传值"><span class="toc-number">54.</span> <span class="toc-text">Intent 传值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xml文件中导入另一个xml文件的方法include"><span class="toc-number">55.</span> <span class="toc-text">xml文件中导入另一个xml文件的方法include</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#单击返回键两次退出"><span class="toc-number">56.</span> <span class="toc-text">单击返回键两次退出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图片左右循环移动"><span class="toc-number">57.</span> <span class="toc-text">图片左右循环移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控件左右抖动"><span class="toc-number">58.</span> <span class="toc-text">控件左右抖动</span></a></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&text=Android小知识库"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&title=Android小知识库"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&is_video=false&description=Android小知识库"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Android小知识库&body=Check out this article: http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&title=Android小知识库"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&title=Android小知识库"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&title=Android小知识库"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&title=Android小知识库"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2016/03/01/android/小知识点/Android开发中的小知识点汇总/&name=Android小知识库&description=&lt;p&gt;这份是我工作以来，总结的小知识库，有些知识点现在看来太LOW了，把还觉得有用的分享出来！&lt;/p&gt;
-&lt;h3 id=&#34;Genymotion下载虚拟镜像Connection-timeout&#34;&gt;&lt;a href=&#34;#Genymotion下载虚拟镜像Connection-timeout&#34; class=&#34;headerlink&#34; title=&#34;Genymotion下载虚拟镜像Connection timeout&#34;&gt;&lt;/a&gt;Genymotion下载虚拟镜像Connection timeout&lt;/h3&gt;&lt;p&gt;Add new device出现的问题：&lt;/p&gt;
-&lt;p&gt;Failed to deploy virtual device.&lt;br&gt;Unable to create virtual device.Connection timeout occurred.&lt;/p&gt;
-&lt;p&gt;解决方案：&lt;br&gt;&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;当选择Google Nexus 5 - 6.0.0 - API 23 - 1080x1920下载device失败后，到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova下看到genymotion_vbox86p_6.0_160114_090449.ova，大小却是0KB，在C:\Users\用户主目录\AppData\Local\Genymobile\genymotion.log，打开该文件，找到类似&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;    “http://files2.genymotion.com/dists/6.0.0/ova/genymotion_vbox86p_6.0_160114_090449.ova”路径，即您想要下载的镜像文件URL；`&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;用迅雷去下载，下载完成后放到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova；&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;重新点击Google Nexus 5 - 6.0.0 - API 23 - 1080x1920去下载，验证安装后即会显示在设备列表中。&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
   </div>
 </div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_1.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2016/03/01/随笔/日常使用到的梯子/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>日常使用到的梯子</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_2.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2016/03/01/android/Android Skills/Lambda for Android/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>Lambda for Android</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+</div>
 
-    
-    <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2019 一只熊猫
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </nav>
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">熊猫博客</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
   </div>
 </footer>
+</div>
+
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/person_1.jpg" alt="一只熊猫"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>一只熊猫</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook">留言</a></li>
+        <li><a href="/about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://lx.blleng.cn" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
+
 
 </body>
 </html>
-<!-- styles -->
-<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
-<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
-
-<!-- jquery -->
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/main.js"></script>
-<!-- search -->
-
-<!-- Google Analytics -->
-
-<!-- Baidu Analytics -->
-
-<!-- Disqus Comments -->
-
-

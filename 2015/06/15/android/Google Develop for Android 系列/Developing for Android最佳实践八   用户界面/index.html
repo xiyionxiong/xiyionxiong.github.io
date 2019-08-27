@@ -1,166 +1,64 @@
 <!DOCTYPE html>
-<html lang=中文>
+<html>
 <head>
-    <!-- so meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="原文：Developing for Android VIII The Rules: User Interface 这节主要涉及UI开发最佳范例的一些重要细节，着重围绕性能和用户体验进行讲解。 避免过度绘制正如我们在第一章（理解移动应用上下文 ）的GPU一节中所讨论的，很多设备的GPU填充率都是受限的，因此，那些具有严重过度绘制问题的应用都将面临的渲染性能问题。要避免不透明view完全遮住其它vie">
-<meta name="keywords" content="Google Develop for Android 系列">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Google Develop for Android 系列八 － 用户界面">
-<meta property="og:url" content="http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/index.html">
-<meta property="og:site_name" content="熊猫博客">
-<meta property="og:description" content="原文：Developing for Android VIII The Rules: User Interface 这节主要涉及UI开发最佳范例的一些重要细节，着重围绕性能和用户体验进行讲解。 避免过度绘制正如我们在第一章（理解移动应用上下文 ）的GPU一节中所讨论的，很多设备的GPU填充率都是受限的，因此，那些具有严重过度绘制问题的应用都将面临的渲染性能问题。要避免不透明view完全遮住其它vie">
-<meta property="og:locale" content="中文">
-<meta property="og:updated_time" content="2018-06-14T03:19:46.532Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Google Develop for Android 系列八 － 用户界面">
-<meta name="twitter:description" content="原文：Developing for Android VIII The Rules: User Interface 这节主要涉及UI开发最佳范例的一些重要细节，着重围绕性能和用户体验进行讲解。 避免过度绘制正如我们在第一章（理解移动应用上下文 ）的GPU一节中所讨论的，很多设备的GPU填充率都是受限的，因此，那些具有严重过度绘制问题的应用都将面临的渲染性能问题。要避免不透明view完全遮住其它vie">
-    
-    
-        
-          
-              <link rel="shortcut icon" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-        
-          
-            <link rel="icon" type="image/png" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" sizes="192x192">
-          
-        
-        
-          
-            <link rel="apple-touch-icon" sizes="180x180" href="https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0">
-          
-        
-    
-    <!-- title -->
-    <title>Google Develop for Android 系列八 － 用户界面</title>
-    <!-- styles -->
-    <link rel="stylesheet" href="/css/style.css">
-    <!-- persian styles -->
-    
-      <link rel="stylesheet" href="/css/rtl.css">
-    
-    <!-- rss -->
-    
-    
-</head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Google Develop for Android 系列八 － 用户界面 | 熊猫博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="一只熊猫">
+  <meta name="keywords" content="">
+  <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '1.4.5',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
 
-<body class="max-width mx-auto px3 ltr">
-    
-      <div id="header-post">
-  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
-  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
-  <span id="menu">
-    <span id="nav">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </span>
-    <br/>
-    <span id="actions">
-      <ul>
-        
-        <li><a class="icon" href="/2015/06/16/android/Google Develop for Android 系列/Developing for Android 最佳实践九：工具/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
-        
-        
-        <li><a class="icon" href="/2015/06/14/android/Google Develop for Android 系列/Google Develop for Android 系列七 － Framework最佳实践/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
-        
-        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
-        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
-      </ul>
-      <span id="i-prev" class="info" style="display:none;">Previous post</span>
-      <span id="i-next" class="info" style="display:none;">Next post</span>
-      <span id="i-top" class="info" style="display:none;">Back to top</span>
-      <span id="i-share" class="info" style="display:none;">Share post</span>
-    </span>
-    <br/>
-    <div id="share" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&text=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&title=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&is_video=false&description=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Google Develop for Android 系列八 － 用户界面&body=Check out this article: http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&title=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&title=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&title=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&title=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&name=Google Develop for Android 系列八 － 用户界面&description=&lt;p&gt;原文：&lt;a href=&#34;https://medium.com/google-developers/developing-for-android-viii-e91ced595fac&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Developing for Android VIII The Rules: User Interface&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;这节主要涉及UI开发最佳范例的一些重要细节，着重围绕性能和用户体验进行讲解。&lt;/p&gt;
-&lt;h2 id=&#34;避免过度绘制&#34;&gt;&lt;a href=&#34;#避免过度绘制&#34; class=&#34;headerlink&#34; title=&#34;避免过度绘制&#34;&gt;&lt;/a&gt;避免过度绘制&lt;/h2&gt;&lt;p&gt;正如我们在第一章（&lt;a href=&#34;https://medium.com/google-developers/developing-for-android-i-understanding-the-mobile-context-fd2351b131f8&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;理解移动应用上下文&lt;/a&gt; ）的GPU一节中所讨论的，很多设备的GPU填充率都是受限的，因此，那些具有严重过度绘制问题的应用都将面临的渲染性能问题。要避免不透明view完全遮住其它view的情况，这种情况下不可见的UI也在做绘制的操作，就会导致某个像素在同一帧的时间内被绘制了多次。检测你的应用是否过渡绘制的办法是在系统设置的开发者选项中开启“&lt;em&gt;调试GPU过度绘制&lt;/em&gt;”选项，然后根据情况修复问题。&lt;/p&gt;
-&lt;p&gt;注：1.GPU的填充率分为像素填充率和纹理填充率。2.关于过度绘制这一点，其实在 &lt;a href=&#34;http://jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0416/2735.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;这篇文章&lt;/a&gt; 的GPU Problem: Overdraw一节中说的最详细。&lt;/p&gt;
-&lt;h2 id=&#34;不要设置窗口背景为空&#34;&gt;&lt;a href=&#34;#不要设置窗口背景为空&#34; class=&#34;headerlink&#34; title=&#34;不要设置窗口背景为空&#34;&gt;&lt;/a&gt;不要设置窗口背景为空&lt;/h2&gt;&lt;p&gt;避免过度绘制的技巧之一就是在所有View都不透明的情况下去除窗口的背景。反正如果有一个或者多个不透明的View完全挡住了窗口，用户怎么也看不到，还不如干脆不要背景。&lt;/p&gt;
-&lt;p&gt;去除窗口背景是一个有效的方法，但也往往是一个解决过度绘制问题的复杂办法，而且它经常在某些情况下导致渲染的artifacts（不知道artifacts啥意思）。虽然可以在app的manifest中设置一个空的窗口背景，但是因为系统无法正确绘制启动窗口，这会导致图形绘制artifacts。更正确的做法是保留manifest中启动窗口的背景，转而在activity的onCreate()方法中通过调用getWindow().setBackground(null)设置成null。但即便是这种方法也会导致artifacts。比如，如果keyboard/IME设置成了adjustResize，然后动画进入一个背景为null的activity，在键盘后面可能存在artifacts，因为window manager没有要绘制的背景。还有，全屏且带有overscroll bounce gaps的ListView也可能会有artifacts。&lt;/p&gt;
-&lt;p&gt;。。。。受不了了 artifacts artifacts artifacts不停。&lt;br&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-    <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#避免过度绘制"><span class="toc-number">1.</span> <span class="toc-text">避免过度绘制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不要设置窗口背景为空"><span class="toc-number">2.</span> <span class="toc-text">不要设置窗口背景为空</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不要禁用启动窗口（Starting-Window）"><span class="toc-number">3.</span> <span class="toc-text">不要禁用启动窗口（Starting Window）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#确保可以轻易退出沉浸模式"><span class="toc-number">4.</span> <span class="toc-text">确保可以轻易退出沉浸模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在启动窗口中设置正确的状态栏导航栏颜色"><span class="toc-number">5.</span> <span class="toc-text">在启动窗口中设置正确的状态栏导航栏颜色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用正确的Context"><span class="toc-number">6.</span> <span class="toc-text">使用正确的Context</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#不要在异步回调中引用View相关的对象"><span class="toc-number">6.1.</span> <span class="toc-text">不要在异步回调中引用View相关的对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#兼容从右到左的设计"><span class="toc-number">7.</span> <span class="toc-text">兼容从右到左的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将数据缓存到本地"><span class="toc-number">8.</span> <span class="toc-text">将数据缓存到本地</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存用户的输入数据"><span class="toc-number">9.</span> <span class="toc-text">缓存用户的输入数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将网络后台任务和磁盘后台任务分开"><span class="toc-number">10.</span> <span class="toc-text">将网络后台任务和磁盘后台任务分开</span></a></li></ol>
-    </div>
-  </span>
-</div>
-
-    
-    <div class="content index my4">
-        
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-  <header>
-    
-    <h1 class="posttitle" itemprop="name headline">
-        Google Develop for Android 系列八 － 用户界面
-    </h1>
-
-
-
-    <div class="meta">
-      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">熊猫博客</span>
-      </span>
-      
-    <div class="postdate">
-        <time datetime="2015-06-15T02:12:17.000Z" itemprop="datePublished">2015-06-15</time>
-    </div>
-
-
-      
-    <div class="article-tag">
-        <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Google-Develop-for-Android-系列/">Google Develop for Android 系列</a>
-    </div>
-
-
-    </div>
-  </header>
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "endless-river",
+	     });
+	}); 
+	</script>
   
-
-  <div class="content" itemprop="articleBody">
-    <p>原文：<a href="https://medium.com/google-developers/developing-for-android-viii-e91ced595fac" target="_blank" rel="noopener">Developing for Android VIII The Rules: User Interface</a></p>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+</head>
+<body>
+<div class="single">
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/page-cover.jpg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
+    <span>2015-06-15</span>
+    <h2>Google Develop for Android 系列八 － 用户界面</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/Google-Develop-for-Android-系列/">Google Develop for Android 系列</a></div>
+    </div>
+</div>
+</div>
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <p>原文：<a href="https://medium.com/google-developers/developing-for-android-viii-e91ced595fac" target="_blank" rel="noopener">Developing for Android VIII The Rules: User Interface</a></p>
 <p>这节主要涉及UI开发最佳范例的一些重要细节，着重围绕性能和用户体验进行讲解。</p>
 <h2 id="避免过度绘制"><a href="#避免过度绘制" class="headerlink" title="避免过度绘制"></a>避免过度绘制</h2><p>正如我们在第一章（<a href="https://medium.com/google-developers/developing-for-android-i-understanding-the-mobile-context-fd2351b131f8" target="_blank" rel="noopener">理解移动应用上下文</a> ）的GPU一节中所讨论的，很多设备的GPU填充率都是受限的，因此，那些具有严重过度绘制问题的应用都将面临的渲染性能问题。要避免不透明view完全遮住其它view的情况，这种情况下不可见的UI也在做绘制的操作，就会导致某个像素在同一帧的时间内被绘制了多次。检测你的应用是否过渡绘制的办法是在系统设置的开发者选项中开启“<em>调试GPU过度绘制</em>”选项，然后根据情况修复问题。</p>
 <p>注：1.GPU的填充率分为像素填充率和纹理填充率。2.关于过度绘制这一点，其实在 <a href="http://jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0416/2735.html" target="_blank" rel="noopener">这篇文章</a> 的GPU Problem: Overdraw一节中说的最详细。</p>
@@ -199,128 +97,93 @@
 <p>同时，你应该在UI上有帮助用户区分完成与未完成输入的提示</p>
 <h2 id="将网络后台任务和磁盘后台任务分开"><a href="#将网络后台任务和磁盘后台任务分开" class="headerlink" title="将网络后台任务和磁盘后台任务分开"></a>将网络后台任务和磁盘后台任务分开</h2><p>如果使用一个线程池来应付所有的后台操作，一些执行很快的任务可能会因为网络请求这样的超长操作而被阻碍。可以考虑针对快速的后台任务使用单独的线程池，比如像本地存储这类操作。这可以保证本地数据的改变可以及时的反应到UI上，而不会受昂贵的网络请求或者进程间通信的影响。</p>
 
-  </div>
-</article>
-
-
-
+      </div>
     </div>
-    
-      <div id="footer-post-container">
-  <div id="footer-post">
-
-    <div id="nav-footer" style="display: none">
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </div>
-
-    <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#避免过度绘制"><span class="toc-number">1.</span> <span class="toc-text">避免过度绘制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不要设置窗口背景为空"><span class="toc-number">2.</span> <span class="toc-text">不要设置窗口背景为空</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不要禁用启动窗口（Starting-Window）"><span class="toc-number">3.</span> <span class="toc-text">不要禁用启动窗口（Starting Window）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#确保可以轻易退出沉浸模式"><span class="toc-number">4.</span> <span class="toc-text">确保可以轻易退出沉浸模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在启动窗口中设置正确的状态栏导航栏颜色"><span class="toc-number">5.</span> <span class="toc-text">在启动窗口中设置正确的状态栏导航栏颜色</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用正确的Context"><span class="toc-number">6.</span> <span class="toc-text">使用正确的Context</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#不要在异步回调中引用View相关的对象"><span class="toc-number">6.1.</span> <span class="toc-text">不要在异步回调中引用View相关的对象</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#兼容从右到左的设计"><span class="toc-number">7.</span> <span class="toc-text">兼容从右到左的设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将数据缓存到本地"><span class="toc-number">8.</span> <span class="toc-text">将数据缓存到本地</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#缓存用户的输入数据"><span class="toc-number">9.</span> <span class="toc-text">缓存用户的输入数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将网络后台任务和磁盘后台任务分开"><span class="toc-number">10.</span> <span class="toc-text">将网络后台任务和磁盘后台任务分开</span></a></li></ol>
-    </div>
-
-    <div id="share-footer" style="display: none">
-      <ul>
-  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&text=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&title=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&is_video=false&description=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Google Develop for Android 系列八 － 用户界面&body=Check out this article: http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&title=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&title=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&title=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&title=Google Develop for Android 系列八 － 用户界面"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://blog.apanda.online/2015/06/15/android/Google Develop for Android 系列/Developing for Android最佳实践八   用户界面/&name=Google Develop for Android 系列八 － 用户界面&description=&lt;p&gt;原文：&lt;a href=&#34;https://medium.com/google-developers/developing-for-android-viii-e91ced595fac&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Developing for Android VIII The Rules: User Interface&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;这节主要涉及UI开发最佳范例的一些重要细节，着重围绕性能和用户体验进行讲解。&lt;/p&gt;
-&lt;h2 id=&#34;避免过度绘制&#34;&gt;&lt;a href=&#34;#避免过度绘制&#34; class=&#34;headerlink&#34; title=&#34;避免过度绘制&#34;&gt;&lt;/a&gt;避免过度绘制&lt;/h2&gt;&lt;p&gt;正如我们在第一章（&lt;a href=&#34;https://medium.com/google-developers/developing-for-android-i-understanding-the-mobile-context-fd2351b131f8&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;理解移动应用上下文&lt;/a&gt; ）的GPU一节中所讨论的，很多设备的GPU填充率都是受限的，因此，那些具有严重过度绘制问题的应用都将面临的渲染性能问题。要避免不透明view完全遮住其它view的情况，这种情况下不可见的UI也在做绘制的操作，就会导致某个像素在同一帧的时间内被绘制了多次。检测你的应用是否过渡绘制的办法是在系统设置的开发者选项中开启“&lt;em&gt;调试GPU过度绘制&lt;/em&gt;”选项，然后根据情况修复问题。&lt;/p&gt;
-&lt;p&gt;注：1.GPU的填充率分为像素填充率和纹理填充率。2.关于过度绘制这一点，其实在 &lt;a href=&#34;http://jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0416/2735.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;这篇文章&lt;/a&gt; 的GPU Problem: Overdraw一节中说的最详细。&lt;/p&gt;
-&lt;h2 id=&#34;不要设置窗口背景为空&#34;&gt;&lt;a href=&#34;#不要设置窗口背景为空&#34; class=&#34;headerlink&#34; title=&#34;不要设置窗口背景为空&#34;&gt;&lt;/a&gt;不要设置窗口背景为空&lt;/h2&gt;&lt;p&gt;避免过度绘制的技巧之一就是在所有View都不透明的情况下去除窗口的背景。反正如果有一个或者多个不透明的View完全挡住了窗口，用户怎么也看不到，还不如干脆不要背景。&lt;/p&gt;
-&lt;p&gt;去除窗口背景是一个有效的方法，但也往往是一个解决过度绘制问题的复杂办法，而且它经常在某些情况下导致渲染的artifacts（不知道artifacts啥意思）。虽然可以在app的manifest中设置一个空的窗口背景，但是因为系统无法正确绘制启动窗口，这会导致图形绘制artifacts。更正确的做法是保留manifest中启动窗口的背景，转而在activity的onCreate()方法中通过调用getWindow().setBackground(null)设置成null。但即便是这种方法也会导致artifacts。比如，如果keyboard/IME设置成了adjustResize，然后动画进入一个背景为null的activity，在键盘后面可能存在artifacts，因为window manager没有要绘制的背景。还有，全屏且带有overscroll bounce gaps的ListView也可能会有artifacts。&lt;/p&gt;
-&lt;p&gt;。。。。受不了了 artifacts artifacts artifacts不停。&lt;br&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-</ul>
-
-    </div>
-
-    <div id="actions-footer">
-        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
-        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
-        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
-        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
-    </div>
-
   </div>
 </div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_1.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2015/06/16/android/Google Develop for Android 系列/Developing for Android 最佳实践九：工具/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>Google Develop for Android 系列九 － 工具</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_2.jpg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2015/06/14/android/Google Develop for Android 系列/Google Develop for Android 系列七 － Framework最佳实践/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>Google Develop for Android 系列七 － Framework最佳实践</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+</div>
 
-    
-    <footer id="footer">
-  <div class="footer-left">
-    Copyright &copy; 2019 一只熊猫
-  </div>
-  <div class="footer-right">
-    <nav>
-      <ul>
-         
-          <li><a href="/">主页</a></li>
-         
-          <li><a href="/archives/">所有文章</a></li>
-         
-          <li><a href="/categories/android">Android</a></li>
-         
-          <li><a href="/tags/Java">Java</a></li>
-         
-          <li><a href="/categories/Docker">Docker容器</a></li>
-         
-          <li><a href="/categories/web">前端</a></li>
-         
-          <li><a href="/categories/golang">Golang</a></li>
-         
-          <li><a href="/categories/linux">Linux</a></li>
-         
-          <li><a href="/categories/随笔">随笔</a></li>
-         
-          <li><a href="/instagram">相册</a></li>
-        
-      </ul>
-    </nav>
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">熊猫博客</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
   </div>
 </footer>
+</div>
+
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/person_1.jpg" alt="一只熊猫"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>一只熊猫</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook">留言</a></li>
+        <li><a href="/about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://lx.blleng.cn" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/main.js"></script>
+
 
 </body>
 </html>
-<!-- styles -->
-<link rel="stylesheet" href="/lib/font-awesome/css/fontawesome-all.min.css">
-<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
-
-<!-- jquery -->
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
-<script src="/js/main.js"></script>
-<!-- search -->
-
-<!-- Google Analytics -->
-
-<!-- Baidu Analytics -->
-
-<!-- Disqus Comments -->
-
-
