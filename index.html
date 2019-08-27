@@ -1,1151 +1,192 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>熊猫博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="一只熊猫🐼">
+  <meta name="keywords" content="">
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="熊猫博客">
-<meta property="og:url" content="http://blog.apanda.online/index.html">
-<meta property="og:site_name" content="熊猫博客">
-<meta property="og:description" content="大道至简，真理在众！技术在手，代码在心!">
-<meta property="og:locale" content="中文">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="熊猫博客">
-<meta name="twitter:description" content="大道至简，真理在众！技术在手，代码在心!">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'lx',
+    version: '1.4.5',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: '-'
+  };
+</script>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "endless-river",
+	     });
+	}); 
+	</script>
   
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
 </head>
-
 <body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="https://d23.usercdn.com/i/03907/herx4n7dz1po.gif" class="js-avatar">
-			
-		</a>
-
-		<hgroup>
-		  <h1 class="header-author"><a href="/">一只熊猫</a></h1>
-		</hgroup>
-
-		
-
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>Menu</li>
-						<li>Tags</li>
-						
-						<li>Links</li>
-						
-						
-						<li>About</li>
-						
-					</ul>
-				</div>
-			</div>
-		
-
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-							<li><a href="/categories/随笔">随笔</a></li>
-				        
-							<li><a href="/categories/技术">技术</a></li>
-				        
-							<li><a href="/instagram">相册</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
-					        
-								<a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
-					        
-								<a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
-					        
-								<a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
-					        
-								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
-					        
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Android性能优化典范/" style="font-size: 16.67px;">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size: 10px;">Annotation</a> <a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a> <a href="/tags/Binder/" style="font-size: 10px;">Binder</a> <a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/tags/EventBus/" style="font-size: 11.67px;">EventBus</a> <a href="/tags/Golang/" style="font-size: 10px;">Golang</a> <a href="/tags/Google-Develop-for-Android-系列/" style="font-size: 20px;">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size: 10px;">Ibeacon</a> <a href="/tags/ImageView/" style="font-size: 10px;">ImageView</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 10px;">Kotlin</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MotionEvent/" style="font-size: 10px;">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size: 11.67px;">OkHttp</a> <a href="/tags/React-Native/" style="font-size: 10px;">React-Native</a> <a href="/tags/RxAndroid/" style="font-size: 10px;">RxAndroid</a> <a href="/tags/RxJava/" style="font-size: 16.67px;">RxJava</a> <a href="/tags/ServiceManager/" style="font-size: 10px;">ServiceManager</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/String相关类性能测试/" style="font-size: 10px;">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size: 10px;">Textview</a> <a href="/tags/TypedArray/" style="font-size: 10px;">TypedArray</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ViewHolder的作用/" style="font-size: 10px;">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/Webview/" style="font-size: 10px;">Webview</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/drawable/" style="font-size: 10px;">drawable</a> <a href="/tags/goland-json/" style="font-size: 10px;">goland json</a> <a href="/tags/golang/" style="font-size: 11.67px;">golang</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/port/" style="font-size: 10px;">port</a> <a href="/tags/redis/" style="font-size: 11.67px;">redis</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/《仙》/" style="font-size: 10px;">《仙》</a> <a href="/tags/《仙》第一部-风流少年/" style="font-size: 11.67px;">《仙》第一部-风流少年</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/写作/" style="font-size: 11.67px;">写作</a> <a href="/tags/反思/" style="font-size: 10px;">反思</a> <a href="/tags/图像、背景、View更新、布局、内存/" style="font-size: 11.67px;">图像、背景、View更新、布局、内存</a> <a href="/tags/壁纸/" style="font-size: 11.67px;">壁纸</a> <a href="/tags/开发规范/" style="font-size: 13.33px;">开发规范</a> <a href="/tags/异步线程的实现（Looper、MessageQueue、Handler）/" style="font-size: 10px;">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/总结分类/" style="font-size: 18.33px;">总结分类</a> <a href="/tags/时间轴/" style="font-size: 10px;">时间轴</a> <a href="/tags/架构的实例/" style="font-size: 10px;">架构的实例</a> <a href="/tags/沉浸式/" style="font-size: 10px;">沉浸式</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/目标/" style="font-size: 11.67px;">目标</a> <a href="/tags/知识库/" style="font-size: 13.33px;">知识库</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/自定义Loader/" style="font-size: 10px;">自定义Loader</a>
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://wsgzao.github.io/">HelloDog</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dearzd.com/DBlog/">咚门</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.codingyun.com/">Coding云</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.jobbole.com/">伯乐在线</a>
-			        
-			        </div>
-				</section>
-				
-
-				
-				
-				<section class="switch-part switch-part4">
-				
-					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>				
+<div id="page">
+<div id="lx-aside" style="background-image: url(/images/cover.jpg)">
+  <div class="overlay">
+  <div class="featured">
+    <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
+    <span>一只熊猫🐼</span>
+    <h2>熊猫博客</h2>
+    <span>——</span>
+    
+  </div>
+  </div>
 </div>
+<div id="lx-main-content">
+  <div class="lx-post"> 
 
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2019/08/27/你们要的老婆来了/">你们要的老婆来了</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2019-08-27 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/壁纸/">壁纸</a></span>
+      <p></p>
     </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">一只熊猫</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-			
-				<img lazy-src="https://d23.usercdn.com/i/03907/herx4n7dz1po.gif" class="js-avatar">
-			
-			</div>
-			<hgroup>
-			  <h1 class="header-author">一只熊猫</h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-					<li><a href="/categories/随笔">随笔</a></li>
-		        
-					<li><a href="/categories/技术">技术</a></li>
-		        
-					<li><a href="/instagram">相册</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
-			        
-						<a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
-			        
-						<a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
-			        
-						<a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
-			        
-						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
-
-      <div class="body-wrap">
-  
-    <article id="post-你们要的老婆来了" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/08/27/你们要的老婆来了/" class="article-date">
-  	<time datetime="2019-08-27T01:40:38.000Z" itemprop="datePublished">2019-08-27</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/27/你们要的老婆来了/">你们要的老婆来了</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://cdn.apanda.online/Foqoy1LjOMA0q78KNaMHXQ693KVD" alt="70396e5agy1ftn04nxu6xj20ud0irqeo.jpg"><img src="http://cdn.apanda.online/Fsl1SOGL82ZaQHcMboM9yzxiLBuX" alt="70396e5agy1ftn06ipqsaj20ud0ir1kx.jpg"><img src="http://cdn.apanda.online/Fl1DZsjiIZ2Zr3Zhpp-jxHeOOXIk" alt="70396e5agy1ftn03pdhcmj20ud0ir7wh.jpg"><img src="http://cdn.apanda.online/Fm1dHz-yIh9W5PdZXx1kzk9hrnvT" alt="70396e5agy1ftn06cu2nij20ud0ire81.jpg"><img src="http://cdn.apanda.online/Fre2nAsfsL8TiZeSKJeCOhjwUnKu" alt="70396e5agy1ftn03w71awj21400p0e81.jpg"><img src="http://cdn.apanda.online/FvdzLSRyzdjmwt27zsAlMhT461wY" alt="70396e5agy1ftn0672i3zj20ud0irb29.jpg"><img src="http://cdn.apanda.online/FhvIubRQ6Rs4_7LZAZmJ7Zg3ofuZ" alt="1bc8b9b450e91b38ffb2d9019989ed9837a1fb99.png"><img src="http://cdn.apanda.online/FjpA7xUWw9pYzrYmHPTIgYzMOSX4" alt="70396e5agy1ftn049mw12j21400p0e82.jpg"><img src="http://cdn.apanda.online/FiApS6nYqNLsGjcCguoOFAY8fOMe" alt="70396e5agy1ftn04kp67hj21400p0b2a.jpg"><img src="http://cdn.apanda.online/Fo2ijK4-DZTI3ETEISDMmYatq1Uw" alt="0103493.jpg"><img src="http://cdn.apanda.online/FtKM9B-iW8ixJdIVXWeB-fLke1yi" alt="0105375.jpg"><img src="http://cdn.apanda.online/FmuK_gwsg5kuOBeYK4kJpJwS1PxD" alt="0107482.jpg"><img src="http://cdn.apanda.online/FvWQj2R3E_niQcxEsDYQ8nFqrQdd" alt="01020948.jpg"><img src="http://cdn.apanda.online/Flr01oI1i0Nz4s_B6B_gSgnHJOYv" alt="01023385.jpg"><img src="http://cdn.apanda.online/FtvKz1Sr44moCLsqva1TUDIkGm0r" alt="01024465.jpg"><img src="http://cdn.apanda.online/FjRsAbQOzMRIDPnI-d2j8fUxPnH_" alt="01025347.jpg"><img src="http://cdn.apanda.online/FpsL_8LEj0ECUUzUK8XAB05L2Hmn" alt="01025888.jpg">!<img src="http://cdn.apanda.online/Ftklo8IjWqelBPZzNbWVX6o8qm1m" alt="01080594.jpg"><img src="http://cdn.apanda.online/FlRNUy_FHL8yF8MxVYXFyuJhouHu" alt="01020763.jpg"><img src="http://cdn.apanda.online/Ft_oqTlEjR2WNDcAoHXQv44BgKPQ" alt="01021340.jpg"><img src="http://cdn.apanda.online/Fj5NB9JLAb6p7mjz3D6jz5smyi3j" alt="01023674.jpg"><img src="http://cdn.apanda.online/Fudhwxus0eKzy7GK_WexufhqGyG0" alt="01024278.jpg"><img src="http://cdn.apanda.online/Fvl4HCobZ_9wTA5rnEc-vMqFWAFO" alt="01024837.jpg"><img src="http://cdn.apanda.online/FvAraemoZ6gb0GDeLvdBkqxXcNGx" alt="01025256.jpg"><a href="37">01025957.jpg</a><img src="http://cdn.apanda.online/FjN3U2R5rOFWIs4bI5re5d_aT32t" alt="01030824.jpg"><img src="http://cdn.apanda.online/FlfcQYGhsY_NZ-5I9dd4XbkxAQBX" alt="01031964.jpg"><img src="http://cdn.apanda.online/Fj2KjEs-hJnFsO3_m7UcEH5FOUfY" alt="01032254.jpg"><img src="http://cdn.apanda.online/FoMNSFLQPjs3QlKkbg4n5RwbQnuq" alt="01032482.jpg"><img src="http://cdn.apanda.online/Fn6yNmmll8dZ-Lt6JsRYcW2OfyuB" alt="01032887.jpg"><img src="http://cdn.apanda.online/FqyBFk-meTLAde139XFVHaPps169" alt="01033426.jpg"><img src="http://cdn.apanda.online/FvU03y7WUGelMFJSx_KXwytNBnca" alt="01033862.jpg"><img src="http://cdn.apanda.online/FghSx_zbrtOWBPYubNOJUo3vhUws" alt="01034250.jpg"><img src="http://cdn.apanda.online/FtsyQqdB-hYIDgOc8i8pUznBpaZH" alt="01034627.jpg"><img src="http://cdn.apanda.online/FnT9anGVAAhHLhu9HrGuP9tLF0Yp" alt="01035478.jpg"><img src="http://cdn.apanda.online/FiDm1LiLcBBLCBhiORYZLv7WcshY" alt="01041286.jpg"><img src="http://cdn.apanda.online/Fl1VJlSs_xh2Wf2WH0GfsZEJ1S8s" alt="01042686.jpg"><img src="http://cdn.apanda.online/FrjLkPpFKXmXorfkCZEdKYSgWXeo" alt="01043265.jpg"><img src="http://cdn.apanda.online/FsPBO-UzUEQvkZ7BUeGxQTnd-S8U" alt="01043648.jpg"><img src="http://cdn.apanda.online/FvzOeZ9UeEbM4RQYtblm3DUhmCk8" alt="01044680.jpg"><img src="http://cdn.apanda.online/Fji-KWbOd6sHO3KxktiWXez3EXj0" alt="01050849.jpg"><img src="http://cdn.apanda.online/FqtJzHGCkZEAN6FXaORioOsan3-B" alt="01050925.jpg"><img src="http://cdn.apanda.online/Fl1IDXSgHfUK5G8D4V8_OiIRjgoS" alt="01051267.jpg"><img src="http://cdn.apanda.online/FnOXTnO9fA4O9UHAec6ZhTTvnhoY" alt="01051584.jpg"><img src="http://cdn.apanda.online/FgsbMlSDzlaAAXszI5K-XIZxM5s0" alt="01051962.jpg"><img src="http://cdn.apanda.online/Fl8Ko2z8NvYuQYVFN4fgoZrp-EUF" alt="01052158.jpg"><img src="http://cdn.apanda.online/FhWtr0kd8Z9yk--7xRGuny9vG4xv" alt="01052417.jpg"><img src="http://cdn.apanda.online/Fgop0SIX1oxEpdQk3oJ3UmWYxOuO" alt="01054371.jpg"><img src="http://cdn.apanda.online/FubazXn8tj1FFW08trNh01NGm6Wh" alt="01055030.jpg"><img src="http://cdn.apanda.online/FjejOUXHx7ZAlapFlh7MSGSqDBl2" alt="01055522.jpg"><img src="http://cdn.apanda.online/Fs3CNMZpcTT2Q-TXQMGmE-I_Mtf9" alt="01055780.jpg"><img src="http://cdn.apanda.online/Fmc6U87v3Wz8Dp78IkKdOgC6JvLI" alt="01064833.jpg"><img src="http://cdn.apanda.online/FuT4JJJBUH_lAzLri3C02r0BrDHh" alt="01065356.jpg"><img src="http://cdn.apanda.online/Fl_J8lmxX4aE64ibLEA4wDSQUvEF" alt="01071538.jpg"><img src="http://cdn.apanda.online/FrsUrS-WVPe243af3Z90Ow43P6bF" alt="01072897.jpg"><img src="http://cdn.apanda.online/Fq-dPKqLfK4bcUE4HfIoN0i9fsng" alt="01073186.jpg"><img src="http://cdn.apanda.online/FldPpbFtDvkTeoot3o43IIPI_obT" alt="01075649.jpg"><img src="http://cdn.apanda.online/Fgc26cjVKhfChexBIM-fQoWZon3R" alt="01075758.jpg"><img src="http://cdn.apanda.online/Fl4O0y4693sVLi3HZf_BU3XkGYxw" alt="01075993.jpg"><img src="http://cdn.apanda.online/FkMxtuh2kVJbzEh5Rd3dtoynNMB7" alt="01080112.jpg"><img src="http://cdn.apanda.online/Ftc5ftom-dHcrbCtGnpqYp9nlIGu" alt="01080352.jpg"><img src="http://cdn.apanda.online/Fo34ws7Bv7W_ixWPmXm3p6UgDxOd" alt="01080449.jpg"><img src="http://cdn.apanda.online/FnWhkTyt6CLbXFt_nUlgl8zfB5Im" alt="01025640.jpg"><img src="http://cdn.apanda.online/FvEGoVqL8ztR3Po579dhzIAEEyqd" alt="01031199.jpg"><img src="http://cdn.apanda.online/FvtRMMxRby5T1XmmBr1sLDXKoBAS" alt="01040536.jpg"><img src="http://cdn.apanda.online/FtnM4IrMhH1MM2G9RAKLwxYudCeq" alt="01042233.jpg"><img src="http://cdn.apanda.online/FsaL8l69GADnhnxvx7LLE6_V3i8-" alt="01044218.jpg"><img src="http://cdn.apanda.online/Ftyr-mejfWqFUZW-fPTYQym_Iyl_" alt="01050617.jpg"><img src="http://cdn.apanda.online/FieAR9OXBvGPENgvKxyoYf8tPcC9" alt="01051881.jpg"><img src="http://cdn.apanda.online/Fmj4GKkildx2x8XZc0s-Mt6HHmZi" alt="01054089.jpg"><img src="http://cdn.apanda.online/Ft2dCkbfIqUlz3OykjlBuR7-kjvi" alt="01054697.jpg"><img src="http://cdn.apanda.online/FhEmsHBzx7q4_JAoK24HcEaJARhp" alt="01054921.jpg"><img src="http://cdn.apanda.online/FhpJXlERlBLM4FpqdU0lv9P2dhMX" alt="01055339.jpg"><img src="http://cdn.apanda.online/Frg1DcSoLOx3FRXw6xw4DYxgY4dR" alt="01061126.jpg"><img src="http://cdn.apanda.online/FpC-8UqMWW6RP9ONjdhi25FCFKnf" alt="01061757.jpg"><img src="http://cdn.apanda.online/FhCqgJq5TpcBVmqvicmW4bPAL4uO" alt="01062095.jpg"><img src="http://cdn.apanda.online/FnM3N3FfVwcQZDvNKA30nExBay4Z" alt="01063158.jpg"><img src="http://cdn.apanda.online/FpVBNfDIlAumedo6Mrn9DvDQiE9B" alt="01063570.jpg"><img src="http://cdn.apanda.online/FqYTCbCgVkp9HlzuLaESqVrHD6lD" alt="01065052.jpg"><img src="http://cdn.apanda.online/FoL5VtBnENvcNROrdMxiMJ_RWaIv" alt="01070551.jpg"><img src="http://cdn.apanda.online/FgRVDONZ-yMW6mazNuBolnObWKeN" alt="01071162.jpg"><img src="http://cdn.apanda.online/Fjzy5Vhh6RUIZcg4LBwKdEg-ElaR" alt="01071334.jpg"><img src="http://cdn.apanda.online/FoZTxIs3L2buSSCzdVl6g7CK7Ycc" alt="01071947.jpg"><img src="http://cdn.apanda.online/FvJ0QngdQFs-kqYIuKP0Cuy4eUZz" alt="01072292.jpg"><img src="http://cdn.apanda.online/FhAortyTkz2iu3xRIYSpuDkFYdj8" alt="01072736.jpg"><img src="http://cdn.apanda.online/FkMw6kxYxCi_kY-zFe7McbJFEcD9" alt="01073480.jpg"><img src="http://cdn.apanda.online/FhUG6WGEFJ48F79_R2TQ4LnUPRCi" alt="01073998.jpg"><img src="http://cdn.apanda.online/FsYAUxQwdN1tZRCpTfpddJ41CiqW" alt="01074116.jpg"><img src="http://cdn.apanda.online/FhNgaeSiD9mnV71x5PLqDybASI61" alt="01080631.jpg"><img src="http://cdn.apanda.online/FtqsxgSgoxjN2Uhx_OFSVaWF7g_5" alt="0105356.jpg"><img src="http://cdn.apanda.online/Fp09EQuKdx072PqUOABK6XPBSLaN" alt="01081063.jpg"><img src="http://cdn.apanda.online/Fu-9YPDjND2uiN14GJmRaCfLU8Sj" alt="01030726.jpg"><img src="http://cdn.apanda.online/Fsl6nhrqppUcRPKAXrRgLAmnYqYH" alt="01031650.jpg"><img src="http://cdn.apanda.online/FrpuXG-kSJ3OaAitPqaecZnEWZAe" alt="01060861.jpg"><img src="http://cdn.apanda.online/FijaSJeRIO0cKhRCHsDrkG3eas89" alt="01060376.jpg"><img src="http://cdn.apanda.online/FtJT0pWb2g8oH8qE1Oe-kndn_Q6X" alt="01062736.jpg"><img src="http://cdn.apanda.online/FkgL6fbFCqADDZNwz1i_rx-Co69D" alt="01075422.jpg"><img src="http://cdn.apanda.online/Fi0PQZXF-n3IdjIlD16q9GH8IFY2" alt="01074748.jpg"><img src="http://cdn.apanda.online/Fp0Cj1fYyhfuTI_LN7Ao6EPnprhG" alt="00581519.jpg"><img src="http://cdn.apanda.online/FtZ5fK42yTNN4t3YsAH7J6cEpuBT" alt="01070238.jpg"><img src="http://cdn.apanda.online/FqV3S7UaYqHaw4bDBseasFB4vADD" alt="00484017.gif"><img src="http://cdn.apanda.online/FhlVlvPdanLHN_xGIVtF22Xe_Rqn" alt="01064645.jpg"><img src="http://cdn.apanda.online/FjmNv8BJfnDZWJtQsY-UcbJetkVw" alt="00482865.gif"><img src="http://cdn.apanda.online/FgTqdOSvrI4QhuoMPL8rYY2Uyvh3" alt="01023261.jpg"><img src="http://cdn.apanda.online/Fjeb2sWGgYwnPkApmC3X5nOwt6at" alt="0047406.gif"><img src="http://cdn.apanda.online/FkJpONBSToBSYiyv7xvkXbaT-0g_" alt="00500557.gif"><img src="http://cdn.apanda.online/FobR-l9orV4W83NoiPpWygZj9V17" alt="00523782.gif"><img src="http://cdn.apanda.online/FqNOjqCgzTAeBEPF6acT27m-zH-3" alt="00493316.gif"><img src="http://cdn.apanda.online/FlGDmDhmTQmTHr93RndbowX9tb7S" alt="0047074.gif"><img src="http://cdn.apanda.online/Fp53DjuKWetyVejdt7-Q-dA-sP3p" alt="00461449.gif"><img src="http://cdn.apanda.online/FpDLXsHuTF-IDM_LkwP-hyWNNksN" alt="00520156.gif"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/壁纸/">壁纸</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/壁纸/">壁纸</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-壁纸分享" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2019/08/27/壁纸分享/" class="article-date">
-  	<time datetime="2019-08-27T01:29:56.000Z" itemprop="datePublished">2019-08-27</time>
-</a>
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2019/08/27/壁纸分享/">壁纸分享</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2019-08-27 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/壁纸/">壁纸</a></span>
+      <p></p>
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/27/壁纸分享/">壁纸分享</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://cdn.apanda.online/lireT0tZbwIMYsnHkyPfr3uPsDf1" alt="NfpRpUiwMbk.jpg"></p>
-<p><img src="http://cdn.apanda.online/ljG2-Rk_hyenP0Kj68SoWF4tqz3Y" alt="8uGyhxwdYUY.jpg"><br><img src="http://cdn.apanda.online/ltC4B9mZG60OW7EC1RdC4Dl5gTCw" alt="5B1mB7Sdbg0.jpg"></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/壁纸/">壁纸</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/壁纸/">壁纸</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-web/nginx" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/05/27/web/nginx/" class="article-date">
-  	<time datetime="2018-05-27T08:17:15.098Z" itemprop="datePublished">2018-05-27</time>
-</a>
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2018/05/27/web/nginx/">Mac和centos下nginx启动和配置</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2018-05-27 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/web/">web</a></span>
+      <p></p>
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/27/web/nginx/">Mac和centos下nginx启动和配置</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Mac-下操作nginx的命令"><a href="#Mac-下操作nginx的命令" class="headerlink" title="Mac 下操作nginx的命令"></a>Mac 下操作nginx的命令</h1><h2 id="配置文件路径"><a href="#配置文件路径" class="headerlink" title="配置文件路径"></a>配置文件路径</h2><p><code>/usr/local/etc/nginx/nginx.conf</code></p>
-<h2 id="启动命令"><a href="#启动命令" class="headerlink" title="启动命令"></a>启动命令</h2><p><code>sudo brew services start nginx</code></p>
-<h2 id="重启命令"><a href="#重启命令" class="headerlink" title="重启命令"></a>重启命令</h2><p><code>sudo brew services restart nginx</code></p>
-<h2 id="关闭命令"><a href="#关闭命令" class="headerlink" title="关闭命令"></a>关闭命令</h2><p><code>sudo brew services stop nginx</code></p>
-<h2 id="编辑hosts-文件"><a href="#编辑hosts-文件" class="headerlink" title="编辑hosts 文件"></a>编辑hosts 文件</h2><p><code>sudo vi /etc/hosts</code></p>
-<h1 id="CentOS-7-yum-安装-Nginx"><a href="#CentOS-7-yum-安装-Nginx" class="headerlink" title="CentOS 7 yum 安装 Nginx"></a>CentOS 7 yum 安装 Nginx</h1><p>阅读数：34855</p>
-<h2 id="1-添加Nginx到YUM源"><a href="#1-添加Nginx到YUM源" class="headerlink" title="1.添加Nginx到YUM源"></a>1.添加Nginx到YUM源</h2><p>添加CentOS 7 Nginx yum资源库,打开终端,使用以下命令:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span><br></pre></td></tr></table></figure>
-<h2 id="2-安装Nginx"><a href="#2-安装Nginx" class="headerlink" title="2.安装Nginx"></a>2.安装Nginx</h2><p>在你的CentOS 7 服务器中使用<code>yum</code>命令从Nginx源服务器中获取来安装Nginx：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y nginx</span><br></pre></td></tr></table></figure>
-<p>Nginx将完成安装在你的CentOS 7 服务器中。</p>
-<h2 id="3-启动Nginx"><a href="#3-启动Nginx" class="headerlink" title="3.启动Nginx"></a>3.启动Nginx</h2><p>刚安装的Nginx不会自行启动。运行Nginx:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start nginx.service</span><br></pre></td></tr></table></figure>
-<p>如果一切进展顺利的话，现在你可以通过你的域名或IP来访问你的Web页面来预览一下Nginx的默认页面；</p>
-<p><img src="/images/nginx_default.png" alt=""></p>
-<p>如果看到这个页面,那么说明你的CentOS 7 中 web服务器已经正确安装。</p>
-<h2 id="CentOS-7-开机启动Nginx"><a href="#CentOS-7-开机启动Nginx" class="headerlink" title="CentOS 7 开机启动Nginx"></a>CentOS 7 开机启动Nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable nginx.service</span><br></pre></td></tr></table></figure>
-<p>更多systemctl命令可查看《<a href="http://www.9696e.com/archives/1253" target="_blank" rel="noopener">systemctl命令用法</a>》</p>
-<h2 id="Nginx配置信息"><a href="#Nginx配置信息" class="headerlink" title="Nginx配置信息"></a>Nginx配置信息</h2><p>网站文件存放默认目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/share/nginx/html</span><br></pre></td></tr></table></figure>
-<p>网站默认站点配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/nginx/conf.d/default.conf</span><br></pre></td></tr></table></figure>
-<p>自定义Nginx站点配置文件存放目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/nginx/conf.d/</span><br></pre></td></tr></table></figure>
-<p>Nginx全局配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure>
-<p>Nginx启动</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -c nginx.conf</span><br></pre></td></tr></table></figure>
-<h2 id="Linux查看公网IP"><a href="#Linux查看公网IP" class="headerlink" title="Linux查看公网IP"></a>Linux查看公网IP</h2><p>您可以运行以下命令来显示你的服务器的公共IP地址:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr show eth0 | grep inet | awk &apos;&#123; print $2; &#125;&apos; | sed &apos;s/\/.*$//&apos;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/web/">web</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-docker/nodejs测试静态html5设置" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/26/docker/nodejs测试静态html5设置/" class="article-date">
-  	<time datetime="2018-04-26T03:09:35.599Z" itemprop="datePublished">2018-04-26</time>
-</a>
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2018/04/26/docker/nodejs测试静态html5设置/">nodejs测试静态html5设置</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2018-04-26 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/Docker/">Docker</a>,<a class="category-link" href="/categories/Docker/web/">web</a></span>
+      <p></p>
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/26/docker/nodejs测试静态html5设置/">nodejs测试静态html5设置</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="docker-打包镜像"><a href="#docker-打包镜像" class="headerlink" title="docker 打包镜像"></a>docker 打包镜像</h1><blockquote>
-<p>  应用场景 </p>
-<p>  1、使用webpack 打包后，测试html静态界面。</p>
-<p>  2、实现前后端分离，单独部署，</p>
-<p>  3、此环境实现打包后的dist内容是否正确。</p>
-</blockquote>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><h3 id="1、docker-安装"><a href="#1、docker-安装" class="headerlink" title="1、docker 安装"></a>1、docker 安装</h3><p>。。。略过</p>
-<h3 id="2-Dockerfile编写"><a href="#2-Dockerfile编写" class="headerlink" title="2 Dockerfile编写"></a>2 Dockerfile编写</h3><p><strong>因为是使用webpack 对前端页面进行的打包操作 ，我们选择一个nodejs相关的镜像进行编译我们自己的docker镜像</strong></p>
-<p>node镜像，官方版本，<a href="https://hub.docker.com/_/node/" target="_blank" rel="noopener">地址</a></p>
-<p>Dockerfile 编写 </p>
-<ul>
-<li>进入到dist目录</li>
-<li>创建Dockerfile文件。</li>
-<li>内容如下 </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FROM node</span><br><span class="line"></span><br><span class="line"># Copy application dist.</span><br><span class="line">COPY . /dist/</span><br><span class="line"></span><br><span class="line"># Install http-server  服务</span><br><span class="line">RUN npm install -g http-server</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>对Dockerfile内容说明 </p>
-<blockquote>
-<p>  1、<code>FROM node</code>：是表示从官方的node镜像作为基础镜像编译</p>
-<p>  2、<code>Copy . /dist/</code> : 编译的时候，复制当前目录下所有文件到镜像 /dist文件夹中</p>
-<p>  3、<code>RUN npm install -g http-server</code> ：安装http-server ，这是关键。后面会用到。 </p>
-</blockquote>
-<p>​    </p>
-</li>
-</ul>
-<h2 id="编译镜像"><a href="#编译镜像" class="headerlink" title="编译镜像"></a>编译镜像</h2><ul>
-<li><p>打开终端，进入dist目录，确保Dockerfile文件的存在。</p>
-<p><img src="/images/image-20180426112736971.png" alt="image-20180426112736971"></p>
-</li>
-</ul>
-<ul>
-<li>使用docker命令 开始编译镜像 </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t camchin1/member:beta_v1.1 .</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>  说明 </p>
-<p>  1、-t 编译参数</p>
-<p>  2、camchin1/member ： 编译镜像名称</p>
-<p>  3、beta_v1.1 ： 编译镜像的版本号，一般称为标记TAG </p>
-<p>  4、 最后的一个 <strong>.</strong>   千万别忘了。</p>
-</blockquote>
-<ul>
-<li><p>按入enter键之后出现如下内容 </p>
-<p><img src="/images/image-20180426113144629.png" alt="image-20180426113144629"></p>
-</li>
-</ul>
-<p>表示编译成功。</p>
-<h2 id="运行镜像"><a href="#运行镜像" class="headerlink" title="运行镜像"></a>运行镜像</h2><p>到此，我们的node镜像就已经编译成功，接下来就要看看， 是否可以使用。</p>
-<p>1、终端 运行 <code>docker images</code> 显示我们的镜像 。</p>
-<p><img src="/images/image-20180426113543491.png" alt=""></p>
-<blockquote>
-<p>  刚刚我们生成的标记就是beta_v1.1 </p>
-</blockquote>
-<p>2、接下来运行镜像 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8080:8080 -t -d ffab2808481c  http-server /dist</span><br></pre></td></tr></table></figure>
-<p>说明：</p>
-<blockquote>
-<p>  1、-p 8080:8080 ： 映射本地端口8080，到docker端口8080 。</p>
-<p>  2、-t  ：参见 附录-  docker run OPTIONS参数表</p>
-<p>  3、-d ：参见 附录-  docker run OPTIONS参数表</p>
-<p>  4、  ffab2808481c ： 镜像id， 如图中所示 IMAGE ID ，也可以使用, 镜像名:TAG</p>
-<p>  即：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;   docker run -p 8080:8080 -t -d camchin1/member:beta_v1.1 http-server /dist</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p>  5、http-server  /dist : 启动http服务指定目录到/dist ，就是我们的静态网页的目录了。</p>
-<p>  ​    http-server 参数说明 ： 参见 附录-</p>
-</blockquote>
-<p>3、然后打开浏览器输入 ： <code>http://localhost:8080</code>： </p>
-<p>就可以看到你的网站了。</p>
-<p>All Done！！！</p>
-<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="docker-run-OPTIONS参数表"><a href="#docker-run-OPTIONS参数表" class="headerlink" title="docker run OPTIONS参数表"></a>docker run OPTIONS参数表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS说明：</span><br><span class="line">-a stdin: 指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项；</span><br><span class="line">-d: 后台运行容器，并返回容器ID；</span><br><span class="line">-i: 以交互模式运行容器，通常与 -t 同时使用；</span><br><span class="line">-t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用；</span><br><span class="line">--name=&quot;nginx-lb&quot;: 为容器指定一个名称；</span><br><span class="line">--dns 8.8.8.8: 指定容器使用的DNS服务器，默认和宿主一致；</span><br><span class="line">--dns-search example.com: 指定容器DNS搜索域名，默认和宿主一致；</span><br><span class="line">-h &quot;mars&quot;: 指定容器的hostname；</span><br><span class="line">-e username=&quot;ritchie&quot;: 设置环境变量；</span><br><span class="line">--env-file=[]: 从指定文件读入环境变量；</span><br><span class="line">--cpuset=&quot;0-2&quot; or --cpuset=&quot;0,1,2&quot;: 绑定容器到指定CPU运行；</span><br><span class="line">-m :设置容器使用内存最大值；</span><br><span class="line">--net=&quot;bridge&quot;: 指定容器的网络连接类型，支持 bridge/host/none/container: 四种类型；</span><br><span class="line">--link=[]: 添加链接到另一个容器；</span><br><span class="line">--expose=[]: 开放一个端口或一组端口；</span><br></pre></td></tr></table></figure>
-<h3 id="http-server-参数说明"><a href="#http-server-参数说明" class="headerlink" title="http-server 参数说明"></a>http-server 参数说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">可用选项:</span><br><span class="line">p 要使用的端口(默认为8080 )</span><br><span class="line">a 要使用的地址(默认为0.0.0.0 )</span><br><span class="line">-d 显示目录列表(默认为“True”</span><br><span class="line">- i 显示autolndex (默认为&quot;True”)</span><br><span class="line">-g或--gzip当启用(默认为“False”)时，它将./public/some-file.js.gz代替./public/some-file.jsgzip文件版本的存在，并且请求接受gzip编码。</span><br><span class="line">-e或--ext默认文件扩展名(如果没有提供) (默认为&apos;html&apos; )</span><br><span class="line">- S或--silent从输出中抑制日志消息</span><br><span class="line">--cors通过Access-Control-Allow-0rigin标题启用CORS</span><br><span class="line">- O 启动服务器后打开浏览器窗口</span><br><span class="line">- C设置缓存控制最大年龄标头的缓存时间(以秒为单位)，例如-C10为10秒(默认为“3600”)。要</span><br><span class="line">禁用缓存，请使用-C-1。</span><br><span class="line">-U或--utc在日志消息中使用UTC时间格式。</span><br><span class="line">- P或-- proxy代理不能在本地解析给定ur的所有请求。例如:-P http://someurl.com</span><br><span class="line">-S或--SS1启用https。</span><br><span class="line">-C或--certssl证书文件的路径( 默认: cert.pem)。</span><br><span class="line">-K或-- keyssl密钥文件的路径( 默认值: key.pem)。</span><br><span class="line">-r或--robots提供/robots.bxt (其内容默认为&apos;User-agent:* \nDisallow: I&apos; )</span><br><span class="line">-h或--help打印此列表并退出。</span><br></pre></td></tr></table></figure>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://segmentfault.com/a/1190000012249873" target="_blank" rel="noopener">利用http-server测试vue-cli打包后的项目</a></p>
-<p><a href="http://www.runoob.com/docker/docker-run-command.html" target="_blank" rel="noopener">Docker run 命令</a></p>
-<hr>
-<p>分割线</p>
-<hr>
-<h2 id="20180427优化Dockerfile"><a href="#20180427优化Dockerfile" class="headerlink" title="20180427优化Dockerfile"></a>20180427优化Dockerfile</h2><p>Dockerfile 内容如下</p>
-<blockquote>
-<p>  不再使用官方node镜像作为基础镜像，体积太大，600M+，</p>
-<p>  使用<a href="https://hub.docker.com/r/tatsushid/tinycore-node/" target="_blank" rel="noopener">tatsushid/tinycore-node</a> ,生成镜像80M+，体积大大减小，提高部署效率</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">FROM tatsushid/tinycore-node</span><br><span class="line"># Copy application code.</span><br><span class="line">COPY . /dist/</span><br><span class="line"># Install dependencies.</span><br><span class="line">RUN npm install -g http-server</span><br><span class="line"># 工作目录</span><br><span class="line">WORKDIR /dist/</span><br><span class="line"># 工作目录 执行的命令</span><br><span class="line">CMD [&quot;http-server&quot;]</span><br></pre></td></tr></table></figure>
-<p>那么 现在执行启动镜像只需： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8081:8080 -t -d  image-id</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web/">web</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Docker/">Docker</a><a class="article-category-link" href="/categories/Docker/web/">web</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-linux/有意思的Linux命令" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/25/linux/有意思的Linux命令/" class="article-date">
-  	<time datetime="2018-04-25T08:27:49.603Z" itemprop="datePublished">2018-04-25</time>
-</a>
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2018/04/25/linux/有意思的Linux命令/">有意思的Linux命令</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2018-04-25 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/linux/">linux</a></span>
+      <p></p>
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/25/linux/有意思的Linux命令/">有意思的Linux命令</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>获取天气 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">//自动获取 当前位置</span><br><span class="line">curl wttr.in</span><br><span class="line"></span><br><span class="line">//根据输入的地址获取位置</span><br><span class="line">curl wttr.in/ChangSha</span><br><span class="line"></span><br><span class="line">//如何查看ubuntu的内核版本和发行版本号？</span><br><span class="line">cat /etc/issue</span><br><span class="line"></span><br><span class="line">lsb_release -a</span><br><span class="line"></span><br><span class="line">//查看centos内核版本 发行版本号</span><br><span class="line">cat /etc/redhat-release</span><br><span class="line"></span><br><span class="line">//链接远程编辑</span><br><span class="line"></span><br><span class="line">一.首先在linux远程主机安装rmate ，使用python版本的rmate ：pip install rmate</span><br><span class="line"></span><br><span class="line">二.在vscode上安装Remote VSCode插件。安装完成后打开vscode的命令面板输入：Remote: Start server来开启服务。</span><br><span class="line"></span><br><span class="line">三.在本地电脑的ssh命令窗口输入ssh -R 52698:127.0.0.1:52698 userName@serverAddress，进入远程linux主机输入rmate -p 52698 yourFileName即可打开。</span><br><span class="line"></span><br><span class="line">ssh -R 8080:127.0.0.1:8080 root@172.96.16.52 -p 29689</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-随笔/专业名词" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/25/随笔/专业名词/" class="article-date">
-  	<time datetime="2018-04-25T06:29:16.989Z" itemprop="datePublished">2018-04-25</time>
-</a>
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2018/04/25/随笔/专业名词/">专业名词</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2018-04-25 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
+      <p></p>
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/25/随笔/专业名词/">专业名词</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h1><p><a href="https://baike.baidu.com/item/CDN" target="_blank" rel="noopener">说明</a></p>
-<p><a href="https://zh.wikipedia.org/wiki/%E5%85%A7%E5%AE%B9%E5%82%B3%E9%81%9E%E7%B6%B2%E8%B7%AF" target="_blank" rel="noopener">wiki</a></p>
-<blockquote>
-<p>  CDN的全称是Content Delivery Network，即<a href="https://baike.baidu.com/item/%E5%86%85%E5%AE%B9%E5%88%86%E5%8F%91%E7%BD%91%E7%BB%9C" target="_blank" rel="noopener">内容分发网络</a>。其基本思路是尽可能避开互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，使内容传输的更快、更稳定。通过在网络各处放置<a href="https://baike.baidu.com/item/%E8%8A%82%E7%82%B9%E6%9C%8D%E5%8A%A1%E5%99%A8" target="_blank" rel="noopener">节点服务器</a>所构成的在现有的互联网基础之上的一层智能<a href="https://baike.baidu.com/item/%E8%99%9A%E6%8B%9F%E7%BD%91%E7%BB%9C" target="_blank" rel="noopener">虚拟网络</a>，CDN系统能够实时地根据<a href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E6%B5%81%E9%87%8F" target="_blank" rel="noopener">网络流量</a>和各节点的连接、负载状况以及到用户的距离和响应时间等综合信息将用户的请求重新导向离用户最近的服务节点上。其目的是使用户可就近取得所需内容，解决 Internet网络拥挤的状况，提高用户访问网站的响应速度。</p>
-</blockquote>
-<h1 id="URL"><a href="#URL" class="headerlink" title="URL"></a>URL</h1><p><a href="https://zh.wikipedia.org/wiki/%E7%BB%9F%E4%B8%80%E8%B5%84%E6%BA%90%E5%AE%9A%E4%BD%8D%E7%AC%A6" target="_blank" rel="noopener">wiki</a></p>
-<blockquote>
-<p>  URL是Uniform Resource Locator，统一资源定位。URL是用于资源定位的，只允许包含资源位置的信息，不能包含具体操作(动词)的信息。一次HTTP请求就像一次快递，快递单上写的是URL和header部分，包裹里面的是body(payload)部分。邮寄地址写：xx市xx街道xx号，但是不能写：”请投递到”xx市xx街道xx号。具体操作行为由HTTP的method(GET,POST,PUT,DELETE…)说明。作者：陈龙链接：<a href="https://www.zhihu.com/question/21142149/answer/346032466来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。" target="_blank" rel="noopener">https://www.zhihu.com/question/21142149/answer/346032466来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</a></p>
-</blockquote>
-<h1 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h1><p><a href="https://zh.wikipedia.org/wiki/JSP" target="_blank" rel="noopener">wiki</a></p>
-<blockquote>
-<p>  Java Server Page</p>
-<p>  JSP仅仅是Java语言在服务器端动态生成HTML的技术。JSP也是J2EE(现在改叫EE4J了)里绝对必须跳过的一个环节，因为最佳实践告诉我们：服务器端不应该知道客户端任何表现和交互类业务逻辑！早期(Spring出来之前)，大家认为只有用了EJB(Enterprise Java Bean)才算J2EE，Rod Johnson的文章(Expert One-on-One J2EE Development without EJB)让大家知道没那么复杂，Spring+Hibernate的组合比EJB简单的多作者：陈龙链接：<a href="https://www.zhihu.com/question/21142149/answer/346032466来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。" target="_blank" rel="noopener">https://www.zhihu.com/question/21142149/answer/346032466来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</a></p>
-</blockquote>
-<h1 id="PWA"><a href="#PWA" class="headerlink" title="PWA"></a>PWA</h1><p><a href="https://zh.wikipedia.org/wiki/%E6%B8%90%E8%BF%9B%E5%BC%8F%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F" target="_blank" rel="noopener">wiki</a></p>
-<blockquote>
-<p>  渐进式网络应用程序（英语：Progressive Web Apps，简称：PWA）是一种普通网页或网站架构起来的网络应用程序，但它可以以传统应用程序或原生移动应用程序形式展示给用户。这种应用程序形态，企图将目前最为现代化的浏览器提供的功能与移动设备的体验优势相结合。</p>
-</blockquote>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/随笔/">随笔</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-linux/OSX下iTerm2实现rzsz与服务器进行文件上传下载 " class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/20/linux/OSX下iTerm2实现rzsz与服务器进行文件上传下载 /" class="article-date">
-  	<time datetime="2018-04-20T13:51:08.594Z" itemprop="datePublished">2018-04-20</time>
-</a>
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2018/04/20/linux/OSX下iTerm2实现rzsz与服务器进行文件上传下载 /">OSX下iTerm2实现rz/sz与服务器进行文件上传/下载</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2018-04-20 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/linux/">linux</a></span>
+      <p></p>
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/20/linux/OSX下iTerm2实现rzsz与服务器进行文件上传下载 /">OSX下iTerm2实现rz/sz与服务器进行文件上传/下载</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在windows下用xshell、secureCRT等工具只要在服务端装好lrzsz工具包就可以实现简单方便的文件上传下载。昨天在Mac上用iTerm的时候发现iTerm原生不支持rz/sz命令，也就是不支持Zmodem来进行文件传输。遂查了一下，发现解决办法还算简单，不过有点小坑。</p>
-<h2 id="通过brew安装lrzsz"><a href="#通过brew安装lrzsz" class="headerlink" title="通过brew安装lrzsz"></a>通过brew安装lrzsz</h2><p>首先先假定你安装了<a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a>，然后我们通过它，先给Mac安装lrzsz。<br>在终端下输入<code>brew install lrzsz</code>，静等一会即可安装完毕。</p>
-<h2 id="下载配置iTerm2的相关脚本"><a href="#下载配置iTerm2的相关脚本" class="headerlink" title="下载配置iTerm2的相关脚本"></a>下载配置iTerm2的相关脚本</h2><p>这一步，在给iTerm2加上相应配置前需要下载两个前人已经写好的脚本文件。</p>
-<p>这里是<a href="https://github.com/mmastrac/iterm2-zmodem" target="_blank" rel="noopener">下载地址</a>，将iterm2-recv-zmodem.sh和iterm2-send-zmodem.sh下载到本机，然后将它们放到<code>/usr/local/bin</code>目录下。</p>
-<p>如果你安装过<code>wget</code>，也可以在<code>/usr/local/bin</code>目录下直接执行：</p>
-<p>然后我们将这两个文件赋予可执行权限：</p>
-<p><code>chmod +x /usr/local/bin/iterm2-send-zmodem.sh /usr/local/bin/iterm2-recv-zmodem.sh</code></p>
-<h2 id="配置iTerm2"><a href="#配置iTerm2" class="headerlink" title="配置iTerm2"></a>配置iTerm2</h2><p>找到iTerm2的配置项：iTerm2的Preferences-&gt; Profiles -&gt; Default -&gt; Advanced -&gt; Triggers的Edit按钮。</p>
-<p>然后配置项如下：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>rz waiting to receive.**B0100</td>
-<td>Run Silent Coprocess</td>
-<td>/usr/local/bin/iterm2-send-zmodem.sh</td>
-<td>checked</td>
-</tr>
-<tr>
-<td>**B00000000000000</td>
-<td>Run Silent Coprocess</td>
-<td>/usr/local/bin/iterm2-recv-zmodem.sh</td>
-<td>checked</td>
-</tr>
-</tbody>
-</table>
-<p><strong>尤其注意最后一项需要你将Instant选项勾上，否则将不生效</strong></p>
-<p>注意看图：<br><img src="/images/iterm2-lrzsz.png" alt="iterm2-lrzsz"></p>
-<p>至此结束。只要服务端也已经装好了<code>lrzsz</code>工具包便可以方便地通过rz\sz来进行文件上传下载了。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/linux/">linux</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-随笔/Mac修改mysqlroot 密码" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/19/随笔/Mac修改mysqlroot 密码/" class="article-date">
-  	<time datetime="2018-04-19T09:29:14.070Z" itemprop="datePublished">2018-04-19</time>
-</a>
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2018/04/19/随笔/Mac修改mysqlroot 密码/">Mac修改mysqlroot密码</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2018-04-19 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
+      <p></p>
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/19/随笔/Mac修改mysqlroot 密码/">Mac修改mysqlroot密码</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>打开终端 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/mysql/bin/</span><br><span class="line"></span><br><span class="line"> ./mysqld_safe --skip-grant-tables &amp;</span><br><span class="line"> </span><br><span class="line"> ./mysql -u root </span><br><span class="line"> </span><br><span class="line"> use mysql;</span><br><span class="line"> </span><br><span class="line"> update user set authentication_string=&apos;pwd&apos; where User=&apos;root&apos;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/随笔/">随笔</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-docker/Docker-Redis安装和使用" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/09/docker/Docker-Redis安装和使用/" class="article-date">
-  	<time datetime="2018-04-09T09:59:45.762Z" itemprop="datePublished">2018-04-09</time>
-</a>
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2018/04/09/docker/Docker-Redis安装和使用/">Docker Redis安装和使用</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2018-04-09 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/Docker/">Docker</a>,<a class="category-link" href="/categories/Docker/redis/">redis</a></span>
+      <p></p>
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/09/docker/Docker-Redis安装和使用/">Docker Redis安装和使用</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="如何使用Docker安装Redis"><a href="#如何使用Docker安装Redis" class="headerlink" title="如何使用Docker安装Redis"></a>如何使用Docker安装Redis</h1><p>最近准备写如何实现分布式锁的文章，实现分布式锁可以借助数据库、缓存和Zoopkpeer实现。在实现代码时就需要安装以上软件。于是就想到使用docker来简化我的安装，并可以正好学习一下Docker相关知识，本篇文章就介绍下如何使用Docker安装Mysql/Reids/Zookeeper。</p>
-<p>关于docker的安装教程很多，不同的操作系统也不一样，这里不再赘述。如果仅是个人研究和学习，在mac上安装建议大家使用docker for mac安装，<a href="https://store.docker.com/editions/community/docker-ce-desktop-mac" target="_blank" rel="noopener">https://store.docker.com/editions/community/docker-ce-desktop-mac</a></p>
-<h3 id="Docker基础概念"><a href="#Docker基础概念" class="headerlink" title="Docker基础概念"></a>Docker基础概念</h3><p>在使用Docker之前，我们先了解下几个Docker的核心概念</p>
-<h3 id="Docker-Daemon"><a href="#Docker-Daemon" class="headerlink" title="Docker Daemon"></a>Docker Daemon</h3><p>Docker引擎，就是运行在后台的一个守护进程，在我们启动它之后，我们就可以通过Docker客户端发送相关Docker的命令。</p>
-<h3 id="Docker-Images"><a href="#Docker-Images" class="headerlink" title="Docker Images"></a>Docker Images</h3><p>Docker镜像，这个就类似于我们在安装Windows时的镜像，只不过windows的镜像，在以前我们通常存在光盘上或者U盘里，这里的镜像我们通常会发布到Docker Registry</p>
-<h3 id="Docker-Containers"><a href="#Docker-Containers" class="headerlink" title="Docker Containers"></a>Docker Containers</h3><p>Docker容器，在获取到Docker镜像之后，我们可以运行该镜像，此时便会启动一个Docker容器，该容器中运行镜像中的程序。如果把Docker镜像理解为一个类的话，那么Docker容器就是一个实例</p>
-<h3 id="Docker-Client"><a href="#Docker-Client" class="headerlink" title="Docker Client"></a>Docker Client</h3><p>Docker客户端，我们安装完Docker之后，我们打开终端使用docker 相关命令进行操作，这些命令便是Docker客户端的命令，另外还有一个基于REST API的Docker客户端，REST API一般用于在开发一些基于Docker运维的系统中使用。</p>
-<h3 id="Docker-Registry"><a href="#Docker-Registry" class="headerlink" title="Docker Registry"></a>Docker Registry</h3><p>Docker镜像注册中心，Docker的官网的注册中心为<a href="http://hub.docker.com.xn--fiqpe8q0a674ayuep2wa89usxcfzkk3ghy5a803apz9ada./" target="_blank" rel="noopener">http://hub.docker.com。我们也可以自己搭建自己的注册中心。</a></p>
-<p>以上是Docker的核心概念，下面我们来看如何使用Docker安装Redis、Zookeeper、Mysql,并在过程中，学习使用Docker Client的一些常用命令</p>
-<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><h3 id="查找镜像"><a href="#查找镜像" class="headerlink" title="查找镜像"></a>查找镜像</h3><p>使用以下命令在Docker Hub搜索Redis镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search redis</span><br></pre></td></tr></table></figure>
-<p>执行以上命令，会搜索出所有带redis关键字的镜像（为减少篇幅，仅展示部分结果）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yanyanwangdeMacBook-Pro:~ yanyan.wang$ docker search redis</span><br><span class="line">NAME                      DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED</span><br><span class="line">redis                     Redis is an open source key-value store th...   3788      [OK]</span><br><span class="line">bitnami/redis             Bitnami Redis Docker Image                      47                   [OK]</span><br><span class="line">torusware/speedus-redis   Always updated official Redis docker image...   32                   [OK]</span><br></pre></td></tr></table></figure>
-<p>其中Name表示镜像仓库的名称，如果不带/则表示Docker官方仓库，带/则表示其他用户公开的镜像。OFFICIAL表示是否为官方仓库，一般我们推荐使用官方的仓库。</p>
-<h3 id="拉取镜像"><a href="#拉取镜像" class="headerlink" title="拉取镜像"></a>拉取镜像</h3><p>我们使用以下命令拉取，Redis的镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull redis:latest</span><br></pre></td></tr></table></figure>
-<p>其中redis:latest表示我们下载NAME为redis的镜像，latest表示TAG</p>
-<p>在执行完以上命令之后，Docker Client会从Docker镜像注册中心下载Redis的镜像，待下载之后，我们查看本地的镜像</p>
-<h3 id="列出所有镜像"><a href="#列出所有镜像" class="headerlink" title="列出所有镜像"></a>列出所有镜像</h3><p>我们使用以下命令查看，本地的redis镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
-<p>执行以上命令，就会显示本地的所有镜像</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">redis               latest              a858478874d1        10 days ago         184 MB</span><br></pre></td></tr></table></figure>
-<p>其中IMAGE ID表示镜像ID,具有唯一性</p>
-<h3 id="创建并启动容器"><a href="#创建并启动容器" class="headerlink" title="创建并启动容器"></a>创建并启动容器</h3><p>使用以下命令，使用Reids镜像，创建并启动Redis容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 6379:6379 -v $PWD/data:/data  -d redis:latest redis-server --appendonly yes</span><br></pre></td></tr></table></figure>
-<p>执行以上命令，我们就使用redis:latest镜像创建并启动了一个Redis容器,其中</p>
-<p>-p 6379:6379：将容器的6379端口映射成主机的6379端口</p>
-<p>-v $PWD/data:/data :将主机中当前目录下的data挂载到容器的/data</p>
-<p>redis-server –appendonly yes : 在容器执行redis-server启动命令，并打开redis持久化配置</p>
-<h3 id="查看容器启动情况"><a href="#查看容器启动情况" class="headerlink" title="查看容器启动情况"></a>查看容器启动情况</h3><p>使用以下命令查看所有容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<p>执行以上命令,输出如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">07f0edc95fb3        redis:latest        &quot;docker-entrypoint...&quot;   2 minutes ago       Up 2 minutes        0.0.0.0:6379-&gt;6379/tcp   quirky_davinci</span><br></pre></td></tr></table></figure>
-<p>其中Status表示运行状态，Up表示运行中，PORTS表示容器需要对外暴露的端口号</p>
-<h3 id="连接、查看容器"><a href="#连接、查看容器" class="headerlink" title="连接、查看容器"></a>连接、查看容器</h3><p>我们使用Redis镜像使用redis-cli客户端，连接到redis容器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it redis:latest redis-cli -h 192.168.0.101</span><br></pre></td></tr></table></figure>
-<p>执行以上命令，我们就连接到redis容器，接下来我们就可以使用redis命令进行操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">192.168.0.101:6379&gt; set &quot;testKey&quot; &quot;test&quot;</span><br><span class="line">OK</span><br><span class="line">192.168.0.101:6379&gt; get &quot;testKey&quot;</span><br><span class="line">&quot;test&quot;</span><br><span class="line">192.168.0.101:6379&gt;</span><br></pre></td></tr></table></figure>
-<p>至此，我们已经完成了Reids的安装。</p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redis/">redis</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Docker/">Docker</a><a class="article-category-link" href="/categories/Docker/redis/">redis</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-Java/范型" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2018/04/06/Java/范型/" class="article-date">
-  	<time datetime="2018-04-06T11:57:51.292Z" itemprop="datePublished">2018-04-06</time>
-</a>
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2018/04/06/Java/范型/">Java范型</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2018-04-06 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/Java/">Java</a></span>
+      <p></p>
     </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/06/Java/范型/">Java范型</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-基本概念："><a href="#1-基本概念：" class="headerlink" title="1)基本概念："></a>1)基本概念：</h2><p>　　泛型(Generic Type或Generics)是 对Java语言的类型系统的一种扩展，以支持创建可以按类型进行参数化的类。可以把类型参数看做是使用参数化类型时指定的类型的一个占位符，就像方法的形 式参数是运行时传递的占位符一样，泛型的体现主要是在集合框架里面可以看到，JCF里面应该是1.5里面使用泛型最多的地方。Java语言引入泛型是一个 较大的功能增强，不仅语言、类型系统和编译器有了大变化，以支持泛型，而且类库也进行了大翻修，所以许多重要的类，比如集合框架，都已经成为了泛型化的 了，使用泛型的优点为：</p>
-<h3 id="类型安全"><a href="#类型安全" class="headerlink" title="类型安全"></a>类型安全</h3><p>​      泛型的主要目标是提高Java程序的类型安全。通过知道使用泛型定义的变量的类型限制，编译器可以在一个高得多的程度上验证类型假设。没有泛型，这些假设就 只存在于程序员的脑海中。Java程序中的一种流行技术是定义这样的集合，即它的元素或键是功能类型的，比如“_列表”。通过在变量声明中捕获这一附加的 类型信息，泛型允许编译器实施这些附加的约束，类型错误现在就可以在编译时被捕获了，而不是在运行时才来进行检测操作。 </p>
-<h3 id="消除强制类型转换"><a href="#消除强制类型转换" class="headerlink" title="消除强制类型转换"></a>消除强制类型转换</h3><p>​      泛型的一个附带的好处是，消除源代码中的许多强制类型转换，这使得代码更加可读，而且减少了出错的机会。比较两段代码：<br>      不使用泛型的代码段： </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List li = <span class="keyword">new</span> ArrayList(); </span><br><span class="line">li.add(<span class="keyword">new</span> Integer(<span class="number">3</span>)); </span><br><span class="line">Integer i = (Integer)li.get(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-<p>​      使用泛型： </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; li = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(); </span><br><span class="line">li.add(<span class="keyword">new</span> Integer(<span class="number">3</span>)); </span><br><span class="line">Integer i = li.get(<span class="number">0</span>);</span><br></pre></td></tr></table></figure>
-<h3 id="潜在的性能收获："><a href="#潜在的性能收获：" class="headerlink" title="潜在的性能收获："></a>潜在的性能收获：</h3><p>​      泛型为较大的优化带来可能。在泛型的初始实现中，编译器将类型转换插入到各种字节码中。但是更多类型信息可用于编译器这一事实，为未来版本的JVM也带来了优化可能。<br>  泛型本质上是提供类型的“类型参数【外露参数】”，它们也被称为参数化类型（Parameterized Type）或参量多态（Parametric Polymorphism）， 用GJ（Generic Java）编写的程序看起来和普通的Java基本相同，只不过多了一些参数化的类型同时少了一些类型转换。实际上，GJ程序也是首先被转化成一般的不带泛 型的Java程序后再进行处理的，编译器自动完成从GenericJava到普通Java的翻译，具体转化过程分为以下几个阶段： </p>
-<pre><code>* 将参数化类型中的类型参数“擦除”（erasure）掉； 
-* 将类型变量用“上限（Upper bound）”取代，通常情况下这些上限是Object。这里的类型变量是指实例域，本地方法域，方法参数以方法返回值用来标记类型信息的“变量”。 
-* 添加类型转换并插入“桥方法”（bridge method），以覆盖可以正常的工作 
-</code></pre><p>  转化后的程序和没有引入的程序程序员不得不手工完成转换的程序是非常一致的，下边针对GJ的特点做一个简要的总结： </p>
-<pre><code>* 类型安全：泛型的一个主要目标是提高Java的类型安全，使用泛型可以使编译器知道变量的类型限制，进而可以在更高程度上验证类型假设。如果没有泛型，那么类型的安全性主要由程序员来保证，这显然不如带有泛型的安全性高。 
-* 消除强制类型转换：泛型可以消除源代码中的许多强制类型转换，这样使得代码更加可读，并且减少出错的机会 
-* 向后兼容：支持泛型的Java编译器可以用来编译经过泛型扩充的Java程序（GJ程序），但是现有的没有使用泛型扩充的Java程序仍然可以用这些编译器来编译 
-* 层次清晰，比较规范：无论被编译的源程序是否使用泛型扩充，编译生成的字节码均可以被虚拟机接受执行。就是说不论编译器输入的GJ程序还是一般的Java程序，经过编译后的字节码都遵循了Java虚拟机规范里面针对字节码的要求，也可以说：泛型对Java虚拟机是透明的 
-* 性能收益：目前来讲GJ编写的代码和一般的Java代码在效率上是很接近的，但是泛型可以进一步优化 
-</code></pre><p>  API中的类型定义：<br>K——键、比如映射的键<br>V——值，比如_和_的内容，或者 _中的值<br>E——异常类型<br>T——泛型<br>  ——[1]简单的泛型例子——</p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.susan.java.enumeration; </span><br><span class="line"></span><br><span class="line">   <span class="class"><span class="keyword">class</span> <span class="title">GenClass</span>&lt;<span class="title">T</span>&gt;</span>&#123; </span><br><span class="line">       T ob; </span><br><span class="line">       GenClass(T o)&#123; </span><br><span class="line">           <span class="keyword">this</span>.ob = o; </span><br><span class="line">       &#125; </span><br><span class="line"></span><br><span class="line">       <span class="function">T <span class="title">getOb</span><span class="params">()</span></span>&#123; </span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">this</span>.ob; </span><br><span class="line">       &#125; </span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">void</span> <span class="title">showType</span><span class="params">()</span></span>&#123; </span><br><span class="line">           System.out.println(<span class="string">"Type of T is "</span> + ob.getClass().getName()); </span><br><span class="line">       &#125; </span><br><span class="line">   &#125; </span><br><span class="line"></span><br><span class="line">   <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenDemo</span> </span>&#123; </span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123; </span><br><span class="line">           GenClass&lt;Integer&gt; iObject = <span class="keyword">new</span> GenClass&lt;Integer&gt;(<span class="number">88</span>); </span><br><span class="line">           iObject.showType(); </span><br><span class="line">       &#125; </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>  这段代码的输出为：<br><code>Type of T is java.lang.Integer</code><br>  【*：上边定义了一个带泛型的类，在使用的时候T可以替换为所有我们需要的类型，这种定义方式类似C++里面的模板定义。】</p>
-<h2 id="2-深入理解泛型："><a href="#2-深入理解泛型：" class="headerlink" title="2)深入理解泛型："></a>2)深入理解泛型：</h2><h3 id="1-数据类型转换："><a href="#1-数据类型转换：" class="headerlink" title="　　[1]数据类型转换："></a>　　[1]数据类型转换：</h3><p>　　在前边已经说过了，Java里面存在类的向下转型和向上转型，而且Java语言里面有时候比较容易因为类型的检查引发转型的问题，因为很多时候需要不断地向下转型，这种方式往往增加了JVM的一部分运行时的开销。实际上程序中每个向下转型针对ClassCastException都是潜在的危险， 应当尽量避免它们，但是在写程序的过程，这种转型往往没有办法避免，即使特别优良的设计也是会存在的。其实JDK 1.4到JDK 1.5的升级过程泛型是一个大的跨度，这种跨度使得编写程序更加规范，其实在前边讲解集合的时候已经使用了很多泛型的编程格式了，提供的很多代码Demo 都是泛型的。这里再提供一段简单的泛型使用代码：</p>
-<p>　　——[$]使用泛型的 List——</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.susan.java.generic; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> java.util.ArrayList; </span><br><span class="line">    <span class="keyword">import</span> java.util.Iterator; </span><br><span class="line">    <span class="keyword">import</span> java.util.List; </span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    *泛型List的使用，结合了JDK 1.4和JDK 1.5的两种用法，但是在JDK 1.4编译器中下边的方式编译不通过</span></span><br><span class="line"><span class="comment">    **/</span> </span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ListGenericDemo</span> </span>&#123; </span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123; </span><br><span class="line">            List list = <span class="keyword">new</span> ArrayList(); </span><br><span class="line">            List&lt;String&gt; genList = <span class="keyword">new</span> ArrayList&lt;String&gt;(); </span><br><span class="line">            list.add(<span class="string">"List 1"</span>); </span><br><span class="line">            list.add(<span class="string">"List 2"</span>); </span><br><span class="line">            genList.add(<span class="string">"Generic List 1"</span>); </span><br><span class="line">            genList.add(<span class="string">"Generic List 2"</span>); </span><br><span class="line">            System.out.println(<span class="string">"No Generic:"</span>); </span><br><span class="line">            Iterator iterator = list.iterator(); </span><br><span class="line">            <span class="keyword">while</span>(iterator.hasNext())&#123; </span><br><span class="line">                System.out.print(<span class="string">"["</span> + (String)iterator.next() + <span class="string">"],"</span>); </span><br><span class="line">            &#125; </span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"\nGeneric:"</span>); </span><br><span class="line">            Iterator&lt;String&gt; genIterator = genList.iterator(); </span><br><span class="line">            <span class="keyword">while</span>(genIterator.hasNext())&#123; </span><br><span class="line">                System.out.print(<span class="string">"["</span> + genIterator.next() + <span class="string">"],"</span>); </span><br><span class="line">            &#125; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>上边这段代码的输出为：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">No Generic:</span><br><span class="line">[List 1],[List 2],</span><br><span class="line">Generic:</span><br><span class="line">[Generic List 1],[Generic List 2],</span><br></pre></td></tr></table></figure>
-<p>　　这里使用了两种不同的方式【*： 在最原始的定义的List参数里面，不使用泛型的时候都是直接使用Object类型，在传入String的时候会进行向下转型，一般情况不会出现转型失败 的情况，但是使用了泛型过后，就上边的genList代码段里面，只能添加String对象，如果使用了其他类型的元素这里编译器就会直接报错，这种做法消除了JVM本身的类型转换。】</p>
-<h3 id="2-基本类型限制"><a href="#2-基本类型限制" class="headerlink" title="　　[2]基本类型限制"></a>　　[2]基本类型限制</h3><p>　　Tiger【Java 5.0的版本号】中 的类型变量的限制之一就是：必须使用引用类型进行实例化，基本类型不起作用，就是说不能使用：List list = new ArrayList();这种定义方式。也就是说在泛型使用的过程里面，如果要针对基本类型进行泛型使用，必须要进行包装，就是 Boxing操作，比如把int包装成为Integer。</p>
-<p>　　这里参考以下泛型的类型限制：JSR-14中：</p>
-<p>​    * 不应在静态成员中引用封闭类型参数 </p>
-<pre><code>* 不能用基本类型实例化泛型类型参数 
-* 不能在数据类型转换或instanceof操作中使用“外露”类型参数 
-* 不能在new操作符中使用“外露”的类型参数 
-* 不能在类定义的implements或extends字句中使用 “外露”类型参数 
-</code></pre><p>  这里简单透露一点JVM的原理：JVM 本身不支持泛型，在编译器进行泛型代码的编译的时候，其实是使用了“擦除”功能，就是JVM在编译带泛型的代码的时候，实际上对带泛型的代码进行了类型检 查，然后“擦除”泛型代码中的类型支持，转换为普通类型进行编译。这里有一个新概念成为“外露”类型——单独出现而不是位于某个类型中的类型参数如 （List<t>中的T）针对T类型而言，T的上界就是Object。这一项技术的功能极其强大，我们可以使几乎所有泛型类型的精度增强，但 是与JVM兼容。<br>  ——[$]静态成员中的封闭类型参数——</t></p>
- <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.susan.java.generic; </span><br><span class="line">   <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticListGenericDemo</span>&lt;<span class="title">T</span>&gt; </span>&#123; </span><br><span class="line">       <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">metho1</span><span class="params">()</span></span>&#123; </span><br><span class="line">           <span class="comment">//T t; </span></span><br><span class="line">       &#125; </span><br><span class="line">       <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticClass</span></span>&#123; </span><br><span class="line">           <span class="comment">//StaticListGenericDemo&lt;T&gt; t; </span></span><br><span class="line">       &#125; </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>  这里被注释掉的代码是不能通过JVM编译的，因为编译器完全禁止在静态方法和静态内部类中引用封闭类型参数，下边几种情况这里就不做解释了，T在整个过程里面是不应该作为外露类型来使用。<br>  ——[$]提供一个 instanceof操作中的“外露参数”——</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.susan.java.generic; </span><br><span class="line">    <span class="keyword">import</span> java.util.Hashtable; </span><br><span class="line">    <span class="class"><span class="keyword">interface</span> <span class="title">Registry</span></span>&#123; </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">register</span><span class="params">(Object o)</span></span>; </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">C</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Registry</span></span>&#123; </span><br><span class="line">        <span class="keyword">int</span> counter = <span class="number">0</span>; </span><br><span class="line">        Hashtable&lt;Integer,T&gt; values; </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">C</span><span class="params">()</span></span>&#123; </span><br><span class="line">            values = <span class="keyword">new</span> Hashtable&lt;Integer,T&gt;(); </span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">register</span><span class="params">(Object o)</span></span>&#123; </span><br><span class="line">            values.put(<span class="keyword">new</span> Integer(counter), (T)o); </span><br><span class="line">            counter++; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>  【*：这段代码编译没有任何问题，但是在(T)o地方会有一个警告，虽然这些警告本身没有什么，事实上，它们会使得诊断代码变得极为困难。在以前的代码中，我们认为如果对实例 C<jframe> 调用 register(“test”) ，会发出 ClassCastException 。但并非如此；计算将继续，就仿佛数据类型转换成功了一样，然后在进一步进行计算时发出错误，或者更糟：用遭破坏的数据完成计算，但不向外发出任何错误信号。同样，对“外露”类型参数的 instanceof 检查将在编译时产生 “unchecked”警告，而且检查将不会如期在运行时进行。】 </jframe></p>
-<h3 id="3-泛型的构造函数："><a href="#3-泛型的构造函数：" class="headerlink" title="[3]泛型的构造函数："></a>[3]泛型的构造函数：</h3><p>  在定义泛型的构造函数的时候，要解决这一个问题，需要一定的操作： </p>
-<pre><code>* 要求类型参数的所有实例化都包括不带参数的构造函数 
-* 只要泛型类的运行时实例化没有包括所需要的构造函数，就抛异常 
-* 修改语言的语法以包括更加详细的类型参数界限 
-</code></pre><p>  ——[$]定义一个带泛型构造函数——</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.susan.java.generic; </span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">GenGons</span></span>&#123; </span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">double</span> val; </span><br><span class="line">        &lt;T extends Number&gt; GenGons(T arg)&#123; </span><br><span class="line">            val = arg.doubleValue(); </span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">showVal</span><span class="params">()</span></span>&#123; </span><br><span class="line">            System.out.println(<span class="string">"Val: "</span> + val); </span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenGonsDemo</span> </span>&#123; </span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123; </span><br><span class="line">            GenGons genOne = <span class="keyword">new</span> GenGons(<span class="number">100</span>); </span><br><span class="line">            GenGons genTwo = <span class="keyword">new</span> GenGons(<span class="number">123.5F</span>); </span><br><span class="line">            genOne.showVal(); </span><br><span class="line">            genTwo.showVal(); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>  这段程序输出为：<br>Val: 100.0<br>Val: 123.5 </p>
-<h3 id="4-泛型中通配符的使用："><a href="#4-泛型中通配符的使用：" class="headerlink" title="[4]泛型中通配符的使用："></a>[4]泛型中通配符的使用：</h3><p>  通配符——使 用一个?标识类型参数，是一种表示未知类型的约束方法。通配符并不包含在最初的泛型设计中，从形成JSR14到发布其最终版本之间的五年时间内完成了设计 添加到泛型中。通配符在泛型的使用中具有重要的意义，它们为一个泛型类所指定的类型集合提供了一个有用的类型范围。对泛型的ArrayList而言，对于 任意类型T，ArrayList&lt;?&gt;类型是ArrayList<t>的超类型，但是这些超类型在执行类型推断方面是不起作用的。通配符类型List&lt;?&gt;、原始List和具体List<object>都不相同。如果说变量X具有List&lt;?&gt;类型，标识存在一些T类型，其中x是List<t>类型，x具有相同的结构，尽管我们不知道其元素的具体类型。这并不代表它具有任意内容，而是指我们并不了解内容的类型限制是什么 — 但我们知道存在 某种限制。另一方面，原始类型 List 是异构的，我们不能对其元素有任何类型限制，具体类型 List<object> 表示我们明确地知道它能包含任何对象（当然，泛型的类型系统没有 “列表内容” 的概念，但可以从 List 之类的集合类型轻松地理解泛型）。 通配符在类型系统中的作用部分来自其不会发生协变（covariant）这一特性。数组是协变的，因为 Integer 是 Number 的子类型，数组类型 Integer[] 是 Number[] 的子类型，因此在任何需要 Number[] 值的地方都可以提供一个 Integer[] 值。另一方面，泛型不是协变的， List<integer> 不是 List<number> 的子类型，试图在要求 List<number> 的位置提供 List<integer> 是一个类型错误。这不算很严重的问题，也不是所有人都认为的错误，但泛型和数组的不同行为的确引起了许多混乱。<br>  ——[$]通配符的使用 ——</integer></number></number></integer></object></t></object></t></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.susan.java.generic; </span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Status</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">Number</span>&gt;</span>&#123; </span><br><span class="line"></span><br><span class="line">        T[] nums; </span><br><span class="line">        Status(T[] o)&#123; </span><br><span class="line">            nums = o; </span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">double</span> <span class="title">average</span><span class="params">()</span></span>&#123; </span><br><span class="line">            <span class="keyword">double</span> sum = <span class="number">0.0</span>; </span><br><span class="line">            <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) </span><br><span class="line">                sum += nums[i].doubleValue(); </span><br><span class="line">            <span class="keyword">return</span> sum / nums.length; </span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">boolean</span> <span class="title">sameAvg</span><span class="params">(Status&lt;?&gt; obj)</span></span>&#123; </span><br><span class="line">            <span class="keyword">if</span>( average() == obj.average()) </span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>; </span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WildcardDemo</span> </span>&#123; </span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123; </span><br><span class="line">            Integer inums[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;; </span><br><span class="line">            Status&lt;Integer&gt; iobj = <span class="keyword">new</span> Status&lt;Integer&gt;(inums); </span><br><span class="line">            System.out.println(<span class="string">"iob average is "</span>+ iobj.average()); </span><br><span class="line">            Double dnums[] = &#123;<span class="number">1.1</span>,<span class="number">2.2</span>,<span class="number">3.3</span>,<span class="number">4.4</span>,<span class="number">5.5</span>&#125;; </span><br><span class="line">            Status&lt;Double&gt; dobj = <span class="keyword">new</span> Status&lt;Double&gt;(dnums); </span><br><span class="line">            System.out.println(<span class="string">"dob average is "</span>+ dobj.average()); </span><br><span class="line">            Float fnums[] = &#123;<span class="number">1.1F</span>,<span class="number">2.2F</span>,<span class="number">3.3F</span>,<span class="number">4.4F</span>,<span class="number">5.5F</span>&#125;; </span><br><span class="line">            Status&lt;Float&gt; fobj = <span class="keyword">new</span> Status&lt;Float&gt;(fnums); </span><br><span class="line">            System.out.println(<span class="string">"fob average is "</span>+ fobj.average()); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>​</p>
-<p>这段程序的输出为： </p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iob average is 3.0 </span><br><span class="line">dob average is 3.3 </span><br><span class="line">fob average is 3.300000023841858</span><br></pre></td></tr></table></figure>
-<p>  ——[$]返回泛型值的方法——</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.susan.java.generic; </span><br><span class="line"></span><br><span class="line">  <span class="keyword">import</span> java.io.Serializable; </span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Base</span></span>&#123;&#125; </span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">SubClass</span> <span class="keyword">extends</span> <span class="title">Base</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;&#125; </span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">SubClassTwo</span> <span class="keyword">extends</span> <span class="title">Base</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;&#125; </span><br><span class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TypeInference</span> </span>&#123; </span><br><span class="line">      <span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Base&gt; <span class="function">T <span class="title">Method</span><span class="params">(T t1,T t2)</span></span>&#123; </span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">null</span>; </span><br><span class="line">      &#125; </span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123; </span><br><span class="line">          Base base = Method(<span class="keyword">new</span> SubClass(), <span class="keyword">new</span> SubClassTwo()); </span><br><span class="line">          Serializable run = Method(<span class="keyword">new</span> SubClass(), <span class="keyword">new</span> SubClassTwo()); </span><br><span class="line">      &#125; </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>​</p>
-<p>注意上边返回值的写法<br>——[$]?通配符——</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.susan.java.generic; </span><br><span class="line">    <span class="keyword">import</span> java.util.ArrayList; </span><br><span class="line">    <span class="keyword">import</span> java.util.List; </span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    *问号通配符</span></span><br><span class="line"><span class="comment">    **/</span> </span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuestionDemo</span> </span>&#123; </span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testMethod</span><span class="params">(List&lt;? extends Number&gt; list)</span></span>&#123;&#125; </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123; </span><br><span class="line">            List&lt;Object&gt; oList = <span class="keyword">new</span> ArrayList&lt;Object&gt;(); </span><br><span class="line">            List&lt;Integer&gt; iList = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(); </span><br><span class="line">            List&lt;Number&gt; nList = <span class="keyword">new</span> ArrayList&lt;Number&gt;(); </span><br><span class="line">            <span class="comment">//testMethod(oList); //这里会出现编译错误 </span></span><br><span class="line">            testMethod(iList); </span><br><span class="line">            testMethod(nList); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>​</p>
-<p>从上边的的代码可以知道，?一般和extends以及super关键字进行使用，其含义在于传入泛型的类型定义为extends后边的类型的子类，所以上边的注释掉的代码是没有办法通过编译的。<br>【*：泛型真正在开发过程程序员需要掌握的是用法，上边讲到的四点都比较深入，而且都是讨论的与JVM处理泛型原理相关的内容，如果没有弄懂没有关系，下边讲“泛型类型捕获”的时候主要提及应用层的相关内容。】<br>——[$]定义一个泛型接口——</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.susan.java.generic; </span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">interface</span> <span class="title">MinMan</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;<span class="title">T</span>&gt;&gt;</span>&#123; </span><br><span class="line"></span><br><span class="line">      <span class="function">T <span class="title">min</span><span class="params">()</span></span>; </span><br><span class="line">      <span class="function">T <span class="title">max</span><span class="params">()</span></span>; </span><br><span class="line"></span><br><span class="line">  &#125; </span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyDemo</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">Comparable</span>&lt;<span class="title">T</span>&gt;&gt; <span class="keyword">implements</span> <span class="title">MinMan</span>&lt;<span class="title">T</span>&gt;</span>&#123; </span><br><span class="line"></span><br><span class="line">      T[] tValues; </span><br><span class="line">      MyDemo(T[] o)&#123; tValues = o;&#125; </span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">public</span> T <span class="title">min</span><span class="params">()</span></span>&#123; </span><br><span class="line"></span><br><span class="line">          T vT = tValues[<span class="number">0</span>]; </span><br><span class="line"></span><br><span class="line">          <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; tValues.length; i++ ) </span><br><span class="line">              <span class="keyword">if</span>(tValues[i].compareTo(vT) &lt; <span class="number">0</span>) </span><br><span class="line">                  vT = tValues[i]; </span><br><span class="line">          <span class="keyword">return</span> vT; </span><br><span class="line">      &#125; </span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">public</span> T <span class="title">max</span><span class="params">()</span></span>&#123; </span><br><span class="line"></span><br><span class="line">          T vT = tValues[<span class="number">0</span>]; </span><br><span class="line"></span><br><span class="line">          <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; tValues.length; i++ ) </span><br><span class="line">              <span class="keyword">if</span>(tValues[i].compareTo(vT) &gt;  <span class="number">0</span>) </span><br><span class="line">                  vT = tValues[i]; </span><br><span class="line">          <span class="keyword">return</span> vT; </span><br><span class="line">      &#125; </span><br><span class="line">  &#125; </span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenericInterface</span> </span>&#123; </span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123; </span><br><span class="line">          Integer inums[] = &#123;<span class="number">3</span>,<span class="number">6</span>,<span class="number">13</span>,<span class="number">11</span>,<span class="number">45</span>,<span class="number">22</span>,<span class="number">33</span>,<span class="number">21</span>&#125;; </span><br><span class="line">          MyDemo&lt;Integer&gt; iob = <span class="keyword">new</span> MyDemo&lt;Integer&gt;(inums); </span><br><span class="line">          System.out.println(<span class="string">"iob Max:"</span> + iob.max()); </span><br><span class="line">          System.out.println(<span class="string">"iob Min:"</span> + iob.min()); </span><br><span class="line">      &#125; </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>​</p>
-<p>该输出为：<br>iob Max:45<br>iob Min:3<br>——[$]泛型的方法重载——</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.susan.java.generic; </span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  *一段错误的代码段</span></span><br><span class="line"><span class="comment">  **/</span> </span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">MyGenDemo</span>&lt;<span class="title">T</span>,<span class="title">V</span>&gt;</span>&#123; </span><br><span class="line">      T ob1; </span><br><span class="line">      V ob2; </span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">set</span><span class="params">(T o)</span></span>&#123; </span><br><span class="line">          <span class="keyword">this</span>.ob1 = o; </span><br><span class="line">      &#125; </span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">set</span><span class="params">(V o)</span></span>&#123; </span><br><span class="line">          <span class="keyword">this</span>.ob2 = o; </span><br><span class="line">      &#125; </span><br><span class="line">  &#125; </span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">GenDemo</span>&lt;<span class="title">T</span>&gt;</span>&#123; </span><br><span class="line">      T ob; </span><br><span class="line"></span><br><span class="line">      GenDemo()&#123; </span><br><span class="line">          <span class="keyword">this</span>.ob = <span class="keyword">new</span> T(); </span><br><span class="line">      &#125; </span><br><span class="line">  &#125; </span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">Wrong</span>&lt;<span class="title">T</span>&gt;</span>&#123; </span><br><span class="line">      <span class="keyword">static</span> T ob; </span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">static</span> T <span class="title">getOb</span><span class="params">()</span></span>&#123; </span><br><span class="line">          <span class="keyword">return</span> ob; </span><br><span class="line">      &#125; </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>​</p>
-<p>分析上边的代码段就可以发现很多问题： </p>
-<ul>
-<li>首先set方法并不能通过这种方式重载，原因很简单，虽然这里使用了通配符T、V，但是这两个“外露” 类型在编译器里面为默认为相同的，因为这种情况下两个都属于占位符类型，按照这样的方式就会使得set方法的方法签名对JVM而言是一模一样的 </li>
-<li>this.ob = new T() 有问题，因为通配符是不能通过这种方式构造的，通配符目前还不能成为Java类型，所以通配符目前是不能实例化的，哪怕是一个类类型。 </li>
-<li>最后一段代码问题也很严重：因为通配符属于非静态类型，所以不能使用在static的方法或者类定义里面，这就是上边代码段的代码。<br>——[$]泛型Java 类——</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.susan.java.generic; </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">GenType</span>&lt;<span class="title">T</span>&gt;</span>&#123; </span><br><span class="line"></span><br><span class="line">        T ob; </span><br><span class="line"></span><br><span class="line">        GenType(T ob)&#123; </span><br><span class="line">            <span class="keyword">this</span>.ob = ob; </span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="function">T <span class="title">getOb</span><span class="params">()</span></span>&#123; </span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.ob; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">GenStr</span>&lt;<span class="title">T</span> <span class="keyword">extends</span> <span class="title">Number</span>&gt;</span>&#123; </span><br><span class="line"></span><br><span class="line">        T str; </span><br><span class="line"></span><br><span class="line">        GenStr(T o)&#123; </span><br><span class="line">            <span class="keyword">this</span>.str = o; </span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="function">T <span class="title">getStr</span><span class="params">()</span></span>&#123; </span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.str; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GenTypeDemo</span> </span>&#123; </span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123; </span><br><span class="line">            GenType&lt;Integer&gt; iObGenType = <span class="keyword">new</span> GenType&lt;Integer&gt;(<span class="number">99</span>); </span><br><span class="line">            GenStr&lt;Float&gt; fOb = <span class="keyword">new</span> GenStr&lt;Float&gt;(<span class="number">102.2F</span>); </span><br><span class="line">            System.out.println(iObGenType.getClass().getName()); </span><br><span class="line">            System.out.println(fOb.getClass().getName()); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>​</p>
-<p>根据输出结果可以知道该类型就为我们定义的类型：<br>org.susan.java.generic.GenType<br>org.susan.java.generic.GenStr </p>
-</li>
-</ul>
-<h2 id="3-泛型“类型捕获”"><a href="#3-泛型“类型捕获”" class="headerlink" title="3)泛型“类型捕获”"></a>3)泛型“类型捕获”</h2><h3 id="协变概念【extends-和super】"><a href="#协变概念【extends-和super】" class="headerlink" title="协变概念【extends 和super】"></a>协变概念【extends 和super】</h3><p>  讲了这么多泛型的内容，相信读者对泛型有一点点了解了，接下来针对泛型里面比较费解的地方进行比较通俗的讲解，泛型的类型捕获是从编译器的级别来说的，当我们定义了泛型的时候，如果使用了? extends T这 种格式，编译器遇到一个这样带有通配符的变量的时候，它如何来进行识别操作呢，它会觉得遇到T了过后，一定会有T定义的变量，而对这些T而言一定有一个 Class<t>类型。但是它不知道T代表什么，但是JVM会为T定制一个占位符来代替T的类型。占位符被称为特殊通配符的捕获。这种情况 下，编译器会为通配符提供一个名字，每个变量声明中出现的一个通配符都会活得JVM的一个捕获，，因此在泛型声明中如果用了public void method(Pointer&lt;?,?&gt; pointer)的话，JVM就会获取两个通配符名称，因为这个时候?也好，T也好，类型是未知的，任意未知的类型的参数在使用的时候相互之间是没有任何关系的。<br>  【*：泛型的通配符的使用其实在JDK 1.5无疑是最复杂的部分，而且Java编译器产生的一些令人困惑的错误以及很多消息都可能和通配符有关。】<br>  ? extends Number：这种语法的意思就是传入的泛型的“外露”类型必须是Number的子类，这里重复一下“外露类型”，其实在遇到泛型的时候往往会遇到两个类型，直接定义的类型，一般为Type<t>格式的，然后是外露类型T，这里T就代表了外露类型，这里需要区分这种情况下Type<t>和Type不属于同一个类型。这里需要了解的是泛型的“协变”。<br>  注意：泛型本身不是协变的<br>  比 如有类型Integer和Number，因为Integer类是Number类的子类，也就是说Integer是一个Number，Integer[]也 是一个Number[]，按照这样的逻辑，我们也许会觉得泛型也是遵循了这样原理List<integer>也会是 List<number>的子类，但是这种做法在泛型里面是错误的。这种做法在传入的时候会被编译器定义为类型错误。看一段程序：<br>  ——[$]协变的概念代码——</number></integer></t></t></t></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.susan.java.generic; </span><br><span class="line">    <span class="keyword">import</span> java.util.ArrayList; </span><br><span class="line">    <span class="keyword">import</span> java.util.List; </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    *关于泛型协变的概念代码</span></span><br><span class="line"><span class="comment">    **/</span> </span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChangeGenerice</span> </span>&#123; </span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">methodOne</span><span class="params">(List&lt;Number&gt; number)</span></span>&#123; </span><br><span class="line">            System.out.println(<span class="string">"One:"</span> + number); </span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">methodTwo</span><span class="params">(List&lt;Integer&gt; integer)</span></span>&#123; </span><br><span class="line">            System.out.println(<span class="string">"Two:"</span> + integer); </span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">methodThree</span><span class="params">(List&lt;? extends Number&gt; number)</span></span>&#123; </span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"Three:"</span> + number); </span><br><span class="line"></span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">methodFour</span><span class="params">(List&lt;? <span class="keyword">super</span> Number&gt; integer)</span></span>&#123; </span><br><span class="line">            System.out.println(<span class="string">"Four:"</span> + integer); </span><br><span class="line">        &#125; </span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123; </span><br><span class="line">            List&lt;Number&gt; nList = <span class="keyword">new</span> ArrayList&lt;Number&gt;(); </span><br><span class="line">            List&lt;Integer&gt; iList = <span class="keyword">new</span> ArrayList&lt;Integer&gt;(); </span><br><span class="line">            List&lt;Object&gt; oList = <span class="keyword">new</span> ArrayList&lt;Object&gt;(); </span><br><span class="line">            methodOne(nList); </span><br><span class="line">            <span class="comment">//这里编译报错，因为nList是List&lt;Number&gt;，但是方法接受参数是 List&lt;Integer&gt;，它们不存在继承关系，这里也证明了协变的简单 </span></span><br><span class="line">            <span class="comment">//methodTwo(nList); </span></span><br><span class="line">            methodThree(nList); </span><br><span class="line">            methodFour(nList); </span><br><span class="line">            <span class="comment">//这里编译报错，iList是List&lt;Integer&gt;，不是 List&lt;Number&gt; </span></span><br><span class="line">            <span class="comment">//methodOne(iList); </span></span><br><span class="line">            methodTwo(iList); </span><br><span class="line">            methodThree(iList); </span><br><span class="line">            <span class="comment">//这里编译报错，iList不满足条件List&lt;? super Number&gt;，因为List&lt;Integer&gt;中外露类型Integer不满足Integer super Number </span></span><br><span class="line">            <span class="comment">//methodFour(iList); </span></span><br><span class="line">            <span class="comment">//最后三个编译错误留给读者自己去分析 </span></span><br><span class="line">            <span class="comment">//methodOne(oList); </span></span><br><span class="line">            <span class="comment">//methodTwo(oList); </span></span><br><span class="line">            <span class="comment">//methodThree(oList); </span></span><br><span class="line">            methodFour(oList); </span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>  如果需要在1.5的JDK环境里面进行1.4的写法，如果不去掉类型检测可能会报警告：<br>  【*：上边这段概念代码很好说明了协变过程，同样也能够很好理解泛型里面的extends和super关键字的使用了。关于通配符的使用可能还需要写更多的代码，最好办法是直接去参考集合部分的源代码，是一个不错的学习途径。】<br>  针对Java泛型做一个简单的总结： </p>
-<pre><code>* 泛型的“外露”类型可以用在类、接口和方法中，一般称为泛型类、泛型接口、泛型方法 
-* 泛型的“外露”类型只可以是类类型（包括自定义类），不能是简单类型 
-* 泛型的“外露”类型可以使用extends和super关键字，该关键字标识了“外露”类型的界限 
-* 泛型不支持直接的类型协变，在协变过程注意泛型的“外露”类型满足的界限的条件 
-* 泛型还可以使用通配符进行操作，这种情况可以用来作为类模版  推荐
-</code></pre>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/Java/">Java</a>
-	</div>
-
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
-  
-</article>
+ 
 
-
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
+<div id="pagination">
+  <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-chevron-right" aria-label="accessibility.next_page"></i></a>
 </div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2019 一只熊猫
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
-    </div>
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">熊猫博客</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
   </div>
 </footer>
-    </div>
-    
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  </div>
+</div>
+</div>
 
+<button class="menu-trigger"></button>
+<div class="menu">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/person_1.jpg" alt="一只熊猫🐼"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>一只熊猫🐼</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>页面</span>
+        <ul>
+          <li><a href="/guestbook">留言</a></li>
+        <li><a href="/about">关于</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>友链</span>
+        <ul>
+          <li> <a href="https://lx.blleng.cn" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: ,
-		animate: true,
-		isHome: true,
-		isPost: false,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false
-	}
-</script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="/js/jquery.easing.min.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
 <script src="/js/main.js"></script>
 
 
-
-
-
-
-  </div>
 </body>
 </html>
