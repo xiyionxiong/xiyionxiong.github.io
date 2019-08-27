@@ -1,110 +1,123 @@
-require([], function (){
+;(function () {
+	
+	"use strict";
 
-	var isMobileInit = false;
-	var loadMobile = function(){
-		require(['/js/mobile.js'], function(mobile){
-			mobile.init();
-			isMobileInit = true;
-		});
-	}
-	var isPCInit = false;
-	var loadPC = function(){
-		require(['/js/pc.js'], function(pc){
-			pc.init();
-			isPCInit = true;
-		});
-	}
-
-	var browser={
-	    versions:function(){
-	    var u = window.navigator.userAgent;
-	    return {
-	        trident: u.indexOf('Trident') > -1, //IE内核
-	        presto: u.indexOf('Presto') > -1, //opera内核
-	        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-	        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
-	        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-	        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-	        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
-	        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
-	        iPad: u.indexOf('iPad') > -1, //是否为iPad
-	        webApp: u.indexOf('Safari') == -1 ,//是否为web应用程序，没有头部与底部
-	        weixin: u.indexOf('MicroMessenger') == -1 //是否为微信浏览器
-	        };
-	    }()
-	}
-
-	$(window).bind("resize", function(){
-		if(isMobileInit && isPCInit){
-			$(window).unbind("resize");
-			return;
+	var isMobile = {
+		Android: function() {
+			return navigator.userAgent.match(/Android/i);
+		},
+			BlackBerry: function() {
+			return navigator.userAgent.match(/BlackBerry/i);
+		},
+			iOS: function() {
+			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+		},
+			Opera: function() {
+			return navigator.userAgent.match(/Opera Mini/i);
+		},
+			Windows: function() {
+			return navigator.userAgent.match(/IEMobile/i);
+		},
+			any: function() {
+			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
 		}
-		var w = $(window).width();
-		if(w >= 700){
-			loadPC();
-		}else{
-			loadMobile();
+	};
+
+
+
+
+	var contentWayPoint = function() {
+		var i = 0;
+		$(".animate-box").waypoint( function( direction ) {
+
+			if( direction === "down" && !$(this.element).hasClass("animated-fast") ) {
+				
+				i++;
+
+				$(this.element).addClass("item-animate");
+				setTimeout(function(){
+
+					$("body .animate-box.item-animate").each(function(k){
+						var el = $(this);
+						setTimeout( function () {
+							var effect = el.data("animate-effect");
+							if ( effect === "fadeIn") {
+								el.addClass("fadeIn animated-fast");
+							} else if ( effect === "fadeInLeft") {
+								el.addClass("fadeInLeft animated-fast");
+							} else if ( effect === "fadeInRight") {
+								el.addClass("fadeInRight animated-fast");
+							} else {
+								el.addClass("fadeInUp animated-fast");
+							}
+
+							el.removeClass("item-animate");
+						},  k * 50, "easeInOutExpo" );
+					});
+					
+				}, 100);
+				
+			}
+
+		} , { offset: "85%" } );
+	};
+
+
+	
+
+	var goToTop = function() {
+
+		$(".js-gotop").on("click", function(event){
+			
+			event.preventDefault();
+
+			$("html, body").animate({
+				scrollTop: $("html").offset().top
+			}, 500, "easeInOutExpo");
+			
+			return false;
+		});
+
+		$(window).scroll(function(){
+
+			var $win = $(window);
+			if ($win.scrollTop() > 200) {
+				$(".js-top").addClass("active");
+			} else {
+				$(".js-top").removeClass("active");
+			}
+
+		});
+	
+	};
+
+
+	// Loading page
+	var loaderPage = function() {
+		$(".fh5co-loader").fadeOut("slow");
+	};
+
+	
+	var parallax = function() {
+
+		if ( !isMobile.any() ) {
+			$(window).stellar({
+				horizontalScrolling: false,
+				hideDistantElements: false, 
+				responsive: true
+
+			});
 		}
+	};
+
+
+	$(function(){
+		contentWayPoint();
+		
+		goToTop();
+		loaderPage();
+		parallax();
 	});
 
-	if(browser.versions.mobile === true || $(window).width() < 700){
-		loadMobile();
-	}else{
-		loadPC();
-	}
 
-	//是否使用fancybox
-	if(yiliaConfig.fancybox === true){
-		require(['/fancybox/jquery.fancybox.js'], function(pc){
-			var isFancy = $(".isFancy");
-			if(isFancy.length != 0){
-				var imgArr = $(".article-inner img");
-				for(var i=0,len=imgArr.length;i<len;i++){
-					var src = imgArr.eq(i).attr("src");
-					var title = imgArr.eq(i).attr("alt");
-					imgArr.eq(i).replaceWith("<a href='"+src+"' title='"+title+"' rel='fancy-group' class='fancy-ctn fancybox'><img src='"+src+"' title='"+title+"'></a>");
-				}
-				$(".article-inner .fancy-ctn").fancybox();
-			}
-		});
-		
-	}
-	//是否开启动画
-	if(yiliaConfig.animate === true){
-
-		require(['/js/jquery.lazyload.js'], function(){
-			//avatar
-			$(".js-avatar").attr("src", $(".js-avatar").attr("lazy-src"));
-			$(".js-avatar")[0].onload = function(){
-				$(".js-avatar").addClass("show");
-			}
-		});
-		
-		if(yiliaConfig.isHome === true){
-			//content
-			function showArticle(){
-				$(".article").each(function(){
-					if( $(this).offset().top <= $(window).scrollTop()+$(window).height() && !($(this).hasClass('show')) ) {
-						$(this).removeClass("hidden").addClass("show");
-						$(this).addClass("is-hiddened");
-					}else{
-						if(!$(this).hasClass("is-hiddened")){
-							$(this).addClass("hidden");
-						}
-					}
-				});
-			}
-			$(window).on('scroll', function(){
-				showArticle();
-			});
-			showArticle();
-		}
-		
-	}
-	
-	//是否新窗口打开链接
-	if(yiliaConfig.open_in_new == true){
-		$(".article a[href]").attr("target", "_blank")
-	}
-	
-});
+}());

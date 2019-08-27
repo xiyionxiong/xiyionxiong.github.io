@@ -14,17 +14,17 @@
     theme: 'lx',
     version: '1.4.5',
     localsearch:{
-      "enable": false,
+      "enable": true,
       "trigger": "auto",
       "top_n_per_article": 1,
       "unescape": false,
       "preload": false
       },
-    path: '-'
+    path: 'search.xml'
   };
 </script>
 
-  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="shortcut icon" href="/images/avatar.png">
   <link rel="stylesheet" href="/css/main.css">
   <script src="/js/jquery.min.js"></script>
   <script src="/js/jquery.jside.menu.js"></script>
@@ -47,11 +47,13 @@
 <div id="lx-aside" style="background-image: url(/images/page-cover.jpg)" data-stellar-background-ratio="0.5">
   <div class="overlay">
   <div class="page-title">
-    <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
+    <div class="avatar"><a href="/"><img src="/images/avatar.png"></a></div>
     <span>2014-06-01</span>
     <h2>CountDownTimer（倒数计时器）</h2>
     <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/CountDownTimer/">CountDownTimer</a></div>
-    </div>
+    <div class="social-links">
+<a href="https://github.com/xiyionxiong" target="_blank"><i class="fa fa-github fa-fw"></i></a><a href="mailto:camchin1@msn.cn"><i class="fa fa-envelope fa-fw"></i></a><a href="http://weibo.com/1743454163/" target="_blank"><i class="fa fa-weibo fa-fw"></i></a><a href="https://twitter.com/w_0482" target="_blank"><i class="fa fa-twitter fa-fw"></i></a><a href="https://www.facebook.com/ken.shoaw" target="_blank"><i class="fa fa-facebook fa-fw"></i></a><a href="https://instagram.com/oneapanda" target="_blank"><i class="fa fa-instagram fa-fw"></i></a>
+</div></div>
 </div>
 </div>
 <div id="lx-main-content">
@@ -266,12 +268,29 @@ mButton.setText(millisUntilFinished / 1000 + &quot; 秒后可重新获取验证�
 	</div>
 </div>
 </div>
-
+<div class="comment"><div id="comments"></div></div>
 <footer>
   <div>
   Copyright &copy; 2019.<a href="/">熊猫博客</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
   </div>
 </footer>
+</div>
+<a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i></a>
+<div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Search..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
 </div>
 
 <button class="menu-trigger"></button>
@@ -281,12 +300,12 @@ mButton.setText(millisUntilFinished / 1000 + &quot; 秒后可重新获取验证�
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/person_1.jpg" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
           </div>
         </div>
         <div class="row for-name">
           <p>一只熊猫🐼</p>
-          <span class="tagline">Hello, World!</span>
+          <span class="tagline">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</span>
         </div>
       </div>
     </span>
@@ -298,16 +317,17 @@ mButton.setText(millisUntilFinished / 1000 + &quot; 秒后可重新获取验证�
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-bookmark fa-fw"></i>页面</span>
         <ul>
-          <li><a href="/guestbook">留言</a></li>
-        <li><a href="/about">关于</a></li>
+          <li><a href="/categories/android">Android</a></li>
+        <li><a href="/tags/Java">Java</a></li>
+        <li><a href="/categories/Docker">Docker容器</a></li>
+        <li><a href="/categories/web">前端</a></li>
+        <li><a href="/categories/golang">Golang</a></li>
+        <li><a href="/categories/linux">Linux</a></li>
+        <li><a href="/categories/随笔">随笔</a></li>
+        <li><a href="/instagram">相册</a></li>
         </ul>
     </li>
-    <li class="has-sub"><span class="dropdown-heading">
-      <i class="fa fa-link fa-fw"></i>友链</span>
-        <ul>
-          <li> <a href="https://lx.blleng.cn" target="_blank">Theme-Lx</a></li>
-        </ul>
-    </li>
+    
   </ul>
   </nav>
 </div>
@@ -319,6 +339,7 @@ mButton.setText(millisUntilFinished / 1000 + &quot; 秒后可重新获取验证�
 <script src="/js/jquery.waypoints.min.js"></script>
 <script src="/js/jquery.stellar.min.js"></script>
 <script src="/js/main.js"></script>
+<script src="/js/local.search.js"></script>
 
 
 </body>

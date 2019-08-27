@@ -52,6 +52,9 @@ figure {
   font-weight: 400;
   margin: 10px 0px 10px 0px;
 }
+h2 {
+  font-size: 18px;
+}
 h2.archive,
 h2.tag,
 h2.category {
@@ -106,7 +109,7 @@ h2.category {
   z-index: 1;
 }
 #lx-aside {
-  width: 38.2%;
+  width: 30%;
   top: 0;
   left: 0;
   bottom: 0;
@@ -345,7 +348,7 @@ footer {
   text-align: center;
 }
 #lx-main-content {
-  margin-left: 38.1966%;
+  margin-left: 30%;
   position: relative;
   z-index: 4;
 }
@@ -430,7 +433,7 @@ a.category-link {
 }
 @media screen and (max-width: 768px) {
   .lx-post .lx-entry > div h2 {
-    font-size: 24px;
+    font-size: 18px;
   }
 }
 .lx-post .lx-entry > div p:last-child {

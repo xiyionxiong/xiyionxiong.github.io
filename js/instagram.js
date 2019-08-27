@@ -29,7 +29,7 @@ var Instagram = (function(){
 		}
 
 		$(".instagram").lazyload();
-	//	changeSize();
+		changeSize();
 
 		setTimeout(function(){
 			preLoad(data);
@@ -117,7 +117,7 @@ var Instagram = (function(){
 
 	var bind = function(){
 		$(window).resize(function(){
-		//	changeSize();
+			changeSize();
 		});
 	}
 
