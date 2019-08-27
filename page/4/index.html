@@ -1,141 +1,698 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>熊猫博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="一只熊猫">
-  <meta name="keywords" content="">
-  <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
-  <script id="hexo-configurations">
-  var CONFIG = {
-    root: '/',
-    theme: 'lx',
-    version: '1.4.5',
-    localsearch:{
-      "enable": false,
-      "trigger": "auto",
-      "top_n_per_article": 1,
-      "unescape": false,
-      "preload": false
-      },
-    path: '-'
-  };
-</script>
-
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/main.css">
-  <script src="/js/jquery.min.js"></script>
-  <script src="/js/jquery.jside.menu.js"></script>
-	<script>
-	$(document).ready(function(){
-	$(".menu-container").jSideMenu({
-	    jSidePosition: "position-right",
-	    jSideSticky: true,
-	    jSideSkin: "endless-river",
-	     });
-	}); 
-	</script>
+  <meta charset="utf-8">
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300|Noto+Serif+SC&amp;display=swap">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+  <title>熊猫博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="熊猫博客">
+<meta property="og:url" content="http://blog.apanda.online/page/4/index.html">
+<meta property="og:site_name" content="熊猫博客">
+<meta property="og:description" content="大道至简，真理在众！技术在手，代码在心!">
+<meta property="og:locale" content="中文">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="熊猫博客">
+<meta name="twitter:description" content="大道至简，真理在众！技术在手，代码在心!">
+  
+    <link rel="alternative" href="/atom.xml" title="熊猫博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.jpg">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+    
+    
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: true,
+          isPost: false,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
 </head>
 <body>
-<div id="page">
-<div id="lx-aside" style="background-image: url(/images/cover.jpg)">
-  <div class="overlay">
-  <div class="featured">
-    <div class="avatar"><a href="/"><img src="/images/person_1.jpg"></a></div>
-    <span>一只熊猫</span>
-    <h2>熊猫博客</h2>
-    <span>——</span>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/">一只熊猫</a></h1>
+        </hgroup>
+
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/categories/随笔">随笔</a></li>
+                        
+                            <li><a href="/categories/技术">技术</a></li>
+                        
+                            <li><a href="/instagram">相册</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                            
+                                <a class="fl mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                            
+                                <a class="fl facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                            
+                                <a class="fl twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                            
+                                <a class="fl rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/Android性能优化典范/" style="font-size: 16.67px;">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size: 10px;">Annotation</a> <a href="/tags/AsyncTask/" style="font-size: 10px;">AsyncTask</a> <a href="/tags/Binder/" style="font-size: 10px;">Binder</a> <a href="/tags/CountDownTimer/" style="font-size: 10px;">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/tags/EventBus/" style="font-size: 11.67px;">EventBus</a> <a href="/tags/Golang/" style="font-size: 10px;">Golang</a> <a href="/tags/Google-Develop-for-Android-系列/" style="font-size: 20px;">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size: 10px;">Ibeacon</a> <a href="/tags/ImageView/" style="font-size: 10px;">ImageView</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 10px;">Kotlin</a> <a href="/tags/Lambda/" style="font-size: 10px;">Lambda</a> <a href="/tags/MotionEvent/" style="font-size: 10px;">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size: 11.67px;">OkHttp</a> <a href="/tags/React-Native/" style="font-size: 10px;">React-Native</a> <a href="/tags/RxAndroid/" style="font-size: 10px;">RxAndroid</a> <a href="/tags/RxJava/" style="font-size: 16.67px;">RxJava</a> <a href="/tags/ServiceManager/" style="font-size: 10px;">ServiceManager</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/String相关类性能测试/" style="font-size: 10px;">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size: 10px;">Textview</a> <a href="/tags/TypedArray/" style="font-size: 10px;">TypedArray</a> <a href="/tags/VPN/" style="font-size: 10px;">VPN</a> <a href="/tags/ViewHolder的作用/" style="font-size: 10px;">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size: 10px;">WebView</a> <a href="/tags/Webview/" style="font-size: 10px;">Webview</a> <a href="/tags/adb/" style="font-size: 10px;">adb</a> <a href="/tags/drawable/" style="font-size: 10px;">drawable</a> <a href="/tags/goland-json/" style="font-size: 10px;">goland json</a> <a href="/tags/golang/" style="font-size: 11.67px;">golang</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/port/" style="font-size: 10px;">port</a> <a href="/tags/redis/" style="font-size: 11.67px;">redis</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/widget/" style="font-size: 10px;">widget</a> <a href="/tags/《仙》/" style="font-size: 10px;">《仙》</a> <a href="/tags/《仙》第一部-风流少年/" style="font-size: 11.67px;">《仙》第一部-风流少年</a> <a href="/tags/下拉刷新/" style="font-size: 10px;">下拉刷新</a> <a href="/tags/写作/" style="font-size: 11.67px;">写作</a> <a href="/tags/反思/" style="font-size: 10px;">反思</a> <a href="/tags/图像、背景、View更新、布局、内存/" style="font-size: 11.67px;">图像、背景、View更新、布局、内存</a> <a href="/tags/壁纸/" style="font-size: 11.67px;">壁纸</a> <a href="/tags/开发规范/" style="font-size: 13.33px;">开发规范</a> <a href="/tags/异步线程的实现（Looper、MessageQueue、Handler）/" style="font-size: 10px;">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/快捷键/" style="font-size: 10px;">快捷键</a> <a href="/tags/总结分类/" style="font-size: 18.33px;">总结分类</a> <a href="/tags/时间轴/" style="font-size: 10px;">时间轴</a> <a href="/tags/架构的实例/" style="font-size: 10px;">架构的实例</a> <a href="/tags/沉浸式/" style="font-size: 10px;">沉浸式</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a> <a href="/tags/目标/" style="font-size: 11.67px;">目标</a> <a href="/tags/知识库/" style="font-size: 13.33px;">知识库</a> <a href="/tags/科学上网/" style="font-size: 10px;">科学上网</a> <a href="/tags/编译/" style="font-size: 10px;">编译</a> <a href="/tags/自定义Loader/" style="font-size: 10px;">自定义Loader</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://wsgzao.github.io/">HelloDog</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.dearzd.com/DBlog/">咚门</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.codingyun.com/">Coding云</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://blog.jobbole.com/">伯乐在线</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.hankin.cn/">hankin技术宅</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">一只熊猫</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/https://dn-coding-net-production-static.qbox.me/5c59ede2-89b8-4696-921c-4ceeaa8f607c.jpg?imageMogr2/auto-orient/format/jpeg/crop/!478x478a0a0" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">一只熊猫</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/categories/随笔">随笔</a></li>
+                
+                    <li><a href="/categories/技术">技术</a></li>
+                
+                    <li><a href="/instagram">相册</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="weibo" target="_blank" href="http://weibo.com/1743454163/" title="weibo">weibo</a>
+                    
+                        <a class="mail" target="_blank" href="mailto:camchin1@msn.cn" title="mail">mail</a>
+                    
+                        <a class="facebook" target="_blank" href="https://www.facebook.com/ken.shoaw" title="facebook">facebook</a>
+                    
+                        <a class="twitter" target="_blank" href="https://twitter.com/w_0482" title="twitter">twitter</a>
+                    
+                        <a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap">
+  
+    <article id="post-随笔/VIM快捷键" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/01/随笔/VIM快捷键/" class="article-date">
+      <time datetime="2016-04-01T03:33:45.000Z" itemprop="datePublished">2016-04-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/01/随笔/VIM快捷键/">VIM快捷键的使用</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>VIM快捷键的使用</p>
+<p>1、删除 dd</p>
+<p>2、删除当前的单词 daw</p>
+<p>3、复制当前的单词 yw</p>
+<p>4、粘贴 p</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/随笔/">随笔</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/目标/">目标</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
     
   </div>
-  </div>
-</div>
-<div id="lx-main-content">
-  <div class="lx-post"> 
+  
+</article>
 
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2016/04/01/随笔/VIM快捷键/">VIM快捷键的使用</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-04-01 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
-      <p></p>
+
+
+
+
+
+
+
+
+  
+    <article id="post-随笔/Q2季度目标" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/01/随笔/Q2季度目标/" class="article-date">
+      <time datetime="2016-04-01T03:33:45.000Z" itemprop="datePublished">2016-04-01</time>
+</a>
     </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2016/04/01/随笔/Q2季度目标/">Q2季度目标</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-04-01 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
-      <p><p>1、完成GankAPP，并上线</p>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/01/随笔/Q2季度目标/">Q2季度目标</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>1、完成GankAPP，并上线</p>
 <pre><code>未完成的部分
 1、上啦下拉更新 
 2、替换历史上今天的API
 3、优化webview的显示
 4、优化代码结构（网络请求**）
-</code></pre></p>
+</code></pre>
+          
+      
     </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/随笔/">随笔</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/目标/">目标</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/04/01/随笔/Q2季度目标/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2016/03/29/android/RxJava/深入浅出RxJava（一：基础篇）/">深入浅出RxJava(一：基础篇)</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-29 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p><a href="http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/" target="_blank" rel="noopener">英文原文</a> </p>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-android/RxJava/深入浅出RxJava（一：基础篇）" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/29/android/RxJava/深入浅出RxJava（一：基础篇）/" class="article-date">
+      <time datetime="2016-03-29T13:12:17.000Z" itemprop="datePublished">2016-03-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/29/android/RxJava/深入浅出RxJava（一：基础篇）/">深入浅出RxJava(一：基础篇)</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p><a href="http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/" target="_blank" rel="noopener">英文原文</a> </p>
 <p><a href="http://blog.csdn.net/lzyzsd/article/details/41833541" target="_blank" rel="noopener">译文原文</a> </p>
 <p><a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="noopener">RxJava</a>正在Android开发者中变的越来越流行。唯一的问题就是上手不容易，尤其是大部分人之前都是使用命令式编程语言。但是一旦你弄明白了，你就会发现RxJava真是太棒了。<br>这里仅仅是帮助你了解RxJava，整个系列共有四篇文章，希望你看完这四篇文章之后能够了解RxJava背后的思想，并且喜欢上RxJava。</p>
 <p>RxJava最核心的两个东西是Observables（被观察者，事件源）和 Subscribers（观察者）。Observables发出一系列事件，Subscribers处理这些事件。这里的事件可以是任何你感兴趣的东西 （触摸事件，web接口调用返回的数据。。。）</p>
 <p>一个Observable可以发出零个或者多个事件，知道结束或者出错。每发出一个事件，就会调用它的Subscriber的onNext方法，最后调用Subscriber.onNext()或者Subscriber.onError()结束。</p>
 <p>Rxjava的看起来很想设计模式中的观察者模式，但是有一点明显不同，那就是如果一个Observerble没有任何的的Subscriber，那么这个Observable是不会发出任何事件的。</p>
-<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1></p>
+<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1>
+          
+      
     </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxJava/">RxJava</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/29/android/RxJava/深入浅出RxJava（一：基础篇）/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2016/03/29/android/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考/">谷歌官方出的一套关于 Android 架构的实例参考</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-29 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>原文 <a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="noopener">github.com</a></p>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-android/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/29/android/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考/" class="article-date">
+      <time datetime="2016-03-29T05:12:17.000Z" itemprop="datePublished">2016-03-29</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/29/android/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考/">谷歌官方出的一套关于 Android 架构的实例参考</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>原文 <a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="noopener">github.com</a></p>
 <p>The Android framework offers a lot of flexibility when it comes to defining how to organize and <em>architect</em> an Android app. This freedom, whilst very valuable, can also result in apps with large classes, inconsistent naming and architectures (or lack of) that can make testing, maintaining and extending difficult.</p>
 <p>Android Architecture Blueprints is meant to demonstrate possible ways to help with these common problems. In this project we offer the same application implemented using different architectural concepts and tools.</p>
 <p>You can use these samples as a reference or as a starting point for creating your own apps. The focus here is on code structure, architecture, testing and maintainability. However, bear in mind that there are many ways to build apps with these architectures and tools, depending on your priorities, so these shouldn’t be considered canonical examples. The UI is deliberately kept simple.</p>
 <p><strong>What does ***</strong>beta<strong>*</strong> mean?**</p>
 <p>We’re still making decisions that could affect all samples so we’re keeping the initial number of variants low before the stable release.</p>
 <p><strong>Samples</strong></p>
-<p>All projects are released in their own branch. Check each project’s README for more information.<br></p>
+<p>All projects are released in their own branch. Check each project’s README for more information.<br>
+          
+      
     </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/架构的实例/">架构的实例</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/29/android/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2016/03/25/android/RxJava/RxAndroid/">从案例学习RxAndroid</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-25 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p><a herf="https://medium.com/@kurtisnusbaum/rxandroid-basics-part-1-c0d5edcf6850">原文链接</a></p>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-android/RxJava/RxAndroid" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/25/android/RxJava/RxAndroid/" class="article-date">
+      <time datetime="2016-03-25T13:01:45.000Z" itemprop="datePublished">2016-03-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/25/android/RxJava/RxAndroid/">从案例学习RxAndroid</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p><a herf="https://medium.com/@kurtisnusbaum/rxandroid-basics-part-1-c0d5edcf6850">原文链接</a></p>
 <p>如果你在阅读这篇文章，相信你一定很想了解RxJava以及如何在Android应用中使用它。可能你已经见过RxJava的代码了，但仍然有些疑惑，愿你能在这篇文章里找到答案。</p>
 <p>当我第一次使用RxJava的时候我只是在照搬代码，这些代码能跑起来，但是我对RxJava的基础部分仍然存在误解，而且我找不到好的源码来学习。所以为了理解RxJava，我不得不一点一点学习，踩了不少坑。</p>
 <p>为了不让你把我踩过的坑再踩一遍，我会基于我的学习成果写一些例子出来，目的就是让你能够对RxJava有足够的了解，并能在你的Android应用中使用它。</p>
 <p>源码可以在这里找到。在每个例子的开始，我会写清每个代码段是属于哪个Activity的。我会将本文分为两个部分，在前三个例子里，我会着重讲解如何用RxJava异步加载数据；在后三个例子里，我会探索一些更高级的用法。</p>
 <p>在开始说代码之前，先澄清几个概念。RxJava最核心的东西就是Observable和Observer。Observable会发出数据，而与之相对的Observer则会通过订阅Observable来进行观察。</p>
 <p>Observer可以在Observable发出数据、报错或者声明没有数据可以发送时进行相应的操作。这三个操作被封装在Observer接口中，相应的方法为onNext()，onError()和onCompleted()。</p>
-<p>明确了这些概念以后，让我们来看一些例子。<br></p>
+<p>明确了这些概念以后，让我们来看一些例子。<br>
+          
+      
     </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RxAndroid/">RxAndroid</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/25/android/RxJava/RxAndroid/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2016/03/23/android/小知识点/你应该知道的那些Android小经验/">Android小经验</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-23 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>原文出处：<a href="http://jayfeng.com/2016/03/18/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E9%82%A3%E4%BA%9BAndroid%E5%B0%8F%E7%BB%8F%E9%AA%8C/" target="_blank" rel="noopener">http://jayfeng.com/</a> </p>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-android/小知识点/你应该知道的那些Android小经验" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/23/android/小知识点/你应该知道的那些Android小经验/" class="article-date">
+      <time datetime="2016-03-23T15:33:02.000Z" itemprop="datePublished">2016-03-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/23/android/小知识点/你应该知道的那些Android小经验/">Android小经验</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>原文出处：<a href="http://jayfeng.com/2016/03/18/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E9%82%A3%E4%BA%9BAndroid%E5%B0%8F%E7%BB%8F%E9%AA%8C/" target="_blank" rel="noopener">http://jayfeng.com/</a> </p>
 <p>做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。</p>
 <h2 id="查看SQLite日志"><a href="#查看SQLite日志" class="headerlink" title="查看SQLite日志"></a>查看SQLite日志</h2><p><code>adb shell setprop log.tag.SQLiteLog V</code></p>
 <p><code>adb shell setprop log.tag.SQLiteStatements V</code></p>
 <p>因为实现里用了Log.isLoggable(TAG, Log.VERBOSE)做了判断，LessCode的LogLess中也参考了这种机制：<a href="https://github.com/openproject/LessCode/blob/master/lesscode-core/src/main/java/com/jayfeng/lesscode/core/LogLess.java" target="_blank" rel="noopener">LogLess</a>。<br>使用这种方法就可以在Release版本也能做到查看应用的打印日志了。</p>
 <h2 id="PNG优化"><a href="#PNG优化" class="headerlink" title="PNG优化"></a>PNG优化</h2><p>APK打包会自动对PNG进行无损压缩，如果自行无损压缩是无效的。<br>当然进行有损压缩是可以的：<a href="https://tinypng.com/" target="_blank" rel="noopener">https://tinypng.com/</a></p>
-<h2 id="Tcpdump抓包"><a href="#Tcpdump抓包" class="headerlink" title="Tcpdump抓包"></a>Tcpdump抓包</h2></p>
+<h2 id="Tcpdump抓包"><a href="#Tcpdump抓包" class="headerlink" title="Tcpdump抓包"></a>Tcpdump抓包</h2>
+          
+      
     </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/知识库/">知识库</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/23/android/小知识点/你应该知道的那些Android小经验/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2016/03/21/android/小知识点/android代码片段/">Android开发代码片段</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-21 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><h3 id="1、获取电源锁"><a href="#1、获取电源锁" class="headerlink" title="1、获取电源锁"></a>1、获取电源锁</h3><pre><code>public static void acquireWakeLock() {
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-android/小知识点/android代码片段" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/21/android/小知识点/android代码片段/" class="article-date">
+      <time datetime="2016-03-21T12:33:02.000Z" itemprop="datePublished">2016-03-21</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/21/android/小知识点/android代码片段/">Android开发代码片段</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <h3 id="1、获取电源锁"><a href="#1、获取电源锁" class="headerlink" title="1、获取电源锁"></a>1、获取电源锁</h3><pre><code>public static void acquireWakeLock() {
     unlockKeyBoard();
     try {
         if (null == mWakeLock) {
@@ -157,103 +714,376 @@
         DbUtils.exceptionHandler(e);
     }
 }
-</code></pre></p>
+</code></pre>
+          
+      
     </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/写作/">写作</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/21/android/小知识点/android代码片段/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2016/03/02/android/小知识点/Android开发工作中的细节/">Android开发工作中的细节</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-02 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><ol>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-android/小知识点/Android开发工作中的细节" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/02/android/小知识点/Android开发工作中的细节/" class="article-date">
+      <time datetime="2016-03-01T18:33:45.000Z" itemprop="datePublished">2016-03-02</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/02/android/小知识点/Android开发工作中的细节/">Android开发工作中的细节</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <ol>
 <li><p>全部 Activity 可继承自 BaseActivity，便于统一风格与处理公共事件，构建对话框统一构建器的建立，万一需要整体变动，一处修改到处有效。</p>
 </li>
 <li><p>数据库表段字段常量和 SQL 逻辑分离，更清晰，建议使用 Lite 系列框架 LiteOrm 库，超级清晰且重心可以放在业务上不用关心数据库细节。</p>
 </li>
 <li><p>全局变量放全局类中，模块私有放自己的管理类中，让常量清晰且集中.</p>
 </li>
-<li><p>不要相信庞大的管理类的东西会带来什么好处，可能是一场灾难，而要时刻注意单一职责原则，一个类专心做好一件事情更为清晰。</p></p>
+<li><p>不要相信庞大的管理类的东西会带来什么好处，可能是一场灾难，而要时刻注意单一职责原则，一个类专心做好一件事情更为清晰。</p>
+          
+      
     </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/知识库/">知识库</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/02/android/小知识点/Android开发工作中的细节/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2016/03/01/随笔/日常使用到的梯子/">日常使用到的梯子</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-01 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
-      <p><p>日常生活中,由于天朝的局域网的限制,很多网站都无法进行使用,虽然国内也有替代的网站,但是作为开发人员来讲,这些事远远不够的,现在就讲我个人在生活工作中使用到梯子,进行总结一下</p>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-随笔/日常使用到的梯子" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/01/随笔/日常使用到的梯子/" class="article-date">
+      <time datetime="2016-03-01T04:33:45.000Z" itemprop="datePublished">2016-03-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/01/随笔/日常使用到的梯子/">日常使用到的梯子</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>日常生活中,由于天朝的局域网的限制,很多网站都无法进行使用,虽然国内也有替代的网站,但是作为开发人员来讲,这些事远远不够的,现在就讲我个人在生活工作中使用到梯子,进行总结一下</p>
 <h2 id="PC端"><a href="#PC端" class="headerlink" title="PC端"></a>PC端</h2><p>##全局梯子<br>目前在PC上(window)使用到的全局的梯子 就是 赛风和VPN Gate</p>
 <h3 id="赛风"><a href="#赛风" class="headerlink" title="赛风"></a>赛风</h3><p>如果能够直接访问 <a herf="http://www.psiphon3.net/zh/index.html"> 直达</a></p>
-<h4 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h4><p>赛风是赛风公司的一款新翻墙工具，利用VPN, SSH和HTTP代理软件提供未经审查的访问互联网。赛风的客户端将自动寻找新的接入点，力求最大限度的绕过网络审查。<br></p>
+<h4 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h4><p>赛风是赛风公司的一款新翻墙工具，利用VPN, SSH和HTTP代理软件提供未经审查的访问互联网。赛风的客户端将自动寻找新的接入点，力求最大限度的绕过网络审查。<br>
+          
+      
     </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/随笔/">随笔</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VPN/">VPN</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/01/随笔/日常使用到的梯子/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2016/03/01/android/小知识点/Android开发中的小知识点汇总/">Android小知识库</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-01 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>这份是我工作以来，总结的小知识库，有些知识点现在看来太LOW了，把还觉得有用的分享出来！</p>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-android/小知识点/Android开发中的小知识点汇总" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/01/android/小知识点/Android开发中的小知识点汇总/" class="article-date">
+      <time datetime="2016-02-29T18:33:45.000Z" itemprop="datePublished">2016-03-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/01/android/小知识点/Android开发中的小知识点汇总/">Android小知识库</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>这份是我工作以来，总结的小知识库，有些知识点现在看来太LOW了，把还觉得有用的分享出来！</p>
 <h3 id="Genymotion下载虚拟镜像Connection-timeout"><a href="#Genymotion下载虚拟镜像Connection-timeout" class="headerlink" title="Genymotion下载虚拟镜像Connection timeout"></a>Genymotion下载虚拟镜像Connection timeout</h3><p>Add new device出现的问题：</p>
 <p>Failed to deploy virtual device.<br>Unable to create virtual device.Connection timeout occurred.</p>
-<p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">当选择Google Nexus 5 - 6.0.0 - API 23 - 1080x1920下载device失败后，到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova下看到genymotion_vbox86p_6.0_160114_090449.ova，大小却是0KB，在C:\Users\用户主目录\AppData\Local\Genymobile\genymotion.log，打开该文件，找到类似</span><br><span class="line">    </span><br><span class="line">    “http://files2.genymotion.com/dists/6.0.0/ova/genymotion_vbox86p_6.0_160114_090449.ova”路径，即您想要下载的镜像文件URL；`</span><br><span class="line"></span><br><span class="line">用迅雷去下载，下载完成后放到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova；</span><br><span class="line">重新点击Google Nexus 5 - 6.0.0 - API 23 - 1080x1920去下载，验证安装后即会显示在设备列表中。</span><br></pre></td></tr></table></figure></p></p>
+<p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">当选择Google Nexus 5 - 6.0.0 - API 23 - 1080x1920下载device失败后，到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova下看到genymotion_vbox86p_6.0_160114_090449.ova，大小却是0KB，在C:\Users\用户主目录\AppData\Local\Genymobile\genymotion.log，打开该文件，找到类似</span><br><span class="line">    </span><br><span class="line">    “http://files2.genymotion.com/dists/6.0.0/ova/genymotion_vbox86p_6.0_160114_090449.ova”路径，即您想要下载的镜像文件URL；`</span><br><span class="line"></span><br><span class="line">用迅雷去下载，下载完成后放到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova；</span><br><span class="line">重新点击Google Nexus 5 - 6.0.0 - API 23 - 1080x1920去下载，验证安装后即会显示在设备列表中。</span><br></pre></td></tr></table></figure></p>
+          
+      
     </div>
-  </div>
- 
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
 
-<div id="pagination">
-  <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-chevron-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-chevron-right" aria-label="accessibility.next_page"></i></a>
-</div>
-<footer>
-  <div>
-  Copyright &copy; 2019.<a href="/">熊猫博客</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.blleng.cn" target="_blank">Lx</a><br>
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/知识库/">知识库</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/03/01/android/小知识点/Android开发中的小知识点汇总/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+    </nav>
+  
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2019 一只熊猫
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a> 
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
 </footer>
-  </div>
-</div>
-</div>
 
-<button class="menu-trigger"></button>
-<div class="menu">
-  <div class="menu-head">
-    <span class="layer">
-      <div class="col">
-        <div class="row for-pic">
-          <div class="profile-pic">
-            <a href="/"><img src="/images/person_1.jpg" alt="一只熊猫"/></a>
-          </div>
-        </div>
-        <div class="row for-name">
-          <p>一只熊猫</p>
-          <span class="tagline">Hello, World!</span>
-        </div>
-      </div>
-    </span>
-  </div>
-  <nav class="menu-container">
-  <ul class="menu-items">
-    <li><a href="/"><i class="fa fa-home fa-fw"></i>首页</a></li>
-    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>归档</a></li>
-    <li class="has-sub"><span class="dropdown-heading">
-      <i class="fa fa-bookmark fa-fw"></i>页面</span>
-        <ul>
-          <li><a href="/guestbook">留言</a></li>
-        <li><a href="/about">关于</a></li>
-        </ul>
-    </li>
-    <li class="has-sub"><span class="dropdown-heading">
-      <i class="fa fa-link fa-fw"></i>友链</span>
-        <ul>
-          <li> <a href="https://lx.blleng.cn" target="_blank">Theme-Lx</a></li>
-        </ul>
-    </li>
-  </ul>
-  </nav>
-</div>
-
-<div class="gototop js-top">
-  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
-</div>
-<script src="/js/jquery.easing.min.js"></script>
-<script src="/js/jquery.waypoints.min.js"></script>
-<script src="/js/jquery.stellar.min.js"></script>
+    </div>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 <script src="/js/main.js"></script>
 
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 21;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
 
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+  </div>
 </body>
 </html>
