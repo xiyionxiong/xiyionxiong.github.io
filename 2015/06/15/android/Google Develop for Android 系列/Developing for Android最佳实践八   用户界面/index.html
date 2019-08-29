@@ -66,10 +66,12 @@
 <p>注：1.GPU的填充率分为像素填充率和纹理填充率。2.关于过度绘制这一点，其实在 <a href="http://jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0416/2735.html" target="_blank" rel="noopener">这篇文章</a> 的GPU Problem: Overdraw一节中说的最详细。</p>
 <h2 id="不要设置窗口背景为空"><a href="#不要设置窗口背景为空" class="headerlink" title="不要设置窗口背景为空"></a>不要设置窗口背景为空</h2><p>避免过度绘制的技巧之一就是在所有View都不透明的情况下去除窗口的背景。反正如果有一个或者多个不透明的View完全挡住了窗口，用户怎么也看不到，还不如干脆不要背景。</p>
 <p>去除窗口背景是一个有效的方法，但也往往是一个解决过度绘制问题的复杂办法，而且它经常在某些情况下导致渲染的artifacts（不知道artifacts啥意思）。虽然可以在app的manifest中设置一个空的窗口背景，但是因为系统无法正确绘制启动窗口，这会导致图形绘制artifacts。更正确的做法是保留manifest中启动窗口的背景，转而在activity的onCreate()方法中通过调用getWindow().setBackground(null)设置成null。但即便是这种方法也会导致artifacts。比如，如果keyboard/IME设置成了adjustResize，然后动画进入一个背景为null的activity，在键盘后面可能存在artifacts，因为window manager没有要绘制的背景。还有，全屏且带有overscroll bounce gaps的ListView也可能会有artifacts。</p>
-<p>。。。。受不了了 artifacts artifacts artifacts不停。<br><a id="more"></a><br>正确解决这种情况下过度绘制问题的方法恰恰是使用启动窗口。不要再窗口与view之间的容器中使用不透明背景颜色，而是将这个颜色设置给主题里的windowBackground属性，而容器则保持透明背景。</p>
+<p>。。。。受不了了 artifacts artifacts artifacts不停。</p>
+<a id="more"></a>
+<p>正确解决这种情况下过度绘制问题的方法恰恰是使用启动窗口。不要再窗口与view之间的容器中使用不透明背景颜色，而是将这个颜色设置给主题里的windowBackground属性，而容器则保持透明背景。</p>
 <p>注：实在觉得这段优点多余，如果要避免过度绘制，我们肯定不会在根view上设置不必要的背景颜色，想都不会想到要去掉窗口的背景颜色。</p>
 <h2 id="不要禁用启动窗口（Starting-Window）"><a href="#不要禁用启动窗口（Starting-Window）" class="headerlink" title="不要禁用启动窗口（Starting Window）"></a>不要禁用启动窗口（Starting Window）</h2><p>正如我们在<a href="https://medium.com/google-developers/developing-for-android-iii-2efc140167fd" target="_blank" rel="noopener">Performance</a>一章的快速启动一节中所讨论的那样，系统为了达到快速启动的用户体验，在应用还在后台加载的时候就调用了启动窗口。可以告在主题设置<em>windowDisablePreview</em>属性，告诉系统不要这样做，</p>
-<p>\&lt;item name=”android:windowDisablePreview”>\&lt;/item>。</p>
+<p>&lt;item name=”android:windowDisablePreview”&gt;&lt;/item&gt;。</p>
 <p>有些应用为了自定义启动屏幕的或者达到其他新颖的用户体验，或者因为启动窗口的样式比如色彩和启动以后的内容差别太大，的确会设置windowDisablePreview为true。但是这样做的问题是这些方法要花费更长的时间（因为初始化与显示内容所花费的时间比系统启动窗口要长的多），在activity启动之前用户必须被迫接受毫无提示的等待。</p>
 <p>为了让用户感受到最好的用户体验，请保持系统对启动窗口的默认设置。如果你需要自定义，可以利用启动窗口将继承activity的主题这一特点，这里可以更正确的调整activity的外观。并且如果你想要全新的、自定义的启动体验，你还可以为启动窗口指定一个自定义的drawable（通过主题的<em>windowBackground</em>属性设置）。 </p>
 <h2 id="确保可以轻易退出沉浸模式"><a href="#确保可以轻易退出沉浸模式" class="headerlink" title="确保可以轻易退出沉浸模式"></a>确保可以轻易退出沉浸模式</h2><p>4.4之后，可以为应用开启沉浸式的全屏模式，用户想退出全屏模式必须滑动屏幕的上下边缘才能显示导航栏与状态栏。这只适用于沉浸式的游戏，用户点击屏幕（不小心点到虚拟键）不至于退出游戏。其他app，尤其是以内容阅读为主的app，比如播放器，应该让用户点击屏幕就能退出，而不是滑动上下栏。关于如何正确使用沉浸模式，详情见<a href="https://developer.android.com/training/system-ui/immersive.html" target="_blank" rel="noopener">沉浸模式开发者指南</a>。</p>
@@ -80,7 +82,7 @@
 <p><code>// some activity code</code></p>
 <p><code>//</code></p>
 <p><code>void onClick(View view) {</code></p>
-<p><code>webservice.fetchPosts(`</code>new<code></code>Callback() {`</p>
+<p><code>webservice.fetchPosts(``new</code> <code>Callback() {</code></p>
 <p><code>public void onResult(Response repsonse) {</code></p>
 <p><code>// View可能不再有效，Activity可能已经消失</code></p>
 <p><code>}</code></p>

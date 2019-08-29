@@ -62,7 +62,9 @@
       <div>
         <p>工欲善其事，必先利其器，对于想要深入学习Android源码，必须先掌握Android编译命令.</p>
 <p>关于Android Build系统，这个话题很早就打算整理下，迟迟没有下笔，决定跟大家分享下。先看下面几条指令，相信编译过Android源码的人都再熟悉不过的。</p>
-<p>source /opt/android1204_17.conf<br>source setenv.sh<br>lunch<br>make -j12<br><a id="more"></a></p>
+<p>source /opt/android1204_17.conf<br>source setenv.sh<br>lunch<br>make -j12</p>
+<a id="more"></a>
+
 <p>记得最初刚接触Android时，同事告诉我用上面的指令就可以编译Android源码，指令虽短但过几天就记不全或者忘记顺序，每次编译时还需要看看自己的云笔记，冰冷的指令总是难以让我记忆。后来我决定认真研究下这个指令的含义。知其然还需知其所以然，这样能更深层次的理解并记忆，才能与自身的知识体系建立强连接，或许还有意外收获，果然如此，接下来跟大家分享一下在研究上述几条指令含义的过程中，深入了解到的Android Build(编译)系统。</p>
 <p>二、编译命令</p>
 <p>准备好编译环境后，编译Android源码的第一步是 source build/envsetup.sh，其中source命令就是用于运行shell脚本命令，功能等价于”.”，因此该命令也等价于. build/envsetup.sh。在文件envsetup.sh声明了当前会话终端可用的命令，这里需要注意的是当前会话终端，也就意味着每次新打开一个终端都必须再一次执行这些指令。起初并不理解为什么新开的终端不能直接执行make指令，到这里总算明白了。</p>
@@ -217,10 +219,14 @@
 </ul>
 <p>针对这些环境变量，编译系统还定义了一些便捷函数，如下：</p>
 <ul>
-<li>$(call my-dir)：获取当前文件夹路径；</li>
-<li>$(call all-java-files-under, )：获取指定目录下的所有Java文件；</li>
-<li>$(call all-c-files-under, )：获取指定目录下的所有C文件；</li>
-<li>$(call all-Iaidl-files-under, ) ：获取指定目录下的所有AIDL文件；</li>
+<li><p>$(call my-dir)：获取当前文件夹路径；</p>
+</li>
+<li><p>$(call all-java-files-under, )：获取指定目录下的所有Java文件；</p>
+</li>
+<li><p>$(call all-c-files-under, )：获取指定目录下的所有C文件；</p>
+</li>
+<li><p>$(call all-Iaidl-files-under, ) ：获取指定目录下的所有AIDL文件；</p>
+</li>
 <li><p>$(call all-makefiles-under, )：获取指定目录下的所有Make文件；</p>
 <p>LOCAL_PATH = call my-dir)<br>include CLEAR_VARS)</p>
 <h1 id="获取所有子目录中的Java文件"><a href="#获取所有子目录中的Java文件" class="headerlink" title="获取所有子目录中的Java文件"></a>获取所有子目录中的Java文件</h1><p>LOCAL_SRC_FILES = call all-subdir-java-files)</p>

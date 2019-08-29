@@ -65,24 +65,20 @@
 </blockquote>
 <p>第一种方式</p>
 <p>第一种方式是不需要，在布局文件中，使用WebView控件的</p>
-<p>步骤：<br><a id="more"></a></p>
+<p>步骤：</p>
+<a id="more"></a>
+
 <p>1、创建WebView实例</p>
-<pre><code>WebView web= new WebView(Context context);
-</code></pre><p>2、webkit浏览器是支持JavaScript的所以，添加支持</p>
-<pre><code>web.getSetting.setJavaScriptEnabled（true）;
-</code></pre><p>3、添加需要加载的网页地址Uri</p>
-<pre><code>web.loadUri(&quot;http://www.google.com&quot;);
-</code></pre><p>4、为保证能点击加载页面中的超链接是在当前打开，而不是在系统默认的浏览器中打开 ，需要添加支持</p>
+<pre><code>WebView web= new WebView(Context context);</code></pre><p>2、webkit浏览器是支持JavaScript的所以，添加支持</p>
+<pre><code>web.getSetting.setJavaScriptEnabled（true）;</code></pre><p>3、添加需要加载的网页地址Uri</p>
+<pre><code>web.loadUri(&quot;http://www.google.com&quot;);</code></pre><p>4、为保证能点击加载页面中的超链接是在当前打开，而不是在系统默认的浏览器中打开 ，需要添加支持</p>
 <pre><code>web.setWebViewClient(shouldOverrideUrlLoad(view,url){
                 view.loadUrl(url);
                 return super.shouldOverrideUrlLoad(view,url);   
-});
-</code></pre><p>5、显示页面</p>
-<pre><code>setContentView(web);
-</code></pre><p>6、为了在按系统返回键，出现直接退出app的情况，重写activity的 onkeydown（）方法</p>
+});</code></pre><p>5、显示页面</p>
+<pre><code>setContentView(web);</code></pre><p>6、为了在按系统返回键，出现直接退出app的情况，重写activity的 onkeydown（）方法</p>
 <p>7、添加权限</p>
-<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
-</code></pre><p>代码实现</p>
+<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;</code></pre><p>代码实现</p>
 <p>布局文件</p>
 <pre><code>&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     android:layout_width=&quot;match_parent&quot;
@@ -94,8 +90,7 @@
         android:layout_height=&quot;wrap_content&quot;
         android:text=&quot;社会新闻&quot; /&gt;
 
-&lt;/LinearLayout&gt;
-</code></pre><p>实现代码</p>
+&lt;/LinearLayout&gt;</code></pre><p>实现代码</p>
 <pre><code>public class MainActivity extends Activity {
 
     @Override
@@ -138,30 +133,23 @@
             }
             return  false;
         }
-}
-</code></pre><p>清单文件</p>
+}</code></pre><p>清单文件</p>
 <pre><code>&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
           package=&quot;com.kevin.fragmentdemo&quot; &gt;
         &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
-&lt;/manifest&gt;
-</code></pre><p>第二种方式</p>
+&lt;/manifest&gt;</code></pre><p>第二种方式</p>
 <p>基本上与第一种方式相同，只是在布局文件中定义了WebView的控件</p>
 <p>步骤</p>
 <p>1、创建WebView实例,通过的是布局文件中的id创建 XX是WebView组件的id</p>
-<pre><code>WebView webView= (WebView) findViewById(R.id.XX);
-</code></pre><p>2、webkit浏览器是支持JavaScript的所以，添加支持</p>
-<pre><code>webView.getSetting.setJavaScriptEnabled（true）;  
-</code></pre><p>3、为保证能点击加载页面中的超链接是在当前打开，而不是在系统默认的浏览器中打开 ，需要添加支持</p>
+<pre><code>WebView webView= (WebView) findViewById(R.id.XX);</code></pre><p>2、webkit浏览器是支持JavaScript的所以，添加支持</p>
+<pre><code>webView.getSetting.setJavaScriptEnabled（true）;  </code></pre><p>3、为保证能点击加载页面中的超链接是在当前打开，而不是在系统默认的浏览器中打开 ，需要添加支持</p>
 <pre><code>web.setWebViewClient(shouldOverrideUrlLoad(view,url){
                 view.loadUrl(url);
                 return super.shouldOverrideUrlLoad(view,url);   
-});
-</code></pre><p>4、添加需要加载的网页地址Uri</p>
-<pre><code>webView.loadUri(&quot;http://www.google.com&quot;);
-</code></pre><p>5、为了在按系统返回键，出现直接退出app的情况，重写activity的 onkeydown（）方法（详见代码）</p>
+});</code></pre><p>4、添加需要加载的网页地址Uri</p>
+<pre><code>webView.loadUri(&quot;http://www.google.com&quot;);</code></pre><p>5、为了在按系统返回键，出现直接退出app的情况，重写activity的 onkeydown（）方法（详见代码）</p>
 <p>6、添加权限、添加权限</p>
-<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
-</code></pre><p>代码实现</p>
+<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;</code></pre><p>代码实现</p>
 <p>布局文件</p>
 <pre><code>&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     xmlns:tools=&quot;http://schemas.android.com/tools&quot;
@@ -173,8 +161,7 @@
         android:layout_width=&quot;fill_parent&quot;
         android:layout_height=&quot;fill_parent&quot;&gt;
     &lt;/WebView&gt;
-&lt;/RelativeLayout&gt;
-</code></pre><p>实现代码</p>
+&lt;/RelativeLayout&gt;</code></pre><p>实现代码</p>
 <pre><code>public class MainActivity extends Activity {
 private WebView webView;
 @Override
@@ -209,13 +196,11 @@ protected void onCreate(Bundle savedInstanceState) {
   }
             return  false;
   }
-}
-</code></pre><p>清单文件</p>
+}</code></pre><p>清单文件</p>
 <pre><code>&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
         package=&quot;com.kevin.fragmentdemo&quot; &gt;
         &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
-&lt;/manifest&gt;
-</code></pre>
+&lt;/manifest&gt;</code></pre>
       </div>
     </div>
   </div>

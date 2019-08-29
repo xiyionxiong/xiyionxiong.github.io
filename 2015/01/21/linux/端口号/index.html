@@ -75,19 +75,15 @@ TCP    192.168.3.230:2020     183.62.96.189:1522     ESTABLISHED     1456
 TCP    192.168.3.230:2927     117.79.91.18:80        ESTABLISHED     4732
 TCP    192.168.3.230:2929     117.79.91.18:80        ESTABLISHED     4732
 TCP    192.168.3.230:2930     117.79.91.18:80        ESTABLISHED     4732
-TCP    192.168.3.230:2931     117.79.91.18:80        ESTABLISHED     4732
-</code></pre><h3 id="2-查看指定端口的占用情况"><a href="#2-查看指定端口的占用情况" class="headerlink" title="2.查看指定端口的占用情况"></a>2.查看指定端口的占用情况</h3><pre><code>C:\&gt;netstat -aon|findstr &quot;9050&quot;
+TCP    192.168.3.230:2931     117.79.91.18:80        ESTABLISHED     4732</code></pre><h3 id="2-查看指定端口的占用情况"><a href="#2-查看指定端口的占用情况" class="headerlink" title="2.查看指定端口的占用情况"></a>2.查看指定端口的占用情况</h3><pre><code>C:\&gt;netstat -aon|findstr &quot;9050&quot;
 协议    本地地址                     外部地址               状态                   PID
 TCP    127.0.0.1:9050         0.0.0.0:0              LISTENING       2016
-P: 看到了吗，端口被进程号为2016的进程占用，继续执行下面命令： （也可以去任务管理器中查看pid对应的进程）
-</code></pre><h3 id="3-查看PID对应的进程"><a href="#3-查看PID对应的进程" class="headerlink" title="3.查看PID对应的进程"></a>3.查看PID对应的进程</h3><pre><code>C:\&gt;tasklist|findstr &quot;2016&quot;
+P: 看到了吗，端口被进程号为2016的进程占用，继续执行下面命令： （也可以去任务管理器中查看pid对应的进程）</code></pre><h3 id="3-查看PID对应的进程"><a href="#3-查看PID对应的进程" class="headerlink" title="3.查看PID对应的进程"></a>3.查看PID对应的进程</h3><pre><code>C:\&gt;tasklist|findstr &quot;2016&quot;
 映像名称                       PID 会话名              会话#       内存使用
 ========================= ======== ================
 tor.exe                     2016 Console                 0     16,064 K 
 
-P:很清楚吧，tor占用了你的端口。
-</code></pre><h3 id="4-结束该进程"><a href="#4-结束该进程" class="headerlink" title="4.结束该进程"></a>4.结束该进程</h3><pre><code>C:\&gt;taskkill /f /t /im tor.exe
-</code></pre>
+P:很清楚吧，tor占用了你的端口。</code></pre><h3 id="4-结束该进程"><a href="#4-结束该进程" class="headerlink" title="4.结束该进程"></a>4.结束该进程</h3><pre><code>C:\&gt;taskkill /f /t /im tor.exe</code></pre>
       </div>
     </div>
   </div>

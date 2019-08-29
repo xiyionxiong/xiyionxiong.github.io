@@ -67,20 +67,25 @@
 <p>使用 docker ps -a 查看本机已有的容器</p>
 <p>我们使用容器 furious_bell，现在要将这个容器保存为一个文件 myunbuntu-export-1204.tar</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">export</span> furious_bell &gt; /home/myubuntu-export-1204.tar</span><br></pre></td></tr></table></figure>
+
 <p>导出完成后，就可以使用 import 导入了</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker import - /home/myubuntu-export-1204.tar</span><br></pre></td></tr></table></figure>
+
 <h2 id="2-保存save-加载-load"><a href="#2-保存save-加载-load" class="headerlink" title="2.保存save - 加载 load"></a>2.保存save - 加载 load</h2><p>格式：<strong>docker save IMAGE(镜像)</strong></p>
 <p>使用 <strong>docker images</strong> 查看本机已有的镜像（也可以使用 <strong>docker commit <contain-id> <image-name></image-name></contain-id></strong>命令把一个正在运行的容器保存为镜像），</p>
 <p> 这里有个基础镜像：ubuntu:12.04，现在要将这个镜像保存为一个文件myubuntu-save-1204.tar</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save 9610cfc68e8d &gt; /home/myubuntu-save-1204.tar</span><br></pre></td></tr></table></figure>
+
 <p>有点慢，稍微等待一下，没有任何warn信息就表示保存OK。9610cfc68e8d 是镜像ID</p>
 <p>现在就可以在任何装 docker 的地方加载 刚保存的镜像了</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load  /home/myubuntu-save-1204.tar</span><br></pre></td></tr></table></figure>
+
 <h2 id="3-导出-export-与-保存-save-的区别"><a href="#3-导出-export-与-保存-save-的区别" class="headerlink" title="3.导出 export 与 保存 save 的区别"></a>3.导出 export 与 保存 save 的区别</h2><p> (1).export导出的镜像文件大小  小于 save保存的镜像</p>
 <p> (2).export 导出（import导入）是根据容器拿到的镜像，再导入时会丢失镜像所有的历史，所以无法进行回滚操作（docker tag <layer id> <image name>）；而save保存（load加载）的镜像，没有丢失镜像的历史，可以回滚到之前的层（layer）。（查看方式：docker images –tree）</image></layer></p>
 <p>注：导入加载进来觉得不合适可以使用 docker rm 容器ID 、 docker rmi 镜像ID 来删掉。</p>
 <p>​       移除所有的容器和镜像（大扫除）：</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">kill</span> (docker ps -q) ; docker rm (docker ps -a -q) ; docker rmi $(docker images -q -a)</span><br></pre></td></tr></table></figure>
+
 <p>参考：</p>
 <p><a href="http://www.tuicool.com/articles/emYVRzv" target="_blank" rel="noopener">http://www.tuicool.com/articles/emYVRzv</a><br><a href="http://my.oschina.net/zjzhai/blog/225112" target="_blank" rel="noopener">http://my.oschina.net/zjzhai/blog/225112</a><br><a href="http://www.sxt.cn/u/756/blog/5339" target="_blank" rel="noopener">http://www.sxt.cn/u/756/blog/5339</a> </p>
 

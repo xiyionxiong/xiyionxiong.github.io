@@ -109,14 +109,11 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                     mUploadMessage = null;
                }
           }
-       }
-</code></pre><p>还有重要的一点：如果这个上传操作涉及到JS操作，别忘记对Webview开启对JS的支持：</p>
+       }</code></pre><p>还有重要的一点：如果这个上传操作涉及到JS操作，别忘记对Webview开启对JS的支持：</p>
 <pre><code>WebSettings settings = webview.getSettings();
-settings.setJavaScriptEnabled(true);
-</code></pre><h3 id="代码混淆"><a href="#代码混淆" class="headerlink" title="代码混淆"></a>代码混淆</h3><pre><code>-keepclassmembers class * extends android.webkit.WebChromeClient{
+settings.setJavaScriptEnabled(true);</code></pre><h3 id="代码混淆"><a href="#代码混淆" class="headerlink" title="代码混淆"></a>代码混淆</h3><pre><code>-keepclassmembers class * extends android.webkit.WebChromeClient{
     public void openFileChooser(...);
-}
-</code></pre><h3 id="兼容5-0"><a href="#兼容5-0" class="headerlink" title="兼容5.0"></a>兼容5.0</h3><pre><code>webview.setWebChromeClient(new WebChromeClient(){
+}</code></pre><h3 id="兼容5-0"><a href="#兼容5-0" class="headerlink" title="兼容5.0"></a>兼容5.0</h3><pre><code>webview.setWebChromeClient(new WebChromeClient(){
 public void openFileChooser(ValueCallback&lt;Uri&gt; uploadMsg) {
      ...
 }
@@ -182,15 +179,13 @@ private void onActivityResultAboveL(int requestCode, int resultCode, Intent data
     mUploadCallbackAboveL.onReceiveValue(results);
     mUploadCallbackAboveL = null;
     return;
-}
-</code></pre><blockquote>
+}</code></pre><blockquote>
 <p>代码转自: <a href="http://blog.saymagic.cn/2015/11/08/webview-upload.html" target="_blank" rel="noopener">http://blog.saymagic.cn/2015/11/08/webview-upload.html</a></p>
 </blockquote>
 <blockquote>
 <p>源码地址: <a href="https://gitcafe.com/saymagic/Webviewdemo" target="_blank" rel="noopener">https://gitcafe.com/saymagic/Webviewdemo</a></p>
 </blockquote>
-<pre><code>* 说明:实际上我使用了该段代码只能够 完成5.0+的支持,对于5.0以下的机器支持的并不完美,比如说上传完成之后,并不能显示图片到目标位置.
-</code></pre><ul>
+<pre><code>* 说明:实际上我使用了该段代码只能够 完成5.0+的支持,对于5.0以下的机器支持的并不完美,比如说上传完成之后,并不能显示图片到目标位置.</code></pre><ul>
 <li>没办法继续爬文 终于发现了</li>
 </ul>
 <pre><code>package com.fuiou.webviewupload;
@@ -458,8 +453,7 @@ public class MainActivity extends Activity {
         }
         return super.onKeyDown(keyCode, event);  
         }
-}
-</code></pre><p>根据这个哥们的代码进行精简,符合自己的需求,而且发现了这个代码的一个问题,没有能够进行判空操作,如果没有选择图片,直接返回APP会奔溃!</p>
+}</code></pre><p>根据这个哥们的代码进行精简,符合自己的需求,而且发现了这个代码的一个问题,没有能够进行判空操作,如果没有选择图片,直接返回APP会奔溃!</p>
 <p>下面是我的开发源码:</p>
 <pre><code>private class MyWebChromeClient extends WebChromeClient {
 
@@ -636,8 +630,7 @@ public class MainActivity extends Activity {
             return Uri.fromFile(newFile);
         }
         return null;
-    }
-</code></pre><p>都目前位置 问题得到完美的解决!!</p>
+    }</code></pre><p>都目前位置 问题得到完美的解决!!</p>
 <p>参考:<a href="http://blog.isming.me/2015/12/21/android-webview-upload-file/" target="_blank" rel="noopener">http://blog.isming.me/2015/12/21/android-webview-upload-file/</a><br><a href="http://www.huochai.mobi/p/d/900504/?share_tid=846ea82e2685&amp;fmid=0" target="_blank" rel="noopener">http://www.huochai.mobi/p/d/900504/?share_tid=846ea82e2685&amp;fmid=0</a><br><a href="http://www.lai18.com/content/1191983.html" target="_blank" rel="noopener">http://www.lai18.com/content/1191983.html</a></p>
 
       </div>

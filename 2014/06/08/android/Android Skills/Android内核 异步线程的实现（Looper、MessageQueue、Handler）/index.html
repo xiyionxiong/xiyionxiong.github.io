@@ -62,8 +62,9 @@
       <div>
         <p>什么是异步消息处理线程?</p>
 <p>对于普通线程来说，执行完run()方法内的代码后线程就结束了。所谓异步消息处理线程<br>而言，线程启动后会进入一个无限循环体之中，每循环一次，就从其内部的消息队列中取出一<br>个消息，并回调该消息相应的消息处理函数，执行完一个消息后再继续回到循环体之中。除非<br>消息队列为空，线程会暂停，直到消息队列中有新的消息了，则继续无限循环。</p>
-<pre><code>异步消息处理线程其本质上也是一个线程，只不过这种线程的执行代码被设计成如上所描述
-</code></pre><p>的逻辑而已。一般来说，当同时处在以下两种需求时使用异步消息处理线程：<br><a id="more"></a></p>
+<pre><code>异步消息处理线程其本质上也是一个线程，只不过这种线程的执行代码被设计成如上所描述</code></pre><p>的逻辑而已。一般来说，当同时处在以下两种需求时使用异步消息处理线程：</p>
+<a id="more"></a>
+
 <p>1.任务需要常驻。比如说用于处理用户交互的任务。<br>2.任务需要根据外部传递的消息而执行不同的操作。</p>
 <p>当有这两种需求的时候，就应该使用一个异步消息处理线程去接管。</p>
 <p>实现异步消息处理线程的思路</p>
@@ -99,8 +100,7 @@ private static void prepare(boolean quitAllowed) {
         throw new RuntimeException(&quot;Only one Looper may be created per thread&quot;);
     }
     sThreadLocal.set(new Looper(quitAllowed));
-}
-</code></pre><p>  从以上的Looper部分源代码可以可以看出，.变量sThreadLocal的类型是ThreadLocal,该类的作<br>用是提供“线程局部存储”，那么什么是线程局部存储（TLS）?这个问题嘛…可以从变量作用于的<br>角度来理解。</p>
+}</code></pre><p>  从以上的Looper部分源代码可以可以看出，.变量sThreadLocal的类型是ThreadLocal,该类的作<br>用是提供“线程局部存储”，那么什么是线程局部存储（TLS）?这个问题嘛…可以从变量作用于的<br>角度来理解。</p>
 <p>变量的常见作用域一般包括以下几种。</p>
 <p>1.函数内部的变量。其作用域就是该函数，即每次调用该函数时，该变量都会重新回到初始值。</p>
 <p>2.类内部的变量。其作用域是该类所产生的对象，即只要对象没有销毁，则对象内部的变量值<br>一直保持。</p>
@@ -132,8 +132,7 @@ private static void prepare(boolean quitAllowed) {
 private Looper(boolean quitAllowed) {
     mQueue = new MessageQueue(quitAllowed);
     mThread = Thread.currentThread();
-}
-</code></pre><p>Looper.prepare()  -&gt; 创建Looper -&gt; 创建Looper时创建MessageQueue -&gt; 然后调用Looper.loop()</p>
+}</code></pre><p>Looper.prepare()  -&gt; 创建Looper -&gt; 创建Looper时创建MessageQueue -&gt; 然后调用Looper.loop()</p>
 <p>当需要把一个线程变成异步消息处理线程时，应该在Thread类的run()函数中先调用Looper.prepare()<br> ( sThreadLocal.set(new Looper(quitAllowed)); ） 为线程创建一个MessageQueue对象<br>（mQueue = new MessageQueue(quitAllowed); ） ，然后调用Looper.loop()函数，是当前线程进<br>入消息处理循环，让我们再来看看loop()函数的代码：</p>
 <pre><code>/**
  * Run the message queue in this thread. Be sure to call
@@ -184,8 +183,7 @@ public static void loop() {
 
         msg.recycleUnchecked();
     }
-}
-</code></pre><p>loop()代码的执行流程：</p>
+}</code></pre><p>loop()代码的执行流程：</p>
 <p>1.调用myLooper函数返回当前线程的Looper对象，从如下myLooper()源码可以看出，该函<br>数内部仅仅通过调用sThreadLocal.get()方法返回当前线程id对象的Looper对象。</p>
 <pre><code>/**
  * Return the Looper object associated with the current thread.  Returns
@@ -193,10 +191,9 @@ public static void loop() {
  */
 public static Looper myLooper() {
     return sThreadLocal.get();
-}
-</code></pre><p>2.进入for(;;)无限循环：</p>
-<p><1>.调用MessageQueue对象的next()函数取出队列中的消息（ Message msg = queue.next(); ）<br>注意：如果当前队列为空则，则当前线程会被挂起，也就是说，next()函数内部会暂停当前线程。</1></p>
-<p><2>.回调msg.target.dispatchMessage()函数，完成对该消息的处理，也就是说，消息的具体处理实<br>际上是由程序指定的。msg变量的类型是Message，msg.target的类型是Handler。可以看如下Message源码：</2></p>
+}</code></pre><p>2.进入for(;;)无限循环：</p>
+<p>&lt;1&gt;.调用MessageQueue对象的next()函数取出队列中的消息（ Message msg = queue.next(); ）<br>注意：如果当前队列为空则，则当前线程会被挂起，也就是说，next()函数内部会暂停当前线程。</p>
+<p>&lt;2&gt;.回调msg.target.dispatchMessage()函数，完成对该消息的处理，也就是说，消息的具体处理实<br>际上是由程序指定的。msg变量的类型是Message，msg.target的类型是Handler。可以看如下Message源码：</p>
 <pre><code>/** If set message is in use.
  * This flag is set when the message is enqueued and remains set while it
  * is delivered and afterwards when it is recycled.  The flag is only cleared
@@ -233,8 +230,7 @@ public static Looper myLooper() {
  */
 public Handler getTarget() {
     return target;
-}
-</code></pre><p><3>.每次处理完消息后，需要调用Message的recycle()回收该Message对象占用的系统资源。因为<br>Message类内部使用了一个数据池去保存Message对象，从而避免不停地创建和删除Message类对象<br>因此，每次处理完该消息后，需要将该Message对象表明为空闲，以便Message对象可以被重用。<br>Android5.0的Message.recycle()源码如下：</3></p>
+}</code></pre><p>&lt;3&gt;.每次处理完消息后，需要调用Message的recycle()回收该Message对象占用的系统资源。因为<br>Message类内部使用了一个数据池去保存Message对象，从而避免不停地创建和删除Message类对象<br>因此，每次处理完该消息后，需要将该Message对象表明为空闲，以便Message对象可以被重用。<br>Android5.0的Message.recycle()源码如下：</p>
 <pre><code>/**
  * Return a Message instance to the global pool.
  * &lt;p&gt;
@@ -280,8 +276,7 @@ void recycleUnchecked() {
             sPoolSize++;
         }
     }
-}
-</code></pre><p>MessageQueue</p>
+}</code></pre><p>MessageQueue</p>
 <p>消息队列采用排队方式对消息进行处理，就是先到的消息会先得到处理，但是如果消息本身指定<br>了被处理的时刻，则必须等到该时刻才能处理消息。消息在MessageQueue中使用Message类表<br>示，队列中的消息以链表的结构进行存储，Message对象内部包含一个next变量，该变量指向下一<br>个消息。</p>
 <p>MessageQueue中的两个主要函数是 “取出消息” 和 “添加消息” ，分别为函数next()和enqueueMessage()。</p>
 <p>next()源码 ：<br>    Message next() {<br>        // Return here if the message loop has already quit and been disposed.<br>        // This can happen if the application tries to restart a looper after quit<br>        // which is not supported.<br>        final long ptr = mPtr;<br>        if (ptr == 0) {<br>            return null;<br>        }</p>
@@ -379,10 +374,9 @@ void recycleUnchecked() {
         // so go back and look again for a pending message without waiting.
         nextPollTimeoutMillis = 0;
     }
-}
-</code></pre><p><1>.nativePollOnce(ptr, nextPollTimeoutMillis) ：这是一个JNI函数，其作用是从消息队列中<br>取出一个消息。MessageQueue类内部本身并没有保存消息队列，真正的消息队列数据保存在JNI<br>中的C 代码中，也就是说，在C 环境中创建了一个NativeMessageQueue数据对象，这就是<br>nativePollOnce()第一个参数的意义。它是一个in t型变量，在C 环境中，该变量将被强制转换为一<br>个NativeMessageQueue对象。在C环境中，如果消息队列中没有消息，将导致当前线程被挂起<br>（wait ) ;如果消息队列中有消息，则C 代码中将把该消息赋值给Java环境中的mMessages变量。</1></p>
-<p><2>.在synchronized(this)关键字中，th is被用做取消息和写消息的锁，在enqueueMessage()函<br>数中也使用synchronized(this)进行代码同步。本步代码比较简单，仅仅是判断消息所指定的执行时<br>间是否到了。如果到了，就返回该消息，并将mMessages变量置空；如果时间还没有到，则尝试读<br>取下一个消息。</2></p>
-<p><3>.如果mMessages为空，则说明C 环境中的消息队列没有可执行的消息了， 因此，执行<br>mPendingldleHandlers列表中的“ 空闲回调函数”。程序员可以向MessageQueue中注册一些<br>“空闲回调函数”，从而当线程中没有消息可处理时去执行这些“空闲代码”。</3></p>
+}</code></pre><p>&lt;1&gt;.nativePollOnce(ptr, nextPollTimeoutMillis) ：这是一个JNI函数，其作用是从消息队列中<br>取出一个消息。MessageQueue类内部本身并没有保存消息队列，真正的消息队列数据保存在JNI<br>中的C 代码中，也就是说，在C 环境中创建了一个NativeMessageQueue数据对象，这就是<br>nativePollOnce()第一个参数的意义。它是一个in t型变量，在C 环境中，该变量将被强制转换为一<br>个NativeMessageQueue对象。在C环境中，如果消息队列中没有消息，将导致当前线程被挂起<br>（wait ) ;如果消息队列中有消息，则C 代码中将把该消息赋值给Java环境中的mMessages变量。</p>
+<p>&lt;2&gt;.在synchronized(this)关键字中，th is被用做取消息和写消息的锁，在enqueueMessage()函<br>数中也使用synchronized(this)进行代码同步。本步代码比较简单，仅仅是判断消息所指定的执行时<br>间是否到了。如果到了，就返回该消息，并将mMessages变量置空；如果时间还没有到，则尝试读<br>取下一个消息。</p>
+<p>&lt;3&gt;.如果mMessages为空，则说明C 环境中的消息队列没有可执行的消息了， 因此，执行<br>mPendingldleHandlers列表中的“ 空闲回调函数”。程序员可以向MessageQueue中注册一些<br>“空闲回调函数”，从而当线程中没有消息可处理时去执行这些“空闲代码”。</p>
 <p>enqueueMessage():</p>
 <pre><code>boolean enqueueMessage(Message msg, long when) {
     if (msg.target == null) {
@@ -436,9 +430,8 @@ void recycleUnchecked() {
         }
     }
     return true;
-}
-</code></pre><p><1>.将参数msg赋值给mMessages （mMessages = msg; ） 。</1></p>
-<p><2>.调用nativeWake(mPtr)。这是一个JNI函数，其内部会将mMessages消息添加到C 环境中<br>的消息队列中，并且如果消息线程正处于挂起(wait)状态，则唤醒该线程。</2></p>
+}</code></pre><p>&lt;1&gt;.将参数msg赋值给mMessages （mMessages = msg; ） 。</p>
+<p>&lt;2&gt;.调用nativeWake(mPtr)。这是一个JNI函数，其内部会将mMessages消息添加到C 环境中<br>的消息队列中，并且如果消息线程正处于挂起(wait)状态，则唤醒该线程。</p>
 <p>Handler</p>
 <p>虽然MessageQueue提供了直接读/写的函数接口，但是一般不直接读/写消息队列。在Looper.loop()<br>函数中，当取出消息后，会回调msg.target对象的handleMessage()函数，而msg.target的类型正是<br>Handler。</p>
 <p>一般使用Handler类向消息队列中发送消息，并重载Handler类的handleMessage()函数添加消息处理代码。</p>
@@ -478,8 +471,7 @@ public Handler(Callback callback, boolean async) {
     mQueue = mLooper.mQueue;
     mCallback = callback;
     mAsynchronous = async;
-}
-</code></pre><p>因此，在构造Handler对象前，必须已经执行过Looper.prepare()，但prepare()不能被执行两<br>次。创建Handler对象可以再执行Looper.loop()函数之前，也可以再执行之后。我们平时一般<br>在Activity对象的初始化代码中添加Handler对象，但是实际上，在Activity对象被构造前，Activity<br>所在的线程已经执行了Looper.prepare()。所以为什么明明Handler里有判断（if(mLooper == null））<br>我们感觉我们没调用Looper.prepare()方法也能初始化Handler。</p>
+}</code></pre><p>因此，在构造Handler对象前，必须已经执行过Looper.prepare()，但prepare()不能被执行两<br>次。创建Handler对象可以再执行Looper.loop()函数之前，也可以再执行之后。我们平时一般<br>在Activity对象的初始化代码中添加Handler对象，但是实际上，在Activity对象被构造前，Activity<br>所在的线程已经执行了Looper.prepare()。所以为什么明明Handler里有判断（if(mLooper == null））<br>我们感觉我们没调用Looper.prepare()方法也能初始化Handler。</p>
 <p>一个线程中可以包含多个Handler对象。在Looper.loop()函数中，不同的Message对应不同的Handler<br>对象，从而回调不同的handleMessage()函数。</p>
 <p>异步消息处理线程在Framework中被广泛使用，除了用于多线程消息传递外，它还和跨进程调用（IPC）<br>一起被使用，用于实现异步跨进程调用。所以我们可以这样，以后只要看到Handler对象，就应该想到异<br>步消息处理线程。</p>
 <p>Rights Reserved</p>

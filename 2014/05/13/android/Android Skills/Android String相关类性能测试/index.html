@@ -65,8 +65,7 @@
 
 StringBuffer： 在字符改变的时候，不会产生新的对象，线程安全的可变字符序列。
 
-StringBuilder： 同StringBuffer类似，线程不安全的可变字符序列。
-</code></pre><a id="more"></a>
+StringBuilder： 同StringBuffer类似，线程不安全的可变字符序列。</code></pre><a id="more"></a>
 <p>Strng相关类的性能测试</p>
 <pre><code>private void stringRun(){
     long begin = System.currentTimeMillis();
@@ -99,18 +98,15 @@ private void stringBuilderRun(){
     }
     long end = System.currentTimeMillis();
     this.stringBuilderTV.setText(&quot;StringBuilderRun: &quot; + (end - begin) + &quot; millis&quot;);
-}
-</code></pre><hr>
+}</code></pre><hr>
 <pre><code>09-11 15:08:02.615 13748-13748/camnter.stringclassperformance V/CaMnter﹕
 StringRun: StringRun: 1240315 millis
 09-11 15:08:02.615 13748-13748/camnter.stringclassperformance V/CaMnter﹕ StringRun: StringBufferRun: 3467 millis
 09-11 15:08:02.615 13748-13748/camnter.stringclassperformance V/CaMnter﹕
-StringRun: StringBuilderRun: 3037 millis
-</code></pre><p>关于String相关类的总结</p>
+StringRun: StringBuilderRun: 3037 millis</code></pre><p>关于String相关类的总结</p>
 <pre><code>String的执行时间远远高于两者的执行时间
 单线程运行下，StringBuilder的效率比StringBuffer高，但是线程不安全
-涉及到多线程，用StringBuffer；单线程，用StringBuilder
-</code></pre>
+涉及到多线程，用StringBuffer；单线程，用StringBuilder</code></pre>
       </div>
     </div>
   </div>

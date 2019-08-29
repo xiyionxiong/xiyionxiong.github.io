@@ -77,8 +77,8 @@
 <p><code>private static Singleton instance;</code></p>
 <p><code>private Singleton (){}</code></p>
 <p><code>public static Singleton getInstance() {</code></p>
-<p><code>if</code> <code>(instance == `</code>null<code></code>) {`</p>
-<p><code>instance = `</code>new<code></code>Singleton();`</p>
+<p><code>if</code> <code>(instance == ``null``) {</code></p>
+<p><code>instance = ``new</code> <code>Singleton();</code></p>
 <p><code>}</code></p>
 <p><code>return</code> <code>instance;</code></p>
 <p><code>}</code></p>
@@ -88,8 +88,8 @@
 <p><code>private static Singleton instance;</code></p>
 <p><code>private Singleton (){}</code></p>
 <p><code>public static synchronized Singleton getInstance() {</code></p>
-<p><code>if</code> <code>(instance == `</code>null<code></code>) {`</p>
-<p><code>instance = `</code>new<code></code>Singleton();`</p>
+<p><code>if</code> <code>(instance == ``null``) {</code></p>
+<p><code>instance = ``new</code> <code>Singleton();</code></p>
 <p><code>}</code></p>
 <p><code>return</code> <code>instance;</code></p>
 <p><code>}</code></p>
@@ -99,10 +99,10 @@
 <p><code>private volatile static Singleton singleton;</code></p>
 <p><code>private Singleton (){}</code></p>
 <p><code>public static Singleton getSingleton() {</code></p>
-<p><code>if</code> <code>(singleton == `</code>null<code></code>) {`</p>
+<p><code>if</code> <code>(singleton == ``null``) {</code></p>
 <p><code>synchronized (Singleton.class) {</code></p>
-<p><code>if</code> <code>(singleton == `</code>null<code></code>) {`</p>
-<p><code>singleton = `</code>new<code></code>Singleton();`</p>
+<p><code>if</code> <code>(singleton == ``null``) {</code></p>
+<p><code>singleton = ``new</code> <code>Singleton();</code></p>
 <p><code>}</code></p>
 <p><code>}</code></p>
 <p><code>}</code></p>
@@ -113,7 +113,7 @@
 <p><code>publlic class Singleton {</code></p>
 <p><code>private Singleton() {}</code></p>
 <p><code>private static class SingletonLoader {</code></p>
-<p><code>private static final Singleton INSTANCE = `</code>new<code></code>Singleton();`</p>
+<p><code>private static final Singleton INSTANCE = ``new</code> <code>Singleton();</code></p>
 <p><code>}</code></p>
 <p><code>public static Singleton getInstance() {</code></p>
 <p><code>return</code> <code>SingletonLoader.INSTANCE;</code></p>
@@ -121,12 +121,12 @@
 <p><code>}</code></p>
 <h2 id="多进程Application"><a href="#多进程Application" class="headerlink" title="多进程Application"></a>多进程Application</h2><p>是不是经常发现Application里的方法执行了多次？百思不得其解。<br>因为当有多个进程的时候，Application会执行多次，可以通过pid来判断那些方法只执行一次，避免浪费资源。</p>
 <h2 id="隐式启动Service"><a href="#隐式启动Service" class="headerlink" title="隐式启动Service"></a>隐式启动Service</h2><p>这是Android5.0的一个改动，不支持隐式的Service调用。下面的代码在Android 5.0+上会报错：Service Intent must be explicit：</p>
-<p><code>Intent serviceIntent = `</code>new<code></code>Intent();`</p>
-<p><code>serviceIntent.setAction(`</code>“com.jayfeng.MyService”<code></code>);`</p>
+<p><code>Intent serviceIntent = ``new</code> <code>Intent();</code></p>
+<p><code>serviceIntent.setAction(``&quot;com.jayfeng.MyService&quot;``);</code></p>
 <p><code>context.startService(serviceIntent);</code></p>
 <p>可改成如下：</p>
 <p><code>// 指定具体Service类，或者有packageName也行</code></p>
-<p><code>Intent serviceIntent = `</code>new<code></code>Intent(context, MyService.class);`</p>
+<p><code>Intent serviceIntent = ``new</code> <code>Intent(context, MyService.class);</code></p>
 <p><code>context.startService(serviceIntent);</code></p>
 <h2 id="fill-parent的寿命"><a href="#fill-parent的寿命" class="headerlink" title="fill_parent的寿命"></a>fill_parent的寿命</h2><p>在Android2.2之后，支持使用match_parent。你的布局文件里是不是既有fill_parent和match_parent显得很乱？<br>如果你现在的minSdkVersion是8+的话，就可以忽略fill_parent，统一使用match_parent了，否则请使用fill_parent。</p>
 <h2 id="ListView的局部刷新"><a href="#ListView的局部刷新" class="headerlink" title="ListView的局部刷新"></a>ListView的局部刷新</h2><p>有的列表可能notifyDataSetChanged()代价有点高，最好能局部刷新。<br>局部刷新的重点是，找到要更新的那项的View，然后再根据业务逻辑更新数据即可。</p>
@@ -148,35 +148,35 @@
 <p><code>// 查看崩溃信息</code></p>
 <p><code>adb logcat -v time | grep AndroidRuntime</code></p>
 <p><code>// 查看Dalvik信息，比如GC</code></p>
-<p><code>adb logcat -v time | grep `</code>“D\/Dalvik”`</p>
+<p><code>adb logcat -v time | grep ``&quot;D\/Dalvik&quot;</code></p>
 <p><code>// 查看art信息，比如GC</code></p>
-<p><code>adb logcat -v time | grep `</code>“I\/art”`</p>
+<p><code>adb logcat -v time | grep ``&quot;I\/art&quot;</code></p>
 <h2 id="一行居中，多行居左的TextView"><a href="#一行居中，多行居左的TextView" class="headerlink" title="一行居中，多行居左的TextView"></a>一行居中，多行居左的TextView</h2><p>这个一般用于提示信息对话框，如果文字是一行就居中，多行就居左。<br>在TextView外套一层wrap_content的ViewGroup即可简单实现：</p>
-<p><code>&lt;RelativeLayout xmlns:android=`</code>“<a href="http://schemas.android.com/apk/res/android" target="_blank" rel="noopener">http://schemas.android.com/apk/res/android</a>“`</p>
-<p><code>android:layout_width=`</code>“match_parent”`</p>
-<p><code>android:layout_height=`</code>“match_parent”<code></code>&gt;`</p>
+<p><code>&lt;RelativeLayout xmlns:android=``&quot;&lt;http://schemas.android.com/apk/res/android&gt;&quot;</code></p>
+<p><code>android:layout_width=``&quot;match_parent&quot;</code></p>
+<p><code>android:layout_height=``&quot;match_parent&quot;``&gt;</code></p>
 <p><code>&lt;!-- 套一层wrap_content的ViewGroup --&gt;</code></p>
 <p><code>&lt;LinearLayout</code></p>
-<p><code>android:layout_width=`</code>“wrap_content”`</p>
-<p><code>android:layout_height=`</code>“wrap_content”`</p>
-<p><code>android:layout_centerInParent=`</code>“true”<code></code>&gt;`</p>
+<p><code>android:layout_width=``&quot;wrap_content&quot;</code></p>
+<p><code>android:layout_height=``&quot;wrap_content&quot;</code></p>
+<p><code>android:layout_centerInParent=``&quot;true&quot;``&gt;</code></p>
 <p><code>&lt;TextView</code></p>
-<p><code>android:layout_width=`</code>“wrap_content”`</p>
-<p><code>android:layout_height=`</code>“wrap_content”`</p>
-<p><code>android:text=`</code>“@string/hello_world”<code></code>/&gt;`</p>
+<p><code>android:layout_width=``&quot;wrap_content&quot;</code></p>
+<p><code>android:layout_height=``&quot;wrap_content&quot;</code></p>
+<p><code>android:text=``&quot;@string/hello_world&quot;</code> <code>/&gt;</code></p>
 <p><code>&lt;/LinearLayout&gt;</code></p>
 <p><code>&lt;/RelativeLayout&gt;</code></p>
 <h2 id="setCompoundDrawablesWithIntrinsicBounds"><a href="#setCompoundDrawablesWithIntrinsicBounds" class="headerlink" title="setCompoundDrawablesWithIntrinsicBounds()"></a>setCompoundDrawablesWithIntrinsicBounds()</h2><p>网上一大堆setCompoundDrawables()方法无效不显示的问题，然后解决方法是setBounds，需要计算大小…<br>不用这么麻烦，用setCompoundDrawablesWithIntrinsicBounds()这个方法最简单！</p>
 <h2 id="计算程序运行时间"><a href="#计算程序运行时间" class="headerlink" title="计算程序运行时间"></a>计算程序运行时间</h2><p>为了计算一段代码运行时间，一般的做法是，在代码的前面加个startTime，在代码的后面把当前时间减去startTime，这个时间差就是运行时间。<br>这里提供一种写起来更方便的方法，完全无时间逻辑，只是加一个打印log就够了。</p>
 <p><code>// 测试setContentView()的时间</code></p>
-<p><code>Log.d(`</code>“TAG”<code>,</code>“Start”<code></code>);`</p>
+<p><code>Log.d(``&quot;TAG&quot;``, ``&quot;Start&quot;``);</code></p>
 <p><code>setContentView(R.layout.activity_http);</code></p>
-<p><code>Log.d(`</code>“TAG”<code>,</code>“End”<code></code>);`</p>
+<p><code>Log.d(``&quot;TAG&quot;``, ``&quot;End&quot;``);</code></p>
 <p>没有计算时间的逻辑，这能测出来？<br>把日志过滤出来，运行命令“adb logcat -v time | grep TAG”：</p>
 <p><code>03-18 14:47:25.477 D/TAG     (14600): Start</code></p>
 <p><code>03-18 14:47:25.478 D/TAG     (14600): End</code></p>
 <p>通过-v time参数，可以比较日志左边的时间来算出中间的代码运行的时间。</p>
-<h2 id="JAVA引用类型一览表"><a href="#JAVA引用类型一览表" class="headerlink" title="JAVA引用类型一览表"></a>JAVA引用类型一览表</h2><p>对象引用：强引用 > 软引用 > 弱引用 > 虚引用。</p>
+<h2 id="JAVA引用类型一览表"><a href="#JAVA引用类型一览表" class="headerlink" title="JAVA引用类型一览表"></a>JAVA引用类型一览表</h2><p>对象引用：强引用 &gt; 软引用 &gt; 弱引用 &gt; 虚引用。</p>
 <p>引用类型回收时机用途生存时间强引用从来不会对象的一般状态JVM停止运行时终止软引用在内存不足时对象缓存内存不足时终止弱引用在垃圾回收时对象缓存GC运行后终止虚引用在垃圾回收时对象跟踪GC运行后终止</p>
 <h2 id="Context使用场景"><a href="#Context使用场景" class="headerlink" title="Context使用场景"></a>Context使用场景</h2><p>为了防止Activity，Service等这样的Context泄漏于一些生命周期更长的对象，可以使用生命周期更长的ApplicationContext，但是不是所有的Context的都能替换为ApplicationContext<br>这是网上流传的一份表格：</p>
 <p>ApplicationActivityServiceContentProviderBroadcastReceiverShow Dialog否是否否否Start Activity否是否否否Layout Inflation否是否否否Start Service是是是是是Bind Service是是是是否Send Broadcast是是是是是Regist BroadcastReceiver是是是是否Load Resource Value是是是是是</p>
@@ -241,7 +241,7 @@
 <p>这么多工具类，一定可以找到对你有用的。</p>
 <h2 id="ClipPadding"><a href="#ClipPadding" class="headerlink" title="ClipPadding"></a>ClipPadding</h2><p>这个不多说，ListView的ClipPadding设为false，就能为ListView设置各种padding而不会出现丑陋的滑动“禁区”了。</p>
 <h2 id="强大的dumpsys"><a href="#强大的dumpsys" class="headerlink" title="强大的dumpsys"></a>强大的dumpsys</h2><p>dumpsys可以查看系统服务和状态，非常强大，可通过如下查看所有支持的子命令：</p>
-<p><code>dumpsys | grep `</code>“DUMP OF SERVICE”`</p>
+<p><code>dumpsys | grep ``&quot;DUMP OF SERVICE&quot;</code></p>
 <p>这里列举几个稍微常用的：</p>
 <p>子命令备注activity显示所有的activities的信息cpuinfo显示CPU信息window显示键盘，窗口和它们的关系meminfo内存信息（meminfo $package_name or $pid 使用包名或者进程id显示内存信息）alarm显示Alarm信息statusbar显示状态栏相关的信息（找出广告通知属于哪个应用）usagestats每个界面启动的时间</p>
 <h2 id="bugreport命令"><a href="#bugreport命令" class="headerlink" title="bugreport命令"></a>bugreport命令</h2><p>很多人都用过adb logcat，但是如果想要更详细的信息，logcat则无能为力。<br>所以大多数手机厂商测试更多的是用adb bugreport来抓log给开发人员分析。</p>
@@ -253,7 +253,7 @@
 <h2 id="更新媒体库文件"><a href="#更新媒体库文件" class="headerlink" title="更新媒体库文件"></a>更新媒体库文件</h2><p>以前做ROM的时候经常碰到一些第三方软件（某音乐APP）下载了新文件或删除文件之后，但是媒体库并没有更新，因为这个是需要第三方软件主动触发。</p>
 <p><code>// 通知媒体库更新单个文件状态</code></p>
 <p><code>Uri fileUri = Uri.fromFile(file);</code></p>
-<p><code>sendBroadcast(`</code>new<code></code>Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,fileUri));`</p>
+<p><code>sendBroadcast(``new</code> <code>Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,fileUri));</code></p>
 <p>媒体库会在手机启动，SD卡插拔的情况下进行全盘扫描，不是实时的而且代价比较大，所以单个文件的刷新很有必要。</p>
 <h2 id="Monkey参数"><a href="#Monkey参数" class="headerlink" title="Monkey参数"></a>Monkey参数</h2><p>大家都知道，跑monkey的参数设置有一些要注意的地方，比如太快了不行不切实际，太慢了也不行等等，这里给出一个参考：</p>
 <p><code>adb shell monkey -p &lt;packageName&gt; -s 1000 --ignore-crashes --ignore-timeouts --ignore-security-exceptions  --pct-trackball 0 --pct-nav 0 --pct-majornav 0 --pct-anyevent 0  -v --throttle 300 1200000000</code></p>

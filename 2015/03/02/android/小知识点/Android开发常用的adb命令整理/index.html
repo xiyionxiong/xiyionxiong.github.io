@@ -63,7 +63,9 @@
         <p>adb的全称是Android Debug Bridge</p>
 <p>adb start-server<br>启动adb服务,如果它没启动的话</p>
 <p>adb kill-server<br>关闭服务</p>
-<p>adb devices<br>查看所连接的设备以及设备所对应的序列号<br><a id="more"></a><br>adb install -r xxxx.apk<br>安装app,需要注意的是如果连接了两台设备,则会报错,此时可以添加-s <serialnumber>来处理</serialnumber></p>
+<p>adb devices<br>查看所连接的设备以及设备所对应的序列号</p>
+<a id="more"></a>
+<p>adb install -r xxxx.apk<br>安装app,需要注意的是如果连接了两台设备,则会报错,此时可以添加-s <serialnumber>来处理</serialnumber></p>
 <p>adb unstall packagename<br>卸载app</p>
 <p>adb shell pm clear packagename<br>清除应用的数据,很常用吧?</p>
 <p>adb connect <device-ip-address><br>连接到指定的ip,这个通常配合wifidebug</device-ip-address></p>

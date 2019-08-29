@@ -88,8 +88,7 @@ public Binder() {
 }
 
 private native final void init();
-private native final void destroy();
-</code></pre><p>   这两段代码可以看出，在Binder的构造函数中，执行了init()方法。通过JNI的形式调用了底层C<br>的init()函数，内部就完成了”启动隐藏线程”。</p>
+private native final void destroy();</code></pre><p>   这两段代码可以看出，在Binder的构造函数中，执行了init()方法。通过JNI的形式调用了底层C<br>的init()函数，内部就完成了”启动隐藏线程”。</p>
 <pre><code>/**
  * Default implementation is a stub that returns false.  You will want
  * to override this to do the appropriate unmarshalling of transactions.
@@ -141,8 +140,7 @@ public final boolean transact(int code, Parcel data, Parcel reply,
         reply.setDataPosition(0);
     }
     return r;
-}
-</code></pre><p>   这两段代码可以看出，onTransact中主要对data进行了处理，即把onTranSact()函数的参数转换<br>为服务函数的参数；而在transact中调用了onTransact()函数也恰巧说明了：transact()有固定格式的<br>输入，那么onTransact()就会有固定格式的输出。</p>
+}</code></pre><p>   这两段代码可以看出，onTransact中主要对data进行了处理，即把onTranSact()函数的参数转换<br>为服务函数的参数；而在transact中调用了onTransact()函数也恰巧说明了：transact()有固定格式的<br>输入，那么onTransact()就会有固定格式的输出。</p>
 <p>简单实现Binder架构</p>
 <p>设计Server端</p>
 <p>设计Server端实际上非常简单，从代码的角度而言，只要基于Binder类新建一个Server类即可。<br>MusicPlayerService:</p>
@@ -220,8 +218,7 @@ package com.zyy.android_csdn.skill;
 
 public interface IMusicPlayerService {
 
-}
-</code></pre><p>   以上定义了服务类，重载了Binder的onTransact()方法，code变量用于标识客户端期望调用服务端<br>的哪个函数，因此，双方需要约束一组int值，不同的值代表不同的服务端函数，该值和客户端的transact()<br>函数中的第一个参数code是一致的。这里假定1000是双方约束要调用start函数的值。</p>
+}</code></pre><p>   以上定义了服务类，重载了Binder的onTransact()方法，code变量用于标识客户端期望调用服务端<br>的哪个函数，因此，双方需要约束一组int值，不同的值代表不同的服务端函数，该值和客户端的transact()<br>函数中的第一个参数code是一致的。这里假定1000是双方约束要调用start函数的值。</p>
 <p>   enforceInterface()是为了某种校验，与客户端的writeInterfaceToken()对应。</p>
 <p>   readString()用于从包裹中取出一个字符串。取出filePath变量后，就可以调用服务端的start()函数。</p>
 <p>   如果该IPC调用的客户端期望返回一些结果，我们则可以再返回包裹reply中调用Parcel提供的相关函数写入相应的方法</p>
@@ -242,8 +239,7 @@ public final boolean transact(int code, Parcel data, Parcel reply,
         reply.setDataPosition(0);
     }
     return r;
-}
-</code></pre><p>   final的”终结”方法。其中data表示要传递给远程Binder的包裹（Parcel），远程服务函数所需要的<br>参数必须放入这个Parcel data 里。Parcel中只能放入一些特定类型的变量，这些类型有：String、int<br>、long等，要查看Parcel可以放入的全部数据类型，可以参照一下Parcel类。当然值得一提的是，Parcel<br>还提供了一个writeParcel()方法，可以再Parcel中包含一个小包裹（Parcel）。因此，要进行Binder远程<br>服务调用时，服务函数的参数要么是一个原子类，要么必须继承Parcel类。否则，不能传递。</p>
+}</code></pre><p>   final的”终结”方法。其中data表示要传递给远程Binder的包裹（Parcel），远程服务函数所需要的<br>参数必须放入这个Parcel data 里。Parcel中只能放入一些特定类型的变量，这些类型有：String、int<br>、long等，要查看Parcel可以放入的全部数据类型，可以参照一下Parcel类。当然值得一提的是，Parcel<br>还提供了一个writeParcel()方法，可以再Parcel中包含一个小包裹（Parcel）。因此，要进行Binder远程<br>服务调用时，服务函数的参数要么是一个原子类，要么必须继承Parcel类。否则，不能传递。</p>
 <p>接下来，我做了一个简单的实现，直观上就是客户端调用了mRemote.transact()：</p>
 <pre><code>package com.zyy.android_csdn.skill;
 
@@ -310,8 +306,7 @@ public class MusicPlayerService extends Service implements IMusicPlayerService {
 
     }
 
-}
-</code></pre><p>   以上代码。首先，Parcel类型的data、reply不是客户端自己创建的，而是调用Parcel.obtain()申请<br>的， 这正如生活中的邮局一样，用户一般只能用邮局提供的信封（EMS）。其中data和reply变量都是<br>由客户端提供，reply变量用户客户端把返回结果放入其中。</p>
+}</code></pre><p>   以上代码。首先，Parcel类型的data、reply不是客户端自己创建的，而是调用Parcel.obtain()申请<br>的， 这正如生活中的邮局一样，用户一般只能用邮局提供的信封（EMS）。其中data和reply变量都是<br>由客户端提供，reply变量用户客户端把返回结果放入其中。</p>
 <p>   writeInterfaceToken()方法标注远程服务名称，理论上而言，这个名称不是必需的，因为客户端既然<br>已经获取指定远程服务的Binder引用（这里我IBinder mRemote = musicPlayerServiceBinder; 来模拟<br>获取过程），那么就不会调用到其他远程服务。该名称将作为Binder驱动确保客户端的确想调用指定的服<br>务端。</p>
 <p>   writeString()方法用于向Parcel类型中添加一个String变量。注意，Parcel中添加的内容是有序的，这个<br>顺序必须是客户端和服务端事先约束好的，在服务端onTransact方法中会按照约定的顺序取出变量。</p>
 <p>   接着，mRemote.transact(code, data, reply, 0)。调用transact()方法，客户端线程进入了Binder驱动<br>Binder驱动会挂起当前的线程(客户端线程)，并向远程服务发送一个消息，消息中包含了客户端传来的包裹<br>（Parcel）。服务端拿到包裹（Parcel）后，会对包裹（Parcel）进行拆解，然后执行指定的服务函数，执<br>行完毕后，再将执行完毕后的执行结果放入客户端提供的reply包裹（Parcel）中。然后服务端想Binder驱动<br>发送一个notify的消息，从而使得客户端线程从Binder驱动代码区返回到客户端代码区。</p>
@@ -331,8 +326,7 @@ public final boolean transact(int code, Parcel data, Parcel reply,
         reply.setDataPosition(0);
     }
     return r;
-}
-</code></pre><p>   可以发现transact()方法的最后一个参数是 int flags。这个flags参数的含义是执行IPC调用的模式，分为<br>两种：一种 0 表示 双向的，其含义表示服务端执行完指定服务后会返回一定的数据；另一张 1 表示 单向的，其<br>含义是不返回任何数据。</p>
+}</code></pre><p>   可以发现transact()方法的最后一个参数是 int flags。这个flags参数的含义是执行IPC调用的模式，分为<br>两种：一种 0 表示 双向的，其含义表示服务端执行完指定服务后会返回一定的数据；另一张 1 表示 单向的，其<br>含义是不返回任何数据。</p>
 <p>   最后，客户端（我这的是MusicPlayerService）就可以从reply中解析服务端（我这的是MusicPlayerServiceBinder）<br>返回的数据了，同样，返回包裹中包含的数据也必须是有序的，而且这个顺序也必须是服务端和客户端事先约定好的。</p>
 <p>绑定服务，实现Binder架构</p>
 <pre><code>BinderActivity:
@@ -424,8 +418,7 @@ public class BinderActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-}
-</code></pre><p>   这里就是用一个ServiceConnection取出了Binder类型然后转成标识接口IMusicPlayerService，接着就是<br>绑定服务了。</p>
+}</code></pre><p>   这里就是用一个ServiceConnection取出了Binder类型然后转成标识接口IMusicPlayerService，接着就是<br>绑定服务了。</p>
 <p>  我们可以看到 “/sdcard/music/helloword.mp3” 证明了一个简单的Binder架构已经实现了。</p>
 <p>ServiceConnection里的学问和技巧</p>
 <p>   请注意，onServiceConnected()的第二个变量service。当客户端请求AmS（ActivityManagerService）<br>启动某个服务（Service）后，该服务（Service）如果正常启动，那么Ams（ActivityManagerService）就<br>会远程调用Ams（ActivityManagerService）就会调用ActivityThread类中的ApplicationThread对象，调用<br>的参数中会包含服务（Service）的Binder引用，然后ApplicationThread中会回调bindService中的ServiceConnection接口<br>（这里我的是 BinderActivity.this.serviceConnection）。因此，在客户端中，可以再onServiceConnected()<br>方法中将第二个变量service保存为一个全局变量（这里我做了 BinderActivity.iMusicPlayerService = (IMusicPlayerService) service;）<br>从而客户端的任何地方都可以随时调用该远程服务。这就解决了第一个重要问题，就是客户端如何获取远程服务的Binder引用。</p>
@@ -441,8 +434,7 @@ interface IMusicPlayerServiceAIDL{
 
     void stop();
 
-}
-</code></pre><p>   aidl文件的语法基本类似于Java，package指定输出后的Java文件对应的包名。如果该文件需要引<br>用其他Java类，则可以使用import关键字，但需要注意的是，包裹（Parcel，这里指的是 String filePath<br> 属于原子型）内只能写入以下三个类型的内容。</p>
+}</code></pre><p>   aidl文件的语法基本类似于Java，package指定输出后的Java文件对应的包名。如果该文件需要引<br>用其他Java类，则可以使用import关键字，但需要注意的是，包裹（Parcel，这里指的是 String filePath<br> 属于原子型）内只能写入以下三个类型的内容。</p>
 <p>• Java原子类型，如int、long、String等变量。<br>• Binder 引用。<br>• 实现了 Parcelable的对象。</p>
 <p>   接下来，我们看看该aidl生成的IMusicPlayerService.java文件的代码：</p>
 <pre><code>/*
@@ -572,8 +564,7 @@ public interface IMusicPlayerServiceAIDL extends android.os.IInterface {
             throws android.os.RemoteException;
 
     public void stop() throws android.os.RemoteException;
-}
-</code></pre><p>以上代码主要完成了三件事：</p>
+}</code></pre><p>以上代码主要完成了三件事：</p>
 <p>定义一个Java Interface，内部包含aidl文件所声明的服务函数，类名字为IMusicPlayerServiceAIDL<br>并且该类基于Ilnterface接口，即需要提供一个asBinder()函数。</p>
 <p>定义一个Proxy类，该类将作为客户端程序访问服务端的代理。所谓的代理主要就是为了前面所提到的<br>第二个重要问题——统一包裹（Parcel）内写入参数的顺序。</p>
 <p>定义一个Stub类，这是一个 abstract 类，基于Binder类，并且实现了IMusicPlayerServiceAIDL接口，<br>主要由服务端来使用。该类之所以要定义为一个abstract类，是因为具体的服务函数必须由程序员实现，因此<br>，IMusicPlayerServiceAIDL接口里定义的函数在Stub类中可以没有具体的实现。同时，在Stub类中重载了<br>onTransact()方法，由于transact()方法内部给包裹（Parcel）内写入参数的顺序是由aidl工具定义的，也因此<br>aidl工具自然知道应该按照何种顺序从包裹（Parcel）中取出相应的参数。</p>
@@ -606,8 +597,7 @@ public void attachInterface(IInterface owner, String descriptor) {
 /* mObject is used by native code, do not remove or rename */
 private long mObject;
 private IInterface mOwner;
-private String mDescriptor;
-</code></pre><p>   以上的三段代码可以看出，queryLocallnterface根据输入的字符串判断该Binder对象时一个本地的Binder<br>引用。我们再看看如下图所示：</p>
+private String mDescriptor;</code></pre><p>   以上的三段代码可以看出，queryLocallnterface根据输入的字符串判断该Binder对象时一个本地的Binder<br>引用。我们再看看如下图所示：</p>
 <p>   当创建一个Binder对象时，服务端进程内部创建一个Binder对象，Binder驱动中也会创建一个Binder<br>对象。如果从远程获取服务端的Binder，则只会返回Binder驱动中的的Binder对象，而如果从服务端内<br>部获取Binder对象的话，则会获取服务端本身的Binder对象</p>
 <p>   再结合aidl生成的asInterface()的源码：</p>
 <pre><code>/**
@@ -626,11 +616,9 @@ public static com.zyy.android_csdn.skill.IMusicPlayerServiceAIDL asInterface(
     }
     return new com.zyy.android_csdn.skill.IMusicPlayerServiceAIDL.Stub.Proxy(
             obj);
-}
-</code></pre><p>   我可以看到这句：android.os.IInterface iin = obj.queryLocalInterface(DESCRIPTOR)。调用了<br>queryLocalInterface()方法，asInterface()提供了一个统一的接口。无论是远程客户端还是本地端，当<br>获取Binder对象后，可以把获取的Binder对象作为asInterface()的参数，从而返回一个IMusicPlayerServicAIDL<br>接口。又可以从return new com.zyy.android_csdn.skill.IMusicPlayerServiceAIDL.Stub.Proxy(obj）中看<br>出，该接口要么使用Proxy类，要么直接使用Stub所实现的相应服务函数。</p>
+}</code></pre><p>   我可以看到这句：android.os.IInterface iin = obj.queryLocalInterface(DESCRIPTOR)。调用了<br>queryLocalInterface()方法，asInterface()提供了一个统一的接口。无论是远程客户端还是本地端，当<br>获取Binder对象后，可以把获取的Binder对象作为asInterface()的参数，从而返回一个IMusicPlayerServicAIDL<br>接口。又可以从return new com.zyy.android_csdn.skill.IMusicPlayerServiceAIDL.Stub.Proxy(obj）中看<br>出，该接口要么使用Proxy类，要么直接使用Stub所实现的相应服务函数。</p>
 <p>那么问题来了!</p>
-<pre><code>我们经常使用的getSystemService(String serviceName)方法获取一个系统服务，那么这些系统服务的
-</code></pre><p>Binder引用时如何传递给客户端?</p>
+<pre><code>我们经常使用的getSystemService(String serviceName)方法获取一个系统服务，那么这些系统服务的</code></pre><p>Binder引用时如何传递给客户端?</p>
 <p>请关注我的 Android ServiceManager 篇</p>
 
       </div>

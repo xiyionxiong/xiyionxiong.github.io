@@ -63,8 +63,7 @@
         <h3 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h3><p>选择适当的图像尺寸<br>视图背景图像总会填充整个视图区域</p>
 <pre><code>1.视图背景图像总会填充整个视图区域
 2.避免实时缩放
-3.最好预先缩放到视图大小
-</code></pre><a id="more"></a>
+3.最好预先缩放到视图大小</code></pre><a id="more"></a>
 <hr>
 <pre><code>package com.zyy.android_csdn.skill;
 
@@ -112,16 +111,14 @@ public class ExquisiteImage {
 
     }
 
-}
-</code></pre><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><pre><code>  默认情况下, 窗口有一个不透明的背景
+}</code></pre><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><pre><code>  默认情况下, 窗口有一个不透明的背景
 
   有时可以不需要
 1.最高层的视图是不透明的
    2.最高层的视图覆盖整个窗口
       &lt;1&gt;.layout_width = fill_parent
       &lt;2&gt;.layout_height = fill_parent
-   更新看不见的背景是浪费时间
-</code></pre><hr>
+   更新看不见的背景是浪费时间</code></pre><hr>
 <pre><code>@Override
 protected void onCreate(Bundle savedInstanceState) {
 
@@ -134,44 +131,35 @@ protected void onCreate(Bundle savedInstanceState) {
 
     ...
 
-}
-</code></pre><h3 id="View更新"><a href="#View更新" class="headerlink" title="View更新"></a>View更新</h3><p>当屏幕需要更新时, 调用 invalidate()</p>
+}</code></pre><h3 id="View更新"><a href="#View更新" class="headerlink" title="View更新"></a>View更新</h3><p>当屏幕需要更新时, 调用 invalidate()</p>
 <pre><code>1.简单方便
-2.但是会更新整个视图, 代价太大了
-</code></pre><p>最好先找到无效的区域，然后调用</p>
+2.但是会更新整个视图, 代价太大了</code></pre><p>最好先找到无效的区域，然后调用</p>
 <pre><code>1.invalidate(Rect dirty);
-2.invalidate(int left, int top, int right, int bottom);
-</code></pre><p>优化上：就是 原来的 刷新了整个视图，现在的只是刷新了 改变后的位置和原来的位置 在内存的一块区域。</p>
+2.invalidate(int left, int top, int right, int bottom);</code></pre><p>优化上：就是 原来的 刷新了整个视图，现在的只是刷新了 改变后的位置和原来的位置 在内存的一块区域。</p>
 <h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><p>越简单越好</p>
 <p>如果一个窗口包含很多视图：</p>
 <pre><code>1.启动时间长
 2.测量时间长
 3.布局时间长
-4.绘制时间长
-</code></pre><p>如果视图树深度太深</p>
+4.绘制时间长</code></pre><p>如果视图树深度太深</p>
 <pre><code>1.StackOverflowException
-2.用户界面反应速度很慢
-</code></pre><p>解决办法：</p>
+2.用户界面反应速度很慢</code></pre><p>解决办法：</p>
 <pre><code>1.使用TextView的复合drawables减少层次
 2.使用ViewStub延迟展开视图
 3.使用&lt;merge&gt;合并中间视图
 4.使用RelativeLayout减少层次
 5.使用自定义视图
-6.使用自定义布局
-</code></pre><h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><p>不要随意创建 Java 对象</p>
+6.使用自定义布局</code></pre><h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><p>不要随意创建 Java 对象</p>
 <p>在以下性能敏感的代码中，尽量避免创建Java对象：</p>
 <pre><code>1.测量：onMeasure()
 2.布局：onLayout()
 3.绘图：dispatchDraw(), onDraw()
 4.事件处理：dispatchTouchEvent(), onTouchEvent()
-5.Adapter：getView(), bindView()
-</code></pre><p>GC，垃圾回收</p>
+5.Adapter：getView(), bindView()</code></pre><p>GC，垃圾回收</p>
 <pre><code>1.整个程序会暂停
-2.慢（大概好几百个毫秒）
-</code></pre><p>管理好Java对象</p>
+2.慢（大概好几百个毫秒）</code></pre><p>管理好Java对象</p>
 <pre><code>1.使用软引用：内存缓存的最佳选择
-2.使用弱引用：避免内存泄露
-</code></pre><hr>
+2.使用弱引用：避免内存泄露</code></pre><hr>
 <pre><code>private final HashMap&lt;String, SoftReference&lt;T&gt;&gt; mCache;
 
 public void put(String key, T value) {
@@ -189,8 +177,7 @@ public T get(String key, ValueBuilder builder) {
         mCache.put(key, new SoftReference&lt;T&gt;(value));
     }
     return value;
-}
-</code></pre>
+}</code></pre>
       </div>
     </div>
   </div>

@@ -68,7 +68,7 @@
 </blockquote>
 </p><p>第一种方式</p>
 <p>第一种方式是不需要，在布局文件中，使用WebView控件的</p>
-<p>步骤：<br></p>
+<p>步骤：</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -85,7 +85,7 @@
       <h2><a href="/2014/06/15/android/Android Skills/Android内核 ServiceManager/">Android内核 ServiceManager</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-06-15 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
       <p></p><p>getSystemService很尽职，你知道吗?</p>
-<p>   那个…嗯…曾记否上篇的<code>Android Binder</code>中留下的疑问?就是在Context的实现类中使用<br>getSystemService(String serviceName)方法获取一个系统服务，那么这些系统服务的Binder<br>引用时如何传递给客户端的呢?其实这里有个关键点，就是系统服务并不是通过startService()启<br>动的。<br></p>
+<p>   那个…嗯…曾记否上篇的<code>Android Binder</code>中留下的疑问?就是在Context的实现类中使用<br>getSystemService(String serviceName)方法获取一个系统服务，那么这些系统服务的Binder<br>引用时如何传递给客户端的呢?其实这里有个关键点，就是系统服务并不是通过startService()启<br>动的。</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -101,8 +101,7 @@
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-06-08 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
       <p></p><p>什么是异步消息处理线程?</p>
 <p>对于普通线程来说，执行完run()方法内的代码后线程就结束了。所谓异步消息处理线程<br>而言，线程启动后会进入一个无限循环体之中，每循环一次，就从其内部的消息队列中取出一<br>个消息，并回调该消息相应的消息处理函数，执行完一个消息后再继续回到循环体之中。除非<br>消息队列为空，线程会暂停，直到消息队列中有新的消息了，则继续无限循环。</p>
-<pre><code>异步消息处理线程其本质上也是一个线程，只不过这种线程的执行代码被设计成如上所描述
-</code></pre><p>的逻辑而已。一般来说，当同时处在以下两种需求时使用异步消息处理线程：<br></p>
+<pre><code>异步消息处理线程其本质上也是一个线程，只不过这种线程的执行代码被设计成如上所描述</code></pre><p>的逻辑而已。一般来说，当同时处在以下两种需求时使用异步消息处理线程：</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -135,8 +134,7 @@
  * @param parent The parent that this view will eventually be attached to
  * @return A View corresponding to the data at the specified position.
  */
-View getView(int position, View convertView, ViewGroup parent);
-</code></pre><p></p>
+View getView(int position, View convertView, ViewGroup parent);</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -160,8 +158,7 @@ View getView(int position, View convertView, ViewGroup parent);
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-05-15 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
       <p></p><h3 id="部分文字设置颜色"><a href="#部分文字设置颜色" class="headerlink" title="部分文字设置颜色"></a>部分文字设置颜色</h3><pre><code>TextView tv = new TextView(this);
 //添加css样式
-tv.setText(Html.fromHtml(&quot;&lt;font color=\&quot;E32910\&quot;&gt;&quot;+&quot;红色&quot;+&quot;&lt;/font&gt;的字&quot;));
-</code></pre><p></p>
+tv.setText(Html.fromHtml(&quot;&lt;font color=\&quot;E32910\&quot;&gt;&quot;+&quot;红色&quot;+&quot;&lt;/font&gt;的字&quot;));</code></pre><p></p>
     </div>
   </div>
  

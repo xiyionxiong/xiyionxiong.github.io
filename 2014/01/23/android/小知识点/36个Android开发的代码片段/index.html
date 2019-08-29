@@ -62,12 +62,10 @@
       <div>
         <h3 id="拨打电话"><a href="#拨打电话" class="headerlink" title="拨打电话"></a>拨打电话</h3><pre><code>public static void call(Context context, String phoneNumber) {
         context.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(&quot;tel:&quot; + phoneNumber)));
-    }
-</code></pre><p>跳转至拨号界面</p>
+    }</code></pre><p>跳转至拨号界面</p>
 <pre><code>public static void callDial(Context context, String phoneNumber) {
         context.startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(&quot;tel:&quot; + phoneNumber)));
-    }
-</code></pre><a id="more"></a>
+    }</code></pre><a id="more"></a>
 <p>发送短信</p>
 <pre><code>public static void sendSms(Context context, String phoneNumber,
             String content) {
@@ -76,8 +74,7 @@
         Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
         intent.putExtra(&quot;sms_body&quot;, TextUtils.isEmpty(content) ? &quot;&quot; : content);
         context.startActivity(intent);
-    }
-</code></pre><p>唤醒屏幕并解锁</p>
+    }</code></pre><p>唤醒屏幕并解锁</p>
 <pre><code>public static void wakeUpAndUnlock(Context context){  
         KeyguardManager km= (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);  
         KeyguardManager.KeyguardLock kl = km.newKeyguardLock(&quot;unLock&quot;);  
@@ -91,13 +88,11 @@
         wl.acquire();  
         //释放  
         wl.release();  
-    }
-</code></pre><blockquote>
+    }</code></pre><blockquote>
 <p>需要添加权限</p>
 </blockquote>
 <pre><code>&lt;uses-permission android:name=&quot;android.permission.WAKE_LOCK&quot; /&gt;
-&lt;uses-permission android:name=&quot;android.permission.DISABLE_KEYGUARD&quot; /&gt;
-</code></pre><p>判断当前App处于前台还是后台状态</p>
+&lt;uses-permission android:name=&quot;android.permission.DISABLE_KEYGUARD&quot; /&gt;</code></pre><p>判断当前App处于前台还是后台状态</p>
 <pre><code>public static boolean isApplicationBackground(final Context context) {
         ActivityManager am = (ActivityManager) context
                 .getSystemService(Context.ACTIVITY_SERVICE);
@@ -110,20 +105,17 @@
             }
         }
         return false;
-    }
-</code></pre><blockquote>
+    }</code></pre><blockquote>
 <p>需要添加权限</p>
 </blockquote>
 <pre><code>&lt;uses-permission
-     android:name=&quot;android.permission.GET_TASKS&quot; /&gt;
-</code></pre><p>判断当前手机是否处于锁屏(睡眠)状态</p>
+     android:name=&quot;android.permission.GET_TASKS&quot; /&gt;</code></pre><p>判断当前手机是否处于锁屏(睡眠)状态</p>
 <pre><code>public static boolean isSleeping(Context context) {
         KeyguardManager kgMgr = (KeyguardManager) context
                 .getSystemService(Context.KEYGUARD_SERVICE);
         boolean isSleeping = kgMgr.inKeyguardRestrictedInputMode();
         return isSleeping;
-    }
-</code></pre><p>判断当前是否有网络连接</p>
+    }</code></pre><p>判断当前是否有网络连接</p>
 <pre><code>public static boolean isOnline(Context context) {
         ConnectivityManager manager = (ConnectivityManager) context
                 .getSystemService(Activity.CONNECTIVITY_SERVICE);
@@ -132,8 +124,7 @@
             return true;
         }
         return false;
-    }
-</code></pre><p>判断当前是否是WIFI连接状态</p>
+    }</code></pre><p>判断当前是否是WIFI连接状态</p>
 <pre><code>public static boolean isWifiConnected(Context context) {
     ConnectivityManager connectivityManager = (ConnectivityManager) context
             .getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -143,8 +134,7 @@
         return true;
     }
     return false;
-}
-</code></pre><p>安装APK</p>
+}</code></pre><p>安装APK</p>
 <pre><code>public static void installApk(Context context, File file) {
     Intent intent = new Intent();
     intent.setAction(&quot;android.intent.action.VIEW&quot;);
@@ -154,8 +144,7 @@
             &quot;application/vnd.android.package-archive&quot;);
     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     context.startActivity(intent);
-}
-</code></pre><p>判断当前设备是否为手机</p>
+}</code></pre><p>判断当前设备是否为手机</p>
 <pre><code>public static boolean isPhone(Context context) {
     TelephonyManager telephony = (TelephonyManager) context
             .getSystemService(Context.TELEPHONY_SERVICE);
@@ -164,8 +153,7 @@
     } else {
         return true;
     }
-}
-</code></pre><p>获取当前设备宽高，单位px</p>
+}</code></pre><p>获取当前设备宽高，单位px</p>
 <pre><code>@SuppressWarnings(&quot;deprecation&quot;)
 public static int getDeviceWidth(Context context) {
     WindowManager manager = (WindowManager) context
@@ -178,8 +166,7 @@ public static int getDeviceHeight(Context context) {
     WindowManager manager = (WindowManager) context
             .getSystemService(Context.WINDOW_SERVICE);
     return manager.getDefaultDisplay().getHeight();
-}
-</code></pre><p>获取当前设备的IMEI，需要与上面的isPhone()一起使用</p>
+}</code></pre><p>获取当前设备的IMEI，需要与上面的isPhone()一起使用</p>
 <pre><code>@TargetApi(Build.VERSION_CODES.CUPCAKE)
 public static String getDeviceIMEI(Context context) {
     String deviceId;
@@ -193,8 +180,7 @@ public static String getDeviceIMEI(Context context) {
 
     }
     return deviceId;
-}
-</code></pre><p>获取当前设备的MAC地址</p>
+}</code></pre><p>获取当前设备的MAC地址</p>
 <pre><code>public static String getMacAddress(Context context) {
     String macAddress;
     WifiManager wifi = (WifiManager) context
@@ -206,8 +192,7 @@ public static String getDeviceIMEI(Context context) {
     }
     macAddress = macAddress.replace(&quot;:&quot;, &quot;&quot;);
     return macAddress;
-}
-</code></pre><p>获取当前程序的版本号</p>
+}</code></pre><p>获取当前程序的版本号</p>
 <pre><code>public static String getAppVersion(Context context) {
     String version = &quot;0&quot;;
     try {
@@ -217,8 +202,7 @@ public static String getDeviceIMEI(Context context) {
         e.printStackTrace();
     }
     return version;
-}
-</code></pre><p>收集设备信息，用于信息统计分析</p>
+}</code></pre><p>收集设备信息，用于信息统计分析</p>
 <pre><code>public static Properties collectDeviceInfo(Context context) {
         Properties mDeviceCrashInfo = new Properties();
         try {
@@ -257,13 +241,11 @@ public static String collectDeviceInfoStr(Context context) {
         }
         deviceInfoStr.append(&quot;}&quot;);
         return deviceInfoStr.toString();
-    }
-</code></pre><p>是否有SD卡</p>
+    }</code></pre><p>是否有SD卡</p>
 <pre><code>public static boolean haveSDCard() {
         return android.os.Environment.getExternalStorageState().equals(
                 android.os.Environment.MEDIA_MOUNTED);
-    }
-</code></pre><p>动态隐藏软键盘</p>
+    }</code></pre><p>动态隐藏软键盘</p>
 <pre><code>@TargetApi(Build.VERSION_CODES.CUPCAKE)
     public static void hideSoftInput(Activity activity) {
         View view = activity.getWindow().peekDecorView();
@@ -280,8 +262,7 @@ public static void hideSoftInput(Context context, EditText edit) {
         InputMethodManager inputmanger = (InputMethodManager) context
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         inputmanger.hideSoftInputFromWindow(edit.getWindowToken(), 0);
-    }
-</code></pre><p>动态显示软键盘</p>
+    }</code></pre><p>动态显示软键盘</p>
 <pre><code>@TargetApi(Build.VERSION_CODES.CUPCAKE)
 public static void showSoftInput(Context context, EditText edit) {
         edit.setFocusable(true);
@@ -290,8 +271,7 @@ public static void showSoftInput(Context context, EditText edit) {
         InputMethodManager inputManager = (InputMethodManager) context
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.showSoftInput(edit, 0);
-    }
-</code></pre><p>动态显示或者是隐藏软键盘</p>
+    }</code></pre><p>动态显示或者是隐藏软键盘</p>
 <pre><code>@TargetApi(Build.VERSION_CODES.CUPCAKE)
 public static void toggleSoftInput(Context context, EditText edit) {
         edit.setFocusable(true);
@@ -300,44 +280,38 @@ public static void toggleSoftInput(Context context, EditText edit) {
         InputMethodManager inputManager = (InputMethodManager) context
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         inputManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-    }
-</code></pre><p>主动回到Home，后台运行</p>
+    }</code></pre><p>主动回到Home，后台运行</p>
 <pre><code>public static void goHome(Context context) {
         Intent mHomeIntent = new Intent(Intent.ACTION_MAIN);
         mHomeIntent.addCategory(Intent.CATEGORY_HOME);
         mHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                 | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
         context.startActivity(mHomeIntent);
-    }
-</code></pre><p>获取状态栏高度</p>
+    }</code></pre><p>获取状态栏高度</p>
 <p>注意，要在onWindowFocusChanged中调用，在onCreate中获取高度为0</p>
 <pre><code>@TargetApi(Build.VERSION_CODES.CUPCAKE)
 public static int getStatusBarHeight(Activity activity) {
     Rect frame = new Rect();
     activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
         return frame.top;
-    }
-</code></pre><p>获取状态栏高度＋标题栏(ActionBar)高度</p>
+    }</code></pre><p>获取状态栏高度＋标题栏(ActionBar)高度</p>
 <p>(注意，如果没有ActionBar，那么获取的高度将和上面的是一样的，只有状态栏的高度)</p>
 <pre><code>public static int getTopBarHeight(Activity activity) {
         return activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT)
                 .getTop();
-    }
-</code></pre><p>获取MCC+MNC代码 (SIM卡运营商国家代码和运营商网络代码)</p>
+    }</code></pre><p>获取MCC+MNC代码 (SIM卡运营商国家代码和运营商网络代码)</p>
 <p>仅当用户已在网络注册时有效, CDMA 可能会无效（中国移动：46000 46002, 中国联通：46001,中国电信：46003）</p>
 <pre><code>public static String getNetworkOperator(Context context) {
         TelephonyManager telephonyManager = (TelephonyManager) context
                 .getSystemService(Context.TELEPHONY_SERVICE);
         return telephonyManager.getNetworkOperator();
-    }
-</code></pre><p>返回移动网络运营商的名字</p>
+    }</code></pre><p>返回移动网络运营商的名字</p>
 <p>(例：中国联通、中国移动、中国电信) 仅当用户已在网络注册时有效, CDMA 可能会无效)</p>
 <pre><code>public static String getNetworkOperatorName(Context context) {
         TelephonyManager telephonyManager = (TelephonyManager) context
                 .getSystemService(Context.TELEPHONY_SERVICE);
         return telephonyManager.getNetworkOperatorName();
-    }
-</code></pre><blockquote>
+    }</code></pre><blockquote>
 <p>返回移动终端类型</p>
 </blockquote>
 <pre><code>PHONE_TYPE_NONE :0 手机制式未知
@@ -350,8 +324,7 @@ public static int getPhoneType(Context context) {
         TelephonyManager telephonyManager = (TelephonyManager) context
                 .getSystemService(Context.TELEPHONY_SERVICE);
         return telephonyManager.getPhoneType();
-    }
-</code></pre><p>判断手机连接的网络类型(2G,3G,4G)</p>
+    }</code></pre><p>判断手机连接的网络类型(2G,3G,4G)</p>
 <p>联通的3G为UMTS或HSDPA，移动和联通的2G为GPRS或EGDE，电信的2G为CDMA，电信的3G为EVDO</p>
 <pre><code>public class Constants {
 
@@ -412,8 +385,7 @@ public static int getNetWorkClass(Context context) {
         default:
             return Constants.NETWORK_CLASS_UNKNOWN;
         }
-    }
-</code></pre><p>判断当前手机的网络类型(WIFI还是2,3,4G)</p>
+    }</code></pre><p>判断当前手机的网络类型(WIFI还是2,3,4G)</p>
 <p>需要用到上面的方法</p>
 <pre><code>public static int getNetWorkStatus(Context context) {
         int netWorkType = Constants.NETWORK_CLASS_UNKNOWN;
@@ -433,8 +405,7 @@ public static int getNetWorkClass(Context context) {
         }
 
         return netWorkType;
-    }
-</code></pre><p>px-dp转换</p>
+    }</code></pre><p>px-dp转换</p>
 <pre><code>public static int dip2px(Context context, float dpValue) {
     final float scale = context.getResources().getDisplayMetrics().density;
     return (int) (dpValue * scale + 0.5f);
@@ -443,8 +414,7 @@ public static int getNetWorkClass(Context context) {
 public static int px2dip(Context context, float pxValue) {
     final float scale = context.getResources().getDisplayMetrics().density;
     return (int) (pxValue / scale + 0.5f);
-}
-</code></pre><p>px-sp转换</p>
+}</code></pre><p>px-sp转换</p>
 <pre><code>public static int px2sp(Context context, float pxValue) {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
@@ -453,8 +423,7 @@ public static int px2dip(Context context, float pxValue) {
 public static int sp2px(Context context, float spValue) {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
-    }
-</code></pre><p>把一个毫秒数转化成时间字符串</p>
+    }</code></pre><p>把一个毫秒数转化成时间字符串</p>
 <p>格式为小时/分/秒/毫秒（如：24903600 –&gt; 06小时55分03秒600毫秒）</p>
 <pre><code>/**
      * @param millis
@@ -526,8 +495,7 @@ public static int sp2px(Context context, float spValue) {
 
         mi += &quot;毫秒&quot;;
         return h + m + s + mi;
-    }
-</code></pre><p>格式为小时/分/秒/毫秒（如：24903600 –&gt; 06小时55分03秒）。</p>
+    }</code></pre><p>格式为小时/分/秒/毫秒（如：24903600 –&gt; 06小时55分03秒）。</p>
 <pre><code>/**
      *
      * @param millis
@@ -589,8 +557,7 @@ public static int sp2px(Context context, float spValue) {
             s += sUnit;
         }
         return h + m + s;
-    }
-</code></pre><p>把一个毫秒数转化成时间字符串。格式为小时/分/秒/毫秒（如：24903600 –&gt; 06小时55分钟）</p>
+    }</code></pre><p>把一个毫秒数转化成时间字符串。格式为小时/分/秒/毫秒（如：24903600 –&gt; 06小时55分钟）</p>
 <pre><code>/**
      *
      * @param millis
@@ -636,8 +603,7 @@ public static int sp2px(Context context, float spValue) {
         }
 
         return h + m;
-    }
-</code></pre><p>把日期毫秒转化为字符串</p>
+    }</code></pre><p>把日期毫秒转化为字符串</p>
 <pre><code>/**
      * @param millis
      *            要转化的日期毫秒数。
@@ -649,8 +615,7 @@ public static int sp2px(Context context, float spValue) {
         SimpleDateFormat format = new SimpleDateFormat(pattern,
                 Locale.getDefault());
         return format.format(new Date(millis));
-    }
-</code></pre><p>把日期毫秒转化为字符串（文件名）</p>
+    }</code></pre><p>把日期毫秒转化为字符串（文件名）</p>
 <pre><code>/**
   * @param millis
   *            要转化的日期毫秒数。
@@ -661,8 +626,7 @@ public static int sp2px(Context context, float spValue) {
  public static String millisToStringFilename(long millis, String pattern) {
      String dateStr = millisToStringDate(millis, pattern);
      return dateStr.replaceAll(&quot;[- :]&quot;, &quot;_&quot;);
- }
-</code></pre><p>转换当前时间为易用时间格式</p>
+ }</code></pre><p>转换当前时间为易用时间格式</p>
 <p>1小时内用，多少分钟前； 超过1小时，显示时间而无日期； 如果是昨天，则显示昨天 超过昨天再显示日期； 超过1年再显示年。</p>
 <pre><code>public static long oneHourMillis = 60 * 60 * 1000; // 一小时的毫秒数
 public static long oneDayMillis = 24 * oneHourMillis; // 一天的毫秒数
@@ -697,8 +661,7 @@ public static String millisToLifeString(long millis) {
         }
 
         return millisToStringDate(millis, &quot;yyyy年MM月dd日 HH:mm&quot;);
-    }
-</code></pre><p>字符串解析成毫秒数</p>
+    }</code></pre><p>字符串解析成毫秒数</p>
 <pre><code>public static long string2Millis(String str, String pattern) {
         SimpleDateFormat format = new SimpleDateFormat(pattern,
                 Locale.getDefault());
@@ -709,12 +672,9 @@ public static String millisToLifeString(long millis) {
             Log.e(&quot;TAG&quot;, e.getMessage());
         }
         return millis;
-    }
-</code></pre><p>手机号码正则</p>
-<pre><code>public static final String REG_PHONE_CHINA =&quot;^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$&quot;;
-</code></pre><p>邮箱正则</p>
-<pre><code>public static final String REG_EMAIL = &quot;\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*&quot;;
-</code></pre>
+    }</code></pre><p>手机号码正则</p>
+<pre><code>public static final String REG_PHONE_CHINA =&quot;^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$&quot;;</code></pre><p>邮箱正则</p>
+<pre><code>public static final String REG_EMAIL = &quot;\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*&quot;;</code></pre>
       </div>
     </div>
   </div>

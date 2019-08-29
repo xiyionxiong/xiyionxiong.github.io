@@ -63,6 +63,7 @@
         <p>最近在研究Android的下拉刷新功能，看了几个别人写的自定义控件：</p>
 <p>1.android-pulltorefresh：<a href="https://github.com/chrisbanes/Android-PullToRefresh" target="_blank" rel="noopener">https://github.com/chrisbanes/Android-PullToRefresh</a><br>2.android-pulltorefresh-listview：<a href="https://github.com/johannilsson/android-pulltorefresh" target="_blank" rel="noopener">https://github.com/johannilsson/android-pulltorefresh</a></p>
 <a id="more"></a>
+
 <p>前者是：一个强大的拉动刷新开源项目，支持各种控件下拉刷新，ListView、ViewPager、WevView、<br>ExpandableListView、GridView、ScrollView、Horizontal ScrollView、Fragment上下左右拉动刷新<br>并且它实现的下拉刷新ListView在item不足一屏情况下也不会显示刷新提示，体验更好。</p>
 <p>后者是：下拉刷新ListView</p>
 <p>这里我为什么特意例举这两个自定义控件呢?因为这两种自定义控件就单单从实现ListView的下拉刷<br>新方面而已，原理是不一样的!</p>
@@ -942,8 +943,7 @@ public class PullToRefreshView extends LinearLayout implements OnTouchListener {
 
     }
 
-}
-</code></pre><p>温馨提示：这里做了if (this.pull_to_refresh_linearLayout.getVisibility() == View.INVISIBLE) 。设置<br> 可见 head的linearLayout部分，原因是因为Fragment的兼容问题。在Acticity里没什么问题；到了Fragment，<br>head部分都会闪一下再消失，我在布局里让LinearLayout部分不可见，然后通过滑动事件动态设置可见，取巧得躲避了这个问题。</p>
+}</code></pre><p>温馨提示：这里做了if (this.pull_to_refresh_linearLayout.getVisibility() == View.INVISIBLE) 。设置<br> 可见 head的linearLayout部分，原因是因为Fragment的兼容问题。在Acticity里没什么问题；到了Fragment，<br>head部分都会闪一下再消失，我在布局里让LinearLayout部分不可见，然后通过滑动事件动态设置可见，取巧得躲避了这个问题。</p>
 <p>还有一点：就是调用刷新方法这里：PullToRefreshView.this.mListener.onRefresh()；如果<br>doInBackground 的onRefresh() 中有事件处理，那么 执行不到  doInBackground 里的 return null ，<br>就一直处在刷新状态效果。此时，可以把 doInBackground 里的 onRefresh操作换到onPostExecute(Void result)<br>里来 。               </p>
 <p>MOnCreateContextMenuListener：</p>
 <pre><code>package com.zyy.android_csdn;
@@ -978,8 +978,7 @@ public class MOnCreateContextMenuListener implements
 
     }
 
-}
-</code></pre><p>RefreshActivity：</p>
+}</code></pre><p>RefreshActivity：</p>
 <pre><code>package com.zyy.android_csdn;
 
 import java.util.ArrayList;
@@ -1090,8 +1089,7 @@ public class RefreshActivity extends Activity {
 
         listView.setOnCreateContextMenuListener(new MOnCreateContextMenuListener());
     }
-}
-</code></pre><p>Activity显示的布局(refresh.xml)：</p>
+}</code></pre><p>Activity显示的布局(refresh.xml)：</p>
 <pre><code>&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     xmlns:tools=&quot;http://schemas.android.com/tools&quot;
     android:layout_width=&quot;match_parent&quot;
@@ -1117,8 +1115,7 @@ public class RefreshActivity extends Activity {
         &lt;/ListView&gt;
     &lt;/com.zyy.android_csdn.PullToRefreshView&gt;
 
-&lt;/RelativeLayout&gt;
-</code></pre><p>下拉头的View的(pull_to_refresh.xml)布局：</p>
+&lt;/RelativeLayout&gt;</code></pre><p>下拉头的View的(pull_to_refresh.xml)布局：</p>
 <pre><code>&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     xmlns:tools=&quot;http://schemas.android.com/tools&quot;
     android:id=&quot;@+id/pull_to_refresh_head&quot;
@@ -1177,16 +1174,14 @@ public class RefreshActivity extends Activity {
         &lt;/LinearLayout&gt;
     &lt;/LinearLayout&gt;
 
-&lt;/RelativeLayout&gt;
-</code></pre><p>string.xml：</p>
+&lt;/RelativeLayout&gt;</code></pre><p>string.xml：</p>
 <pre><code>&lt;string name=&quot;pull_to_refresh&quot;&gt;下拉可以刷新&lt;/string&gt;
 &lt;string name=&quot;release_to_refresh&quot;&gt;释放立即刷新&lt;/string&gt;
 &lt;string name=&quot;refreshing&quot;&gt;正在刷新…&lt;/string&gt;
 &lt;string name=&quot;not_updated_yet&quot;&gt;暂未更新过&lt;/string&gt;
 &lt;string name=&quot;updated_at&quot;&gt;上次更新于%1$s前&lt;/string&gt;
 &lt;string name=&quot;updated_just_now&quot;&gt;刚刚更新&lt;/string&gt;
-&lt;string name=&quot;time_error&quot;&gt;时间有问题&lt;/string&gt;
-</code></pre><p>效果图：</p>
+&lt;string name=&quot;time_error&quot;&gt;时间有问题&lt;/string&gt;</code></pre><p>效果图：</p>
 <p><img src="http://img.blog.csdn.net/20141118183653229?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt><br><img src="http://img.blog.csdn.net/20141118183704773?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt><br><img src="http://img.blog.csdn.net/20141118183715678?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt><br><img src="http://img.blog.csdn.net/20141118183726406?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt></p>
 
       </div>

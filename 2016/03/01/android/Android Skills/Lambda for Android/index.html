@@ -67,11 +67,10 @@
 public void onClick(View v) {
 Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;);
 }
-});
-</code></pre><p>使用 lambda</p>
+});</code></pre><p>使用 lambda</p>
 <pre><code>view.setOnClickListener(
-v -&gt; Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;));
-</code></pre><h3 id="Android如何使用"><a href="#Android如何使用" class="headerlink" title="Android如何使用"></a>Android如何使用</h3><p>这里是使用Retrolambda的gradle插件，这样就可以在代码中使用lambda了。<br><a id="more"></a></p>
+v -&gt; Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;));</code></pre><h3 id="Android如何使用"><a href="#Android如何使用" class="headerlink" title="Android如何使用"></a>Android如何使用</h3><p>这里是使用Retrolambda的gradle插件，这样就可以在代码中使用lambda了。</p>
+<a id="more"></a>
 <h4 id="Android-Studio配置Retrolambda"><a href="#Android-Studio配置Retrolambda" class="headerlink" title="Android Studio配置Retrolambda"></a>Android Studio配置Retrolambda</h4><p>lambda需要安装JDK8，下载最新版本jdk-8u73</p>
 <p>build.gradle</p>
 <pre><code>buildscript {
@@ -82,8 +81,7 @@ v -&gt; Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;));
             classpath &apos;com.android.tools.build:gradle:1.5.0&apos;
             classpath &apos;me.tatarka:gradle-retrolambda:3.2.4&apos;//加上这句依赖，这会使用retrolambda来编译Java代码
     }
-}
-</code></pre><p>app/build.gradle</p>
+}</code></pre><p>app/build.gradle</p>
 <pre><code>apply plugin: &apos;com.android.application&apos;
 apply plugin: &apos;me.tatarka.retrolambda&apos;//加上这句加,入plugin声明
 android {
@@ -95,33 +93,27 @@ compileOptions {//使用JAVA8语法解析
 }
     retrolambda {//指定将源码编译的级别，使用下列代码，会将代码编译到兼容1.6的字节码格式
     javaVersion JavaVersion.VERSION_1_6
-}
-</code></pre><h4 id="Android-Studio自动生成lambda"><a href="#Android-Studio自动生成lambda" class="headerlink" title="Android Studio自动生成lambda"></a>Android Studio自动生成lambda</h4><p><img src="https://d7.usercdn.com/i/04033/9kdvn64rz5p9.png" alt></p>
+}</code></pre><h4 id="Android-Studio自动生成lambda"><a href="#Android-Studio自动生成lambda" class="headerlink" title="Android Studio自动生成lambda"></a>Android Studio自动生成lambda</h4><p><img src="https://d7.usercdn.com/i/04033/9kdvn64rz5p9.png" alt></p>
 <p>当配置Retrolambda成功后，Android Studio会有提示，按Alt+Enter键<br>hexo<br><img src="https://d7.usercdn.com/i/04033/8zt63yej4sql.png" alt></p>
 <p>点击替换，这样就能自动生成，使用lambda了。到这里我就可以洗洗睡了，也很晚了，但为什么可以这样写呢，还是来简单了解lambda语法吧。<br>lambda语法简介</p>
-<pre><code>input -&gt; body
-</code></pre><h4 id="intput种类"><a href="#intput种类" class="headerlink" title="intput种类"></a>intput种类</h4><h5 id="无输入-void"><a href="#无输入-void" class="headerlink" title="无输入 void"></a>无输入 void</h5><pre><code>() -&gt; body
+<pre><code>input -&gt; body</code></pre><h4 id="intput种类"><a href="#intput种类" class="headerlink" title="intput种类"></a>intput种类</h4><h5 id="无输入-void"><a href="#无输入-void" class="headerlink" title="无输入 void"></a>无输入 void</h5><pre><code>() -&gt; body
 
 new Thread(new Runnable() {
 @Override
 public void run() {
 Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;);
 }
-});
-</code></pre><p>使用 lambda</p>
-<pre><code>new Thread(() -&gt; Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;));
-</code></pre><h5 id="一个参数输入"><a href="#一个参数输入" class="headerlink" title="一个参数输入"></a>一个参数输入</h5><pre><code>x -&gt; body
+});</code></pre><p>使用 lambda</p>
+<pre><code>new Thread(() -&gt; Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;));</code></pre><h5 id="一个参数输入"><a href="#一个参数输入" class="headerlink" title="一个参数输入"></a>一个参数输入</h5><pre><code>x -&gt; body
 
 view.setOnClickListener(new View.OnClickListener() {
 @Override
 public void onClick(View v) {
 Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;);
 }
-});
-</code></pre><p>使用 lambda</p>
+});</code></pre><p>使用 lambda</p>
 <pre><code>view.setOnClickListener(
-v -&gt; Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;));
-</code></pre><h5 id="多个参数输入"><a href="#多个参数输入" class="headerlink" title="多个参数输入"></a>多个参数输入</h5><pre><code>(x, y) -&gt; x + y;
+v -&gt; Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;));</code></pre><h5 id="多个参数输入"><a href="#多个参数输入" class="headerlink" title="多个参数输入"></a>多个参数输入</h5><pre><code>(x, y) -&gt; x + y;
 
 List&lt;String&gt; names = Arrays.asList(&quot;peter&quot;, &quot;anna&quot;, &quot;mike&quot;, &quot;xenia&quot;);
 Collections.sort(names, new Comparator&lt;String&gt;() {
@@ -132,17 +124,12 @@ Collections.sort(names, new Comparator&lt;String&gt;() {
     });
     for (String name : names) {
     Log.d(&quot;wxl&quot;, name);
-}
-</code></pre><p>使用 lambda</p>
+}</code></pre><p>使用 lambda</p>
 <pre><code>List&lt;String&gt; names = Arrays.asList(&quot;peter&quot;, &quot;anna&quot;, &quot;mike&quot;, &quot;xenia&quot;);
     Collections.sort(names, (a, b) -&gt; b.compareTo(a));
      for (String name : names) {
         Log.d(&quot;wxl&quot;, name);
-}
-</code></pre><h5 id="不省略型別"><a href="#不省略型別" class="headerlink" title="不省略型別"></a>不省略型別</h5><pre><code>(int x, int y) -&gt; x + y;
-</code></pre><h4 id="body-种类"><a href="#body-种类" class="headerlink" title="body 种类"></a>body 种类</h4><h5 id="什麼都不做"><a href="#什麼都不做" class="headerlink" title="什麼都不做"></a>什麼都不做</h5><pre><code>() -&gt; {}
-</code></pre><h5 id="单行不需要有返回值，单行可省略"><a href="#单行不需要有返回值，单行可省略" class="headerlink" title="单行不需要有返回值，单行可省略{}"></a>单行不需要有返回值，单行可省略{}</h5><pre><code>(x, y) -&gt; x + y;
-</code></pre><h5 id="单行需要有返回值"><a href="#单行需要有返回值" class="headerlink" title="单行需要有返回值"></a>单行需要有返回值</h5><pre><code>(x, y) -&gt; x + y//注意没有分号结尾
+}</code></pre><h5 id="不省略型別"><a href="#不省略型別" class="headerlink" title="不省略型別"></a>不省略型別</h5><pre><code>(int x, int y) -&gt; x + y;</code></pre><h4 id="body-种类"><a href="#body-种类" class="headerlink" title="body 种类"></a>body 种类</h4><h5 id="什麼都不做"><a href="#什麼都不做" class="headerlink" title="什麼都不做"></a>什麼都不做</h5><pre><code>() -&gt; {}</code></pre><h5 id="单行不需要有返回值，单行可省略"><a href="#单行不需要有返回值，单行可省略" class="headerlink" title="单行不需要有返回值，单行可省略{}"></a>单行不需要有返回值，单行可省略{}</h5><pre><code>(x, y) -&gt; x + y;</code></pre><h5 id="单行需要有返回值"><a href="#单行需要有返回值" class="headerlink" title="单行需要有返回值"></a>单行需要有返回值</h5><pre><code>(x, y) -&gt; x + y//注意没有分号结尾
 
 Observable.just(&quot;Hello&quot;, &quot;RxJava&quot;)
 .map(new Func1&lt;String, String&gt;() {
@@ -150,20 +137,16 @@ Observable.just(&quot;Hello&quot;, &quot;RxJava&quot;)
     public String call(String s) {
      return s.toUpperCase();
     }
-});
-</code></pre><p>使用 lambda</p>
+});</code></pre><p>使用 lambda</p>
 <pre><code>Observable.just(&quot;Hello&quot;, &quot;RxJava&quot;)
-.map(s -&gt; s.toUpperCase());
-</code></pre><h5 id="多行不需要有返回值"><a href="#多行不需要有返回值" class="headerlink" title="多行不需要有返回值"></a>多行不需要有返回值</h5><pre><code>(x, y) -&gt;{
+.map(s -&gt; s.toUpperCase());</code></pre><h5 id="多行不需要有返回值"><a href="#多行不需要有返回值" class="headerlink" title="多行不需要有返回值"></a>多行不需要有返回值</h5><pre><code>(x, y) -&gt;{
 x x;
 y y;
-}
-</code></pre><h5 id="多行需要有返回值"><a href="#多行需要有返回值" class="headerlink" title="多行需要有返回值"></a>多行需要有返回值</h5><pre><code>(x, y) -&gt;{
+}</code></pre><h5 id="多行需要有返回值"><a href="#多行需要有返回值" class="headerlink" title="多行需要有返回值"></a>多行需要有返回值</h5><pre><code>(x, y) -&gt;{
 x x;
 y y;
 return x + y;
-}
-</code></pre>
+}</code></pre>
       </div>
     </div>
   </div>

@@ -63,7 +63,9 @@
         <p>转载自胡凯的博客 <a href="http://hukai.me/android-performance-patterns/" target="_blank" rel="noopener">Android性能优化典范</a> </p>
 <p><img src="/images/1B60ABFE035FF01195310770A636F912.jpg" alt></p>
 <p>2015年伊始，Google发布了关于<a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范的专题</a>， 一共16个短视频，每个3-5分钟，帮助开发者创建更快更优秀的Android App。课程专题不仅仅介绍了Android系统中有关性能问题的底层工作原理，同时也介绍了如何通过工具来找出性能问题以及提升性能的建议。主要从三个 方面展开，Android的渲染机制，内存与GC，电量优化。下面是对这些问题和建议的总结梳理。</p>
-<h2 id="0-Render-Performance"><a href="#0-Render-Performance" class="headerlink" title="0)Render Performance"></a>0)Render Performance</h2><p>大多数用户感知到的卡顿等性能问题的最主要根源都是因为渲染性能。从设计师的角度，他们希望App能够有更多的动画，图片等时尚元素来实现流畅的用 户体验。但是Android系统很有可能无法及时完成那些复杂的界面渲染操作。Android系统每隔16ms发出VSYNC信号，触发对UI进行渲染， 如果每次渲染都成功，这样就能够达到流畅的画面所需要的60fps，为了能够实现60fps，这意味着程序的大多数操作都必须在16ms内完成。<br><a id="more"></a><br><img src="/images/89CEA4325FEA20ECCEB900D7A0E204FB.jpg" alt></p>
+<h2 id="0-Render-Performance"><a href="#0-Render-Performance" class="headerlink" title="0)Render Performance"></a>0)Render Performance</h2><p>大多数用户感知到的卡顿等性能问题的最主要根源都是因为渲染性能。从设计师的角度，他们希望App能够有更多的动画，图片等时尚元素来实现流畅的用 户体验。但是Android系统很有可能无法及时完成那些复杂的界面渲染操作。Android系统每隔16ms发出VSYNC信号，触发对UI进行渲染， 如果每次渲染都成功，这样就能够达到流畅的画面所需要的60fps，为了能够实现60fps，这意味着程序的大多数操作都必须在16ms内完成。</p>
+<a id="more"></a>
+<p><img src="/images/89CEA4325FEA20ECCEB900D7A0E204FB.jpg" alt></p>
 <p>如果你的某个操作花费时间是24ms，系统在得到VSYNC信号的时候就无法进行正常渲染，这样就发生了丢帧现象。那么用户在32ms内看到的会是同一帧画面。</p>
 <p><img src="/images/75B783AEC9735D84FE792368727C0828.jpg" alt></p>
 <p>用户容易在UI执行动画或者滑动ListView的时候感知到卡顿不流畅，是因为这里的操作相对复杂，容易发生丢帧的现象，从而感觉卡顿。有很多原 因可以导致丢帧，也许是因为你的layout太过复杂，无法在16ms内完成渲染，有可能是因为你的UI上有层叠太多的绘制单元，还有可能是因为动画执行 的次数过多。这些都会导致CPU或者GPU负载过重。</p>

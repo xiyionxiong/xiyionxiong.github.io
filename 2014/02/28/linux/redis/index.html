@@ -61,18 +61,31 @@
     <div class="lx-entry padding">
       <div>
         <h2 id="centos6安装redis-2-8-19"><a href="#centos6安装redis-2-8-19" class="headerlink" title="centos6安装redis-2.8.19"></a>centos6安装redis-2.8.19</h2><h3 id="1、检查安装依赖程序"><a href="#1、检查安装依赖程序" class="headerlink" title="1、检查安装依赖程序"></a>1、检查安装依赖程序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc-c++</span><br><span class="line">yum install -y tcl</span><br><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
+
 <h3 id="2、获取安装文件"><a href="#2、获取安装文件" class="headerlink" title="2、获取安装文件"></a>2、获取安装文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-2.8.13.tar.gz</span><br></pre></td></tr></table></figure>
+
 <h3 id="3、解压文件"><a href="#3、解压文件" class="headerlink" title="3、解压文件"></a>3、解压文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf redis-2.8.19.tar.gz</span><br><span class="line">mv redis-2.8.19 /usr/local/redis</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
+
 <h3 id="4、进入目录"><a href="#4、进入目录" class="headerlink" title="4、进入目录"></a>4、进入目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/redis</span><br></pre></td></tr></table></figure>
+
 <h3 id="5、编译安装"><a href="#5、编译安装" class="headerlink" title="5、编译安装"></a>5、编译安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
 <h3 id="6、设置配置文件路径"><a href="#6、设置配置文件路径" class="headerlink" title="6、设置配置文件路径"></a>6、设置配置文件路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/redis</span><br><span class="line">cp redis.conf/etc/redis</span><br></pre></td></tr></table></figure>
+
 <h3 id="7、修改配置文件"><a href="#7、修改配置文件" class="headerlink" title="7、修改配置文件"></a>7、修改配置文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/redis/redis.conf</span><br><span class="line">仅修改： daemonize yes （no--&gt;yes）</span><br></pre></td></tr></table></figure>
+
 <h3 id="8、启动"><a href="#8、启动" class="headerlink" title="8、启动"></a>8、启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/redis-server /etc/redis/redis.conf</span><br></pre></td></tr></table></figure>
+
 <h3 id="9、查看启动"><a href="#9、查看启动" class="headerlink" title="9、查看启动"></a>9、查看启动</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep redis</span><br></pre></td></tr></table></figure>
+
 <h3 id="10、使用客户端"><a href="#10、使用客户端" class="headerlink" title="10、使用客户端"></a>10、使用客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis-cli</span><br><span class="line">&gt;set name david</span><br><span class="line">OK</span><br><span class="line">&gt;get name</span><br><span class="line">&quot;david&quot;</span><br></pre></td></tr></table></figure>
+
 <h3 id="11-关闭客户端"><a href="#11-关闭客户端" class="headerlink" title="11.关闭客户端"></a>11.关闭客户端</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli shutdown</span><br></pre></td></tr></table></figure>
+
 <h3 id="12、开机启动配置"><a href="#12、开机启动配置" class="headerlink" title="12、开机启动配置"></a>12、开机启动配置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;/usr/local/bin/redis-server /etc/redis/redis.conf &amp;&quot; &gt;&gt; /etc/rc.local</span><br></pre></td></tr></table></figure>
+
 <p>开机启动要配置在 <code>rc.local</code> 中，而 <code>/etc/profile</code> 文件，要有用户登录了，才会被执行。</p>
 
       </div>

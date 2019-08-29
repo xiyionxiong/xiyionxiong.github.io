@@ -125,8 +125,7 @@
     public void setSeleted(boolean isSeleted) {
         this.isSeleted = isSeleted;
     }
-}
-</code></pre><h4 id="自定义读取图片的Loader（ImagesLoader）"><a href="#自定义读取图片的Loader（ImagesLoader）" class="headerlink" title="自定义读取图片的Loader（ImagesLoader）"></a>自定义读取图片的Loader（ImagesLoader）</h4><p>-<br>    public class ImagesLoader extends AsyncTaskLoader&lt;ArrayList<imagebean>&gt; {</imagebean></p>
+}</code></pre><h4 id="自定义读取图片的Loader（ImagesLoader）"><a href="#自定义读取图片的Loader（ImagesLoader）" class="headerlink" title="自定义读取图片的Loader（ImagesLoader）"></a>自定义读取图片的Loader（ImagesLoader）</h4><p>-<br>    public class ImagesLoader extends AsyncTaskLoader&lt;ArrayList<imagebean>&gt; {</imagebean></p>
 <pre><code>    private ArrayList&lt;ImageBean&gt; mImages = null;
 
     /**
@@ -216,8 +215,7 @@
         }
     }
 
-}
-</code></pre><h4 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h4><pre><code>public class GalleryActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks&lt;ArrayList&lt;ImageBean&gt;&gt;  {
+}</code></pre><h4 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h4><pre><code>public class GalleryActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks&lt;ArrayList&lt;ImageBean&gt;&gt;  {
     ......
     ......
     ......
@@ -235,8 +233,7 @@
     public void onLoaderReset(Loader&lt;ArrayList&lt;ImageBean&gt;&gt; images) {
 
     }
-}
-</code></pre><h3 id="自定义Loader获取联系人"><a href="#自定义Loader获取联系人" class="headerlink" title="自定义Loader获取联系人"></a>自定义Loader获取联系人</h3><h4 id="联系人实体（ContactInfo）"><a href="#联系人实体（ContactInfo）" class="headerlink" title="联系人实体（ContactInfo）"></a>联系人实体（ContactInfo）</h4><pre><code>public class ContactInfo implements Serializable {
+}</code></pre><h3 id="自定义Loader获取联系人"><a href="#自定义Loader获取联系人" class="headerlink" title="自定义Loader获取联系人"></a>自定义Loader获取联系人</h3><h4 id="联系人实体（ContactInfo）"><a href="#联系人实体（ContactInfo）" class="headerlink" title="联系人实体（ContactInfo）"></a>联系人实体（ContactInfo）</h4><pre><code>public class ContactInfo implements Serializable {
     private String name;
     private String phoneNumber;
     private boolean selected;
@@ -294,8 +291,7 @@
         this.selected = selected;
     }
 
-}
-</code></pre><h4 id="控制Loader的广播（ContactLoaderReceiver）"><a href="#控制Loader的广播（ContactLoaderReceiver）" class="headerlink" title="控制Loader的广播（ContactLoaderReceiver）"></a>控制Loader的广播（ContactLoaderReceiver）</h4><pre><code>public class ContactLoaderReceiver extends BroadcastReceiver {
+}</code></pre><h4 id="控制Loader的广播（ContactLoaderReceiver）"><a href="#控制Loader的广播（ContactLoaderReceiver）" class="headerlink" title="控制Loader的广播（ContactLoaderReceiver）"></a>控制Loader的广播（ContactLoaderReceiver）</h4><pre><code>public class ContactLoaderReceiver extends BroadcastReceiver {
 
     private ContactLoader mLoader;
 
@@ -361,8 +357,7 @@
          */
         mLoader.onContentChanged();
     }
-}
-</code></pre><h4 id="联系人Loader（ContactLoader）"><a href="#联系人Loader（ContactLoader）" class="headerlink" title="联系人Loader（ContactLoader）"></a>联系人Loader（ContactLoader）</h4><pre><code>public class ContactLoader extends AsyncTaskLoader&lt;LinkedList&lt;ContactInfo&gt;&gt; {
+}</code></pre><h4 id="联系人Loader（ContactLoader）"><a href="#联系人Loader（ContactLoader）" class="headerlink" title="联系人Loader（ContactLoader）"></a>联系人Loader（ContactLoader）</h4><pre><code>public class ContactLoader extends AsyncTaskLoader&lt;LinkedList&lt;ContactInfo&gt;&gt; {
 
     /**
      * 获取库Phone表字段 *
@@ -523,8 +518,7 @@
     protected void onStopLoading() {
         cancelLoad();
     }
-}
-</code></pre><h4 id="Activity-1"><a href="#Activity-1" class="headerlink" title="Activity"></a>Activity</h4><pre><code>public class ImportContactActivity extends BaseActivity implements LoaderManager.LoaderCallbacks&lt;LinkedList&lt;ContactInfo&gt;&gt;{
+}</code></pre><h4 id="Activity-1"><a href="#Activity-1" class="headerlink" title="Activity"></a>Activity</h4><pre><code>public class ImportContactActivity extends BaseActivity implements LoaderManager.LoaderCallbacks&lt;LinkedList&lt;ContactInfo&gt;&gt;{
     ......
     ......
     ......
@@ -552,8 +546,7 @@
         this.lvAdater.clearList();
     }
 
-}
-</code></pre>
+}</code></pre>
       </div>
     </div>
   </div>

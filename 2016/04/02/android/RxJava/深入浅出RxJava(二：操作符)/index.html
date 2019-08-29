@@ -67,21 +67,23 @@
 <p>假设我有这样一个方法：<br>这个方法根据输入的字符串返回一个网站的url列表（啊哈，搜索引擎）</p>
 <p><code>Observable&lt;List&lt;String&gt;&gt; query(String text);</code></p>
 <p>现在我希望构建一个健壮系统，它可以查询字符串并且显示结果。根据上一篇blog的内容，我们可能会写出下面的代码：</p>
-<p><code>query(`</code>“Hello, world!”<code></code>)<code></code>.subscribe(urls -&gt; {<code></code>for<code></code>(String url : urls) {<code></code>System.out.println(url);<code></code>}<code></code>});`<br><a id="more"></a><br>这种代码当然是不能容忍的，因为上面的代码使我们丧失了变化数据流的能力。一旦我们想要更改每一个URL，只能在Subscriber中来做。我们竟然没有使用如此酷的map()操作符！！！</p>
+<p><code>query(``&quot;Hello, world!&quot;``)</code><br><code>.subscribe(urls -&gt; {</code><br><code>for</code> <code>(String url : urls) {</code><br><code>System.out.println(url);</code><br><code>}</code><br><code>});</code></p>
+<a id="more"></a>
+<p>这种代码当然是不能容忍的，因为上面的代码使我们丧失了变化数据流的能力。一旦我们想要更改每一个URL，只能在Subscriber中来做。我们竟然没有使用如此酷的map()操作符！！！</p>
 <p>当然，我可以使用map操作符，map的输入是urls列表，处理的时候还是要for each遍历，一样很蛋疼。</p>
 <p>万幸，还有Observable.from()方法，它接收一个集合作为输入，然后每次输出一个元素给subscriber：</p>
-<p><code>Observable.from(`</code>“url1”<code>,</code>“url2”<code>,</code>“url3”<code></code>)`</p>
+<p><code>Observable.from(``&quot;url1&quot;``, ``&quot;url2&quot;``, ``&quot;url3&quot;``)</code></p>
 <p><code>.subscribe(url -&gt; System.out.println(url));</code></p>
 <p>我们来把这个方法使用到刚才的场景：</p>
-<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>query(``&quot;Hello, world!&quot;``)</code></p>
 <p><code>.subscribe(urls -&gt; {</code></p>
 <p><code>Observable.from(urls)</code></p>
 <p><code>.subscribe(url -&gt; System.out.println(url));</code></p>
 <p><code>});</code></p>
 <p>虽然去掉了for each循环，但是代码依然看起来很乱。多个嵌套的subscription不仅看起来很丑，难以修改，更严重的是它会破坏某些我们现在还没有讲到的RxJava的特性。</p>
 <p>救星来了,他就是flatMap()。<br>Observable.flatMap()接收一个Observable的输出作为输入，同时输出另外一个Observable。直接看代码：</p>
-<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
-<p><code>.flatMap(`</code>new<code></code>Func1&lt;List<string>, Observable<string>&gt;() {`</string></string></p>
+<p><code>query(``&quot;Hello, world!&quot;``)</code></p>
+<p><code>.flatMap(``new</code> <code>Func1&lt;List&lt;String&gt;, Observable&lt;String&gt;&gt;() {</code></p>
 <p><code>@Override</code></p>
 <p><code>public Observable&lt;String&gt; call(List&lt;String&gt; urls) {</code></p>
 <p><code>return</code> <code>Observable.from(urls);</code></p>
@@ -89,18 +91,18 @@
 <p><code>})</code></p>
 <p><code>.subscribe(url -&gt; System.out.println(url));</code></p>
 <p>这里我贴出了整个的函数代码，以方便你了解发生了什么，使用lambda可以大大简化代码长度：</p>
-<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>query(``&quot;Hello, world!&quot;``)</code></p>
 <p><code>.flatMap(urls -&gt; Observable.from(urls))</code></p>
 <p><code>.subscribe(url -&gt; System.out.println(url));</code></p>
-<p>flatMap()是不是看起来很奇怪？为什么它要返回另外一个Observable呢？理解flatMap的关键点在于，flatMap输出的新的 Observable正是我们在Subscriber想要接收的。现在Subscriber不再收到List\&lt;String>，而是收到一些 列单个的字符串，就像Observable.from()的输出一样。</p>
+<p>flatMap()是不是看起来很奇怪？为什么它要返回另外一个Observable呢？理解flatMap的关键点在于，flatMap输出的新的 Observable正是我们在Subscriber想要接收的。现在Subscriber不再收到List&lt;String&gt;，而是收到一些 列单个的字符串，就像Observable.from()的输出一样。</p>
 <p>这部分也是我当初学RxJava的时候最难理解的部分，一旦我突然领悟了，RxJava的很多疑问也就一并解决了。</p>
 <h2 id="还可以更好"><a href="#还可以更好" class="headerlink" title="还可以更好"></a>还可以更好</h2><p>flatMap()实在不能更赞了，它可以返回任何它想返回的Observable对象。<br>比如下面的方法：</p>
 <p><code>// 返回网站的标题，如果404了就返回null</code></p>
 <p><code>Observable&lt;String&gt; getTitle(String URL);</code></p>
 <p>接着前面的例子，现在我不想打印URL了，而是要打印收到的每个网站的标题。问题来了，我的方法每次只能传入一个URL，并且返回值不是一个String，而是一个输出String的Observabl对象。使用flatMap()可以简单的解决这个问题。</p>
-<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>query(``&quot;Hello, world!&quot;``)</code></p>
 <p><code>.flatMap(urls -&gt; Observable.from(urls))</code></p>
-<p><code>.flatMap(`</code>new<code></code>Func1&lt;String, Observable<string>&gt;() {`</string></p>
+<p><code>.flatMap(``new</code> <code>Func1&lt;String, Observable&lt;String&gt;&gt;() {</code></p>
 <p><code>@Override</code></p>
 <p><code>public Observable&lt;String&gt; call(String url) {</code></p>
 <p><code>return</code> <code>getTitle(url);</code></p>
@@ -108,31 +110,31 @@
 <p><code>})</code></p>
 <p><code>.subscribe(title -&gt; System.out.println(title));</code></p>
 <p>使用lambda:</p>
-<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>query(``&quot;Hello, world!&quot;``)</code></p>
 <p><code>.flatMap(urls -&gt; Observable.from(urls))</code></p>
 <p><code>.flatMap(url -&gt; getTitle(url))</code></p>
 <p><code>.subscribe(title -&gt; System.out.println(title));</code></p>
 <p>是不是感觉很不可思议？我竟然能将多个独立的返回Observable对象的方法组合在一起！帅呆了！<br>不止这些，我还将两个API的调用组合到一个链式调用中了。我们可以将任意多个API调用链接起来。大家应该都应该知道同步所有的API调用，然后将所有 API调用的回调结果组合成需要展示的数据是一件多么蛋疼的事情。这里我们成功的避免了callback hell（多层嵌套的回调，导致代码难以阅读维护）。现在所有的逻辑都包装成了这种简单的响应式调用。</p>
 <h2 id="丰富的操作符"><a href="#丰富的操作符" class="headerlink" title="丰富的操作符"></a>丰富的操作符</h2><p>目前为止，我们已经接触了两个操作符，RxJava中还有更多的操作符，那么我们如何使用其他的操作符来改进我们的代码呢？<br>getTitle()返回null如果url不存在。我们不想输出”null”，那么我们可以从返回的title列表中过滤掉null值！</p>
-<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>query(``&quot;Hello, world!&quot;``)</code></p>
 <p><code>.flatMap(urls -&gt; Observable.from(urls))</code></p>
 <p><code>.flatMap(url -&gt; getTitle(url))</code></p>
-<p><code>.filter(title -&gt; title != `</code>null<code></code>)`</p>
+<p><code>.filter(title -&gt; title != ``null``)</code></p>
 <p><code>.subscribe(title -&gt; System.out.println(title));</code></p>
 <p>filter()输出和输入相同的元素，并且会过滤掉那些不满足检查条件的。</p>
 <p>如果我们只想要最多5个结果：</p>
-<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>query(``&quot;Hello, world!&quot;``)</code></p>
 <p><code>.flatMap(urls -&gt; Observable.from(urls))</code></p>
 <p><code>.flatMap(url -&gt; getTitle(url))</code></p>
-<p><code>.filter(title -&gt; title != `</code>null<code></code>)`</p>
+<p><code>.filter(title -&gt; title != ``null``)</code></p>
 <p><code>.take(5)</code></p>
 <p><code>.subscribe(title -&gt; System.out.println(title));</code></p>
 <p>take()输出最多指定数量的结果。</p>
 <p>如果我们想在打印之前，把每个标题保存到磁盘：</p>
-<p><code>query(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>query(``&quot;Hello, world!&quot;``)</code></p>
 <p><code>.flatMap(urls -&gt; Observable.from(urls))</code></p>
 <p><code>.flatMap(url -&gt; getTitle(url))</code></p>
-<p><code>.filter(title -&gt; title != `</code>null<code></code>)`</p>
+<p><code>.filter(title -&gt; title != ``null``)</code></p>
 <p><code>.take(5)</code></p>
 <p><code>.doOnNext(title -&gt; saveTitle(title))</code></p>
 <p><code>.subscribe(title -&gt; System.out.println(title));</code></p>
@@ -143,7 +145,7 @@
 <h2 id="感觉如何？"><a href="#感觉如何？" class="headerlink" title="感觉如何？"></a>感觉如何？</h2><p>好吧，你是一个怀疑主义者，并且还很难被说服，那为什么你要关心这些操作符呢？</p>
 <p>因为操作符可以让你对数据流做任何操作。</p>
 <p>将一系列的操作符链接起来就可以完成复杂的逻辑。代码被分解成一系列可以组合的片段。这就是响应式函数编程的魅力。用的越多，就会越多的改变你的编程思维。</p>
-<p>另外，RxJava也使我们处理数据的方式变得更简单。在最后一个例子里，我们调用了两个API，对API返回的数据进行了处理，然后保存到磁盘。 但是我们的Subscriber并不知道这些，它只是认为自己在接收一个Observable\&lt;String>对象。良好的封装性也带来了编 码的便利！</p>
+<p>另外，RxJava也使我们处理数据的方式变得更简单。在最后一个例子里，我们调用了两个API，对API返回的数据进行了处理，然后保存到磁盘。 但是我们的Subscriber并不知道这些，它只是认为自己在接收一个Observable&lt;String&gt;对象。良好的封装性也带来了编 码的便利！</p>
 <p>在第三部分中，我将介绍RxJava的另外一些很酷的特性，比如错误处理和并发，这些特性并不会直接用来处理数据。</p>
 
       </div>
@@ -166,12 +168,12 @@
 	</div>
         <div class="lx-cover next lx-cover-sm" style="background-image: url(/images/footer_2.jpg)">
 		<div class="overlay"></div>
-		<a class="copy" href="/2016/04/01/随笔/Q2季度目标/">
+		<a class="copy" href="/2016/04/01/随笔/VIM快捷键/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Prev</span>
-						<h3>Q2季度目标</h3>
+						<h3>VIM快捷键的使用</h3>
 					</div>
 				</div>
 			</div>

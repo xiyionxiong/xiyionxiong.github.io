@@ -68,8 +68,7 @@
 
 StringBuffer： 在字符改变的时候，不会产生新的对象，线程安全的可变字符序列。
 
-StringBuilder： 同StringBuffer类似，线程不安全的可变字符序列。
-</code></pre><p></p>
+StringBuilder： 同StringBuffer类似，线程不安全的可变字符序列。</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -85,8 +84,7 @@ StringBuilder： 同StringBuffer类似，线程不安全的可变字符序列。
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-05-05 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
       <p></p><h3 id="解决EditView抢焦点事件"><a href="#解决EditView抢焦点事件" class="headerlink" title="解决EditView抢焦点事件"></a>解决EditView抢焦点事件</h3><p>在最外层布局加上</p>
 <pre><code>android:focusable=&quot;true&quot;
-android:focusableInTouchMode=&quot;true&quot;
-</code></pre><p></p>
+android:focusableInTouchMode=&quot;true&quot;</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -94,7 +92,9 @@ android:focusableInTouchMode=&quot;true&quot;
       <h2><a href="/2014/02/28/linux/redis/">centos6安装redis-2.8.19</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-02-28 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/linux/">linux</a>,<a class="category-link" href="/categories/linux/redis/">redis</a></span>
       <p></p><h2 id="centos6安装redis-2-8-19"><a href="#centos6安装redis-2-8-19" class="headerlink" title="centos6安装redis-2.8.19"></a>centos6安装redis-2.8.19</h2><h3 id="1、检查安装依赖程序"><a href="#1、检查安装依赖程序" class="headerlink" title="1、检查安装依赖程序"></a>1、检查安装依赖程序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc-c++</span><br><span class="line">yum install -y tcl</span><br><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
+
 <h3 id="2、获取安装文件"><a href="#2、获取安装文件" class="headerlink" title="2、获取安装文件"></a>2、获取安装文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-2.8.13.tar.gz</span><br></pre></td></tr></table></figure>
+
 <h3 id="3、解压文件"><a href="#3、解压文件" class="headerlink" title="3、解压文件"></a>3、解压文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf redis-2.8.19.tar.gz</span><br><span class="line">mv redis-2.8.19 /usr/local/redis</span><br></pre></td></tr></table></figure><p></p>
     </div>
   </div>
@@ -109,14 +109,14 @@ android:focusableInTouchMode=&quot;true&quot;
 <p>接下来，你将收到顺序如下标题的两封邮件:</p>
 <p>1 Lantern Beta Request: Please Confirm</p>
 <p>点击邮件正文的<strong>Yes,subscribe me to this list.</strong>按钮</p>
-<p>2 Lantern Beta Request: Subscription Confirmed<br></p>
+<p>2 Lantern Beta Request: Subscription Confirmed</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/02/19/android/Android Skills/Context/">Android Context 到底是什么？</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-02-19 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p></p><h3 id="什么是Context？"><a href="#什么是Context？" class="headerlink" title="什么是Context？"></a>什么是Context？</h3><p>一个Context意味着一个场景，一个场景就是我们和软件进行交互的一个过程。比如当你使用微信的时候，场景包括聊天界面、通讯录、朋友圈，以及背后的一些数据。<br></p>
+      <p></p><h3 id="什么是Context？"><a href="#什么是Context？" class="headerlink" title="什么是Context？"></a>什么是Context？</h3><p>一个Context意味着一个场景，一个场景就是我们和软件进行交互的一个过程。比如当你使用微信的时候，场景包括聊天界面、通讯录、朋友圈，以及背后的一些数据。</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -124,14 +124,10 @@ android:focusableInTouchMode=&quot;true&quot;
       <h2><a href="/2014/02/17/android/小知识点/Android开发中一些被冷落但却很有用的类和方法/">Android开发中一些被冷落但却很有用的类和方法</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-02-17 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
       <p></p><h3 id="MediaMetadataRetriever"><a href="#MediaMetadataRetriever" class="headerlink" title="MediaMetadataRetriever"></a>MediaMetadataRetriever</h3><p>顾名思义，就是用来获取媒体文件一些相关信息的类。包括一首歌的标题，作者，专辑封面和名称，时长，比特率等等。如果是视频的话，可以获取视频的长宽，预览图。</p>
-<pre><code>http://developer.android.com/intl/zh-cn/reference/android/media/MediaMetadataRetriever.html
-</code></pre><h3 id="TouchDelegate"><a href="#TouchDelegate" class="headerlink" title="TouchDelegate`"></a>TouchDelegate`</h3><p>用于更改View的触摸区域。场景：比如在RecyclerView的ItemView里包含了CheckBox组件, 然后想实现点击ItemView的时候，也可以触发CheckBox，就可以使用此类。</p>
-<pre><code>http://developer.android.com/intl/zh-cn/training/gestures/viewgroup.html#delegate
-</code></pre><h3 id="ArgbEvaluator"><a href="#ArgbEvaluator" class="headerlink" title="ArgbEvaluator"></a>ArgbEvaluator</h3><p>用于计算不同颜色值之间的插值，配合ValueAnimator.ofObject或者ViewPager.PageTransformer使用，可以实现不同颜色之间的平滑过渡。</p>
-<pre><code>http://developer.android.com/intl/zh-cn/reference/android/animation/ArgbEvaluator.html
-</code></pre><h3 id="Palette"><a href="#Palette" class="headerlink" title="Palette"></a>Palette</h3><p>用于提取一张图片的颜色。</p>
-<pre><code>http://developer.android.com/intl/zh-cn/reference/android/support/v7/graphics/Palette.html
-</code></pre><p></p>
+<pre><code>http://developer.android.com/intl/zh-cn/reference/android/media/MediaMetadataRetriever.html</code></pre><h3 id="TouchDelegate"><a href="#TouchDelegate" class="headerlink" title="TouchDelegate`"></a>TouchDelegate`</h3><p>用于更改View的触摸区域。场景：比如在RecyclerView的ItemView里包含了CheckBox组件, 然后想实现点击ItemView的时候，也可以触发CheckBox，就可以使用此类。</p>
+<pre><code>http://developer.android.com/intl/zh-cn/training/gestures/viewgroup.html#delegate</code></pre><h3 id="ArgbEvaluator"><a href="#ArgbEvaluator" class="headerlink" title="ArgbEvaluator"></a>ArgbEvaluator</h3><p>用于计算不同颜色值之间的插值，配合ValueAnimator.ofObject或者ViewPager.PageTransformer使用，可以实现不同颜色之间的平滑过渡。</p>
+<pre><code>http://developer.android.com/intl/zh-cn/reference/android/animation/ArgbEvaluator.html</code></pre><h3 id="Palette"><a href="#Palette" class="headerlink" title="Palette"></a>Palette</h3><p>用于提取一张图片的颜色。</p>
+<pre><code>http://developer.android.com/intl/zh-cn/reference/android/support/v7/graphics/Palette.html</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -155,8 +151,7 @@ Ctrl+Alt+Shift+S        打开当前项目/模块属性
 Alt+Shift+C                查看文件的变更历史
 Ctrl+Shift+F10            运行
 Ctrl+Shift+F9            debug运行
-Ctrl+Alt+F12                资源管理器打开文件夹
-</code></pre><p></p>
+Ctrl+Alt+F12                资源管理器打开文件夹</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -171,8 +166,7 @@ Ctrl+Alt+F12                资源管理器打开文件夹
 二级包名为xxx（可以是公司域名或者个人命名），
 三级包名根据应用进行命名，
 四级包名为模块名或层级名。如：
-com.weicheche.android.activity | com.weicheche.android.adapter
-</code></pre><p></p>
+com.weicheche.android.activity | com.weicheche.android.adapter</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -181,8 +175,11 @@ com.weicheche.android.activity | com.weicheche.android.adapter
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-02-07 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
       <p></p><p>这份文档是Google Java编程风格规范的完整定义。当且仅当一个Java源文件符合此文档中的规则， 我们才认为它符合Google的Java编程风格。</p>
 <p>与其它的编程风格指南一样，这里所讨论的不仅仅是编码格式美不美观的问题， 同时也讨论一些约定及编码标准。然而，这份文档主要侧重于我们所普遍遵循的规则， 对于那些不是明确强制要求的，我们尽量避免提供意见。</p>
-<p>1.1 术语说明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">术语class可表示一个普通类，枚举类，接口或是annotation类型(@interface)</span><br><span class="line">术语comment只用来指代实现的注释(implementation comments)，我们不使用“documentation comments”一词，而是用Javadoc。</span><br><span class="line">其他的术语说明会偶尔在后面的文档出现。</span><br></pre></td></tr></table></figure></p>
-<p>1.2 指南说明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">本文档中的示例代码并不作为规范。也就是说，虽然示例代码是遵循Google编程风格，但并不意味着这是展现这些代码的唯一方式。 示例中的格式选择不应该被强制定为规则。</span><br></pre></td></tr></table></figure></p><p></p>
+<p>1.1 术语说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">术语class可表示一个普通类，枚举类，接口或是annotation类型(@interface)</span><br><span class="line">术语comment只用来指代实现的注释(implementation comments)，我们不使用“documentation comments”一词，而是用Javadoc。</span><br><span class="line">其他的术语说明会偶尔在后面的文档出现。</span><br></pre></td></tr></table></figure>
+
+<p>1.2 指南说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">本文档中的示例代码并不作为规范。也就是说，虽然示例代码是遵循Google编程风格，但并不意味着这是展现这些代码的唯一方式。 示例中的格式选择不应该被强制定为规则。</span><br></pre></td></tr></table></figure><p></p>
     </div>
   </div>
  

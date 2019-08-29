@@ -66,8 +66,7 @@
 final float offsetY = mScrollY - child.mTop;
 event.offsetLocation(offsetX, offsetY);
 handled = child.dispatchTouchEvent(event);
-event.offsetLocation(-offsetX, -offsetY);
-</code></pre><p> 这段代码清晰展示了父视图把事件分发给子视图时，getX()和getY所获得的相关坐标是如何改变的。当父视图处理事件时，上述两个函数获得的相对坐标是相对于父视图的，然后通过上边这段代码，调整了相对坐标的值，让其变为相对于子视图啦。</p>
+event.offsetLocation(-offsetX, -offsetY);</code></pre><p> 这段代码清晰展示了父视图把事件分发给子视图时，getX()和getY所获得的相关坐标是如何改变的。当父视图处理事件时，上述两个函数获得的相对坐标是相对于父视图的，然后通过上边这段代码，调整了相对坐标的值，让其变为相对于子视图啦。</p>
 <p> 涉及MotionEvent使用的代码一般如下:</p>
 <pre><code>action = MotionEventCompat.getActionMasked(event);
 switch(action) {
@@ -76,8 +75,7 @@ switch(action) {
     MotionEvent.ACTION_MOVE:
         break;
     MotionEvent.ACTION_UP:
-        break;
-</code></pre><p> 这里就引入了关于MotionEvent的一个重要概念，事件类型。事件类型就是指MotionEvent对象所代表的动作。比如说，当你的一个手指在屏幕上滑动一下时，系统会产生一系列的触摸事件对象,他们所代表的动作有所不同。有的事件代表你手指按下这个动作,有的事件代表你手指在屏幕上滑动,还有的事件代表你手指离开屏幕。这些事件的事件类型就分别为ACTION_DOWN,ACTION_MOVE,和<strong>ACTION_UP</strong>。上述这个动作所产生的一系列事件，被称为一个事件流，它包括一个<strong>ACTION_DOWN</strong>事件，很多个<strong>ACTION_MOVE</strong>事件，和一个ACTION_UP事件。</p>
+        break;</code></pre><p> 这里就引入了关于MotionEvent的一个重要概念，事件类型。事件类型就是指MotionEvent对象所代表的动作。比如说，当你的一个手指在屏幕上滑动一下时，系统会产生一系列的触摸事件对象,他们所代表的动作有所不同。有的事件代表你手指按下这个动作,有的事件代表你手指在屏幕上滑动,还有的事件代表你手指离开屏幕。这些事件的事件类型就分别为ACTION_DOWN,ACTION_MOVE,和<strong>ACTION_UP</strong>。上述这个动作所产生的一系列事件，被称为一个事件流，它包括一个<strong>ACTION_DOWN</strong>事件，很多个<strong>ACTION_MOVE</strong>事件，和一个ACTION_UP事件。</p>
 <p><img src="https://d9.usercdn.com/2/i/04033/9g2l6srojvha.gif" alt></p>
 <p> 当然，除了这三个类型外，还有很多不同的事件类型,比如ACTION_CANCEL。它代表当前的手势被取消。要理解这个类型，就必须要了解ViewGroup分发事件的机制。一般来说，如果一个子视图接收了父视图分发给它的ACTION_DOWN事件，那么与ACTION_DOWN事件相关的事件流就都要分发给这个子视图，但是如果父视图希望拦截其中的一些事件，不再继续转发事件给这个子视图的话，那么就需要给子视图一个ACTION_CANCEL事件。<br> 其他的类型会在接下来的博文中一一解释。</p>
 <h4 id="Pointer"><a href="#Pointer" class="headerlink" title="Pointer"></a>Pointer</h4><p> 细心的同学会发现，在上一节我描述用户手指在屏幕上滑动的例子时，特地说明了手指的数量为一个。那么当用户两个或者多个手指在屏幕上滑动时，系统又会产生怎样的事件流呢？<br> 为了可以表示多个触摸点的动作，MotionEvent中引入了Pointer的概念，一个pointer就代表一个触摸点，每个pointer都有自己的事件类型，也有自己的横轴坐标值。一个MotionEvent对象中可能会存储多个pointer的相关信息，每个pointer都会有一个自己的id和index。pointer的id在整个事件流中是不会发生变化的，但是index会发生变化。<br> MotionEvent类中的很多方法都是可以传入一个int值作为参数的，其实传入的就是pointer的index值。比如getX(pointerIndex)和getY(pointerIndex)，此时，它们返回的就是index所代表的触摸点相关事件坐标值。<br> 由于pointer的index值在不同的MotionEvent对象中会发生变化，但是id值却不会变化。所以，当我们要记录一个触摸点的事件流时，就只需要保存其id,然后使用findPointerIndex(int)来获得其index值，然后再获得其他信息。</p>
@@ -122,8 +120,7 @@ switch (action) {
             mPrimaryLastY = -;
             break;
 
-return ;
-</code></pre><p> 除了pointer的概念，MotionEvent还引入了两个事件类型：</p>
+return ;</code></pre><p> 除了pointer的概念，MotionEvent还引入了两个事件类型：</p>
 <p><code>ACTION_POINTER_DOWN</code>:代表用户又使用一个手指触摸到屏幕上，也就是说，在已经有一个触摸点的情况下，有新出现了一个触摸点。</p>
 <p><code>ACTION_POINTER_UP</code>:代表用户的一个手指离开了触摸屏，但是还有其他手指还在触摸屏上。也就是说，在多个触摸点存在的情况下，其中一个触摸点消失了。它与ACTION_UP的区别就是，它是在多个触摸点中的一个触摸点消失时（此时，还有触摸点存在，也就是说用户还有手指触摸屏幕）产生，而ACTION_UP可以说是最后一个触摸点消失时产生。<br> 那么，用户先两个手指先后接触屏幕，同时滑动，然后在先后离开这一套动作所产生的事件流是什么样的呢？<br> 它所产生的事件流如下：</p>
 <p>先产生一个ACTION_DOWN事件，代表用户的第一个手指接触到了屏幕。<br>再产生一个ACTION_POINTER_DOWN事件，代表用户的第二个手指接触到了屏幕。<br>很多的ACTION_MOVE事件，但是在这些MotionEvent对象中，都保存着两个触摸点滑动的信息，相关的代码我们会在文章的最后进行演示。<br>一个ACTION_POINTER_UP事件，代表用户的一个手指离开了屏幕。<br>如果用户剩下的手指还在滑动时，就会产生很多ACTION_MOVE事件。<br>一个ACTION_UP事件，代表用户的最后一个手指离开了屏幕</p>
@@ -144,8 +141,7 @@ return ;
     System.out.printf(&quot;At time %d:&quot;, ev.getEventTime());
     ( p = ; p &lt; pointerCount; p++) {
         System.out.printf(&quot;  pointer %d: (%f,%f)&quot;,
-            ev.getPointerId(p), ev.getX(p), ev.getY(p));
-</code></pre>
+            ev.getPointerId(p), ev.getX(p), ev.getY(p));</code></pre>
       </div>
     </div>
   </div>

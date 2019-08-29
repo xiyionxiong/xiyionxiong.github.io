@@ -67,8 +67,7 @@
 <h3 id="EventBus框架"><a href="#EventBus框架" class="headerlink" title="EventBus框架"></a>EventBus框架</h3><p>大家谈到EventBus，总会想到<code>greenrobot</code>的<code>EventBus</code>，但是实际上<code>EventBus</code>是一个通用的叫法，例如Google出品的Guava，Guava是一个庞大的库，<code>EventBus</code>只是它附带的一个小功能，因此实际项目中使用并不多。用的最多的是<code>greenrobot/EventBus</code>，这个库的优点是接口简洁，集成方便，但是限定了方法名，不支持注解。另一个库<code>square/otto</code>修改自 <code>Guava</code>，用的人也不少。</p>
 <h3 id="这篇博文暂时只讨论greenrobot的EventBus库。"><a href="#这篇博文暂时只讨论greenrobot的EventBus库。" class="headerlink" title="这篇博文暂时只讨论greenrobot的EventBus库。"></a>这篇博文暂时只讨论greenrobot的EventBus库。</h3><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><p>很多文章会讲到<code>Subscriber</code>，以及<code>Publisher</code>和<code>ThreadMode</code>等概念，我觉得暂时没有必要，简单粗暴，直接上代码：</p>
 <h4 id="1、添加依赖库："><a href="#1、添加依赖库：" class="headerlink" title="1、添加依赖库："></a>1、添加依赖库：</h4><p>首先你要为你的app添加依赖库：</p>
-<pre><code>compile &apos;de.greenrobot:eventbus:3.0.0-beta1&apos;
-</code></pre><p>有些人会问为什么是beta版本，因为eventbus现阶段3.0版本只处于beta测试阶段。有些人会问如何找到·eventbus 3.0.0·版本，具体添加:</p>
+<pre><code>compile &apos;de.greenrobot:eventbus:3.0.0-beta1&apos;</code></pre><p>有些人会问为什么是beta版本，因为eventbus现阶段3.0版本只处于beta测试阶段。有些人会问如何找到·eventbus 3.0.0·版本，具体添加:</p>
 <p><img src="https://segmentfault.com/img/bVr7mp" alt></p>
 <h4 id="2、注册"><a href="#2、注册" class="headerlink" title="2、注册"></a>2、注册</h4><p>举个例子，你需要在一个activity中注册eventbus事件，然后定义接收方法，这和Android的广播机制很像，你需要首先注册广播，然后需要编写内部类，实现接收广播，然后操作UI,在EventBus中，你同样需要这么做。</p>
 <pre><code>@Override
@@ -83,17 +82,14 @@ protected void onCreate(Bundle savedInstanceState) {
 protected void onDestroy() {
     super.onDestroy();
     EventBus.getDefault().unregister(this);
-}
-</code></pre><h4 id="3、订阅者"><a href="#3、订阅者" class="headerlink" title="3、订阅者"></a>3、订阅者</h4><p>类似广播，但是有别于2.4版本，你不必再去约定OnEvent方法开头了（看不懂没关系）：</p>
+}</code></pre><h4 id="3、订阅者"><a href="#3、订阅者" class="headerlink" title="3、订阅者"></a>3、订阅者</h4><p>类似广播，但是有别于2.4版本，你不必再去约定OnEvent方法开头了（看不懂没关系）：</p>
 <pre><code>@Subscribe(threadMode = ThreadMode.MainThread)
 public void helloEventBus(String message){
     mText.setText(message);
-}
-</code></pre><p>该操作很简单，定义了一个hello方法，需要传入String参数，在其中操作UI操作，注意：<br>我们添加了注解@Subscribe，其含义为订阅者，在其内传入了threadMode，我们定义为ThreadMode.MainThread，其含义为该方法在UI线程完成，这样你就不要担心抛出异常啦。是不是很简单？</p>
+}</code></pre><p>该操作很简单，定义了一个hello方法，需要传入String参数，在其中操作UI操作，注意：<br>我们添加了注解@Subscribe，其含义为订阅者，在其内传入了threadMode，我们定义为ThreadMode.MainThread，其含义为该方法在UI线程完成，这样你就不要担心抛出异常啦。是不是很简单？</p>
 <h4 id="4、发布者"><a href="#4、发布者" class="headerlink" title="4、发布者"></a>4、发布者</h4><p>既然你在某个地方订阅了内容，当然就会在某个地方发布消息。举个例子，你的这个activity需要http请求，而http请求你肯定是在异步线程中操作，其返回结果后，你可以这么写：</p>
 <pre><code>String json=&quot;&quot;;
-EventBus.getDefault().post(json);
-</code></pre><p>这样就OK了，你可以试下能否正常运行了！</p>
+EventBus.getDefault().post(json);</code></pre><p>这样就OK了，你可以试下能否正常运行了！</p>
 <h4 id="5、原理初探"><a href="#5、原理初探" class="headerlink" title="5、原理初探"></a>5、原理初探</h4><p>你订阅了内容，所以你需要在该类注册EventBus，而你订阅的方法需要传入String,即你的接收信息为String类型，那么在post的时候，你post出去的也应该是String类型，其才会接收到消息。</p>
 <h4 id="6、如果你post的是对象"><a href="#6、如果你post的是对象" class="headerlink" title="6、如果你post的是对象"></a>6、如果你post的是对象</h4><p>首先你需要定义一个类似pojo类：</p>
 <pre><code>public class MessageEvent {
@@ -103,15 +99,12 @@ EventBus.getDefault().post(json);
     this.name = name;
     this.password=password;
   }
-}
-</code></pre><p>然后你post的时候：</p>
-<pre><code>EventBus.getDefault().post(new MessageEvent(&quot;hello&quot;,&quot;world&quot;));
-</code></pre><p>当然，你接收的方法也需要改为：</p>
+}</code></pre><p>然后你post的时候：</p>
+<pre><code>EventBus.getDefault().post(new MessageEvent(&quot;hello&quot;,&quot;world&quot;));</code></pre><p>当然，你接收的方法也需要改为：</p>
 <pre><code>@Subscribe(threadMode = ThreadMode.MainThread)
 public void helloEventBus(MessageEvent message){
     mText.setText(message.name);
-}
-</code></pre><p>疑问，当你post了消息之后，你的订阅者有多个，每一个都接收吗？能否做到指定接收者。</p>
+}</code></pre><p>疑问，当你post了消息之后，你的订阅者有多个，每一个都接收吗？能否做到指定接收者。</p>
 <p>下一章，带来源码解析以及EventBus的高级用法；<br>如果大家有兴趣，也可带领大家编写属于自己的EventBus框架，敬请期待。</p>
 
       </div>

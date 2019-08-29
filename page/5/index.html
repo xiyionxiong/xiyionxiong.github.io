@@ -66,7 +66,8 @@
       <p></p><p>这份是我工作以来，总结的小知识库，有些知识点现在看来太LOW了，把还觉得有用的分享出来！</p>
 <h3 id="Genymotion下载虚拟镜像Connection-timeout"><a href="#Genymotion下载虚拟镜像Connection-timeout" class="headerlink" title="Genymotion下载虚拟镜像Connection timeout"></a>Genymotion下载虚拟镜像Connection timeout</h3><p>Add new device出现的问题：</p>
 <p>Failed to deploy virtual device.<br>Unable to create virtual device.Connection timeout occurred.</p>
-<p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">当选择Google Nexus 5 - 6.0.0 - API 23 - 1080x1920下载device失败后，到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova下看到genymotion_vbox86p_6.0_160114_090449.ova，大小却是0KB，在C:\Users\用户主目录\AppData\Local\Genymobile\genymotion.log，打开该文件，找到类似</span><br><span class="line">    </span><br><span class="line">    “http://files2.genymotion.com/dists/6.0.0/ova/genymotion_vbox86p_6.0_160114_090449.ova”路径，即您想要下载的镜像文件URL；`</span><br><span class="line"></span><br><span class="line">用迅雷去下载，下载完成后放到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova；</span><br><span class="line">重新点击Google Nexus 5 - 6.0.0 - API 23 - 1080x1920去下载，验证安装后即会显示在设备列表中。</span><br></pre></td></tr></table></figure></p><p></p>
+<p>解决方案：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">当选择Google Nexus 5 - 6.0.0 - API 23 - 1080x1920下载device失败后，到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova下看到genymotion_vbox86p_6.0_160114_090449.ova，大小却是0KB，在C:\Users\用户主目录\AppData\Local\Genymobile\genymotion.log，打开该文件，找到类似</span><br><span class="line">    </span><br><span class="line">    “http://files2.genymotion.com/dists/6.0.0/ova/genymotion_vbox86p_6.0_160114_090449.ova”路径，即您想要下载的镜像文件URL；`</span><br><span class="line"></span><br><span class="line">用迅雷去下载，下载完成后放到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova；</span><br><span class="line">重新点击Google Nexus 5 - 6.0.0 - API 23 - 1080x1920去下载，验证安装后即会显示在设备列表中。</span><br></pre></td></tr></table></figure><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -80,11 +81,9 @@
 public void onClick(View v) {
 Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;);
 }
-});
-</code></pre><p>使用 lambda</p>
+});</code></pre><p>使用 lambda</p>
 <pre><code>view.setOnClickListener(
-v -&gt; Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;));
-</code></pre><h3 id="Android如何使用"><a href="#Android如何使用" class="headerlink" title="Android如何使用"></a>Android如何使用</h3><p>这里是使用Retrolambda的gradle插件，这样就可以在代码中使用lambda了。<br></p>
+v -&gt; Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;));</code></pre><h3 id="Android如何使用"><a href="#Android如何使用" class="headerlink" title="Android如何使用"></a>Android如何使用</h3><p>这里是使用Retrolambda的gradle插件，这样就可以在代码中使用lambda了。</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -93,7 +92,7 @@ v -&gt; Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;));
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-02-25 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
       <p></p><p>工欲善其事，必先利其器，对于想要深入学习Android源码，必须先掌握Android编译命令.</p>
 <p>关于Android Build系统，这个话题很早就打算整理下，迟迟没有下笔，决定跟大家分享下。先看下面几条指令，相信编译过Android源码的人都再熟悉不过的。</p>
-<p>source /opt/android1204_17.conf<br>source setenv.sh<br>lunch<br>make -j12<br></p>
+<p>source /opt/android1204_17.conf<br>source setenv.sh<br>lunch<br>make -j12</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -114,8 +113,7 @@ v -&gt; Log.d(&quot;wxl&quot;, &quot;retrolambda test&quot;));
 </blockquote>
 <h4 id="2、JdK安装"><a href="#2、JdK安装" class="headerlink" title="2、JdK安装"></a>2、JdK安装</h4><pre><code>$ sudo add-apt-repository &quot;deb http://archive.canonical.com/ lucid partner&quot;
 $ sudo apt-get update
-$ sudo apt-get install sun-java8-jdk
-</code></pre><p></p>
+$ sudo apt-get install sun-java8-jdk</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -128,8 +126,7 @@ $ sudo apt-get install sun-java8-jdk
 <pre><code>IntelliJ IDEA，Android Studio 和 Eclipse
 Maven, Gradle 和Ant
 Spring Boot（Kotlin 支持今天正式发布！）
-GitHub，Slack，甚至 Minecraft
-</code></pre><p></p>
+GitHub，Slack，甚至 Minecraft</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -139,7 +136,7 @@ GitHub，Slack，甚至 Minecraft
       <p></p><h3 id="是什么？"><a href="#是什么？" class="headerlink" title="是什么？"></a>是什么？</h3><p>iBeacon是apple公司提出的“一种可以让附近手持电子设备检测到的一种新的低功耗、低成本信号传送器”的一套可用于室内定位系统的协议。 这种技术可以使一个智能手机或其他装置在一个iBeacon基站的感应范围内执行相应的命令。</p>
 <p>这是帮助智能手机确定他们大概位置或环境的一个应用程序。在一个iBeacon基站的帮助下，智能手机的软件能大概找到它和这个iBeacon基站的相对位置。iBeacon能让手机收到附近售卖商品的通知，也可以让消费者不用拿出钱包或信用卡就能在销售点的POS机上完成支付。iBeacon技术通过低功耗蓝牙（BLE），也就是我们所说的智能蓝牙来实现。</p>
 <p>iBeacon为利用低功耗蓝牙可以近距离感测的功能来传输通用唯一识别码的一个app或操作系统。 这个识别码可以在网上被查找到用以确定设备的物理位置或者可以在设备上触发一个动作比如在社交媒体签到或者推送通知。</p>
-<p>各种供应商创造了不同形式的iBeacon硬件设备，包括小硬币电池设备，随身碟和蓝牙4.0通用加密狗。<br></p>
+<p>各种供应商创造了不同形式的iBeacon硬件设备，包括小硬币电池设备，随身碟和蓝牙4.0通用加密狗。</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -179,7 +176,7 @@ GitHub，Slack，甚至 Minecraft
       <h2><a href="/2015/12/18/android/Android Skills/RecyclerView 列表控件中简单实现时间线/">RecyclerView 列表控件中简单实现时间线</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-12-18 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
       <p></p><p>看见很多软件中都有时间线的东西，貌似天气啊，旅游啊什么的最多了；具体实现方式很多，在本篇文章中讲解一种自定义View封装的方式。</p>
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>先来看看效果。<br><img src="http://www.jcodecraeer.com/uploads/20150825/1440469250572021.png" alt><br></p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>先来看看效果。<br><img src="http://www.jcodecraeer.com/uploads/20150825/1440469250572021.png" alt></p><p></p>
     </div>
   </div>
  

@@ -79,24 +79,21 @@ public void onDisabled(Context context) {
     context.stopService(service);
     super.onDisabled(context);
 }
-}
-</code></pre><a id="more"></a>
+}</code></pre><a id="more"></a>
 <p>创建xml文件夹，创建info的xml文件</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;appwidget-provider xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
     android:initialLayout=&quot;@layout/process_widget&quot;
     android:minHeight=&quot;72.0dip&quot;
     android:minWidth=&quot;294.0dip&quot;
-    android:updatePeriodMillis=&quot;0&quot; /&gt;
-</code></pre><p>配置清单文件</p>
+    android:updatePeriodMillis=&quot;0&quot; /&gt;</code></pre><p>配置清单文件</p>
 <pre><code>&lt;receiver android:name=&quot;ExampleAppWidgetProvider&quot; &gt;
     &lt;intent-filter&gt;
     &lt;action android:name=&quot;android.appwidget.action.APPWIDGET_UPDATE&quot; /&gt;
     &lt;/intent-filter&gt;
     &lt;meta-data android:name=&quot;android.appwidget.provider&quot;
     android:resource=&quot;@xml/example_appwidget_info&quot; /&gt;
-&lt;/receiver&gt;
-</code></pre><p>广播一定要在清单文件中注册</p>
+&lt;/receiver&gt;</code></pre><p>广播一定要在清单文件中注册</p>
 <pre><code> &lt;receiver android:name=&quot;com.itheima.mobilesafe13.receiver.WidgetClearTaskReceiver&quot;&gt;
     &lt;intent-filter &gt;然后在显示Toast的地方
         &lt;action android:name=&quot;widget.clear.task&quot;&gt;&lt;/action&gt;
@@ -109,8 +106,7 @@ public void onDisabled(Context context) {
     &lt;meta-data
         android:name=&quot;android.appwidget.provider&quot;
         android:resource=&quot;@xml/process_widget_provider&quot; /&gt;
-    &lt;/receiver&gt;
-</code></pre><p>使用widget</p>
+    &lt;/receiver&gt;</code></pre><p>使用widget</p>
 <pre><code>/**
 * @author Administrator
 * @desc 清理进程的widget的服务
@@ -165,8 +161,7 @@ public class TaskWidgetService extends Service {
         super.onDestroy();
     }
 
-}
-</code></pre>
+}</code></pre>
       </div>
     </div>
   </div>

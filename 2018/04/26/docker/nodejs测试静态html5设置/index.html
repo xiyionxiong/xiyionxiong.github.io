@@ -76,6 +76,7 @@
 <li>内容如下 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">FROM node</span><br><span class="line"></span><br><span class="line"># Copy application dist.</span><br><span class="line">COPY . /dist/</span><br><span class="line"></span><br><span class="line"># Install http-server  服务</span><br><span class="line">RUN npm install -g http-server</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>对Dockerfile内容说明 </p>
 <blockquote>
@@ -95,6 +96,7 @@
 <li>使用docker命令 开始编译镜像 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t camchin1/member:beta_v1.1 .</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>  说明 </p>
 <p>  1、-t 编译参数</p>
@@ -116,6 +118,7 @@
 </blockquote>
 <p>2、接下来运行镜像 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8080:8080 -t -d ffab2808481c  http-server /dist</span><br></pre></td></tr></table></figure>
+
 <p>说明：</p>
 <blockquote>
 <p>  1、-p 8080:8080 ： 映射本地端口8080，到docker端口8080 。</p>
@@ -133,7 +136,9 @@
 <p>就可以看到你的网站了。</p>
 <p>All Done！！！</p>
 <h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="docker-run-OPTIONS参数表"><a href="#docker-run-OPTIONS参数表" class="headerlink" title="docker run OPTIONS参数表"></a>docker run OPTIONS参数表</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS说明：</span><br><span class="line">-a stdin: 指定标准输入输出内容类型，可选 STDIN/STDOUT/STDERR 三项；</span><br><span class="line">-d: 后台运行容器，并返回容器ID；</span><br><span class="line">-i: 以交互模式运行容器，通常与 -t 同时使用；</span><br><span class="line">-t: 为容器重新分配一个伪输入终端，通常与 -i 同时使用；</span><br><span class="line">--name=&quot;nginx-lb&quot;: 为容器指定一个名称；</span><br><span class="line">--dns 8.8.8.8: 指定容器使用的DNS服务器，默认和宿主一致；</span><br><span class="line">--dns-search example.com: 指定容器DNS搜索域名，默认和宿主一致；</span><br><span class="line">-h &quot;mars&quot;: 指定容器的hostname；</span><br><span class="line">-e username=&quot;ritchie&quot;: 设置环境变量；</span><br><span class="line">--env-file=[]: 从指定文件读入环境变量；</span><br><span class="line">--cpuset=&quot;0-2&quot; or --cpuset=&quot;0,1,2&quot;: 绑定容器到指定CPU运行；</span><br><span class="line">-m :设置容器使用内存最大值；</span><br><span class="line">--net=&quot;bridge&quot;: 指定容器的网络连接类型，支持 bridge/host/none/container: 四种类型；</span><br><span class="line">--link=[]: 添加链接到另一个容器；</span><br><span class="line">--expose=[]: 开放一个端口或一组端口；</span><br></pre></td></tr></table></figure>
+
 <h3 id="http-server-参数说明"><a href="#http-server-参数说明" class="headerlink" title="http-server 参数说明"></a>http-server 参数说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">可用选项:</span><br><span class="line">p 要使用的端口(默认为8080 )</span><br><span class="line">a 要使用的地址(默认为0.0.0.0 )</span><br><span class="line">-d 显示目录列表(默认为“True”</span><br><span class="line">- i 显示autolndex (默认为&quot;True”)</span><br><span class="line">-g或--gzip当启用(默认为“False”)时，它将./public/some-file.js.gz代替./public/some-file.jsgzip文件版本的存在，并且请求接受gzip编码。</span><br><span class="line">-e或--ext默认文件扩展名(如果没有提供) (默认为&apos;html&apos; )</span><br><span class="line">- S或--silent从输出中抑制日志消息</span><br><span class="line">--cors通过Access-Control-Allow-0rigin标题启用CORS</span><br><span class="line">- O 启动服务器后打开浏览器窗口</span><br><span class="line">- C设置缓存控制最大年龄标头的缓存时间(以秒为单位)，例如-C10为10秒(默认为“3600”)。要</span><br><span class="line">禁用缓存，请使用-C-1。</span><br><span class="line">-U或--utc在日志消息中使用UTC时间格式。</span><br><span class="line">- P或-- proxy代理不能在本地解析给定ur的所有请求。例如:-P http://someurl.com</span><br><span class="line">-S或--SS1启用https。</span><br><span class="line">-C或--certssl证书文件的路径( 默认: cert.pem)。</span><br><span class="line">-K或-- keyssl密钥文件的路径( 默认值: key.pem)。</span><br><span class="line">-r或--robots提供/robots.bxt (其内容默认为&apos;User-agent:* \nDisallow: I&apos; )</span><br><span class="line">-h或--help打印此列表并退出。</span><br></pre></td></tr></table></figure>
+
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://segmentfault.com/a/1190000012249873" target="_blank" rel="noopener">利用http-server测试vue-cli打包后的项目</a></p>
 <p><a href="http://www.runoob.com/docker/docker-run-command.html" target="_blank" rel="noopener">Docker run 命令</a></p>
 <hr>
@@ -145,8 +150,10 @@
 <p>  使用<a href="https://hub.docker.com/r/tatsushid/tinycore-node/" target="_blank" rel="noopener">tatsushid/tinycore-node</a> ,生成镜像80M+，体积大大减小，提高部署效率</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">FROM tatsushid/tinycore-node</span><br><span class="line"># Copy application code.</span><br><span class="line">COPY . /dist/</span><br><span class="line"># Install dependencies.</span><br><span class="line">RUN npm install -g http-server</span><br><span class="line"># 工作目录</span><br><span class="line">WORKDIR /dist/</span><br><span class="line"># 工作目录 执行的命令</span><br><span class="line">CMD [&quot;http-server&quot;]</span><br></pre></td></tr></table></figure>
+
 <p>那么 现在执行启动镜像只需： </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 8081:8080 -t -d  image-id</span><br></pre></td></tr></table></figure>
+
 
       </div>
     </div>

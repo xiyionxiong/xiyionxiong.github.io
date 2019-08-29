@@ -74,7 +74,7 @@
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-07-19 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
       <p></p><p>Android系统提供了两种HTTP通信类，HttpURLConnection和HttpClient。</p>
 <p>尽管Google在大部分安卓版本中推荐使用HttpURLConnection，但是这个类相比HttpClient实在是太难用，太弱爆了。</p>
-<p>OkHttp是一个相对成熟的解决方案，据说Android4.4的源码中可以看到HttpURLConnection已经替换成OkHttp实现了。所以我们更有理由相信OkHttp的强大。<br></p>
+<p>OkHttp是一个相对成熟的解决方案，据说Android4.4的源码中可以看到HttpURLConnection已经替换成OkHttp实现了。所以我们更有理由相信OkHttp的强大。</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -123,8 +123,7 @@ Dialog dialog = new Dialog(this);
 // dialog.setContentView(v);
 dialog.setContentView(R.layout.dialog_layout);
 
-dialog.setTitle(&quot;Custom Dialog&quot;);
-</code></pre><hr></p>
+dialog.setTitle(&quot;Custom Dialog&quot;);</code></pre><hr></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -148,7 +147,7 @@ dialog.setTitle(&quot;Custom Dialog&quot;);
 <p>注：1.GPU的填充率分为像素填充率和纹理填充率。2.关于过度绘制这一点，其实在 <a href="http://jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0416/2735.html" target="_blank" rel="noopener">这篇文章</a> 的GPU Problem: Overdraw一节中说的最详细。</p>
 <h2 id="不要设置窗口背景为空"><a href="#不要设置窗口背景为空" class="headerlink" title="不要设置窗口背景为空"></a>不要设置窗口背景为空</h2><p>避免过度绘制的技巧之一就是在所有View都不透明的情况下去除窗口的背景。反正如果有一个或者多个不透明的View完全挡住了窗口，用户怎么也看不到，还不如干脆不要背景。</p>
 <p>去除窗口背景是一个有效的方法，但也往往是一个解决过度绘制问题的复杂办法，而且它经常在某些情况下导致渲染的artifacts（不知道artifacts啥意思）。虽然可以在app的manifest中设置一个空的窗口背景，但是因为系统无法正确绘制启动窗口，这会导致图形绘制artifacts。更正确的做法是保留manifest中启动窗口的背景，转而在activity的onCreate()方法中通过调用getWindow().setBackground(null)设置成null。但即便是这种方法也会导致artifacts。比如，如果keyboard/IME设置成了adjustResize，然后动画进入一个背景为null的activity，在键盘后面可能存在artifacts，因为window manager没有要绘制的背景。还有，全屏且带有overscroll bounce gaps的ListView也可能会有artifacts。</p>
-<p>。。。。受不了了 artifacts artifacts artifacts不停。<br></p>
+<p>。。。。受不了了 artifacts artifacts artifacts不停。</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">

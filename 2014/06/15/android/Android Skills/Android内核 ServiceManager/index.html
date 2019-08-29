@@ -61,7 +61,9 @@
     <div class="lx-entry padding">
       <div>
         <p>getSystemService很尽职，你知道吗?</p>
-<p>   那个…嗯…曾记否上篇的<code>Android Binder</code>中留下的疑问?就是在Context的实现类中使用<br>getSystemService(String serviceName)方法获取一个系统服务，那么这些系统服务的Binder<br>引用时如何传递给客户端的呢?其实这里有个关键点，就是系统服务并不是通过startService()启<br>动的。<br><a id="more"></a><br>   getSystemService函数的实现是在Context的实现类中，该函数返回的Service比较多。那<br>么就让我们看一下Activity、ContextThemeWrapper的部分源代码吧：</p>
+<p>   那个…嗯…曾记否上篇的<code>Android Binder</code>中留下的疑问?就是在Context的实现类中使用<br>getSystemService(String serviceName)方法获取一个系统服务，那么这些系统服务的Binder<br>引用时如何传递给客户端的呢?其实这里有个关键点，就是系统服务并不是通过startService()启<br>动的。</p>
+<a id="more"></a>
+<p>   getSystemService函数的实现是在Context的实现类中，该函数返回的Service比较多。那<br>么就让我们看一下Activity、ContextThemeWrapper的部分源代码吧：</p>
 <p>Activity：</p>
 <pre><code>@Override
 public Object getSystemService(@ServiceName @NonNull String name) {
@@ -77,8 +79,7 @@ public Object getSystemService(@ServiceName @NonNull String name) {
         return mSearchManager;
     }
     return super.getSystemService(name);
-}
-</code></pre><p>   1.首先， if (getBaseContext() == null)判断 mBase（Context类型）是否为空。如果为空则 ，提<br>示Context没创建前调用了getSystemService的错误。至于，我为什么能准确地mBase这个名字呢?让<br>我们再看一段关于ContextWrapper（Activity的父类、Context的子类）的源代码：</p>
+}</code></pre><p>   1.首先， if (getBaseContext() == null)判断 mBase（Context类型）是否为空。如果为空则 ，提<br>示Context没创建前调用了getSystemService的错误。至于，我为什么能准确地mBase这个名字呢?让<br>我们再看一段关于ContextWrapper（Activity的父类、Context的子类）的源代码：</p>
 <pre><code>Context mBase;
 
 public ContextWrapper(Context base) {
@@ -104,8 +105,7 @@ protected void attachBaseContext(Context base) {
  */
 public Context getBaseContext() {
     return mBase;
-}
-</code></pre><p>   以上很简单，也就是从父类继承下来的Context mBase属性。</p>
+}</code></pre><p>   以上很简单，也就是从父类继承下来的Context mBase属性。</p>
 <p>   2.if (WINDOW_SERVICE.equals(name)) {……}elseif(SEARCH_SERVICE.equals(name)){……}。这个<br>就是判断要取的服务是Window类型还是Search类型的。这个在Activity里有对应的WindowManager类<br>型和SearchManager类型属性，并且做了对应的实例化。</p>
 <p>   3.return super.getSystemService(name)：当要取的服务不是Window类型也不是Search类型的时候，就<br>调用了父类（ContextThemeWrapper）的getSystemService(String name)帮你找服务。那么就让我们顺便看看<br>ContextThemeWrapper的源代码：</p>
 <pre><code>@Override public Object getSystemService(String name) {
@@ -116,8 +116,7 @@ public Context getBaseContext() {
         return mInflater;
     }
     return getBaseContext().getSystemService(name);
-}
-</code></pre><p>   4.这里也做了个Activity里类似的判断是否为 layout Inflater 服务，然后返回相应的layout Inflater 服务。</p>
+}</code></pre><p>   4.这里也做了个Activity里类似的判断是否为 layout Inflater 服务，然后返回相应的layout Inflater 服务。</p>
 <p>   5.return getBaseContext().getSystemService(name)：这里的话就回到了Context 这个抽象的基类。 我<br>们就再看看Context的源代码：</p>
 <pre><code>/**
  * Return the handle to a system-level service by name. The class of the
@@ -273,8 +272,7 @@ public static final String LAYOUT_INFLATER_SERVICE = &quot;layout_inflater&quot;
  */
 
 
- /*******************************下面还有很多很多*************************/
-</code></pre><p>   6.以上可以看出，如果在Activity和ContextThemeWrapper不能帮你取到服务的话，最终会回到Context来一个”大搜查”。</p>
+ /*******************************下面还有很多很多*************************/</code></pre><p>   6.以上可以看出，如果在Activity和ContextThemeWrapper不能帮你取到服务的话，最终会回到Context来一个”大搜查”。</p>
 <p>ServiceManager 管理的服务</p>
 <p>   ServiceManager是一个独立的进程!这里特别强调，它是一个进程!作用就跟它的名称一样，管理各种系统服务，如下图所示：<br><img src="http://img.blog.csdn.net/20141112182131029?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt></p>
 <p>   其实ServiceManager本身也是一个Service，Framework提供了一个系统函数，可以获取ServiceManager<br>对应的Binder引用，那就是BinderInternal.getContextObject()。该静态函数返回ServiceManager后，就<br>可以通过ServiceManger提供的方法获取其他服务Service的Binder引用。这种设计模式就好比：ServiceManager<br>是一个公司的总机，这个总计的号码是公开的，系统中任何进程都可以使用BinderInternal.getContextObject()<br>获取该总机的Binder对象，而当前用户想联系公司的其他人（服务）的时候，则要经过总机再获取到分机的号码。<br>这种设计模式的优点就是：系统中仅仅只暴漏一个全局Binder引用，那就是ServiceManager，而其他服务则可以<br>隐藏起来，从而有助于系统服务的扩展，以及调用系统服务的安全检查。其他系统服务在启动的时候，首先把自己<br>的Binder对象传递给ServiceManager，就是所谓的注册（addService）。</p>
@@ -292,8 +290,7 @@ public static final String LAYOUT_INFLATER_SERVICE = &quot;layout_inflater&quot;
         Log.e(TAG, &quot;error in getService&quot;,e);
     }
     return null;
-}
-</code></pre><p>以上片段源码，sCache.get(name) 缓存中查看是否有对应的 Binder 对象，有则返回，没有则调用<br>return getIServiceManager.getService(name)；第一个getIServiceManager()即用于返回系统中<br>唯一的ServiceManager对应的Binder。</p>
+}</code></pre><p>以上片段源码，sCache.get(name) 缓存中查看是否有对应的 Binder 对象，有则返回，没有则调用<br>return getIServiceManager.getService(name)；第一个getIServiceManager()即用于返回系统中<br>唯一的ServiceManager对应的Binder。</p>
 <p>接着看看getIServiceManager()：</p>
 <pre><code>private static IServiceManager getIServiceManager() {
     if (sServiceManager != null) {
@@ -303,8 +300,7 @@ public static final String LAYOUT_INFLATER_SERVICE = &quot;layout_inflater&quot;
     // Find the service manager
     sServiceManager = ServiceManagerNative.asInterface(BinderInternal.getContextObject());
     return sServiceManager;
-}
-</code></pre><p>以上源码中，BinderInternal.getContextObject()静态函数用于返回ServiceManager对应的全局Binder<br>对象，该函数不需要任何参数，因为它的作用所致是固定的。</p>
+}</code></pre><p>以上源码中，BinderInternal.getContextObject()静态函数用于返回ServiceManager对应的全局Binder<br>对象，该函数不需要任何参数，因为它的作用所致是固定的。</p>
 <p>其他所有通过ServiceManager获取的系统服务的过程与以上基本相似，所不同的就是传递给ServiceManager<br>的服务名称不同，因为ServiceManager正是按照服务的名称（String）来保存不同的Binder。</p>
 <p>Android 中的 Manager</p>
 <p>在Android中，Manager的含义应该翻译为“经纪人”，Manager所管理的对象时服务本身，因为每一<br>个具体的服务一般都会提供多个API接口，而Manager所管理的就是这些API。客户端一般不能直接通过<br>Binder访问的服务，而是要经过一个Manager，对应的Manager类对客户端是可见的，而远程的服务类<br>对客户端是隐藏的。</p>
@@ -453,8 +449,7 @@ public static class RecentTaskInfo implements Parcelable {
     private RecentTaskInfo(Parcel source) {
         readFromParcel(source);
     }
-}
-</code></pre><p>ActivityManager 的 MemoryInfo类 源代码 ：</p>
+}</code></pre><p>ActivityManager 的 MemoryInfo类 源代码 ：</p>
 <pre><code>/**
  * Information you can retrieve about the available memory through
  * {@link ActivityManager#getMemoryInfo}.
@@ -539,8 +534,7 @@ public static class MemoryInfo implements Parcelable {
     private MemoryInfo(Parcel source) {
         readFromParcel(source);
     }
-}
-</code></pre><p>这种通过Manager 访问远程服务的模型如下图：</p>
+}</code></pre><p>这种通过Manager 访问远程服务的模型如下图：</p>
 <p><img src="http://img.blog.csdn.net/20141120163612296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt></p>
 
       </div>

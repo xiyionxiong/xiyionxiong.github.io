@@ -81,8 +81,7 @@
     } catch (Exception e) {
         DbUtils.exceptionHandler(e);
     }
-}
-</code></pre><a id="more"></a>
+}</code></pre><a id="more"></a>
 <h3 id="2、释放设备电源锁"><a href="#2、释放设备电源锁" class="headerlink" title="2、释放设备电源锁"></a>2、释放设备电源锁</h3><pre><code>public static void releaseWakeLock() {
     try {
         if (null != mWakeLock) {
@@ -92,12 +91,10 @@
     } catch (Exception e) {
         DbUtils.exceptionHandler(e);
     }
-}
-</code></pre><h3 id="3、解锁键盘"><a href="#3、解锁键盘" class="headerlink" title="3、解锁键盘"></a>3、解锁键盘</h3><pre><code>public static void unlockKeyBoard () {
+}</code></pre><h3 id="3、解锁键盘"><a href="#3、解锁键盘" class="headerlink" title="3、解锁键盘"></a>3、解锁键盘</h3><pre><code>public static void unlockKeyBoard () {
     KeyguardManager km = (KeyguardManager)ApplicationContext.getInstance().getContext().getSystemService(Context.KEYGUARD_SERVICE);
     km.newKeyguardLock(&quot;Tag For Debug&quot;).disableKeyguard();
-}
-</code></pre><p>4、获取当前程序版本名</p>
+}</code></pre><p>4、获取当前程序版本名</p>
 <pre><code>/**  
 * 返回当前程序版本名  
 */    
@@ -117,8 +114,7 @@ public static String getAppVersionName(Context context) {
         Log.e(&quot;VersionInfo&quot;, &quot;Exception&quot;, e);    
     }    
     return versionName;    
-} 
-</code></pre><h3 id="5、获取当前应用的版本号"><a href="#5、获取当前应用的版本号" class="headerlink" title="5、获取当前应用的版本号"></a>5、获取当前应用的版本号</h3><pre><code>public static String getVersionName() throws Exception  
+} </code></pre><h3 id="5、获取当前应用的版本号"><a href="#5、获取当前应用的版本号" class="headerlink" title="5、获取当前应用的版本号"></a>5、获取当前应用的版本号</h3><pre><code>public static String getVersionName() throws Exception  
 {  
         // 获取packagemanager的实例  
         PackageManager packageManager = getPackageManager();  
@@ -126,14 +122,12 @@ public static String getAppVersionName(Context context) {
         PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(),0);  
         String version = packInfo.versionName;  
         return version;  
-}
-</code></pre><h3 id="6、获取当前系统的版本号"><a href="#6、获取当前系统的版本号" class="headerlink" title="6、获取当前系统的版本号"></a>6、获取当前系统的版本号</h3><pre><code>/** 
+}</code></pre><h3 id="6、获取当前系统的版本号"><a href="#6、获取当前系统的版本号" class="headerlink" title="6、获取当前系统的版本号"></a>6、获取当前系统的版本号</h3><pre><code>/** 
  * 手机系统版本 
  */  
  public static String getSdkVersion() {  
      return android.os.Build.VERSION.RELEASE;  
- }  
-</code></pre><h3 id="7、当我们点击某个话题的选项卡，会弹出一个popupwindow，里面有诸如-评论、回复的选项，你点击这个选项的时候，需要定位到EditText编辑框，并且自动弹出输入法。可以考虑如下方法："><a href="#7、当我们点击某个话题的选项卡，会弹出一个popupwindow，里面有诸如-评论、回复的选项，你点击这个选项的时候，需要定位到EditText编辑框，并且自动弹出输入法。可以考虑如下方法：" class="headerlink" title="7、当我们点击某个话题的选项卡，会弹出一个popupwindow，里面有诸如 评论、回复的选项，你点击这个选项的时候，需要定位到EditText编辑框，并且自动弹出输入法。可以考虑如下方法："></a>7、当我们点击某个话题的选项卡，会弹出一个popupwindow，里面有诸如 评论、回复的选项，你点击这个选项的时候，需要定位到EditText编辑框，并且自动弹出输入法。可以考虑如下方法：</h3><pre><code>// 获取编辑框焦点
+ }  </code></pre><h3 id="7、当我们点击某个话题的选项卡，会弹出一个popupwindow，里面有诸如-评论、回复的选项，你点击这个选项的时候，需要定位到EditText编辑框，并且自动弹出输入法。可以考虑如下方法："><a href="#7、当我们点击某个话题的选项卡，会弹出一个popupwindow，里面有诸如-评论、回复的选项，你点击这个选项的时候，需要定位到EditText编辑框，并且自动弹出输入法。可以考虑如下方法：" class="headerlink" title="7、当我们点击某个话题的选项卡，会弹出一个popupwindow，里面有诸如 评论、回复的选项，你点击这个选项的时候，需要定位到EditText编辑框，并且自动弹出输入法。可以考虑如下方法："></a>7、当我们点击某个话题的选项卡，会弹出一个popupwindow，里面有诸如 评论、回复的选项，你点击这个选项的时候，需要定位到EditText编辑框，并且自动弹出输入法。可以考虑如下方法：</h3><pre><code>// 获取编辑框焦点
 editText.setFocusable(true);
 //打开软键盘
 InputMethodManager imm = (InputMethodManager) ctx
@@ -141,13 +135,11 @@ InputMethodManager imm = (InputMethodManager) ctx
 imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
 
 //关闭软键盘
-imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
-</code></pre><h3 id="8、EditText软键盘"><a href="#8、EditText软键盘" class="headerlink" title="8、EditText软键盘"></a>8、EditText软键盘</h3><pre><code>//打开软键盘
+imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);</code></pre><h3 id="8、EditText软键盘"><a href="#8、EditText软键盘" class="headerlink" title="8、EditText软键盘"></a>8、EditText软键盘</h3><pre><code>//打开软键盘
 et_feedback_content.setFocusable(true);
 getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
 //关闭软键盘
-((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(input.getWindowToken(), 0); 
-</code></pre><h3 id="9、设置全屏的Dialog"><a href="#9、设置全屏的Dialog" class="headerlink" title="9、设置全屏的Dialog"></a>9、设置全屏的Dialog</h3><pre><code>//在代码里设置Dialog的Theme
+((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(input.getWindowToken(), 0); </code></pre><h3 id="9、设置全屏的Dialog"><a href="#9、设置全屏的Dialog" class="headerlink" title="9、设置全屏的Dialog"></a>9、设置全屏的Dialog</h3><pre><code>//在代码里设置Dialog的Theme
 Dialog dialog = new Dialog(this, R.style.Dialog_Fullscreen);  
 dialog.setContentView(R.layout.main);  
 dialog.show(); 
@@ -156,20 +148,16 @@ dialog.show();
  &lt;style name=&quot;Dialog_Fullscreen&quot;&gt; 
    &lt;item name=&quot;android:windowFullscreen&quot;&gt;true&lt;/item&gt; 
    &lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;  
-&lt;/style&gt;   
-</code></pre><h3 id="10、设置全屏的Dialog（二）"><a href="#10、设置全屏的Dialog（二）" class="headerlink" title="10、设置全屏的Dialog（二）"></a>10、设置全屏的Dialog（二）</h3><p>我们也可以自定义Dialog，首先继承Dialig，然后再构造函数中添加</p>
+&lt;/style&gt;   </code></pre><h3 id="10、设置全屏的Dialog（二）"><a href="#10、设置全屏的Dialog（二）" class="headerlink" title="10、设置全屏的Dialog（二）"></a>10、设置全屏的Dialog（二）</h3><p>我们也可以自定义Dialog，首先继承Dialig，然后再构造函数中添加</p>
 <pre><code>super(context, android.R.style.Theme); 
-setOwnerActivity((Activity)context);  
-</code></pre><h3 id="11、设置全屏Dialog（三）"><a href="#11、设置全屏Dialog（三）" class="headerlink" title="11、设置全屏Dialog（三）"></a>11、设置全屏Dialog（三）</h3><p>首先介绍一个方法：getDecorView()</p>
+setOwnerActivity((Activity)context);  </code></pre><h3 id="11、设置全屏Dialog（三）"><a href="#11、设置全屏Dialog（三）" class="headerlink" title="11、设置全屏Dialog（三）"></a>11、设置全屏Dialog（三）</h3><p>首先介绍一个方法：getDecorView()</p>
 <p>decorView是window中的最顶层view，可以从window中获取到decorView，然后decorView有个getWindowVisibleDisplayFrame方法可以获取到程序显示的区域，包括标题栏，但不包括状态栏。 于是，我们就可以算出状态栏的高度了。</p>
 <pre><code>Rect frame = new Rect();
 getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-int statusBarHeight = frame.top;
-</code></pre><p>同样我们获取标题栏的高度</p>
+int statusBarHeight = frame.top;</code></pre><p>同样我们获取标题栏的高度</p>
 <pre><code>getWindow().findViewById(Window.ID_ANDROID_CONTENT)这个方法获取到的view就是程序不包括标题栏的部分，然后就可以知道标题栏的高度了，代码如下：
 int contentTop = getWindow().findViewById(Window.ID_ANDROID_CONTENT).getTop();         
-int titleBarHeight = contentTop - statusBarHeight; //statusBarHeight是上面所求的状态栏的高度
-</code></pre><p>最后：知道上述原理，我们就可以设置我们的Dialog和activity一样大了，Java代码如下：</p>
+int titleBarHeight = contentTop - statusBarHeight; //statusBarHeight是上面所求的状态栏的高度</code></pre><p>最后：知道上述原理，我们就可以设置我们的Dialog和activity一样大了，Java代码如下：</p>
 <pre><code>final Dialog dialog = new Dialog(WenDetailActivity.this, R.style.popupDialog);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.wen_cover_pager);
@@ -182,8 +170,7 @@ int titleBarHeight = contentTop - statusBarHeight; //statusBarHeight是上面所
         View view = getWindow().getDecorView();//decorView是window中的最顶层view，可以从window中获取到decorView
         view.getWindowVisibleDisplayFrame(rect);
         lay.height = dm.heightPixels - rect.top;
-        lay.width = dm.widthPixels;
-</code></pre><p>style.xml如下：</p>
+        lay.width = dm.widthPixels;</code></pre><p>style.xml如下：</p>
 <pre><code>&lt;style name=&quot;popupDialog&quot; parent=&quot;@android:style/Theme.Dialog&quot;&gt;
         &lt;item name=&quot;android:windowBackground&quot;&gt;@drawable/filled_activity_bg&lt;/item&gt;
         &lt;item name=&quot;android:backgroundDimEnabled&quot;&gt;false&lt;/item&gt;
@@ -195,8 +182,7 @@ int titleBarHeight = contentTop - statusBarHeight; //statusBarHeight是上面所
         &lt;item name=&quot;android:colorBackgroundCacheHint&quot;&gt;@null&lt;/item&gt;
         &lt;item name=&quot;android:backgroundDimAmount&quot;&gt;0.6&lt;/item&gt;&lt;!-- 灰度 --&gt;
         &lt;!--&lt;item name=&quot;android:windowFullscreen&quot;&gt;true&lt;/item&gt;--&gt;
- &lt;/style&gt;
-</code></pre><h3 id="12、利用代码清除App的数据"><a href="#12、利用代码清除App的数据" class="headerlink" title="12、利用代码清除App的数据"></a>12、利用代码清除App的数据</h3><pre><code>/** 
+ &lt;/style&gt;</code></pre><h3 id="12、利用代码清除App的数据"><a href="#12、利用代码清除App的数据" class="headerlink" title="12、利用代码清除App的数据"></a>12、利用代码清除App的数据</h3><pre><code>/** 
 * 利用代码清除App的数据 
 * 平常我们在清除App的数据时,多半在设置中找到对应的App 
 * 然后选择其清除数据.下面给出代码实现. 
@@ -222,8 +208,7 @@ private void cleanData(String packageName){
         System.out.println(&quot;---&gt; 9527 清除数据时 e=&quot;+e.toString());  
     }  
 
-} 
-</code></pre><h3 id="13、清除内-外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录"><a href="#13、清除内-外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录" class="headerlink" title="13、清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录"></a>13、清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录</h3><pre><code>/** 文 件 名:  DataCleanManager.java  * 描    述:  主要功能有清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录  */
+} </code></pre><h3 id="13、清除内-外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录"><a href="#13、清除内-外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录" class="headerlink" title="13、清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录"></a>13、清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录</h3><pre><code>/** 文 件 名:  DataCleanManager.java  * 描    述:  主要功能有清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录  */
 import java.io.File;
 import android.content.Context;
 import android.os.Environment;
@@ -296,8 +281,7 @@ private static void deleteFilesByDirectory(File directory) {
         }
     }
 }
-}
-</code></pre><h3 id="14、Listview测量高度-（放在设置完适配器之后进行测量，放在之前，没有效果）"><a href="#14、Listview测量高度-（放在设置完适配器之后进行测量，放在之前，没有效果）" class="headerlink" title="14、Listview测量高度 （放在设置完适配器之后进行测量，放在之前，没有效果）"></a>14、Listview测量高度 （放在设置完适配器之后进行测量，放在之前，没有效果）</h3><pre><code>/**
+}</code></pre><h3 id="14、Listview测量高度-（放在设置完适配器之后进行测量，放在之前，没有效果）"><a href="#14、Listview测量高度-（放在设置完适配器之后进行测量，放在之前，没有效果）" class="headerlink" title="14、Listview测量高度 （放在设置完适配器之后进行测量，放在之前，没有效果）"></a>14、Listview测量高度 （放在设置完适配器之后进行测量，放在之前，没有效果）</h3><pre><code>/**
  * 设置高度
  */
  private void setHeight(ListView listView) {
@@ -324,8 +308,7 @@ private static void deleteFilesByDirectory(File directory) {
      params.height = totalHeight;
      // 重新设置布局属性
      listView.setLayoutParams(params);
- }
-</code></pre>
+ }</code></pre>
       </div>
     </div>
   </div>

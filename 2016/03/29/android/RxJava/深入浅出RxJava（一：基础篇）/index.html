@@ -71,14 +71,14 @@
 <p><code>Observable&lt;String&gt; myObservable = Observable.create(</code></p>
 <p><code>new</code> <code>Observable.OnSubscribe&lt;String&gt;() {</code></p>
 <p><code>@Override</code></p>
-<p><code>public void call(Subscriber&lt;? `</code>super<code></code>String&gt; sub) {`</p>
-<p><code>sub.onNext(`</code>“Hello, world!”<code></code>);`</p>
+<p><code>public void call(Subscriber&lt;? ``super</code> <code>String&gt; sub) {</code></p>
+<p><code>sub.onNext(``&quot;Hello, world!&quot;``);</code></p>
 <p><code>sub.onCompleted();</code></p>
 <p><code>}</code></p>
 <p><code>}</code></p>
 <p><code>);</code></p>
 <p>这里定义的Observable对象仅仅发出一个Hello World字符串，然后就结束了。接着我们创建一个Subscriber来处理Observable对象发出的字符串。</p>
-<p><code>Subscriber&lt;String&gt; mySubscriber = `</code>new<code></code>Subscriber<string>() {`</string></p>
+<p><code>Subscriber&lt;String&gt; mySubscriber = ``new</code> <code>Subscriber&lt;String&gt;() {</code></p>
 <p><code>@Override</code></p>
 <p><code>public void onNext(String s) { System.out.println(s); }</code></p>
 <p><code>@Override</code></p>
@@ -91,9 +91,9 @@
 <p>一旦mySubscriber订阅了myObservable，myObservable就是调用mySubscriber对象的onNext和onComplete方法，mySubscriber就会打印出Hello World！</p>
 <h2 id="更简洁的代码"><a href="#更简洁的代码" class="headerlink" title="更简洁的代码"></a>更简洁的代码</h2><p>是不是觉得仅仅为了打印一个hello world要写这么多代码太啰嗦？我这里主要是为了展示RxJava背后的原理而采用了这种比较啰嗦的写法，RxJava其实提供了很多便捷的函数来帮助我们减少代码。</p>
 <p>首先来看看如何简化Observable对象的创建过程。RxJava内置了很多简化创建Observable对象的函数，比如 Observable.just就是用来创建只发出一个事件就结束的Observable对象，上面创建Observable对象的代码可以简化为一行</p>
-<p><code>Observable&lt;String&gt; myObservable = Observable.just(`</code>“Hello, world!”<code></code>);`</p>
+<p><code>Observable&lt;String&gt; myObservable = Observable.just(``&quot;Hello, world!&quot;``);</code></p>
 <p>接下来看看如何简化Subscriber，上面的例子中，我们其实并不关心OnComplete和OnError，我们只需要在onNext的时候做一些处理，这时候就可以使用Action1类。</p>
-<p><code>Action1&lt;String&gt; onNextAction = `</code>new<code></code>Action1<string>() {`</string></p>
+<p><code>Action1&lt;String&gt; onNextAction = ``new</code> <code>Action1&lt;String&gt;() {</code></p>
 <p><code>@Override</code></p>
 <p><code>public void call(String s) {</code></p>
 <p><code>System.out.println(s);</code></p>
@@ -105,41 +105,41 @@
 <p><code>myObservable.subscribe(onNextAction);</code></p>
 <p><code>// Outputs &quot;Hello, world!&quot;</code></p>
 <p>上面的代码最终可以写成这样</p>
-<p><code>Observable.just(`</code>“Hello, world!”<code></code>)`</p>
-<p><code>.subscribe(`</code>new<code></code>Action1<string>() {`</string></p>
+<p><code>Observable.just(``&quot;Hello, world!&quot;``)</code></p>
+<p><code>.subscribe(``new</code> <code>Action1&lt;String&gt;() {</code></p>
 <p><code>@Override</code></p>
 <p><code>public void call(String s) {</code></p>
 <p><code>System.out.println(s);</code></p>
 <p><code>}</code></p>
 <p><code>});</code></p>
 <p>使用java8的lambda可以使代码更简洁</p>
-<p><code>Observable.just(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>Observable.just(``&quot;Hello, world!&quot;``)</code></p>
 <p><code>.subscribe(s -&gt; System.out.println(s));</code></p>
 <p>Android开发中，强烈推荐使用<a href="https://github.com/evant/gradle-retrolambda" target="_blank" rel="noopener">retrolambda</a>这个gradle插件，这样你就可以在你的代码中使用lambda了。</p>
 <p>让我们做一些更有趣的事情吧！<br>比如我想在hello world中加上我的签名，你可能会想到去修改Observable对象：</p>
-<p><code>Observable.just(`</code>“Hello, world! -Dan”<code></code>)`</p>
+<p><code>Observable.just(``&quot;Hello, world! -Dan&quot;``)</code></p>
 <p><code>.subscribe(s -&gt; System.out.println(s));</code></p>
 <p>如果你能够改变Observable对象，这当然是可以的，但是如果你不能修改Observable对象呢？比如Observable对象是第三方库提供的？比如我的Observable对象被多个Subscriber订阅，但是我只想在对某个订阅者做修改呢？<br>那么在Subscriber中对事件进行修改怎么样呢？比如下面的代码：</p>
-<p><code>Observable.just(`</code>“Hello, world!”<code></code>)`</p>
-<p><code>.subscribe(s -&gt; System.out.println(s + `</code>“ -Dan”<code></code>));`</p>
+<p><code>Observable.just(``&quot;Hello, world!&quot;``)</code></p>
+<p><code>.subscribe(s -&gt; System.out.println(s + ``&quot; -Dan&quot;``));</code></p>
 <p>这种方式仍然不能让人满意，因为我希望我的Subscribers越轻量越好，因为我有可能会在mainThread中运行subscriber。另外， 根据响应式函数编程的概念，Subscribers更应该做的事情是“响应”，响应Observable发出的事件，而不是去修改。如果我能在某些中间步 骤中对“Hello World！”进行变换是不是很酷？</p>
 <h2 id="操作符（Operators）"><a href="#操作符（Operators）" class="headerlink" title="操作符（Operators）"></a>操作符（Operators）</h2><p>操作符就是为了解决对Observable对象的变换的问题，操作符用于在Observable和最终的Subscriber之间修改Observable发出的事件。RxJava提供了很多很有用的操作符。<br>比如map操作符，就是用来把把一个事件转换为另一个事件的。</p>
-<p><code>Observable.just(`</code>“Hello, world!”<code></code>)`</p>
-<p><code>.map(`</code>new<code></code>Func1&lt;String, String&gt;() {`</p>
+<p><code>Observable.just(``&quot;Hello, world!&quot;``)</code></p>
+<p><code>.map(``new</code> <code>Func1&lt;String, String&gt;() {</code></p>
 <p><code>@Override</code></p>
 <p><code>public String call(String s) {</code></p>
-<p><code>return</code> <code>s + `</code>“ -Dan”<code></code>;`</p>
+<p><code>return</code> <code>s + ``&quot; -Dan&quot;``;</code></p>
 <p><code>}</code></p>
 <p><code>})</code></p>
 <p><code>.subscribe(s -&gt; System.out.println(s));</code></p>
 <p>使用lambda可以简化为</p>
-<p><code>Observable.just(`</code>“Hello, world!”<code></code>)`</p>
-<p><code>.map(s -&gt; s + `</code>“ -Dan”<code></code>)`</p>
+<p><code>Observable.just(``&quot;Hello, world!&quot;``)</code></p>
+<p><code>.map(s -&gt; s + ``&quot; -Dan&quot;``)</code></p>
 <p><code>.subscribe(s -&gt; System.out.println(s));</code></p>
 <p>是不是很酷？map()操作符就是用于变换Observable对象的，map操作符返回一个Observable对象，这样就可以实现链式调用，在一个Observable对象上多次使用map操作符，最终将最简洁的数据传递给Subscriber对象。</p>
 <h2 id="map操作符进阶"><a href="#map操作符进阶" class="headerlink" title="map操作符进阶"></a>map操作符进阶</h2><p>map操作符更有趣的一点是它不必返回Observable对象返回的类型，你可以使用map操作符返回一个发出新的数据类型的observable对象。<br>比如上面的例子中，subscriber并不关心返回的字符串，而是想要字符串的hash值</p>
-<p><code>Observable.just(`</code>“Hello, world!”<code></code>)`</p>
-<p><code>.map(`</code>new<code></code>Func1&lt;String, Integer&gt;() {`</p>
+<p><code>Observable.just(``&quot;Hello, world!&quot;``)</code></p>
+<p><code>.map(``new</code> <code>Func1&lt;String, Integer&gt;() {</code></p>
 <p><code>@Override</code></p>
 <p><code>public Integer call(String s) {</code></p>
 <p><code>return</code> <code>s.hashCode();</code></p>
@@ -147,11 +147,11 @@
 <p><code>})</code></p>
 <p><code>.subscribe(i -&gt; System.out.println(Integer.toString(i)));</code></p>
 <p>很有趣吧？我们初始的Observable返回的是字符串，最终的Subscriber收到的却是Integer，当然使用lambda可以进一步简化代码：</p>
-<p><code>Observable.just(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>Observable.just(``&quot;Hello, world!&quot;``)</code></p>
 <p><code>.map(s -&gt; s.hashCode())</code></p>
 <p><code>.subscribe(i -&gt; System.out.println(Integer.toString(i)));</code></p>
 <p>前面说过，Subscriber做的事情越少越好，我们再增加一个map操作符</p>
-<p><code>Observable.just(`</code>“Hello, world!”<code></code>)`</p>
+<p><code>Observable.just(``&quot;Hello, world!&quot;``)</code></p>
 <p><code>.map(s -&gt; s.hashCode())</code></p>
 <p><code>.map(i -&gt; Integer.toString(i))</code></p>
 <p><code>.subscribe(s -&gt; System.out.println(s));</code></p>
@@ -166,12 +166,12 @@
 <div class="lx-navigation">
 	<div class="lx-cover prev lx-cover-sm" style="background-image: url(/images/footer_1.jpg)">
 		<div class="overlay"></div>
-		<a class="copy" href="/2016/04/01/随笔/VIM快捷键/">
+		<a class="copy" href="/2016/04/01/随笔/Q2季度目标/">
 			<div class="display-t">
 				<div class="display-tc">
 					<div>
 						<span>Next</span>
-						<h3>VIM快捷键的使用</h3>
+						<h3>Q2季度目标</h3>
 					</div>
 				</div>
 			</div>

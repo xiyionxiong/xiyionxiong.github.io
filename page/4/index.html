@@ -70,7 +70,14 @@
 <p>假设我有这样一个方法：<br>这个方法根据输入的字符串返回一个网站的url列表（啊哈，搜索引擎）</p>
 <p><code>Observable&lt;List&lt;String&gt;&gt; query(String text);</code></p>
 <p>现在我希望构建一个健壮系统，它可以查询字符串并且显示结果。根据上一篇blog的内容，我们可能会写出下面的代码：</p>
-<p><code>query(`</code>“Hello, world!”<code></code>)<code></code>.subscribe(urls -&gt; {<code></code>for<code></code>(String url : urls) {<code></code>System.out.println(url);<code></code>}<code></code>});`<br></p>
+<p><code>query(``&quot;Hello, world!&quot;``)</code><br><code>.subscribe(urls -&gt; {</code><br><code>for</code> <code>(String url : urls) {</code><br><code>System.out.println(url);</code><br><code>}</code><br><code>});</code></p><p></p>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2016/04/01/随笔/VIM快捷键/">VIM快捷键的使用</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-04-01 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
+      <p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -82,15 +89,7 @@
 1、上啦下拉更新 
 2、替换历史上今天的API
 3、优化webview的显示
-4、优化代码结构（网络请求**）
-</code></pre><p></p>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2016/04/01/随笔/VIM快捷键/">VIM快捷键的使用</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-04-01 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
-      <p></p>
+4、优化代码结构（网络请求**）</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -114,10 +113,10 @@
 <p>The Android framework offers a lot of flexibility when it comes to defining how to organize and <em>architect</em> an Android app. This freedom, whilst very valuable, can also result in apps with large classes, inconsistent naming and architectures (or lack of) that can make testing, maintaining and extending difficult.</p>
 <p>Android Architecture Blueprints is meant to demonstrate possible ways to help with these common problems. In this project we offer the same application implemented using different architectural concepts and tools.</p>
 <p>You can use these samples as a reference or as a starting point for creating your own apps. The focus here is on code structure, architecture, testing and maintainability. However, bear in mind that there are many ways to build apps with these architectures and tools, depending on your priorities, so these shouldn’t be considered canonical examples. The UI is deliberately kept simple.</p>
-<p><strong>What does ***</strong>beta<strong>*</strong> mean?**</p>
+<p><strong>What does ***</strong>beta<strong>*** mean?</strong></p>
 <p>We’re still making decisions that could affect all samples so we’re keeping the initial number of variants low before the stable release.</p>
 <p><strong>Samples</strong></p>
-<p>All projects are released in their own branch. Check each project’s README for more information.<br></p>
+<p>All projects are released in their own branch. Check each project’s README for more information.</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -131,7 +130,7 @@
 <p>源码可以在这里找到。在每个例子的开始，我会写清每个代码段是属于哪个Activity的。我会将本文分为两个部分，在前三个例子里，我会着重讲解如何用RxJava异步加载数据；在后三个例子里，我会探索一些更高级的用法。</p>
 <p>在开始说代码之前，先澄清几个概念。RxJava最核心的东西就是Observable和Observer。Observable会发出数据，而与之相对的Observer则会通过订阅Observable来进行观察。</p>
 <p>Observer可以在Observable发出数据、报错或者声明没有数据可以发送时进行相应的操作。这三个操作被封装在Observer接口中，相应的方法为onNext()，onError()和onCompleted()。</p>
-<p>明确了这些概念以后，让我们来看一些例子。<br></p>
+<p>明确了这些概念以后，让我们来看一些例子。</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -172,8 +171,7 @@
     } catch (Exception e) {
         DbUtils.exceptionHandler(e);
     }
-}
-</code></pre><p></p>
+}</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -197,7 +195,7 @@
       <p></p><p>日常生活中,由于天朝的局域网的限制,很多网站都无法进行使用,虽然国内也有替代的网站,但是作为开发人员来讲,这些事远远不够的,现在就讲我个人在生活工作中使用到梯子,进行总结一下</p>
 <h2 id="PC端"><a href="#PC端" class="headerlink" title="PC端"></a>PC端</h2><p>##全局梯子<br>目前在PC上(window)使用到的全局的梯子 就是 赛风和VPN Gate</p>
 <h3 id="赛风"><a href="#赛风" class="headerlink" title="赛风"></a>赛风</h3><p>如果能够直接访问 <a herf="http://www.psiphon3.net/zh/index.html"> 直达</a></p>
-<h4 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h4><p>赛风是赛风公司的一款新翻墙工具，利用VPN, SSH和HTTP代理软件提供未经审查的访问互联网。赛风的客户端将自动寻找新的接入点，力求最大限度的绕过网络审查。<br></p>
+<h4 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h4><p>赛风是赛风公司的一款新翻墙工具，利用VPN, SSH和HTTP代理软件提供未经审查的访问互联网。赛风的客户端将自动寻找新的接入点，力求最大限度的绕过网络审查。</p><p></p>
     </div>
   </div>
  

@@ -77,16 +77,14 @@ try {
     mTextPos = array.getInteger(R.styleable.PieChart_labelPosition,0);
 }finally {
     array.recycle();
-}
-</code></pre><p>可见，TypedArray不是我们new出来的，而是调用了 obtainStyledAttributes 方法得到的对象，该方法实现如下：</p>
+}</code></pre><p>可见，TypedArray不是我们new出来的，而是调用了 obtainStyledAttributes 方法得到的对象，该方法实现如下：</p>
 <pre><code>public TypedArray obtainStyledAttributes(AttributeSet set,
                 int[] attrs, int defStyleAttr, int defStyleRes) {
     final int len = attrs.length;
     final TypedArray array = TypedArray.obtain(Resources.this, len);
     // other code .....
     return array;
-}
-</code></pre><p>我们只关注当前待解决的问题，其他的代码忽略不看。从上面的代码片段得知，TypedArray也不是它实例化的，而是调用了TypedArray的一个静态方法，得到一个实例，再做一些处理，最后返回这个实例。看到这里，我们似乎知道了什么，，，带着猜测，我们进一步查看该静态方法的内部实现：</p>
+}</code></pre><p>我们只关注当前待解决的问题，其他的代码忽略不看。从上面的代码片段得知，TypedArray也不是它实例化的，而是调用了TypedArray的一个静态方法，得到一个实例，再做一些处理，最后返回这个实例。看到这里，我们似乎知道了什么，，，带着猜测，我们进一步查看该静态方法的内部实现：</p>
 <pre><code>/**
  * Container for an array of values that were retrieved with
  * {@link Resources.Theme#obtainStyledAttributes(AttributeSet, int[], int, int)}
@@ -119,8 +117,7 @@ public class TypedArray {
                 new int[1+len], len);
     }
     // Other members ......
-}
-</code></pre><p>仔细看一下这个方法的实现，我想大部分人都明了了，该类没有公共的构造函数，只提供静态方法获取实例，显然是一个典型的单例模式。在代码片段的第 13 行，很清晰的表达了这个 array 是从一个 array pool的池中获取的。</p>
+}</code></pre><p>仔细看一下这个方法的实现，我想大部分人都明了了，该类没有公共的构造函数，只提供静态方法获取实例，显然是一个典型的单例模式。在代码片段的第 13 行，很清晰的表达了这个 array 是从一个 array pool的池中获取的。</p>
 <p>因此，我们得出结论：</p>
 <p>程序在运行时维护了一个 TypedArray的池，程序调用时，会向该池中请求一个实例，用完之后，调用 recycle() 方法来释放该实例，从而使其可被其他模块复用。</p>
 <p>那为什么要使用这种模式呢？答案也很简单，TypedArray的使用场景之一，就是上述的自定义View，会随着 Activity的每一次Create而Create，因此，需要系统频繁的创建array，对内存和性能是一个不小的开销，如果不使用池模式，每次都让GC来回收，很可能就会造成OutOfMemory。</p>

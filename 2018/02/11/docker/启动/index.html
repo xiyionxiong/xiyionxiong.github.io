@@ -65,12 +65,15 @@
 <h3 id="新建并启动"><a href="#新建并启动" class="headerlink" title="新建并启动"></a>新建并启动</h3><p>所需要的命令主要为 <code>docker run</code>。</p>
 <p>例如，下面的命令输出一个 “Hello World”，之后终止容器。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker run ubuntu:14.04 /bin/echo &apos;Hello world&apos;</span><br><span class="line">Hello world</span><br></pre></td></tr></table></figure>
+
 <p>这跟在本地直接执行 <code>/bin/echo &#39;hello world&#39;</code> 几乎感觉不出任何区别。</p>
 <p>下面的命令则启动一个 bash 终端，允许用户进行交互。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -t -i ubuntu:14.04 /bin/bash</span><br><span class="line">root@af8bae53bdd3:/#</span><br></pre></td></tr></table></figure>
+
 <p>其中，<code>-t</code> 选项让Docker分配一个伪终端（pseudo-tty）并绑定到容器的标准输入上， <code>-i</code> 则让容器的标准输入保持打开。</p>
 <p>在交互模式下，用户可以通过所创建的终端来输入命令，例如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@af8bae53bdd3:/# pwd</span><br><span class="line">/</span><br><span class="line">root@af8bae53bdd3:/# ls</span><br><span class="line">bin boot dev etc home lib lib64 media mnt opt proc root run sbin srv sys tmp usr var</span><br></pre></td></tr></table></figure>
+
 <p>当利用 <code>docker run</code> 来创建容器时，Docker 在后台运行的标准操作包括：</p>
 <ul>
 <li>检查本地是否存在指定的镜像，不存在就从公有仓库下载</li>
@@ -84,6 +87,7 @@
 <h3 id="启动已终止容器"><a href="#启动已终止容器" class="headerlink" title="启动已终止容器"></a>启动已终止容器</h3><p>可以利用 <code>docker container start</code> 命令，直接将一个已经终止的容器启动运行。</p>
 <p>容器的核心为所执行的应用程序，所需要的资源都是应用程序运行所必需的。除此之外，并没有其它的资源。可以在伪终端中利用 <code>ps</code> 或 <code>top</code> 来查看进程信息。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@ba267838cc1b:/# ps</span><br><span class="line">  PID TTY          TIME CMD</span><br><span class="line">    1 ?        00:00:00 bash</span><br><span class="line">   11 ?        00:00:00 ps</span><br></pre></td></tr></table></figure>
+
 <p>可见，容器中仅运行了指定的 bash 应用。这种特点使得 Docker 对资源的利用率极高，是货真价实的轻量级虚拟化。</p>
 
       </div>

@@ -91,8 +91,7 @@
     exec.execute(mFuture);
 
     return this;
-}
-</code></pre><p>其他的onProgressUpdate()、onPostExecute()、onCancelled()都经由InternalHandler调用。</p>
+}</code></pre><p>其他的onProgressUpdate()、onPostExecute()、onCancelled()都经由InternalHandler调用。</p>
 <pre><code>private static class InternalHandler extends Handler {
     public InternalHandler() {
         super(Looper.getMainLooper());
@@ -112,8 +111,7 @@
                 break;
         }
     }
-}
-</code></pre><p>这里就是各种sendMessage(…)后的转发，最明显是是看到了onProgressUpdate()；</p>
+}</code></pre><p>这里就是各种sendMessage(…)后的转发，最明显是是看到了onProgressUpdate()；</p>
 <p>然后onPostExecute()、onCancelled()就在finish()中再次转发</p>
 <pre><code>private void finish(Result result) {
     if (isCancelled()) {
@@ -122,8 +120,7 @@
         onPostExecute(result);
     }
     mStatus = Status.FINISHED;
-}
-</code></pre><p>综上，就是内置一个线程池既花式又完美的sendMessage(…)给内部Handler处理的二次封装类<br>AsyncTask 模板</p>
+}</code></pre><p>综上，就是内置一个线程池既花式又完美的sendMessage(…)给内部Handler处理的二次封装类<br>AsyncTask 模板</p>
 <h4 id="ProgressBarAsyncTask："><a href="#ProgressBarAsyncTask：" class="headerlink" title="ProgressBarAsyncTask："></a>ProgressBarAsyncTask：</h4><pre><code>/**
  * Description：
  * Created by：CaMnter
@@ -224,10 +221,8 @@ public class ProgressBarAsyncTask extends AsyncTask&lt;String, Integer, String&g
         super.onCancelled();
     }
 
-}
-</code></pre><h4 id="Activity："><a href="#Activity：" class="headerlink" title="Activity："></a>Activity：</h4><pre><code>ProgressBarAsyncTask asyncTask = new ProgressBarAsyncTask(this.progressBar, this.textview);
-asyncTask.execute(&quot;%&quot;);
-</code></pre>
+}</code></pre><h4 id="Activity："><a href="#Activity：" class="headerlink" title="Activity："></a>Activity：</h4><pre><code>ProgressBarAsyncTask asyncTask = new ProgressBarAsyncTask(this.progressBar, this.textview);
+asyncTask.execute(&quot;%&quot;);</code></pre>
       </div>
     </div>
   </div>

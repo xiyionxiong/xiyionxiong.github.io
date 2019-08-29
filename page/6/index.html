@@ -76,8 +76,7 @@
     4、3的操作，保证每次打开首页进入到一键加油流程都是最新的数据，同样也保证再次回到首页的时候，在网络情况差，请求不到数据的情况，不会使用上一次缓存的数据
 优点：
     优化用户体验，节省流量
-缺点：暂未发现
-</code></pre></li>
+缺点：暂未发现</code></pre></li>
 </ul><p></p>
     </div>
   </div>
@@ -86,8 +85,7 @@
       <h2><a href="/2015/10/09/android/Android Skills/ActionBar沉浸式实现/">ActionBar沉浸式实现</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-10-09 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
       <p></p><p>studio，中引入沉浸式兼容库 </p>
-<pre><code>compile &apos;com.readystatesoftware.systembartint:systembartint:1.0.3&apos; 
-</code></pre><p>eclipse，可以导入相应的那个类。</p>
+<pre><code>compile &apos;com.readystatesoftware.systembartint:systembartint:1.0.3&apos; </code></pre><p>eclipse，可以导入相应的那个类。</p>
 <h3 id="第一类，兼容actionbar"><a href="#第一类，兼容actionbar" class="headerlink" title="第一类，兼容actionbar"></a>第一类，兼容actionbar</h3><ul>
 <li><p>第一步：设置activity主题android:theme=”@style/ActionBarTheme”</p><p></p>
     </li></ul></div>
@@ -175,7 +173,7 @@
 <p>Google前几天刚发布了<a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范第2季</a>的 课程，一共20个短视频，包括的内容大致有：电量优化、网络优化、Android Wear上如何做优化、使用对象池来提高效率、LRU Cache、Bitmap的缩放、缓存、重用、PNG压缩、自定义View的性能、提升设置alpha之后View的渲染性能，以及Lint、 StictMode等工具的使用技巧。 下面是对这些课程的总结摘要，认知有限，理解偏差的地方请多多指教！</p>
 <p><img src="/images/35C6E464AD6DAF773B756644C64CE853.jpg" alt></p>
 <p><strong>1) Battery Drain and Networking</strong></p>
-<p>对 于手机程序，网络操作相对来说是比较耗电的行为。优化网络操作能够显著节约电量的消耗。在性能优化第1季里面有提到过，手机硬件的各个模块的耗电量是不一 样的，其中移动蜂窝模块对电量消耗是比较大的，另外蜂窝模块在不同工作强度下，对电量的消耗也是有差异的。当程序想要执行某个网络请求之前，需要先唤醒设 备，然后发送数据请求，之后等待返回数据，最后才慢慢进入休眠状态。这个流程如下图所示：<br></p>
+<p>对 于手机程序，网络操作相对来说是比较耗电的行为。优化网络操作能够显著节约电量的消耗。在性能优化第1季里面有提到过，手机硬件的各个模块的耗电量是不一 样的，其中移动蜂窝模块对电量消耗是比较大的，另外蜂窝模块在不同工作强度下，对电量的消耗也是有差异的。当程序想要执行某个网络请求之前，需要先唤醒设 备，然后发送数据请求，之后等待返回数据，最后才慢慢进入休眠状态。这个流程如下图所示：</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -185,7 +183,7 @@
       <p></p><p>转载自胡凯的博客 <a href="http://hukai.me/android-performance-patterns/" target="_blank" rel="noopener">Android性能优化典范</a> </p>
 <p><img src="/images/1B60ABFE035FF01195310770A636F912.jpg" alt></p>
 <p>2015年伊始，Google发布了关于<a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范的专题</a>， 一共16个短视频，每个3-5分钟，帮助开发者创建更快更优秀的Android App。课程专题不仅仅介绍了Android系统中有关性能问题的底层工作原理，同时也介绍了如何通过工具来找出性能问题以及提升性能的建议。主要从三个 方面展开，Android的渲染机制，内存与GC，电量优化。下面是对这些问题和建议的总结梳理。</p>
-<h2 id="0-Render-Performance"><a href="#0-Render-Performance" class="headerlink" title="0)Render Performance"></a>0)Render Performance</h2><p>大多数用户感知到的卡顿等性能问题的最主要根源都是因为渲染性能。从设计师的角度，他们希望App能够有更多的动画，图片等时尚元素来实现流畅的用 户体验。但是Android系统很有可能无法及时完成那些复杂的界面渲染操作。Android系统每隔16ms发出VSYNC信号，触发对UI进行渲染， 如果每次渲染都成功，这样就能够达到流畅的画面所需要的60fps，为了能够实现60fps，这意味着程序的大多数操作都必须在16ms内完成。<br></p>
+<h2 id="0-Render-Performance"><a href="#0-Render-Performance" class="headerlink" title="0)Render Performance"></a>0)Render Performance</h2><p>大多数用户感知到的卡顿等性能问题的最主要根源都是因为渲染性能。从设计师的角度，他们希望App能够有更多的动画，图片等时尚元素来实现流畅的用 户体验。但是Android系统很有可能无法及时完成那些复杂的界面渲染操作。Android系统每隔16ms发出VSYNC信号，触发对UI进行渲染， 如果每次渲染都成功，这样就能够达到流畅的画面所需要的60fps，为了能够实现60fps，这意味着程序的大多数操作都必须在16ms内完成。</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">

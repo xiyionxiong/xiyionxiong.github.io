@@ -67,7 +67,9 @@
 <p>源码可以在这里找到。在每个例子的开始，我会写清每个代码段是属于哪个Activity的。我会将本文分为两个部分，在前三个例子里，我会着重讲解如何用RxJava异步加载数据；在后三个例子里，我会探索一些更高级的用法。</p>
 <p>在开始说代码之前，先澄清几个概念。RxJava最核心的东西就是Observable和Observer。Observable会发出数据，而与之相对的Observer则会通过订阅Observable来进行观察。</p>
 <p>Observer可以在Observable发出数据、报错或者声明没有数据可以发送时进行相应的操作。这三个操作被封装在Observer接口中，相应的方法为onNext()，onError()和onCompleted()。</p>
-<p>明确了这些概念以后，让我们来看一些例子。<br><a id="more"></a><br>案例1：基础</p>
+<p>明确了这些概念以后，让我们来看一些例子。</p>
+<a id="more"></a>
+<p>案例1：基础</p>
 <p>现在要写一个用来展示一个颜色列表的Activity。我们要写一个能发送一个字符串列表、然后结束的Observeable。而后我们会通过这个字符串列表来填充颜色列表，这里要使用到Observable.just()方法。由这个方法创建的Observable对象的特点是：所有Observer一旦订阅这个Observable就会立即调用onNext()方法并传入Observable.just()的参数，而后因为Observable没有数据可以发送了，onComplete()方法会被调用。</p>
 <p>Observable&lt;List<string>&gt; listObservable = Observable.just(getColorList());</string></p>
 <p>注意这里的getColorList()是一个不耗时的方法。虽然现在看来这个方法无足轻重，但一会我们会回到这个方法。</p>
@@ -82,8 +84,7 @@ public void onError(Throwable e) { }
 @Override
 public void onNext(List&lt;String&gt; colors) {
     mSimpleStringAdapter.setStrings(colors);
-}
-</code></pre><p>});</p>
+}</code></pre><p>});</p>
 <p>而后神奇的事情就发生了。如我刚才所说，一旦通过subscribe()方法订阅Observable，就会发生一系列事情：</p>
 <ul>
 <li><p>onNext()方法被调用，被发送的颜色列表会作为参数传入。</p>
@@ -100,8 +101,7 @@ public void onNext(List&lt;String&gt; colors) {
 <pre><code>@Override
 public List&lt;String&gt; call() {
     return mRestClient.getFavoriteTvShows();
-}
-</code></pre><p>});</p>
+}</code></pre><p>});</p>
 <p>在刚才的例子中，我们使用Observable.just()来创建Observable，你可能认为在这里可以通过Observable.just(mRestClient.getFavoriteTvShows())来创建Observable。</p>
 <p>但在这里我们不能这么做，因为mRestClient.getFavoriteTvShows()会发起网络请求。如果在这里我们使用Observable.just()，mRestClient.getFavoriteTvShows()会被立即执行并阻塞UI线程。</p>
 <p>使用Observable.fromCallable()方法有两点好处：</p>
@@ -123,8 +123,7 @@ public List&lt;String&gt; call() {
     public void onNext(List&lt;String&gt; tvShows){
         displayTvShows(tvShows);
     }
-});
-</code></pre><p>让我们一个方法一个方法地来看这段代码。subscribeOn会修改我们刚刚创建的Observable。在默认情况下Observable的所有代码，包括刚才说到的只有在被订阅之后才会执行的代码，都会在执行subscribe()方法的线程中运行。而通过subscribeOn()方法，这些代码可以在其他线程中执行。但具体是哪个线程呢？</p>
+});</code></pre><p>让我们一个方法一个方法地来看这段代码。subscribeOn会修改我们刚刚创建的Observable。在默认情况下Observable的所有代码，包括刚才说到的只有在被订阅之后才会执行的代码，都会在执行subscribe()方法的线程中运行。而通过subscribeOn()方法，这些代码可以在其他线程中执行。但具体是哪个线程呢？</p>
 <p>在这个例子中我们让代码在”IO Scheduler”中执行（Schedulers.io()）。现在我们可以只把Scheduler当做一个可以工作的子线程，这个描述对于现在的我们已经足够了，不过这其中还有更深层次的内容。</p>
 <p>不过我们的确遇到了一个小障碍。既然Observable会在IO Scheduler中运行，那么它与Observer的连接也会在IO Scheduler中完成。这就意味着Observer的onNext()方法也会在IO Scheduler中运行，而onNext()方法会操作UI中的View，但View只能在UI主线程中操作。</p>
 <p>事实上解决这个问题也很简单，我们可以告诉RxJava我们要在UI线程中观察这个Observable，也就是，我们想让onNext()方法在UI线程中执行。这一点我们可以通过在observeOn()方法中指定另一个Scheduler来完成，在这里也就是AndroidSchedules.mainThread()所返回的Scheduler(UI线程的Scheduler)。</p>
@@ -160,8 +159,7 @@ public List&lt;String&gt; call() {
     public void onError(Throwable error) {
         displayErrorMessage();
     }
-});
-</code></pre><p>这段代码和刚才很像，我们调用subscribeOn()方法以确保getFavoriteTvShows()在子线程中执行。而后我们调用observeOn()以确保Single的数据被发送到UI线程。</p>
+});</code></pre><p>这段代码和刚才很像，我们调用subscribeOn()方法以确保getFavoriteTvShows()在子线程中执行。而后我们调用observeOn()以确保Single的数据被发送到UI线程。</p>
 <p>但这次我们不再使用Observer，而是使用一个叫SingleSubscriber的类。这个类和Observer非常像，只不过它只有上述两个方法：onSuccess()和onError()。SingleSubscriber之于Single就如Observer之于Observable。</p>
 <p>订阅一个Single的同时也会自动创建一个Subscription对象。这里的Subscription和案例2中没有区别，一定要在onDestroy()中解除订阅。</p>
 <p>最后一点：在这里我们添加了处理异常的代码，所以如果mRestClient出了问题，onError()就会被调用。建议你亲手写一个案例玩一玩，体验一下有异常时程序是怎么运行的。</p>
@@ -179,16 +177,14 @@ public void onError(Throwable e) { }
 @Override
 public void onNext(Integer integer) {
     mCounterDisplay.setText(String.valueOf(integer));
-}
-</code></pre><p>});</p>
+}</code></pre><p>});</p>
 <p>与前面的几个例子不同，在这个例子中onNext()会被调用多次。每次发送新的数据时，mCounterDisplay都会展示新的数据。但是PublishSubject怎么发送数据呢？让我们看一下mIncrementButton的监听代码。</p>
 <p>mIncrementButton.setOnClickListener(new View.OnClickListener() {</p>
 <pre><code>@Override
 public void onClick(View v) {
     mCounter++;
     mCounterEmitter.onNext(mCounter);
-}
-</code></pre><p>});</p>
+}</code></pre><p>});</p>
 <p>可以看到mIncrementButton在onClick()回调方法中做了两件事情：</p>
 <ul>
 <li><p>让mCounter变量自增。</p>
@@ -204,16 +200,14 @@ public void onClick(View v) {
 <pre><code>@Override
 public String call(Integer integer) {
     return String.valueOf(integer);
-}
-</code></pre><p>}).subscribe(new SingleSubscriber<string>() {</string></p>
+}</code></pre><p>}).subscribe(new SingleSubscriber<string>() {</string></p>
 <pre><code>@Override
 public void onSuccess(String value) {
     mValueDisplay.setText(value);
 }
 
 @Override
-public void onError(Throwable error) { }
-</code></pre><p>});</p>
+public void onError(Throwable error) { }</code></pre><p>});</p>
 <p>我们最终要显示Single所发送的数据，但首先我们需要将这个数据从Integer转为String，而这里的解决方法就是使用map()函数。正如刚才所说，map接收一个数据，进行处理而后输出它，这正是我们需要的。现在Single会发送数字4，我们使用map()方法将其转为String，而后交给Observer去展示它。</p>
 <p>这个例子中对于map方法的使用很轻量，不过map可是非常强大的，在下一个例子中你可以看到，map可以被用来执行任意代码，在处理数据方面起到很重要的作用。</p>
 <p>案例6：综合使用</p>
@@ -238,8 +232,7 @@ public void onError(Throwable error) { }
     public void onNext(List&lt;String&gt; cities) {
         handleSearchResults(cities);
     }
-});
-</code></pre><p>mSearchInput.addTextChangedListener(new TextWatcher() {</p>
+});</code></pre><p>mSearchInput.addTextChangedListener(new TextWatcher() {</p>
 <pre><code>@Override
 public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
@@ -249,8 +242,7 @@ public void onTextChanged(CharSequence s, int start, int before, int count) {
 }
 
 @Override
-public void afterTextChanged(Editable s) { }
-</code></pre><p>});</p>
+public void afterTextChanged(Editable s) { }</code></pre><p>});</p>
 <p>这段代码有不少内容，让我们一点一点分析。</p>
 <p>首先你会看到debounce()方法。这是啥？有啥用？如果你看一下我们是如何给输入框添加监听器的，你会发现每当输入的内容改变时都会有输入发送到mSearchResultsSubject，不过我们不想让用户每点一个键都向服务器请求一次。我们想等一会，等用户停止输入（代表差不多输完）的时候再请求服务器。</p>
 <p>而debounce()方法就是做这个的。这个方法告诉mSearchResultsSubject在没有数据传入达400毫秒时才发送数据。意思就是，仅当用户400ms都没有改变输入内容时，Subject才会发送最新的搜索字符串。这样以来我们就不会进行无意义的网络请求了，UI也不会每输入一个字符都更新。</p>

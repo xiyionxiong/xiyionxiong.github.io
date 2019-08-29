@@ -62,8 +62,7 @@
       <div>
         <h3 id="解决EditView抢焦点事件"><a href="#解决EditView抢焦点事件" class="headerlink" title="解决EditView抢焦点事件"></a>解决EditView抢焦点事件</h3><p>在最外层布局加上</p>
 <pre><code>android:focusable=&quot;true&quot;
-android:focusableInTouchMode=&quot;true&quot;
-</code></pre><a id="more"></a>
+android:focusableInTouchMode=&quot;true&quot;</code></pre><a id="more"></a>
 <p>实例</p>
 <pre><code>&lt;LinearLayout
         android:id=&quot;@+id/top_search&quot;
@@ -99,17 +98,13 @@ android:focusableInTouchMode=&quot;true&quot;
             android:hint=&quot;搜索&quot;
             android:singleLine=&quot;true&quot;
             android:textSize=&quot;15dip&quot; /&gt;
-&lt;/LinearLayout&gt;
-</code></pre><h3 id="将EditText的光标定位到字符的最后面"><a href="#将EditText的光标定位到字符的最后面" class="headerlink" title="将EditText的光标定位到字符的最后面"></a>将EditText的光标定位到字符的最后面</h3><pre><code>public void setEditTextCursorLocationEnd(EditText editText) {
+&lt;/LinearLayout&gt;</code></pre><h3 id="将EditText的光标定位到字符的最后面"><a href="#将EditText的光标定位到字符的最后面" class="headerlink" title="将EditText的光标定位到字符的最后面"></a>将EditText的光标定位到字符的最后面</h3><pre><code>public void setEditTextCursorLocationEnd(EditText editText) {
     CharSequence text = editText.getText();
     if (text instanceof Spannable) {
        Spannable spanText = (Spannable) text;
        Selection.setSelection(spanText, text.length());
     }
-}
-</code></pre><h3 id="添加下划线"><a href="#添加下划线" class="headerlink" title="添加下划线"></a>添加下划线</h3><pre><code>this.editText.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
-</code></pre><h3 id="设置抗锯齿"><a href="#设置抗锯齿" class="headerlink" title="设置抗锯齿"></a>设置抗锯齿</h3><pre><code>this.editText.getPaint().setAntiAlias(true);
-</code></pre><h3 id="焦点事件监听"><a href="#焦点事件监听" class="headerlink" title="焦点事件监听"></a>焦点事件监听</h3><pre><code>this.editText.setOnFocusChangeListener(new android.view.View.
+}</code></pre><h3 id="添加下划线"><a href="#添加下划线" class="headerlink" title="添加下划线"></a>添加下划线</h3><pre><code>this.editText.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);</code></pre><h3 id="设置抗锯齿"><a href="#设置抗锯齿" class="headerlink" title="设置抗锯齿"></a>设置抗锯齿</h3><pre><code>this.editText.getPaint().setAntiAlias(true);</code></pre><h3 id="焦点事件监听"><a href="#焦点事件监听" class="headerlink" title="焦点事件监听"></a>焦点事件监听</h3><pre><code>this.editText.setOnFocusChangeListener(new android.view.View.
                 OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -122,11 +117,9 @@ android:focusableInTouchMode=&quot;true&quot;
 
                 }
             }
-});
-</code></pre><h3 id="手动获取焦点"><a href="#手动获取焦点" class="headerlink" title="手动获取焦点"></a>手动获取焦点</h3><pre><code>this.editText.setFocusable(true);
+});</code></pre><h3 id="手动获取焦点"><a href="#手动获取焦点" class="headerlink" title="手动获取焦点"></a>手动获取焦点</h3><pre><code>this.editText.setFocusable(true);
 this.editText.setFocusableInTouchMode(true);
-this.editText.requestFocus();
-</code></pre><h3 id="弹出软键盘"><a href="#弹出软键盘" class="headerlink" title="弹出软键盘"></a>弹出软键盘</h3><pre><code>public static void popSoftkeyboard(Context context,View view,boolean pop) {
+this.editText.requestFocus();</code></pre><h3 id="弹出软键盘"><a href="#弹出软键盘" class="headerlink" title="弹出软键盘"></a>弹出软键盘</h3><pre><code>public static void popSoftkeyboard(Context context,View view,boolean pop) {
         InputMethodManager imm = (InputMethodManager)           context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (pop) {
             view.requestFocus();
@@ -134,14 +127,11 @@ this.editText.requestFocus();
         } else {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
- }
-</code></pre><h3 id="限制长度"><a href="#限制长度" class="headerlink" title="限制长度"></a>限制长度</h3><p>XML</p>
+ }</code></pre><h3 id="限制长度"><a href="#限制长度" class="headerlink" title="限制长度"></a>限制长度</h3><p>XML</p>
 <p>在 xml 文件中设置文本编辑框属性作字符数限制</p>
-<pre><code>如：android:maxLength=”10” 即限制最大输入字符个数为10
-</code></pre><p>代码<br>在代码中使用InputFilter 进行过滤</p>
+<pre><code>如：android:maxLength=”10” 即限制最大输入字符个数为10</code></pre><p>代码<br>在代码中使用InputFilter 进行过滤</p>
 <pre><code>//即限定最大输入字符数为20
-this.editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});
-</code></pre>
+this.editText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(20)});</code></pre>
       </div>
     </div>
   </div>

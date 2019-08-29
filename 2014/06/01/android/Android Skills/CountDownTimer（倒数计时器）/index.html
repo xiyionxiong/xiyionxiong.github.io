@@ -65,61 +65,103 @@
 <p>接下来，我们通过CountDownTimer的源代码，看观赏一下它的实现原理：</p>
 <p>/*</p>
 <ul>
-<li>Copyright (C) 2008 The Android Open Source Project<br>*</li>
+<li>Copyright (C) 2008 The Android Open Source Project</li>
+<li></li>
 <li>Licensed under the Apache License, Version 2.0 (the “License”);</li>
 <li>you may not use this file except in compliance with the License.</li>
-<li>You may obtain a copy of the License at<br>*</li>
-<li><a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">http://www.apache.org/licenses/LICENSE-2.0</a><br>*</li>
+<li>You may obtain a copy of the License at</li>
+<li></li>
+<li><a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">http://www.apache.org/licenses/LICENSE-2.0</a></li>
+<li></li>
 <li>Unless required by applicable law or agreed to in writing, software</li>
 <li>distributed under the License is distributed on an “AS IS” BASIS,</li>
 <li>WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</li>
 <li>See the License for the specific language governing permissions and</li>
-<li>limitations under the License.<br>*/</li>
+<li>limitations under the License.</li>
+<li>/</li>
 </ul>
 <p>package android.os;</p>
 <p>import android.util.Log;</p>
 <p>/**</p>
 <ul>
-<li>Schedule a countdown until a time in the future, with</li>
-<li>regular notifications on intervals along the way.<br>*</li>
-<li>Example of showing a 30 second countdown in a text field:<br>*</li>
+<li><p>Schedule a countdown until a time in the future, with</p>
+</li>
+<li><p>regular notifications on intervals along the way.</p>
+</li>
+<li></li>
+<li><p>Example of showing a 30 second countdown in a text field:</p>
+</li>
+<li></li>
 <li><pre class="prettyprint"></pre></li>
-<li>new CountDownTimer(30000, 1000) {<br>*</li>
-<li>public void onTick(long millisUntilFinished) {</li>
-<li>mTextField.setText(“seconds remaining: “ + millisUntilFinished / 1000);</li>
-<li>}<br>*</li>
-<li>public void onFinish() {</li>
-<li>mTextField.setText(“done!”);</li>
-<li>}</li>
-<li>}.start();</li>
-<li><br>*</li>
-<li>The calls to {@link #onTick(long)} are synchronized to this object so that</li>
-<li>one call to {@link #onTick(long)} won’t ever occur before the previous</li>
-<li>callback is complete.  This is only relevant when the implementation of</li>
-<li>{@link #onTick(long)} takes an amount of time to execute that is significant</li>
-<li><p>compared to the countdown interval.<br>*/<br>public abstract class CountDownTimer {</p>
-<p> /**</p>
+<li><p>new CountDownTimer(30000, 1000) {</p>
+</li>
+<li></li>
+<li><p>public void onTick(long millisUntilFinished) {</p>
+</li>
+<li><p>mTextField.setText(“seconds remaining: “ + millisUntilFinished / 1000);</p>
+</li>
+<li><p>}</p>
+</li>
+<li></li>
+<li><p>public void onFinish() {</p>
+</li>
+<li><p>mTextField.setText(“done!”);</p>
+</li>
+<li><p>}</p>
+</li>
+<li><p>}.start();</p>
+</li>
+<li><p></p>
+</li>
+<li></li>
+<li><p>The calls to {@link #onTick(long)} are synchronized to this object so that</p>
+</li>
+<li><p>one call to {@link #onTick(long)} won’t ever occur before the previous</p>
+</li>
+<li><p>callback is complete.  This is only relevant when the implementation of</p>
+</li>
+<li><p>{@link #onTick(long)} takes an amount of time to execute that is significant</p>
+</li>
+<li><p>compared to the countdown interval.</p>
+</li>
+<li><p>/<br>public abstract class CountDownTimer {</p>
+<p>  /**</p>
 <ul>
-<li><p>Millis since epoch when alarm should stop.<br>*/<br>private final long mMillisInFuture;</p>
+<li><p>Millis since epoch when alarm should stop.</p>
+</li>
+<li><p>/<br>private final long mMillisInFuture;</p>
 <p>/**</p>
 </li>
-<li><p>The interval in millis that the user receives callbacks<br>*/<br>private final long mCountdownInterval;</p>
+<li><p>The interval in millis that the user receives callbacks</p>
+</li>
+<li><p>/<br>private final long mCountdownInterval;</p>
 <p>private long mStopTimeInFuture;</p>
 <p>/**</p>
 </li>
-<li>@param millisInFuture The number of millis in the future from the call</li>
-<li>to {@link #start()} until the countdown is done and {@link #onFinish()}</li>
-<li>is called.</li>
-<li>@param countDownInterval The interval along the way to receive</li>
-<li><p>{@link #onTick(long)} callbacks.<br>*/<br>public CountDownTimer(long millisInFuture, long countDownInterval) {<br>mMillisInFuture = millisInFuture;<br>mCountdownInterval = countDownInterval;<br>}</p>
+<li><p>@param millisInFuture The number of millis in the future from the call</p>
+</li>
+<li><p>to {@link #start()} until the countdown is done and {@link #onFinish()}</p>
+</li>
+<li><p>is called.</p>
+</li>
+<li><p>@param countDownInterval The interval along the way to receive</p>
+</li>
+<li><p>{@link #onTick(long)} callbacks.</p>
+</li>
+<li><p>/<br>public CountDownTimer(long millisInFuture, long countDownInterval) {<br>  mMillisInFuture = millisInFuture;<br>  mCountdownInterval = countDownInterval;<br>}</p>
 <p>/**</p>
 </li>
-<li><p>Cancel the countdown.<br>*/<br>public final void cancel() {<br> mHandler.removeMessages(MSG);<br>}</p>
+<li><p>Cancel the countdown.</p>
+</li>
+<li><p>/<br>public final void cancel() {<br>  mHandler.removeMessages(MSG);<br>}</p>
 <p>/**</p>
 </li>
-<li>Start the countdown.<br>*/<br>public synchronized final CountDownTimer start() {<br> if (mMillisInFuture &lt;= 0) {<pre><code>onFinish();
-return this;
-</code></pre> }<br> mStopTimeInFuture = SystemClock.elapsedRealtime() + mMillisInFuture;<br> mHandler.sendMessage(mHandler.obtainMessage(MSG));<br> return this;<br>}</li>
+<li><p>Start the countdown.</p>
+</li>
+<li><p>/<br>public synchronized final CountDownTimer start() {<br>  if (mMillisInFuture &lt;= 0) {</p>
+<pre><code>onFinish();
+return this;</code></pre><p>  }<br>  mStopTimeInFuture = SystemClock.elapsedRealtime() + mMillisInFuture;<br>  mHandler.sendMessage(mHandler.obtainMessage(MSG));<br>  return this;<br>}</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -167,8 +209,7 @@ private Handler mHandler = new Handler() {
             }
         }
     }
-};
-</code></pre><p>}</p>
+};</code></pre><p>}</p>
 <p>cancel() ：取消的倒计时。</p>
 <p>start() ：开始倒计时。</p>
 <p>onTick()：回调执行固定时间间隔。</p>
@@ -178,56 +219,63 @@ private Handler mHandler = new Handler() {
 <p>所以主要的操作，我们都放在onTick()和onFinish()方法中。</p>
 <p>那么这里，给一个小小的实现类：<br>package com.zyy.android_csdn.skill;</p>
 <p>import android.content.Context;<br>import android.graphics.drawable.Drawable;<br>import android.os.CountDownTimer;<br>import android.widget.Button;</p>
-<p>/*<em>
- </em></p>
+<p>/**<br> *</p>
 <ul>
-<li>倒计时按钮计时器<br>*</li>
-<li><p>@author CaMnter<br><em>
-</em>/<br>public class CountDownButtonTimer extends CountDownTimer {</p>
-<p> public static final int TIME_COUNT_FUTURE = 60000;<br> public static final int TIME_COUNT_INTERVAL = 1000;</p>
-<p> // 用于存放 Context<br> private Context mContext;</p>
-<p> // 用于存放 按钮<br> private Button mButton;</p>
-<p> // 用于 存放 按钮Text<br> private String mOriginalText;</p>
-<p> // 用于 存放 按钮背景<br> private Drawable mOriginalBackground;</p>
-<p> // 用于 存放 按钮颜色<br> private int mOriginalTextColor;</p>
-<p> private Drawable mTickBackground;</p>
-<p> public CountDownButtonTimer() {</p>
-<pre><code>super(TIME_COUNT_FUTURE, TIME_COUNT_INTERVAL);
-</code></pre><p> }</p>
-<p> public CountDownButtonTimer(long millisInFuture, long countDownInterval) {</p>
-<pre><code>super(millisInFuture, countDownInterval);
-</code></pre><p> }</p>
-<p> /*<em>
-  </em></p>
-<ul>
-<li>初始化 Button及其相关内容<br>*</li>
-<li>@param context</li>
-<li><p>@param button<br>*/<br>public void init(Context context, Button button) {</p>
-<p> this.mContext = context;<br> this.mButton = button;<br> this.mOriginalText = mButton.getText().toString();<br> this.mOriginalBackground = mButton.getBackground();<br> this.mTickBackground = this.mOriginalBackground;<br> this.mOriginalTextColor = mButton.getCurrentTextColor();</p>
-<p>}</p>
-<p>public void setTickDrawable(Drawable tickDrawable) {<br> this.mTickBackground = tickDrawable;<br>}</p>
-<p>/*<em>
-</em></p>
+<li><p>倒计时按钮计时器</p>
 </li>
-<li><p>计时器结束的时<br><em>
-</em>/<br>@Override<br>public void onFinish() {<br> if (mContext != null &amp;&amp; mButton != null) {</p>
+<li></li>
+<li><p>@author CaMnter</p>
+</li>
+<li></li>
+<li><p>/<br>public class CountDownButtonTimer extends CountDownTimer {</p>
+<p>  public static final int TIME_COUNT_FUTURE = 60000;<br>  public static final int TIME_COUNT_INTERVAL = 1000;</p>
+<p>  // 用于存放 Context<br>  private Context mContext;</p>
+<p>  // 用于存放 按钮<br>  private Button mButton;</p>
+<p>  // 用于 存放 按钮Text<br>  private String mOriginalText;</p>
+<p>  // 用于 存放 按钮背景<br>  private Drawable mOriginalBackground;</p>
+<p>  // 用于 存放 按钮颜色<br>  private int mOriginalTextColor;</p>
+<p>  private Drawable mTickBackground;</p>
+<p>  public CountDownButtonTimer() {</p>
+<pre><code>super(TIME_COUNT_FUTURE, TIME_COUNT_INTERVAL);</code></pre><p>  }</p>
+<p>  public CountDownButtonTimer(long millisInFuture, long countDownInterval) {</p>
+<pre><code>super(millisInFuture, countDownInterval);</code></pre><p>  }</p>
+<p>  /**<br>   *</p>
+<ul>
+<li><p>初始化 Button及其相关内容</p>
+</li>
+<li></li>
+<li><p>@param context</p>
+</li>
+<li><p>@param button</p>
+</li>
+<li><p>/<br>public void init(Context context, Button button) {</p>
+<p>  this.mContext = context;<br>  this.mButton = button;<br>  this.mOriginalText = mButton.getText().toString();<br>  this.mOriginalBackground = mButton.getBackground();<br>  this.mTickBackground = this.mOriginalBackground;<br>  this.mOriginalTextColor = mButton.getCurrentTextColor();</p>
+<p>}</p>
+<p>public void setTickDrawable(Drawable tickDrawable) {<br>  this.mTickBackground = tickDrawable;<br>}</p>
+<p>/**</p>
+</li>
+<li></li>
+<li><p>计时器结束的时</p>
+</li>
+<li></li>
+<li><p>/<br>@Override<br>public void onFinish() {<br>  if (mContext != null &amp;&amp; mButton != null) {</p>
 <pre><code>mButton.setText(mOriginalText);
 mButton.setTextColor(mOriginalTextColor);
 mButton.setBackground(mOriginalBackground);
-mButton.setClickable(true);
-</code></pre><p> }</p>
+mButton.setClickable(true);</code></pre><p>  }</p>
 <p>}</p>
-<p>/*<em>
-</em></p>
+<p>/**</p>
 </li>
-<li><p>倒计时开始时<br><em>
-</em>/<br>@Override<br>public void onTick(long millisUntilFinished) {<br> if (mContext != null &amp;&amp; mButton != null) {</p>
+<li></li>
+<li><p>倒计时开始时</p>
+</li>
+<li></li>
+<li><p>/<br>@Override<br>public void onTick(long millisUntilFinished) {<br>  if (mContext != null &amp;&amp; mButton != null) {</p>
 <pre><code>mButton.setClickable(false);
 mButton.setBackground(mTickBackground);
 mButton.setTextColor(mContext.getResources().getColor(
         android.R.color.darker_gray));
-mButton.setText(millisUntilFinished / 1000 + &quot; 秒后可重新获取验证码&quot;);
-</code></pre><p> }</p>
+mButton.setText(millisUntilFinished / 1000 + &quot; 秒后可重新获取验证码&quot;);</code></pre><p>  }</p>
 <p>}</p>
 </li>
 </ul>

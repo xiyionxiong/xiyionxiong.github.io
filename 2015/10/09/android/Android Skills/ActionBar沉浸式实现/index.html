@@ -61,11 +61,11 @@
     <div class="lx-entry padding">
       <div>
         <p>studio，中引入沉浸式兼容库 </p>
-<pre><code>compile &apos;com.readystatesoftware.systembartint:systembartint:1.0.3&apos; 
-</code></pre><p>eclipse，可以导入相应的那个类。</p>
+<pre><code>compile &apos;com.readystatesoftware.systembartint:systembartint:1.0.3&apos; </code></pre><p>eclipse，可以导入相应的那个类。</p>
 <h3 id="第一类，兼容actionbar"><a href="#第一类，兼容actionbar" class="headerlink" title="第一类，兼容actionbar"></a>第一类，兼容actionbar</h3><ul>
 <li><p>第一步：设置activity主题android:theme=”@style/ActionBarTheme”</p>
 <a id="more"></a>
+
   <style name="ActionBarTheme" parent="android:Theme.Holo.Light.DarkActionBar">
     <!--API 14 themecustomizationscangohere. -->
     <item name="android:actionBarStyle">@style/ActionBarStyle</item>
@@ -102,14 +102,12 @@ SystemBarTintManager tintManager = new SystemBarTintManager(this);
 tintManager.setStatusBarTintEnabled(true);
 //设置沉浸的颜色        
 tintManager.setStatusBarTintResource(R.color.statusbar_bg);
-}
-</code></pre><ul>
+}</code></pre><ul>
 <li>第三步：设置适应windows，在布局文件设置</li>
 </ul>
 <pre><code>android:fitsSystemWindows=”true”
 如果不设置，应用的ui会顶上去，顶进system ui
-ok
-</code></pre><h3 id="第二类-没有actionbar的activity"><a href="#第二类-没有actionbar的activity" class="headerlink" title="第二类 没有actionbar的activity"></a>第二类 没有actionbar的activity</h3><ul>
+ok</code></pre><h3 id="第二类-没有actionbar的activity"><a href="#第二类-没有actionbar的activity" class="headerlink" title="第二类 没有actionbar的activity"></a>第二类 没有actionbar的activity</h3><ul>
 <li>第一步，设置主题，android:theme=”@style/FullBleedTheme”</li>
 </ul>
 <pre><code>&lt;stylename=&quot;FullBleedTheme&quot;parent=&quot;android:Theme.Holo.Light.NoActionBar&quot;&gt;
@@ -117,8 +115,7 @@ ok
 &lt;/style&gt;
 &lt;stylename=&quot;FullBleedTheme&quot;parent=&quot;android:Theme.Holo.Light.NoActionBar.TranslucentDecor&quot;&gt;
 &lt;!--API 19 themecustomizationscangohere. --&gt;
-&lt;/style&gt;
-</code></pre><blockquote>
+&lt;/style&gt;</code></pre><blockquote>
 <p>或者用toolbar只能设置Theme.AppCompat.NoActionBar主题</p>
 </blockquote>
 <pre><code>&lt;style name=&quot;AppThemeToolbar&quot; parent=&quot;Theme.AppCompat.NoActionBar&quot;&gt;
@@ -126,21 +123,18 @@ ok
     &lt;itemname=&quot;colorPrimaryDark&quot;&gt;#2196F3&lt;/item&gt;
     &lt;!--&lt;item name=&quot;colorPrimaryDark&quot;&gt;#1565C0&lt;/item&gt;--&gt;
     &lt;itemname=&quot;colorAccent&quot;&gt;#E91E63&lt;/item&gt;
-&lt;/style&gt;
-</code></pre><ul>
+&lt;/style&gt;</code></pre><ul>
 <li>第二步：同上一个第二步。<br>设置状态栏透明+颜色</li>
 </ul>
 <pre><code>mTintManager = new SystemBarTintManager(this);
 mTintManager.setStatusBarTintEnabled(true);
-mTintManager.setNavigationBarTintEnabled(true);  mTintManager.setStatusBarTintResource(R.color.statusbar_bg);
-</code></pre><ul>
+mTintManager.setNavigationBarTintEnabled(true);  mTintManager.setStatusBarTintResource(R.color.statusbar_bg);</code></pre><ul>
 <li>第三步：</li>
 </ul>
 <pre><code>android:fitsSystemWindows=”true”
 android:clipToPadding=”false
 &lt;item name=&quot;android:fitsSystemWindows&quot;&gt;true&lt;/item&gt;
-&lt;item name=&quot;android:clipToPadding&quot;&gt;false&lt;/item&gt;```
-</code></pre><h3 id="可能出现的问题"><a href="#可能出现的问题" class="headerlink" title="可能出现的问题"></a>可能出现的问题</h3><ul>
+&lt;item name=&quot;android:clipToPadding&quot;&gt;false&lt;/item&gt;```</code></pre><h3 id="可能出现的问题"><a href="#可能出现的问题" class="headerlink" title="可能出现的问题"></a>可能出现的问题</h3><ul>
 <li>android:fitsSystemWindows属性的奇怪问题</li>
 </ul>
 <blockquote>

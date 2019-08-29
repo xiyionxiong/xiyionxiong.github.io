@@ -64,7 +64,9 @@
 <p>Google前几天刚发布了<a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范第2季</a>的 课程，一共20个短视频，包括的内容大致有：电量优化、网络优化、Android Wear上如何做优化、使用对象池来提高效率、LRU Cache、Bitmap的缩放、缓存、重用、PNG压缩、自定义View的性能、提升设置alpha之后View的渲染性能，以及Lint、 StictMode等工具的使用技巧。 下面是对这些课程的总结摘要，认知有限，理解偏差的地方请多多指教！</p>
 <p><img src="/images/35C6E464AD6DAF773B756644C64CE853.jpg" alt></p>
 <p><strong>1) Battery Drain and Networking</strong></p>
-<p>对 于手机程序，网络操作相对来说是比较耗电的行为。优化网络操作能够显著节约电量的消耗。在性能优化第1季里面有提到过，手机硬件的各个模块的耗电量是不一 样的，其中移动蜂窝模块对电量消耗是比较大的，另外蜂窝模块在不同工作强度下，对电量的消耗也是有差异的。当程序想要执行某个网络请求之前，需要先唤醒设 备，然后发送数据请求，之后等待返回数据，最后才慢慢进入休眠状态。这个流程如下图所示：<br><a id="more"></a><br><img src="/images/907BD199535B7B1A9E9514CEDB57A50C.jpg" alt></p>
+<p>对 于手机程序，网络操作相对来说是比较耗电的行为。优化网络操作能够显著节约电量的消耗。在性能优化第1季里面有提到过，手机硬件的各个模块的耗电量是不一 样的，其中移动蜂窝模块对电量消耗是比较大的，另外蜂窝模块在不同工作强度下，对电量的消耗也是有差异的。当程序想要执行某个网络请求之前，需要先唤醒设 备，然后发送数据请求，之后等待返回数据，最后才慢慢进入休眠状态。这个流程如下图所示：</p>
+<a id="more"></a>
+<p><img src="/images/907BD199535B7B1A9E9514CEDB57A50C.jpg" alt></p>
 <p>在上面那个流程中，蜂窝模块的电量消耗差异如下图所示：</p>
 <p><img src="/images/4428194A93D3D6F48A4CD58CCDC71D27.jpg" alt></p>
 <p>从图示中可以看到，激活瞬间，发送数据的瞬间，接收数据的瞬间都有很大的电量消耗，所以，我们应该从如何传递网络数据以及何时发起网络请求这两个方面来着手优化。</p>
@@ -90,7 +92,7 @@
 <li>另外我们可以针对Sensor的数据做批量处理，待数据累积一定次数或者某个程度的时候才更新到UI上。</li>
 <li>最后当Watch与Phone连接起来的时候，可以把某些复杂操作的事情交给Phone来执行，Watch只需要等待返回的结果。</li>
 </ul>
-<p>更对关于Sensors的知识，可以点击<a href="https://www.youtube.com/watch?v=82M8DmFz4P8&amp;index=2&amp;list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">这里</a>。</p>
+<p>更对关于Sensors的知识，可以点击<a href="https://www.youtube.com/watch?v=82M8DmFz4P8&index=2&list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">这里</a>。</p>
 <p><strong>3) Smooth Android Wear Animation</strong></p>
 <p>Android Material Design风格的应用采用了大量的动画来进行UI切换，优化动画的性能不仅能够提升用户体验还可以减少电量的消耗，下面会介绍一些简单易行的方法。</p>
 <p>在Android里面一个相对操作比较繁重的事情是对Bitmap进行旋转，缩放，裁剪等等。例如在一个圆形的钟表图上，我们把时钟的指针抠出来当做单独的图片进行旋转会比旋转一张完整的圆形图的所形成的帧率要高56%。</p>
@@ -132,7 +134,7 @@
 <p><strong>8) Using LINT for Performance Tips</strong></p>
 <p>Lint是Android提供的一个静态扫描应用源码并找出其中的潜在问题的一个强大的工具。</p>
 <p><img src="/images/8DD45B189853B6E3929F45F67DC2BC89.jpg" alt></p>
-<p>例 如，如果我们在onDraw方法里面执行了new对象的操作，Lint就会提示我们这里有性能问题，并提出对应的建议方案。Lint已经集成到 Android Studio中了，我们可以手动去触发这个工具，点击工具栏的Analysis -> Inspect Code，触发之后，Lint会开始工作，并把结果输出到底部的工具栏，我们可以逐个查看原因并根据指示做相应的优化修改。</p>
+<p>例 如，如果我们在onDraw方法里面执行了new对象的操作，Lint就会提示我们这里有性能问题，并提出对应的建议方案。Lint已经集成到 Android Studio中了，我们可以手动去触发这个工具，点击工具栏的Analysis -&gt; Inspect Code，触发之后，Lint会开始工作，并把结果输出到底部的工具栏，我们可以逐个查看原因并根据指示做相应的优化修改。</p>
 <p>Lint的功能非常强大，他能够扫描各种问题。当然我们可以通过Android Studio设置找到Lint，对Lint做一些定制化扫描的设置，可以选择忽略掉那些不想Lint去扫描的选项，我们还可以针对部分扫描内容修改它的提示优先级。</p>
 <p>建议把与内存有关的选项中的严重程度标记为红色的Error，对于Layout的性能问题标记为黄色Warning。 </p>
 <p><strong>9) Hidden Cost of Transparency</strong></p>
@@ -162,20 +164,20 @@
 <p>Android提供了一个叫做Strict Mode的工具，我们可以通过手机设置里面的开发者选项，打开Strict Mode选项，如果程序存在潜在的隐患，屏幕就会闪现红色。我们也可以通过<a href="http://developer.android.com/reference/android/os/StrictMode.html" target="_blank" rel="noopener">StrictMode</a> API在代码层面做细化的跟踪，可以设置StrictMode监听那些潜在问题，出现问题时如何提醒开发者，可以对屏幕闪红色，也可以输出错误日志。下面是官方的代码示例：</p>
 <p><code>public void onCreate() {</code></p>
 <p><code>if</code> <code>(DEVELOPER_MODE) {</code></p>
-<p><code>StrictMode.setThreadPolicy(`</code>new<code></code>StrictMode.ThreadPolicy.Builder()`</p>
+<p><code>StrictMode.setThreadPolicy(``new</code> <code>StrictMode.ThreadPolicy.Builder()</code></p>
 <p><code>.detectDiskReads()</code></p>
 <p><code>.detectDiskWrites()</code></p>
-<p><code>.detectNetwork()   `</code>// or .detectAll() for all detectable problems`</p>
+<p><code>.detectNetwork()   ``// or .detectAll() for all detectable problems</code></p>
 <p><code>.penaltyLog()</code></p>
 <p><code>.build());</code></p>
-<p><code>StrictMode.setVmPolicy(`</code>new<code></code>StrictMode.VmPolicy.Builder()`</p>
+<p><code>StrictMode.setVmPolicy(``new</code> <code>StrictMode.VmPolicy.Builder()</code></p>
 <p><code>.detectLeakedSqlLiteObjects()</code></p>
 <p><code>.detectLeakedClosableObjects()</code></p>
 <p><code>.penaltyLog()</code></p>
 <p><code>.penaltyDeath()</code></p>
 <p><code>.build());</code></p>
 <p><code>}</code></p>
-<p><code>super`</code>.onCreate();`</p>
+<p><code>super``.onCreate();</code></p>
 <p><code>}</code></p>
 <p><strong>12) Custom Views and Performance</strong></p>
 <p>Android系统有提供超过70多种标准的View，例如TextView，ImageView，Button等等。在某些时候，这些标准的View无法满足我们的需要，那么就需要我们自己来实现一个View，这节会介绍如何优化自定义View的性能。</p>
@@ -232,7 +234,7 @@
 <p><img src="/images/5BDAABD8649067D44762319217FB99DC.jpg" alt></p>
 <p>使用inBitmap需要注意几个限制条件：</p>
 <ul>
-<li>在SDK 11 -> 18之间，重用的bitmap大小必须是一致的，例如给inBitmap赋值的图片大小为100-100，那么新申请的bitmap必须也为 100-100才能够被重用。从SDK 19开始，新申请的bitmap大小必须小于或者等于已经赋值过的bitmap大小。</li>
+<li>在SDK 11 -&gt; 18之间，重用的bitmap大小必须是一致的，例如给inBitmap赋值的图片大小为100-100，那么新申请的bitmap必须也为 100-100才能够被重用。从SDK 19开始，新申请的bitmap大小必须小于或者等于已经赋值过的bitmap大小。</li>
 <li>新申请的bitmap与旧的bitmap必须有相同的解码格式，例如大家都是8888的，如果前面的bitmap是8888，那么就不能支持4444与565格式的bitmap了。</li>
 </ul>
 <p>我们可以创建一个包含多种典型可重用bitmap的对象池，这样后续的bitmap创建都能够找到合适的“模板”去进行重用。如下图所示：</p>

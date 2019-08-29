@@ -79,8 +79,8 @@
  * @param parent The parent that this view will eventually be attached to
  * @return A View corresponding to the data at the specified position.
  */
-View getView(int position, View convertView, ViewGroup parent);
-</code></pre><a id="more"></a>
+View getView(int position, View convertView, ViewGroup parent);</code></pre><a id="more"></a>
+
 <p>看过精致Adapter都知道，ListView的一个Item移出屏幕的范围，和一个Item进入屏幕的范围的时候，Adapter的getView(int position, View convertView, ViewGroup parent)里都能得到这个Item的View，也就是上述所说的旧视图（convertView） 。ListView的的Item如果样式都是一样的话，我们可以拿到旧视图的View，然后根据ViewId上的去取得组件并修改其内容，然后return该View。达到复用的效果。所以这里，涉及到了ViewHolder去保存该View上组件的各个ViewId，并且将ViewHolder继续保存到return的convertView的tag中，以供下一次拿到convertView时取得，规避了ViewHolder的不断创建，也实现了ViewHolder的复用。</p>
 <p>其实findViewById()的性能是很低的，引入ViewHolder的目的也是为减少getView()时findViewById()的次数。</p>
 <p>万能ViewHolder的原理</p>
@@ -102,8 +102,7 @@ View getView(int position, View convertView, ViewGroup parent);
         }
         return (T) view;
     }
-}
-</code></pre><p>在你的BaseListAdapter中可以这么实现</p>
+}</code></pre><p>在你的BaseListAdapter中可以这么实现</p>
 <pre><code>public abstract View getView(int position, View convertView, ViewHolder viewHolder);
 
 @Override
@@ -123,8 +122,7 @@ public final View getView(int position, View convertView, ViewGroup parent) {
     }
     return convertView;
 
-}
-</code></pre><p>这样的话可以让BaseListAdapter的子类强制继承getView然后与BaseListAdapter的getView对接后续操作。相当于执行了：BaseListAdapter.getView() -&gt; BaseListAdapter子类.getView() 。</p>
+}</code></pre><p>这样的话可以让BaseListAdapter的子类强制继承getView然后与BaseListAdapter的getView对接后续操作。相当于执行了：BaseListAdapter.getView() -&gt; BaseListAdapter子类.getView() 。</p>
 
       </div>
     </div>

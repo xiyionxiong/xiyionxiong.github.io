@@ -104,22 +104,19 @@
 </ol>
 <p>在实际写代码之前，首先我们还是需要做一些准备工作：</p>
 <p>下载开发包：Android官方下载页面<br>配置系统环境变量<br>下载好开发包之后，直接解压到任意目录，然后需要配置一下系统环境变量，之所以要配置环境变量，是为了方便使用命令ndk-build脚本进行编译。配置参考如下：</p>
-<pre><code># 在.bash_profile中配置如下代码
-</code></pre><p>export ANDROID_NDK/Users/liangqi/android-ndk<br>export PATH$ANDROID_NDK$PATH</p>
-<pre><code># 然后执行如下代码，更新配置文件
-</code></pre><p>source .bash_profile<br>其实编译C/C++代码不一定在AndroidStudio中，如果配置好环境变量，直接使用进入项目中的目录执行ndk-build命令即可在当前目录下生成一个的目录，里面存放了不同 平台的包，当然运行这个命令的前提是，这个目录下至少得有一个Android.mk文件，如果需要指定具体的编译平台，那么还需要添加一个Application.mk文件，当然，如果命令行让你头疼，那么你可以采用gradle的方式来解决这些问题，接下来我们将分别介绍这些使用方式。<br></p>
+<pre><code># 在.bash_profile中配置如下代码</code></pre><p>export ANDROID_NDK/Users/liangqi/android-ndk<br>export PATH$ANDROID_NDK$PATH</p>
+<pre><code># 然后执行如下代码，更新配置文件</code></pre><p>source .bash_profile<br>其实编译C/C++代码不一定在AndroidStudio中，如果配置好环境变量，直接使用进入项目中的目录执行ndk-build命令即可在当前目录下生成一个的目录，里面存放了不同 平台的包，当然运行这个命令的前提是，这个目录下至少得有一个Android.mk文件，如果需要指定具体的编译平台，那么还需要添加一个Application.mk文件，当然，如果命令行让你头疼，那么你可以采用gradle的方式来解决这些问题，接下来我们将分别介绍这些使用方式。</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2016/04/06/android/RxJava/RxJava & RxAndroid备忘/">RxJava & RxAndroid备忘</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-04-06 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><pre><code>来源 &lt;http://chenqichao.me/2015/07/01/119-Mastering-RxAndroid/&gt; 
-</code></pre></p><p>今天在刷G+的时候看到Dave Smith推荐了一个视频<a href="https://www.youtube.com/watch?v=k3D0cWyNno4" target="_blank" rel="noopener">《Learning RxJava (for Android) by example》</a>点进去看了一下，原来是位熟悉的”阿三哥”，视频封面如下：（没有歧视的意思，不要喷我啊~，为什么感到熟悉？接着往下看）</p>
+      <p><pre><code>来源 &lt;http://chenqichao.me/2015/07/01/119-Mastering-RxAndroid/&gt; </code></pre></p><p>今天在刷G+的时候看到Dave Smith推荐了一个视频<a href="https://www.youtube.com/watch?v=k3D0cWyNno4" target="_blank" rel="noopener">《Learning RxJava (for Android) by example》</a>点进去看了一下，原来是位熟悉的”阿三哥”，视频封面如下：（没有歧视的意思，不要喷我啊~，为什么感到熟悉？接着往下看）</p>
 <p><a href="http://7mnllc.com1.z0.glb.clouddn.com/kp.png" target="_blank" rel="noopener"></a></p>
 <p><a href="http://7mnllc.com1.z0.glb.clouddn.com/kp.png" target="_blank" rel="noopener"><img src="http://7mnllc.com1.z0.glb.clouddn.com/kp.png" alt></a></p>
 <p>几乎同时也看到了JetBrains在G+也推荐了篇在Medium上的博文<a href="https://medium.com/@ahmedrizwan/rxandroid-and-kotlin-part-1-f0382dc26ed8" target="_blank" rel="noopener">《RxAndroid And Kotlin (Part 1)》</a>，然后想到前几天转了InfoQ上的<a href="http://www.infoq.com/cn/news/2015/06/Android-JVM-JetBrains-Kotlin" target="_blank" rel="noopener">《Kotlin：Android世界的Swift》</a>，再加上隐约记得之前在AndroidCN看到过<a href="http://weibo.com/brucefromsdu" target="_blank" rel="noopener">@hi大头鬼hi</a>写的《深入浅出RxJava》，最后还想到了这篇<a href="http://www.jianshu.com/p/a7fadc79e0fb" target="_blank" rel="noopener">《Kotlin在Android工程中的应用》</a>，Holy shit…大脑能瞬间闪过这么多关联的文章和博文，于是把这些资料找了出来，觉得有必要把这些内容记下来，<br>方便日后查阅，因此有了今天这篇文章，取名叫《RxJava &amp; RxAndroid备忘》是希望列出的参考资料能让大家尽快熟悉和掌握了RxJava和RxAndroid。</p>
-<p>等等..还没解释为什么对这位阿三哥的声音感到熟悉呢? 其实是因为之前听过也推荐过Kaushik Gopal和他的小伙伴Donn Felker录制的关于Android开发的Podcast《FragmentedPodcast》，每一集都很精彩（目前更新到第十期），感兴趣的可以关注他们。唯一的需要克服的就是三哥的英语口音…另外，真心觉得这种类型的Podcast很不错，类似还有官方团队Chet和Tor录制的《Android Backstage》，虽然国内也有类似《内核恐慌》的技术播客，但只是针对Android或者iOS的目前并没有发现（如果你有推荐可以直接评论或者联系我），再者就是希望以后开始工作了可以找到同样感兴趣的人，可以一起来做这样有趣的事情。<br></p>
+<p>等等..还没解释为什么对这位阿三哥的声音感到熟悉呢? 其实是因为之前听过也推荐过Kaushik Gopal和他的小伙伴Donn Felker录制的关于Android开发的Podcast《FragmentedPodcast》，每一集都很精彩（目前更新到第十期），感兴趣的可以关注他们。唯一的需要克服的就是三哥的英语口音…另外，真心觉得这种类型的Podcast很不错，类似还有官方团队Chet和Tor录制的《Android Backstage》，虽然国内也有类似《内核恐慌》的技术播客，但只是针对Android或者iOS的目前并没有发现（如果你有推荐可以直接评论或者联系我），再者就是希望以后开始工作了可以找到同样感兴趣的人，可以一起来做这样有趣的事情。</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -138,8 +135,7 @@
 `&lt;groupId&gt;com.netflix.rxjava&lt;/groupId&gt;`
 `&lt;artifactId&gt;rxjava-android&lt;/artifactId&gt;`
 `&lt;version&gt;0.14.6&lt;/version&gt;`s
-`&lt;/dependency&gt;`
-</code></pre><p></p>
+`&lt;/dependency&gt;`</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -152,8 +148,7 @@
 <pre><code>retrofitService.getImage(url)
 .subscribeOn(Schedulers.io())
 .observeOn(AndroidSchedulers.mainThread())
-.subscribe(bitmap -&gt; myImageView.setImageBitmap(bitmap));
-</code></pre><p></p>
+.subscribe(bitmap -&gt; myImageView.setImageBitmap(bitmap));</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -177,8 +172,7 @@
     public void onCompleted() { System.out.println(``&quot;Completed!&quot;``); }        
     @Override
     public void onError(Throwable e) { System.out.println(``&quot;Ouch!&quot;``); }
-});
-</code></pre><p></p>
+});</code></pre><p></p>
     </div>
   </div>
  

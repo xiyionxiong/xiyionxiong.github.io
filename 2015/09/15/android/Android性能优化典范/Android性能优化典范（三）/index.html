@@ -110,7 +110,7 @@
 <p>Android系统提供了一些回调来通知应用的内存使用情况，通常来说，当所有的background应用都被kill掉的时候，forground应用会收到onLowMemory()的回调。在这种情况下，需要尽快释放当前应用的非必须内存资源，从而确保系统能够稳定继续运行。Android系统还提供了onTrimMemory()的回调，当系统内存达到某些条件的时候，所有正在运行的应用都会收到这个回调，同时在这个回调里面会传递以下的参数，代表不同的内存使用情况，下图介绍了各种不同的回调参数：</p>
 <p><img src="/images/C9F5B4B5C46678F2C7FC85FE7430B195.jpg" alt></p>
 <p>关于每个参数的更多介绍，请参考《 <a href="http://hukai.me/android-training-managing_your_app_memory/" target="_blank" rel="noopener">Android Training - 管理应用的内存</a>》，另外onTrimMemory()的回调可以发生在Application，Activity，Fragment，Service，Content Provider。</p>
-<p>从Android 4.4开始，ActivityManager提供了isLowRamDevice()的API，通常指的是Heap Size低于512M或者屏幕大小\&lt;=800*480的设备。</p>
+<p>从Android 4.4开始，ActivityManager提供了isLowRamDevice()的API，通常指的是Heap Size低于512M或者屏幕大小&lt;=800*480的设备。</p>
 <h2 id="6-DO-NOT-LEAK-VIEWS"><a href="#6-DO-NOT-LEAK-VIEWS" class="headerlink" title="6) DO NOT LEAK VIEWS"></a>6) DO NOT LEAK VIEWS</h2><p>内存泄漏的概念，下面一张图演示下：</p>
 <p><img src="/images/15F5750E255B7BC3D343228FC18D25E5.jpg" alt></p>
 <p>通常来说，View会保持Activity的引用，Activity同时还和其他内部对象也有可能保持引用关系。当屏幕发生旋转的时候，activity很容易发生泄漏，这样的话，里面的view也会发生泄漏。Activity以及view的泄漏是非常严重的，为了避免出现泄漏，请特别留意以下的规则：</p>

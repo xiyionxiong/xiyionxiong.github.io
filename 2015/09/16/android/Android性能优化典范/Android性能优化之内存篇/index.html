@@ -78,8 +78,8 @@
 <p>发生内存泄漏会导致Memory Generation中的剩余可用Heap Size越来越小，这样会导致频繁触发GC，更进一步引起性能问题。</p>
 <p>举例内存泄漏，下面<code>init()</code>方法来自某个自定义View：</p>
 <p><code>private void init() {</code></p>
-<p><code>ListenerCollector collector = `</code>new<code></code>ListenerCollector();`</p>
-<p><code>collector.setListener(`</code>this<code></code>, mListener);`</p>
+<p><code>ListenerCollector collector = ``new</code> <code>ListenerCollector();</code></p>
+<p><code>collector.setListener(``this``, mListener);</code></p>
 <p><code>}</code></p>
 <p>上面的例子容易存在内存泄漏，如果activity因为设备翻转而重新创建，自定义的View会自动重新把新创建出来的mListener给绑定到ListenerCollector中，但是当activity被销毁的时候，mListener却无法被回收了。</p>
 <h3 id="4-Heap-Viewer-Walkthrough"><a href="#4-Heap-Viewer-Walkthrough" class="headerlink" title="4)Heap Viewer Walkthrough"></a>4)Heap Viewer Walkthrough</h3><p>下图演示了Android Tools里面的Heap Viewer的功能，我们可以看到当前进程中的Heap Size的情况，分别有哪些类型的数据，占比是多少。</p>

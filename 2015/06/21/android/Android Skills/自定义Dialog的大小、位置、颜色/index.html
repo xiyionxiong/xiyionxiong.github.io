@@ -86,9 +86,9 @@ Dialog dialog = new Dialog(this);
 // dialog.setContentView(v);
 dialog.setContentView(R.layout.dialog_layout);
 
-dialog.setTitle(&quot;Custom Dialog&quot;);
-</code></pre><hr>
+dialog.setTitle(&quot;Custom Dialog&quot;);</code></pre><hr>
 <a id="more"></a>
+
 <pre><code>/*
 * 获取圣诞框的窗口对象及参数对象以修改对话框的布局设置,
 * 可以直接调用getWindow(),表示获得这个Activity的Window
@@ -138,8 +138,7 @@ dialogWindow.setAttributes(lp);
 dialog.show();
 
 }
-}
-</code></pre><blockquote>
+}</code></pre><blockquote>
 <p>布局文件:<br>main.xml</p>
 </blockquote>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
@@ -180,18 +179,14 @@ android:layout_height=&quot;wrap_content&quot;
 android:text=&quot;A Dialog&quot;
 android:textColor=&quot;#FFF&quot; /&gt;
 
-&lt;/LinearLayout&gt;
-</code></pre><blockquote>
+&lt;/LinearLayout&gt;</code></pre><blockquote>
 <p>取消自定义dialog的标题栏</p>
 </blockquote>
 <p>Android中取消自定义dialog的标题栏, 只需在</p>
-<pre><code>dialog.setContentView(R.layout.popwin_chooseversion);
-</code></pre><p>前面加一句:</p>
-<pre><code>dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-</code></pre><p>加在这句之后会产生异常.</p>
+<pre><code>dialog.setContentView(R.layout.popwin_chooseversion);</code></pre><p>前面加一句:</p>
+<pre><code>dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);</code></pre><p>加在这句之后会产生异常.</p>
 <p>还要导入</p>
-<pre><code>import android.view.Window;
-</code></pre><p>包.</p>
+<pre><code>import android.view.Window;</code></pre><p>包.</p>
 <h3 id="android-如何让自定义dialog的宽度充满整个屏幕"><a href="#android-如何让自定义dialog的宽度充满整个屏幕" class="headerlink" title="android 如何让自定义dialog的宽度充满整个屏幕"></a>android 如何让自定义dialog的宽度充满整个屏幕</h3><h4 id="方案："><a href="#方案：" class="headerlink" title="方案："></a>方案：</h4><p>  通过设置Dialog的样式实现</p>
 <h5 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h5><blockquote>
 <p>1、添加style</p>
@@ -199,14 +194,12 @@ android:textColor=&quot;#FFF&quot; /&gt;
 <pre><code>&lt;style name=&quot;Dialog_FS&quot;&gt;
 &lt;item name=&quot;android:windowFullscreen&quot;&gt;true&lt;/item&gt; //设置填充父窗体
 &lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt; //设置隐藏标题栏
-&lt;/style&gt;
-</code></pre><blockquote>
+&lt;/style&gt;</code></pre><blockquote>
 <p>2、代码里面设置dialog的样式</p>
 </blockquote>
 <pre><code>Dialog dialog = new Dialog(this,R.style.Dialog_FS); //设置全屏样式
 dialog.setContentView(R.layout.main); //设置dialog的布局
-dialog.show();//显示dialog界面
-</code></pre><blockquote>
+dialog.show();//显示dialog界面</code></pre><blockquote>
 <p>3.style文件具体</p>
 </blockquote>
 <pre><code>  &lt;style name=&quot;iphone_progress_dialog&quot; parent=&quot;@android:style/Theme.Dialog&quot;&gt;
@@ -216,8 +209,7 @@ dialog.show();//显示dialog界面
      &lt;item name=&quot;android:windowNoTitle&quot;&gt;true&lt;/item&gt;
      &lt;item name=&quot;android:backgroundDimEnabled&quot;&gt;false&lt;/item&gt;&lt;!-- dim:模糊的 阴影效果 --&gt;
      &lt;item name=&quot;android:windowBackground&quot;&gt;@drawable/load_bg&lt;/item&gt;&lt;!-- 背景图片的大小也影响窗口的大小 --&gt;
-&lt;/style&gt;
-</code></pre>
+&lt;/style&gt;</code></pre>
       </div>
     </div>
   </div>

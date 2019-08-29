@@ -77,8 +77,7 @@
     public void onCompleted() { System.out.println(``&quot;Completed!&quot;``); }        
     @Override
     public void onError(Throwable e) { System.out.println(``&quot;Ouch!&quot;``); }
-});
-</code></pre><a id="more"></a>
+});</code></pre><a id="more"></a>
 <p>代码中的potentialException() 和 anotherPotentialException()有可能会抛出异常。每一个Observerable对象在终结的时候都会调用 onCompleted()或者onError()方法，所以Demo中会打印”Completed!”或者”Ouch!”。</p>
 <p>这种模式有以下几个优点：</p>
 <p>1.只要有异常发生onError()一定会被调用</p>
@@ -100,11 +99,11 @@
 <p>最棒的是我可以把subscribeOn()和observerOn()添加到任何Observable对象上。这两个也是操作符！。我不需要关心Observable对象以及它上面有哪些操作符。仅仅运用这两个操作符就可以实现在不同的线程中调度。</p>
 <p>如果使用AsyncTask或者其他类似的，我将不得不仔细设计我的代码，找出需要并发执行的部分。使用RxJava，我可以保持代码不变，仅仅在需要并发的时候调用这两个操作符就可以。</p>
 <h2 id="订阅（Subscriptions）"><a href="#订阅（Subscriptions）" class="headerlink" title="订阅（Subscriptions）"></a>订阅（Subscriptions）</h2><p>当调用Observable.subscribe()，会返回一个Subscription对象。这个对象代表了被观察者和订阅者之间的联系。</p>
-<p><code>ubscription subscription = Observable.just(`</code>“Hello, World!”<code></code>)`</p>
+<p><code>ubscription subscription = Observable.just(``&quot;Hello, World!&quot;``)</code></p>
 <p><code>.subscribe(s -&gt; System.out.println(s));</code></p>
 <p>你可以在后面使用这个Subscription对象来操作被观察者和订阅者之间的联系.</p>
 <p><code>subscription.unsubscribe();</code></p>
-<p><code>System.out.println(`</code>“Unsubscribed=”<code></code>+ subscription.isUnsubscribed());`</p>
+<p><code>System.out.println(``&quot;Unsubscribed=&quot;</code> <code>+ subscription.isUnsubscribed());</code></p>
 <p><code>// Outputs &quot;Unsubscribed=true&quot;</code></p>
 <p>RxJava的另外一个好处就是它处理unsubscribing的时候，会停止整个调用链。如果你使用了一串很复杂的操作符，调用unsubscribe将会在他当前执行的地方终止。不需要做任何额外的工作！</p>
 <p>记住这个系列仅仅是对RxJava的一个入门介绍。RxJava中有更多的我没介绍的功能等你探索（比如backpressure）。当然我也不是所有的代码都使用响应式的方式–仅仅当代码复杂到我想将它分解成简单的逻辑的时候，我才使用响应式代码。</p>
