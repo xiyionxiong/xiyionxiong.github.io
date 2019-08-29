@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>熊猫博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="一只熊猫🐼">
-  <meta name="keywords" content="">
+  <meta name="keywords" content>
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
   <script id="hexo-configurations">
   var CONFIG = {
@@ -61,35 +61,48 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2><a href="/2014/05/13/android/Android Skills/Android String相关类性能测试/">String相关类性能测试</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-05-13 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
+      <p></p><p>String、StringBuffer、StringBuilder</p>
+<pre><code>String： String是一个不可变的对象，每次对String类的改变实质都是新生成了一个新的String，然后把指针指向新String对象。每次生成对象都会对系统性能产生影响，速度会相当慢。
+
+StringBuffer： 在字符改变的时候，不会产生新的对象，线程安全的可变字符序列。
+
+StringBuilder： 同StringBuffer类似，线程不安全的可变字符序列。
+</code></pre><p></p>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2><a href="/2014/05/11/android/Android Skills/Android ImageView ScaleType属性/">ImageView ScaleType属性</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-05-11 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>原图<br><img src="http://img.blog.csdn.net/20150913233900119" alt=""></p></p>
+      <p></p><p>原图<br><img src="http://img.blog.csdn.net/20150913233900119" alt></p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/05/05/android/Android Skills/Android EditText 技巧/">图像、背景、View更新、布局、内存</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-05-05 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><h3 id="解决EditView抢焦点事件"><a href="#解决EditView抢焦点事件" class="headerlink" title="解决EditView抢焦点事件"></a>解决EditView抢焦点事件</h3><p>在最外层布局加上</p>
+      <p></p><h3 id="解决EditView抢焦点事件"><a href="#解决EditView抢焦点事件" class="headerlink" title="解决EditView抢焦点事件"></a>解决EditView抢焦点事件</h3><p>在最外层布局加上</p>
 <pre><code>android:focusable=&quot;true&quot;
 android:focusableInTouchMode=&quot;true&quot;
-</code></pre></p>
+</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/02/28/linux/redis/">centos6安装redis-2.8.19</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-02-28 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/linux/">linux</a>,<a class="category-link" href="/categories/linux/redis/">redis</a></span>
-      <p><h2 id="centos6安装redis-2-8-19"><a href="#centos6安装redis-2-8-19" class="headerlink" title="centos6安装redis-2.8.19"></a>centos6安装redis-2.8.19</h2><h3 id="1、检查安装依赖程序"><a href="#1、检查安装依赖程序" class="headerlink" title="1、检查安装依赖程序"></a>1、检查安装依赖程序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc-c++</span><br><span class="line">yum install -y tcl</span><br><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
+      <p></p><h2 id="centos6安装redis-2-8-19"><a href="#centos6安装redis-2-8-19" class="headerlink" title="centos6安装redis-2.8.19"></a>centos6安装redis-2.8.19</h2><h3 id="1、检查安装依赖程序"><a href="#1、检查安装依赖程序" class="headerlink" title="1、检查安装依赖程序"></a>1、检查安装依赖程序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc-c++</span><br><span class="line">yum install -y tcl</span><br><span class="line">yum install wget</span><br></pre></td></tr></table></figure>
 <h3 id="2、获取安装文件"><a href="#2、获取安装文件" class="headerlink" title="2、获取安装文件"></a>2、获取安装文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-2.8.13.tar.gz</span><br></pre></td></tr></table></figure>
-<h3 id="3、解压文件"><a href="#3、解压文件" class="headerlink" title="3、解压文件"></a>3、解压文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf redis-2.8.19.tar.gz</span><br><span class="line">mv redis-2.8.19 /usr/local/redis</span><br></pre></td></tr></table></figure></p>
+<h3 id="3、解压文件"><a href="#3、解压文件" class="headerlink" title="3、解压文件"></a>3、解压文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf redis-2.8.19.tar.gz</span><br><span class="line">mv redis-2.8.19 /usr/local/redis</span><br></pre></td></tr></table></figure><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/02/24/随笔/Lantern(灯笼)使用实例/">Lantern(灯笼)使用实例</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-02-24 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
-      <p><h3 id="申请Lantern"><a href="#申请Lantern" class="headerlink" title="申请Lantern"></a>申请Lantern</h3><ul>
+      <p></p><h3 id="申请Lantern"><a href="#申请Lantern" class="headerlink" title="申请Lantern"></a>申请Lantern</h3><ul>
 <li>首先，你需要有一个Google帐户的邮箱地址。</li>
 </ul>
 <p>进入到Lantern官网 <a href="https://www.getlantern.org/" target="_blank" rel="noopener">https://www.getlantern.org/</a> ,按照提示输入邮箱地址，索取邀请函。</p>
@@ -103,14 +116,14 @@ android:focusableInTouchMode=&quot;true&quot;
     <div>
       <h2><a href="/2014/02/19/android/Android Skills/Context/">Android Context 到底是什么？</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-02-19 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><h3 id="什么是Context？"><a href="#什么是Context？" class="headerlink" title="什么是Context？"></a>什么是Context？</h3><p>一个Context意味着一个场景，一个场景就是我们和软件进行交互的一个过程。比如当你使用微信的时候，场景包括聊天界面、通讯录、朋友圈，以及背后的一些数据。<br></p>
+      <p></p><h3 id="什么是Context？"><a href="#什么是Context？" class="headerlink" title="什么是Context？"></a>什么是Context？</h3><p>一个Context意味着一个场景，一个场景就是我们和软件进行交互的一个过程。比如当你使用微信的时候，场景包括聊天界面、通讯录、朋友圈，以及背后的一些数据。<br></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/02/17/android/小知识点/Android开发中一些被冷落但却很有用的类和方法/">Android开发中一些被冷落但却很有用的类和方法</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-02-17 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><h3 id="MediaMetadataRetriever"><a href="#MediaMetadataRetriever" class="headerlink" title="MediaMetadataRetriever"></a>MediaMetadataRetriever</h3><p>顾名思义，就是用来获取媒体文件一些相关信息的类。包括一首歌的标题，作者，专辑封面和名称，时长，比特率等等。如果是视频的话，可以获取视频的长宽，预览图。</p>
+      <p></p><h3 id="MediaMetadataRetriever"><a href="#MediaMetadataRetriever" class="headerlink" title="MediaMetadataRetriever"></a>MediaMetadataRetriever</h3><p>顾名思义，就是用来获取媒体文件一些相关信息的类。包括一首歌的标题，作者，专辑封面和名称，时长，比特率等等。如果是视频的话，可以获取视频的长宽，预览图。</p>
 <pre><code>http://developer.android.com/intl/zh-cn/reference/android/media/MediaMetadataRetriever.html
 </code></pre><h3 id="TouchDelegate"><a href="#TouchDelegate" class="headerlink" title="TouchDelegate`"></a>TouchDelegate`</h3><p>用于更改View的触摸区域。场景：比如在RecyclerView的ItemView里包含了CheckBox组件, 然后想实现点击ItemView的时候，也可以触发CheckBox，就可以使用此类。</p>
 <pre><code>http://developer.android.com/intl/zh-cn/training/gestures/viewgroup.html#delegate
@@ -118,14 +131,14 @@ android:focusableInTouchMode=&quot;true&quot;
 <pre><code>http://developer.android.com/intl/zh-cn/reference/android/animation/ArgbEvaluator.html
 </code></pre><h3 id="Palette"><a href="#Palette" class="headerlink" title="Palette"></a>Palette</h3><p>用于提取一张图片的颜色。</p>
 <pre><code>http://developer.android.com/intl/zh-cn/reference/android/support/v7/graphics/Palette.html
-</code></pre></p>
+</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/02/12/android/小知识点/Android Studio的快捷键/">Android Studio 的快捷键</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-02-12 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><h4 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h4><pre><code>按键                        说明
+      <p></p><h4 id="IDE"><a href="#IDE" class="headerlink" title="IDE"></a>IDE</h4><pre><code>按键                        说明
 F1                            帮助
 Alt+F1                    查找文件所在目录位置
 Alt+1                    快速打开或隐藏工程面板
@@ -143,14 +156,14 @@ Alt+Shift+C                查看文件的变更历史
 Ctrl+Shift+F10            运行
 Ctrl+Shift+F9            debug运行
 Ctrl+Alt+F12                资源管理器打开文件夹
-</code></pre></p>
+</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/02/08/android/小知识点/Android开发规范/">Android 开发规范</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-02-08 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><h3 id="包命名规范"><a href="#包命名规范" class="headerlink" title="包命名规范"></a>包命名规范</h3><pre><code>采用反域名命名规则，
+      <p></p><h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><h3 id="包命名规范"><a href="#包命名规范" class="headerlink" title="包命名规范"></a>包命名规范</h3><pre><code>采用反域名命名规则，
 包名全部小写，
 连续的单词只是简单地连接起来，
 不使用下划线，
@@ -159,26 +172,17 @@ Ctrl+Alt+F12                资源管理器打开文件夹
 三级包名根据应用进行命名，
 四级包名为模块名或层级名。如：
 com.weicheche.android.activity | com.weicheche.android.adapter
-</code></pre></p>
+</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/02/07/android/小知识点/开发规范/">Google Java编程风格指南</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-02-07 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>这份文档是Google Java编程风格规范的完整定义。当且仅当一个Java源文件符合此文档中的规则， 我们才认为它符合Google的Java编程风格。</p>
+      <p></p><p>这份文档是Google Java编程风格规范的完整定义。当且仅当一个Java源文件符合此文档中的规则， 我们才认为它符合Google的Java编程风格。</p>
 <p>与其它的编程风格指南一样，这里所讨论的不仅仅是编码格式美不美观的问题， 同时也讨论一些约定及编码标准。然而，这份文档主要侧重于我们所普遍遵循的规则， 对于那些不是明确强制要求的，我们尽量避免提供意见。</p>
 <p>1.1 术语说明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">术语class可表示一个普通类，枚举类，接口或是annotation类型(@interface)</span><br><span class="line">术语comment只用来指代实现的注释(implementation comments)，我们不使用“documentation comments”一词，而是用Javadoc。</span><br><span class="line">其他的术语说明会偶尔在后面的文档出现。</span><br></pre></td></tr></table></figure></p>
-<p>1.2 指南说明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">本文档中的示例代码并不作为规范。也就是说，虽然示例代码是遵循Google编程风格，但并不意味着这是展现这些代码的唯一方式。 示例中的格式选择不应该被强制定为规则。</span><br></pre></td></tr></table></figure></p></p>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2014/01/29/linux/ssr/">Shadowsocks 一键安装脚本（四合一）</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-01-29 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/linux/">linux</a></span>
-      <p><h2 id="本脚本适用环境"><a href="#本脚本适用环境" class="headerlink" title="本脚本适用环境"></a>本脚本适用环境</h2><p>系统支持：CentOS 6+，Debian 7+，Ubuntu 12+<br>内存要求：≥128M<br>日期　　：2018 年 02 月 07 日</p>
-<h3 id="关于本脚本"><a href="#关于本脚本" class="headerlink" title="关于本脚本"></a>关于本脚本</h3><p>1、一键安装 Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev 版（四选一）服务端；<br>2、各版本的启动脚本及配置文件名不再重合；<br>3、每次运行可安装一种版本；<br>4、支持以多次运行来安装多个版本，且各个版本可以共存（注意端口号需设成不同）；<br>5、若已安装多个版本，则卸载时也需多次运行（每次卸载一种）；<br>6、Shadowsocks-Python 和 ShadowsocksR 安装后不可同时启动（因为本质上都属 Python 版）。</p>
-<p><strong>友情提示：</strong>如果你有问题，请先阅读这篇《<a href="https://teddysun.com/399.html" target="_blank" rel="noopener">Shadowsocks Troubleshooting</a>》之后再询问。<br></p>
+<p>1.2 指南说明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">本文档中的示例代码并不作为规范。也就是说，虽然示例代码是遵循Google编程风格，但并不意味着这是展现这些代码的唯一方式。 示例中的格式选择不应该被强制定为规则。</span><br></pre></td></tr></table></figure></p><p></p>
     </div>
   </div>
  
@@ -204,9 +208,7 @@ com.weicheche.android.activity | com.weicheche.android.adapter
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Search..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -219,7 +221,7 @@ com.weicheche.android.activity | com.weicheche.android.adapter
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"></a>
           </div>
         </div>
         <div class="row for-name">

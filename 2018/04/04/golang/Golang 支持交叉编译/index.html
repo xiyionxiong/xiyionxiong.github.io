@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Golang 交叉编译笔记 | 熊猫博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="一只熊猫🐼">
-  <meta name="keywords" content="">
+  <meta name="keywords" content>
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
   <script id="hexo-configurations">
   var CONFIG = {
@@ -63,7 +63,7 @@
         <blockquote>
 <p>Golang 支持交叉编译，在一个平台上生成另一个平台的可执行程序，最近使用了一下，非常好用，这里备忘一下。</p>
 </blockquote>
-<p><img src="/images/golang.png" alt=""></p>
+<p><img src="/images/golang.png" alt></p>
 <h2 id="Mac-下编译-Linux-和-Windows-64位可执行程序"><a href="#Mac-下编译-Linux-和-Windows-64位可执行程序" class="headerlink" title="Mac 下编译 Linux 和 Windows 64位可执行程序"></a>Mac 下编译 Linux 和 Windows 64位可执行程序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build main.go</span><br><span class="line">CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h2 id="Linux-下编译-Mac-和-Windows-64位可执行程序"><a href="#Linux-下编译-Mac-和-Windows-64位可执行程序" class="headerlink" title="Linux 下编译 Mac 和 Windows 64位可执行程序"></a>Linux 下编译 Mac 和 Windows 64位可执行程序</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build main.go</span><br><span class="line">CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build main.go</span><br></pre></td></tr></table></figure>
@@ -123,9 +123,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Search..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -138,7 +136,7 @@
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"></a>
           </div>
         </div>
         <div class="row for-name">

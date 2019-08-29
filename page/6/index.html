@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>熊猫博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="一只熊猫🐼">
-  <meta name="keywords" content="">
+  <meta name="keywords" content>
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
   <script id="hexo-configurations">
   var CONFIG = {
@@ -61,50 +61,72 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2><a href="/2015/11/21/随笔/3.5开发中的亮点和不足/">亮点和不足</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-11-21 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
+      <p></p><h3 id="1、一键加油的数据缓存操作"><a href="#1、一键加油的数据缓存操作" class="headerlink" title="1、一键加油的数据缓存操作"></a>1、一键加油的数据缓存操作</h3><ul>
+<li><p>添加缓存</p>
+<pre><code>原因：
+    开发过程，由于测试服务器的网络带宽，客户端请求数据超级慢，用户的体验非常不好。
+工具：
+    sharedPreference：
+流程：
+    1、将一键加油的数据，在进入到主页的时候，进行请求完成，将JSON,时间，当前请求的位置等数据缓存到本地
+    2、在进入到一键加油的流程时候，先拿到本地缓存的数据，对时间和位置进行对比，时间超过5分钟，位置移动超过20m，都会重新向服务器请求数据。
+    3、在首页生命周期走到onStop()方法时候，将缓存数据进行致空（json=&quot;&quot;;）操作。
+    4、3的操作，保证每次打开首页进入到一键加油流程都是最新的数据，同样也保证再次回到首页的时候，在网络情况差，请求不到数据的情况，不会使用上一次缓存的数据
+优点：
+    优化用户体验，节省流量
+缺点：暂未发现
+</code></pre></li>
+</ul><p></p>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2><a href="/2015/10/09/android/Android Skills/ActionBar沉浸式实现/">ActionBar沉浸式实现</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-10-09 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>studio，中引入沉浸式兼容库 </p>
+      <p></p><p>studio，中引入沉浸式兼容库 </p>
 <pre><code>compile &apos;com.readystatesoftware.systembartint:systembartint:1.0.3&apos; 
 </code></pre><p>eclipse，可以导入相应的那个类。</p>
 <h3 id="第一类，兼容actionbar"><a href="#第一类，兼容actionbar" class="headerlink" title="第一类，兼容actionbar"></a>第一类，兼容actionbar</h3><ul>
-<li><p>第一步：设置activity主题android:theme=”@style/ActionBarTheme”</p></p>
-    </div>
+<li><p>第一步：设置activity主题android:theme=”@style/ActionBarTheme”</p><p></p>
+    </li></ul></div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2015/09/16/android/Android性能优化典范/Android性能优化之内存篇/">Android性能优化之内存篇</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-09-16 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>来源 <a href="http://hukai.me/android-performance-memory/" target="_blank" rel="noopener">http://hukai.me/android-performance-memory/</a> </p>
+      <p></p><p>来源 <a href="http://hukai.me/android-performance-memory/" target="_blank" rel="noopener">http://hukai.me/android-performance-memory/</a> </p>
 <p>Google近期在Udacity上发布了<a href="https://www.udacity.com/course/ud825" target="_blank" rel="noopener">Android性能优化的在线课程</a>，分别从渲染，运算与内存，电量几个方面介绍了如何去优化性能，这些课程是Google之前在Youtube上发布的<a href="http://hukai.me/android-performance-patterns/" target="_blank" rel="noopener">Android性能优化典范</a>专题课程的细化与补充。</p>
 <p>下面是内存篇章的学习笔记，部分内容与前面的性能优化典范有重合，欢迎大家一起学习交流！</p>
 <h3 id="1-Memory-GC-and-Performance"><a href="#1-Memory-GC-and-Performance" class="headerlink" title="1)Memory, GC, and Performance"></a>1)Memory, GC, and Performance</h3><p>众所周知，与C/C++需要通过手动编码来申请以及释放内存有所不同，Java拥有GC的机制。Android系统里面有一个<strong>Generational Heap Memory</strong>的 模型，系统会根据内存中不同的内存数据类型分别执行不同的GC操作。例如，最近刚分配的对象会放在Young Generation区域，这个区域的对象通常都是会快速被创建并且很快被销毁回收的，同时这个区域的GC操作速度也是比Old Generation区域的GC操作速度更快的。</p>
-<p><img src="/images/8FA9497E1500172C5E8590B2DCEA78EA.jpg" alt=""></p>
+<p><img src="/images/8FA9497E1500172C5E8590B2DCEA78EA.jpg" alt></p>
 <p>除了速度差异之外，执行GC操作的时候，所有线程的任何操作都会需要暂停，等待GC操作完成之后，其他操作才能够继续运行。</p>
-<p><img src="/images/C21B81FB0EFD3F119FCF9B7046477A77.jpg" alt=""></p>
+<p><img src="/images/C21B81FB0EFD3F119FCF9B7046477A77.jpg" alt></p>
 <p>通常来说，单个的GC并不会占用太多时间，但是大量不停的GC操作则会显著占用帧间隔时间(16ms)。如果在帧间隔时间里面做了过多的GC操作，那么自然其他类似计算，渲染等操作的可用时间就变得少了。</p>
-<h3 id="2-Memory-Monitor-Walkthrough"><a href="#2-Memory-Monitor-Walkthrough" class="headerlink" title="2)Memory Monitor Walkthrough"></a>2)Memory Monitor Walkthrough</h3></p>
+<h3 id="2-Memory-Monitor-Walkthrough"><a href="#2-Memory-Monitor-Walkthrough" class="headerlink" title="2)Memory Monitor Walkthrough"></a>2)Memory Monitor Walkthrough</h3><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2015/09/16/android/Android性能优化典范/Android性能优化之渲染篇/">Android性能优化之渲染篇</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-09-16 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p> 发表于 2015-04-16 22:34 1043 </p>
+      <p></p><p> 发表于 2015-04-16 22:34 1043 </p>
 <p>来源 <a href="http://hukai.me/android-performance-render/" target="_blank" rel="noopener">http://hukai.me/android-performance-render/</a> </p>
-<p><img src="/images/7E490E081B1D4EEE4FA62A791BD9C8BF.jpg" alt=""></p>
+<p><img src="/images/7E490E081B1D4EEE4FA62A791BD9C8BF.jpg" alt></p>
 <p>Google近期在Udacity上发布了<a href="https://www.udacity.com/course/ud825" target="_blank" rel="noopener">Android性能优化的在线课程</a>，目前有三个篇章，分别从渲染，运算与内存，电量三个方面介绍了如何去优化性能，这些课程是Google之前在Youtube上发布的<a href="http://hukai.me/android-performance-patterns/" target="_blank" rel="noopener">Android性能优化典范</a>专题课程的细化与补充。</p>
 <p>下面是渲染篇章的学习笔记，部分内容和前面的性能优化典范有重合，欢迎大家一起学习交流！</p>
 <h3 id="1-Why-Rendering-Performance-Matters"><a href="#1-Why-Rendering-Performance-Matters" class="headerlink" title="1)Why Rendering Performance Matters"></a>1)Why Rendering Performance Matters</h3><p>现在有不少App为了达到很华丽的视觉效果，会需要在界面上层叠很多的视图组件，但是这会很容易引起性能问题。如何平衡Design与Performance就很需要智慧了。</p>
 <h3 id="2-Defining-‘Jank’"><a href="#2-Defining-‘Jank’" class="headerlink" title="2)Defining ‘Jank’"></a>2)Defining ‘Jank’</h3><p>大多数手机的屏幕刷新频率是60hz，如果在1000/60=16.67ms内没有办法把这一帧的任务执行完毕，就会发生丢帧的现象。丢帧越多，用户感受到的卡顿情况就越严重。</p>
-<p><img src="/images/F8DBA2E8508CA74C621DFFC51D7EECE0.jpg" alt=""></p>
-<h3 id="3-Rendering-Pipeline-Common-Problems"><a href="#3-Rendering-Pipeline-Common-Problems" class="headerlink" title="3)Rendering Pipeline: Common Problems"></a>3)Rendering Pipeline: Common Problems</h3></p>
+<p><img src="/images/F8DBA2E8508CA74C621DFFC51D7EECE0.jpg" alt></p>
+<h3 id="3-Rendering-Pipeline-Common-Problems"><a href="#3-Rendering-Pipeline-Common-Problems" class="headerlink" title="3)Rendering Pipeline: Common Problems"></a>3)Rendering Pipeline: Common Problems</h3><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2015/09/16/android/Android性能优化典范/Android性能优化之电量篇/">Android性能优化之电量篇</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-09-16 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>发表于 2015-04-20 00:52 632 </p>
+      <p></p><p>发表于 2015-04-20 00:52 632 </p>
 <p>来源 <a href="http://hukai.me/android-performance-battery/" target="_blank" rel="noopener">http://hukai.me/android-performance-battery/</a> </p>
 <p>Google近期在Udacity上发布了<a href="https://www.udacity.com/course/ud825" target="_blank" rel="noopener">Android性能优化的在线课程</a>，分别从渲染，运算与内存，电量几个方面介绍了如何去优化性能，这些课程是Google之前在Youtube上发布的<a href="http://hukai.me/android-performance-patterns/" target="_blank" rel="noopener">Android性能优化典范</a>专题课程的细化与补充。</p>
 <p>下面是电量篇章的学习笔记，部分内容与前面的性能优化典范有重合，欢迎大家一起学习交流！</p>
@@ -114,23 +136,23 @@
 <p>当设备处于待机状态时消耗的电量是极少的，以N5为例，打开飞行模式，可以待机接近1个月。可是点亮屏幕，硬件各个模块就需要开始工作，这会需要消耗很多电量。</p>
 <p>使用WakeLock或者JobScheduler唤醒设备处理定时的任务之后，一定要及时让设备回到初始状态。每次唤醒蜂窝信号进行数据传递，都会消耗很多电量，它比WiFi等操作更加的耗电。</p>
 <p><img src="/images/531056DFF5B509CD8ED8FD4D64D23807.jpg" alt="battery\_drain\_radio"></p>
-<h3 id="2-Battery-Historian"><a href="#2-Battery-Historian" class="headerlink" title="2)Battery Historian"></a>2)Battery Historian</h3></p>
+<h3 id="2-Battery-Historian"><a href="#2-Battery-Historian" class="headerlink" title="2)Battery Historian"></a>2)Battery Historian</h3><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2015/09/15/android/Android性能优化典范/Android性能优化典范（三）/">Android性能优化典范（三）</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-09-15 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p><a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范</a>的课程最近更新到第三季了，这次一共12个短视频课程，包括的内容大致有：更高效的ArrayMap容器，使用Android系统提供的特殊容器来避免自动装箱，避免使用枚举类型，注意onLowMemory与onTrimMemory的回调，避免内存泄漏，高效的位置更新操作，重复layout操作的性能影响，以及使用Batching，Prefetching优化网络请求，压缩传输数据等等使用技巧。下面是对这些课程的总结摘要，认知有限，理解偏差的地方请多多交流指正！</p>
-<p><img src="/images/E7C1236FA835601C32BF7E628221652E.jpg" alt=""></p>
-<h2 id="1-Fun-with-ArrayMaps"><a href="#1-Fun-with-ArrayMaps" class="headerlink" title="1) Fun with ArrayMaps"></a><strong>1) Fun with ArrayMaps</strong></h2></p>
+      <p></p><p><a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范</a>的课程最近更新到第三季了，这次一共12个短视频课程，包括的内容大致有：更高效的ArrayMap容器，使用Android系统提供的特殊容器来避免自动装箱，避免使用枚举类型，注意onLowMemory与onTrimMemory的回调，避免内存泄漏，高效的位置更新操作，重复layout操作的性能影响，以及使用Batching，Prefetching优化网络请求，压缩传输数据等等使用技巧。下面是对这些课程的总结摘要，认知有限，理解偏差的地方请多多交流指正！</p>
+<p><img src="/images/E7C1236FA835601C32BF7E628221652E.jpg" alt></p>
+<h2 id="1-Fun-with-ArrayMaps"><a href="#1-Fun-with-ArrayMaps" class="headerlink" title="1) Fun with ArrayMaps"></a><strong>1) Fun with ArrayMaps</strong></h2><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2015/09/15/android/Android性能优化典范/Android性能优化之运算篇/">Android性能优化之运算篇</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-09-15 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>发表于 2015-04-17 10:22 719</p>
+      <p></p><p>发表于 2015-04-17 10:22 719</p>
 <blockquote>
 <p>译文原文：<a href="http://hukai.me/android-performance-compute/" target="_blank" rel="noopener">http://hukai.me/android-performance-compute/</a></p>
 </blockquote>
@@ -142,16 +164,16 @@
 <p>虽然现代的CPU架构得到了很大的提升，也许并不存在上面所示的那么大的差异，但是这个例子说明了代码写法上的差异会对运算性能产生很大的影响。</p>
 <p>通常来说有两类运行效率差的情况：第1种是相对执行时间长的方法，我们可以很轻松的找到这些方法并做一定的优化。第2种是执行时间短，但是执行频次很高的方法，因为执行次数多，累积效应下就会对性能产生很大的影响。</p>
 <p>修复这些细节效率问题，需要使用Android SDK提供的工具，进行仔细的测量，然后再进行微调修复。</p>
-<h3 id="3-Traceview-Walkthrough"><a href="#3-Traceview-Walkthrough" class="headerlink" title="3)Traceview Walkthrough"></a>3)Traceview Walkthrough</h3></p>
+<h3 id="3-Traceview-Walkthrough"><a href="#3-Traceview-Walkthrough" class="headerlink" title="3)Traceview Walkthrough"></a>3)Traceview Walkthrough</h3><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2015/09/13/android/Android性能优化典范/Android性能优化典范（二）/">Android性能优化典范（二）</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-09-13 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>来源 <a href="http://www.csdn.net/article/2015-04-29/2824583-android-performance-patterns-season-2/4" target="_blank" rel="noopener">http://www.csdn.net/article/2015-04-29/2824583-android-performance-patterns-season-2/4</a> </p>
+      <p></p><p>来源 <a href="http://www.csdn.net/article/2015-04-29/2824583-android-performance-patterns-season-2/4" target="_blank" rel="noopener">http://www.csdn.net/article/2015-04-29/2824583-android-performance-patterns-season-2/4</a> </p>
 <p>Google前几天刚发布了<a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范第2季</a>的 课程，一共20个短视频，包括的内容大致有：电量优化、网络优化、Android Wear上如何做优化、使用对象池来提高效率、LRU Cache、Bitmap的缩放、缓存、重用、PNG压缩、自定义View的性能、提升设置alpha之后View的渲染性能，以及Lint、 StictMode等工具的使用技巧。 下面是对这些课程的总结摘要，认知有限，理解偏差的地方请多多指教！</p>
-<p><img src="/images/35C6E464AD6DAF773B756644C64CE853.jpg" alt=""></p>
+<p><img src="/images/35C6E464AD6DAF773B756644C64CE853.jpg" alt></p>
 <p><strong>1) Battery Drain and Networking</strong></p>
 <p>对 于手机程序，网络操作相对来说是比较耗电的行为。优化网络操作能够显著节约电量的消耗。在性能优化第1季里面有提到过，手机硬件的各个模块的耗电量是不一 样的，其中移动蜂窝模块对电量消耗是比较大的，另外蜂窝模块在不同工作强度下，对电量的消耗也是有差异的。当程序想要执行某个网络请求之前，需要先唤醒设 备，然后发送数据请求，之后等待返回数据，最后才慢慢进入休眠状态。这个流程如下图所示：<br></p>
     </div>
@@ -160,8 +182,8 @@
     <div>
       <h2><a href="/2015/09/11/android/Android性能优化典范/Android性能优化典范（一）/">Android性能优化典范（一）</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-09-11 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>转载自胡凯的博客 <a href="http://hukai.me/android-performance-patterns/" target="_blank" rel="noopener">Android性能优化典范</a> </p>
-<p><img src="/images/1B60ABFE035FF01195310770A636F912.jpg" alt=""></p>
+      <p></p><p>转载自胡凯的博客 <a href="http://hukai.me/android-performance-patterns/" target="_blank" rel="noopener">Android性能优化典范</a> </p>
+<p><img src="/images/1B60ABFE035FF01195310770A636F912.jpg" alt></p>
 <p>2015年伊始，Google发布了关于<a href="https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE" target="_blank" rel="noopener">Android性能优化典范的专题</a>， 一共16个短视频，每个3-5分钟，帮助开发者创建更快更优秀的Android App。课程专题不仅仅介绍了Android系统中有关性能问题的底层工作原理，同时也介绍了如何通过工具来找出性能问题以及提升性能的建议。主要从三个 方面展开，Android的渲染机制，内存与GC，电量优化。下面是对这些问题和建议的总结梳理。</p>
 <h2 id="0-Render-Performance"><a href="#0-Render-Performance" class="headerlink" title="0)Render Performance"></a>0)Render Performance</h2><p>大多数用户感知到的卡顿等性能问题的最主要根源都是因为渲染性能。从设计师的角度，他们希望App能够有更多的动画，图片等时尚元素来实现流畅的用 户体验。但是Android系统很有可能无法及时完成那些复杂的界面渲染操作。Android系统每隔16ms发出VSYNC信号，触发对UI进行渲染， 如果每次渲染都成功，这样就能够达到流畅的画面所需要的60fps，为了能够实现60fps，这意味着程序的大多数操作都必须在16ms内完成。<br></p>
     </div>
@@ -170,17 +192,8 @@
     <div>
       <h2><a href="/2015/07/22/android/Android Skills/注解(Annotation)自定义注解入门/">Android注解(Annotation)自定义注解入门</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-07-22 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>要深入学习注解，我们就必须能定义自己的注解，并使用注解，在定义自己的注解之前，我们就必须要了解Java为我们提供的元注解和相关定义注解的语法。</p>
+      <p></p><p>要深入学习注解，我们就必须能定义自己的注解，并使用注解，在定义自己的注解之前，我们就必须要了解Java为我们提供的元注解和相关定义注解的语法。</p>
 <p>元注解：<br>元注解的作用就是负责注解其他注解。Java5.0定义了4个标准的<code>meta-annotation</code>类型，它们被用来提供对其它 <code>annotation</code>类型作说明。Java5.0定义的元注解：</p>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2015/07/21/android/Android Skills/Android OkHttp完全解析/">Android OkHttp完全解析</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-07-21 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><blockquote>
-<p>最近在群里听到各种讨论okhttp的话题，可见okhttp的口碑相当好了。再加上Google貌似在6.0版本里面删除了HttpClient相关API，对于这个行为不做评价。为了更好的在应对网络访问，学习下okhttp还是蛮必要的，本篇博客首先介绍okhttp的简单使用，主要包含：</p>
-</blockquote></p>
     </div>
   </div>
  
@@ -206,9 +219,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Search..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -221,7 +232,7 @@
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"></a>
           </div>
         </div>
         <div class="row for-name">

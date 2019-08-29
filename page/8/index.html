@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>熊猫博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="一只熊猫🐼">
-  <meta name="keywords" content="">
+  <meta name="keywords" content>
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
   <script id="hexo-configurations">
   var CONFIG = {
@@ -61,9 +61,27 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2><a href="/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/">Google Develop for Android 系列四 － Network最佳实践</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-06-11 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
+      <p></p><p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-4-network/" target="_blank" rel="noopener">原文链接</a></p>
+<hr>
+<h2 id="不要过度同步"><a href="#不要过度同步" class="headerlink" title="不要过度同步"></a>不要过度同步</h2><p>向云端发送数据和获取数据是非常耗电的行为之一。不是网络传输会将设备搞挂，而是一定量的后台应用向服务发起的这些请求会导致设备不能进入睡眠状态 （或者对于收音机的低电量模式），一定时间后会导致严重的电量的流失。如果你不需要立即获取数据，就不要获取。如果将来需要获取数据，那么可以使用<code>JobScheduler</code>或者<code>GCM Network Manager</code>将它们和一些系统的请求一起处理。<br>下面是一些避免过度请求的一些建议：</p>
+<ul>
+<li>使用 GoogleCloudMessaging（GCM）。而不是使用新的持久化连接。</li>
+<li>使用JobScheduler（API 21以及之后）或者GCM NetrowManager将一些异步请求绑在一起进行批处理，这些API可以保证操作只在设备恰当的闲暇状态下进行</li>
+<li>Do not poll.Ever.（不太理解啥意思）</li>
+<li>只同步你需要的数据。数据同步已经被认为是电池和总体系统健康的罪魁祸首之一。因此开发者需要谨慎的选择哪些是真正需要同步的数据，以及多久同步一次,这些都可以让用户有更好的体验。</li>
+</ul>
+<h2 id="避免过度加载服务"><a href="#避免过度加载服务" class="headerlink" title="避免过度加载服务"></a>避免过度加载服务</h2><p>当服务请求失败，应该使用备用的技术避免请求一直，重复的请求。Also, never synchronize against wall-clock time to avoid problems with the server being hit by large loads at these absolute times. 不是太明白啥意思， “当然，从不同步以至于一次性进行大量加载的方式去避免这些问题也是不好的？”</p>
+<h2 id="不要对网络想当然"><a href="#不要对网络想当然" class="headerlink" title="不要对网络想当然"></a>不要对网络想当然</h2><p>进行网络调用前，确保使用<code>NetworkInfo.isConnected()</code>进行检测。</p>
+<p>网络请求不确定性很大，比较耗时，因此另一个建议是不要在UI 线程或者其它需要立即同步的行为中进行网络的请求。<br></p>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2><a href="/2015/06/10/android/Google Develop for Android 系列/Google Develop for Android 系列三 － Performance最佳实践/">Google Develop for Android 系列三 － Performance最佳实践</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-06-10 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-3-performance/" target="_blank" rel="noopener">原文链接</a></p>
+      <p></p><p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-3-performance/" target="_blank" rel="noopener">原文链接</a></p>
 <hr>
 <p>在Android中，性能和内存的关系很密切，因为系统的整体内存大小会影响所有进程的性能，因为垃圾回收器会对运行期间的性能产生很大的影响。下面的重点是运行期间的性能问题而不是内存。</p>
 <h2 id="避免在动画和交互期间繁重的操作"><a href="#避免在动画和交互期间繁重的操作" class="headerlink" title="避免在动画和交互期间繁重的操作"></a>避免在动画和交互期间繁重的操作</h2><p>正如在第一篇文章中提到过的，在UI Thread做繁重的操作会影响到渲染的处理。同样会导致动画的问题，因为它依赖于每一帧的渲染。这就意味着在动画期间避免在UI进行繁重的操作就更加重要。以下是一些可以避免的常见情况：</p>
@@ -71,28 +89,28 @@
 <li><strong>Layout</strong><br>Measurement 和 layout是比较繁重的操作，view的层级越复杂，操作就会越繁重。Measurement和layout是在UI Thred发发生的。因此当系统需要运行一个动画的时候紧接着还需进行layout，而它们都是在同一个线程，因此动画的流畅度可能就会受到影响。<br>假设你的动画在13ms内就可以完成所有的渲染，在16帧率之内。然后某一请求导致了layout，花费了5ms的时间。该layout在下一帧绘制前会 发生，那么总的绘制时间就会达到18ms，最终你的动画就明显的跳过一帧。当动画过程中需要进行layout的时候，为了避免这种情况，可以在动画启动前 进行layout或者延迟layout到动画完成。当然，尽量为那些不会触发layout的属性添加动画。比如，View的<code>translationX</code>和<code>tanshlationY</code>属性影响到post-layout属性。LayoutParams 属性也会需要请求layout操作，因此对这些属性进行动画的时候在相对复杂的UI上会导致卡顿。</li>
 <li><strong>Inflation</strong><br>View 填充也只会发生在UI Thread，也是比较繁重的操作（View的层级越大，工作越繁重）。填充工作会在手动填充一个View 或者启动一个activity的时候发生。这些都是在相同的UI线程进行的，当新的activity被填充的时候将会导致动画暂停。为了避免这种情况，可 以在动画完成的时候再启动Activity。或者避免滚动列表时填充不同类型的View导致的卡顿，可以考虑预填充。比如，RecyclerView支持 使用RectcledViewPool来装载不同的View类型。</li>
 </ul>
-<h2 id="加快启动速度"><a href="#加快启动速度" class="headerlink" title="加快启动速度"></a>加快启动速度</h2></p>
+<h2 id="加快启动速度"><a href="#加快启动速度" class="headerlink" title="加快启动速度"></a>加快启动速度</h2><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2015/06/09/android/Google Develop for Android 系列/Google Develop for Android 系列二 － Memory 最佳实践/">Google Develop for Android 系列二 － Memory 最佳实践</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-06-09 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-2-memory/" target="_blank" rel="noopener">原文链接</a></p>
+      <p></p><p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-2-memory/" target="_blank" rel="noopener">原文链接</a></p>
 <hr>
 <p>在决定应用的行为，是否有好的用户体验以及整体的设备体验来说，内存的使用可能是独立因素中最重要的。内存因素包括应用的内存占用，以及内存搅动（导致的垃圾回收会对运行期间的性能有影响）。</p>
 <h2 id="避免在循环中分配内存"><a href="#避免在循环中分配内存" class="headerlink" title="避免在循环中分配内存"></a>避免在循环中分配内存</h2><p>内存分配虽然不可避免，但是应尽可能的避免，特别是在平凡的调用的代码块中。比如在绘制代码中，因为每一帧的渲染都会执行该方法。</p>
 <p>避免在自定义View的onDraw方法中分配内存，因为动画也许会调用它。使用缓存对象替换临时对象可以避免新的内存开销。典型的例子就是在 onDraw方法中分配了一个新的Paint对象，因为Canvas需要一个Paint对象。对于这种自定义View的实例只分配一个独立的Paint对 象而后在onDraw方法中临时使用更好。</p>
 <h2 id="尽可能的避免内存分配"><a href="#尽可能的避免内存分配" class="headerlink" title="尽可能的避免内存分配"></a>尽可能的避免内存分配</h2><p>避免常量，临时变量的内存分配。下面有一些可参考的策略，也许并不适用于传统的java编码，但是对于Android开发是推荐的。通常可以使用工 具帮助我们去决定是否某一块代码需要优化。如果代码的某一部分很少执行（比如用户改变一些设置的操作），更简洁和传统的抽象层是不错的选择。但是如果分析 表明某些代码频繁执行并导致了大量的内存搅动，考虑以下策略：</p>
 <ul>
-<li><strong>对象缓存</strong><br>重用对象在一些常量内存的再分配中很有用，比如在内部循环中避免内存分配。比如，有些频繁调用的方法中可能需要一个Rect对象存储一些中间值，最好在把 Rect作为类级别的常量，只分配一次内存，甚至是静态的，避免每次方法调用的时候都分配。关于单例的一些警示对于这种方式也是适用的，在Android 上，静态的常见缺陷就是它们对于某一个进程是静态的，但是可能有多个活动在同一进程中。小心应用，这种技术在避免内存的再分配中是通用的</p>
-    </div>
+<li><strong>对象缓存</strong><br>重用对象在一些常量内存的再分配中很有用，比如在内部循环中避免内存分配。比如，有些频繁调用的方法中可能需要一个Rect对象存储一些中间值，最好在把 Rect作为类级别的常量，只分配一次内存，甚至是静态的，避免每次方法调用的时候都分配。关于单例的一些警示对于这种方式也是适用的，在Android 上，静态的常见缺陷就是它们对于某一个进程是静态的，但是可能有多个活动在同一进程中。小心应用，这种技术在避免内存的再分配中是通用的<p></p>
+    </li></ul></div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2015/06/08/android/Google Develop for Android 系列/Google Develop for Android 系列一 － 相关上下文介绍/">Google Develop for Android 系列一 － 相关上下文介绍</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-06-08 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-1-mobile-context/" target="_blank" rel="noopener">原文链接</a></p>
+      <p></p><p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-1-mobile-context/" target="_blank" rel="noopener">原文链接</a></p>
 <p>前几天在G+上看到Google Developers站点，有一个Android系列的文章，分享到个人微博，周末闲来没事就学写了下，把它们简单的翻译了下，没想到一发不可收拾，六篇 文章全部都翻译完了，有些地方省略了部分示例的描述或者换了另一种表述，如果有理解的不准确的地方，还望指正</p>
 <hr>
 <p>原文：<a href="https://medium.com/google-developers/developing-for-android-i-understanding-the-mobile-context-fd2351b131f8" target="_blank" rel="noopener">Developing for Android, I:Understanding the Mobile Context</a></p>
@@ -104,7 +122,7 @@
     <div>
       <h2><a href="/2015/03/02/android/小知识点/Android开发常用的adb命令整理/">Android开发常用的adb命令整理</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-03-02 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>adb的全称是Android Debug Bridge</p>
+      <p></p><p>adb的全称是Android Debug Bridge</p>
 <p>adb start-server<br>启动adb服务,如果它没启动的话</p>
 <p>adb kill-server<br>关闭服务</p>
 <p>adb devices<br>查看所连接的设备以及设备所对应的序列号<br></p>
@@ -121,37 +139,37 @@
     <div>
       <h2><a href="/2014/11/07/android/Android Skills/Android AsyncTask 技巧/">Android AsyncTask 技巧</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-11-07 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><h4 id="AsyncTask的原理"><a href="#AsyncTask的原理" class="headerlink" title="AsyncTask的原理"></a>AsyncTask的原理</h4><p>其实AsyncTask的原理简单来说，就是：</p>
+      <p></p><h4 id="AsyncTask的原理"><a href="#AsyncTask的原理" class="headerlink" title="AsyncTask的原理"></a>AsyncTask的原理</h4><p>其实AsyncTask的原理简单来说，就是：</p>
 <ul>
 <li>一个任务队：用于存放自定义的（WorkerRunnable）。</li>
 <li>一个线程池：初始化好任务队列，放入该线程池中。</li>
 <li>一个内部Handler：用于提供线程池执行线程时与主线程之间的交互（刷新控件各种）。</li>
-</ul></p>
+</ul><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/11/05/android/Android Skills/图像、背景、View更新、布局、内存/">图像、背景、View更新、布局、内存</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-11-05 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><h3 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h3><p>选择适当的图像尺寸<br>视图背景图像总会填充整个视图区域</p>
+      <p></p><h3 id="图像"><a href="#图像" class="headerlink" title="图像"></a>图像</h3><p>选择适当的图像尺寸<br>视图背景图像总会填充整个视图区域</p>
 <pre><code>1.视图背景图像总会填充整个视图区域
 2.避免实时缩放
 3.最好预先缩放到视图大小
-</code></pre></p>
+</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/10/08/随笔/健身/">健身</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-10-08 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
-      <p><p>少年不知精贵，老了望批空流泪。<br></p>
+      <p></p><p>少年不知精贵，老了望批空流泪。<br></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/09/18/android/Android Skills/widget用法/">widget用法</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-09-18 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>September 23, 2015 8:21 PM</p>
+      <p></p><p>September 23, 2015 8:21 PM</p>
 <p>创建AppWidgetProvider的子类</p>
 <pre><code>public class MyAppWidgetProvider extends AppWidgetProvider {
 @Override
@@ -171,19 +189,7 @@ public void onDisabled(Context context) {
     super.onDisabled(context);
 }
 }
-</code></pre></p>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2014/08/08/android/Android Skills/webview入门/">WebView入门</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-08-08 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><blockquote>
-<p>WebView控件可以实现一个浏览器的功能，直接在控件中显示指定的网页</p>
-</blockquote>
-<p>第一种方式</p>
-<p>第一种方式是不需要，在布局文件中，使用WebView控件的</p>
-<p>步骤：<br></p>
+</code></pre><p></p>
     </div>
   </div>
  
@@ -209,9 +215,7 @@ public void onDisabled(Context context) {
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Search..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -224,7 +228,7 @@ public void onDisabled(Context context) {
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"></a>
           </div>
         </div>
         <div class="row for-name">

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>RecyclerView 列表控件中简单实现时间线 | 熊猫博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="一只熊猫🐼">
-  <meta name="keywords" content="">
+  <meta name="keywords" content>
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
   <script id="hexo-configurations">
   var CONFIG = {
@@ -61,10 +61,10 @@
     <div class="lx-entry padding">
       <div>
         <p>看见很多软件中都有时间线的东西，貌似天气啊，旅游啊什么的最多了；具体实现方式很多，在本篇文章中讲解一种自定义View封装的方式。</p>
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>先来看看效果。<br><img src="http://www.jcodecraeer.com/uploads/20150825/1440469250572021.png" alt=""><br><a id="more"></a></p>
+<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>先来看看效果。<br><img src="http://www.jcodecraeer.com/uploads/20150825/1440469250572021.png" alt><br><a id="more"></a></p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>软件中，可以看见前面的时间线也就是线条加上圆圈组成；当然这里的圆圈与线条也都是可以随意换成其他的，比如图片等等。</p>
 <p>当然这里最简单的来说，是上面一个线条，然后一个圆圈，然后下面一个线条；上线条在第一条数据时不做显示，下线条在最后一条数据时不做显示。</p>
-<p><img src="http://www.jcodecraeer.com/uploads/20150825/1440469277121276.png" alt=""></p>
+<p><img src="http://www.jcodecraeer.com/uploads/20150825/1440469277121276.png" alt></p>
 <p>这里自定义布局部分也就是把旁边的线条与圆圈封装到一起，并使用简单的方法来控制是否显示。<br>当封装好了后，与旁边的文字部分也就是水瓶方向的线性布局了，然后设置为每一个的RecyclerView 的Item的布局也就完成了。</p>
 <h3 id="控件"><a href="#控件" class="headerlink" title="控件"></a>控件</h3><p>控件很简单，首先我们继承View，取名为 TimeLineMarker 就OK。</p>
 <h3 id="Attrs-属性"><a href="#Attrs-属性" class="headerlink" title="Attrs 属性"></a>Attrs 属性</h3><p>开始控件之前先准备好需要的属性。</p>
@@ -322,7 +322,7 @@ public void setMarkerDrawable(Drawable markerDrawable) {
 &lt;/RelativeLayout&gt;
 </code></pre><p>在这里就是加上了一个RecyclerView 控件在主界面就OK。</p>
 <h5 id="Java代码部分"><a href="#Java代码部分" class="headerlink" title="Java代码部分"></a>Java代码部分</h5><p>在开始之前先来看看我们的文件具体有些神马。</p>
-<p><img src="http://www.jcodecraeer.com/uploads/20150825/1440469609114998.png" alt=""></p>
+<p><img src="http://www.jcodecraeer.com/uploads/20150825/1440469609114998.png" alt></p>
 <p>widget中就是具体的自定义控件，model是具体的数据模型，adapter部分，这里有一个Recyclerview的adapter文件，以及一个具体的Item TimeLineViewHolder，当然在这里还定义了一个ItemType类，该类用来标示每个Item的类型，比如头部，第一个，普通，最后一个，底部等等。</p>
 <h6 id="TimeLineModel-java"><a href="#TimeLineModel-java" class="headerlink" title="TimeLineModel.java"></a>TimeLineModel.java</h6><pre><code>package net.qiujuer.example.timeline.model;
 
@@ -509,7 +509,7 @@ private List&lt;TimeLineModel&gt; getData() {
 }
 </code></pre><p>在这里就是傻瓜的操作了，流程就是准备好对应的数据，装进Adapter，准备好对应的布局方式，然后都设置到RecyclerView中就OK。</p>
 <h6 id="效果-1"><a href="#效果-1" class="headerlink" title="效果"></a>效果</h6><p>来看看具体的效果：</p>
-<p><img src="http://www.jcodecraeer.com/uploads/20150825/1440469865127253.png" alt=""></p>
+<p><img src="http://www.jcodecraeer.com/uploads/20150825/1440469865127253.png" alt></p>
 <p>效果虽然简单，但是也算是五脏具全；其中无非就是控件的自定义。这个自定义是可以扩展的，大家可以扩展为水平方向试试。</p>
 <h6 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h6><p>博客代码都开源到项目中了。<br>地址：<a href="https://github.com/qiujuer/BeFoot/tree/master/blog/sample/TimeLine" target="_blank" rel="noopener">https://github.com/qiujuer/BeFoot/tree/master/blog/sample/TimeLine</a></p>
 <h6 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h6><p>文章的开始截屏来源于：最近没事儿捣鼓了一个APP［UPMiss］，一个简单的生日，纪念日提醒软件；欢迎大家尝鲜。</p>
@@ -566,9 +566,7 @@ private List&lt;TimeLineModel&gt; getData() {
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Search..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -581,7 +579,7 @@ private List&lt;TimeLineModel&gt; getData() {
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"></a>
           </div>
         </div>
         <div class="row for-name">

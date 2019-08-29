@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>熊猫博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="一只熊猫🐼">
-  <meta name="keywords" content="">
+  <meta name="keywords" content>
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
   <script id="hexo-configurations">
   var CONFIG = {
@@ -61,6 +61,33 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2><a href="/2016/04/02/android/RxJava/深入浅出RxJava(二：操作符)/">深入浅出RxJava(二：操作符)</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-04-02 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
+      <p></p><p>译文原文 <a href="http://blog.csdn.net/lzyzsd/article/details/44094895" target="_blank" rel="noopener">http://blog.csdn.net/lzyzsd/article/details/44094895</a> </p>
+<p>英文原文 <a href="http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/" target="_blank" rel="noopener">Grokking RxJava, Part 2: Operator, Operator</a></p>
+<p>在<a href="http://blog.csdn.net/lzyzsd/article/details/41833541" target="_blank" rel="noopener">第一篇blog</a>中， 我介绍了RxJava的一些基础知识，同时也介绍了map()操作符。当然如果你并没有意愿去使用RxJava我一点都不诧异，毕竟才接触了这么点。看完 这篇blog，我相信你肯定想立即在你的项目中使用RxJava了，这篇blog将介绍许多RxJava中的操作符，RxJava的强大性就来自于它所定 义的操作符。</p>
+<p>首先先看一个例子：</p>
+<p>假设我有这样一个方法：<br>这个方法根据输入的字符串返回一个网站的url列表（啊哈，搜索引擎）</p>
+<p><code>Observable&lt;List&lt;String&gt;&gt; query(String text);</code></p>
+<p>现在我希望构建一个健壮系统，它可以查询字符串并且显示结果。根据上一篇blog的内容，我们可能会写出下面的代码：</p>
+<p><code>query(`</code>“Hello, world!”<code></code>)<code></code>.subscribe(urls -&gt; {<code></code>for<code></code>(String url : urls) {<code></code>System.out.println(url);<code></code>}<code></code>});`<br></p>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2016/04/01/随笔/Q2季度目标/">Q2季度目标</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-04-01 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
+      <p></p><p>1、完成GankAPP，并上线</p>
+<pre><code>未完成的部分
+1、上啦下拉更新 
+2、替换历史上今天的API
+3、优化webview的显示
+4、优化代码结构（网络请求**）
+</code></pre><p></p>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2><a href="/2016/04/01/随笔/VIM快捷键/">VIM快捷键的使用</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-04-01 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
       <p></p>
@@ -68,35 +95,22 @@
   </div>
   <div class="lx-entry padding">
     <div>
-      <h2><a href="/2016/04/01/随笔/Q2季度目标/">Q2季度目标</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-04-01 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
-      <p><p>1、完成GankAPP，并上线</p>
-<pre><code>未完成的部分
-1、上啦下拉更新 
-2、替换历史上今天的API
-3、优化webview的显示
-4、优化代码结构（网络请求**）
-</code></pre></p>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
       <h2><a href="/2016/03/29/android/RxJava/深入浅出RxJava（一：基础篇）/">深入浅出RxJava(一：基础篇)</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-29 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p><a href="http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/" target="_blank" rel="noopener">英文原文</a> </p>
+      <p></p><p><a href="http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/" target="_blank" rel="noopener">英文原文</a> </p>
 <p><a href="http://blog.csdn.net/lzyzsd/article/details/41833541" target="_blank" rel="noopener">译文原文</a> </p>
 <p><a href="https://github.com/ReactiveX/RxJava" target="_blank" rel="noopener">RxJava</a>正在Android开发者中变的越来越流行。唯一的问题就是上手不容易，尤其是大部分人之前都是使用命令式编程语言。但是一旦你弄明白了，你就会发现RxJava真是太棒了。<br>这里仅仅是帮助你了解RxJava，整个系列共有四篇文章，希望你看完这四篇文章之后能够了解RxJava背后的思想，并且喜欢上RxJava。</p>
 <p>RxJava最核心的两个东西是Observables（被观察者，事件源）和 Subscribers（观察者）。Observables发出一系列事件，Subscribers处理这些事件。这里的事件可以是任何你感兴趣的东西 （触摸事件，web接口调用返回的数据。。。）</p>
 <p>一个Observable可以发出零个或者多个事件，知道结束或者出错。每发出一个事件，就会调用它的Subscriber的onNext方法，最后调用Subscriber.onNext()或者Subscriber.onError()结束。</p>
 <p>Rxjava的看起来很想设计模式中的观察者模式，但是有一点明显不同，那就是如果一个Observerble没有任何的的Subscriber，那么这个Observable是不会发出任何事件的。</p>
-<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1></p>
+<h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2016/03/29/android/Google Develop for Android 系列/谷歌官方出的一套关于 Android 架构的实例参考/">谷歌官方出的一套关于 Android 架构的实例参考</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-29 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>原文 <a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="noopener">github.com</a></p>
+      <p></p><p>原文 <a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="noopener">github.com</a></p>
 <p>The Android framework offers a lot of flexibility when it comes to defining how to organize and <em>architect</em> an Android app. This freedom, whilst very valuable, can also result in apps with large classes, inconsistent naming and architectures (or lack of) that can make testing, maintaining and extending difficult.</p>
 <p>Android Architecture Blueprints is meant to demonstrate possible ways to help with these common problems. In this project we offer the same application implemented using different architectural concepts and tools.</p>
 <p>You can use these samples as a reference or as a starting point for creating your own apps. The focus here is on code structure, architecture, testing and maintainability. However, bear in mind that there are many ways to build apps with these architectures and tools, depending on your priorities, so these shouldn’t be considered canonical examples. The UI is deliberately kept simple.</p>
@@ -110,7 +124,7 @@
     <div>
       <h2><a href="/2016/03/25/android/RxJava/RxAndroid/">从案例学习RxAndroid</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-25 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p><a herf="https://medium.com/@kurtisnusbaum/rxandroid-basics-part-1-c0d5edcf6850">原文链接</a></p>
+      <p></p><p><a herf="https://medium.com/@kurtisnusbaum/rxandroid-basics-part-1-c0d5edcf6850">原文链接</a></p>
 <p>如果你在阅读这篇文章，相信你一定很想了解RxJava以及如何在Android应用中使用它。可能你已经见过RxJava的代码了，但仍然有些疑惑，愿你能在这篇文章里找到答案。</p>
 <p>当我第一次使用RxJava的时候我只是在照搬代码，这些代码能跑起来，但是我对RxJava的基础部分仍然存在误解，而且我找不到好的源码来学习。所以为了理解RxJava，我不得不一点一点学习，踩了不少坑。</p>
 <p>为了不让你把我踩过的坑再踩一遍，我会基于我的学习成果写一些例子出来，目的就是让你能够对RxJava有足够的了解，并能在你的Android应用中使用它。</p>
@@ -124,20 +138,20 @@
     <div>
       <h2><a href="/2016/03/23/android/小知识点/你应该知道的那些Android小经验/">Android小经验</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-23 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>原文出处：<a href="http://jayfeng.com/2016/03/18/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E9%82%A3%E4%BA%9BAndroid%E5%B0%8F%E7%BB%8F%E9%AA%8C/" target="_blank" rel="noopener">http://jayfeng.com/</a> </p>
+      <p></p><p>原文出处：<a href="http://jayfeng.com/2016/03/18/%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E9%82%A3%E4%BA%9BAndroid%E5%B0%8F%E7%BB%8F%E9%AA%8C/" target="_blank" rel="noopener">http://jayfeng.com/</a> </p>
 <p>做Android久了，就会踩很多坑，被坑的多了就有经验了，闲暇之余整理了部分，现挑选一些重要或者偏门的“小”经验做个记录。</p>
 <h2 id="查看SQLite日志"><a href="#查看SQLite日志" class="headerlink" title="查看SQLite日志"></a>查看SQLite日志</h2><p><code>adb shell setprop log.tag.SQLiteLog V</code></p>
 <p><code>adb shell setprop log.tag.SQLiteStatements V</code></p>
 <p>因为实现里用了Log.isLoggable(TAG, Log.VERBOSE)做了判断，LessCode的LogLess中也参考了这种机制：<a href="https://github.com/openproject/LessCode/blob/master/lesscode-core/src/main/java/com/jayfeng/lesscode/core/LogLess.java" target="_blank" rel="noopener">LogLess</a>。<br>使用这种方法就可以在Release版本也能做到查看应用的打印日志了。</p>
 <h2 id="PNG优化"><a href="#PNG优化" class="headerlink" title="PNG优化"></a>PNG优化</h2><p>APK打包会自动对PNG进行无损压缩，如果自行无损压缩是无效的。<br>当然进行有损压缩是可以的：<a href="https://tinypng.com/" target="_blank" rel="noopener">https://tinypng.com/</a></p>
-<h2 id="Tcpdump抓包"><a href="#Tcpdump抓包" class="headerlink" title="Tcpdump抓包"></a>Tcpdump抓包</h2></p>
+<h2 id="Tcpdump抓包"><a href="#Tcpdump抓包" class="headerlink" title="Tcpdump抓包"></a>Tcpdump抓包</h2><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2016/03/21/android/小知识点/android代码片段/">Android开发代码片段</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-21 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><h3 id="1、获取电源锁"><a href="#1、获取电源锁" class="headerlink" title="1、获取电源锁"></a>1、获取电源锁</h3><pre><code>public static void acquireWakeLock() {
+      <p></p><h3 id="1、获取电源锁"><a href="#1、获取电源锁" class="headerlink" title="1、获取电源锁"></a>1、获取电源锁</h3><pre><code>public static void acquireWakeLock() {
     unlockKeyBoard();
     try {
         if (null == mWakeLock) {
@@ -159,7 +173,7 @@
         DbUtils.exceptionHandler(e);
     }
 }
-</code></pre></p>
+</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
@@ -173,27 +187,17 @@
 </li>
 <li><p>全局变量放全局类中，模块私有放自己的管理类中，让常量清晰且集中.</p>
 </li>
-<li><p>不要相信庞大的管理类的东西会带来什么好处，可能是一场灾难，而要时刻注意单一职责原则，一个类专心做好一件事情更为清晰。</p></p>
+<li><p>不要相信庞大的管理类的东西会带来什么好处，可能是一场灾难，而要时刻注意单一职责原则，一个类专心做好一件事情更为清晰。</p></li></ol></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2016/03/01/随笔/日常使用到的梯子/">日常使用到的梯子</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-01 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
-      <p><p>日常生活中,由于天朝的局域网的限制,很多网站都无法进行使用,虽然国内也有替代的网站,但是作为开发人员来讲,这些事远远不够的,现在就讲我个人在生活工作中使用到梯子,进行总结一下</p>
+      <p></p><p>日常生活中,由于天朝的局域网的限制,很多网站都无法进行使用,虽然国内也有替代的网站,但是作为开发人员来讲,这些事远远不够的,现在就讲我个人在生活工作中使用到梯子,进行总结一下</p>
 <h2 id="PC端"><a href="#PC端" class="headerlink" title="PC端"></a>PC端</h2><p>##全局梯子<br>目前在PC上(window)使用到的全局的梯子 就是 赛风和VPN Gate</p>
 <h3 id="赛风"><a href="#赛风" class="headerlink" title="赛风"></a>赛风</h3><p>如果能够直接访问 <a herf="http://www.psiphon3.net/zh/index.html"> 直达</a></p>
 <h4 id="简单介绍"><a href="#简单介绍" class="headerlink" title="简单介绍"></a>简单介绍</h4><p>赛风是赛风公司的一款新翻墙工具，利用VPN, SSH和HTTP代理软件提供未经审查的访问互联网。赛风的客户端将自动寻找新的接入点，力求最大限度的绕过网络审查。<br></p>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2016/03/01/android/小知识点/Android开发中的小知识点汇总/">Android小知识库</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-03-01 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>这份是我工作以来，总结的小知识库，有些知识点现在看来太LOW了，把还觉得有用的分享出来！</p>
-<h3 id="Genymotion下载虚拟镜像Connection-timeout"><a href="#Genymotion下载虚拟镜像Connection-timeout" class="headerlink" title="Genymotion下载虚拟镜像Connection timeout"></a>Genymotion下载虚拟镜像Connection timeout</h3><p>Add new device出现的问题：</p>
-<p>Failed to deploy virtual device.<br>Unable to create virtual device.Connection timeout occurred.</p>
-<p>解决方案：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">当选择Google Nexus 5 - 6.0.0 - API 23 - 1080x1920下载device失败后，到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova下看到genymotion_vbox86p_6.0_160114_090449.ova，大小却是0KB，在C:\Users\用户主目录\AppData\Local\Genymobile\genymotion.log，打开该文件，找到类似</span><br><span class="line">    </span><br><span class="line">    “http://files2.genymotion.com/dists/6.0.0/ova/genymotion_vbox86p_6.0_160114_090449.ova”路径，即您想要下载的镜像文件URL；`</span><br><span class="line"></span><br><span class="line">用迅雷去下载，下载完成后放到C:\Users\用户主目录\AppData\Local\Genymobile\Genymotion\ova；</span><br><span class="line">重新点击Google Nexus 5 - 6.0.0 - API 23 - 1080x1920去下载，验证安装后即会显示在设备列表中。</span><br></pre></td></tr></table></figure></p></p>
     </div>
   </div>
  
@@ -219,9 +223,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Search..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -234,7 +236,7 @@
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"></a>
           </div>
         </div>
         <div class="row for-name">

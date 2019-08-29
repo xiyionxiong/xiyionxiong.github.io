@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Docker导出、保存镜像 | 熊猫博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="一只熊猫🐼">
-  <meta name="keywords" content="">
+  <meta name="keywords" content>
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
   <script id="hexo-configurations">
   var CONFIG = {
@@ -77,7 +77,7 @@
 <p>现在就可以在任何装 docker 的地方加载 刚保存的镜像了</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load  /home/myubuntu-save-1204.tar</span><br></pre></td></tr></table></figure>
 <h2 id="3-导出-export-与-保存-save-的区别"><a href="#3-导出-export-与-保存-save-的区别" class="headerlink" title="3.导出 export 与 保存 save 的区别"></a>3.导出 export 与 保存 save 的区别</h2><p> (1).export导出的镜像文件大小  小于 save保存的镜像</p>
-<p> (2).export 导出（import导入）是根据容器拿到的镜像，再导入时会丢失镜像所有的历史，所以无法进行回滚操作（docker tag <layer id=""> <image name="">）；而save保存（load加载）的镜像，没有丢失镜像的历史，可以回滚到之前的层（layer）。（查看方式：docker images –tree）</image></layer></p>
+<p> (2).export 导出（import导入）是根据容器拿到的镜像，再导入时会丢失镜像所有的历史，所以无法进行回滚操作（docker tag <layer id> <image name>）；而save保存（load加载）的镜像，没有丢失镜像的历史，可以回滚到之前的层（layer）。（查看方式：docker images –tree）</image></layer></p>
 <p>注：导入加载进来觉得不合适可以使用 docker rm 容器ID 、 docker rmi 镜像ID 来删掉。</p>
 <p>​       移除所有的容器和镜像（大扫除）：</p>
  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">kill</span> (docker ps -q) ; docker rm (docker ps -a -q) ; docker rmi $(docker images -q -a)</span><br></pre></td></tr></table></figure>
@@ -134,9 +134,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Search..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -149,7 +147,7 @@
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"></a>
           </div>
         </div>
         <div class="row for-name">

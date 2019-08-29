@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Android MotionEvent详解 | 熊猫博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="一只熊猫🐼">
-  <meta name="keywords" content="">
+  <meta name="keywords" content>
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
   <script id="hexo-configurations">
   var CONFIG = {
@@ -78,7 +78,7 @@ switch(action) {
     MotionEvent.ACTION_UP:
         break;
 </code></pre><p> 这里就引入了关于MotionEvent的一个重要概念，事件类型。事件类型就是指MotionEvent对象所代表的动作。比如说，当你的一个手指在屏幕上滑动一下时，系统会产生一系列的触摸事件对象,他们所代表的动作有所不同。有的事件代表你手指按下这个动作,有的事件代表你手指在屏幕上滑动,还有的事件代表你手指离开屏幕。这些事件的事件类型就分别为ACTION_DOWN,ACTION_MOVE,和<strong>ACTION_UP</strong>。上述这个动作所产生的一系列事件，被称为一个事件流，它包括一个<strong>ACTION_DOWN</strong>事件，很多个<strong>ACTION_MOVE</strong>事件，和一个ACTION_UP事件。</p>
-<p><img src="https://d9.usercdn.com/2/i/04033/9g2l6srojvha.gif" alt=""></p>
+<p><img src="https://d9.usercdn.com/2/i/04033/9g2l6srojvha.gif" alt></p>
 <p> 当然，除了这三个类型外，还有很多不同的事件类型,比如ACTION_CANCEL。它代表当前的手势被取消。要理解这个类型，就必须要了解ViewGroup分发事件的机制。一般来说，如果一个子视图接收了父视图分发给它的ACTION_DOWN事件，那么与ACTION_DOWN事件相关的事件流就都要分发给这个子视图，但是如果父视图希望拦截其中的一些事件，不再继续转发事件给这个子视图的话，那么就需要给子视图一个ACTION_CANCEL事件。<br> 其他的类型会在接下来的博文中一一解释。</p>
 <h4 id="Pointer"><a href="#Pointer" class="headerlink" title="Pointer"></a>Pointer</h4><p> 细心的同学会发现，在上一节我描述用户手指在屏幕上滑动的例子时，特地说明了手指的数量为一个。那么当用户两个或者多个手指在屏幕上滑动时，系统又会产生怎样的事件流呢？<br> 为了可以表示多个触摸点的动作，MotionEvent中引入了Pointer的概念，一个pointer就代表一个触摸点，每个pointer都有自己的事件类型，也有自己的横轴坐标值。一个MotionEvent对象中可能会存储多个pointer的相关信息，每个pointer都会有一个自己的id和index。pointer的id在整个事件流中是不会发生变化的，但是index会发生变化。<br> MotionEvent类中的很多方法都是可以传入一个int值作为参数的，其实传入的就是pointer的index值。比如getX(pointerIndex)和getY(pointerIndex)，此时，它们返回的就是index所代表的触摸点相关事件坐标值。<br> 由于pointer的index值在不同的MotionEvent对象中会发生变化，但是id值却不会变化。所以，当我们要记录一个触摸点的事件流时，就只需要保存其id,然后使用findPointerIndex(int)来获得其index值，然后再获得其他信息。</p>
 <pre><code>private final static  INVALID_ID = -;
@@ -127,7 +127,7 @@ return ;
 <p><code>ACTION_POINTER_DOWN</code>:代表用户又使用一个手指触摸到屏幕上，也就是说，在已经有一个触摸点的情况下，有新出现了一个触摸点。</p>
 <p><code>ACTION_POINTER_UP</code>:代表用户的一个手指离开了触摸屏，但是还有其他手指还在触摸屏上。也就是说，在多个触摸点存在的情况下，其中一个触摸点消失了。它与ACTION_UP的区别就是，它是在多个触摸点中的一个触摸点消失时（此时，还有触摸点存在，也就是说用户还有手指触摸屏幕）产生，而ACTION_UP可以说是最后一个触摸点消失时产生。<br> 那么，用户先两个手指先后接触屏幕，同时滑动，然后在先后离开这一套动作所产生的事件流是什么样的呢？<br> 它所产生的事件流如下：</p>
 <p>先产生一个ACTION_DOWN事件，代表用户的第一个手指接触到了屏幕。<br>再产生一个ACTION_POINTER_DOWN事件，代表用户的第二个手指接触到了屏幕。<br>很多的ACTION_MOVE事件，但是在这些MotionEvent对象中，都保存着两个触摸点滑动的信息，相关的代码我们会在文章的最后进行演示。<br>一个ACTION_POINTER_UP事件，代表用户的一个手指离开了屏幕。<br>如果用户剩下的手指还在滑动时，就会产生很多ACTION_MOVE事件。<br>一个ACTION_UP事件，代表用户的最后一个手指离开了屏幕</p>
-<p><img src="https://d9.usercdn.com/2/i/04033/2tkzlfdu5yrq.gif" alt=""></p>
+<p><img src="https://d9.usercdn.com/2/i/04033/2tkzlfdu5yrq.gif" alt></p>
 <h4 id="getAction-和-getActionMasked"><a href="#getAction-和-getActionMasked" class="headerlink" title="getAction 和 getActionMasked"></a>getAction 和 getActionMasked</h4><p> 看到文章开头那段代码的同学可能会有点疑问：好像在很多代码里，大家都是通过getAction获得事件类型的，那么它和getActionMasked又有什么不同呢？<br> 从上一节我们可以得知，一个MotionEvent对象中可以包含多个触摸点的事件。当MotionEvent对象只包含一个触摸点的事件时，上边两个函数的结果是相同的，但是当包含多个触摸点时，二者的结果就不同啦。<br> getAction获得的int值是由pointer的index值和事件类型值组合而成的，而getActionWithMasked则只返回事件的类型值<br> 举个例子（注:假设了int中不同位所代表的含义，可能不是例子所中的前8位代表id,后8位代表事件类型）:</p>
 <p>getAction returns x0105.<br>getActionMasked will return x0005<br>其中x0100就是pointer的index值。<br> 一般来说，getAction() &amp; ACTION_POINTER_INDEX_MASK就获得了pointer的id,等同于getActionIndex函数;getAction()&amp; ACTION_MASK就获得了pointer的事件类型，等同于getActionMasked函数。</p>
 <p> 为了效率，Android系统在处理ACTION_MOVE事件时会将连续的几个多触点移动事件打包到一个MotionEvent对象中。我们可以通过getX(int)和getY(int)来获得最近发生的一个触摸点事件的坐标，然后使用getHistorical(int,int)和getHistorical(int,int)来获得时间稍早的触点事件的坐标，二者是发生时间先后的关系。所以，我们应该先处理通过getHistoricalXX相关函数获得的事件信息，然后在处理当前的事件信息。<br> 下边就是Android Guide中相关的例子:</p>
@@ -196,9 +196,7 @@ return ;
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Search..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -211,7 +209,7 @@ return ;
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"></a>
           </div>
         </div>
         <div class="row for-name">

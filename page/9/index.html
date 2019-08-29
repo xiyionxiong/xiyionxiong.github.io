@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>熊猫博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="一只熊猫🐼">
-  <meta name="keywords" content="">
+  <meta name="keywords" content>
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
   <script id="hexo-configurations">
   var CONFIG = {
@@ -61,18 +61,30 @@
 
   <div class="lx-entry padding">
     <div>
+      <h2><a href="/2014/08/08/android/Android Skills/webview入门/">WebView入门</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-08-08 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
+      <p><blockquote>
+<p>WebView控件可以实现一个浏览器的功能，直接在控件中显示指定的网页</p>
+</blockquote>
+</p><p>第一种方式</p>
+<p>第一种方式是不需要，在布局文件中，使用WebView控件的</p>
+<p>步骤：<br></p>
+    </div>
+  </div>
+  <div class="lx-entry padding">
+    <div>
       <h2><a href="/2014/07/18/android/Android Skills/TypedArray/">解析：TypedArray 为什么需要调用recycle()</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-07-18 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>在 Android 自定义 View 的时候，需要使用 TypedArray 来获取 XML layout 中的属性值，使用完之后，需要调用 recyle() 方法将 TypedArray 回收。</p>
+      <p></p><p>在 Android 自定义 View 的时候，需要使用 TypedArray 来获取 XML layout 中的属性值，使用完之后，需要调用 recyle() 方法将 TypedArray 回收。</p>
 <p>那么问题来了，这个TypedArray是个什么东西？为什么需要回收呢？TypedArray并没有占用IO，线程，它仅仅是一个变量而已，为什么需要 recycle？<br>为了解开这个谜，首先去找官网的 Documentation，到找 TypedArray 方法，得到下面一个简短的回答：</p>
-<p><img src="http://i.imgur.com/0YmjniV.png" alt=""></p></p>
+<p><img src="http://i.imgur.com/0YmjniV.png" alt></p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/06/15/android/Android Skills/Android内核 ServiceManager/">Android内核 ServiceManager</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-06-15 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>getSystemService很尽职，你知道吗?</p>
+      <p></p><p>getSystemService很尽职，你知道吗?</p>
 <p>   那个…嗯…曾记否上篇的<code>Android Binder</code>中留下的疑问?就是在Context的实现类中使用<br>getSystemService(String serviceName)方法获取一个系统服务，那么这些系统服务的Binder<br>引用时如何传递给客户端的呢?其实这里有个关键点，就是系统服务并不是通过startService()启<br>动的。<br></p>
     </div>
   </div>
@@ -80,14 +92,14 @@
     <div>
       <h2><a href="/2014/06/12/android/Android Skills/Android内核 Binder/">Android内核 Binder</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-06-12 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>   Binder,英文的意思是别针、回形针。平常我们经常用回形针把几张纸夹起来。而在Android<br>中，Binder用于完成进程间通信（IPC），就是把多个线程夹起来。比如，普通应用程序可以<br>调用音乐播放服务的播放、暂停、停止等功能。</p></p>
+      <p></p><p>   Binder,英文的意思是别针、回形针。平常我们经常用回形针把几张纸夹起来。而在Android<br>中，Binder用于完成进程间通信（IPC），就是把多个线程夹起来。比如，普通应用程序可以<br>调用音乐播放服务的播放、暂停、停止等功能。</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/06/08/android/Android Skills/Android内核 异步线程的实现（Looper、MessageQueue、Handler）/">异步线程的实现（Looper、MessageQueue、Handler）</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-06-08 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>什么是异步消息处理线程?</p>
+      <p></p><p>什么是异步消息处理线程?</p>
 <p>对于普通线程来说，执行完run()方法内的代码后线程就结束了。所谓异步消息处理线程<br>而言，线程启动后会进入一个无限循环体之中，每循环一次，就从其内部的消息队列中取出一<br>个消息，并回调该消息相应的消息处理函数，执行完一个消息后再继续回到循环体之中。除非<br>消息队列为空，线程会暂停，直到消息队列中有新的消息了，则继续无限循环。</p>
 <pre><code>异步消息处理线程其本质上也是一个线程，只不过这种线程的执行代码被设计成如上所描述
 </code></pre><p>的逻辑而已。一般来说，当同时处在以下两种需求时使用异步消息处理线程：<br></p>
@@ -97,14 +109,14 @@
     <div>
       <h2><a href="/2014/06/01/android/Android Skills/CountDownTimer（倒数计时器）/">CountDownTimer（倒数计时器）</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-06-01 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>  其实在很多时候，我们都需要一个倒计时的功能，这个功能我们自己可以根据java自带的TimerTask<br>去实现。这里，提到的是一个在基本Android开发书籍中都很少介绍到的一个Android原生自带倒数计<br>时器 - CountDownTimer 。</p></p>
+      <p></p><p>  其实在很多时候，我们都需要一个倒计时的功能，这个功能我们自己可以根据java自带的TimerTask<br>去实现。这里，提到的是一个在基本Android开发书籍中都很少介绍到的一个Android原生自带倒数计<br>时器 - CountDownTimer 。</p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/05/19/android/Android Skills/万能的ViewHolder/">ViewHolder的作用</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-05-19 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>Adapter的getVIew()以得到旧视图（convertView）：</p>
+      <p></p><p>Adapter的getVIew()以得到旧视图（convertView）：</p>
 <pre><code>/**
  * Get a View that displays the data at the specified position in the data set. You can either
  * create a View manually or inflate it from an XML layout file. When the View is inflated, the
@@ -124,45 +136,32 @@
  * @return A View corresponding to the data at the specified position.
  */
 View getView(int position, View convertView, ViewGroup parent);
-</code></pre></p>
+</code></pre><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/05/17/android/Android Skills/Android Skill 下拉刷新/">下拉刷新</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-05-17 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>最近在研究Android的下拉刷新功能，看了几个别人写的自定义控件：</p>
-<p>1.android-pulltorefresh：<a href="https://github.com/chrisbanes/Android-PullToRefresh" target="_blank" rel="noopener">https://github.com/chrisbanes/Android-PullToRefresh</a><br>2.android-pulltorefresh-listview：<a href="https://github.com/johannilsson/android-pulltorefresh" target="_blank" rel="noopener">https://github.com/johannilsson/android-pulltorefresh</a></p></p>
+      <p></p><p>最近在研究Android的下拉刷新功能，看了几个别人写的自定义控件：</p>
+<p>1.android-pulltorefresh：<a href="https://github.com/chrisbanes/Android-PullToRefresh" target="_blank" rel="noopener">https://github.com/chrisbanes/Android-PullToRefresh</a><br>2.android-pulltorefresh-listview：<a href="https://github.com/johannilsson/android-pulltorefresh" target="_blank" rel="noopener">https://github.com/johannilsson/android-pulltorefresh</a></p><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/05/17/android/Android Skills/Android 自定义Loader/">Android 自定义Loader</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-05-17 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><h3 id="自定义Loader获取本机照片"><a href="#自定义Loader获取本机照片" class="headerlink" title="自定义Loader获取本机照片"></a>自定义Loader获取本机照片</h3><h4 id="图片实体类（ImageBean）"><a href="#图片实体类（ImageBean）" class="headerlink" title="图片实体类（ImageBean）"></a>图片实体类（ImageBean）</h4></p>
+      <p></p><h3 id="自定义Loader获取本机照片"><a href="#自定义Loader获取本机照片" class="headerlink" title="自定义Loader获取本机照片"></a>自定义Loader获取本机照片</h3><h4 id="图片实体类（ImageBean）"><a href="#图片实体类（ImageBean）" class="headerlink" title="图片实体类（ImageBean）"></a>图片实体类（ImageBean）</h4><p></p>
     </div>
   </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2014/05/15/android/Android Skills/Android TextView 技巧/">Android Textview 技巧</a></h2>
       <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-05-15 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><h3 id="部分文字设置颜色"><a href="#部分文字设置颜色" class="headerlink" title="部分文字设置颜色"></a>部分文字设置颜色</h3><pre><code>TextView tv = new TextView(this);
+      <p></p><h3 id="部分文字设置颜色"><a href="#部分文字设置颜色" class="headerlink" title="部分文字设置颜色"></a>部分文字设置颜色</h3><pre><code>TextView tv = new TextView(this);
 //添加css样式
 tv.setText(Html.fromHtml(&quot;&lt;font color=\&quot;E32910\&quot;&gt;&quot;+&quot;红色&quot;+&quot;&lt;/font&gt;的字&quot;));
-</code></pre></p>
-    </div>
-  </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2014/05/13/android/Android Skills/Android String相关类性能测试/">String相关类性能测试</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-05-13 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><p>String、StringBuffer、StringBuilder</p>
-<pre><code>String： String是一个不可变的对象，每次对String类的改变实质都是新生成了一个新的String，然后把指针指向新String对象。每次生成对象都会对系统性能产生影响，速度会相当慢。
-
-StringBuffer： 在字符改变的时候，不会产生新的对象，线程安全的可变字符序列。
-
-StringBuilder： 同StringBuffer类似，线程不安全的可变字符序列。
-</code></pre></p>
+</code></pre><p></p>
     </div>
   </div>
  
@@ -188,9 +187,7 @@ StringBuilder： 同StringBuffer类似，线程不安全的可变字符序列。
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Search..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -203,7 +200,7 @@ StringBuilder： 同StringBuffer类似，线程不安全的可变字符序列。
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"></a>
           </div>
         </div>
         <div class="row for-name">

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Android内核 ServiceManager | 熊猫博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="一只熊猫🐼">
-  <meta name="keywords" content="">
+  <meta name="keywords" content>
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
   <script id="hexo-configurations">
   var CONFIG = {
@@ -276,7 +276,7 @@ public static final String LAYOUT_INFLATER_SERVICE = &quot;layout_inflater&quot;
  /*******************************下面还有很多很多*************************/
 </code></pre><p>   6.以上可以看出，如果在Activity和ContextThemeWrapper不能帮你取到服务的话，最终会回到Context来一个”大搜查”。</p>
 <p>ServiceManager 管理的服务</p>
-<p>   ServiceManager是一个独立的进程!这里特别强调，它是一个进程!作用就跟它的名称一样，管理各种系统服务，如下图所示：<br><img src="http://img.blog.csdn.net/20141112182131029?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p>   ServiceManager是一个独立的进程!这里特别强调，它是一个进程!作用就跟它的名称一样，管理各种系统服务，如下图所示：<br><img src="http://img.blog.csdn.net/20141112182131029?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt></p>
 <p>   其实ServiceManager本身也是一个Service，Framework提供了一个系统函数，可以获取ServiceManager<br>对应的Binder引用，那就是BinderInternal.getContextObject()。该静态函数返回ServiceManager后，就<br>可以通过ServiceManger提供的方法获取其他服务Service的Binder引用。这种设计模式就好比：ServiceManager<br>是一个公司的总机，这个总计的号码是公开的，系统中任何进程都可以使用BinderInternal.getContextObject()<br>获取该总机的Binder对象，而当前用户想联系公司的其他人（服务）的时候，则要经过总机再获取到分机的号码。<br>这种设计模式的优点就是：系统中仅仅只暴漏一个全局Binder引用，那就是ServiceManager，而其他服务则可以<br>隐藏起来，从而有助于系统服务的扩展，以及调用系统服务的安全检查。其他系统服务在启动的时候，首先把自己<br>的Binder对象传递给ServiceManager，就是所谓的注册（addService）。</p>
 <p>BinderInternal.getContextObject() -&gt;ServiceManager -&gt;其它Service的Binder引用</p>
 <p>那么我们来看一看ServiceManager.getService()的源码：</p>
@@ -541,7 +541,7 @@ public static class MemoryInfo implements Parcelable {
     }
 }
 </code></pre><p>这种通过Manager 访问远程服务的模型如下图：</p>
-<p><img src="http://img.blog.csdn.net/20141120163612296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+<p><img src="http://img.blog.csdn.net/20141120163612296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt></p>
 
       </div>
     </div>
@@ -593,9 +593,7 @@ public static class MemoryInfo implements Parcelable {
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Search..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -608,7 +606,7 @@ public static class MemoryInfo implements Parcelable {
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"></a>
           </div>
         </div>
         <div class="row for-name">

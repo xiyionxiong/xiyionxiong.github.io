@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>解析：TypedArray 为什么需要调用recycle() | 熊猫博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="一只熊猫🐼">
-  <meta name="keywords" content="">
+  <meta name="keywords" content>
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
   <script id="hexo-configurations">
   var CONFIG = {
@@ -62,7 +62,7 @@
       <div>
         <p>在 Android 自定义 View 的时候，需要使用 TypedArray 来获取 XML layout 中的属性值，使用完之后，需要调用 recyle() 方法将 TypedArray 回收。</p>
 <p>那么问题来了，这个TypedArray是个什么东西？为什么需要回收呢？TypedArray并没有占用IO，线程，它仅仅是一个变量而已，为什么需要 recycle？<br>为了解开这个谜，首先去找官网的 Documentation，到找 TypedArray 方法，得到下面一个简短的回答：</p>
-<p><img src="http://i.imgur.com/0YmjniV.png" alt=""></p>
+<p><img src="http://i.imgur.com/0YmjniV.png" alt></p>
 <a id="more"></a>
 <p>这里写图片描述</p>
 <p>告诉我们在确定使用完之后调用 recycle() 方法。于是进一步查看该方法的解释，如下：<br>这里写图片描述</p>
@@ -176,9 +176,7 @@ public class TypedArray {
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Search..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -191,7 +189,7 @@ public class TypedArray {
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"></a>
           </div>
         </div>
         <div class="row for-name">

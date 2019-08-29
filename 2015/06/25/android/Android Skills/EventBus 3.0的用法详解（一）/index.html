@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>EventBus 3.0的用法详解（一） | 熊猫博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="一只熊猫🐼">
-  <meta name="keywords" content="">
+  <meta name="keywords" content>
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
   <script id="hexo-configurations">
   var CONFIG = {
@@ -69,7 +69,7 @@
 <h4 id="1、添加依赖库："><a href="#1、添加依赖库：" class="headerlink" title="1、添加依赖库："></a>1、添加依赖库：</h4><p>首先你要为你的app添加依赖库：</p>
 <pre><code>compile &apos;de.greenrobot:eventbus:3.0.0-beta1&apos;
 </code></pre><p>有些人会问为什么是beta版本，因为eventbus现阶段3.0版本只处于beta测试阶段。有些人会问如何找到·eventbus 3.0.0·版本，具体添加:</p>
-<p><img src="https://segmentfault.com/img/bVr7mp" alt=""></p>
+<p><img src="https://segmentfault.com/img/bVr7mp" alt></p>
 <h4 id="2、注册"><a href="#2、注册" class="headerlink" title="2、注册"></a>2、注册</h4><p>举个例子，你需要在一个activity中注册eventbus事件，然后定义接收方法，这和Android的广播机制很像，你需要首先注册广播，然后需要编写内部类，实现接收广播，然后操作UI,在EventBus中，你同样需要这么做。</p>
 <pre><code>@Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -164,9 +164,7 @@ public void helloEventBus(MessageEvent message){
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Search..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -179,7 +177,7 @@ public void helloEventBus(MessageEvent message){
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"></a>
           </div>
         </div>
         <div class="row for-name">

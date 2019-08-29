@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Google Java编程风格指南 | 熊猫博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="一只熊猫🐼">
-  <meta name="keywords" content="">
+  <meta name="keywords" content>
   <meta name="description" content="大道至简，真理在众！技术在手，代码在心!">
   <script id="hexo-configurations">
   var CONFIG = {
@@ -108,13 +108,13 @@
 <p>不可能满足列限制的行(例如，Javadoc中的一个长URL，或是一个长的JSNI方法参考)。<br>package和import语句(见3.2节和3.3节)。<br>注释中那些可能被剪切并粘贴到shell中的命令行。<br>4.5 自动换行<br>术语说明：一般情况下，一行长代码为了避免超出列限制(80或100个字符)而被分为多行，我们称之为自动换行(line-wrapping)。</p>
 <p>我们并没有全面，确定性的准则来决定在每一种情况下如何自动换行。很多时候，对于同一段代码会有好几种有效的自动换行方式。</p>
 <p>Tip: 提取方法或局部变量可以在不换行的情况下解决代码过长的问题(是合理缩短命名长度吧)<br>4.5.1 从哪里断开<br>自动换行的基本准则是：更倾向于在更高的语法级别处断开。</p>
-<p>如果在非赋值运算符处断开，那么在该符号前断开(比如+，它将位于下一行)。注意：这一点与Google其它语言的编程风格不同(如C++和JavaScript)。 这条规则也适用于以下“类运算符”符号：点分隔符(.)，类型界限中的&amp;（<t extends="" foo="" &="" bar="">)，catch块中的管道符号(catch (FooException | BarException e)<br>如果在赋值运算符处断开，通常的做法是在该符号后断开(比如=，它与前面的内容留在同一行)。这条规则也适用于foreach语句中的分号。<br>方法名或构造函数名与左括号留在同一行。<br>逗号(,)与其前面的内容留在同一行。<br>4.5.2 自动换行时缩进至少+4个空格<br>自动换行时，第一行后的每一行至少比第一行多缩进4个空格(注意：制表符不用于缩进。见2.3.1节)。</t></p>
+<p>如果在非赋值运算符处断开，那么在该符号前断开(比如+，它将位于下一行)。注意：这一点与Google其它语言的编程风格不同(如C++和JavaScript)。 这条规则也适用于以下“类运算符”符号：点分隔符(.)，类型界限中的&amp;（<t extends foo & bar>)，catch块中的管道符号(catch (FooException | BarException e)<br>如果在赋值运算符处断开，通常的做法是在该符号后断开(比如=，它与前面的内容留在同一行)。这条规则也适用于foreach语句中的分号。<br>方法名或构造函数名与左括号留在同一行。<br>逗号(,)与其前面的内容留在同一行。<br>4.5.2 自动换行时缩进至少+4个空格<br>自动换行时，第一行后的每一行至少比第一行多缩进4个空格(注意：制表符不用于缩进。见2.3.1节)。</t></p>
 <p>当存在连续自动换行时，缩进可能会多缩进不只4个空格(语法元素存在多级时)。一般而言，两个连续行使用相同的缩进当且仅当它们开始于同级语法元素。</p>
 <p>第4.6.3水平对齐一节中指出，不鼓励使用可变数目的空格来对齐前面行的符号。</p>
 <p>4.6 空白<br>4.6.1 垂直空白<br>以下情况需要使用一个空行：</p>
 <p>类内连续的成员之间：字段，构造函数，方法，嵌套类，静态初始化块，实例初始化块。<br>例外：两个连续字段之间的空行是可选的，用于字段的空行主要用来对字段进行逻辑分组。<br>在函数体内，语句的逻辑分组间使用空行。<br>类内的第一个成员前或最后一个成员后的空行是可选的(既不鼓励也不反对这样做，视个人喜好而定)。<br>要满足本文档中其他节的空行要求(比如3.3节：import语句)<br>多个连续的空行是允许的，但没有必要这样做(我们也不鼓励这样做)。</p>
 <p>4.6.2 水平空白<br>除了语言需求和其它规则，并且除了文字，注释和Javadoc用到单个空格，单个ASCII空格也出现在以下几个地方：</p>
-<p>分隔任何保留字与紧随其后的左括号(()(如if, for catch等)。<br>分隔任何保留字与其前面的右大括号(})(如else, catch)。<br>在任何左大括号前({)，两个例外：<br>@SomeAnnotation({a, b})(不使用空格)。<br>String[][] x = foo;(大括号间没有空格，见下面的Note)。<br>在任何二元或三元运算符的两侧。这也适用于以下“类运算符”符号：<br>类型界限中的&amp;(<t extends="" foo="" &="" bar="">)。<br>catch块中的管道符号(catch (FooException | BarException e)。<br>foreach语句中的分号。<br>在, : ;及右括号())后<br>如果在一条语句后做注释，则双斜杠(//)两边都要空格。这里可以允许多个空格，但没有必要。<br>类型和变量之间：List list。<br>数组初始化中，大括号内的空格是可选的，即new int[] {5, 6}和new int[] { 5, 6 }都是可以的。<br>Note：这个规则并不要求或禁止一行的开关或结尾需要额外的空格，只对内部空格做要求。<br>4.6.3 水平对齐：不做要求<br>术语说明：水平对齐指的是通过增加可变数量的空格来使某一行的字符与上一行的相应字符对齐。</t></p>
+<p>分隔任何保留字与紧随其后的左括号(()(如if, for catch等)。<br>分隔任何保留字与其前面的右大括号(})(如else, catch)。<br>在任何左大括号前({)，两个例外：<br>@SomeAnnotation({a, b})(不使用空格)。<br>String[][] x = foo;(大括号间没有空格，见下面的Note)。<br>在任何二元或三元运算符的两侧。这也适用于以下“类运算符”符号：<br>类型界限中的&amp;(<t extends foo & bar>)。<br>catch块中的管道符号(catch (FooException | BarException e)。<br>foreach语句中的分号。<br>在, : ;及右括号())后<br>如果在一条语句后做注释，则双斜杠(//)两边都要空格。这里可以允许多个空格，但没有必要。<br>类型和变量之间：List list。<br>数组初始化中，大括号内的空格是可选的，即new int[] {5, 6}和new int[] { 5, 6 }都是可以的。<br>Note：这个规则并不要求或禁止一行的开关或结尾需要额外的空格，只对内部空格做要求。<br>4.6.3 水平对齐：不做要求<br>术语说明：水平对齐指的是通过增加可变数量的空格来使某一行的字符与上一行的相应字符对齐。</t></p>
 <p>这是允许的(而且在不少地方可以看到这样的代码)，但Google编程风格对此不做要求。即使对于已经使用水平对齐的代码，我们也不需要去保持这种风格。</p>
 <p>以下示例先展示未对齐的代码，然后是对齐的代码：</p>
 <p>private int x; // this is fine<br>private Color color; // this too</p>
@@ -246,9 +246,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="Search..." spellcheck="false"
-             type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="Search..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -261,7 +259,7 @@
       <div class="col">
         <div class="row for-pic">
           <div class="profile-pic">
-            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"/></a>
+            <a href="/"><img src="/images/avatar.png" alt="一只熊猫🐼"></a>
           </div>
         </div>
         <div class="row for-name">
