@@ -49,7 +49,7 @@
     <div class="avatar"><a href="/"><img src="/images/avatar.png"></a></div>
     <span>一只熊猫🐼</span>
     <h2>熊猫博客</h2>
-    <span>——</span>
+    <span>——大道至简，真理在众！技术在手，代码在心!</span>
     <div class="social-links">
 <a href="https://github.com/xiyionxiong" target="_blank"><i class="fa fa-github fa-fw"></i></a><a href="mailto:camchin1@msn.cn"><i class="fa fa-envelope fa-fw"></i></a><a href="http://weibo.com/1743454163/" target="_blank"><i class="fa fa-weibo fa-fw"></i></a><a href="https://twitter.com/w_0482" target="_blank"><i class="fa fa-twitter fa-fw"></i></a><a href="https://www.facebook.com/ken.shoaw" target="_blank"><i class="fa fa-facebook fa-fw"></i></a><a href="https://instagram.com/oneapanda" target="_blank"><i class="fa fa-instagram fa-fw"></i></a>
 </div>
@@ -59,6 +59,24 @@
 <div id="lx-main-content">
   <div class="lx-post"> 
 
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2015/06/12/android/Google Develop for Android 系列/Google Develop for Android 系列五 － Language and Libraries/">Google Develop for Android 系列五 － Language and Libraries</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2015-06-12 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
+      <p></p><p>作者 : lightsky<br><a href="http://www.lightskystreet.com/2015/06/07/google-for-android-5-language-libraries/" target="_blank" rel="noopener">原文链接</a></p>
+<hr>
+<h2 id="使用Android自身适当的数据结构"><a href="#使用Android自身适当的数据结构" class="headerlink" title="使用Android自身适当的数据结构"></a>使用Android自身适当的数据结构</h2><p>出于对内存分配的考虑，传统的集合类在Android上可能不是最优选。Android特地提供的一些集合类型在很多情况下更合适，比如 ArrayMap（好过HashMap），SparseArray。当集合非常大的时候，那些一般的集合仍然是合适的。而较小的集合则受益于自动装箱和内 存分配的减少。</p>
+<h2 id="Serialization"><a href="#Serialization" class="headerlink" title="Serialization"></a>Serialization</h2><h3 id="Parcelable"><a href="#Parcelable" class="headerlink" title="Parcelable"></a>Parcelable</h3><p>Parcelable是Andorid的IPC序列化格式，或者说它是一种可以通过Binder传递数据的接口，它有以下限制</p>
+<ul>
+<li>将Parcels写入到硬盘中是不安全的</li>
+<li>你可以实现自己的Parcelables，但是如果在unparceling（Parcel反序列化）时不能访问到相同到类，那么就会unparcel就失败（对于向framework传递Parcels也适用）。</li>
+<li>一些对象被存入到Parcels而不是共享内存中的情况，比如文件描述器，也许是很好的性能优化，但是隐藏了该Parcel对象真实的内存耗费（直到该对象被unparceling反序列化后才会占用真实的内存）。</li>
+</ul>
+<h3 id="持久化的Bundles"><a href="#持久化的Bundles" class="headerlink" title="持久化的Bundles"></a>持久化的Bundles</h3><p>从API21开始，有一个新的PersistableBundle类，该类型的Bundle持有一个数据表支持XML格式数据的序列化。它接收的数据类型只能是Bundle所支持的子类。特别的，它不支持Parcelable对象。</p>
+<p>当处理一些需要通过Binder IPC传递的数据时，PersistableBundle类非常有用。</p>
+<h3 id="避免Java序列化"><a href="#避免Java序列化" class="headerlink" title="避免Java序列化"></a>避免Java序列化</h3><p></p>
+    </div>
+  </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2015/06/11/android/Google Develop for Android 系列/Google Develop for Android 系列四 － Network最佳实践/">Google Develop for Android 系列四 － Network最佳实践</a></h2>
@@ -164,32 +182,6 @@
       <p></p><p>少年不知精贵，老了望批空流泪。</p><p></p>
     </div>
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2014/09/18/android/Android Skills/widget用法/">widget用法</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2014-09-18 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p></p><p>September 23, 2015 8:21 PM</p>
-<p>创建AppWidgetProvider的子类</p>
-<pre><code>public class MyAppWidgetProvider extends AppWidgetProvider {
-@Override
-public void onEnabled(Context context) {
-    // 第一次创建执行
-    // 服务监控进程状态
-    Intent service = new Intent(context,TaskWidgetService.class);
-    context.startService(service);
-    super.onEnabled(context);
-}
-
-@Override
-public void onDisabled(Context context) {
-    //删除最后一个执行
-    Intent service = new Intent(context,TaskWidgetService.class);
-    context.stopService(service);
-    super.onDisabled(context);
-}
-}</code></pre><p></p>
-    </div>
-  </div>
  
 
 <div id="pagination">
@@ -243,13 +235,7 @@ public void onDisabled(Context context) {
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-bookmark fa-fw"></i>页面</span>
         <ul>
-          <li><a href="/categories/android">Android</a></li>
-        <li><a href="/tags/Java">Java</a></li>
-        <li><a href="/categories/Docker">Docker容器</a></li>
-        <li><a href="/categories/web">前端</a></li>
-        <li><a href="/categories/golang">Golang</a></li>
-        <li><a href="/categories/linux">Linux</a></li>
-        <li><a href="/categories/随笔">随笔</a></li>
+          <li><a href="/2019/09/04/profile/index/">个人简历</a></li>
         <li><a href="/instagram">相册</a></li>
         </ul>
     </li>

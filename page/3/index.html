@@ -49,7 +49,7 @@
     <div class="avatar"><a href="/"><img src="/images/avatar.png"></a></div>
     <span>一只熊猫🐼</span>
     <h2>熊猫博客</h2>
-    <span>——</span>
+    <span>——大道至简，真理在众！技术在手，代码在心!</span>
     <div class="social-links">
 <a href="https://github.com/xiyionxiong" target="_blank"><i class="fa fa-github fa-fw"></i></a><a href="mailto:camchin1@msn.cn"><i class="fa fa-envelope fa-fw"></i></a><a href="http://weibo.com/1743454163/" target="_blank"><i class="fa fa-weibo fa-fw"></i></a><a href="https://twitter.com/w_0482" target="_blank"><i class="fa fa-twitter fa-fw"></i></a><a href="https://www.facebook.com/ken.shoaw" target="_blank"><i class="fa fa-facebook fa-fw"></i></a><a href="https://instagram.com/oneapanda" target="_blank"><i class="fa fa-instagram fa-fw"></i></a>
 </div>
@@ -59,6 +59,13 @@
 <div id="lx-main-content">
   <div class="lx-post"> 
 
+  <div class="lx-entry padding">
+    <div>
+      <h2><a href="/2017/10/25/随笔/收徒/">《仙》第一部 风流少年 第二章收徒</a></h2>
+      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2017-10-25 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/随笔/">随笔</a></span>
+      <p></p>
+    </div>
+  </div>
   <div class="lx-entry padding">
     <div>
       <h2><a href="/2017/10/25/随笔/出世/">《仙》第一部 风流少年 第一章-出世</a></h2>
@@ -151,30 +158,6 @@
 .subscribe(bitmap -&gt; myImageView.setImageBitmap(bitmap));</code></pre><p></p>
     </div>
   </div>
-  <div class="lx-entry padding">
-    <div>
-      <h2><a href="/2016/04/04/android/RxJava/深入浅出RxJava三--响应式的好处/">深入浅出RxJava(三：响应式的好处)</a></h2>
-      <span class="lx-post-detail"><i class="fa fa-calendar-o"></i> 2016-04-04 | <i class="fa fa-folder-o"></i> <a class="category-link" href="/categories/android/">android</a></span>
-      <p><blockquote>
-<p><a href="http://blog.danlew.net/2014/09/30/grokking-rxjava-part-3/" target="_blank" rel="noopener">英文原文</a> </p>
-<p><a href="http://blog.csdn.net/lzyzsd/article/details/44891933" target="_blank" rel="noopener">译文原文</a></p>
-</blockquote>
-</p><p>在第一篇中，我介绍了RxJava的基础知识。第二篇中，我向你展示了操作符的强大。但是你可能仍然没被说服。这篇里面，我讲向你展示RxJava的其他的一些好处，相信这篇足够让你去使用Rxjava.</p>
-<p>到目前为止，我们都没怎么介绍onComplete()和onError()函数。这两个函数用来通知订阅者，被观察的对象将停止发送数据以及为什么停止（成功的完成或者出错了）。</p>
-<p>下面的代码展示了怎么使用这两个函数：</p>
-<pre><code>Observable.just(``&quot;Hello, world!&quot;``)
-.map(s -&gt; potentialException(s))
-.map(s -&gt; anotherPotentialException(s))
-.subscribe(``new` `Subscriber&lt;String&gt;() {        
-    @Override
-    public void onNext(String s) { System.out.println(s); }        
-    @Override
-    public void onCompleted() { System.out.println(``&quot;Completed!&quot;``); }        
-    @Override
-    public void onError(Throwable e) { System.out.println(``&quot;Ouch!&quot;``); }
-});</code></pre><p></p>
-    </div>
-  </div>
  
 
 <div id="pagination">
@@ -228,13 +211,7 @@
     <li class="has-sub"><span class="dropdown-heading">
       <i class="fa fa-bookmark fa-fw"></i>页面</span>
         <ul>
-          <li><a href="/categories/android">Android</a></li>
-        <li><a href="/tags/Java">Java</a></li>
-        <li><a href="/categories/Docker">Docker容器</a></li>
-        <li><a href="/categories/web">前端</a></li>
-        <li><a href="/categories/golang">Golang</a></li>
-        <li><a href="/categories/linux">Linux</a></li>
-        <li><a href="/categories/随笔">随笔</a></li>
+          <li><a href="/2019/09/04/profile/index/">个人简历</a></li>
         <li><a href="/instagram">相册</a></li>
         </ul>
     </li>
