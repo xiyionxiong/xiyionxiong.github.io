@@ -1,0 +1,601 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui"><meta name="renderer" content="webkit"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no,email=no,adress=no"><meta name="theme-color" content="#000000"><meta http-equiv="window-target" content="_top"><title>36个Android开发常用代码片段 | Hexo</title><meta name="description" content="拨打电话public static void call(Context context, String phoneNumber) &amp;#123;         context.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(&quot;tel:&quot; + phoneNumber)));     &amp;#125;  跳转至拨号界面 pu"><meta property="og:type" content="article"><meta property="og:title" content="36个Android开发常用代码片段"><meta property="og:url" content="http://example.com/2014/01/23/android/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/36%E4%B8%AAAndroid%E5%BC%80%E5%8F%91%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/index.html"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="拨打电话public static void call(Context context, String phoneNumber) &amp;#123;         context.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(&quot;tel:&quot; + phoneNumber)));     &amp;#125;  跳转至拨号界面 pu"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2014-01-23T05:33:02.000Z"><meta property="article:modified_time" content="2018-06-14T03:18:21.000Z"><meta property="article:author" content="熊凯"><meta property="article:tag" content="总结分类"><meta name="twitter:card" content="summary"><link rel="canonical" href="http://example.com/2014/01/23/android/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/36%E4%B8%AAAndroid%E5%BC%80%E5%8F%91%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/index.html"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml"><link rel="icon" href="/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 5.4.0"></head><body class="main-center" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="slimContent"><div class="navbar-header"><div class="profile-block text-center"><a id="avatar" href="https://github.com/xiyionxiong" target="_blank"><img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200"></a><h2 id="name" class="hidden-xs hidden-sm">熊凯</h2><h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3><small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small></div><div class="search" id="search-form-wrap"><form class="search-form sidebar-form"><div class="input-group"><input type="text" class="search-form-input form-control" placeholder="搜索"> <span class="input-group-btn"><button type="submit" class="search-form-submit btn btn-flat" onclick="return!1"><i class="icon icon-search"></i></button></span></div></form><div class="ins-search"><div class="ins-search-mask"></div><div class="ins-search-container"><div class="ins-input-wrapper"><input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech> <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div><div class="ins-section-wrapper"><div class="ins-section-container"></div></div></div></div></div><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button></div><nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation"><ul class="nav navbar-nav main-nav"><li class="menu-item menu-item-home"><a href="/."><i class="icon icon-home-fill"></i> <span class="menu-title">首页</span></a></li><li class="menu-item menu-item-archives"><a href="/archives"><i class="icon icon-archives-fill"></i> <span class="menu-title">归档</span></a></li><li class="menu-item menu-item-categories"><a href="/categories"><i class="icon icon-folder"></i> <span class="menu-title">分类</span></a></li><li class="menu-item menu-item-tags"><a href="/tags"><i class="icon icon-tags"></i> <span class="menu-title">标签</span></a></li><li class="menu-item menu-item-repository"><a href="/repository"><i class="icon icon-project"></i> <span class="menu-title">项目</span></a></li><li class="menu-item menu-item-books"><a href="/books"><i class="icon icon-book-fill"></i> <span class="menu-title">书单</span></a></li><li class="menu-item menu-item-links"><a href="/links"><i class="icon icon-friendship"></i> <span class="menu-title">友链</span></a></li><li class="menu-item menu-item-about"><a href="/about"><i class="icon icon-cup-fill"></i> <span class="menu-title">关于</span></a></li></ul><ul class="social-links"><li><a href="https://github.com/xiyionxiong" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li><li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li></ul></nav></div></header><aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar"><div class="slimContent"><div class="widget"><h3 class="widget-title">公告</h3><div class="widget-body"><div id="board"><div class="content"><p>欢迎交流与分享经验!</p></div></div></div></div><div class="widget"><h3 class="widget-title">分类</h3><div class="widget-body"><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/redis/">redis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/web/">web</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Flutter/">Flutter</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">68</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/redis/">redis</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/android/">android</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%80%E5%8E%86/">简历</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">13</span></li></ul></div></div><div class="widget"><h3 class="widget-title">标签</h3><div class="widget-body"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%85%B8%E8%8C%83/" rel="tag">Android性能优化典范</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Annotation/" rel="tag">Annotation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AsyncTask/" rel="tag">AsyncTask</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binder/" rel="tag">Binder</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CountDownTimer/" rel="tag">CountDownTimer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog/" rel="tag">Dialog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EventBus/" rel="tag">EventBus</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter%E3%80%81%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" rel="tag">Flutter、网络编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Develop-for-Android-%E7%B3%BB%E5%88%97/" rel="tag">Google Develop for Android 系列</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ibeacon/" rel="tag">Ibeacon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ImageView/" rel="tag">ImageView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kotlin/" rel="tag">Kotlin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MotionEvent/" rel="tag">MotionEvent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OkHttp/" rel="tag">OkHttp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/" rel="tag">React-Native</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxAndroid/" rel="tag">RxAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxJava/" rel="tag">RxJava</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ServiceManager/" rel="tag">ServiceManager</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String%E7%9B%B8%E5%85%B3%E7%B1%BB%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" rel="tag">String相关类性能测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Textview/" rel="tag">Textview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypedArray/" rel="tag">TypedArray</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewHolder%E7%9A%84%E4%BD%9C%E7%94%A8/" rel="tag">ViewHolder的作用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebView/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/" rel="tag">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adb/" rel="tag">adb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brew/" rel="tag">brew</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drawable/" rel="tag">drawable</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/goland-json/" rel="tag">goland json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/" rel="tag">golang</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/port/" rel="tag">port</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">widget</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B/" rel="tag">《仙》</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B%E7%AC%AC%E4%B8%80%E9%83%A8-%E9%A3%8E%E6%B5%81%E5%B0%91%E5%B9%B4/" rel="tag">《仙》第一部-风流少年</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0/" rel="tag">下拉刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C/" rel="tag">写作</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D/" rel="tag">反思</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E3%80%81%E8%83%8C%E6%99%AF%E3%80%81View%E6%9B%B4%E6%96%B0%E3%80%81%E5%B8%83%E5%B1%80%E3%80%81%E5%86%85%E5%AD%98/" rel="tag">图像、背景、View更新、布局、内存</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" rel="tag">开发规范</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%82%E6%AD%A5%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88Looper%E3%80%81MessageQueue%E3%80%81Handler%EF%BC%89/" rel="tag">异步线程的实现（Looper、MessageQueue、Handler）</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93%E5%88%86%E7%B1%BB/" rel="tag">总结分类</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E8%BD%B4/" rel="tag">时间轴</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84%E7%9A%84%E5%AE%9E%E4%BE%8B/" rel="tag">架构的实例</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%89%E6%B5%B8%E5%BC%8F/" rel="tag">沉浸式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87/" rel="tag">目标</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/" rel="tag">知识库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%80%E5%8E%86/" rel="tag">简历</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89Loader/" rel="tag">自定义Loader</a><span class="tag-list-count">1</span></li></ul></div></div><div class="widget"><h3 class="widget-title">标签云</h3><div class="widget-body tagcloud"><a href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%85%B8%E8%8C%83/" style="font-size:13.5px">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size:13px">Annotation</a> <a href="/tags/AsyncTask/" style="font-size:13px">AsyncTask</a> <a href="/tags/Binder/" style="font-size:13px">Binder</a> <a href="/tags/CountDownTimer/" style="font-size:13px">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size:13px">Dialog</a> <a href="/tags/Docker/" style="font-size:13.38px">Docker</a> <a href="/tags/EventBus/" style="font-size:13.13px">EventBus</a> <a href="/tags/Flutter/" style="font-size:13.88px">Flutter</a> <a href="/tags/Flutter%E3%80%81%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size:13px">Flutter、网络编程</a> <a href="/tags/Golang/" style="font-size:13px">Golang</a> <a href="/tags/Google-Develop-for-Android-%E7%B3%BB%E5%88%97/" style="font-size:13.75px">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size:13px">Ibeacon</a> <a href="/tags/ImageView/" style="font-size:13px">ImageView</a> <a href="/tags/Java/" style="font-size:13.25px">Java</a> <a href="/tags/Kotlin/" style="font-size:13px">Kotlin</a> <a href="/tags/Lambda/" style="font-size:13px">Lambda</a> <a href="/tags/MotionEvent/" style="font-size:13px">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size:13.13px">OkHttp</a> <a href="/tags/React-Native/" style="font-size:13px">React-Native</a> <a href="/tags/RxAndroid/" style="font-size:13px">RxAndroid</a> <a href="/tags/RxJava/" style="font-size:13.5px">RxJava</a> <a href="/tags/ServiceManager/" style="font-size:13px">ServiceManager</a> <a href="/tags/SpringBoot/" style="font-size:13px">SpringBoot</a> <a href="/tags/String%E7%9B%B8%E5%85%B3%E7%B1%BB%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size:13px">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size:13px">Textview</a> <a href="/tags/TypedArray/" style="font-size:13px">TypedArray</a> <a href="/tags/VPN/" style="font-size:13px">VPN</a> <a href="/tags/ViewHolder%E7%9A%84%E4%BD%9C%E7%94%A8/" style="font-size:13px">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size:13px">WebView</a> <a href="/tags/Webview/" style="font-size:13px">Webview</a> <a href="/tags/adb/" style="font-size:13px">adb</a> <a href="/tags/brew/" style="font-size:13px">brew</a> <a href="/tags/drawable/" style="font-size:13px">drawable</a> <a href="/tags/goland-json/" style="font-size:13px">goland json</a> <a href="/tags/golang/" style="font-size:13.13px">golang</a> <a href="/tags/linux/" style="font-size:13px">linux</a> <a href="/tags/port/" style="font-size:13px">port</a> <a href="/tags/redis/" style="font-size:13.13px">redis</a> <a href="/tags/web/" style="font-size:13px">web</a> <a href="/tags/widget/" style="font-size:13px">widget</a> <a href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B/" style="font-size:13px">《仙》</a> <a href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B%E7%AC%AC%E4%B8%80%E9%83%A8-%E9%A3%8E%E6%B5%81%E5%B0%91%E5%B9%B4/" style="font-size:13.13px">《仙》第一部-风流少年</a> <a href="/tags/%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0/" style="font-size:13px">下拉刷新</a> <a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size:13.13px">写作</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" style="font-size:14px">前端进阶</a> <a href="/tags/%E5%8F%8D%E6%80%9D/" style="font-size:13px">反思</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E3%80%81%E8%83%8C%E6%99%AF%E3%80%81View%E6%9B%B4%E6%96%B0%E3%80%81%E5%B8%83%E5%B1%80%E3%80%81%E5%86%85%E5%AD%98/" style="font-size:13.13px">图像、背景、View更新、布局、内存</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" style="font-size:13.25px">开发规范</a> <a href="/tags/%E5%BC%82%E6%AD%A5%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88Looper%E3%80%81MessageQueue%E3%80%81Handler%EF%BC%89/" style="font-size:13px">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size:13px">快捷键</a> <a href="/tags/%E6%80%BB%E7%BB%93%E5%88%86%E7%B1%BB/" style="font-size:13.63px">总结分类</a> <a href="/tags/%E6%97%B6%E9%97%B4%E8%BD%B4/" style="font-size:13px">时间轴</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E7%9A%84%E5%AE%9E%E4%BE%8B/" style="font-size:13px">架构的实例</a> <a href="/tags/%E6%B2%89%E6%B5%B8%E5%BC%8F/" style="font-size:13px">沉浸式</a> <a href="/tags/%E6%BA%90%E7%A0%81/" style="font-size:13px">源码</a> <a href="/tags/%E7%9B%AE%E6%A0%87/" style="font-size:13.13px">目标</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/" style="font-size:13.25px">知识库</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size:13px">科学上网</a> <a href="/tags/%E7%AE%80%E5%8E%86/" style="font-size:13px">简历</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size:13px">编译</a> <a href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89Loader/" style="font-size:13px">自定义Loader</a></div></div><div class="widget"><h3 class="widget-title">归档</h3><div class="widget-body"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">五月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">二月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">一月 2014</a><span class="archive-list-count">5</span></li></ul></div></div><div class="widget"><h3 class="widget-title">最新文章</h3><div class="widget-body"><ul class="recent-post-list list-unstyled no-thumbnail"><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/12/09/flutter/flutterbase004/" class="title">Flutter入门之跨组件传递数据</a></p><p class="item-date"><time datetime="2020-12-08T16:00:00.000Z" itemprop="datePublished">2020-12-09</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/11/01/web/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%81%93/JS%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%81%93/" class="title">前端进阶之JS前端进阶</a></p><p class="item-date"><time datetime="2020-10-31T16:00:00.000Z" itemprop="datePublished">2020-11-01</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/10/31/flutter/%E6%89%93%E5%8C%85/" class="title">Flutter进阶之如何构建高效的FlutterApp打包发布环境？</a></p><p class="item-date"><time datetime="2020-10-30T16:00:00.000Z" itemprop="datePublished">2020-10-31</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/09/30/flutter/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/" class="title">Flutter进阶之如何通过工具链优化开发调试效率？</a></p><p class="item-date"><time datetime="2020-09-29T16:00:00.000Z" itemprop="datePublished">2020-09-30</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/09/30/web/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%81%93/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="title">前端进阶之数据结构</a></p><p class="item-date"><time datetime="2020-09-29T16:00:00.000Z" itemprop="datePublished">2020-09-30</time></p></div></li></ul></div></div></div></aside><main class="main" role="main"><div class="content"><article id="post-android/小知识点/36个Android开发的代码片段" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting"><div class="article-header"><h1 class="article-title" itemprop="name">36个Android开发常用代码片段</h1><div class="article-meta"><span class="article-date"><i class="icon icon-calendar-check"></i> <a href="/2014/01/23/android/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/36%E4%B8%AAAndroid%E5%BC%80%E5%8F%91%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" class="article-date"><time datetime="2014-01-23T05:33:02.000Z" itemprop="datePublished">2014-01-23</time> </a></span><span class="article-category"><i class="icon icon-folder"></i> <a class="article-category-link" href="/categories/android/">android</a> </span><span class="article-tag"><i class="icon icon-tags"></i> <a class="article-tag-link-link" href="/tags/%E6%80%BB%E7%BB%93%E5%88%86%E7%B1%BB/" rel="tag">总结分类</a> </span><span class="post-comment"><i class="icon icon-comment"></i> <a href="/2014/01/23/android/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/36%E4%B8%AAAndroid%E5%BC%80%E5%8F%91%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/#comments" class="article-comment-link">评论</a></span></div></div><div class="article-entry marked-body" itemprop="articleBody"><h3 id="拨打电话"><a href="#拨打电话" class="headerlink" title="拨打电话"></a>拨打电话</h3><pre><code>public static void call(Context context, String phoneNumber) &#123;
+        context.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(&quot;tel:&quot; + phoneNumber)));
+    &#125;
+</code></pre><p>跳转至拨号界面</p><pre><code>public static void callDial(Context context, String phoneNumber) &#123;
+        context.startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse(&quot;tel:&quot; + phoneNumber)));
+    &#125;
+</code></pre><span id="more"></span><p>发送短信</p><pre><code>public static void sendSms(Context context, String phoneNumber,
+            String content) &#123;
+        Uri uri = Uri.parse(&quot;smsto:&quot;
+                + (TextUtils.isEmpty(phoneNumber) ? &quot;&quot; : phoneNumber));
+        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+        intent.putExtra(&quot;sms_body&quot;, TextUtils.isEmpty(content) ? &quot;&quot; : content);
+        context.startActivity(intent);
+    &#125;
+</code></pre><p>唤醒屏幕并解锁</p><pre><code>public static void wakeUpAndUnlock(Context context)&#123;  
+        KeyguardManager km= (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);  
+        KeyguardManager.KeyguardLock kl = km.newKeyguardLock(&quot;unLock&quot;);  
+        //解锁  
+        kl.disableKeyguard();  
+        //获取电源管理器对象  
+        PowerManager pm=(PowerManager) context.getSystemService(Context.POWER_SERVICE);  
+        //获取PowerManager.WakeLock对象,后面的参数|表示同时传入两个值,最后的是LogCat里用的Tag  
+        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_DIM_WAKE_LOCK,&quot;bright&quot;);  
+        //点亮屏幕  
+        wl.acquire();  
+        //释放  
+        wl.release();  
+    &#125;
+</code></pre><blockquote><p>需要添加权限</p></blockquote><pre><code>&lt;uses-permission android:name=&quot;android.permission.WAKE_LOCK&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.DISABLE_KEYGUARD&quot; /&gt;
+</code></pre><p>判断当前App处于前台还是后台状态</p><pre><code>public static boolean isApplicationBackground(final Context context) &#123;
+        ActivityManager am = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        @SuppressWarnings(&quot;deprecation&quot;)
+        List&lt;ActivityManager.RunningTaskInfo&gt; tasks = am.getRunningTasks(1);
+        if (!tasks.isEmpty()) &#123;
+            ComponentName topActivity = tasks.get(0).topActivity;
+            if (!topActivity.getPackageName().equals(context.getPackageName())) &#123;
+                return true;
+            &#125;
+        &#125;
+        return false;
+    &#125;
+</code></pre><blockquote><p>需要添加权限</p></blockquote><pre><code>&lt;uses-permission
+     android:name=&quot;android.permission.GET_TASKS&quot; /&gt;
+</code></pre><p>判断当前手机是否处于锁屏(睡眠)状态</p><pre><code>public static boolean isSleeping(Context context) &#123;
+        KeyguardManager kgMgr = (KeyguardManager) context
+                .getSystemService(Context.KEYGUARD_SERVICE);
+        boolean isSleeping = kgMgr.inKeyguardRestrictedInputMode();
+        return isSleeping;
+    &#125;
+</code></pre><p>判断当前是否有网络连接</p><pre><code>public static boolean isOnline(Context context) &#123;
+        ConnectivityManager manager = (ConnectivityManager) context
+                .getSystemService(Activity.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
+        if (info != null &amp;&amp; info.isConnected()) &#123;
+            return true;
+        &#125;
+        return false;
+    &#125;
+</code></pre><p>判断当前是否是WIFI连接状态</p><pre><code>public static boolean isWifiConnected(Context context) &#123;
+    ConnectivityManager connectivityManager = (ConnectivityManager) context
+            .getSystemService(Context.CONNECTIVITY_SERVICE);
+    NetworkInfo wifiNetworkInfo = connectivityManager
+            .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+    if (wifiNetworkInfo.isConnected()) &#123;
+        return true;
+    &#125;
+    return false;
+&#125;
+</code></pre><p>安装APK</p><pre><code>public static void installApk(Context context, File file) &#123;
+    Intent intent = new Intent();
+    intent.setAction(&quot;android.intent.action.VIEW&quot;);
+    intent.addCategory(&quot;android.intent.category.DEFAULT&quot;);
+    intent.setType(&quot;application/vnd.android.package-archive&quot;);
+    intent.setDataAndType(Uri.fromFile(file),
+            &quot;application/vnd.android.package-archive&quot;);
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    context.startActivity(intent);
+&#125;
+</code></pre><p>判断当前设备是否为手机</p><pre><code>public static boolean isPhone(Context context) &#123;
+    TelephonyManager telephony = (TelephonyManager) context
+            .getSystemService(Context.TELEPHONY_SERVICE);
+    if (telephony.getPhoneType() == TelephonyManager.PHONE_TYPE_NONE) &#123;
+        return false;
+    &#125; else &#123;
+        return true;
+    &#125;
+&#125;
+</code></pre><p>获取当前设备宽高，单位px</p><pre><code>@SuppressWarnings(&quot;deprecation&quot;)
+public static int getDeviceWidth(Context context) &#123;
+    WindowManager manager = (WindowManager) context
+            .getSystemService(Context.WINDOW_SERVICE);
+    return manager.getDefaultDisplay().getWidth();
+&#125;
+
+@SuppressWarnings(&quot;deprecation&quot;)
+public static int getDeviceHeight(Context context) &#123;
+    WindowManager manager = (WindowManager) context
+            .getSystemService(Context.WINDOW_SERVICE);
+    return manager.getDefaultDisplay().getHeight();
+&#125;
+</code></pre><p>获取当前设备的IMEI，需要与上面的isPhone()一起使用</p><pre><code>@TargetApi(Build.VERSION_CODES.CUPCAKE)
+public static String getDeviceIMEI(Context context) &#123;
+    String deviceId;
+    if (isPhone(context)) &#123;
+        TelephonyManager telephony = (TelephonyManager) context
+                .getSystemService(Context.TELEPHONY_SERVICE);
+        deviceId = telephony.getDeviceId();
+    &#125; else &#123;
+        deviceId = Settings.Secure.getString(context.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+
+    &#125;
+    return deviceId;
+&#125;
+</code></pre><p>获取当前设备的MAC地址</p><pre><code>public static String getMacAddress(Context context) &#123;
+    String macAddress;
+    WifiManager wifi = (WifiManager) context
+            .getSystemService(Context.WIFI_SERVICE);
+    WifiInfo info = wifi.getConnectionInfo();
+    macAddress = info.getMacAddress();
+    if (null == macAddress) &#123;
+        return &quot;&quot;;
+    &#125;
+    macAddress = macAddress.replace(&quot;:&quot;, &quot;&quot;);
+    return macAddress;
+&#125;
+</code></pre><p>获取当前程序的版本号</p><pre><code>public static String getAppVersion(Context context) &#123;
+    String version = &quot;0&quot;;
+    try &#123;
+        version = context.getPackageManager().getPackageInfo(
+                context.getPackageName(), 0).versionName;
+    &#125; catch (PackageManager.NameNotFoundException e) &#123;
+        e.printStackTrace();
+    &#125;
+    return version;
+&#125;
+</code></pre><p>收集设备信息，用于信息统计分析</p><pre><code>public static Properties collectDeviceInfo(Context context) &#123;
+        Properties mDeviceCrashInfo = new Properties();
+        try &#123;
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(),
+                    PackageManager.GET_ACTIVITIES);
+            if (pi != null) &#123;
+                mDeviceCrashInfo.put(VERSION_NAME,
+                        pi.versionName == null ? &quot;not set&quot; : pi.versionName);
+                mDeviceCrashInfo.put(VERSION_CODE, pi.versionCode);
+            &#125;
+        &#125; catch (PackageManager.NameNotFoundException e) &#123;
+            Log.e(TAG, &quot;Error while collect package info&quot;, e);
+        &#125;
+        Field[] fields = Build.class.getDeclaredFields();
+        for (Field field : fields) &#123;
+            try &#123;
+                field.setAccessible(true);
+                mDeviceCrashInfo.put(field.getName(), field.get(null));
+            &#125; catch (Exception e) &#123;
+                Log.e(TAG, &quot;Error while collect crash info&quot;, e);
+            &#125;
+        &#125;
+
+        return mDeviceCrashInfo;
+    &#125;
+
+public static String collectDeviceInfoStr(Context context) &#123;
+        Properties prop = collectDeviceInfo(context);
+        Set deviceInfos = prop.keySet();
+        StringBuilder deviceInfoStr = new StringBuilder(&quot;&#123;\n&quot;);
+        for (Iterator iter = deviceInfos.iterator(); iter.hasNext();) &#123;
+            Object item = iter.next();
+            deviceInfoStr.append(&quot;\t\t\t&quot; + item + &quot;:&quot; + prop.get(item)
+                    + &quot;, \n&quot;);
+        &#125;
+        deviceInfoStr.append(&quot;&#125;&quot;);
+        return deviceInfoStr.toString();
+    &#125;
+</code></pre><p>是否有SD卡</p><pre><code>public static boolean haveSDCard() &#123;
+        return android.os.Environment.getExternalStorageState().equals(
+                android.os.Environment.MEDIA_MOUNTED);
+    &#125;
+</code></pre><p>动态隐藏软键盘</p><pre><code>@TargetApi(Build.VERSION_CODES.CUPCAKE)
+    public static void hideSoftInput(Activity activity) &#123;
+        View view = activity.getWindow().peekDecorView();
+        if (view != null) &#123;
+            InputMethodManager inputmanger = (InputMethodManager) activity
+                    .getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputmanger.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        &#125;
+    &#125;
+
+    @TargetApi(Build.VERSION_CODES.CUPCAKE)
+public static void hideSoftInput(Context context, EditText edit) &#123;
+        edit.clearFocus();
+        InputMethodManager inputmanger = (InputMethodManager) context
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputmanger.hideSoftInputFromWindow(edit.getWindowToken(), 0);
+    &#125;
+</code></pre><p>动态显示软键盘</p><pre><code>@TargetApi(Build.VERSION_CODES.CUPCAKE)
+public static void showSoftInput(Context context, EditText edit) &#123;
+        edit.setFocusable(true);
+        edit.setFocusableInTouchMode(true);
+        edit.requestFocus();
+        InputMethodManager inputManager = (InputMethodManager) context
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.showSoftInput(edit, 0);
+    &#125;
+</code></pre><p>动态显示或者是隐藏软键盘</p><pre><code>@TargetApi(Build.VERSION_CODES.CUPCAKE)
+public static void toggleSoftInput(Context context, EditText edit) &#123;
+        edit.setFocusable(true);
+        edit.setFocusableInTouchMode(true);
+        edit.requestFocus();
+        InputMethodManager inputManager = (InputMethodManager) context
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+    &#125;
+</code></pre><p>主动回到Home，后台运行</p><pre><code>public static void goHome(Context context) &#123;
+        Intent mHomeIntent = new Intent(Intent.ACTION_MAIN);
+        mHomeIntent.addCategory(Intent.CATEGORY_HOME);
+        mHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+        context.startActivity(mHomeIntent);
+    &#125;
+</code></pre><p>获取状态栏高度</p><p>注意，要在onWindowFocusChanged中调用，在onCreate中获取高度为0</p><pre><code>@TargetApi(Build.VERSION_CODES.CUPCAKE)
+public static int getStatusBarHeight(Activity activity) &#123;
+    Rect frame = new Rect();
+    activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        return frame.top;
+    &#125;
+</code></pre><p>获取状态栏高度＋标题栏(ActionBar)高度</p><p>(注意，如果没有ActionBar，那么获取的高度将和上面的是一样的，只有状态栏的高度)</p><pre><code>public static int getTopBarHeight(Activity activity) &#123;
+        return activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT)
+                .getTop();
+    &#125;
+</code></pre><p>获取MCC+MNC代码 (SIM卡运营商国家代码和运营商网络代码)</p><p>仅当用户已在网络注册时有效, CDMA 可能会无效（中国移动：46000 46002, 中国联通：46001,中国电信：46003）</p><pre><code>public static String getNetworkOperator(Context context) &#123;
+        TelephonyManager telephonyManager = (TelephonyManager) context
+                .getSystemService(Context.TELEPHONY_SERVICE);
+        return telephonyManager.getNetworkOperator();
+    &#125;
+</code></pre><p>返回移动网络运营商的名字</p><p>(例：中国联通、中国移动、中国电信) 仅当用户已在网络注册时有效, CDMA 可能会无效)</p><pre><code>public static String getNetworkOperatorName(Context context) &#123;
+        TelephonyManager telephonyManager = (TelephonyManager) context
+                .getSystemService(Context.TELEPHONY_SERVICE);
+        return telephonyManager.getNetworkOperatorName();
+    &#125;
+</code></pre><blockquote><p>返回移动终端类型</p></blockquote><pre><code>PHONE_TYPE_NONE :0 手机制式未知
+PHONE_TYPE_GSM :1 手机制式为GSM，移动和联通
+PHONE_TYPE_CDMA :2 手机制式为CDMA，电信
+PHONE_TYPE_SIP:3
+
+
+public static int getPhoneType(Context context) &#123;
+        TelephonyManager telephonyManager = (TelephonyManager) context
+                .getSystemService(Context.TELEPHONY_SERVICE);
+        return telephonyManager.getPhoneType();
+    &#125;
+</code></pre><p>判断手机连接的网络类型(2G,3G,4G)</p><p>联通的3G为UMTS或HSDPA，移动和联通的2G为GPRS或EGDE，电信的2G为CDMA，电信的3G为EVDO</p><pre><code>public class Constants &#123;
+
+    /**
+     * Unknown network class
+     */
+
+    public static final int NETWORK_CLASS_UNKNOWN = 0;
+
+    /**
+     *  wifi net work
+     */
+    public static final int NETWORK_WIFI = 1;
+
+    /**
+     * &quot;2G&quot; networks
+     */
+    public static final int NETWORK_CLASS_2_G = 2;
+
+    /**
+     * &quot;3G&quot; networks
+     */
+    public static final int NETWORK_CLASS_3_G = 3;
+
+    /**
+     * &quot;4G&quot; networks
+     */
+    public static final int NETWORK_CLASS_4_G = 4;
+
+&#125;
+
+public static int getNetWorkClass(Context context) &#123;
+        TelephonyManager telephonyManager = (TelephonyManager) context
+                .getSystemService(Context.TELEPHONY_SERVICE);
+
+        switch (telephonyManager.getNetworkType()) &#123;
+        case TelephonyManager.NETWORK_TYPE_GPRS:
+        case TelephonyManager.NETWORK_TYPE_EDGE:
+        case TelephonyManager.NETWORK_TYPE_CDMA:
+        case TelephonyManager.NETWORK_TYPE_1xRTT:
+        case TelephonyManager.NETWORK_TYPE_IDEN:
+            return Constants.NETWORK_CLASS_2_G;
+
+        case TelephonyManager.NETWORK_TYPE_UMTS:
+        case TelephonyManager.NETWORK_TYPE_EVDO_0:
+        case TelephonyManager.NETWORK_TYPE_EVDO_A:
+        case TelephonyManager.NETWORK_TYPE_HSDPA:
+        case TelephonyManager.NETWORK_TYPE_HSUPA:
+        case TelephonyManager.NETWORK_TYPE_HSPA:
+        case TelephonyManager.NETWORK_TYPE_EVDO_B:
+        case TelephonyManager.NETWORK_TYPE_EHRPD:
+        case TelephonyManager.NETWORK_TYPE_HSPAP:
+            return Constants.NETWORK_CLASS_3_G;
+
+        case TelephonyManager.NETWORK_TYPE_LTE:
+            return Constants.NETWORK_CLASS_4_G;
+
+        default:
+            return Constants.NETWORK_CLASS_UNKNOWN;
+        &#125;
+    &#125;
+</code></pre><p>判断当前手机的网络类型(WIFI还是2,3,4G)</p><p>需要用到上面的方法</p><pre><code>public static int getNetWorkStatus(Context context) &#123;
+        int netWorkType = Constants.NETWORK_CLASS_UNKNOWN;
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if (networkInfo != null &amp;&amp; networkInfo.isConnected()) &#123;
+            int type = networkInfo.getType();
+
+            if (type == ConnectivityManager.TYPE_WIFI) &#123;
+                netWorkType = Constants.NETWORK_WIFI;
+            &#125; else if (type == ConnectivityManager.TYPE_MOBILE) &#123;
+                netWorkType = getNetWorkClass(context);
+            &#125;
+        &#125;
+
+        return netWorkType;
+    &#125;
+</code></pre><p>px-dp转换</p><pre><code>public static int dip2px(Context context, float dpValue) &#123;
+    final float scale = context.getResources().getDisplayMetrics().density;
+    return (int) (dpValue * scale + 0.5f);
+&#125;
+
+public static int px2dip(Context context, float pxValue) &#123;
+    final float scale = context.getResources().getDisplayMetrics().density;
+    return (int) (pxValue / scale + 0.5f);
+&#125;
+</code></pre><p>px-sp转换</p><pre><code>public static int px2sp(Context context, float pxValue) &#123;
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue / fontScale + 0.5f);
+    &#125;
+
+public static int sp2px(Context context, float spValue) &#123;
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (spValue * fontScale + 0.5f);
+    &#125;
+</code></pre><p>把一个毫秒数转化成时间字符串</p><p>格式为小时/分/秒/毫秒（如：24903600 –&gt; 06小时55分03秒600毫秒）</p><pre><code>/**
+     * @param millis
+     *            要转化的毫秒数。
+     * @param isWhole
+     *            是否强制全部显示小时/分/秒/毫秒。
+     * @param isFormat
+     *            时间数字是否要格式化，如果true：少位数前面补全；如果false：少位数前面不补全。
+     * @return 返回时间字符串：小时/分/秒/毫秒的格式（如：24903600 --&gt; 06小时55分03秒600毫秒）。
+     */
+    public static String millisToString(long millis, boolean isWhole,
+            boolean isFormat) &#123;
+        String h = &quot;&quot;;
+        String m = &quot;&quot;;
+        String s = &quot;&quot;;
+        String mi = &quot;&quot;;
+        if (isWhole) &#123;
+            h = isFormat ? &quot;00小时&quot; : &quot;0小时&quot;;
+            m = isFormat ? &quot;00分&quot; : &quot;0分&quot;;
+            s = isFormat ? &quot;00秒&quot; : &quot;0秒&quot;;
+            mi = isFormat ? &quot;00毫秒&quot; : &quot;0毫秒&quot;;
+        &#125;
+
+        long temp = millis;
+
+        long hper = 60 * 60 * 1000;
+        long mper = 60 * 1000;
+        long sper = 1000;
+
+        if (temp / hper &gt; 0) &#123;
+            if (isFormat) &#123;
+                h = temp / hper &lt; 10 ? &quot;0&quot; + temp / hper : temp / hper + &quot;&quot;;
+            &#125; else &#123;
+                h = temp / hper + &quot;&quot;;
+            &#125;
+            h += &quot;小时&quot;;
+        &#125;
+        temp = temp % hper;
+
+        if (temp / mper &gt; 0) &#123;
+            if (isFormat) &#123;
+                m = temp / mper &lt; 10 ? &quot;0&quot; + temp / mper : temp / mper + &quot;&quot;;
+            &#125; else &#123;
+                m = temp / mper + &quot;&quot;;
+            &#125;
+            m += &quot;分&quot;;
+        &#125;
+        temp = temp % mper;
+
+        if (temp / sper &gt; 0) &#123;
+            if (isFormat) &#123;
+                s = temp / sper &lt; 10 ? &quot;0&quot; + temp / sper : temp / sper + &quot;&quot;;
+            &#125; else &#123;
+                s = temp / sper + &quot;&quot;;
+            &#125;
+            s += &quot;秒&quot;;
+        &#125;
+        temp = temp % sper;
+        mi = temp + &quot;&quot;;
+
+        if (isFormat) &#123;
+            if (temp &lt; 100 &amp;&amp; temp &gt;= 10) &#123;
+                mi = &quot;0&quot; + temp;
+            &#125;
+            if (temp &lt; 10) &#123;
+                mi = &quot;00&quot; + temp;
+            &#125;
+        &#125;
+
+        mi += &quot;毫秒&quot;;
+        return h + m + s + mi;
+    &#125;
+</code></pre><p>格式为小时/分/秒/毫秒（如：24903600 –&gt; 06小时55分03秒）。</p><pre><code>/**
+     *
+     * @param millis
+     *            要转化的毫秒数。
+     * @param isWhole
+     *            是否强制全部显示小时/分/秒/毫秒。
+     * @param isFormat
+     *            时间数字是否要格式化，如果true：少位数前面补全；如果false：少位数前面不补全。
+     * @return 返回时间字符串：小时/分/秒/毫秒的格式（如：24903600 --&gt; 06小时55分03秒）。
+     */
+    public static String millisToStringMiddle(long millis, boolean isWhole,
+            boolean isFormat) &#123;
+        return millisToStringMiddle(millis, isWhole, isFormat, &quot;小时&quot;, &quot;分钟&quot;, &quot;秒&quot;);
+    &#125;
+
+    public static String millisToStringMiddle(long millis, boolean isWhole,
+            boolean isFormat, String hUnit, String mUnit, String sUnit) &#123;
+        String h = &quot;&quot;;
+        String m = &quot;&quot;;
+        String s = &quot;&quot;;
+        if (isWhole) &#123;
+            h = isFormat ? &quot;00&quot; + hUnit : &quot;0&quot; + hUnit;
+            m = isFormat ? &quot;00&quot; + mUnit : &quot;0&quot; + mUnit;
+            s = isFormat ? &quot;00&quot; + sUnit : &quot;0&quot; + sUnit;
+        &#125;
+
+        long temp = millis;
+
+        long hper = 60 * 60 * 1000;
+        long mper = 60 * 1000;
+        long sper = 1000;
+
+        if (temp / hper &gt; 0) &#123;
+            if (isFormat) &#123;
+                h = temp / hper &lt; 10 ? &quot;0&quot; + temp / hper : temp / hper + &quot;&quot;;
+            &#125; else &#123;
+                h = temp / hper + &quot;&quot;;
+            &#125;
+            h += hUnit;
+        &#125;
+        temp = temp % hper;
+
+        if (temp / mper &gt; 0) &#123;
+            if (isFormat) &#123;
+                m = temp / mper &lt; 10 ? &quot;0&quot; + temp / mper : temp / mper + &quot;&quot;;
+            &#125; else &#123;
+                m = temp / mper + &quot;&quot;;
+            &#125;
+            m += mUnit;
+        &#125;
+        temp = temp % mper;
+
+        if (temp / sper &gt; 0) &#123;
+            if (isFormat) &#123;
+                s = temp / sper &lt; 10 ? &quot;0&quot; + temp / sper : temp / sper + &quot;&quot;;
+            &#125; else &#123;
+                s = temp / sper + &quot;&quot;;
+            &#125;
+            s += sUnit;
+        &#125;
+        return h + m + s;
+    &#125;
+</code></pre><p>把一个毫秒数转化成时间字符串。格式为小时/分/秒/毫秒（如：24903600 –&gt; 06小时55分钟）</p><pre><code>/**
+     *
+     * @param millis
+     *            要转化的毫秒数。
+     * @param isWhole
+     *            是否强制全部显示小时/分。
+     * @param isFormat
+     *            时间数字是否要格式化，如果true：少位数前面补全；如果false：少位数前面不补全。
+     * @return 返回时间字符串：小时/分/秒/毫秒的格式（如：24903600 --&gt; 06小时55分钟）。
+     */
+    public static String millisToStringShort(long millis, boolean isWhole,
+            boolean isFormat) &#123;
+        String h = &quot;&quot;;
+        String m = &quot;&quot;;
+        if (isWhole) &#123;
+            h = isFormat ? &quot;00小时&quot; : &quot;0小时&quot;;
+            m = isFormat ? &quot;00分钟&quot; : &quot;0分钟&quot;;
+        &#125;
+
+        long temp = millis;
+
+        long hper = 60 * 60 * 1000;
+        long mper = 60 * 1000;
+        long sper = 1000;
+
+        if (temp / hper &gt; 0) &#123;
+            if (isFormat) &#123;
+                h = temp / hper &lt; 10 ? &quot;0&quot; + temp / hper : temp / hper + &quot;&quot;;
+            &#125; else &#123;
+                h = temp / hper + &quot;&quot;;
+            &#125;
+            h += &quot;小时&quot;;
+        &#125;
+        temp = temp % hper;
+
+        if (temp / mper &gt; 0) &#123;
+            if (isFormat) &#123;
+                m = temp / mper &lt; 10 ? &quot;0&quot; + temp / mper : temp / mper + &quot;&quot;;
+            &#125; else &#123;
+                m = temp / mper + &quot;&quot;;
+            &#125;
+            m += &quot;分钟&quot;;
+        &#125;
+
+        return h + m;
+    &#125;
+</code></pre><p>把日期毫秒转化为字符串</p><pre><code>/**
+     * @param millis
+     *            要转化的日期毫秒数。
+     * @param pattern
+     *            要转化为的字符串格式（如：yyyy-MM-dd HH:mm:ss）。
+     * @return 返回日期字符串。
+     */
+    public static String millisToStringDate(long millis, String pattern) &#123;
+        SimpleDateFormat format = new SimpleDateFormat(pattern,
+                Locale.getDefault());
+        return format.format(new Date(millis));
+    &#125;
+</code></pre><p>把日期毫秒转化为字符串（文件名）</p><pre><code>   /**
+     * @param millis
+     *            要转化的日期毫秒数。
+     * @param pattern
+     *            要转化为的字符串格式（如：yyyy-MM-dd HH:mm:ss）。
+     * @return 返回日期字符串（yyyy_MM_dd_HH_mm_ss）。
+     */
+    public static String millisToStringFilename(long millis, String pattern) &#123;
+        String dateStr = millisToStringDate(millis, pattern);
+        return dateStr.replaceAll(&quot;[- :]&quot;, &quot;_&quot;);
+    &#125;
+</code></pre><p>转换当前时间为易用时间格式</p><p>1小时内用，多少分钟前； 超过1小时，显示时间而无日期； 如果是昨天，则显示昨天 超过昨天再显示日期； 超过1年再显示年。</p><pre><code>public static long oneHourMillis = 60 * 60 * 1000; // 一小时的毫秒数
+public static long oneDayMillis = 24 * oneHourMillis; // 一天的毫秒数
+public static long oneYearMillis = 365 * oneDayMillis; // 一年的毫秒数
+
+public static String millisToLifeString(long millis) &#123;
+        long now = System.currentTimeMillis();
+        long todayStart = string2Millis(millisToStringDate(now, &quot;yyyy-MM-dd&quot;),
+                &quot;yyyy-MM-dd&quot;);
+
+        // 一小时内
+        if (now - millis &lt;= oneHourMillis &amp;&amp; now - millis &gt; 0l) &#123;
+            String m = millisToStringShort(now - millis, false, false);
+            return &quot;&quot;.equals(m) ? &quot;1分钟内&quot; : m + &quot;前&quot;;
+        &#125;
+
+         // 大于今天开始开始值，小于今天开始值加一天（即今天结束值）
+        if (millis &gt;= todayStart &amp;&amp; millis &lt;= oneDayMillis + todayStart) &#123;
+            return &quot;今天 &quot; + millisToStringDate(millis, &quot;HH:mm&quot;);
+        &#125;
+
+         // 大于（今天开始值减一天，即昨天开始值）
+        if (millis &gt; todayStart - oneDayMillis) &#123;
+            return &quot;昨天 &quot; + millisToStringDate(millis, &quot;HH:mm&quot;);
+        &#125;
+
+        long thisYearStart = string2Millis(millisToStringDate(now, &quot;yyyy&quot;),
+                &quot;yyyy&quot;);
+         // 大于今天小于今年
+        if (millis &gt; thisYearStart) &#123;
+            return millisToStringDate(millis, &quot;MM月dd日 HH:mm&quot;);
+        &#125;
+
+        return millisToStringDate(millis, &quot;yyyy年MM月dd日 HH:mm&quot;);
+    &#125;
+</code></pre><p>字符串解析成毫秒数</p><pre><code>public static long string2Millis(String str, String pattern) &#123;
+        SimpleDateFormat format = new SimpleDateFormat(pattern,
+                Locale.getDefault());
+        long millis = 0;
+        try &#123;
+            millis = format.parse(str).getTime();
+        &#125; catch (ParseException e) &#123;
+            Log.e(&quot;TAG&quot;, e.getMessage());
+        &#125;
+        return millis;
+    &#125;
+</code></pre><p>手机号码正则</p><pre><code>public static final String REG_PHONE_CHINA =&quot;^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d&#123;8&#125;$&quot;;
+</code></pre><p>邮箱正则</p><pre><code>public static final String REG_EMAIL = &quot;\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*&quot;;
+</code></pre></div><div class="article-footer"><blockquote class="mt-2x"><ul class="post-copyright list-unstyled"><li class="post-copyright-link hidden-xs"><strong>本文链接：</strong> <a href="http://example.com/2014/01/23/android/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/36%E4%B8%AAAndroid%E5%BC%80%E5%8F%91%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" title="36个Android开发常用代码片段" target="_blank" rel="external">http://example.com/2014/01/23/android/小知识点/36个Android开发的代码片段/</a></li><li class="post-copyright-license"><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！</li></ul></blockquote><div class="panel panel-default panel-badger"><div class="panel-body"><figure class="media"><div class="media-left"><a href="https://github.com/xiyionxiong" target="_blank" class="img-burn thumb-sm visible-lg"><img src="/images/avatar.jpg" class="img-rounded w-full" alt=""></a></div><div class="media-body"><h3 class="media-heading"><a href="https://github.com/xiyionxiong" target="_blank"><span class="text-dark">熊凯</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3><div>个人简介。</div></div></figure></div></div></div></article><section id="comments"></section></div><nav class="bar bar-footer clearfix" data-stick-bottom><div class="bar-inner"><ul class="pager pull-left"><li class="prev"><a href="/2014/01/23/android/Android%20Skills/Android%20anim%20drawable%20color%20%E6%8A%80%E5%B7%A7/" title="Android anim drawable color技巧"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a></li><li class="next"><a href="/2014/01/21/%E9%9A%8F%E7%AC%94/%E7%94%9F%E5%91%BD%E4%B8%AD%E7%9A%84%E7%A9%BA%E7%99%BD/" title="生命中的空白"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a></li></ul><button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button><div class="bar-right"></div></div></nav><div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog"><div class="modal-dialog" role="document"><div class="modal-content donate"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><div class="modal-body"><div class="donate-box"><div class="donate-head"><p>感谢您的支持，我会继续努力的!</p></div><div class="tab-content"><div role="tabpanel" class="tab-pane fade active in" id="alipay"><div class="donate-payimg"><img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫"></div><p class="text-muted mv">扫码打赏，你说多少就多少</p><p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p></div><div role="tabpanel" class="tab-pane fade" id="wechatpay"><div class="donate-payimg"><img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫"></div><p class="text-muted mv">扫码打赏，你说多少就多少</p><p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p></div></div><div class="donate-footer"><ul class="nav nav-tabs nav-justified" role="tablist"><li role="presentation" class="active"><a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a></li><li role="presentation"><a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a></li></ul></div></div></div></div></div></div></main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter"><ul class="social-links"><li><a href="https://github.com/xiyionxiong" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li><li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li></ul><div class="copyright"><div class="publishby">Theme by <a href="https://github.com/cofess" target="_blank">cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.</div></div></footer><script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script><script>window.jQuery||document.write('<script src="js/jquery.min.js"><\/script>')</script><script src="/js/plugin.min.js"></script><script src="/js/application.js"></script><script>window.INSIGHT_CONFIG={TRANSLATION:{POSTS:"文章",PAGES:"页面",CATEGORIES:"分类",TAGS:"标签",UNTITLED:"(未命名)"},ROOT_URL:"/",CONTENT_URL:"/content.json"}</script><script src="/js/insight.js"></script></body></html>

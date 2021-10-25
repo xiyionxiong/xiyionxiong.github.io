@@ -1,0 +1,416 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui"><meta name="renderer" content="webkit"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no,email=no,adress=no"><meta name="theme-color" content="#000000"><meta http-equiv="window-target" content="_top"><title>RecyclerView 列表控件中简单实现时间线 | Hexo</title><meta name="description" content="看见很多软件中都有时间线的东西，貌似天气啊，旅游啊什么的最多了；具体实现方式很多，在本篇文章中讲解一种自定义View封装的方式。 效果先来看看效果。"><meta property="og:type" content="article"><meta property="og:title" content="RecyclerView 列表控件中简单实现时间线"><meta property="og:url" content="http://example.com/2015/12/18/android/Android%20Skills/RecyclerView%20%E5%88%97%E8%A1%A8%E6%8E%A7%E4%BB%B6%E4%B8%AD%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%97%B6%E9%97%B4%E7%BA%BF/index.html"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="看见很多软件中都有时间线的东西，貌似天气啊，旅游啊什么的最多了；具体实现方式很多，在本篇文章中讲解一种自定义View封装的方式。 效果先来看看效果。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://www.jcodecraeer.com/uploads/20150825/1440469250572021.png"><meta property="og:image" content="http://www.jcodecraeer.com/uploads/20150825/1440469277121276.png"><meta property="og:image" content="http://www.jcodecraeer.com/uploads/20150825/1440469609114998.png"><meta property="og:image" content="http://www.jcodecraeer.com/uploads/20150825/1440469865127253.png"><meta property="article:published_time" content="2015-12-17T17:01:14.000Z"><meta property="article:modified_time" content="2018-06-14T03:21:48.000Z"><meta property="article:author" content="熊凯"><meta property="article:tag" content="时间轴"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="http://www.jcodecraeer.com/uploads/20150825/1440469250572021.png"><link rel="canonical" href="http://example.com/2015/12/18/android/Android%20Skills/RecyclerView%20%E5%88%97%E8%A1%A8%E6%8E%A7%E4%BB%B6%E4%B8%AD%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%97%B6%E9%97%B4%E7%BA%BF/index.html"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml"><link rel="icon" href="/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 5.4.0"></head><body class="main-center" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="slimContent"><div class="navbar-header"><div class="profile-block text-center"><a id="avatar" href="https://github.com/xiyionxiong" target="_blank"><img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200"></a><h2 id="name" class="hidden-xs hidden-sm">熊凯</h2><h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3><small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small></div><div class="search" id="search-form-wrap"><form class="search-form sidebar-form"><div class="input-group"><input type="text" class="search-form-input form-control" placeholder="搜索"> <span class="input-group-btn"><button type="submit" class="search-form-submit btn btn-flat" onclick="return!1"><i class="icon icon-search"></i></button></span></div></form><div class="ins-search"><div class="ins-search-mask"></div><div class="ins-search-container"><div class="ins-input-wrapper"><input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech> <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div><div class="ins-section-wrapper"><div class="ins-section-container"></div></div></div></div></div><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button></div><nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation"><ul class="nav navbar-nav main-nav"><li class="menu-item menu-item-home"><a href="/."><i class="icon icon-home-fill"></i> <span class="menu-title">首页</span></a></li><li class="menu-item menu-item-archives"><a href="/archives"><i class="icon icon-archives-fill"></i> <span class="menu-title">归档</span></a></li><li class="menu-item menu-item-categories"><a href="/categories"><i class="icon icon-folder"></i> <span class="menu-title">分类</span></a></li><li class="menu-item menu-item-tags"><a href="/tags"><i class="icon icon-tags"></i> <span class="menu-title">标签</span></a></li><li class="menu-item menu-item-repository"><a href="/repository"><i class="icon icon-project"></i> <span class="menu-title">项目</span></a></li><li class="menu-item menu-item-books"><a href="/books"><i class="icon icon-book-fill"></i> <span class="menu-title">书单</span></a></li><li class="menu-item menu-item-links"><a href="/links"><i class="icon icon-friendship"></i> <span class="menu-title">友链</span></a></li><li class="menu-item menu-item-about"><a href="/about"><i class="icon icon-cup-fill"></i> <span class="menu-title">关于</span></a></li></ul><ul class="social-links"><li><a href="https://github.com/xiyionxiong" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li><li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li></ul></nav></div></header><aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar"><div class="slimContent"><div class="widget"><h3 class="widget-title">公告</h3><div class="widget-body"><div id="board"><div class="content"><p>欢迎交流与分享经验!</p></div></div></div></div><div class="widget"><h3 class="widget-title">分类</h3><div class="widget-body"><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/redis/">redis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/web/">web</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Flutter/">Flutter</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">68</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/redis/">redis</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/android/">android</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%80%E5%8E%86/">简历</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">13</span></li></ul></div></div><div class="widget"><h3 class="widget-title">标签</h3><div class="widget-body"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%85%B8%E8%8C%83/" rel="tag">Android性能优化典范</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Annotation/" rel="tag">Annotation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AsyncTask/" rel="tag">AsyncTask</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binder/" rel="tag">Binder</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CountDownTimer/" rel="tag">CountDownTimer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog/" rel="tag">Dialog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EventBus/" rel="tag">EventBus</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter%E3%80%81%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" rel="tag">Flutter、网络编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Develop-for-Android-%E7%B3%BB%E5%88%97/" rel="tag">Google Develop for Android 系列</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ibeacon/" rel="tag">Ibeacon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ImageView/" rel="tag">ImageView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kotlin/" rel="tag">Kotlin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MotionEvent/" rel="tag">MotionEvent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OkHttp/" rel="tag">OkHttp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/" rel="tag">React-Native</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxAndroid/" rel="tag">RxAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxJava/" rel="tag">RxJava</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ServiceManager/" rel="tag">ServiceManager</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String%E7%9B%B8%E5%85%B3%E7%B1%BB%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" rel="tag">String相关类性能测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Textview/" rel="tag">Textview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypedArray/" rel="tag">TypedArray</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewHolder%E7%9A%84%E4%BD%9C%E7%94%A8/" rel="tag">ViewHolder的作用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebView/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/" rel="tag">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adb/" rel="tag">adb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brew/" rel="tag">brew</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drawable/" rel="tag">drawable</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/goland-json/" rel="tag">goland json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/" rel="tag">golang</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/port/" rel="tag">port</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">widget</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B/" rel="tag">《仙》</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B%E7%AC%AC%E4%B8%80%E9%83%A8-%E9%A3%8E%E6%B5%81%E5%B0%91%E5%B9%B4/" rel="tag">《仙》第一部-风流少年</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0/" rel="tag">下拉刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C/" rel="tag">写作</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D/" rel="tag">反思</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E3%80%81%E8%83%8C%E6%99%AF%E3%80%81View%E6%9B%B4%E6%96%B0%E3%80%81%E5%B8%83%E5%B1%80%E3%80%81%E5%86%85%E5%AD%98/" rel="tag">图像、背景、View更新、布局、内存</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" rel="tag">开发规范</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%82%E6%AD%A5%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88Looper%E3%80%81MessageQueue%E3%80%81Handler%EF%BC%89/" rel="tag">异步线程的实现（Looper、MessageQueue、Handler）</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93%E5%88%86%E7%B1%BB/" rel="tag">总结分类</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E8%BD%B4/" rel="tag">时间轴</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84%E7%9A%84%E5%AE%9E%E4%BE%8B/" rel="tag">架构的实例</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%89%E6%B5%B8%E5%BC%8F/" rel="tag">沉浸式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87/" rel="tag">目标</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/" rel="tag">知识库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%80%E5%8E%86/" rel="tag">简历</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89Loader/" rel="tag">自定义Loader</a><span class="tag-list-count">1</span></li></ul></div></div><div class="widget"><h3 class="widget-title">标签云</h3><div class="widget-body tagcloud"><a href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%85%B8%E8%8C%83/" style="font-size:13.5px">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size:13px">Annotation</a> <a href="/tags/AsyncTask/" style="font-size:13px">AsyncTask</a> <a href="/tags/Binder/" style="font-size:13px">Binder</a> <a href="/tags/CountDownTimer/" style="font-size:13px">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size:13px">Dialog</a> <a href="/tags/Docker/" style="font-size:13.38px">Docker</a> <a href="/tags/EventBus/" style="font-size:13.13px">EventBus</a> <a href="/tags/Flutter/" style="font-size:13.88px">Flutter</a> <a href="/tags/Flutter%E3%80%81%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size:13px">Flutter、网络编程</a> <a href="/tags/Golang/" style="font-size:13px">Golang</a> <a href="/tags/Google-Develop-for-Android-%E7%B3%BB%E5%88%97/" style="font-size:13.75px">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size:13px">Ibeacon</a> <a href="/tags/ImageView/" style="font-size:13px">ImageView</a> <a href="/tags/Java/" style="font-size:13.25px">Java</a> <a href="/tags/Kotlin/" style="font-size:13px">Kotlin</a> <a href="/tags/Lambda/" style="font-size:13px">Lambda</a> <a href="/tags/MotionEvent/" style="font-size:13px">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size:13.13px">OkHttp</a> <a href="/tags/React-Native/" style="font-size:13px">React-Native</a> <a href="/tags/RxAndroid/" style="font-size:13px">RxAndroid</a> <a href="/tags/RxJava/" style="font-size:13.5px">RxJava</a> <a href="/tags/ServiceManager/" style="font-size:13px">ServiceManager</a> <a href="/tags/SpringBoot/" style="font-size:13px">SpringBoot</a> <a href="/tags/String%E7%9B%B8%E5%85%B3%E7%B1%BB%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size:13px">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size:13px">Textview</a> <a href="/tags/TypedArray/" style="font-size:13px">TypedArray</a> <a href="/tags/VPN/" style="font-size:13px">VPN</a> <a href="/tags/ViewHolder%E7%9A%84%E4%BD%9C%E7%94%A8/" style="font-size:13px">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size:13px">WebView</a> <a href="/tags/Webview/" style="font-size:13px">Webview</a> <a href="/tags/adb/" style="font-size:13px">adb</a> <a href="/tags/brew/" style="font-size:13px">brew</a> <a href="/tags/drawable/" style="font-size:13px">drawable</a> <a href="/tags/goland-json/" style="font-size:13px">goland json</a> <a href="/tags/golang/" style="font-size:13.13px">golang</a> <a href="/tags/linux/" style="font-size:13px">linux</a> <a href="/tags/port/" style="font-size:13px">port</a> <a href="/tags/redis/" style="font-size:13.13px">redis</a> <a href="/tags/web/" style="font-size:13px">web</a> <a href="/tags/widget/" style="font-size:13px">widget</a> <a href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B/" style="font-size:13px">《仙》</a> <a href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B%E7%AC%AC%E4%B8%80%E9%83%A8-%E9%A3%8E%E6%B5%81%E5%B0%91%E5%B9%B4/" style="font-size:13.13px">《仙》第一部-风流少年</a> <a href="/tags/%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0/" style="font-size:13px">下拉刷新</a> <a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size:13.13px">写作</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" style="font-size:14px">前端进阶</a> <a href="/tags/%E5%8F%8D%E6%80%9D/" style="font-size:13px">反思</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E3%80%81%E8%83%8C%E6%99%AF%E3%80%81View%E6%9B%B4%E6%96%B0%E3%80%81%E5%B8%83%E5%B1%80%E3%80%81%E5%86%85%E5%AD%98/" style="font-size:13.13px">图像、背景、View更新、布局、内存</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" style="font-size:13.25px">开发规范</a> <a href="/tags/%E5%BC%82%E6%AD%A5%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88Looper%E3%80%81MessageQueue%E3%80%81Handler%EF%BC%89/" style="font-size:13px">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size:13px">快捷键</a> <a href="/tags/%E6%80%BB%E7%BB%93%E5%88%86%E7%B1%BB/" style="font-size:13.63px">总结分类</a> <a href="/tags/%E6%97%B6%E9%97%B4%E8%BD%B4/" style="font-size:13px">时间轴</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E7%9A%84%E5%AE%9E%E4%BE%8B/" style="font-size:13px">架构的实例</a> <a href="/tags/%E6%B2%89%E6%B5%B8%E5%BC%8F/" style="font-size:13px">沉浸式</a> <a href="/tags/%E6%BA%90%E7%A0%81/" style="font-size:13px">源码</a> <a href="/tags/%E7%9B%AE%E6%A0%87/" style="font-size:13.13px">目标</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/" style="font-size:13.25px">知识库</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size:13px">科学上网</a> <a href="/tags/%E7%AE%80%E5%8E%86/" style="font-size:13px">简历</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size:13px">编译</a> <a href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89Loader/" style="font-size:13px">自定义Loader</a></div></div><div class="widget"><h3 class="widget-title">归档</h3><div class="widget-body"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">五月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">二月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">一月 2014</a><span class="archive-list-count">5</span></li></ul></div></div><div class="widget"><h3 class="widget-title">最新文章</h3><div class="widget-body"><ul class="recent-post-list list-unstyled no-thumbnail"><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/12/09/flutter/flutterbase004/" class="title">Flutter入门之跨组件传递数据</a></p><p class="item-date"><time datetime="2020-12-08T16:00:00.000Z" itemprop="datePublished">2020-12-09</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/11/01/web/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%81%93/JS%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%81%93/" class="title">前端进阶之JS前端进阶</a></p><p class="item-date"><time datetime="2020-10-31T16:00:00.000Z" itemprop="datePublished">2020-11-01</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/10/31/flutter/%E6%89%93%E5%8C%85/" class="title">Flutter进阶之如何构建高效的FlutterApp打包发布环境？</a></p><p class="item-date"><time datetime="2020-10-30T16:00:00.000Z" itemprop="datePublished">2020-10-31</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/09/30/flutter/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/" class="title">Flutter进阶之如何通过工具链优化开发调试效率？</a></p><p class="item-date"><time datetime="2020-09-29T16:00:00.000Z" itemprop="datePublished">2020-09-30</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/09/30/web/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%81%93/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="title">前端进阶之数据结构</a></p><p class="item-date"><time datetime="2020-09-29T16:00:00.000Z" itemprop="datePublished">2020-09-30</time></p></div></li></ul></div></div></div></aside><main class="main" role="main"><div class="content"><article id="post-android/Android Skills/RecyclerView 列表控件中简单实现时间线" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting"><div class="article-header"><h1 class="article-title" itemprop="name">RecyclerView 列表控件中简单实现时间线</h1><div class="article-meta"><span class="article-date"><i class="icon icon-calendar-check"></i> <a href="/2015/12/18/android/Android%20Skills/RecyclerView%20%E5%88%97%E8%A1%A8%E6%8E%A7%E4%BB%B6%E4%B8%AD%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%97%B6%E9%97%B4%E7%BA%BF/" class="article-date"><time datetime="2015-12-17T17:01:14.000Z" itemprop="datePublished">2015-12-18</time> </a></span><span class="article-category"><i class="icon icon-folder"></i> <a class="article-category-link" href="/categories/android/">android</a> </span><span class="article-tag"><i class="icon icon-tags"></i> <a class="article-tag-link-link" href="/tags/%E6%97%B6%E9%97%B4%E8%BD%B4/" rel="tag">时间轴</a> </span><span class="post-comment"><i class="icon icon-comment"></i> <a href="/2015/12/18/android/Android%20Skills/RecyclerView%20%E5%88%97%E8%A1%A8%E6%8E%A7%E4%BB%B6%E4%B8%AD%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%97%B6%E9%97%B4%E7%BA%BF/#comments" class="article-comment-link">评论</a></span></div></div><div class="article-entry marked-body" itemprop="articleBody"><p>看见很多软件中都有时间线的东西，貌似天气啊，旅游啊什么的最多了；具体实现方式很多，在本篇文章中讲解一种自定义View封装的方式。</p><h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>先来看看效果。<br><img src="http://www.jcodecraeer.com/uploads/20150825/1440469250572021.png"></p><span id="more"></span><h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>软件中，可以看见前面的时间线也就是线条加上圆圈组成；当然这里的圆圈与线条也都是可以随意换成其他的，比如图片等等。</p><p>当然这里最简单的来说，是上面一个线条，然后一个圆圈，然后下面一个线条；上线条在第一条数据时不做显示，下线条在最后一条数据时不做显示。</p><p><img src="http://www.jcodecraeer.com/uploads/20150825/1440469277121276.png"></p><p>这里自定义布局部分也就是把旁边的线条与圆圈封装到一起，并使用简单的方法来控制是否显示。<br>当封装好了后，与旁边的文字部分也就是水瓶方向的线性布局了，然后设置为每一个的RecyclerView 的Item的布局也就完成了。</p><h3 id="控件"><a href="#控件" class="headerlink" title="控件"></a>控件</h3><p>控件很简单，首先我们继承View，取名为 TimeLineMarker 就OK。</p><h3 id="Attrs-属性"><a href="#Attrs-属性" class="headerlink" title="Attrs 属性"></a>Attrs 属性</h3><p>开始控件之前先准备好需要的属性。</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;resources&gt;
+    &lt;declare-styleable name=&quot;TimeLineMarker&quot;&gt;
+        &lt;attr name=&quot;markerSize&quot; format=&quot;dimension&quot; /&gt;
+        &lt;attr name=&quot;marker&quot; format=&quot;color|reference&quot; /&gt;
+        &lt;attr name=&quot;beginLine&quot; format=&quot;color|reference&quot; /&gt;
+        &lt;attr name=&quot;endLine&quot; format=&quot;color|reference&quot; /&gt;
+        &lt;attr name=&quot;lineSize&quot; format=&quot;dimension&quot; /&gt;
+    &lt;/declare-styleable&gt;
+&lt;/resources&gt;
+</code></pre><p>在这里也就准备了线条的大小、开始线条、结束线条、中间标示部分及大小。</p><h3 id="属性与现实"><a href="#属性与现实" class="headerlink" title="属性与现实"></a>属性与现实</h3><pre><code>private int mMarkerSize = 24;
+private int mLineSize = 12;
+private Drawable mBeginLine;
+private Drawable mEndLine;
+private Drawable mMarkerDrawable;
+
+@Override
+protected void onDraw(Canvas canvas) &#123;
+    if (mBeginLine != null) &#123;
+        mBeginLine.draw(canvas);
+    &#125;
+
+    if (mEndLine != null) &#123;
+        mEndLine.draw(canvas);
+    &#125;
+
+    if (mMarkerDrawable != null) &#123;
+        mMarkerDrawable.draw(canvas);
+    &#125;
+
+    super.onDraw(canvas);
+&#125;
+</code></pre><p>两个大小属性，3个具体的Drawable，然后在onDraw方法中进行具体的显示也就OK。</p><h3 id="构造与属性初始化"><a href="#构造与属性初始化" class="headerlink" title="构造与属性初始化"></a>构造与属性初始化</h3><p>在上面我们定义了属性，在这里我们在构造函数中获取XML所设置的属性。</p><pre><code>public TimeLineMarker(Context context) &#123;
+    this(context, null);
+&#125;
+
+public TimeLineMarker(Context context, AttributeSet attrs) &#123;
+    this(context, attrs, 0);
+&#125;
+
+public TimeLineMarker(Context context, AttributeSet attrs, int defStyle) &#123;
+    super(context, attrs, defStyle);
+    init(attrs);
+&#125;
+
+private void init(AttributeSet attrs) &#123;
+    // Load attributes
+    final TypedArray a = getContext().obtainStyledAttributes(
+            attrs, R.styleable.TimeLineMarker, 0, 0);
+
+    mMarkerSize = a.getDimensionPixelSize(
+            R.styleable.TimeLineMarker_markerSize,
+            mMarkerSize);
+
+    mLineSize = a.getDimensionPixelSize(
+            R.styleable.TimeLineMarker_lineSize,
+            mLineSize);
+
+    mBeginLine = a.getDrawable(
+            R.styleable.TimeLineMarker_beginLine);
+
+    mEndLine = a.getDrawable(
+            R.styleable.TimeLineMarker_endLine);
+
+    mMarkerDrawable = a.getDrawable(
+            R.styleable.TimeLineMarker_marker);
+
+    a.recycle();
+
+    if (mBeginLine != null)
+        mBeginLine.setCallback(this);
+
+    if (mEndLine != null)
+        mEndLine.setCallback(this);
+
+    if (mMarkerDrawable != null)
+        mMarkerDrawable.setCallback(this);
+&#125;
+</code></pre><h3 id="Drawable-的位置与大小初始化"><a href="#Drawable-的位置与大小初始化" class="headerlink" title="Drawable 的位置与大小初始化"></a>Drawable 的位置与大小初始化</h3><p>属性啥的有了，具体的Drawable 也有了，要显示的地方调用也是OK了；但是如果没有进行进行具体的位置调整这一切也都没有意义。</p><pre><code>@Override
+protected void onSizeChanged(int w, int h, int oldw, int oldh) &#123;
+    super.onSizeChanged(w, h, oldw, oldh);
+    initDrawableSize();
+&#125;
+
+private void initDrawableSize() &#123;
+    int pLeft = getPaddingLeft();
+    int pRight = getPaddingRight();
+    int pTop = getPaddingTop();
+    int pBottom = getPaddingBottom();
+
+    int width = getWidth();
+    int height = getHeight();
+
+    int cWidth = width - pLeft - pRight;
+    int cHeight = height - pTop - pBottom;
+
+    Rect bounds;
+
+    if (mMarkerDrawable != null) &#123;
+        // Size
+        int markerSize = Math.min(mMarkerSize, Math.min(cWidth, cHeight));
+        mMarkerDrawable.setBounds(pLeft, pTop,
+                pLeft + markerSize, pTop + markerSize);
+
+        bounds = mMarkerDrawable.getBounds();
+    &#125; else &#123;
+        bounds = new Rect(pLeft, pTop, pLeft + cWidth, pTop + cHeight);
+    &#125;
+
+
+    int halfLineSize = mLineSize &gt;&gt; 1;
+    int lineLeft = bounds.centerX() - halfLineSize;
+
+    if (mBeginLine != null) &#123;
+        mBeginLine.setBounds(lineLeft, 0, lineLeft + mLineSize, bounds.top);
+    &#125;
+
+    if (mEndLine != null) &#123;
+        mEndLine.setBounds(lineLeft, bounds.bottom, lineLeft + mLineSize, height);
+    &#125;
+&#125;
+</code></pre><p>initDrawableSize 方法进行具体的运算，而运算的时间点就是当控件的大小改变（onSizeChanged）的时候。</p><p>在初始化中采用了一定的投机取巧；这里利用了上内边距与下内边距分别作为上线条与下线条的长度；而线条与中间的标识都采用了水平距中。</p><h3 id="其他设置方法"><a href="#其他设置方法" class="headerlink" title="其他设置方法"></a>其他设置方法</h3><pre><code>public void setLineSize(int lineSize) &#123;
+    if (mLineSize != lineSize) &#123;
+        this.mLineSize = lineSize;
+        initDrawableSize();
+        invalidate();
+    &#125;
+&#125;
+
+public void setMarkerSize(int markerSize) &#123;
+    if (this.mMarkerSize != markerSize) &#123;
+        mMarkerSize = markerSize;
+        initDrawableSize();
+        invalidate();
+    &#125;
+&#125;
+
+public void setBeginLine(Drawable beginLine) &#123;
+    if (this.mBeginLine != beginLine) &#123;
+        this.mBeginLine = beginLine;
+        if (mBeginLine != null) &#123;
+            mBeginLine.setCallback(this);
+        &#125;
+        initDrawableSize();
+        invalidate();
+    &#125;
+&#125;
+
+public void setEndLine(Drawable endLine) &#123;
+    if (this.mEndLine != endLine) &#123;
+        this.mEndLine = endLine;
+        if (mEndLine != null) &#123;
+            mEndLine.setCallback(this);
+        &#125;
+        initDrawableSize();
+        invalidate();
+    &#125;
+&#125;
+
+public void setMarkerDrawable(Drawable markerDrawable) &#123;
+    if (this.mMarkerDrawable != markerDrawable) &#123;
+        this.mMarkerDrawable = markerDrawable;
+        if (mMarkerDrawable != null) &#123;
+            mMarkerDrawable.setCallback(this);
+        &#125;
+        initDrawableSize();
+        invalidate();
+    &#125;
+&#125;
+</code></pre><p>在设置中，首先判断是否更改，如果更改那么就更新并重新计算位置；随后刷新界面。</p><blockquote><p>到这里，控件差不多准备OK了，其中还有很多可以完善的地方，比如加上快捷设置颜色什么的，也可以加上大小计算的东西。同时还可以加上时间线是水瓶还是垂直等等。在这里就不累赘介绍哪些了。下面来看看如何使用。</p></blockquote><h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><h4 id="XML布局"><a href="#XML布局" class="headerlink" title="XML布局"></a>XML布局</h4><h5 id="ITEM布局item-time-line-xml"><a href="#ITEM布局item-time-line-xml" class="headerlink" title="ITEM布局item_time_line.xml"></a>ITEM布局item_time_line.xml</h5><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;wrap_content&quot;
+    android:orientation=&quot;horizontal&quot;
+    android:paddingLeft=&quot;@dimen/lay_16&quot;
+    android:paddingRight=&quot;@dimen/lay_16&quot;
+    tools:ignore=&quot;MissingPrefix&quot;&gt;
+
+    &lt;net.qiujuer.example.timeline.widget.TimeLineMarker
+        android:id=&quot;@+id/item_time_line_mark&quot;
+        android:layout_width=&quot;wrap_content&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:paddingBottom=&quot;@dimen/lay_16&quot;
+        android:paddingLeft=&quot;@dimen/lay_4&quot;
+        android:paddingRight=&quot;@dimen/lay_4&quot;
+        android:paddingTop=&quot;@dimen/lay_16&quot;
+        app:beginLine=&quot;@color/black_alpha_32&quot;
+        app:endLine=&quot;@color/black_alpha_32&quot;
+        app:lineSize=&quot;2dp&quot;
+        app:marker=&quot;@drawable/ic_timeline_default_marker&quot;
+        app:markerSize=&quot;24dp&quot; /&gt;
+
+    &lt;TextView
+        android:id=&quot;@+id/item_time_line_txt&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;wrap_content&quot;
+        android:layout_gravity=&quot;center&quot;
+        android:paddingBottom=&quot;@dimen/lay_16&quot;
+        android:paddingLeft=&quot;@dimen/lay_4&quot;
+        android:paddingRight=&quot;@dimen/lay_4&quot;
+        android:paddingTop=&quot;@dimen/lay_16&quot;
+        android:textColor=&quot;@color/grey_600&quot;
+        android:textSize=&quot;@dimen/font_16&quot; /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><p>在这里我们之间使用顺序布局，左边是TimelIne控件，右边是一个简单的字体控件，具体使用中可以细化一些。</p><p>在TImeLine控件中我们的Mark是使用的drawable/ic_timeline_default_marker；这个就是一个简单的圆圈而已；对于自己美化可以使用一张图片代替或者更加复杂的布局；当然上面的线条就更加简单了，就直接使用颜色代替。</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:shape=&quot;oval&quot;&gt;
+    &lt;solid android:color=&quot;@color/cyan_500&quot; /&gt;
+    &lt;stroke
+        android:width=&quot;1dp&quot;
+        android:color=&quot;@color/black_alpha_32&quot; /&gt;
+&lt;/shape&gt;
+</code></pre><h5 id="主界面XML-RecyclerView"><a href="#主界面XML-RecyclerView" class="headerlink" title="主界面XML RecyclerView"></a>主界面XML RecyclerView</h5><pre><code>&lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;
+    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;
+    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;
+    tools:context=&quot;.MainActivity&quot;&gt;
+
+    &lt;android.support.v7.widget.RecyclerView
+        android:id=&quot;@+id/time_line_recycler&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:clickable=&quot;true&quot;
+        android:fadeScrollbars=&quot;true&quot;
+        android:fadingEdge=&quot;none&quot;
+        android:focusable=&quot;true&quot;
+        android:focusableInTouchMode=&quot;true&quot;
+        android:overScrollMode=&quot;never&quot;
+        android:scrollbarSize=&quot;2dp&quot;
+        android:scrollbarThumbVertical=&quot;@color/cyan_500&quot;
+        android:scrollbars=&quot;vertical&quot; /&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>在这里就是加上了一个RecyclerView 控件在主界面就OK。</p><h5 id="Java代码部分"><a href="#Java代码部分" class="headerlink" title="Java代码部分"></a>Java代码部分</h5><p>在开始之前先来看看我们的文件具体有些神马。</p><p><img src="http://www.jcodecraeer.com/uploads/20150825/1440469609114998.png"></p><p>widget中就是具体的自定义控件，model是具体的数据模型，adapter部分，这里有一个Recyclerview的adapter文件，以及一个具体的Item TimeLineViewHolder，当然在这里还定义了一个ItemType类，该类用来标示每个Item的类型，比如头部，第一个，普通，最后一个，底部等等。</p><h6 id="TimeLineModel-java"><a href="#TimeLineModel-java" class="headerlink" title="TimeLineModel.java"></a>TimeLineModel.java</h6><pre><code>package net.qiujuer.example.timeline.model;
+
+/**
+ * Created by qiujuer
+ * on 15/8/23.
+ */
+public class TimeLineModel &#123;
+    private String name;
+    private int age;
+
+    public TimeLineModel() &#123;
+
+    &#125;
+
+    public TimeLineModel(String name, int age) &#123;
+        this.name = name;
+        this.age = age;
+    &#125;
+
+    public int getAge() &#123;
+        return age;
+    &#125;
+
+    public String getName() &#123;
+        return name;
+    &#125;
+
+    public void setAge(int age) &#123;
+        this.age = age;
+    &#125;
+
+    public void setName(String name) &#123;
+        this.name = name;
+    &#125;
+&#125;
+</code></pre><p>一个名字，一个年龄也就OK。</p><h6 id="ItemType-java"><a href="#ItemType-java" class="headerlink" title="ItemType.java"></a>ItemType.java</h6><pre><code>package net.qiujuer.example.timeline.adapter;
+
+/**
+ * Created by qiujuer
+ * on 15/8/23.
+ */
+public class ItemType &#123;
+    public final static int NORMAL = 0;
+
+    public final static int HEADER = 1;
+    public final static int FOOTER = 2;
+
+    public final static int START = 4;
+    public final static int END = 8;
+
+    public final static int ATOM = 16;
+&#125;
+</code></pre><p>分别定义了几个静态值，分别代表普通、头部、底部、开始、结束、原子；当然其中有些可以不用定义。</p><h6 id="TimeLineViewHolder-java"><a href="#TimeLineViewHolder-java" class="headerlink" title="TimeLineViewHolder.java"></a>TimeLineViewHolder.java</h6><pre><code>package net.qiujuer.example.timeline.adapter;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
+
+import net.qiujuer.example.timeline.R;
+import net.qiujuer.example.timeline.model.TimeLineModel;
+import net.qiujuer.example.timeline.widget.TimeLineMarker;
+
+/**
+ * Created by qiujuer
+ * on 15/8/23.
+ */
+public class TimeLineViewHolder extends RecyclerView.ViewHolder &#123;
+    private TextView mName;
+
+    public TimeLineViewHolder(View itemView, int type) &#123;
+        super(itemView);
+
+        mName = (TextView) itemView.findViewById(R.id.item_time_line_txt);
+
+        TimeLineMarker mMarker = (TimeLineMarker) itemView.findViewById(R.id.item_time_line_mark);
+        if (type == ItemType.ATOM) &#123;
+            mMarker.setBeginLine(null);
+            mMarker.setEndLine(null);
+        &#125; else if (type == ItemType.START) &#123;
+            mMarker.setBeginLine(null);
+        &#125; else if (type == ItemType.END) &#123;
+            mMarker.setEndLine(null);
+        &#125;
+
+    &#125;
+
+    public void setData(TimeLineModel data) &#123;
+        mName.setText(&quot;Name:&quot; + data.getName() + &quot; Age:&quot; + data.getAge());
+    &#125;
+&#125;
+</code></pre><p>该文件为RecyclerView 的Adapter中每个Item需要实现的Holder类。<br>在该类中，我们在构造函数中需要传入一个根View同时传入一个当然item的状态。<br>随后使用find….找到控件，在这里我们把TextView保存起来，而TimeLineView找到后直接进行初始化设置。<br>根据传入的ItemType来判断是否是第一个，最后一个，以及原子；然后设置TimeLineView的属性。<br>在下面的setData方法中我们显示具体的Model数据。</p><h6 id="TimeLineAdapter-java"><a href="#TimeLineAdapter-java" class="headerlink" title="TimeLineAdapter.java"></a>TimeLineAdapter.java</h6><p>适配器部分，我们需要做的工作是；根据具体的数据渲染上对应的界面就OK。</p><pre><code>package net.qiujuer.example.timeline.adapter;
+
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import net.qiujuer.example.timeline.R;
+import net.qiujuer.example.timeline.model.TimeLineModel;
+
+import java.util.List;
+
+/**
+ * Created by qiujuer
+ * on 15/8/23.
+ */
+public class TimeLineAdapter extends RecyclerView.Adapter&lt;TimeLineViewHolder&gt; &#123;
+    private List&lt;TimeLineModel&gt; mDataSet;
+
+    public TimeLineAdapter(List&lt;TimeLineModel&gt; models) &#123;
+        mDataSet = models;
+    &#125;
+
+    @Override
+    public int getItemViewType(int position) &#123;
+        final int size = mDataSet.size() - 1;
+        if (size == 0)
+            return ItemType.ATOM;
+        else if (position == 0)
+            return ItemType.START;
+        else if (position == size)
+            return ItemType.END;
+        else return ItemType.NORMAL;
+    &#125;
+
+    @Override
+    public TimeLineViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) &#123;
+        // Create a new view.
+        View v = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.item_time_line, viewGroup, false);
+        return new TimeLineViewHolder(v, viewType);
+    &#125;
+
+    @Override
+    public void onBindViewHolder(TimeLineViewHolder timeLineViewHolder, int i) &#123;
+        timeLineViewHolder.setData(mDataSet.get(i));
+    &#125;
+
+    @Override
+    public int getItemCount() &#123;
+        return mDataSet.size();
+    &#125;
+&#125;
+</code></pre><blockquote><p>在这里需要着重说一下：我复写了getItemViewType方法；在该方法中我们需要设置对应的Item的类型；在这里传入的是item的坐标，需要返回的是item的具体状态，该状态标示是int类型；在这里我使用的是ItemType的静态属性。<br>该方法会在调用onCreateViewHolder方法之前调用；而onCreateViewHolder方法中的第二个参数int值也就是从getItemViewType之中来；所以我们可以在这里进行对应的数据状态标示。<br>而在onCreateViewHolder方法中我们返回一个：TimeLineViewHolder就OK，随后在onBindViewHolder方法中进行数据初始化操作。</p></blockquote><h6 id="MainActivity-java"><a href="#MainActivity-java" class="headerlink" title="MainActivity.java"></a>MainActivity.java</h6><p>上面所有都准备好了，下面就进行具体的显示。<br>在这里就只贴出核心代码了；篇幅也是有些长。</p><pre><code>private RecyclerView mRecycler;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) &#123;
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    mRecycler = (RecyclerView) findViewById(R.id.time_line_recycler);
+    initRecycler();
+&#125;
+
+private void initRecycler() &#123;
+    LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+    layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+    TimeLineAdapter adapter = new TimeLineAdapter(getData());
+
+    mRecycler.setLayoutManager(layoutManager);
+    mRecycler.setAdapter(adapter);
+&#125;
+
+private List&lt;TimeLineModel&gt; getData() &#123;
+    List&lt;TimeLineModel&gt; models = new ArrayList&lt;TimeLineModel&gt;();
+
+    models.add(new TimeLineModel(&quot;XiaoMing&quot;, 21));
+    models.add(new TimeLineModel(&quot;XiaoFang&quot;, 20));
+    models.add(new TimeLineModel(&quot;XiaoHua&quot;, 25));
+    models.add(new TimeLineModel(&quot;XiaoA&quot;, 22));
+    models.add(new TimeLineModel(&quot;XiaoNiu&quot;, 23));
+
+    return models;
+&#125;
+</code></pre><p>在这里就是傻瓜的操作了，流程就是准备好对应的数据，装进Adapter，准备好对应的布局方式，然后都设置到RecyclerView中就OK。</p><h6 id="效果-1"><a href="#效果-1" class="headerlink" title="效果"></a>效果</h6><p>来看看具体的效果：</p><p><img src="http://www.jcodecraeer.com/uploads/20150825/1440469865127253.png"></p><p>效果虽然简单，但是也算是五脏具全；其中无非就是控件的自定义。这个自定义是可以扩展的，大家可以扩展为水平方向试试。</p><h6 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h6><p>博客代码都开源到项目中了。<br>地址：<a target="_blank" rel="noopener" href="https://github.com/qiujuer/BeFoot/tree/master/blog/sample/TimeLine">https://github.com/qiujuer/BeFoot/tree/master/blog/sample/TimeLine</a></p><h6 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h6><p>文章的开始截屏来源于：最近没事儿捣鼓了一个APP［UPMiss］，一个简单的生日，纪念日提醒软件；欢迎大家尝鲜。</p><hr><p>转载出处：<a target="_blank" rel="noopener" href="http://blog.csdn.net/qiujuer/article/details/47910185">http://blog.csdn.net/qiujuer/article/details/47910185</a></p></div><div class="article-footer"><blockquote class="mt-2x"><ul class="post-copyright list-unstyled"><li class="post-copyright-link hidden-xs"><strong>本文链接：</strong> <a href="http://example.com/2015/12/18/android/Android%20Skills/RecyclerView%20%E5%88%97%E8%A1%A8%E6%8E%A7%E4%BB%B6%E4%B8%AD%E7%AE%80%E5%8D%95%E5%AE%9E%E7%8E%B0%E6%97%B6%E9%97%B4%E7%BA%BF/" title="RecyclerView 列表控件中简单实现时间线" target="_blank" rel="external">http://example.com/2015/12/18/android/Android Skills/RecyclerView 列表控件中简单实现时间线/</a></li><li class="post-copyright-license"><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！</li></ul></blockquote><div class="panel panel-default panel-badger"><div class="panel-body"><figure class="media"><div class="media-left"><a href="https://github.com/xiyionxiong" target="_blank" class="img-burn thumb-sm visible-lg"><img src="/images/avatar.jpg" class="img-rounded w-full" alt=""></a></div><div class="media-body"><h3 class="media-heading"><a href="https://github.com/xiyionxiong" target="_blank"><span class="text-dark">熊凯</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3><div>个人简介。</div></div></figure></div></div></div></article><section id="comments"></section></div><nav class="bar bar-footer clearfix" data-stick-bottom><div class="bar-inner"><ul class="pager pull-left"><li class="prev"><a href="/2015/12/19/web/React-Native%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/" title="React-Native学习指南"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a></li><li class="next"><a href="/2015/11/21/%E9%9A%8F%E7%AC%94/3.5%E5%BC%80%E5%8F%91%E4%B8%AD%E7%9A%84%E4%BA%AE%E7%82%B9%E5%92%8C%E4%B8%8D%E8%B6%B3/" title="亮点和不足"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a></li></ul><button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button><div class="bar-right"></div></div></nav><div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog"><div class="modal-dialog" role="document"><div class="modal-content donate"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><div class="modal-body"><div class="donate-box"><div class="donate-head"><p>感谢您的支持，我会继续努力的!</p></div><div class="tab-content"><div role="tabpanel" class="tab-pane fade active in" id="alipay"><div class="donate-payimg"><img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫"></div><p class="text-muted mv">扫码打赏，你说多少就多少</p><p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p></div><div role="tabpanel" class="tab-pane fade" id="wechatpay"><div class="donate-payimg"><img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫"></div><p class="text-muted mv">扫码打赏，你说多少就多少</p><p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p></div></div><div class="donate-footer"><ul class="nav nav-tabs nav-justified" role="tablist"><li role="presentation" class="active"><a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a></li><li role="presentation"><a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a></li></ul></div></div></div></div></div></div></main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter"><ul class="social-links"><li><a href="https://github.com/xiyionxiong" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li><li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li></ul><div class="copyright"><div class="publishby">Theme by <a href="https://github.com/cofess" target="_blank">cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.</div></div></footer><script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script><script>window.jQuery||document.write('<script src="js/jquery.min.js"><\/script>')</script><script src="/js/plugin.min.js"></script><script src="/js/application.js"></script><script>window.INSIGHT_CONFIG={TRANSLATION:{POSTS:"文章",PAGES:"页面",CATEGORIES:"分类",TAGS:"标签",UNTITLED:"(未命名)"},ROOT_URL:"/",CONTENT_URL:"/content.json"}</script><script src="/js/insight.js"></script></body></html>

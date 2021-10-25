@@ -1,0 +1,458 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui"><meta name="renderer" content="webkit"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no,email=no,adress=no"><meta name="theme-color" content="#000000"><meta http-equiv="window-target" content="_top"><title>Android anim drawable color技巧 | Hexo</title><meta name="description" content="Anim Set属性"><meta property="og:type" content="article"><meta property="og:title" content="Android anim drawable color技巧"><meta property="og:url" content="http://example.com/2014/01/23/android/Android%20Skills/Android%20anim%20drawable%20color%20%E6%8A%80%E5%B7%A7/index.html"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="Anim Set属性"><meta property="og:locale" content="zh_CN"><meta property="article:published_time" content="2014-01-23T10:32:45.000Z"><meta property="article:modified_time" content="2018-06-14T03:20:45.000Z"><meta property="article:author" content="熊凯"><meta property="article:tag" content="drawable"><meta name="twitter:card" content="summary"><link rel="canonical" href="http://example.com/2014/01/23/android/Android%20Skills/Android%20anim%20drawable%20color%20%E6%8A%80%E5%B7%A7/index.html"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml"><link rel="icon" href="/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 5.4.0"></head><body class="main-center" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="slimContent"><div class="navbar-header"><div class="profile-block text-center"><a id="avatar" href="https://github.com/xiyionxiong" target="_blank"><img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200"></a><h2 id="name" class="hidden-xs hidden-sm">熊凯</h2><h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3><small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small></div><div class="search" id="search-form-wrap"><form class="search-form sidebar-form"><div class="input-group"><input type="text" class="search-form-input form-control" placeholder="搜索"> <span class="input-group-btn"><button type="submit" class="search-form-submit btn btn-flat" onclick="return!1"><i class="icon icon-search"></i></button></span></div></form><div class="ins-search"><div class="ins-search-mask"></div><div class="ins-search-container"><div class="ins-input-wrapper"><input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech> <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div><div class="ins-section-wrapper"><div class="ins-section-container"></div></div></div></div></div><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button></div><nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation"><ul class="nav navbar-nav main-nav"><li class="menu-item menu-item-home"><a href="/."><i class="icon icon-home-fill"></i> <span class="menu-title">首页</span></a></li><li class="menu-item menu-item-archives"><a href="/archives"><i class="icon icon-archives-fill"></i> <span class="menu-title">归档</span></a></li><li class="menu-item menu-item-categories"><a href="/categories"><i class="icon icon-folder"></i> <span class="menu-title">分类</span></a></li><li class="menu-item menu-item-tags"><a href="/tags"><i class="icon icon-tags"></i> <span class="menu-title">标签</span></a></li><li class="menu-item menu-item-repository"><a href="/repository"><i class="icon icon-project"></i> <span class="menu-title">项目</span></a></li><li class="menu-item menu-item-books"><a href="/books"><i class="icon icon-book-fill"></i> <span class="menu-title">书单</span></a></li><li class="menu-item menu-item-links"><a href="/links"><i class="icon icon-friendship"></i> <span class="menu-title">友链</span></a></li><li class="menu-item menu-item-about"><a href="/about"><i class="icon icon-cup-fill"></i> <span class="menu-title">关于</span></a></li></ul><ul class="social-links"><li><a href="https://github.com/xiyionxiong" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li><li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li></ul></nav></div></header><aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar"><div class="slimContent"><div class="widget"><h3 class="widget-title">公告</h3><div class="widget-body"><div id="board"><div class="content"><p>欢迎交流与分享经验!</p></div></div></div></div><div class="widget"><h3 class="widget-title">分类</h3><div class="widget-body"><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/redis/">redis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/web/">web</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Flutter/">Flutter</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">68</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/redis/">redis</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/android/">android</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%80%E5%8E%86/">简历</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">13</span></li></ul></div></div><div class="widget"><h3 class="widget-title">标签</h3><div class="widget-body"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%85%B8%E8%8C%83/" rel="tag">Android性能优化典范</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Annotation/" rel="tag">Annotation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AsyncTask/" rel="tag">AsyncTask</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binder/" rel="tag">Binder</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CountDownTimer/" rel="tag">CountDownTimer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog/" rel="tag">Dialog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EventBus/" rel="tag">EventBus</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter%E3%80%81%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" rel="tag">Flutter、网络编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Develop-for-Android-%E7%B3%BB%E5%88%97/" rel="tag">Google Develop for Android 系列</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ibeacon/" rel="tag">Ibeacon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ImageView/" rel="tag">ImageView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kotlin/" rel="tag">Kotlin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MotionEvent/" rel="tag">MotionEvent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OkHttp/" rel="tag">OkHttp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/" rel="tag">React-Native</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxAndroid/" rel="tag">RxAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxJava/" rel="tag">RxJava</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ServiceManager/" rel="tag">ServiceManager</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String%E7%9B%B8%E5%85%B3%E7%B1%BB%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" rel="tag">String相关类性能测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Textview/" rel="tag">Textview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypedArray/" rel="tag">TypedArray</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewHolder%E7%9A%84%E4%BD%9C%E7%94%A8/" rel="tag">ViewHolder的作用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebView/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/" rel="tag">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adb/" rel="tag">adb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brew/" rel="tag">brew</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drawable/" rel="tag">drawable</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/goland-json/" rel="tag">goland json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/" rel="tag">golang</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/port/" rel="tag">port</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">widget</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B/" rel="tag">《仙》</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B%E7%AC%AC%E4%B8%80%E9%83%A8-%E9%A3%8E%E6%B5%81%E5%B0%91%E5%B9%B4/" rel="tag">《仙》第一部-风流少年</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0/" rel="tag">下拉刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C/" rel="tag">写作</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D/" rel="tag">反思</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E3%80%81%E8%83%8C%E6%99%AF%E3%80%81View%E6%9B%B4%E6%96%B0%E3%80%81%E5%B8%83%E5%B1%80%E3%80%81%E5%86%85%E5%AD%98/" rel="tag">图像、背景、View更新、布局、内存</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" rel="tag">开发规范</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%82%E6%AD%A5%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88Looper%E3%80%81MessageQueue%E3%80%81Handler%EF%BC%89/" rel="tag">异步线程的实现（Looper、MessageQueue、Handler）</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93%E5%88%86%E7%B1%BB/" rel="tag">总结分类</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E8%BD%B4/" rel="tag">时间轴</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84%E7%9A%84%E5%AE%9E%E4%BE%8B/" rel="tag">架构的实例</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%89%E6%B5%B8%E5%BC%8F/" rel="tag">沉浸式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87/" rel="tag">目标</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/" rel="tag">知识库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%80%E5%8E%86/" rel="tag">简历</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89Loader/" rel="tag">自定义Loader</a><span class="tag-list-count">1</span></li></ul></div></div><div class="widget"><h3 class="widget-title">标签云</h3><div class="widget-body tagcloud"><a href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%85%B8%E8%8C%83/" style="font-size:13.5px">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size:13px">Annotation</a> <a href="/tags/AsyncTask/" style="font-size:13px">AsyncTask</a> <a href="/tags/Binder/" style="font-size:13px">Binder</a> <a href="/tags/CountDownTimer/" style="font-size:13px">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size:13px">Dialog</a> <a href="/tags/Docker/" style="font-size:13.38px">Docker</a> <a href="/tags/EventBus/" style="font-size:13.13px">EventBus</a> <a href="/tags/Flutter/" style="font-size:13.88px">Flutter</a> <a href="/tags/Flutter%E3%80%81%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size:13px">Flutter、网络编程</a> <a href="/tags/Golang/" style="font-size:13px">Golang</a> <a href="/tags/Google-Develop-for-Android-%E7%B3%BB%E5%88%97/" style="font-size:13.75px">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size:13px">Ibeacon</a> <a href="/tags/ImageView/" style="font-size:13px">ImageView</a> <a href="/tags/Java/" style="font-size:13.25px">Java</a> <a href="/tags/Kotlin/" style="font-size:13px">Kotlin</a> <a href="/tags/Lambda/" style="font-size:13px">Lambda</a> <a href="/tags/MotionEvent/" style="font-size:13px">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size:13.13px">OkHttp</a> <a href="/tags/React-Native/" style="font-size:13px">React-Native</a> <a href="/tags/RxAndroid/" style="font-size:13px">RxAndroid</a> <a href="/tags/RxJava/" style="font-size:13.5px">RxJava</a> <a href="/tags/ServiceManager/" style="font-size:13px">ServiceManager</a> <a href="/tags/SpringBoot/" style="font-size:13px">SpringBoot</a> <a href="/tags/String%E7%9B%B8%E5%85%B3%E7%B1%BB%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size:13px">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size:13px">Textview</a> <a href="/tags/TypedArray/" style="font-size:13px">TypedArray</a> <a href="/tags/VPN/" style="font-size:13px">VPN</a> <a href="/tags/ViewHolder%E7%9A%84%E4%BD%9C%E7%94%A8/" style="font-size:13px">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size:13px">WebView</a> <a href="/tags/Webview/" style="font-size:13px">Webview</a> <a href="/tags/adb/" style="font-size:13px">adb</a> <a href="/tags/brew/" style="font-size:13px">brew</a> <a href="/tags/drawable/" style="font-size:13px">drawable</a> <a href="/tags/goland-json/" style="font-size:13px">goland json</a> <a href="/tags/golang/" style="font-size:13.13px">golang</a> <a href="/tags/linux/" style="font-size:13px">linux</a> <a href="/tags/port/" style="font-size:13px">port</a> <a href="/tags/redis/" style="font-size:13.13px">redis</a> <a href="/tags/web/" style="font-size:13px">web</a> <a href="/tags/widget/" style="font-size:13px">widget</a> <a href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B/" style="font-size:13px">《仙》</a> <a href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B%E7%AC%AC%E4%B8%80%E9%83%A8-%E9%A3%8E%E6%B5%81%E5%B0%91%E5%B9%B4/" style="font-size:13.13px">《仙》第一部-风流少年</a> <a href="/tags/%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0/" style="font-size:13px">下拉刷新</a> <a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size:13.13px">写作</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" style="font-size:14px">前端进阶</a> <a href="/tags/%E5%8F%8D%E6%80%9D/" style="font-size:13px">反思</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E3%80%81%E8%83%8C%E6%99%AF%E3%80%81View%E6%9B%B4%E6%96%B0%E3%80%81%E5%B8%83%E5%B1%80%E3%80%81%E5%86%85%E5%AD%98/" style="font-size:13.13px">图像、背景、View更新、布局、内存</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" style="font-size:13.25px">开发规范</a> <a href="/tags/%E5%BC%82%E6%AD%A5%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88Looper%E3%80%81MessageQueue%E3%80%81Handler%EF%BC%89/" style="font-size:13px">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size:13px">快捷键</a> <a href="/tags/%E6%80%BB%E7%BB%93%E5%88%86%E7%B1%BB/" style="font-size:13.63px">总结分类</a> <a href="/tags/%E6%97%B6%E9%97%B4%E8%BD%B4/" style="font-size:13px">时间轴</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E7%9A%84%E5%AE%9E%E4%BE%8B/" style="font-size:13px">架构的实例</a> <a href="/tags/%E6%B2%89%E6%B5%B8%E5%BC%8F/" style="font-size:13px">沉浸式</a> <a href="/tags/%E6%BA%90%E7%A0%81/" style="font-size:13px">源码</a> <a href="/tags/%E7%9B%AE%E6%A0%87/" style="font-size:13.13px">目标</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/" style="font-size:13.25px">知识库</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size:13px">科学上网</a> <a href="/tags/%E7%AE%80%E5%8E%86/" style="font-size:13px">简历</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size:13px">编译</a> <a href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89Loader/" style="font-size:13px">自定义Loader</a></div></div><div class="widget"><h3 class="widget-title">归档</h3><div class="widget-body"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">五月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">二月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">一月 2014</a><span class="archive-list-count">5</span></li></ul></div></div><div class="widget"><h3 class="widget-title">最新文章</h3><div class="widget-body"><ul class="recent-post-list list-unstyled no-thumbnail"><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/12/09/flutter/flutterbase004/" class="title">Flutter入门之跨组件传递数据</a></p><p class="item-date"><time datetime="2020-12-08T16:00:00.000Z" itemprop="datePublished">2020-12-09</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/11/01/web/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%81%93/JS%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%81%93/" class="title">前端进阶之JS前端进阶</a></p><p class="item-date"><time datetime="2020-10-31T16:00:00.000Z" itemprop="datePublished">2020-11-01</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/10/31/flutter/%E6%89%93%E5%8C%85/" class="title">Flutter进阶之如何构建高效的FlutterApp打包发布环境？</a></p><p class="item-date"><time datetime="2020-10-30T16:00:00.000Z" itemprop="datePublished">2020-10-31</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/09/30/flutter/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/" class="title">Flutter进阶之如何通过工具链优化开发调试效率？</a></p><p class="item-date"><time datetime="2020-09-29T16:00:00.000Z" itemprop="datePublished">2020-09-30</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/09/30/web/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%81%93/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="title">前端进阶之数据结构</a></p><p class="item-date"><time datetime="2020-09-29T16:00:00.000Z" itemprop="datePublished">2020-09-30</time></p></div></li></ul></div></div></div></aside><main class="main" role="main"><div class="content"><article id="post-android/Android Skills/Android anim drawable color 技巧" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting"><div class="article-header"><h1 class="article-title" itemprop="name">Android anim drawable color技巧</h1><div class="article-meta"><span class="article-date"><i class="icon icon-calendar-check"></i> <a href="/2014/01/23/android/Android%20Skills/Android%20anim%20drawable%20color%20%E6%8A%80%E5%B7%A7/" class="article-date"><time datetime="2014-01-23T10:32:45.000Z" itemprop="datePublished">2014-01-23</time> </a></span><span class="article-category"><i class="icon icon-folder"></i> <a class="article-category-link" href="/categories/android/">android</a> </span><span class="article-tag"><i class="icon icon-tags"></i> <a class="article-tag-link-link" href="/tags/drawable/" rel="tag">drawable</a> </span><span class="post-comment"><i class="icon icon-comment"></i> <a href="/2014/01/23/android/Android%20Skills/Android%20anim%20drawable%20color%20%E6%8A%80%E5%B7%A7/#comments" class="article-comment-link">评论</a></span></div></div><div class="article-entry marked-body" itemprop="articleBody"><h3 id="Anim-Set属性"><a href="#Anim-Set属性" class="headerlink" title="Anim Set属性"></a>Anim Set属性</h3><span id="more"></span><pre><code>&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+
+    &lt;!--
+        Set 属性
+
+        shareInterpolator true时，interpolator应用到所有子元素中。
+     --&gt;
+
+    &lt;!--
+        公共属性
+
+        detachWallpaper 是否在壁纸上运行，设置了壁纸背景的窗口动画(window animation)才有效。
+        设为true，则动画只在窗口运行，壁纸背景保持不变。
+
+        fillEnabled true时，fillBefore的值才有效，否则fillBefore会被忽略。
+        fillBefore true时，动画执行完后，View会还原动画执行前的初始状态；否则不会，默认即为true。
+
+        repeatCount 动画重复执行的次数，默认为0，不重复；-1或infinite，无限重复。
+        repeatMode 动画重复执行的模式，默认restart 动画重复执行时从起点开始；reverse 动画会反方向执行。
+
+        startOffset 动画执行之前的等待时间，毫秒为单位；重复执行时，每次执行前同样执行等待时间。
+        zAdjustment 动画的内容在动画运行时在z轴上的位置：
+                        normal 默认值，在z轴上
+                        top 在z轴最上层
+       &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+
+    &lt;item android:state_selected=&quot;true&quot; android:color=&quot;#FFFFFFFF&quot; /&gt;
+
+    &lt;item android:state_focused=&quot;true&quot; android:color=&quot;#FFFFFFFF&quot; /&gt;
+
+    &lt;item android:state_pressed=&quot;true&quot; android:color=&quot;#FFFFFFFF&quot; /&gt;
+
+    &lt;item android:color=&quot;#FF000000&quot; /&gt;
+
+&lt;/selector&gt;                     bottom 在z轴最下层
+        interpolator 动画速率的变化
+     --&gt;
+
+    &lt;!--
+        alpha 渐变动画
+        对应的 AlphaAnimation
+        AlphaAnimation alpha = (AlphaAnimation) AnimationUtils.loadAnimation(this, R.anim.alpha);
+        view.startAnimation(alpha);
+
+        duration 动画持续时间
+        fromAlpha 动画开始时透明度，默认值1.0，最小值0.0
+        toAlpha 动画结束时透明度，默认值1.0，最小值0.0
+     --&gt;
+    &lt;alpha
+        android:duration=&quot;500&quot;
+        android:fromAlpha=&quot;0.0&quot;
+        android:toAlpha=&quot;1.0&quot; /&gt;
+
+    &lt;!--
+        scale 缩放动画
+        对应的 ScaleAnimation
+        ScaleAnimation scale = (ScaleAnimation) AnimationUtils.loadAnimation(this, R.anim.scale);
+        view.startAnimation(scale);
+
+        duration 动画持续时间
+        fromXScale 动画开始时,x轴上（宽度）的缩放比例。0.0为没有大小，1.0为正常大小，大于1.0为放大，小于1.0为缩小。
+        fromYScale 动画开始时,y轴上（高度）的缩放比例。0.0为没有大小，1.0为正常大小，大于1.0为放大，小于1.0为缩小。
+        toXScale 动画结束时,x轴上（宽度）的缩放比例。0.0为没有大小，1.0为正常大小，大于1.0为放大，小于1.0为缩小。
+        toYScale 动画结束时,y轴上（高度）的缩放比例。0.0为没有大小，1.0为正常大小，大于1.0为放大，小于1.0为缩小。
+        pivotX 缩放时的固定不变的x坐标，0%为最左边，100%为最右边。
+        pivotY 缩放时的固定不变的y坐标，0%为最顶部，100%为最底部。
+    --&gt;
+    &lt;scale
+        android:duration=&quot;500&quot;
+        android:fromXScale=&quot;0.0&quot;
+        android:fromYScale=&quot;0.0&quot;
+        android:pivotX=&quot;0%&quot;
+        android:pivotY=&quot;100%&quot;
+        android:toXScale=&quot;1.0&quot;
+        android:toYScale=&quot;1.0&quot; /&gt;
+
+    &lt;!--
+        translate 平移动画
+        对应的 TranslateAnimation
+        TranslateAnimation translate = (TranslateAnimation) AnimationUtils.loadAnimation(this, R.anim.translate);
+        view.startAnimation(translate);
+
+        duration 动画持续时间
+        fromXDelta 起始位置的X坐标的偏移量
+        fromYDelta 结束位置的X坐标的偏移量
+        toXDelta 起始位置的Y坐标的偏移量
+        toYDelta 结束位置的Y坐标的偏移量
+
+        1.-100到100，以&quot;%&quot;结束，表示相对于View本身的百分比位置；-100%表示控件左边或者上边，100%表示控件右边或者下边
+        2.以&quot;%p&quot;（parent）结束，表示相对于View的父View的百分比位置；
+        3.没有任何后缀，表示相对于View本身具体的像素值
+     --&gt;
+    &lt;translate
+        android:duration=&quot;500&quot;
+        android:fromXDelta=&quot;100%&quot;
+        android:fromYDelta=&quot;-100%&quot;
+        android:toXDelta=&quot;-100%&quot;
+        android:toYDelta=&quot;100%&quot; /&gt;
+
+    &lt;!--
+        rotate 旋转动画
+        对应的 RotateAnimation
+        RotateAnimation rotate = (RotateAnimation) AnimationUtils.loadAnimation(this, R.anim.rotate);
+        view.startAnimation(rotate);
+
+        duration 动画持续时间
+        fromDegrees 旋转开始的角度
+        toDegrees 旋转结束的角度
+        pivotX 旋转中心点的X坐标，纯数字表示相对于View本身左边缘的像素偏移量；
+        带&quot;%&quot;后缀时表示相对于View本身左边缘的百分比偏移量；带&quot;%p&quot;后缀时表示相对于父View左边缘的百分比偏移量
+
+        pivotY 旋转中心点的Y坐标，纯数字表示相对于View本身顶部边缘的像素偏移量；
+        带&quot;%&quot;后缀时表示相对于View本身顶部边缘的百分比偏移量；带&quot;%p&quot;后缀时表示相对于父View顶部边缘的百分比偏移量
+    --&gt;
+    &lt;rotate
+        android:duration=&quot;500&quot;
+        android:fromDegrees=&quot;0&quot;
+        android:pivotX=&quot;50%&quot;
+        android:pivotY=&quot;50%&quot;
+        android:toDegrees=&quot;360&quot; /&gt;
+
+&lt;/set&gt;
+</code></pre><h3 id="Animi-interpolator"><a href="#Animi-interpolator" class="headerlink" title="Animi interpolator"></a>Animi interpolator</h3><pre><code>&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+
+    &lt;!--
+        加速度设置
+        &lt;动画标签
+        android:interpolator=&quot;@资源id&quot;/&gt;
+     --&gt;
+
+    &lt;!--
+        对应的类 AccelerateDecelerateInterpolator
+        对应的资源 @android:anim/accelerate_decelerate_interpolator
+        作用 动画开始与结束时速率改变比较慢，在中间时加速
+    --&gt;
+    &lt;accelerateDecelerateInterpolator /&gt;
+
+    &lt;!--
+        对应的类 AccelerateInterpolator
+        对应的资源 @android:anim/accelerate_interpolator
+        作用 动画开始时速率改变比较慢，然后开始加速
+
+        factor 加速速率，默认值1.0。
+     --&gt;
+    &lt;accelerateInterpolator android:factor=&quot;1&quot; /&gt;
+
+    &lt;!--
+        对应的类 AnticipateInterpolator
+        对应的资源 @android:anim/anticipate_interpolator
+        作用 动画开始的时候向后然后往前抛
+
+        tension 向后的拉力，默认值2.0；0.0时，不会有向后的动画
+     --&gt;
+    &lt;anticipateInterpolator android:tension=&quot;2&quot; /&gt;
+
+    &lt;!--
+        对应的类 AnticipateOvershootInterpolator
+        对应的资源 @android:anim/anticipate_overshoot_interpolator
+        作用 动画开始的时候向后抛，然后再向前抛；会抛超过目标值后再返回到最后的值
+    --&gt;
+    &lt;anticipateOvershootInterpolator
+        android:extraTension=&quot;2&quot;
+        android:tension=&quot;2&quot; /&gt;
+
+    &lt;!--
+        对应的类 BounceInterpolator
+        对应的资源 @android:anim/bounce_interpolator
+        作用 动画结束的时候会弹跳
+    --&gt;
+    &lt;bounceInterpolator /&gt;
+
+
+    &lt;!--
+        对应的类 CycleInterpolator
+        对应的资源 @android:anim/bounce_interpolator
+        作用 动画循环做周期运动，速率改变沿着正弦曲线
+
+        cycles 循环次数，默认值1
+    --&gt;
+    &lt;cycleInterpolator android:cycles=&quot;1&quot; /&gt;
+
+    &lt;!--
+        对应的类 DecelerateInterpolator
+        对应的资源 @android:anim/decelerate_interpolator
+        作用 动画开始时速率改变比较快，然后开始减速线
+
+        factor 减速速率，默认为1.0
+    --&gt;
+    &lt;decelerateInterpolator android:factor=&quot;1&quot; /&gt;
+
+    &lt;!--
+        对应的类 LinearInterpolator
+        对应的资源 @android:anim/decelerate_interpolator
+        作用 动画匀速播放，没有可更改设置的属性
+     --&gt;
+    &lt;linearInterpolator /&gt;
+
+    &lt;!--
+       对应的类 OvershootInterpolator
+       对应的资源 @android:anim/overshoot_interpolator
+       作用 动画向前抛，抛超过最后值，然后才返回
+
+       tension 超出后的拉力，默认为2.0
+    --&gt;
+    &lt;overshootInterpolator android:tension=&quot;2&quot; /&gt;
+
+&lt;/set&gt;
+</code></pre><h3 id="Anim-animation-list实现帧动画"><a href="#Anim-animation-list实现帧动画" class="headerlink" title="Anim animation-list实现帧动画"></a>Anim animation-list实现帧动画</h3><pre><code>&lt;animation-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:oneshot=&quot;false&quot;&gt;
+    &lt;!-- oneshot=&quot;true&quot;表示只展示一遍，oneshot=&quot;false&quot;表示不停止的循环展示
+         android:duration 表示展示所用的该图片的时间长度  --&gt;
+    &lt;item
+        android:drawable=&quot;@mipmap/up&quot;
+        android:duration=&quot;500&quot; /&gt;
+    &lt;item
+        android:drawable=&quot;@mipmap/down&quot;
+        android:duration=&quot;500&quot; /&gt;
+&lt;/animation-list&gt;
+</code></pre><h3 id="Anim-从左淡入"><a href="#Anim-从左淡入" class="headerlink" title="Anim 从左淡入"></a>Anim 从左淡入</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;!--
+        fromXDelta 属性为动画起始时 X坐标上的位置
+        toXDelta   属性为动画结束时 X坐标上的位置
+        fromYDelta 属性为动画起始时 Y坐标上的位置
+        toYDelta   属性为动画结束时 Y坐标上的位置
+     --&gt;
+    &lt;translate android:fromXDelta=&quot;-50%p&quot; android:toXDelta=&quot;0&quot;
+        android:duration=&quot;400&quot;/&gt;
+    &lt;alpha android:fromAlpha=&quot;0.0&quot; android:toAlpha=&quot;1.0&quot;
+        android:duration=&quot;400&quot; /&gt;
+&lt;/set&gt;
+</code></pre><h3 id="Anim-从左淡出"><a href="#Anim-从左淡出" class="headerlink" title="Anim 从左淡出"></a>Anim 从左淡出</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;!--
+        fromXDelta 属性为动画起始时 X坐标上的位置
+        toXDelta   属性为动画结束时 X坐标上的位置
+        fromYDelta 属性为动画起始时 Y坐标上的位置
+        toYDelta   属性为动画结束时 Y坐标上的位置
+     --&gt;
+    &lt;translate android:fromXDelta=&quot;0&quot; android:toXDelta=&quot;-50%p&quot;
+        android:duration=&quot;400&quot;/&gt;
+    &lt;alpha android:fromAlpha=&quot;1.0&quot; android:toAlpha=&quot;0.0&quot;
+        android:duration=&quot;400&quot; /&gt;
+&lt;/set&gt;
+</code></pre><h3 id="Anim-从右淡入"><a href="#Anim-从右淡入" class="headerlink" title="Anim 从右淡入"></a>Anim 从右淡入</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;!--
+        fromXDelta 属性为动画起始时 X坐标上的位置
+        toXDelta   属性为动画结束时 X坐标上的位置
+        fromYDelta 属性为动画起始时 Y坐标上的位置
+        toYDelta   属性为动画结束时 Y坐标上的位置
+     --&gt;
+    &lt;translate android:fromXDelta=&quot;50%p&quot; android:toXDelta=&quot;0&quot;
+        android:duration=&quot;400&quot;/&gt;
+    &lt;alpha android:fromAlpha=&quot;0.0&quot; android:toAlpha=&quot;1.0&quot;
+        android:duration=&quot;@integer/config_mediumAnimTime&quot; /&gt;
+&lt;/set&gt;
+</code></pre><h3 id="Anim-从右淡出"><a href="#Anim-从右淡出" class="headerlink" title="Anim 从右淡出"></a>Anim 从右淡出</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;set xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;!--
+        fromXDelta 属性为动画起始时 X坐标上的位置
+        toXDelta   属性为动画结束时 X坐标上的位置
+        fromYDelta 属性为动画起始时 Y坐标上的位置
+        toYDelta   属性为动画结束时 Y坐标上的位置
+     --&gt;
+    &lt;translate android:fromXDelta=&quot;0&quot; android:toXDelta=&quot;50%p&quot;
+        android:duration=&quot;400&quot;/&gt;
+    &lt;alpha android:fromAlpha=&quot;1.0&quot; android:toAlpha=&quot;0.0&quot;
+        android:duration=&quot;400&quot; /&gt;
+&lt;/set&gt;
+</code></pre><h3 id="Drawable-shape属性"><a href="#Drawable-shape属性" class="headerlink" title="Drawable shape属性"></a>Drawable shape属性</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    android:shape=&quot;rectangle&quot;&gt;
+
+    &lt;!-- android:shape：
+        rectangle 矩形
+        oval 椭圆形
+        line 线性形状
+        ring 环形
+     --&gt;
+
+    &lt;!-- 圆角
+        radius 四角半径
+        bottomLeftRadius 左下角半径
+        bottomRightRadius 右下角半径
+        topLeftRadius 左上角半径
+        topRightRadius 右上角半径
+    --&gt;
+    &lt;corners
+        android:bottomLeftRadius=&quot;6dp&quot;
+        android:bottomRightRadius=&quot;6dp&quot;
+        android:radius=&quot;12dp&quot;
+        android:topLeftRadius=&quot;6dp&quot;
+        android:topRightRadius=&quot;6dp&quot; /&gt;
+
+    &lt;!-- 渐变
+        startColor 起始颜色
+        endColor 结束颜色
+        angle 方向角度。当angle=0时，渐变色是从左向右；逆时针方向转，当angle=90时为从下往上。
+        gradientRadius 渐变色半径（当 android:type=&quot;radial&quot; 时才使用。单独使用 android:type=&quot;radial&quot;会报错）
+        type 渐变类型：
+            linear 线性渐变，默认设置
+            radial 放射性渐变，以开始色为中心。
+            sweep 扫描线式的渐变。
+        useLevel（如果要使用LevelListDrawable对象）：
+            true无渐变色
+            false有渐变色
+        centerX 渐变中心X点坐标的相对位置
+        centerY 渐变中心Y点坐标的相对位置
+    --&gt;
+    &lt;gradient
+        android:angle=&quot;90&quot;
+        android:centerColor=&quot;@android:color/black&quot;
+        android:centerX=&quot;0&quot;
+        android:centerY=&quot;0&quot;
+        android:endColor=&quot;@android:color/black&quot;
+        android:gradientRadius=&quot;90&quot;
+        android:startColor=&quot;@android:color/white&quot;
+        android:type=&quot;radial&quot;
+        android:useLevel=&quot;true&quot; /&gt;
+
+    &lt;!-- 内间距 --&gt;
+    &lt;padding
+        android:bottom=&quot;6dp&quot;
+        android:left=&quot;6dp&quot;
+        android:right=&quot;6dp&quot;
+        android:top=&quot;6dp&quot; /&gt;
+
+
+    &lt;!-- 大小 --&gt;
+    &lt;size
+        android:width=&quot;60dp&quot;
+        android:height=&quot;60dp&quot; /&gt;
+
+
+    &lt;!-- 填充 --&gt;
+    &lt;solid android:color=&quot;@android:color/white&quot; /&gt;
+
+
+    &lt;!-- 描边
+        dashGap 虚线的宽度
+        dashWidth   间隔宽度
+    --&gt;
+    &lt;stroke
+        android:width=&quot;1dp&quot;
+        android:color=&quot;@android:color/black&quot;
+        android:dashGap=&quot;1dp&quot;
+        android:dashWidth=&quot;1dp&quot; /&gt;
+
+&lt;/shape&gt;
+</code></pre><h3 id="Drawable-selector属性"><a href="#Drawable-selector属性" class="headerlink" title="Drawable selector属性"></a>Drawable selector属性</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+
+    &lt;!-- 点击时 --&gt;
+    &lt;item android:state_pressed=&quot;true&quot; android:drawable=&quot;@mipmap/pressed&quot;/&gt;
+
+    &lt;!-- 选中时 --&gt;
+    &lt;item android:state_selected=&quot;true&quot; android:drawable=&quot;@mipmap/pressed&quot;/&gt;
+
+    &lt;!-- 获得焦点时 --&gt;
+    &lt;item android:state_focused=&quot;true&quot; android:drawable=&quot;@mipmap/pressed&quot;/&gt;
+
+    &lt;!-- 失去焦点时 --&gt;
+    &lt;item android:state_focused=&quot;false&quot; android:drawable=&quot;@mipmap/pressed&quot;/&gt;
+
+    &lt;!-- 不可用时 --&gt;
+    &lt;item android:state_enabled=&quot;false&quot; android:drawable=&quot;@mipmap/disabled&quot;/&gt;
+
+    &lt;!-- 可用时 --&gt;
+    &lt;item android:state_enabled=&quot;true&quot; android:drawable=&quot;@mipmap/enabled&quot;/&gt;
+
+    &lt;!-- 正常时 --&gt;
+    &lt;item android:drawable=&quot;@mipmap/normal&quot;/&gt;
+
+&lt;/selector&gt;
+</code></pre><h3 id="Drawable-selector-shape混搭"><a href="#Drawable-selector-shape混搭" class="headerlink" title="Drawable selector+shape混搭"></a>Drawable selector+shape混搭</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;item android:state_selected=&quot;true&quot;&gt;
+        &lt;shape&gt;
+            &lt;solid android:color=&quot;#ff38b8c1&quot; /&gt;
+            &lt;corners android:radius=&quot;4px&quot;&gt;&lt;/corners&gt;
+            &lt;padding android:bottom=&quot;5dp&quot; android:left=&quot;10dp&quot; android:right=&quot;10dp&quot; android:top=&quot;5dp&quot; /&gt;
+        &lt;/shape&gt;
+    &lt;/item&gt;
+    &lt;item android:state_checked=&quot;true&quot;&gt;
+        &lt;shape&gt;
+            &lt;solid android:color=&quot;#ff38b8c1&quot; /&gt;
+       &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+
+    &lt;item android:state_selected=&quot;true&quot; android:color=&quot;#FFFFFFFF&quot; /&gt;
+
+    &lt;item android:state_focused=&quot;true&quot; android:color=&quot;#FFFFFFFF&quot; /&gt;
+
+    &lt;item android:state_pressed=&quot;true&quot; android:color=&quot;#FFFFFFFF&quot; /&gt;
+
+    &lt;item android:color=&quot;#FF000000&quot; /&gt;
+
+&lt;/selector&gt;         &lt;corners android:radius=&quot;4px&quot;&gt;&lt;/corners&gt;
+            &lt;padding android:bottom=&quot;5dp&quot; android:left=&quot;10dp&quot; android:right=&quot;10dp&quot; android:top=&quot;5dp&quot; /&gt;
+        &lt;/shape&gt;
+    &lt;/item&gt;
+    &lt;item android:state_pressed=&quot;true&quot;&gt;
+        &lt;shape&gt;
+            &lt;solid android:color=&quot;#ff38b8c1&quot; /&gt;
+            &lt;corners android:radius=&quot;4px&quot;&gt;&lt;/corners&gt;
+            &lt;padding android:bottom=&quot;5dp&quot; android:left=&quot;10dp&quot; android:right=&quot;10dp&quot; android:top=&quot;5dp&quot; /&gt;
+        &lt;/shape&gt;
+    &lt;/item&gt;
+    &lt;item&gt;
+        &lt;shape&gt;
+            &lt;solid android:color=&quot;#00000000&quot; /&gt;
+            &lt;corners android:radius=&quot;4px&quot;&gt;&lt;/corners&gt;
+            &lt;padding android:bottom=&quot;5dp&quot; android:left=&quot;10dp&quot; android:right=&quot;10dp&quot; android:top=&quot;5dp&quot; /&gt;
+        &lt;/shape&gt;
+    &lt;/item&gt;
+&lt;/selector&gt;
+</code></pre><h3 id="Drawable-selector通用模板"><a href="#Drawable-selector通用模板" class="headerlink" title="Drawable selector通用模板"></a>Drawable selector通用模板</h3><p>上述的情况颇多，一般用这个模板都能实现大部分需求。</p><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+
+    &lt;!-- 点击时 --&gt;
+    &lt;item android:state_pressed=&quot;true&quot; android:drawable=&quot;@mipmap/pressed&quot;/&gt;
+
+    &lt;!-- 选中时 --&gt;
+    &lt;item android:state_selected=&quot;true&quot; android:drawable=&quot;@mipmap/pressed&quot;/&gt;
+
+    &lt;!-- 获得焦点时 --&gt;
+    &lt;item android:state_focused=&quot;true&quot; android:drawable=&quot;@mipmap/pressed&quot;/&gt;
+
+    &lt;!-- 正常时 --&gt;
+    &lt;item android:drawable=&quot;@mipmap/normal&quot;/&gt;
+
+&lt;/selector&gt;
+</code></pre><h3 id="Drawable-layer-list-边框-底框不绘制"><a href="#Drawable-layer-list-边框-底框不绘制" class="headerlink" title="Drawable layer-list 边框 底框不绘制"></a>Drawable layer-list 边框 底框不绘制</h3><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;item android:bottom=&quot;-2dp&quot;&gt;
+        &lt;shape&gt;
+            &lt;corners
+                android:topLeftRadius=&quot;2dp&quot;
+                android:topRightRadius=&quot;2dp&quot; /&gt;
+            &lt;solid android:color=&quot;#ffffffff&quot; /&gt;
+            &lt;stroke
+                android:width=&quot;0.5dp&quot;
+                android:color=&quot;@color/blue&quot; /&gt;
+        &lt;/shape&gt;
+    &lt;/item&gt;
+&lt;/layer-list&gt;
+</code></pre><h3 id="Color-selector通用模板"><a href="#Color-selector通用模板" class="headerlink" title="Color selector通用模板"></a>Color selector通用模板</h3><blockquote><p>color的selector属性和drawable的seletor属性是一样的，可以说只是从使用角度区分了selector。本质上，所有的selector都是一样的。</p></blockquote><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+    &lt;item android:state_selected=&quot;true&quot; android:color=&quot;#FFFFFFFF&quot; /&gt;
+    &lt;item android:state_focused=&quot;true&quot; android:color=&quot;#FFFFFFFF&quot; /&gt;
+    &lt;item android:state_pressed=&quot;true&quot; android:color=&quot;#FFFFFFFF&quot; /&gt;
+    &lt;item android:color=&quot;#FF000000&quot; /&gt;
+&lt;/selector&gt;
+</code></pre></div><div class="article-footer"><blockquote class="mt-2x"><ul class="post-copyright list-unstyled"><li class="post-copyright-link hidden-xs"><strong>本文链接：</strong> <a href="http://example.com/2014/01/23/android/Android%20Skills/Android%20anim%20drawable%20color%20%E6%8A%80%E5%B7%A7/" title="Android anim drawable color技巧" target="_blank" rel="external">http://example.com/2014/01/23/android/Android Skills/Android anim drawable color 技巧/</a></li><li class="post-copyright-license"><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！</li></ul></blockquote><div class="panel panel-default panel-badger"><div class="panel-body"><figure class="media"><div class="media-left"><a href="https://github.com/xiyionxiong" target="_blank" class="img-burn thumb-sm visible-lg"><img src="/images/avatar.jpg" class="img-rounded w-full" alt=""></a></div><div class="media-body"><h3 class="media-heading"><a href="https://github.com/xiyionxiong" target="_blank"><span class="text-dark">熊凯</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3><div>个人简介。</div></div></figure></div></div></div></article><section id="comments"></section></div><nav class="bar bar-footer clearfix" data-stick-bottom><div class="bar-inner"><ul class="pager pull-left"><li class="prev"><a href="/2014/01/28/android/Android%20Skills/40%E4%B8%AAJava%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%92%8C%E7%AD%94%E6%A1%88/" title="40个Java集合面试问题和答案"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a></li><li class="next"><a href="/2014/01/23/android/%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/36%E4%B8%AAAndroid%E5%BC%80%E5%8F%91%E7%9A%84%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" title="36个Android开发常用代码片段"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a></li></ul><button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button><div class="bar-right"></div></div></nav><div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog"><div class="modal-dialog" role="document"><div class="modal-content donate"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><div class="modal-body"><div class="donate-box"><div class="donate-head"><p>感谢您的支持，我会继续努力的!</p></div><div class="tab-content"><div role="tabpanel" class="tab-pane fade active in" id="alipay"><div class="donate-payimg"><img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫"></div><p class="text-muted mv">扫码打赏，你说多少就多少</p><p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p></div><div role="tabpanel" class="tab-pane fade" id="wechatpay"><div class="donate-payimg"><img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫"></div><p class="text-muted mv">扫码打赏，你说多少就多少</p><p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p></div></div><div class="donate-footer"><ul class="nav nav-tabs nav-justified" role="tablist"><li role="presentation" class="active"><a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a></li><li role="presentation"><a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a></li></ul></div></div></div></div></div></div></main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter"><ul class="social-links"><li><a href="https://github.com/xiyionxiong" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li><li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li></ul><div class="copyright"><div class="publishby">Theme by <a href="https://github.com/cofess" target="_blank">cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.</div></div></footer><script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script><script>window.jQuery||document.write('<script src="js/jquery.min.js"><\/script>')</script><script src="/js/plugin.min.js"></script><script src="/js/application.js"></script><script>window.INSIGHT_CONFIG={TRANSLATION:{POSTS:"文章",PAGES:"页面",CATEGORIES:"分类",TAGS:"标签",UNTITLED:"(未命名)"},ROOT_URL:"/",CONTENT_URL:"/content.json"}</script><script src="/js/insight.js"></script></body></html>

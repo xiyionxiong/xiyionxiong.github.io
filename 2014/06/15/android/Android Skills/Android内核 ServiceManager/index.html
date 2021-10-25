@@ -1,0 +1,456 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,minimal-ui"><meta name="renderer" content="webkit"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="format-detection" content="telephone=no,email=no,adress=no"><meta name="theme-color" content="#000000"><meta http-equiv="window-target" content="_top"><title>Android内核 ServiceManager | Hexo</title><meta name="description" content="getSystemService很尽职，你知道吗?    那个…嗯…曾记否上篇的Android Binder中留下的疑问?就是在Context的实现类中使用getSystemService(String serviceName)方法获取一个系统服务，那么这些系统服务的Binder引用时如何传递给客户端的呢?其实这里有个关键点，就是系统服务并不是通过startService()启动的。"><meta property="og:type" content="article"><meta property="og:title" content="Android内核 ServiceManager"><meta property="og:url" content="http://example.com/2014/06/15/android/Android%20Skills/Android%E5%86%85%E6%A0%B8%20ServiceManager/index.html"><meta property="og:site_name" content="Hexo"><meta property="og:description" content="getSystemService很尽职，你知道吗?    那个…嗯…曾记否上篇的Android Binder中留下的疑问?就是在Context的实现类中使用getSystemService(String serviceName)方法获取一个系统服务，那么这些系统服务的Binder引用时如何传递给客户端的呢?其实这里有个关键点，就是系统服务并不是通过startService()启动的。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://img.blog.csdn.net/20141112182131029?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"><meta property="og:image" content="http://img.blog.csdn.net/20141120163612296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"><meta property="article:published_time" content="2014-06-15T10:15:38.000Z"><meta property="article:modified_time" content="2018-06-14T03:21:23.000Z"><meta property="article:author" content="熊凯"><meta property="article:tag" content="ServiceManager"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="http://img.blog.csdn.net/20141112182131029?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"><link rel="canonical" href="http://example.com/2014/06/15/android/Android%20Skills/Android%E5%86%85%E6%A0%B8%20ServiceManager/index.html"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml"><link rel="icon" href="/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><meta name="generator" content="Hexo 5.4.0"></head><body class="main-center" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="slimContent"><div class="navbar-header"><div class="profile-block text-center"><a id="avatar" href="https://github.com/xiyionxiong" target="_blank"><img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200"></a><h2 id="name" class="hidden-xs hidden-sm">熊凯</h2><h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3><small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small></div><div class="search" id="search-form-wrap"><form class="search-form sidebar-form"><div class="input-group"><input type="text" class="search-form-input form-control" placeholder="搜索"> <span class="input-group-btn"><button type="submit" class="search-form-submit btn btn-flat" onclick="return!1"><i class="icon icon-search"></i></button></span></div></form><div class="ins-search"><div class="ins-search-mask"></div><div class="ins-search-container"><div class="ins-input-wrapper"><input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech> <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div><div class="ins-section-wrapper"><div class="ins-section-container"></div></div></div></div></div><button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button></div><nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation"><ul class="nav navbar-nav main-nav"><li class="menu-item menu-item-home"><a href="/."><i class="icon icon-home-fill"></i> <span class="menu-title">首页</span></a></li><li class="menu-item menu-item-archives"><a href="/archives"><i class="icon icon-archives-fill"></i> <span class="menu-title">归档</span></a></li><li class="menu-item menu-item-categories"><a href="/categories"><i class="icon icon-folder"></i> <span class="menu-title">分类</span></a></li><li class="menu-item menu-item-tags"><a href="/tags"><i class="icon icon-tags"></i> <span class="menu-title">标签</span></a></li><li class="menu-item menu-item-repository"><a href="/repository"><i class="icon icon-project"></i> <span class="menu-title">项目</span></a></li><li class="menu-item menu-item-books"><a href="/books"><i class="icon icon-book-fill"></i> <span class="menu-title">书单</span></a></li><li class="menu-item menu-item-links"><a href="/links"><i class="icon icon-friendship"></i> <span class="menu-title">友链</span></a></li><li class="menu-item menu-item-about"><a href="/about"><i class="icon icon-cup-fill"></i> <span class="menu-title">关于</span></a></li></ul><ul class="social-links"><li><a href="https://github.com/xiyionxiong" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li><li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li></ul></nav></div></header><aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar"><div class="slimContent"><div class="widget"><h3 class="widget-title">公告</h3><div class="widget-body"><div id="board"><div class="content"><p>欢迎交流与分享经验!</p></div></div></div></div><div class="widget"><h3 class="widget-title">分类</h3><div class="widget-body"><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/redis/">redis</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/web/">web</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Flutter/">Flutter</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Mac/">Mac</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">68</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/golang/">golang</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/redis/">redis</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/web/">web</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/web/android/">android</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%80%E5%8E%86/">简历</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94/">随笔</a><span class="category-list-count">13</span></li></ul></div></div><div class="widget"><h3 class="widget-title">标签</h3><div class="widget-body"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%85%B8%E8%8C%83/" rel="tag">Android性能优化典范</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Annotation/" rel="tag">Annotation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AsyncTask/" rel="tag">AsyncTask</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Binder/" rel="tag">Binder</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CountDownTimer/" rel="tag">CountDownTimer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dialog/" rel="tag">Dialog</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EventBus/" rel="tag">EventBus</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter/" rel="tag">Flutter</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Flutter%E3%80%81%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" rel="tag">Flutter、网络编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang/" rel="tag">Golang</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Develop-for-Android-%E7%B3%BB%E5%88%97/" rel="tag">Google Develop for Android 系列</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ibeacon/" rel="tag">Ibeacon</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ImageView/" rel="tag">ImageView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kotlin/" rel="tag">Kotlin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Lambda/" rel="tag">Lambda</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MotionEvent/" rel="tag">MotionEvent</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OkHttp/" rel="tag">OkHttp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Native/" rel="tag">React-Native</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxAndroid/" rel="tag">RxAndroid</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RxJava/" rel="tag">RxJava</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ServiceManager/" rel="tag">ServiceManager</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/String%E7%9B%B8%E5%85%B3%E7%B1%BB%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" rel="tag">String相关类性能测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Textview/" rel="tag">Textview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TypedArray/" rel="tag">TypedArray</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VPN/" rel="tag">VPN</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewHolder%E7%9A%84%E4%BD%9C%E7%94%A8/" rel="tag">ViewHolder的作用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/WebView/" rel="tag">WebView</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/" rel="tag">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/adb/" rel="tag">adb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/brew/" rel="tag">brew</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drawable/" rel="tag">drawable</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/goland-json/" rel="tag">goland json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/golang/" rel="tag">golang</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/port/" rel="tag">port</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/" rel="tag">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web/" rel="tag">web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/widget/" rel="tag">widget</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B/" rel="tag">《仙》</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B%E7%AC%AC%E4%B8%80%E9%83%A8-%E9%A3%8E%E6%B5%81%E5%B0%91%E5%B9%B4/" rel="tag">《仙》第一部-风流少年</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0/" rel="tag">下拉刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C/" rel="tag">写作</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E6%80%9D/" rel="tag">反思</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E5%83%8F%E3%80%81%E8%83%8C%E6%99%AF%E3%80%81View%E6%9B%B4%E6%96%B0%E3%80%81%E5%B8%83%E5%B1%80%E3%80%81%E5%86%85%E5%AD%98/" rel="tag">图像、背景、View更新、布局、内存</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" rel="tag">开发规范</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%82%E6%AD%A5%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88Looper%E3%80%81MessageQueue%E3%80%81Handler%EF%BC%89/" rel="tag">异步线程的实现（Looper、MessageQueue、Handler）</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93%E5%88%86%E7%B1%BB/" rel="tag">总结分类</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E8%BD%B4/" rel="tag">时间轴</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84%E7%9A%84%E5%AE%9E%E4%BE%8B/" rel="tag">架构的实例</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%89%E6%B5%B8%E5%BC%8F/" rel="tag">沉浸式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%BA%90%E7%A0%81/" rel="tag">源码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87/" rel="tag">目标</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/" rel="tag">知识库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" rel="tag">科学上网</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%80%E5%8E%86/" rel="tag">简历</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E8%AF%91/" rel="tag">编译</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89Loader/" rel="tag">自定义Loader</a><span class="tag-list-count">1</span></li></ul></div></div><div class="widget"><h3 class="widget-title">标签云</h3><div class="widget-body tagcloud"><a href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%85%B8%E8%8C%83/" style="font-size:13.5px">Android性能优化典范</a> <a href="/tags/Annotation/" style="font-size:13px">Annotation</a> <a href="/tags/AsyncTask/" style="font-size:13px">AsyncTask</a> <a href="/tags/Binder/" style="font-size:13px">Binder</a> <a href="/tags/CountDownTimer/" style="font-size:13px">CountDownTimer</a> <a href="/tags/Dialog/" style="font-size:13px">Dialog</a> <a href="/tags/Docker/" style="font-size:13.38px">Docker</a> <a href="/tags/EventBus/" style="font-size:13.13px">EventBus</a> <a href="/tags/Flutter/" style="font-size:13.88px">Flutter</a> <a href="/tags/Flutter%E3%80%81%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" style="font-size:13px">Flutter、网络编程</a> <a href="/tags/Golang/" style="font-size:13px">Golang</a> <a href="/tags/Google-Develop-for-Android-%E7%B3%BB%E5%88%97/" style="font-size:13.75px">Google Develop for Android 系列</a> <a href="/tags/Ibeacon/" style="font-size:13px">Ibeacon</a> <a href="/tags/ImageView/" style="font-size:13px">ImageView</a> <a href="/tags/Java/" style="font-size:13.25px">Java</a> <a href="/tags/Kotlin/" style="font-size:13px">Kotlin</a> <a href="/tags/Lambda/" style="font-size:13px">Lambda</a> <a href="/tags/MotionEvent/" style="font-size:13px">MotionEvent</a> <a href="/tags/OkHttp/" style="font-size:13.13px">OkHttp</a> <a href="/tags/React-Native/" style="font-size:13px">React-Native</a> <a href="/tags/RxAndroid/" style="font-size:13px">RxAndroid</a> <a href="/tags/RxJava/" style="font-size:13.5px">RxJava</a> <a href="/tags/ServiceManager/" style="font-size:13px">ServiceManager</a> <a href="/tags/SpringBoot/" style="font-size:13px">SpringBoot</a> <a href="/tags/String%E7%9B%B8%E5%85%B3%E7%B1%BB%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" style="font-size:13px">String相关类性能测试</a> <a href="/tags/Textview/" style="font-size:13px">Textview</a> <a href="/tags/TypedArray/" style="font-size:13px">TypedArray</a> <a href="/tags/VPN/" style="font-size:13px">VPN</a> <a href="/tags/ViewHolder%E7%9A%84%E4%BD%9C%E7%94%A8/" style="font-size:13px">ViewHolder的作用</a> <a href="/tags/WebView/" style="font-size:13px">WebView</a> <a href="/tags/Webview/" style="font-size:13px">Webview</a> <a href="/tags/adb/" style="font-size:13px">adb</a> <a href="/tags/brew/" style="font-size:13px">brew</a> <a href="/tags/drawable/" style="font-size:13px">drawable</a> <a href="/tags/goland-json/" style="font-size:13px">goland json</a> <a href="/tags/golang/" style="font-size:13.13px">golang</a> <a href="/tags/linux/" style="font-size:13px">linux</a> <a href="/tags/port/" style="font-size:13px">port</a> <a href="/tags/redis/" style="font-size:13.13px">redis</a> <a href="/tags/web/" style="font-size:13px">web</a> <a href="/tags/widget/" style="font-size:13px">widget</a> <a href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B/" style="font-size:13px">《仙》</a> <a href="/tags/%E3%80%8A%E4%BB%99%E3%80%8B%E7%AC%AC%E4%B8%80%E9%83%A8-%E9%A3%8E%E6%B5%81%E5%B0%91%E5%B9%B4/" style="font-size:13.13px">《仙》第一部-风流少年</a> <a href="/tags/%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0/" style="font-size:13px">下拉刷新</a> <a href="/tags/%E5%86%99%E4%BD%9C/" style="font-size:13.13px">写作</a> <a href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" style="font-size:14px">前端进阶</a> <a href="/tags/%E5%8F%8D%E6%80%9D/" style="font-size:13px">反思</a> <a href="/tags/%E5%9B%BE%E5%83%8F%E3%80%81%E8%83%8C%E6%99%AF%E3%80%81View%E6%9B%B4%E6%96%B0%E3%80%81%E5%B8%83%E5%B1%80%E3%80%81%E5%86%85%E5%AD%98/" style="font-size:13.13px">图像、背景、View更新、布局、内存</a> <a href="/tags/%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" style="font-size:13.25px">开发规范</a> <a href="/tags/%E5%BC%82%E6%AD%A5%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88Looper%E3%80%81MessageQueue%E3%80%81Handler%EF%BC%89/" style="font-size:13px">异步线程的实现（Looper、MessageQueue、Handler）</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size:13px">快捷键</a> <a href="/tags/%E6%80%BB%E7%BB%93%E5%88%86%E7%B1%BB/" style="font-size:13.63px">总结分类</a> <a href="/tags/%E6%97%B6%E9%97%B4%E8%BD%B4/" style="font-size:13px">时间轴</a> <a href="/tags/%E6%9E%B6%E6%9E%84%E7%9A%84%E5%AE%9E%E4%BE%8B/" style="font-size:13px">架构的实例</a> <a href="/tags/%E6%B2%89%E6%B5%B8%E5%BC%8F/" style="font-size:13px">沉浸式</a> <a href="/tags/%E6%BA%90%E7%A0%81/" style="font-size:13px">源码</a> <a href="/tags/%E7%9B%AE%E6%A0%87/" style="font-size:13.13px">目标</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%BA%93/" style="font-size:13.25px">知识库</a> <a href="/tags/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" style="font-size:13px">科学上网</a> <a href="/tags/%E7%AE%80%E5%8E%86/" style="font-size:13px">简历</a> <a href="/tags/%E7%BC%96%E8%AF%91/" style="font-size:13px">编译</a> <a href="/tags/%E8%87%AA%E5%AE%9A%E4%B9%89Loader/" style="font-size:13px">自定义Loader</a></div></div><div class="widget"><h3 class="widget-title">归档</h3><div class="widget-body"><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">十一月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">九月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">七月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">五月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">四月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">三月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">二月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">一月 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">一月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">十月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">六月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">五月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">二月 2014</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/01/">一月 2014</a><span class="archive-list-count">5</span></li></ul></div></div><div class="widget"><h3 class="widget-title">最新文章</h3><div class="widget-body"><ul class="recent-post-list list-unstyled no-thumbnail"><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/12/09/flutter/flutterbase004/" class="title">Flutter入门之跨组件传递数据</a></p><p class="item-date"><time datetime="2020-12-08T16:00:00.000Z" itemprop="datePublished">2020-12-09</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/11/01/web/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%81%93/JS%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%81%93/" class="title">前端进阶之JS前端进阶</a></p><p class="item-date"><time datetime="2020-10-31T16:00:00.000Z" itemprop="datePublished">2020-11-01</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/10/31/flutter/%E6%89%93%E5%8C%85/" class="title">Flutter进阶之如何构建高效的FlutterApp打包发布环境？</a></p><p class="item-date"><time datetime="2020-10-30T16:00:00.000Z" itemprop="datePublished">2020-10-31</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/09/30/flutter/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/" class="title">Flutter进阶之如何通过工具链优化开发调试效率？</a></p><p class="item-date"><time datetime="2020-09-29T16:00:00.000Z" itemprop="datePublished">2020-09-30</time></p></div></li><li><div class="item-inner"><p class="item-category"></p><p class="item-title"><a href="/2020/09/30/web/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6%E4%B9%8B%E9%81%93/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="title">前端进阶之数据结构</a></p><p class="item-date"><time datetime="2020-09-29T16:00:00.000Z" itemprop="datePublished">2020-09-30</time></p></div></li></ul></div></div></div></aside><main class="main" role="main"><div class="content"><article id="post-android/Android Skills/Android内核 ServiceManager" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting"><div class="article-header"><h1 class="article-title" itemprop="name">Android内核 ServiceManager</h1><div class="article-meta"><span class="article-date"><i class="icon icon-calendar-check"></i> <a href="/2014/06/15/android/Android%20Skills/Android%E5%86%85%E6%A0%B8%20ServiceManager/" class="article-date"><time datetime="2014-06-15T10:15:38.000Z" itemprop="datePublished">2014-06-15</time> </a></span><span class="article-category"><i class="icon icon-folder"></i> <a class="article-category-link" href="/categories/android/">android</a> </span><span class="article-tag"><i class="icon icon-tags"></i> <a class="article-tag-link-link" href="/tags/ServiceManager/" rel="tag">ServiceManager</a> </span><span class="post-comment"><i class="icon icon-comment"></i> <a href="/2014/06/15/android/Android%20Skills/Android%E5%86%85%E6%A0%B8%20ServiceManager/#comments" class="article-comment-link">评论</a></span></div></div><div class="article-entry marked-body" itemprop="articleBody"><p>getSystemService很尽职，你知道吗?</p><p>那个…嗯…曾记否上篇的<code>Android Binder</code>中留下的疑问?就是在Context的实现类中使用<br>getSystemService(String serviceName)方法获取一个系统服务，那么这些系统服务的Binder<br>引用时如何传递给客户端的呢?其实这里有个关键点，就是系统服务并不是通过startService()启<br>动的。</p><span id="more"></span><p>getSystemService函数的实现是在Context的实现类中，该函数返回的Service比较多。那<br>么就让我们看一下Activity、ContextThemeWrapper的部分源代码吧：</p><p>Activity：</p><pre><code>@Override
+public Object getSystemService(@ServiceName @NonNull String name) &#123;
+    if (getBaseContext() == null) &#123;
+        throw new IllegalStateException(
+                &quot;System services not available to Activities before onCreate()&quot;);
+    &#125;
+
+    if (WINDOW_SERVICE.equals(name)) &#123;
+        return mWindowManager;
+    &#125; else if (SEARCH_SERVICE.equals(name)) &#123;
+        ensureSearchManager();
+        return mSearchManager;
+    &#125;
+    return super.getSystemService(name);
+&#125;
+</code></pre><p>1.首先， if (getBaseContext() == null)判断 mBase（Context类型）是否为空。如果为空则 ，提<br>示Context没创建前调用了getSystemService的错误。至于，我为什么能准确地mBase这个名字呢?让<br>我们再看一段关于ContextWrapper（Activity的父类、Context的子类）的源代码：</p><pre><code>Context mBase;
+
+public ContextWrapper(Context base) &#123;
+    mBase = base;
+&#125;
+
+/**
+ * Set the base context for this ContextWrapper.  All calls will then be
+ * delegated to the base context.  Throws
+ * IllegalStateException if a base context has already been set.
+ *
+ * @param base The new base context for this wrapper.
+ */
+protected void attachBaseContext(Context base) &#123;
+    if (mBase != null) &#123;
+        throw new IllegalStateException(&quot;Base context already set&quot;);
+    &#125;
+    mBase = base;
+&#125;
+
+/**
+ * @return the base context as set by the constructor or setBaseContext
+ */
+public Context getBaseContext() &#123;
+    return mBase;
+&#125;
+</code></pre><p>以上很简单，也就是从父类继承下来的Context mBase属性。</p><p>2.if (WINDOW_SERVICE.equals(name)) {……}elseif(SEARCH_SERVICE.equals(name)){……}。这个<br>就是判断要取的服务是Window类型还是Search类型的。这个在Activity里有对应的WindowManager类<br>型和SearchManager类型属性，并且做了对应的实例化。</p><p>3.return super.getSystemService(name)：当要取的服务不是Window类型也不是Search类型的时候，就<br>调用了父类（ContextThemeWrapper）的getSystemService(String name)帮你找服务。那么就让我们顺便看看<br>ContextThemeWrapper的源代码：</p><pre><code>@Override public Object getSystemService(String name) &#123;
+    if (LAYOUT_INFLATER_SERVICE.equals(name)) &#123;
+        if (mInflater == null) &#123;
+            mInflater = LayoutInflater.from(getBaseContext()).cloneInContext(this);
+        &#125;
+        return mInflater;
+    &#125;
+    return getBaseContext().getSystemService(name);
+&#125;
+</code></pre><p>4.这里也做了个Activity里类似的判断是否为 layout Inflater 服务，然后返回相应的layout Inflater 服务。</p><p>5.return getBaseContext().getSystemService(name)：这里的话就回到了Context 这个抽象的基类。 我<br>们就再看看Context的源代码：</p><pre><code>/**
+ * Return the handle to a system-level service by name. The class of the
+ * returned object varies by the requested name. Currently available names
+ * are:
+ *
+ * &lt;dl&gt;
+ *  &lt;dt&gt; &#123;@link #WINDOW_SERVICE&#125; (&quot;window&quot;)
+ *  &lt;dd&gt; The top-level window manager in which you can place custom
+ *  windows.  The returned object is a &#123;@link android.view.WindowManager&#125;.
+ *  &lt;dt&gt; &#123;@link #LAYOUT_INFLATER_SERVICE&#125; (&quot;layout_inflater&quot;)
+ *  &lt;dd&gt; A &#123;@link android.view.LayoutInflater&#125; for inflating layout resources
+ *  in this context.
+ *  &lt;dt&gt; &#123;@link #ACTIVITY_SERVICE&#125; (&quot;activity&quot;)
+ *  &lt;dd&gt; A &#123;@link android.app.ActivityManager&#125; for interacting with the
+ *  global activity state of the system.
+ *  &lt;dt&gt; &#123;@link #POWER_SERVICE&#125; (&quot;power&quot;)
+ *  &lt;dd&gt; A &#123;@link android.os.PowerManager&#125; for controlling power
+ *  management.
+ *  &lt;dt&gt; &#123;@link #ALARM_SERVICE&#125; (&quot;alarm&quot;)
+ *  &lt;dd&gt; A &#123;@link android.app.AlarmManager&#125; for receiving intents at the
+ *  time of your choosing.
+ *  &lt;dt&gt; &#123;@link #NOTIFICATION_SERVICE&#125; (&quot;notification&quot;)
+ *  &lt;dd&gt; A &#123;@link android.app.NotificationManager&#125; for informing the user
+ *   of background events.
+ *  &lt;dt&gt; &#123;@link #KEYGUARD_SERVICE&#125; (&quot;keyguard&quot;)
+ *  &lt;dd&gt; A &#123;@link android.app.KeyguardManager&#125; for controlling keyguard.
+ *  &lt;dt&gt; &#123;@link #LOCATION_SERVICE&#125; (&quot;location&quot;)
+ *  &lt;dd&gt; A &#123;@link android.location.LocationManager&#125; for controlling location
+ *   (e.g., GPS) updates.
+ *  &lt;dt&gt; &#123;@link #SEARCH_SERVICE&#125; (&quot;search&quot;)
+ *  &lt;dd&gt; A &#123;@link android.app.SearchManager&#125; for handling search.
+ *  &lt;dt&gt; &#123;@link #VIBRATOR_SERVICE&#125; (&quot;vibrator&quot;)
+ *  &lt;dd&gt; A &#123;@link android.os.Vibrator&#125; for interacting with the vibrator
+ *  hardware.
+ *  &lt;dt&gt; &#123;@link #CONNECTIVITY_SERVICE&#125; (&quot;connection&quot;)
+ *  &lt;dd&gt; A &#123;@link android.net.ConnectivityManager ConnectivityManager&#125; for
+ *  handling management of network connections.
+ *  &lt;dt&gt; &#123;@link #WIFI_SERVICE&#125; (&quot;wifi&quot;)
+ *  &lt;dd&gt; A &#123;@link android.net.wifi.WifiManager WifiManager&#125; for management of
+ * Wi-Fi connectivity.
+ *  &lt;dt&gt; &#123;@link #WIFI_P2P_SERVICE&#125; (&quot;wifip2p&quot;)
+ *  &lt;dd&gt; A &#123;@link android.net.wifi.p2p.WifiP2pManager WifiP2pManager&#125; for management of
+ * Wi-Fi Direct connectivity.
+ * &lt;dt&gt; &#123;@link #INPUT_METHOD_SERVICE&#125; (&quot;input_method&quot;)
+ * &lt;dd&gt; An &#123;@link android.view.inputmethod.InputMethodManager InputMethodManager&#125;
+ * for management of input methods.
+ * &lt;dt&gt; &#123;@link #UI_MODE_SERVICE&#125; (&quot;uimode&quot;)
+ * &lt;dd&gt; An &#123;@link android.app.UiModeManager&#125; for controlling UI modes.
+ * &lt;dt&gt; &#123;@link #DOWNLOAD_SERVICE&#125; (&quot;download&quot;)
+ * &lt;dd&gt; A &#123;@link android.app.DownloadManager&#125; for requesting HTTP downloads
+ * &lt;dt&gt; &#123;@link #BATTERY_SERVICE&#125; (&quot;batterymanager&quot;)
+ * &lt;dd&gt; A &#123;@link android.os.BatteryManager&#125; for managing battery state
+ * &lt;dt&gt; &#123;@link #JOB_SCHEDULER_SERVICE&#125; (&quot;taskmanager&quot;)
+ * &lt;dd&gt;  A &#123;@link android.app.job.JobScheduler&#125; for managing scheduled tasks
+ * &lt;/dl&gt;
+ *
+ * &lt;p&gt;Note:  System services obtained via this API may be closely associated with
+ * the Context in which they are obtained from.  In general, do not share the
+ * service objects between various different contexts (Activities, Applications,
+ * Services, Providers, etc.)
+ *
+ * @param name The name of the desired service.
+ *
+ * @return The service or null if the name does not exist.
+ *
+ * @see #WINDOW_SERVICE
+ * @see android.view.WindowManager
+ * @see #LAYOUT_INFLATER_SERVICE
+ * @see android.view.LayoutInflater
+ * @see #ACTIVITY_SERVICE
+ * @see android.app.ActivityManager
+ * @see #POWER_SERVICE
+ * @see android.os.PowerManager
+ * @see #ALARM_SERVICE
+ * @see android.app.AlarmManager
+ * @see #NOTIFICATION_SERVICE
+ * @see android.app.NotificationManager
+ * @see #KEYGUARD_SERVICE
+ * @see android.app.KeyguardManager
+ * @see #LOCATION_SERVICE
+ * @see android.location.LocationManager
+ * @see #SEARCH_SERVICE
+ * @see android.app.SearchManager
+ * @see #SENSOR_SERVICE
+ * @see android.hardware.SensorManager
+ * @see #STORAGE_SERVICE
+ * @see android.os.storage.StorageManager
+ * @see #VIBRATOR_SERVICE
+ * @see android.os.Vibrator
+ * @see #CONNECTIVITY_SERVICE
+ * @see android.net.ConnectivityManager
+ * @see #WIFI_SERVICE
+ * @see android.net.wifi.WifiManager
+ * @see #AUDIO_SERVICE
+ * @see android.media.AudioManager
+ * @see #MEDIA_ROUTER_SERVICE
+ * @see android.media.MediaRouter
+ * @see #TELEPHONY_SERVICE
+ * @see android.telephony.TelephonyManager
+ * @see #INPUT_METHOD_SERVICE
+ * @see android.view.inputmethod.InputMethodManager
+ * @see #UI_MODE_SERVICE
+ * @see android.app.UiModeManager
+ * @see #DOWNLOAD_SERVICE
+ * @see android.app.DownloadManager
+ * @see #BATTERY_SERVICE
+ * @see android.os.BatteryManager
+ * @see #JOB_SCHEDULER_SERVICE
+ * @see android.app.job.JobScheduler
+ */
+public abstract Object getSystemService(@ServiceName @NonNull String name);
+
+
+/******************************以下是服务的名称***************************/
+
+
+/**
+ * Use with &#123;@link #getSystemService&#125; to retrieve a
+ * &#123;@link android.os.PowerManager&#125; for controlling power management,
+ * including &quot;wake locks,&quot; which let you keep the device on while
+ * you&#39;re running long tasks.
+ */
+public static final String POWER_SERVICE = &quot;power&quot;;
+
+/**
+ * Use with &#123;@link #getSystemService&#125; to retrieve a
+ * &#123;@link android.view.WindowManager&#125; for accessing the system&#39;s window
+ * manager.
+ *
+ * @see #getSystemService
+ * @see android.view.WindowManager
+ */
+public static final String WINDOW_SERVICE = &quot;window&quot;;
+
+/**
+ * Use with &#123;@link #getSystemService&#125; to retrieve a
+ * &#123;@link android.view.LayoutInflater&#125; for inflating layout resources in this
+ * context.
+ *
+ * @see #getSystemService
+ * @see android.view.LayoutInflater
+ */
+public static final String LAYOUT_INFLATER_SERVICE = &quot;layout_inflater&quot;;
+
+/**
+ * Use with &#123;@link #getSystemService&#125; to retrieve a
+ * &#123;@link android.accounts.AccountManager&#125; for receiving intents at a
+ * time of your choosing.
+ *
+ * @see #getSystemService
+ * @see android.accounts.AccountManager
+ */
+
+
+ /*******************************下面还有很多很多*************************/
+</code></pre><p>6.以上可以看出，如果在Activity和ContextThemeWrapper不能帮你取到服务的话，最终会回到Context来一个”大搜查”。</p><p>ServiceManager 管理的服务</p><p>ServiceManager是一个独立的进程!这里特别强调，它是一个进程!作用就跟它的名称一样，管理各种系统服务，如下图所示：<br><img src="http://img.blog.csdn.net/20141112182131029?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p><p>其实ServiceManager本身也是一个Service，Framework提供了一个系统函数，可以获取ServiceManager<br>对应的Binder引用，那就是BinderInternal.getContextObject()。该静态函数返回ServiceManager后，就<br>可以通过ServiceManger提供的方法获取其他服务Service的Binder引用。这种设计模式就好比：ServiceManager<br>是一个公司的总机，这个总计的号码是公开的，系统中任何进程都可以使用BinderInternal.getContextObject()<br>获取该总机的Binder对象，而当前用户想联系公司的其他人（服务）的时候，则要经过总机再获取到分机的号码。<br>这种设计模式的优点就是：系统中仅仅只暴漏一个全局Binder引用，那就是ServiceManager，而其他服务则可以<br>隐藏起来，从而有助于系统服务的扩展，以及调用系统服务的安全检查。其他系统服务在启动的时候，首先把自己<br>的Binder对象传递给ServiceManager，就是所谓的注册（addService）。</p><p>BinderInternal.getContextObject() -&gt;ServiceManager -&gt;其它Service的Binder引用</p><p>那么我们来看一看ServiceManager.getService()的源码：</p><pre><code>public static IBinder getService(String name)&#123;
+    try&#123;
+        IBinder service = sCache.get(name);
+        if(servie != null)&#123;
+            return service
+        &#125;else&#123;
+            return getIServiceManager().getService(name);
+        &#125;
+    &#125;catch (RemoteException e) &#123;
+        Log.e(TAG, &quot;error in getService&quot;,e);
+    &#125;
+    return null;
+&#125;
+</code></pre><p>以上片段源码，sCache.get(name) 缓存中查看是否有对应的 Binder 对象，有则返回，没有则调用<br>return getIServiceManager.getService(name)；第一个getIServiceManager()即用于返回系统中<br>唯一的ServiceManager对应的Binder。</p><p>接着看看getIServiceManager()：</p><pre><code>private static IServiceManager getIServiceManager() &#123;
+    if (sServiceManager != null) &#123;
+        return sServiceManager;
+    &#125;
+
+    // Find the service manager
+    sServiceManager = ServiceManagerNative.asInterface(BinderInternal.getContextObject());
+    return sServiceManager;
+&#125;
+</code></pre><p>以上源码中，BinderInternal.getContextObject()静态函数用于返回ServiceManager对应的全局Binder<br>对象，该函数不需要任何参数，因为它的作用所致是固定的。</p><p>其他所有通过ServiceManager获取的系统服务的过程与以上基本相似，所不同的就是传递给ServiceManager<br>的服务名称不同，因为ServiceManager正是按照服务的名称（String）来保存不同的Binder。</p><p>Android 中的 Manager</p><p>在Android中，Manager的含义应该翻译为“经纪人”，Manager所管理的对象时服务本身，因为每一<br>个具体的服务一般都会提供多个API接口，而Manager所管理的就是这些API。客户端一般不能直接通过<br>Binder访问的服务，而是要经过一个Manager，对应的Manager类对客户端是可见的，而远程的服务类<br>对客户端是隐藏的。</p><p>而这些Manager的类内部都会存在一个远程服务Binder的变量，而且在一般情况下，这些Manager的构造<br>函数中都会包含这个Binder对象。即先通过ServiceManager获取远程服务的Binder引用，然后使用这个Binder<br>引用构造一个客户端本地可以访问的经纪人，然后客户端就可以通过经纪人间接访问远程的服务了。</p><p>这种设计的作用是为了屏蔽客户端直接访问远程服务，从而可以给应用程序提供灵活的、可控的API接口，比<br>如Ams。系统不希望用户直接去访问Ams，而是经过ActivityManager类去访问，而ActivityManager内部则<br>提供一些更具可操作性的数据结构，比如RecentTaskInfo数据结构封装了最近访问过的Task列表；MemoryInfo<br>数据类封装了和内存相关的信息。如下（RecentTaskInfo和MemoryInfo的源代码）：</p><p>ActivityManager 中的 RecentTaskInfo 类 源码：</p><pre><code>/**
+ * Information you can retrieve about tasks that the user has most recently
+ * started or visited.
+ */
+public static class RecentTaskInfo implements Parcelable &#123;
+    /**
+     * If this task is currently running, this is the identifier for it.
+     * If it is not running, this will be -1.
+     */
+    public int id;
+
+    /**
+     * The true identifier of this task, valid even if it is not running.
+     */
+    public int persistentId;
+
+    /**
+     * The original Intent used to launch the task.  You can use this
+     * Intent to re-launch the task (if it is no longer running) or bring
+     * the current task to the front.
+     */
+    public Intent baseIntent;
+
+    /**
+     * If this task was started from an alias, this is the actual
+     * activity component that was initially started; the component of
+     * the baseIntent in this case is the name of the actual activity
+     * implementation that the alias referred to.  Otherwise, this is null.
+     */
+    public ComponentName origActivity;
+
+    /**
+     * Description of the task&#39;s last state.
+     */
+    public CharSequence description;
+
+    /**
+     * The id of the ActivityStack this Task was on most recently.
+     * @hide
+     */
+    public int stackId;
+
+    /**
+     * The id of the user the task was running as.
+     * @hide
+     */
+    public int userId;
+
+    /**
+     * The first time this task was active.
+     * @hide
+     */
+    public long firstActiveTime;
+
+    /**
+     * The last time this task was active.
+     * @hide
+     */
+    public long lastActiveTime;
+
+    /**
+     * The recent activity values for the highest activity in the stack to have set the values.
+     * &#123;@link Activity#setTaskDescription(android.app.ActivityManager.TaskDescription)&#125;.
+     */
+    public TaskDescription taskDescription;
+
+    /**
+     * Task affiliation for grouping with other tasks.
+     */
+    public int affiliatedTaskId;
+
+    /**
+     * Task affiliation color of the source task with the affiliated task id.
+     *
+     * @hide
+     */
+    public int affiliatedTaskColor;
+
+    public RecentTaskInfo() &#123;
+    &#125;
+
+    @Override
+    public int describeContents() &#123;
+        return 0;
+    &#125;
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) &#123;
+        dest.writeInt(id);
+        dest.writeInt(persistentId);
+        if (baseIntent != null) &#123;
+            dest.writeInt(1);
+            baseIntent.writeToParcel(dest, 0);
+        &#125; else &#123;
+            dest.writeInt(0);
+        &#125;
+        ComponentName.writeToParcel(origActivity, dest);
+        TextUtils.writeToParcel(description, dest,
+                Parcelable.PARCELABLE_WRITE_RETURN_VALUE);
+        if (taskDescription != null) &#123;
+            dest.writeInt(1);
+            taskDescription.writeToParcel(dest, 0);
+        &#125; else &#123;
+            dest.writeInt(0);
+        &#125;
+        dest.writeInt(stackId);
+        dest.writeInt(userId);
+        dest.writeLong(firstActiveTime);
+        dest.writeLong(lastActiveTime);
+        dest.writeInt(affiliatedTaskId);
+        dest.writeInt(affiliatedTaskColor);
+    &#125;
+
+    public void readFromParcel(Parcel source) &#123;
+        id = source.readInt();
+        persistentId = source.readInt();
+        baseIntent = source.readInt() &gt; 0 ? Intent.CREATOR.createFromParcel(source) : null;
+        origActivity = ComponentName.readFromParcel(source);
+        description = TextUtils.CHAR_SEQUENCE_CREATOR.createFromParcel(source);
+        taskDescription = source.readInt() &gt; 0 ?
+                TaskDescription.CREATOR.createFromParcel(source) : null;
+        stackId = source.readInt();
+        userId = source.readInt();
+        firstActiveTime = source.readLong();
+        lastActiveTime = source.readLong();
+        affiliatedTaskId = source.readInt();
+        affiliatedTaskColor = source.readInt();
+    &#125;
+
+    public static final Creator&lt;RecentTaskInfo&gt; CREATOR
+            = new Creator&lt;RecentTaskInfo&gt;() &#123;
+        public RecentTaskInfo createFromParcel(Parcel source) &#123;
+            return new RecentTaskInfo(source);
+        &#125;
+        public RecentTaskInfo[] newArray(int size) &#123;
+            return new RecentTaskInfo[size];
+        &#125;
+    &#125;;
+
+    private RecentTaskInfo(Parcel source) &#123;
+        readFromParcel(source);
+    &#125;
+&#125;
+</code></pre><p>ActivityManager 的 MemoryInfo类 源代码 ：</p><pre><code>/**
+ * Information you can retrieve about the available memory through
+ * &#123;@link ActivityManager#getMemoryInfo&#125;.
+ */
+public static class MemoryInfo implements Parcelable &#123;
+    /**
+     * The available memory on the system.  This number should not
+     * be considered absolute: due to the nature of the kernel, a significant
+     * portion of this memory is actually in use and needed for the overall
+     * system to run well.
+     */
+    public long availMem;
+
+    /**
+     * The total memory accessible by the kernel.  This is basically the
+     * RAM size of the device, not including below-kernel fixed allocations
+     * like DMA buffers, RAM for the baseband CPU, etc.
+     */
+    public long totalMem;
+
+    /**
+     * The threshold of &#123;@link #availMem&#125; at which we consider memory to be
+     * low and start killing background services and other non-extraneous
+     * processes.
+     */
+    public long threshold;
+
+    /**
+     * Set to true if the system considers itself to currently be in a low
+     * memory situation.
+     */
+    public boolean lowMemory;
+
+    /** @hide */
+    public long hiddenAppThreshold;
+    /** @hide */
+    public long secondaryServerThreshold;
+    /** @hide */
+    public long visibleAppThreshold;
+    /** @hide */
+    public long foregroundAppThreshold;
+
+    public MemoryInfo() &#123;
+    &#125;
+
+    public int describeContents() &#123;
+        return 0;
+    &#125;
+
+    public void writeToParcel(Parcel dest, int flags) &#123;
+        dest.writeLong(availMem);
+        dest.writeLong(totalMem);
+        dest.writeLong(threshold);
+        dest.writeInt(lowMemory ? 1 : 0);
+        dest.writeLong(hiddenAppThreshold);
+        dest.writeLong(secondaryServerThreshold);
+        dest.writeLong(visibleAppThreshold);
+        dest.writeLong(foregroundAppThreshold);
+    &#125;
+
+    public void readFromParcel(Parcel source) &#123;
+        availMem = source.readLong();
+        totalMem = source.readLong();
+        threshold = source.readLong();
+        lowMemory = source.readInt() != 0;
+        hiddenAppThreshold = source.readLong();
+        secondaryServerThreshold = source.readLong();
+        visibleAppThreshold = source.readLong();
+        foregroundAppThreshold = source.readLong();
+    &#125;
+
+    public static final Creator&lt;MemoryInfo&gt; CREATOR
+            = new Creator&lt;MemoryInfo&gt;() &#123;
+        public MemoryInfo createFromParcel(Parcel source) &#123;
+            return new MemoryInfo(source);
+        &#125;
+        public MemoryInfo[] newArray(int size) &#123;
+            return new MemoryInfo[size];
+        &#125;
+    &#125;;
+
+    private MemoryInfo(Parcel source) &#123;
+        readFromParcel(source);
+    &#125;
+&#125;
+</code></pre><p>这种通过Manager 访问远程服务的模型如下图：</p><p><img src="http://img.blog.csdn.net/20141120163612296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTY0MzA3MzU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"></p></div><div class="article-footer"><blockquote class="mt-2x"><ul class="post-copyright list-unstyled"><li class="post-copyright-link hidden-xs"><strong>本文链接：</strong> <a href="http://example.com/2014/06/15/android/Android%20Skills/Android%E5%86%85%E6%A0%B8%20ServiceManager/" title="Android内核 ServiceManager" target="_blank" rel="external">http://example.com/2014/06/15/android/Android Skills/Android内核 ServiceManager/</a></li><li class="post-copyright-license"><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！</li></ul></blockquote><div class="panel panel-default panel-badger"><div class="panel-body"><figure class="media"><div class="media-left"><a href="https://github.com/xiyionxiong" target="_blank" class="img-burn thumb-sm visible-lg"><img src="/images/avatar.jpg" class="img-rounded w-full" alt=""></a></div><div class="media-body"><h3 class="media-heading"><a href="https://github.com/xiyionxiong" target="_blank"><span class="text-dark">熊凯</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3><div>个人简介。</div></div></figure></div></div></div></article><section id="comments"></section></div><nav class="bar bar-footer clearfix" data-stick-bottom><div class="bar-inner"><ul class="pager pull-left"><li class="prev"><a href="/2014/07/18/android/Android%20Skills/TypedArray/" title="解析：TypedArray 为什么需要调用recycle()"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a></li><li class="next"><a href="/2014/06/12/android/Android%20Skills/Android%E5%86%85%E6%A0%B8%20Binder/" title="Android内核 Binder"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a></li></ul><button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button><div class="bar-right"></div></div></nav><div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog"><div class="modal-dialog" role="document"><div class="modal-content donate"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><div class="modal-body"><div class="donate-box"><div class="donate-head"><p>感谢您的支持，我会继续努力的!</p></div><div class="tab-content"><div role="tabpanel" class="tab-pane fade active in" id="alipay"><div class="donate-payimg"><img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫"></div><p class="text-muted mv">扫码打赏，你说多少就多少</p><p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p></div><div role="tabpanel" class="tab-pane fade" id="wechatpay"><div class="donate-payimg"><img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫"></div><p class="text-muted mv">扫码打赏，你说多少就多少</p><p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p></div></div><div class="donate-footer"><ul class="nav nav-tabs nav-justified" role="tablist"><li role="presentation" class="active"><a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a></li><li role="presentation"><a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a></li></ul></div></div></div></div></div></div></main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter"><ul class="social-links"><li><a href="https://github.com/xiyionxiong" target="_blank" title="Github" data-toggle="tooltip" data-placement="top"><i class="icon icon-github"></i></a></li><li><a href="/atom.xml" target="_blank" title="Rss" data-toggle="tooltip" data-placement="top"><i class="icon icon-rss"></i></a></li></ul><div class="copyright"><div class="publishby">Theme by <a href="https://github.com/cofess" target="_blank">cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.</div></div></footer><script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script><script>window.jQuery||document.write('<script src="js/jquery.min.js"><\/script>')</script><script src="/js/plugin.min.js"></script><script src="/js/application.js"></script><script>window.INSIGHT_CONFIG={TRANSLATION:{POSTS:"文章",PAGES:"页面",CATEGORIES:"分类",TAGS:"标签",UNTITLED:"(未命名)"},ROOT_URL:"/",CONTENT_URL:"/content.json"}</script><script src="/js/insight.js"></script></body></html>
